@@ -21,7 +21,6 @@ import {
 import { Dialog } from "@/components/ui/dialog";
 import { footerVariants } from "@/config/animation";
 // import { useSite } from "@/hooks/useSite";
-import { SocialNetworks } from "./social-icons";
 import { Logo } from "./logo";
 import { VariantProps, cva } from "class-variance-authority";
 import { useDimensions } from "@/hooks/use-dimension";
@@ -207,7 +206,6 @@ const Footer = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>((_, re
             © {new Date().getFullYear()} - Todos os direitos reservados
           </p>
         </div>
-        <SocialNetworks size={18} />
       </div>
     </motion.footer>
   );
