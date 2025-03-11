@@ -6,7 +6,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "./ui/textarea";
 import { ContactFormSchema, contactFormSchema } from "@/types/contact";
-import { sendEmail } from "@/server/send-email";
 import { useToast } from "./ui/use-toast";
 import { DialogFooter, DialogTrigger } from "./ui/dialog";
 import { MdEmail } from "react-icons/md";
