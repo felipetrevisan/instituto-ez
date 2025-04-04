@@ -1,12 +1,11 @@
 import { Metadata } from "next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import Providers from "./providers";
+import { getSiteConfig } from "@/server/get-site-config";
 
 import { Inter, Oswald, Questrial } from "next/font/google";
-import * as App from "@/components/app";
 
-import "../globals.css";
-import Providers from "./providers";
-// import { getSiteConfig } from "@/server/get-site-config";
+import "../globals.scss";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -26,19 +25,19 @@ const questrial = Questrial({
   variable: "--font-questrial",
 });
 
-// export async function generateMetadata(): Promise<Metadata> {
-//   const settings = await getSiteConfig();
-//   const title = settings?.title || "Instituto Enzo";
-//   const description = settings?.description || "";
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await getSiteConfig();
+  const title = settings?.title || "Instituto Enzo";
+  const description = settings?.description || "";
 
-//   return {
-//     title: {
-//       template: `%s | ${title}`,
-//       default: title,
-//     },
-//     description,
-//   };
-// }
+  return {
+    title: {
+      template: `%s | ${title}`,
+      default: title,
+    },
+    description,
+  };
+}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

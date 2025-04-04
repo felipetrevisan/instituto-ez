@@ -1,24 +1,25 @@
-import { Home as HomeComponent } from "@/components/sections/home";
+import { Banner as BannerComponent } from "@/components/sections/banner";
 import { About as AboutComponent } from "@/components/sections/about";
-import { TrainingMode as TrainingModeComponent } from "@/components/sections/training-mode";
 import { Testimonials as TestimonialsComponent } from "@/components/sections/testimonials";
 import { Immersion as ImmersionComponent } from "@/components/sections/immersion";
 import { Lectures as LecturesComponent } from "@/components/sections/lectures";
-import { Workshops as WorkshopsComponent } from "@/components/sections/workshop";
+import { Workshops as WorkshopsComponent } from "@/components/sections/workshops";
 import { AdvancedMentory as AdvancedMentoryComponent } from "@/components/sections/advancedMentory";
 import { Services as ServicesComponent } from "@/components/sections/services";
+import { Mathematizer as MathematizerComponent } from "@/components/sections/mathematizer";
+import { Training as TrainingComponent } from "@/components/sections/training";
 
 export default async function Page() {
   return (
-    <div className="w-full flex items-center flex-col justify-center space-y-14 mb-40">
-      <section className="section relative flex w-full items-center justify-center">
-        <HomeComponent />
+    <div className="w-full flex items-center flex-col justify-center gap-20">
+      <section className="section relative flex w-screen lg:w-full items-center justify-center">
+        <BannerComponent />
       </section>
       <section className="section relative flex w-full justify-center bg-white">
         <AboutComponent />
       </section>
       <section className="section relative flex w-full justify-center bg-white">
-        <TrainingModeComponent />
+        <ServicesComponent />
       </section>
       <section className="section relative flex w-full justify-center bg-white">
         <TestimonialsComponent />
@@ -29,14 +30,17 @@ export default async function Page() {
       <section className="section relative flex flex-col w-screen h-full justify-center">
         <LecturesComponent />
       </section>
-      <section className="section relative flex h-full justify-center bg-white mt-80">
+      <section className="section relative flex h-full justify-center bg-white">
         <WorkshopsComponent />
       </section>
       <section className="section relative flex flex-col w-screen h-full justify-center">
         <AdvancedMentoryComponent />
       </section>
       <section className="section relative flex flex-col w-screen h-full justify-center">
-        <ServicesComponent />
+        <MathematizerComponent />
+      </section>
+      <section className="section relative flex h-full justify-center bg-white">
+        <TrainingComponent />
       </section>
     </div>
   );
