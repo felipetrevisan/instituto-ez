@@ -1,5 +1,21 @@
 import { Variants } from "framer-motion";
 
+export const textVariants: Variants = {
+  hide: {
+    opacity: 0,
+    scale: 0
+  },
+  show: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      delayChildren: 1,
+      duration: 2,
+      ease: "easeInOut"
+    },
+  },
+};
+
 export const headerVariants: Variants = {
   hide: {
     opacity: 0,
@@ -11,6 +27,7 @@ export const headerVariants: Variants = {
     transition: {
       delayChildren: 1,
       duration: 2,
+      ease: "easeInOut"
     },
   },
 };
@@ -123,3 +140,30 @@ export const opacityVariants: Variants = {
     },
   },
 };
+
+export const menuListVariants = {
+  open: {
+    transition: { staggerChildren: 0.07, delayChildren: 0.2 },
+  },
+  closed: {
+    transition: { staggerChildren: 0.05, staggerDirection: -1 },
+  },
+};
+
+export const menuItemVariants = {
+  open: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      y: { stiffness: 1000, velocity: -100 },
+    },
+  },
+  closed: {
+    y: 50,
+    opacity: 0,
+    transition: {
+      y: { stiffness: 1000 },
+    },
+  },
+};
+
