@@ -1,17 +1,23 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { InfoIcon, Loader2 } from "lucide-react";
+import { MdEmail } from "react-icons/md";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "./ui/textarea";
+import { DialogFooter, DialogTrigger } from "@/components/ui/dialog";
+import { Textarea } from "@/components/ui/textarea";
+// import { useToast } from "@/components/ui/use-toast";
 import { ContactFormSchema, contactFormSchema } from "@/types/contact";
-import { useToast } from "./ui/use-toast";
-import { DialogFooter, DialogTrigger } from "./ui/dialog";
-import { MdEmail } from "react-icons/md";
 
-export function ContactForm({ isDialog = false, onClose }: { isDialog: boolean, onClose: () => void }) {
-  const { toast } = useToast();
+export function ContactForm({
+  isDialog = false,
+  onClose,
+}: {
+  isDialog: boolean;
+  onClose: () => void;
+}) {
+  // const { toast } = useToast();
 
   const {
     register,
@@ -46,7 +52,6 @@ export function ContactForm({ isDialog = false, onClose }: { isDialog: boolean, 
     //   }
     onClose();
   }
-
 
   return (
     <form onSubmit={handleSubmit(handleSendForm)} className="w-full">

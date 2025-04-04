@@ -12,7 +12,7 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from "@/components/ui2/navigation-menu";
+} from "@/components/ui/navigation-menu";
 import { Navigation } from "@/types/site";
 import { cn } from "@/lib/utils";
 import { menuItemVariants } from "@/config/animation";

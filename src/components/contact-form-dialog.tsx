@@ -1,6 +1,6 @@
 import { useApp } from "@/hooks/use-app";
 import { ContactForm } from "./contact-form";
-import { DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
+import { DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 export function ContactFormDialog() {
   const { setIsContactDialogOpen } = useApp();

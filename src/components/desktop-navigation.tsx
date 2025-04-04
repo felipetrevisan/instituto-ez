@@ -2,13 +2,13 @@
 
 import { Fragment } from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-} from "@/components/ui2/navigation-menu";
-import { motion } from "framer-motion";
+} from "@/components/ui/navigation-menu";
 import { Navigation } from "@/types/site";
 import { useApp } from "@/hooks/use-app";
 
