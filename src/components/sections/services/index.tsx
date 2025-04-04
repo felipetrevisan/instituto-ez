@@ -1,47 +1,26 @@
 "use client";
 
-import { Parallax } from "react-parallax";
-import bgServices from "@/assets/images/bg-services.png";
-
-import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import * as App from "@/components/app";
+import { useServices } from "@/hooks/use-services";
+import { ServiceCard as Card } from "./card";
+import { Skeleton } from "./skeleton";
 
 export function Services() {
+  const { data, isLoading } = useServices();
+
   return (
-    <div className="flex flex-col gap-48">
-      <div className="relative flex justify-between w-full h-full">
-        <Parallax
-          bgImage={bgServices.src}
-          className="flex justify-center w-2/3 h-[362px] overflow-hidden rounded-lg"
-        ></Parallax>
-        <div className="flex justify-center w-1/2 z-10 bg-card/90 shadow-lg rounded-lg absolute right-80 top-24">
-          <div className="relative flex flex-col justify-start items-start w-full h-full text-primary-foreground p-10 gap-10">
-            <div className="flex flex-col">
-              <h3 className="text-4xl text-left font-bold font-oswald">Matematizador</h3>
-              <h1 className="text-5xl text-left font-bold font-oswald">
-                de Eficiência Empresarial
-              </h1>
-            </div>
-            <p className="flex flex-col font-light text-justify text-md font-questrial leading-7 gap-10">
-              Apresentamos a revolução no aprimoramento empresarial: Uma ferramenta capaz de
-              decifrar a dinâmica interna de sua equipe e setores de maneira matemática,
-              proporcionando análises precisas sobre seu funcionamento. Nosso sistema gera um
-              relatório detalhado que destaca áreas de excelência, identifica falhas e assegura o
-              direcionamento da empresa. Descubra como a neurociência pode impulsionar o sucesso do
-              seu negócio. Elevamos sua empresa a um novo patamar. Produto Neurocientífico.
-              <Button
-                variant="default"
-                theme="tertiary"
-                size="xl"
-                hover="effect"
-                rounded="2xl"
-                className="w-full font-bold"
-              >
-                Saiba Mais
-              </Button>
-            </p>
-          </div>
-        </div>
+    <motion.div layout className="flex flex-col space-y-12 gap-10">
+      <App.PageHeader>
+        <App.Title>Sessões de Transformação</App.Title>
+        <App.Subtitle>
+          Método exclusivo do Instituto Ez, escolha sua modalidade de atendimento:
+        </App.Subtitle>
+      </App.PageHeader>
+      <div className="flex flex-col justify-center items-center gap-16 h-full place-items-center">
+        {isLoading && <Skeleton />}
+        {data?.map((item, index) => <Card key={item.id} item={item} index={index} />)}
       </div>
-    </div>
+    </motion.div>
   );
 }

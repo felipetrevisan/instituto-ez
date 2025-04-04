@@ -1,19 +1,13 @@
-// bulletActiveClass: "size-6",
-//           bulletClass: "bg-tertiary rounded-full size-4",
-//           horizontalClass: "flex flex-col"
-
 .swiper {
-  @apply mt-12;
-
   .swiper-wrapper {
-    @apply mb-12;
+    @apply mb-12 flex;
   }
 
   .swiper-pagination-horizontal {
     @apply mt-10 bottom-0 flex justify-center items-center;
 
     .swiper-pagination-bullet {
-      @apply size-2 bg-tertiary;
+      @apply size-2 bg-tertiary rounded-full;
 
       &.swiper-pagination-bullet-active {
         @apply size-3;
