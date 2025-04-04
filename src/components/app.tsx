@@ -3,32 +3,26 @@
 import { Fragment, useRef, useState, forwardRef, HTMLAttributes } from "react";
 import Image from "next/image";
 import { motion, useAnimation, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
+import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
+import { Slot } from "@radix-ui/react-slot";
+import { MdOutlineEmail } from "react-icons/md";
+import { VariantProps, cva } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 import * as Navbar from "@/components/ui/navbar";
 import { Button } from "@/components/ui/button";
-import { MdOutlineEmail } from "react-icons/md";
-import { Slot } from "@radix-ui/react-slot";
-import {
-  NavigationListItem,
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
 import { Dialog } from "@/components/ui/dialog";
-import { footerVariants } from "@/config/animation";
-// import { useSite } from "@/hooks/useSite";
-import { Logo } from "./logo";
-import { VariantProps, cva } from "class-variance-authority";
+import { useSite } from "@/hooks/use-site";
 import { useDimensions } from "@/hooks/use-dimension";
 import { useApp } from "@/hooks/use-app";
 import { DesktopNavigation } from "./desktop-navigation";
 import { ContactFormDialog } from "./contact-form-dialog";
+import { Drawer, DrawerContent, DrawerTitle, DrawerTrigger } from "./ui/drawer";
+import { MobileNavigation } from "./mobile-navigation";
+import { Logo } from "./logo";
 
 const Header = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(({ className }, ref) => {
+  const { data, isLoading } = useSite();
   const [currentScrollY, setCurrentScrollY] = useState(0);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const { height } = useDimensions(containerRef);
@@ -39,7 +33,7 @@ const Header = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(({ cla
 
   const logoSizeHeight = useTransform(scrollY, scrollYRange, ["60px", "56px", "56px"]);
   const logoSizeWidth = useTransform(scrollY, scrollYRange, ["220px", "174px", "174px"]);
-  const paddingHeaderX = useTransform(scrollY, scrollYRange, ["30px", "20px", "20px"]);
+  // const paddingHeaderX = useTransform(scrollY, scrollYRange, ["0", "20px", "20px"]);
   const paddingHeaderY = useTransform(scrollY, scrollYRange, ["1.2rem", "1rem", "1rem"]);
 
   const controls = useAnimation();
@@ -87,8 +81,8 @@ const Header = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(({ cla
           hidden: { top: "0px" },
         }}
         style={{
-          paddingLeft: paddingHeaderX,
-          paddingRight: paddingHeaderX,
+          // paddingLeft: paddingHeaderX,
+          // paddingRight: paddingHeaderX,
           paddingTop: paddingHeaderY,
           paddingBottom: paddingHeaderY,
         }}
@@ -103,39 +97,35 @@ const Header = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(({ cla
             ref={containerRef}
             className="flex"
           >
-            {/* {!isSiteConfigLoading && ( */}
-            <Fragment>
-              <DesktopNavigation />
-              {/* <Drawer open={isMenuOpen} onClose={() => toggleMenu(0)}>
-                    <DrawerTrigger
-                      asChild
-                      className={cn({
-                        hidden: isMenuOpen,
-                      })}
-                    >
-                      <Navbar.Toggle />
-                    </DrawerTrigger>
-                    <VisuallyHidden.Root>
-                      <DrawerTitle>Menu</DrawerTitle>
-                    </VisuallyHidden.Root>
-                    <DrawerContent className="container max-w-xl md:max-w-4xl h-[99svh]">
-                      <div className="flex justify-between">
-                        <Navbar.Brand className="mt-5">
-                          <Logo height={logoSizeHeight} width={logoSizeWidth} />
-                        </Navbar.Brand>
-                        <DrawerTrigger asChild>
-                          <Navbar.Toggle className="mt-5 bg-secondary text-muted" />
-                        </DrawerTrigger>
-                      </div>
-                      <MobileNavigation
-                        navigation={siteConfigData?.primaryNavigation}
-                        servicesData={serviceData}
-                        isServicesLoading={isLoading}
-                      />
-                    </DrawerContent>
-                  </Drawer> */}
-            </Fragment>
-            {/* )} */}
+            {!isLoading && (
+              <Fragment>
+                <DesktopNavigation navigation={data?.primaryNavigation} />
+                <Drawer open={isMenuOpen} onClose={() => toggleMenu(0)} direction="right">
+                  <DrawerTrigger
+                    asChild
+                    className={cn({
+                      hidden: isMenuOpen,
+                    })}
+                  >
+                    <Navbar.Toggle />
+                  </DrawerTrigger>
+                  <VisuallyHidden.Root>
+                    <DrawerTitle>Menu</DrawerTitle>
+                  </VisuallyHidden.Root>
+                  <DrawerContent className="lg:container max-w-xl md:max-w-4xl h-[100svh]">
+                    <div className="flex justify-between p-5">
+                      <Navbar.Brand className="mt-5">
+                        <Logo height={logoSizeHeight} width={logoSizeWidth} />
+                      </Navbar.Brand>
+                      <DrawerTrigger asChild>
+                        <Navbar.Toggle className="mt-5 bg-primary text-primary-foreground" />
+                      </DrawerTrigger>
+                    </div>
+                    <MobileNavigation navigation={data?.primaryNavigation} />
+                  </DrawerContent>
+                </Drawer>
+              </Fragment>
+            )}
           </motion.div>
         </Fragment>
       </Navbar.Root>
@@ -168,14 +158,7 @@ const Footer = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>((_, re
   const MotionButton = motion(Button);
 
   return (
-    <motion.footer
-      className="flex flex-col w-full select-none items-center p-5 relative mt-24 border border-t-primary-foreground shadow"
-      initial="hide"
-      whileInView="show"
-      exit="hide"
-      variants={footerVariants}
-      ref={ref}
-    >
+    <footer className="flex flex-col w-full select-none items-center p-5 relative mt-24" ref={ref}>
       <div className="fixed bottom-4 right-10 z-50 flex flex-row items-center gap-4">
         <MotionButton
           aria-label="Entre em contato"
@@ -207,7 +190,7 @@ const Footer = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>((_, re
           </p>
         </div>
       </div>
-    </motion.footer>
+    </footer>
   );
 });
 Footer.displayName = "Footer";
@@ -219,11 +202,11 @@ const titleVariants = cva("font-oswald font-bold", {
       secondary: "text-secondary-foreground",
     },
     size: {
-      default: "text-xl md:text-6xl",
-      sm: "text-sm md:text-lg",
-      lg: "text-lg md:text-2xl",
-      xl: "text-xl md:text-6xl",
-      "2xl": "text-2xl md:text-8xl",
+      default: "clamp-[2xl-6cqw-6xl]",
+      sm: "clamp-[sm-6cqw-xl]",
+      lg: "clamp-[lg-6cqw-2xl]",
+      xl: "clamp-[xl-6cqw-6xl]",
+      "2xl": "clamp-[2xl-6cqw-8xl]",
     },
   },
   defaultVariants: {
@@ -258,7 +241,7 @@ const Subtitle = forwardRef<HTMLHeadingElement, TitleProps>(
     return (
       <Comp
         className={cn(
-          "ms-7 text-xl md:text-2xl font-oswald font-semibold text-primary-foreground text-wrap",
+          "clamp-[lg-6cqw-2xl] text-x font-oswald font-light text-center text-primary-foreground text-wrap",
           className
         )}
         {...props}
