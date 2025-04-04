@@ -2,6 +2,10 @@
 
 import { Dispatch, SetStateAction, createContext, useContext, useState } from "react";
 import { Cycle, useCycle } from "framer-motion";
+import { useCallback } from "react";
+import { ReactNode } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 // import { Service } from "@/types/services";
 
 type AppContextProps = {
@@ -9,19 +13,32 @@ type AppContextProps = {
   toggleMenu: Cycle;
   isContactDialogOpen: boolean;
   setIsContactDialogOpen: Dispatch<SetStateAction<boolean>>
-  // serviceDetailsDialogOpen: boolean;
-  // setServiceDetailsDialogOpen: Dispatch<SetStateAction<boolean>>;
-  // selectedServiceDetails: Service | null;
-  // setSelectedServiceDetails: Dispatch<SetStateAction<Service | null>>;
+  isMenuActive: (menu: string) => boolean;
+  isHome: boolean;
+  setActiveMenu: Dispatch<SetStateAction<string>>;
+  activeMenu: string;
 };
 
 const AppContext = createContext({} as AppContextProps);
 
-export function AppProvider({ children }: { children: React.ReactNode }) {
+export function AppProvider({ children }: { children: ReactNode }) {
+  const currentUrl = usePathname();
   const [isMenuOpen, toggleMenu] = useCycle(false, true);
   const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
-  // const [serviceDetailsDialogOpen, setServiceDetailsDialogOpen] = useState(false);
-  // const [selectedServiceDetails, setSelectedServiceDetails] = useState<Service | null>(null);
+  const [activeMenu, setActiveMenu] = useState(currentUrl);
+
+  const isHome = activeMenu === "/";
+  const isMenuActive = useCallback(
+    (menu: string) => {
+      return currentUrl.includes(menu) && menu !== "/";
+    },
+    [currentUrl]
+  );
+
+  useEffect(() => {
+    setActiveMenu(currentUrl);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <AppContext.Provider
@@ -29,11 +46,11 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         toggleMenu,
         isMenuOpen,
         isContactDialogOpen,
-        setIsContactDialogOpen
-        // serviceDetailsDialogOpen,
-        // setServiceDetailsDialogOpen,
-        // selectedServiceDetails,
-        // setSelectedServiceDetails,
+        setIsContactDialogOpen,
+        isHome,
+        isMenuActive,
+        activeMenu,
+        setActiveMenu
       }}
     >
       {children}
