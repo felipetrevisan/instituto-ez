@@ -14,10 +14,6 @@ export const Logo = ({ className, height, width, ...props }: LogoProps) => {
   return (
     <motion.a
       className="relative h-[3.56rem] w-[14rem] flex space-x-2"
-      // style={{
-      //   height,
-      //   width,
-      // }}
       {...props}
       href="/"
     >
