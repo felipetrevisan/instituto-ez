@@ -5,7 +5,7 @@ import { HTMLMotionProps, motion, MotionValue } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { useApp } from "@/hooks/use-app";
 
-const navbarVariants = cva("w-full h-auto sm:px-4 p-2", {
+const navbarVariants = cva("w-full h-auto sm:px-4 lg:p-2", {
   variants: {
     sticky: {
       true: "fixed z-[90] top-0 start-0",

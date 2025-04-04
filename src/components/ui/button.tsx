@@ -5,13 +5,14 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "relative overflow-hidden inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 z-[1] duration-500 cursor-pointer",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        default: "shadow-sm outline outline-2",
-        outline: "shadow-sm outline outline-2",
-        ghost: "hover:bg-secondary/10",
+        default: "bg-primary text-primary-foreground shadow hover:bg-primary/90",
+        outline:
+          "border border-input bg-background shadow-sm",
+        ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         whatsapp:
           "bg-success border-2 border-white text-white font-bold hover:bg-white hover:text-success hover:border-white outline outline-2 outline-success hover:outline-white hover:border-success",
@@ -52,8 +53,8 @@ const buttonVariants = cva(
           "before:absolute before:top-0 before:right-0 before:bottom-0 before:left-0 before:[clip-path:polygon(50%_0%,50%_0%,50%_50%,50%_100%,50%_100%,50%_50%)] before:-z-[1] before:transition-all hover:before:[clip-path:polygon(25%_-70%,75%_-70%,120%_50%,75%_170%,25%_170%,-20%_50%)] before:duration-500",
       },
       inverted: {
-        true: ""
-      }
+        true: "",
+      },
     },
     defaultVariants: {
       variant: "default",
@@ -94,7 +95,7 @@ const buttonVariants = cva(
         variant: "outline",
         theme: "default",
         className:
-          "bg-white/40 hover:bg-primary hover:text-primary-foreground outline-primary-foreground",
+          "bg-white/60 hover:bg-primary hover:text-primary-foreground outline-primary-foreground",
       },
       {
         hover: "effect",
@@ -162,8 +163,7 @@ const buttonVariants = cva(
         variant: "default",
         theme: "secondary",
         inverted: true,
-        className:
-          "bg-secondary-foreground text-secondary",
+        className: "bg-secondary-foreground text-secondary",
       },
 
       //Tertiary
