@@ -2,6 +2,7 @@ import * as React from "react"
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu"
 import { cva } from "class-variance-authority"
 import { ChevronDown } from "lucide-react"
+import { icons } from "lucide-react";
 
 import { cn } from "@/lib/utils"
 
@@ -115,6 +116,41 @@ const NavigationMenuIndicator = React.forwardRef<
 NavigationMenuIndicator.displayName =
   NavigationMenuPrimitive.Indicator.displayName
 
+export interface NavigationListItemProps
+  extends React.AnchorHTMLAttributes<HTMLAnchorElement>,
+    React.ComponentPropsWithoutRef<"a"> {
+  icon?: keyof typeof icons | null;
+}
+
+const NavigationListItem = React.forwardRef<HTMLAnchorElement, NavigationListItemProps>(
+  ({ className, title, icon, children, ...props }, ref) => {
+    const LucideIcon = icon ? icons[icon] : null;
+
+    return (
+      <li className="cursor-pointer">
+        <a
+          className={cn(
+            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-secondary hover:text-secondary-foreground focus:bg-secondary focus:text-secondary-foreground",
+            className
+          )}
+          ref={ref}
+          {...props}
+        >
+          <div className="flex flex-row items-center gap-2">
+            {LucideIcon && <LucideIcon className="size-6" />}
+            <div className="text-md font-medium leading-none">{title}</div>
+          </div>
+          {children && (
+            <p className="line-clamp-1 text-sm leading-snug text-muted-foreground">{children}</p>
+          )}
+        </a>
+      </li>
+    );
+  }
+);
+
+NavigationListItem.displayName = "NavigationListItem";
+
 export {
   navigationMenuTriggerStyle,
   NavigationMenu,
@@ -125,4 +161,5 @@ export {
   NavigationMenuLink,
   NavigationMenuIndicator,
   NavigationMenuViewport,
+  NavigationListItem
 }

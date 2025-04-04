@@ -1,73 +1,48 @@
 "use client";
 
-import * as React from "react";
+import { Fragment } from "react";
 import Link from "next/link";
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-} from "@/components/ui/navigation-menu";
+} from "@/components/ui2/navigation-menu";
+import { motion } from "framer-motion";
+import { Navigation } from "@/types/site";
+import { useApp } from "@/hooks/use-app";
 
-export const DesktopNavigation = () => {
+type NavigationProps = {
+  navigation?: Navigation;
+};
+
+const MenuItemMotion = motion(NavigationMenuItem);
+
+export const DesktopNavigation = ({ navigation }: NavigationProps) => {
+  const { isMenuActive } = useApp();
+
   return (
     <NavigationMenu className="hidden lg:flex">
       <NavigationMenuList>
-        <NavigationMenuItem>
-          <Link href="/" legacyBehavior passHref>
-            <NavigationMenuLink>Início</NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link href="ss" legacyBehavior passHref>
-            <NavigationMenuLink>Sobre</NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link href="ss" legacyBehavior passHref>
-            <NavigationMenuLink>Atendimentos</NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link href="ss" legacyBehavior passHref>
-            <NavigationMenuLink>Mentorias</NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link href="ss" legacyBehavior passHref>
-            <NavigationMenuLink>Workshops</NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link href="ss" legacyBehavior passHref>
-            <NavigationMenuLink>Palestras</NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link href="ss" legacyBehavior passHref>
-            <NavigationMenuLink>Imersão</NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link href="ss" legacyBehavior passHref>
-            <NavigationMenuLink>Matematizador</NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link href="ss" legacyBehavior passHref>
-            <NavigationMenuLink>Treinamentos</NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link href="ss" legacyBehavior passHref>
-            <NavigationMenuLink>Calendário</NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link href="ss" legacyBehavior passHref>
-            <NavigationMenuLink>Contato</NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
+        {navigation?.items?.map(({ id, label, url }) => (
+          <Fragment key={`frag-${id}`}>
+            <MenuItemMotion whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+              <Link
+                href={url.isHome || !url.link ? "/" : url.link ?? url.externalUrl!}
+                target={!url.link && url.externalUrl ? "_blank" : undefined}
+                legacyBehavior
+                passHref
+              >
+                <NavigationMenuLink
+                  active={(url.link && isMenuActive(url.link!)) || false}
+                  className="relative"
+                >
+                  {label}
+                </NavigationMenuLink>
+              </Link>
+            </MenuItemMotion>
+          </Fragment>
+        ))}
       </NavigationMenuList>
     </NavigationMenu>
   );
