@@ -3,10 +3,10 @@ import { Testimonial } from "@/types/testimonial";
 import { getTestimonials } from "@/server/get-testimonials";
 
 export function useTestimonials() {
-  const { data, isLoading, isPending } = useQuery<Testimonial[]>({
-    queryKey: ["testimonials"],
-    queryFn: () => getTestimonials(),
-  });
+	const { data, isLoading, isPending } = useQuery<Testimonial[]>({
+		queryKey: ["testimonials"],
+		queryFn: () => getTestimonials(),
+	});
 
-  return { data, isLoading, isPending };
+	return { data, isLoading, isPending };
 }

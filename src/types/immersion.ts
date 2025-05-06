@@ -3,13 +3,13 @@ import { SanityAsset } from "./sanityAssets";
 import { Button } from "./global";
 
 export type Immersion = {
-  id: string;
-  title: string;
-  content: PortableTextBlock[];
-  background: SanityAsset;
-  button: Button;
-  ribbon: {
-    show: boolean;
-    text: string;
-  }
+	id: string;
+	title: string;
+	content: PortableTextBlock[];
+	background: SanityAsset;
+	button: Button;
+	ribbon: {
+		show: boolean;
+		text: string;
+	};
 };

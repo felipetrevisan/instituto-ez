@@ -3,10 +3,10 @@ import { Lecture } from "@/types/lecture";
 import { getLectures } from "@/server/get-lectures";
 
 export function useLecture() {
-  const { data, isLoading, isPending } = useQuery<Lecture[]>({
-    queryKey: ["lectures"],
-    queryFn: () => getLectures(),
-  });
+	const { data, isLoading, isPending } = useQuery<Lecture[]>({
+		queryKey: ["lectures"],
+		queryFn: () => getLectures(),
+	});
 
-  return { data, isLoading, isPending };
+	return { data, isLoading, isPending };
 }

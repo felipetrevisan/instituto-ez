@@ -25,28 +25,28 @@ import aboutCard from "./schemas/objects/about-card";
 import ribbon from "./schemas/objects/ribbon";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [
-    settings,
-    testimonial,
-    workshop,
-    training,
-    services,
-    immersion,
-    advancedMentory,
-    mathematizer,
-    lecture,
-    banner,
+	types: [
+		settings,
+		testimonial,
+		workshop,
+		training,
+		services,
+		immersion,
+		advancedMentory,
+		mathematizer,
+		lecture,
+		banner,
 
-    page,
+		page,
 
-    navigation,
-    navigationItem,
-    navigationSubmenuItem,
-    socialNetworksItem,
-    link,
-    button,
-    ribbon,
-    pageSection,
-    aboutCard
-  ],
+		navigation,
+		navigationItem,
+		navigationSubmenuItem,
+		socialNetworksItem,
+		link,
+		button,
+		ribbon,
+		pageSection,
+		aboutCard,
+	],
 };

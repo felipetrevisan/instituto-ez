@@ -3,9 +3,11 @@ import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
+	return twMerge(clsx(inputs));
 }
 
 export function getLink(button: Button) {
-  return button.type === LinkType.INTERNAL ? `/${button.link}` : button.externalUrl!;
+	return button.type === LinkType.INTERNAL
+		? `/${button.link}`
+		: button.externalUrl!;
 }

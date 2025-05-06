@@ -7,17 +7,19 @@ import { TrainingCard as Card } from "./card";
 import { Skeleton } from "./skeleton";
 
 export function Training() {
-  const { data, isLoading } = useTraining();
+	const { data, isLoading } = useTraining();
 
-  return (
-    <motion.div layout className="flex flex-col space-y-12">
-      <App.PageHeader>
-        <App.Title>Treinamentos</App.Title>
-      </App.PageHeader>
-      <div className="flex flex-col md:flex-row justify-center items-center gap-16 h-full flex-wrap">
-        {isLoading && <Skeleton />}
-        {data?.map((item) => <Card key={item.id} item={item} />)}
-      </div>
-    </motion.div>
-  );
+	return (
+		<motion.div layout className="flex flex-col space-y-12">
+			<App.PageHeader>
+				<App.Title>Treinamentos</App.Title>
+			</App.PageHeader>
+			<div className="flex flex-col md:flex-row justify-center items-center gap-16 h-full flex-wrap">
+				{isLoading && <Skeleton />}
+				{data?.map((item) => (
+					<Card key={item.id} item={item} />
+				))}
+			</div>
+		</motion.div>
+	);
 }

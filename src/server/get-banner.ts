@@ -5,5 +5,5 @@ import { bannerQuery } from "@/sanity/lib/queries";
 import { Banner } from "@/types/banner";
 
 export async function getBanner() {
-  return sanityFetch<Banner[]>({ query: bannerQuery });
+	return sanityFetch<Banner[]>({ query: bannerQuery });
 }
