@@ -38,11 +38,11 @@ export default defineType({
 			title: "Navigation items",
 			type: "array",
 			of: [{ type: "navigationItem" }],
-			hidden: ({ parent }) => !parent?.is_social_network,
+			hidden: ({ parent }) => !!parent?.is_social_network,
 			validation: (Rule) =>
 				Rule.custom((items, context) => {
 					const isSocial = context?.document?.is_social_network ?? false;
-					if (!isSocial && (!items || items.length === 0)) {
+					if (!!isSocial && (!items || items.length === 0)) {
 						return "The navigation must have at least one item.";
 					}
 					return true;
