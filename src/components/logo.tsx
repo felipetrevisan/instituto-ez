@@ -7,9 +7,16 @@ import * as React from 'react';
 type LogoProps = {
 	height: MotionValue<string>;
 	width: MotionValue<string>;
+	src?: string;
 } & HTMLMotionProps<'a'>;
 
-export const Logo = ({ className, height, width, ...props }: LogoProps) => {
+export const Logo = ({
+	className,
+	height,
+	width,
+	src,
+	...props
+}: LogoProps) => {
 	return (
 		<motion.a
 			className="relative h-[3.56rem] w-56 flex space-x-2"
@@ -17,7 +24,7 @@ export const Logo = ({ className, height, width, ...props }: LogoProps) => {
 			href="/"
 		>
 			<Image
-				src="/assets/logo.png"
+				src={src ?? '/assets/logo.png'}
 				alt="Logo Instituto Ez - Desenvolvimento Humano"
 				className="h-full"
 				sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

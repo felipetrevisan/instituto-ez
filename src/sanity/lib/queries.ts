@@ -5,6 +5,16 @@ export const siteConfigQuery = groq`
     title,
     description,
     keywords,
+    "contact": {
+      email
+    },
+    "logo": logo {
+      "asset": asset,
+        "metadata": {
+        "lqip": asset->metadata.lqip,
+        "dimensions": asset->metadata.dimensions
+      }
+    },
     "hero": hero[] { 
       "background": background_image {
         "asset": asset,

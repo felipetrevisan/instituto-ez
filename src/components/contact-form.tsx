@@ -58,9 +58,6 @@ export function ContactForm({
 			<div className="grid gap-4 py-4">
 				<div className="grid grid-cols-1 md:grid-cols-2 items-baseline gap-4">
 					<div>
-						<Label htmlFor="name" className="text-right">
-							Nome
-						</Label>
 						<div className="col-span-3 space-y-4">
 							<Input
 								id="name"
@@ -76,9 +73,6 @@ export function ContactForm({
 						</div>
 					</div>
 					<div>
-						<Label htmlFor="email" className="text-right">
-							Endereço de e-mail
-						</Label>
 						<div className="col-span-3 space-y-4">
 							<Input
 								id="email"
@@ -97,46 +91,36 @@ export function ContactForm({
 					</div>
 				</div>
 				<div className="grid grid-cols-1 items-baseline gap-4">
-					<div>
-						<Label htmlFor="subject" className="text-right">
-							Assunto
-						</Label>
-						<div className="col-span-2 space-y-4">
-							<Input
-								id="subject"
-								placeholder="Assunto"
-								disabled={isSubmitting}
-								{...register('subject')}
-							/>
-							{errors.subject && (
-								<p className="flex items-center gap-1 text-sm font-medium text-secondary">
-									<InfoIcon />
-									{errors.subject.message}
-								</p>
-							)}
-						</div>
+					<div className="col-span-2 space-y-4">
+						<Input
+							id="subject"
+							placeholder="Assunto"
+							disabled={isSubmitting}
+							{...register('subject')}
+						/>
+						{errors.subject && (
+							<p className="flex items-center gap-1 text-sm font-medium text-secondary">
+								<InfoIcon />
+								{errors.subject.message}
+							</p>
+						)}
 					</div>
 				</div>
 				<div className="grid grid-cols-1 items-baseline gap-4">
-					<div>
-						<Label htmlFor="subject" className="text-right">
-							Mensagem
-						</Label>
-						<div className="col-span-2 space-y-4">
-							<Textarea
-								id="message"
-								placeholder="Mensagem"
-								rows={4}
-								disabled={isSubmitting}
-								{...register('message')}
-							/>
-							{errors.message && (
-								<p className="flex items-center gap-1 text-sm font-medium text-secondary">
-									<InfoIcon />
-									{errors.message.message}
-								</p>
-							)}
-						</div>
+					<div className="col-span-2 space-y-4">
+						<Textarea
+							id="message"
+							placeholder="Mensagem"
+							rows={4}
+							disabled={isSubmitting}
+							{...register('message')}
+						/>
+						{errors.message && (
+							<p className="flex items-center gap-1 text-sm font-medium text-secondary">
+								<InfoIcon />
+								{errors.message.message}
+							</p>
+						)}
 					</div>
 				</div>
 			</div>

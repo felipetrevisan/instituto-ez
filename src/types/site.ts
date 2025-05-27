@@ -7,9 +7,10 @@ export type Site = {
 	title: string;
 	description?: string;
 	keywords?: string;
+	contact: { email: string };
 	hero: Hero[];
 	sections: Section[];
-	logo: SanityAsset;
+	logo?: SanityAsset;
 	primaryNavigation?: Navigation;
 	socialNavigation?: SocialNetwork;
 };

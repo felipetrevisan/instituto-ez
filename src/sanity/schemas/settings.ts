@@ -23,6 +23,10 @@ export default defineType({
 			name: 'home',
 			title: 'Home',
 		},
+		{
+			name: 'contact',
+			title: 'Contact',
+		},
 	],
 	fields: [
 		defineField({
@@ -54,6 +58,12 @@ export default defineType({
 			title: 'Site Logo',
 			type: 'image',
 			group: ['site'],
+		}),
+		defineField({
+			name: 'email',
+			title: 'E-mail',
+			type: 'email',
+			group: ['site', 'contact'],
 		}),
 		defineField({
 			name: 'hero',

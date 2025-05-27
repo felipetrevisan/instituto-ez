@@ -8,6 +8,7 @@ import { useApp } from '@/hooks/use-app';
 import { useDimensions } from '@/hooks/use-dimension';
 import { useSite } from '@/hooks/use-site';
 import { cn } from '@/lib/utils';
+import { urlForImage } from '@/sanity/lib/utils';
 import { Slot } from '@radix-ui/react-slot';
 import { type VariantProps, cva } from 'class-variance-authority';
 import {
@@ -98,7 +99,11 @@ function Header({ className }: React.ComponentProps<'div'>) {
 			>
 				<Fragment>
 					<Navbar.Brand>
-						<Logo height={logoSizeHeight} width={logoSizeWidth} />
+						<Logo
+							height={logoSizeHeight}
+							width={logoSizeWidth}
+							src={data?.logo && urlForImage(data.logo?.asset).url()}
+						/>
 					</Navbar.Brand>
 					<motion.div
 						animate={isMenuOpen ? 'open' : 'closed'}

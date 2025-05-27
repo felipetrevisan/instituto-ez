@@ -29,16 +29,16 @@ export const DesktopNavigation = ({ navigation }: NavigationProps) => {
 							whileHover={{ scale: 1.1 }}
 							whileTap={{ scale: 0.95 }}
 						>
-								<NavigationMenuLink
-									active={(url.link && isMenuActive(url.link)) || false}
-									href={
+							<NavigationMenuLink
+								active={(url.link && isMenuActive(url.link)) || false}
+								href={
 									url.isHome || !url.link ? '/' : (url.link ?? url.externalUrl)
 								}
 								target={!url.link && url.externalUrl ? '_blank' : undefined}
-									className="relative hover:after:w-full hover:after:animation-pulse hover:after:shadow-xl after:absolute after:w-0 after:bg-primary-foreground after:left-1/2 after:-bottom-1 after:h-[2px] after:rounded-xl after:-translate-x-1/2 after:transition-all"
-								>
-									{label}
-								</NavigationMenuLink>
+								className="relative hover:after:w-full hover:after:animation-pulse hover:after:shadow-xl after:absolute after:w-0 after:bg-primary-foreground after:left-1/2 after:-bottom-1 after:h-[2px] after:rounded-xl after:-translate-x-1/2 after:transition-all"
+							>
+								{label}
+							</NavigationMenuLink>
 						</MenuItemMotion>
 					</Fragment>
 				))}
