@@ -1,10 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
-import { Lecture } from "@/types/lecture";
-import { getLectures } from "@/server/get-lectures";
+import { getLectures } from '@/server/get-lectures';
+import type { Lecture } from '@/types/lecture';
+import { useQuery } from '@tanstack/react-query';
 
 export function useLecture() {
 	const { data, isLoading, isPending } = useQuery<Lecture[]>({
-		queryKey: ["lectures"],
+		queryKey: ['lectures'],
 		queryFn: () => getLectures(),
 	});
 

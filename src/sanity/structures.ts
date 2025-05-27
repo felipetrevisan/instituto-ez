@@ -1,97 +1,115 @@
-import { MdPages, MdSettings } from "react-icons/md";
-import { StructureBuilder } from "sanity/structure";
+import { orderableDocumentListDeskItem } from '@sanity/orderable-document-list';
+import { MdPages, MdSettings } from 'react-icons/md';
+import type { ConfigContext } from 'sanity';
+import type { StructureBuilder } from 'sanity/structure';
 
-const structure = (S: StructureBuilder) =>
+const structure = (S: StructureBuilder, context: ConfigContext) =>
 	S.list()
-		.title("Content Manager")
+		.title('Content Manager')
 		.items([
 			// Settings section
 			S.listItem()
-				.title("Settings")
+				.title('Settings')
 				.icon(MdSettings)
 				.child(
 					S.list()
-						.title("Settings")
+						.title('Settings')
 						.items([
 							S.listItem()
-								.title("Settings")
+								.title('Settings')
 								.child(
 									S.document()
-										.schemaType("siteConfig")
-										.documentId("siteConfig"),
+										.schemaType('siteConfig')
+										.documentId('siteConfig'),
 								),
 							S.listItem()
-								.title("Navigation")
-								.child(S.documentTypeList("navigation")),
+								.title('Navigation')
+								.child(S.documentTypeList('navigation')),
 						]),
 				),
 
 			S.listItem()
-				.title("Home")
+				.title('Home')
 				.icon(MdSettings)
 				.child(
 					S.list()
-						.title("Home")
+						.title('Home')
 						.items([
-							S.listItem().title("Banner").child(S.documentTypeList("banner")),
+							S.listItem().title('Banner').child(S.documentTypeList('banner')),
 							S.divider(),
+							orderableDocumentListDeskItem({
+								type: 'service',
+								title: 'Atendimentos',
+								S,
+								context,
+							}),
+							orderableDocumentListDeskItem({
+								type: 'workshop',
+								title: 'Workshops',
+								S,
+								context,
+							}),
 							S.listItem()
-								.title("Atendimentos")
-								.child(S.documentTypeList("service")),
-							S.listItem()
-								.title("Workshops")
-								.child(S.documentTypeList("workshop")),
-							S.listItem()
-								.title("Imersão")
+								.title('Imersão')
 								.child(
-									S.document().schemaType("immersion").documentId("immersion"),
+									S.document().schemaType('immersion').documentId('immersion'),
 								),
 							S.listItem()
-								.title("Mentoria Avançanda")
+								.title('Mentoria Avançanda')
 								.child(
 									S.document()
-										.schemaType("advanced-mentory")
-										.documentId("advanced-mentory"),
+										.schemaType('advanced-mentory')
+										.documentId('advanced-mentory'),
 								),
+							orderableDocumentListDeskItem({
+								type: 'lecture',
+								title: 'Palestras',
+								S,
+								context,
+							}),
 							S.listItem()
-								.title("Palestras")
-								.child(S.documentTypeList("lecture")),
-							S.listItem()
-								.title("Matematizador")
-								.child(S.documentTypeList("mathematizer")),
-							S.listItem()
-								.title("Treinamentos")
-								.child(S.documentTypeList("training")),
-							S.listItem()
-								.title("Depoimentos")
-								.child(S.documentTypeList("testimonial")),
+								.title('Matematizador')
+								.child(S.documentTypeList('mathematizer')),
+							orderableDocumentListDeskItem({
+								type: 'training',
+								title: 'Treinamentos',
+								S,
+								context,
+							}),
+							orderableDocumentListDeskItem({
+								type: 'testimonial',
+								title: 'Depoimentos',
+								S,
+								context,
+							}),
 						]),
 				),
 
 			S.divider(),
 
 			S.listItem()
-				.title("Pages")
+				.title('Pages')
 				.icon(MdPages)
-				.child(S.documentTypeList("page")),
+				.child(S.documentTypeList('page')),
 
 			S.divider(),
 			...S.documentTypeListItems().filter(
 				(listItem) =>
 					![
-						"siteConfig",
-						"navigation",
-						"page",
-						"about",
-						"banner",
-						"service",
-						"workshop",
-						"immersion",
-						"lecture",
-						"mathematizer",
-						"training",
-						"testimonial",
-					].includes(listItem.getId() || ""),
+						'siteConfig',
+						'navigation',
+						'page',
+						'about',
+						'banner',
+						'service',
+						'workshop',
+						'immersion',
+						'lecture',
+						'mathematizer',
+						'training',
+						'testimonial',
+						'advanced-mentory',
+					].includes(listItem.getId() || ''),
 			),
 		]);
 

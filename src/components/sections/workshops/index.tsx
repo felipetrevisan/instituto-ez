@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
-import * as App from "@/components/app";
-import { useWorkshop } from "@/hooks/use-workshop";
-import { WorkshopCard as Card } from "./card";
-import { Skeleton } from "./skeleton";
+import * as App from '@/components/app';
+import { useWorkshop } from '@/hooks/use-workshop';
+import { motion } from 'framer-motion';
+import { WorkshopCard as Card } from './card';
+import { Skeleton } from './skeleton';
 
 export function Workshops() {
 	const { data, isLoading } = useWorkshop();

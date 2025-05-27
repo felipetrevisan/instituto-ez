@@ -1,10 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
-import { Immersion } from "@/types/immersion";
-import { getImmersion } from "@/server/get-immersion";
+import { getImmersion } from '@/server/get-immersion';
+import type { Immersion } from '@/types/immersion';
+import { useQuery } from '@tanstack/react-query';
 
 export function useImmersion() {
 	const { data, isLoading, isPending } = useQuery<Immersion>({
-		queryKey: ["immersion"],
+		queryKey: ['immersion'],
 		queryFn: () => getImmersion(),
 	});
 

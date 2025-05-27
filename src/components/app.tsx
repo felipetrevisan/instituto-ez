@@ -1,143 +1,135 @@
-"use client";
+'use client';
 
-import { Fragment, useRef, useState, forwardRef, HTMLAttributes } from "react";
-import Image from "next/image";
+import { Button } from '@/components/ui/button';
+import { Dialog } from '@/components/ui/dialog';
+import * as Navbar from '@/components/ui/navbar';
+import { menuListVariants, sidebarVariants } from '@/config/animation';
+import { useApp } from '@/hooks/use-app';
+import { useDimensions } from '@/hooks/use-dimension';
+import { useSite } from '@/hooks/use-site';
+import { cn } from '@/lib/utils';
+import { Slot } from '@radix-ui/react-slot';
+import { type VariantProps, cva } from 'class-variance-authority';
 import {
 	motion,
 	useAnimation,
 	useMotionValueEvent,
 	useScroll,
 	useTransform,
-} from "framer-motion";
-import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
-import { Slot } from "@radix-ui/react-slot";
-import { MdOutlineEmail } from "react-icons/md";
-import { VariantProps, cva } from "class-variance-authority";
-
-import { cn } from "@/lib/utils";
-import * as Navbar from "@/components/ui/navbar";
-import { Button } from "@/components/ui/button";
-import { Dialog } from "@/components/ui/dialog";
-import { useSite } from "@/hooks/use-site";
-import { useDimensions } from "@/hooks/use-dimension";
-import { useApp } from "@/hooks/use-app";
-import { DesktopNavigation } from "./desktop-navigation";
-import { ContactFormDialog } from "./contact-form-dialog";
-import { MobileNavigation } from "./mobile-navigation";
-import { Logo } from "./logo";
-import { menuListVariants, sidebarVariants } from "@/config/animation";
+} from 'framer-motion';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Fragment, useRef, useState } from 'react';
+import { MdOutlineEmail } from 'react-icons/md';
+import { ContactFormDialog } from './contact-form-dialog';
+import { DesktopNavigation } from './desktop-navigation';
+import { Logo } from './logo';
+import { MobileNavigation } from './mobile-navigation';
 
 const MotionMobileNavigation = motion(MobileNavigation);
 
-const Header = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
-	({ className }, ref) => {
-		const { data, isLoading } = useSite();
-		const [currentScrollY, setCurrentScrollY] = useState(0);
-		const containerRef = useRef<HTMLDivElement | null>(null);
-		const { height } = useDimensions(containerRef);
-		const { isMenuOpen, toggleMenu } = useApp();
-		const { scrollY } = useScroll();
+function Header({ className }: React.ComponentProps<'div'>) {
+	const { data } = useSite();
+	const [currentScrollY, setCurrentScrollY] = useState(0);
+	const containerRef = useRef<HTMLDivElement | null>(null);
+	const { height } = useDimensions(containerRef);
+	const { isMenuOpen, toggleMenu } = useApp();
+	const { scrollY } = useScroll();
 
-		const scrollYRange = [0, 100, 100];
+	const scrollYRange = [0, 100, 100];
 
-		const logoSizeHeight = useTransform(scrollY, scrollYRange, [
-			"60px",
-			"56px",
-			"56px",
-		]);
-		const logoSizeWidth = useTransform(scrollY, scrollYRange, [
-			"220px",
-			"174px",
-			"174px",
-		]);
-		const paddingHeaderY = useTransform(scrollY, scrollYRange, [
-			"1.2rem",
-			"1rem",
-			"1rem",
-		]);
+	const logoSizeHeight = useTransform(scrollY, scrollYRange, [
+		'60px',
+		'56px',
+		'56px',
+	]);
+	const logoSizeWidth = useTransform(scrollY, scrollYRange, [
+		'220px',
+		'174px',
+		'174px',
+	]);
+	const paddingHeaderY = useTransform(scrollY, scrollYRange, [
+		'1.2rem',
+		'1rem',
+		'1rem',
+	]);
 
-		const controls = useAnimation();
-		const delta = useRef(0);
-		const lastScrollY = useRef(0);
+	const controls = useAnimation();
+	const delta = useRef(0);
+	const lastScrollY = useRef(0);
 
-		useMotionValueEvent(scrollY, "change", (val) => {
-			const diff = Math.abs(val - lastScrollY.current);
+	useMotionValueEvent(scrollY, 'change', (val) => {
+		const diff = Math.abs(val - lastScrollY.current);
 
-			if (val >= lastScrollY.current) {
-				delta.current = delta.current >= 10 ? 10 : delta.current + diff;
-			} else {
-				delta.current = delta.current <= -10 ? -10 : delta.current - diff;
-			}
+		if (val >= lastScrollY.current) {
+			delta.current = delta.current >= 10 ? 10 : delta.current + diff;
+		} else {
+			delta.current = delta.current <= -10 ? -10 : delta.current - diff;
+		}
 
-			if (delta.current >= 10 && val > 200) {
-				controls.start("hidden");
-			} else if (delta.current <= -10 || val < 200) {
-				controls.start("visible");
-			}
+		if (delta.current >= 10 && val > 200) {
+			controls.start('hidden');
+		} else if (delta.current <= -10 || val < 200) {
+			controls.start('visible');
+		}
 
-			lastScrollY.current = val;
-			setCurrentScrollY(val);
-		});
+		lastScrollY.current = val;
+		setCurrentScrollY(val);
+	});
 
-		return (
-			<motion.header
-				className={cn(
-					"lg:fixed lg:z-[90] lg:top-0 w-full backdrop-blur-md transition-colors duration-500 bg-transparent h-20",
-					{
-						"bg-white/90 backdrop-blur-3xl shadow-2xl": currentScrollY > 80,
-						"backdrop-blur-none": currentScrollY < 80,
-					},
-					className,
-				)}
-				ref={ref}
-				{...(isMenuOpen && { "data-menu-open": true })}
+	return (
+		<motion.header
+			className={cn(
+				'lg:fixed lg:z-90 lg:top-0 w-full backdrop-blur-md transition-colors duration-500 bg-transparent h-20',
+				{
+					'bg-white/90 backdrop-blur-3xl shadow-2xl': currentScrollY > 80,
+					'backdrop-blur-none': currentScrollY < 80,
+				},
+				className,
+			)}
+			{...(isMenuOpen && { 'data-menu-open': true })}
+		>
+			<Navbar.Root
+				sticky
+				style={{
+					paddingTop: paddingHeaderY,
+					paddingBottom: paddingHeaderY,
+				}}
 			>
-				<Navbar.Root
-					sticky
-					style={{
-						paddingTop: paddingHeaderY,
-						paddingBottom: paddingHeaderY,
-					}}
-					// custom={height}
-				>
-					<Fragment>
-						<Navbar.Brand>
-							<Logo height={logoSizeHeight} width={logoSizeWidth} />
-						</Navbar.Brand>
+				<Fragment>
+					<Navbar.Brand>
+						<Logo height={logoSizeHeight} width={logoSizeWidth} />
+					</Navbar.Brand>
+					<motion.div
+						animate={isMenuOpen ? 'open' : 'closed'}
+						custom={height}
+						ref={containerRef}
+					>
+						<Navbar.Toggle />
+						<DesktopNavigation navigation={data?.primaryNavigation} />
 						<motion.div
-							animate={isMenuOpen ? "open" : "closed"}
-							custom={height}
-							ref={containerRef}
+							className="absolute z-90 top-0 right-0 w-[300px] h-screen bg-slate-200/80 backdrop-blur-2xl lg:hidden"
+							variants={sidebarVariants}
 						>
-							<Navbar.Toggle />
-							<DesktopNavigation navigation={data?.primaryNavigation} />
-							<motion.div
-								className="absolute z-[90] top-0 right-0 w-[300px] h-screen bg-slate-200/80 backdrop-blur-2xl lg:hidden"
-								variants={sidebarVariants}
-							>
-								<MotionMobileNavigation
-									navigation={data?.primaryNavigation}
-									variants={menuListVariants}
-								/>
-							</motion.div>
+							<MotionMobileNavigation
+								navigation={data?.primaryNavigation}
+								variants={menuListVariants}
+							/>
 						</motion.div>
-					</Fragment>
-				</Navbar.Root>
-			</motion.header>
-		);
-	},
-);
-Header.displayName = "Header";
+					</motion.div>
+				</Fragment>
+			</Navbar.Root>
+		</motion.header>
+	);
+}
 
-type ContentProps = HTMLAttributes<HTMLDivElement>;
-
-const Content = ({ className, children }: ContentProps) => {
+function Content({ className, children }: React.ComponentProps<'div'>) {
 	const { isContactDialogOpen } = useApp();
 
 	return (
 		<motion.main
 			className={cn(
-				"mt-4 lg:mt-36 container relative h-full flex items-center flex-col justify-center space-x-2",
+				'mt-4 lg:mt-36 container relative h-full flex items-center flex-col justify-center space-x-2',
 				className,
 			)}
 		>
@@ -147,137 +139,170 @@ const Content = ({ className, children }: ContentProps) => {
 			</Dialog>
 		</motion.main>
 	);
-};
-Content.displayName = "Content";
+}
 
-const Footer = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
-	(_, ref) => {
-		const { setIsContactDialogOpen } = useApp();
-		const MotionButton = motion(Button);
+function Footer({ className }: React.ComponentProps<'div'>) {
+	const { setIsContactDialogOpen } = useApp();
+	const MotionButton = motion(Button);
 
-		return (
-			<footer
-				className="flex flex-col w-full select-none items-center p-5 relative mt-24"
-				ref={ref}
-			>
-				<div className="fixed bottom-4 right-10 z-50 flex flex-row items-center gap-4">
-					<MotionButton
-						aria-label="Entre em contato"
-						whileHover={{ scale: 1.4 }}
-						whileTap={{ scale: 1.4 }}
-						variant="icon"
-						size="2xl"
-						icon
-						rounded="full"
-						className="flex items-center justify-center gap-2 shadow"
-						onClick={() => setIsContactDialogOpen(true)}
-					>
-						<MdOutlineEmail size={32} />
-						<span className="sr-only">Entre em contato</span>
-					</MotionButton>
+	return (
+		<footer
+			className={cn(
+				'flex flex-col w-full select-none items-center p-5 relative mt-24',
+				className,
+			)}
+		>
+			<div className="fixed bottom-4 right-10 z-50 flex flex-row items-center gap-4">
+				<MotionButton
+					aria-label="Entre em contato"
+					whileHover={{ scale: 1.4 }}
+					whileTap={{ scale: 1.4 }}
+					variant="icon"
+					size="2xl"
+					rounded="full"
+					className="flex items-center justify-center gap-2 shadow"
+					onClick={() => setIsContactDialogOpen(true)}
+				>
+					<MdOutlineEmail size={32} />
+					<span className="sr-only">Entre em contato</span>
+				</MotionButton>
+			</div>
+			<div className="container flex flex-row gap-4 items-center justify-center w-full">
+				<div className="flex flex-row justify-center items-center gap-4">
+					<Image
+						src="/assets/logo.png"
+						alt="Logo"
+						width="60"
+						height="60"
+						sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+						priority
+					/>
+					<p className="text-center text-primary text-opacity-75">
+						© {new Date().getFullYear()} - Todos os direitos reservados
+					</p>
 				</div>
-				<div className="container flex flex-row gap-4 items-center justify-center w-full">
-					<div className="flex flex-row justify-center items-center gap-4">
-						<Image
-							src="/assets/logo.png"
-							alt="Logo"
-							width="60"
-							height="60"
-							sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-							priority
-						/>
-						<p className="text-center text-primary-foreground text-opacity-75">
-							© {new Date().getFullYear()} - Todos os direitos reservados
-						</p>
-					</div>
-				</div>
-			</footer>
-		);
-	},
-);
-Footer.displayName = "Footer";
+			</div>
+		</footer>
+	);
+}
 
-const titleVariants = cva("font-oswald font-bold", {
+export const titleVariants = cva('font-oswald font-bold', {
 	variants: {
 		variant: {
-			default: "text-primary-foreground ",
-			secondary: "text-secondary-foreground",
+			default: 'text-primary',
+			secondary: 'text-secondary',
+			tertiary: 'text-tertiary',
+			white: 'text-white',
 		},
 		size: {
-			default: "clamp-[2xl-6cqw-6xl]",
-			sm: "clamp-[sm-6cqw-xl]",
-			lg: "clamp-[lg-6cqw-2xl]",
-			xl: "clamp-[xl-6cqw-6xl]",
-			"2xl": "clamp-[2xl-6cqw-8xl]",
+			default: 'clamp-[text,2xl,6xl]',
+			sm: 'clamp-[text,sm,lg]',
+			lg: 'clamp-[text,lg,2xl]',
+			xl: 'clamp-[text,xl,6xl]',
+			'2xl': 'clamp-[text,2xl,8xl]',
 		},
 	},
 	defaultVariants: {
-		variant: "default",
-		size: "default",
+		variant: 'secondary',
+		size: 'default',
 	},
 });
 
-export interface TitleProps
-	extends HTMLAttributes<HTMLHeadingElement>,
-		VariantProps<typeof titleVariants> {
-	asChild?: boolean;
+function Title({
+	className,
+	variant,
+	size,
+	asChild = false,
+	children,
+	...props
+}: React.ComponentProps<'h1'> &
+	VariantProps<typeof titleVariants> & {
+		asChild?: boolean;
+	}) {
+	const Comp = asChild ? Slot : 'h1';
+
+	return (
+		<Comp
+			className={cn(titleVariants({ variant, size }), className)}
+			{...props}
+		>
+			{children}
+		</Comp>
+	);
 }
 
-const Title = forwardRef<HTMLHeadingElement, TitleProps>(
-	({ className, children, asChild, variant, size, ...props }, ref) => {
-		const Comp = asChild ? Slot : "h1";
+function Subtitle({
+	className,
+	variant,
+	size,
+	asChild = false,
+	children,
+	...props
+}: React.ComponentProps<'h3'> &
+	VariantProps<typeof titleVariants> & {
+		asChild?: boolean;
+	}) {
+	const Comp = asChild ? Slot : 'h3';
 
-		return (
-			<Comp
-				className={cn(titleVariants({ variant, size, className }))}
-				{...props}
-				ref={ref}
-			>
-				{children}
-			</Comp>
-		);
-	},
-);
-Title.displayName = "Title";
+	return (
+		<Comp
+			className={cn(
+				titleVariants({ variant, size }),
+				'font-light mt-5',
+				className,
+			)}
+			{...props}
+		>
+			{children}
+		</Comp>
+	);
+}
 
-const Subtitle = forwardRef<HTMLHeadingElement, TitleProps>(
-	({ className, asChild, ...props }, ref) => {
-		const Comp = asChild ? Slot : "h3";
-
-		return (
-			<Comp
-				className={cn(
-					"clamp-[lg-6cqw-2xl] text-x font-oswald font-light text-center text-primary-foreground text-wrap",
-					className,
-				)}
-				{...props}
-				ref={ref}
-			/>
-		);
-	},
-);
-Subtitle.displayName = "Subtitle";
-
-export interface PageHeaderProps extends HTMLAttributes<HTMLDivElement> {
+function PageHeader({
+	className,
+	children,
+	...props
+}: React.ComponentProps<'div'> & {
 	background?: string;
+}) {
+	return (
+		<div
+			className={cn(
+				'w-full flex flex-col justify-center items-center font-oswald',
+				className,
+			)}
+			{...props}
+		>
+			{children}
+		</div>
+	);
 }
 
-const PageHeader = forwardRef<HTMLDivElement, PageHeaderProps>(
-	({ className, background, children, ...props }, ref) => {
-		return (
-			<div
-				className={cn(
-					"w-full flex flex-col justify-center items-center font-oswald",
-					className,
-				)}
-				{...props}
-				ref={ref}
-			>
-				{children}
-			</div>
-		);
-	},
-);
-PageHeader.displayName = "PageHeader";
+function ButtonLink({
+	className,
+	children,
+	href,
+	disabled,
+	...props
+}: React.ComponentProps<typeof Link> & {
+	disabled?: boolean;
+}) {
+	return (
+		<>
+			{href && (
+				<Link
+					href={href}
+					passHref
+					aria-disabled={disabled}
+					className={className}
+					{...props}
+				>
+					{children}
+				</Link>
+			)}
+			{!href && <div className={className}>{children}</div>}
+		</>
+	);
+}
 
-export { Header, Content, Footer, Title, Subtitle, PageHeader };
+export { Header, Content, Footer, Title, Subtitle, PageHeader, ButtonLink };

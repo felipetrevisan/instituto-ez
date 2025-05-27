@@ -1,6 +1,6 @@
-import { PortableTextBlock } from "sanity";
-import { SanityAsset } from "./sanityAssets";
-import { Button } from "./global";
+import type { PortableTextBlock } from 'sanity';
+import type { Button } from './global';
+import type { SanityAsset } from './sanityAssets';
 
 export type AdvancedMentory = {
 	id: string;

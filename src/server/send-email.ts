@@ -1,8 +1,8 @@
-"use server";
+'use server';
 
 // import { EmailTemplateContact } from "@/components/email-template-contact";
-import { env } from "@/config/env";
-import { ContactFormSchema } from "@/types/contact";
+import { env } from '@/config/env';
+import type { ContactFormSchema } from '@/types/contact';
 
 //const resend = new Resend(env.RESEND_API_KEY);
 

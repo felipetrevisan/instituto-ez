@@ -1,10 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
-import { Mathematizer } from "@/types/mathematizer";
-import { getMathematizers } from "@/server/get-mathematizer";
+import { getMathematizers } from '@/server/get-mathematizer';
+import type { Mathematizer } from '@/types/mathematizer';
+import { useQuery } from '@tanstack/react-query';
 
 export function useMathematizer() {
 	const { data, isLoading, isPending } = useQuery<Mathematizer[]>({
-		queryKey: ["mathematizers"],
+		queryKey: ['mathematizers'],
 		queryFn: () => getMathematizers(),
 	});
 

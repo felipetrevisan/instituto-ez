@@ -1,66 +1,46 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardProps } from "@/components/ui/card";
-import { cn, getLink } from "@/lib/utils";
-import { Service } from "@/types/service";
-import { urlForImage } from "@/sanity/lib/utils";
-
-import "./style.scss";
-
+import { ButtonLink } from '@/components/app';
+import { Card, CardFooter, type CardProps } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
+import { urlForImage } from '@/sanity/lib/utils';
+import type { Service } from '@/types/service';
+import { motion } from 'framer-motion';
 type Props = {
-	index: number;
 	item: Service;
 } & CardProps;
 
 const MotionCard = motion(Card);
 
-export function ServiceCard({
-	item: { button, image, title },
-	index,
-	className,
-}: Props) {
+export function ServiceCard({ item: { background, title }, className }: Props) {
+	const backgroundClass = background
+		? `url('${urlForImage(background.asset)}')`
+		: 'transparent';
+
 	return (
-		<MotionCard
-			variant="ghost"
-			initial="normal"
-			className="flex items-center justify-center rounded-xl bg-card bg-center w-full h-64 lg:h-80 relative bg-cover shadow-2xl"
-			style={{
-				backgroundImage: `url("${urlForImage(image.asset)}")`,
-			}}
-		>
-			<CardContent className="p-20 md:p-0 lg:p-0 w-full h-full">
-				<div
-					className={cn(
-						"flex flex-col gap-4 absolute -top-10 md:-top-14",
-						className,
-						{
-							"left-10": index % 2 == 0,
-							"right-10": index % 2 != 0,
-						},
-					)}
-				>
-					<h2 className="mix-blend-multiply font-semibold clamp-[xl-6cqw-6xl] text-center text-primary-foreground">
+		<ButtonLink href="/atendimentos" passHref>
+			<MotionCard
+				variant="ghost"
+				className={cn(
+					'flex items-end justify-center shrink md:shrink-0 rounded-xl bg-card w-[70vw] md:w-160 lg:w-80 h-96 relative bg-cover! shadow-2xl',
+					className,
+				)}
+				style={{
+					background: backgroundClass,
+				}}
+				whileHover={{ scale: 1.1 }}
+				whileTap={{ scale: 0.9 }}
+				transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+				animate={{
+					transition: { duration: 0.4, ease: 'easeInOut' },
+				}}
+			>
+				<CardFooter className="bg-black/80 flex flex-col justify-center items-center gap-4 p-4 w-[calc(100%-10px)] h-28 rounded-2xl font-oswald border border-white/40 backdrop-blur-xl">
+					<span className="text-orange-400 font-bold text-2xl text-center">
 						{title}
-					</h2>
-					{button.visible && (
-						<Link href={getLink(button)} passHref>
-							<Button
-								variant="outline"
-								theme="default"
-								rounded="2xl"
-								hover="effect"
-								className="w-full"
-								disabled={button.disabled}
-							>
-								{button.label}
-							</Button>
-						</Link>
-					)}
-				</div>
-			</CardContent>
-		</MotionCard>
+					</span>
+				</CardFooter>
+			</MotionCard>
+		</ButtonLink>
 	);
 }

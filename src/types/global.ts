@@ -8,6 +8,6 @@ export type Button = {
 };
 
 export enum LinkType {
-	EXTERNAL = "EXTERNAL",
-	INTERNAL = "INTERNAL",
+	EXTERNAL = 'EXTERNAL',
+	INTERNAL = 'INTERNAL',
 }

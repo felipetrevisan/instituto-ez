@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { A11y, Pagination } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
-import * as App from "@/components/app";
-import { useTestimonials } from "@/hooks/use-testimonials";
-import { TestimonialCard } from "./card";
-import { Skeleton } from "./skeleton";
+import * as App from '@/components/app';
+import { useTestimonials } from '@/hooks/use-testimonials';
+import { useState } from 'react';
+import { A11y, Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { TestimonialCard } from './card';
+import { Skeleton } from './skeleton';
 
-import "swiper/css";
-import "swiper/css/pagination";
-import "./styles.scss";
+import './styles.css';
+import 'swiper/css';
+import 'swiper/css/pagination';
 
 export function Testimonials() {
 	const { data, isLoading } = useTestimonials();
@@ -19,7 +19,7 @@ export function Testimonials() {
 	return (
 		<div className="flex flex-col w-full h-full space-y-14">
 			<App.PageHeader>
-				<App.Title variant="default">Depoimentos</App.Title>
+				<App.Title>Depoimentos</App.Title>
 			</App.PageHeader>
 			<div className="flex flex-col justify-center">
 				{isLoading && <Skeleton />}
@@ -46,7 +46,7 @@ export function Testimonials() {
 							clickable: true,
 						}}
 						modules={[Pagination, A11y]}
-						className="flex flex-col md:flex-row w-full !overflow-visible"
+						className="flex flex-col md:flex-row w-full overflow-visible!"
 					>
 						{data?.map((testimonial, _index) => (
 							<SwiperSlide key={testimonial.id}>

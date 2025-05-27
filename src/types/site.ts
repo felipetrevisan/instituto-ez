@@ -1,11 +1,14 @@
-import { LinkType } from "./global";
-import { SanityAsset } from "./sanityAssets";
+import type { LinkType } from './global';
+import type { SanityAsset } from './sanityAssets';
+import type { Section } from './sections';
 
 export type Site = {
 	id: string;
 	title: string;
 	description?: string;
+	keywords?: string;
 	hero: Hero[];
+	sections: Section[];
 	logo: SanityAsset;
 	primaryNavigation?: Navigation;
 	socialNavigation?: SocialNetwork;

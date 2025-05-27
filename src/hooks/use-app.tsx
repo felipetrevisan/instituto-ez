@@ -1,18 +1,17 @@
-"use client";
+'use client';
 
+import { type Cycle, useCycle } from 'framer-motion';
+import { usePathname } from 'next/navigation';
 import {
-	Dispatch,
-	SetStateAction,
+	type Dispatch,
+	type ReactNode,
+	type SetStateAction,
 	createContext,
+	useCallback,
 	useContext,
+	useEffect,
 	useState,
-} from "react";
-import { Cycle, useCycle } from "framer-motion";
-import { useCallback } from "react";
-import { ReactNode } from "react";
-import { usePathname } from "next/navigation";
-import { useEffect } from "react";
-// import { Service } from "@/types/services";
+} from 'react';
 
 type AppContextProps = {
 	isMenuOpen: boolean;
@@ -33,17 +32,18 @@ export function AppProvider({ children }: { children: ReactNode }) {
 	const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
 	const [activeMenu, setActiveMenu] = useState(currentUrl);
 
-	const isHome = activeMenu === "/";
+	const isHome = activeMenu === '/';
+
 	const isMenuActive = useCallback(
 		(menu: string) => {
-			return currentUrl.includes(menu) && menu !== "/";
+			return currentUrl.includes(menu) && menu !== '/';
 		},
 		[currentUrl],
 	);
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
 		setActiveMenu(currentUrl);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (

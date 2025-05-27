@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
-import * as App from "@/components/app";
-import { useTraining } from "@/hooks/use-training";
-import { TrainingCard as Card } from "./card";
-import { Skeleton } from "./skeleton";
+import * as App from '@/components/app';
+import { useTraining } from '@/hooks/use-training';
+import { motion } from 'framer-motion';
+import { TrainingCard as Card } from './card';
+import { Skeleton } from './skeleton';
 
 export function Training() {
 	const { data, isLoading } = useTraining();

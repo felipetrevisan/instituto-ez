@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button";
-import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
-import { useSwiper } from "swiper/react";
+import { Button } from '@/components/ui/button';
+import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react';
+import { useSwiper } from 'swiper/react';
 
 export function SliderPagination() {
 	const swiper = useSwiper();
@@ -9,9 +9,8 @@ export function SliderPagination() {
 		<div className="flex justify-center mt-4 gap-4 select-none p-2">
 			<Button
 				size="xl"
-				icon
 				rounded="full"
-				variant="outline"
+				variant="icon"
 				onClick={() => swiper.slidePrev()}
 			>
 				<ArrowLeftIcon className="size-4" />
@@ -19,9 +18,8 @@ export function SliderPagination() {
 			</Button>
 			<Button
 				size="xl"
-				icon
 				rounded="full"
-				variant="outline"
+				variant="icon"
 				onClick={() => swiper.slideNext()}
 			>
 				<ArrowRightIcon className="size-4" />

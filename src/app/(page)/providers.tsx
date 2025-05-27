@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { AppProvider } from "@/hooks/use-app";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ThemeProvider } from "next-themes";
-import { ReactNode, useState } from "react";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { ProgressProvider } from "@bprogress/next/app";
-import { Bar } from "@bprogress/next";
-import { Toaster } from "@/components/ui/toaster";
+// import { Toaster } from '@/components/ui/toaster';
+import { AppProvider } from '@/hooks/use-app';
+import { Bar } from '@bprogress/next';
+import { ProgressProvider } from '@bprogress/next/app';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { ThemeProvider } from 'next-themes';
+import { type ReactNode, useState } from 'react';
 
 export default function Providers({ children }: { children: ReactNode }) {
 	const [queryClient] = useState(() => new QueryClient());
@@ -27,11 +27,11 @@ export default function Providers({ children }: { children: ReactNode }) {
 			>
 				<QueryClientProvider client={queryClient}>
 					<AppProvider>
-            <Bar />
-            {children}
-          </AppProvider>
+						<Bar />
+						{children}
+					</AppProvider>
 					<ReactQueryDevtools initialIsOpen={false} />
-					<Toaster />
+					{/* <Toaster /> */}
 				</QueryClientProvider>
 			</ProgressProvider>
 		</ThemeProvider>

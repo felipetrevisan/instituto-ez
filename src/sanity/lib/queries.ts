@@ -1,9 +1,10 @@
-import { groq } from "next-sanity";
+import { groq } from 'next-sanity';
 
 export const siteConfigQuery = groq`
   *[ _type == 'siteConfig' ][0] {
     title,
     description,
+    keywords,
     "hero": hero[] { 
       "background": background_image {
         "asset": asset,
@@ -14,6 +15,10 @@ export const siteConfigQuery = groq`
       }, 
       title, 
       description 
+    },
+    "sections": sections_home[] {
+      "key": key_section,
+      "show": show_section
     },
     "primaryNavigation": main_nav-> {
       "items": items[] {
@@ -51,7 +56,7 @@ export const siteConfigQuery = groq`
 `;
 
 export const testimonialsQuery = groq`
-  *[ _type == 'testimonial' ] | order(_id desc) { 
+  *[ _type == 'testimonial' ] | order(orderRank) { 
     "id": _id,
     "author": {
       "name": author_name,
@@ -88,7 +93,7 @@ export const immersionQuery = groq`
 `;
 
 export const servicesQuery = groq`
-  *[ _type == 'service' ] | order(_id desc) { 
+  *[ _type == 'service' ] | order(orderRank) { 
     "id": _id,
     title,
     "image": image {
@@ -110,7 +115,7 @@ export const servicesQuery = groq`
 `;
 
 export const lectureQuery = groq`
-  *[ _type == 'lecture' ] | order(_id asc) { 
+  *[ _type == 'lecture' ] | order(orderRank) { 
     "id": _id,
     title,
     content,
@@ -160,7 +165,7 @@ export const advancedMentoryQuery = groq`
 `;
 
 export const mathematizerQuery = groq`
-  *[ _type == 'mathematizer' ] | order(_id asc) { 
+  *[ _type == 'mathematizer' ] | order(orderRank) { 
     "id": _id,
     title,
     content,
@@ -183,7 +188,7 @@ export const mathematizerQuery = groq`
 `;
 
 export const trainingQuery = groq`
-  *[ _type == 'training' ] | order(_id asc) { 
+  *[ _type == 'training' ] | order(orderRank) { 
     "id": _id,
     title,
     subtitle,
@@ -198,7 +203,7 @@ export const trainingQuery = groq`
 `;
 
 export const workshopQuery = groq`
-  *[ _type == 'workshop' ] | order(_id asc) { 
+  *[ _type == 'workshop' ] | order(orderRank) { 
     "id": _id,
     title,
     subtitle,
@@ -219,7 +224,13 @@ export const pageQuery = groq`* [slug.current == $slug] [0] {
   slug,
   "sections": section[] {
     title,
-    content,
+    content[] {
+      ...,
+      _type == "buttonLink" => {
+        ...,
+        link->{slug},
+      }
+    },
     "video": {
       "url": video,
     },
@@ -237,7 +248,7 @@ export const pageQuery = groq`* [slug.current == $slug] [0] {
 }`;
 
 export const bannerQuery = groq`
-  *[ _type == 'banner' ] | order(_id asc) { 
+  *[ _type == 'banner' ] | order(orderRank) { 
     "id": _id,
     title,
     subtitle,

@@ -1,4 +1,4 @@
-import { SanityAsset } from "./sanityAssets";
+import type { SanityAsset } from './sanityAssets';
 
 export type Banner = {
 	id: string;

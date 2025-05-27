@@ -1,5 +1,5 @@
-import { PortableTextBlock } from "sanity";
-import { SanityAsset } from "./sanityAssets";
+import type { PortableTextBlock } from 'sanity';
+import type { SanityAsset } from './sanityAssets';
 
 export type About = {
 	id: string;

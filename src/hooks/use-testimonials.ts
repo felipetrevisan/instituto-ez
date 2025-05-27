@@ -1,10 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
-import { Testimonial } from "@/types/testimonial";
-import { getTestimonials } from "@/server/get-testimonials";
+import { getTestimonials } from '@/server/get-testimonials';
+import type { Testimonial } from '@/types/testimonial';
+import { useQuery } from '@tanstack/react-query';
 
 export function useTestimonials() {
 	const { data, isLoading, isPending } = useQuery<Testimonial[]>({
-		queryKey: ["testimonials"],
+		queryKey: ['testimonials'],
 		queryFn: () => getTestimonials(),
 	});
 

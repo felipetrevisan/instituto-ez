@@ -1,14 +1,14 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { InfoIcon, Loader2 } from "lucide-react";
-import { MdEmail } from "react-icons/md";
-import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { DialogFooter, DialogTrigger } from "@/components/ui/dialog";
-import { Textarea } from "@/components/ui/textarea";
+import { Button } from '@/components/ui/button';
+import { DialogFooter, DialogTrigger } from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 // import { useToast } from "@/components/ui/use-toast";
-import { ContactFormSchema, contactFormSchema } from "@/types/contact";
+import { type ContactFormSchema, contactFormSchema } from '@/types/contact';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { InfoIcon, Loader2 } from 'lucide-react';
+import { useForm } from 'react-hook-form';
+import { MdEmail } from 'react-icons/md';
 
 export function ContactForm({
 	isDialog = false,
@@ -27,10 +27,10 @@ export function ContactForm({
 	} = useForm<ContactFormSchema>({
 		resolver: zodResolver(contactFormSchema),
 		defaultValues: {
-			name: "",
-			email: "",
-			subject: "",
-			message: "",
+			name: '',
+			email: '',
+			subject: '',
+			message: '',
 		},
 	});
 
@@ -66,7 +66,7 @@ export function ContactForm({
 								id="name"
 								placeholder="Seu nome"
 								disabled={isSubmitting}
-								{...register("name")}
+								{...register('name')}
 							/>
 							{errors.name && (
 								<p className="flex items-center gap-1 text-sm font-medium text-secondary">
@@ -85,7 +85,7 @@ export function ContactForm({
 								placeholder="E-mail"
 								disabled={isSubmitting}
 								icon={MdEmail}
-								{...register("email")}
+								{...register('email')}
 							/>
 							{errors.email && (
 								<p className="flex items-center gap-1 text-sm font-medium text-secondary">
@@ -106,7 +106,7 @@ export function ContactForm({
 								id="subject"
 								placeholder="Assunto"
 								disabled={isSubmitting}
-								{...register("subject")}
+								{...register('subject')}
 							/>
 							{errors.subject && (
 								<p className="flex items-center gap-1 text-sm font-medium text-secondary">
@@ -128,7 +128,7 @@ export function ContactForm({
 								placeholder="Mensagem"
 								rows={4}
 								disabled={isSubmitting}
-								{...register("message")}
+								{...register('message')}
 							/>
 							{errors.message && (
 								<p className="flex items-center gap-1 text-sm font-medium text-secondary">
@@ -149,7 +149,6 @@ export function ContactForm({
 							theme="tertiary"
 							size="xl"
 							rounded="2xl"
-							inverted
 							className="w-40"
 							onClick={onClose}
 						>
@@ -163,13 +162,12 @@ export function ContactForm({
 						type="submit"
 						rounded="2xl"
 						disabled={isSubmitting}
-						inverted
 						className="w-40"
 					>
 						{isSubmitting ? (
 							<Loader2 className="mr-2 h-4 w-4 animate-spin" />
 						) : (
-							"Enviar"
+							'Enviar'
 						)}
 					</Button>
 				</DialogFooter>
@@ -188,7 +186,7 @@ export function ContactForm({
 						{isSubmitting ? (
 							<Loader2 className="mr-2 h-4 w-4 animate-spin" />
 						) : (
-							"Enviar"
+							'Enviar'
 						)}
 					</Button>
 				</div>

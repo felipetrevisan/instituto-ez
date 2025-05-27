@@ -1,6 +1,6 @@
-import { notFound } from "next/navigation";
-import { getPageBySlug } from "@/server/get-page";
-import { Content } from "./_content";
+import { getPageBySlug } from '@/server/get-page';
+import { notFound } from 'next/navigation';
+import { Content } from './_content';
 
 export default async function Page({
 	params,
@@ -12,8 +12,6 @@ export default async function Page({
 	if (!response) {
 		notFound();
 	}
-
-	console.log(response);
 
 	return (
 		<div className="w-full flex items-center flex-col justify-center space-y-14 mb-40">

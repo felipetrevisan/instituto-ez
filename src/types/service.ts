@@ -1,9 +1,7 @@
-import { SanityAsset } from "./sanityAssets";
-import { Button } from "./global";
+import type { SanityAsset } from './sanityAssets';
 
 export type Service = {
 	id: string;
 	title: string;
-	image: SanityAsset;
-	button: Button;
+	background: SanityAsset;
 };

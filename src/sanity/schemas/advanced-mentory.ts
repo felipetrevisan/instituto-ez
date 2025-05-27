@@ -1,63 +1,65 @@
-import { MdRequestQuote } from "react-icons/md";
-import { defineField, defineType } from "sanity";
+import { MdRequestQuote } from 'react-icons/md';
+import { defineField, defineType } from 'sanity';
+import { annotations, blockDecorators } from '../lib/portable-components';
 
 export default defineType({
-	name: "advanced-mentory",
-	title: "Mentoria Avançada",
+	name: 'advanced-mentory',
+	title: 'Mentoria Avançada',
 	icon: MdRequestQuote,
-	type: "document",
+	type: 'document',
 	fields: [
 		defineField({
-			name: "title",
-			title: "Title",
-			type: "string",
+			name: 'title',
+			title: 'Title',
+			type: 'string',
 			validation: (Rule) =>
-				Rule.required().warning("This field must not be empty."),
+				Rule.required().warning('This field must not be empty.'),
 		}),
 		defineField({
-			name: "content",
-			title: "Content",
-			type: "array",
+			name: 'content',
+			title: 'Content',
+			type: 'array',
 			of: [
 				{
-					type: "block",
+					type: 'block',
 					marks: {
-						decorators: [
-							{ title: "Bold", value: "strong" },
-							{ title: "Emphasis", value: "em" },
-							{ title: "Code", value: "code" },
-							{
-								title: "Highlight",
-								value: "highlight",
-								icon: () => "H",
-							},
-						],
+						decorators: blockDecorators,
+						annotations: annotations,
 					},
+				},
+				{
+					type: 'buttonLink',
+				},
+				{
+					type: 'image',
+				},
+				{
+					type: 'title',
 				},
 			],
 			validation: (Rule) =>
-				Rule.required().warning("This field must not be empty."),
+				Rule.required().warning('This field must not be empty.'),
 		}),
 		defineField({
-			name: "image",
-			title: "Image",
-			type: "image",
+			name: 'image',
+			title: 'Image',
+			type: 'image',
 			validation: (Rule) =>
-				Rule.required().warning("This field must not be empty."),
+				Rule.required().warning('This field must not be empty.'),
 		}),
 		defineField({
-			name: "button",
-			title: "Button",
-			type: "button",
+			name: 'button',
+			title: 'Button',
+			type: 'button',
 			validation: (Rule) =>
-				Rule.required().warning("This field must not be empty."),
+				Rule.required().warning('This field must not be empty.'),
 		}),
 		defineField({
-			name: "ribbon",
-			title: "Ribbon",
-			type: "ribbon",
+			name: 'ribbon',
+			title: 'Ribbon',
+			type: 'ribbon',
 			validation: (Rule) =>
-				Rule.required().warning("This field must not be empty."),
+				Rule.required().warning('This field must not be empty.'),
 		}),
 	],
 });

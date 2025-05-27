@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { Skeleton as BaseSkeleton } from "@/components/ui/skeleton";
+import { Skeleton as BaseSkeleton } from '@/components/ui/skeleton';
 
 export function Skeleton() {
 	return (

@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useLecture } from "@/hooks/use-lecture";
-import { LectureCard as Card } from "./card";
-import { Skeleton } from "./skeleton";
+import { useLecture } from '@/hooks/use-lecture';
+import { LectureCard as Card } from './card';
+import { Skeleton } from './skeleton';
 
 export function Lectures() {
 	const { data, isLoading } = useLecture();

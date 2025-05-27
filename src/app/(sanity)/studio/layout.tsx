@@ -1,17 +1,17 @@
-import { Inter } from "next/font/google";
+import { Inter } from 'next/font/google';
 
-import "../../globals.scss";
+import '../../globals.css';
 
 const inter = Inter({
-	subsets: ["latin"],
-	weight: ["200", "300", "400", "500", "600", "700"],
-	variable: "--inter",
+	subsets: ['latin'],
+	weight: ['200', '300', '400', '500', '600', '700'],
+	variable: '--inter',
 });
 
 export const metadata = {
 	title: {
-		template: "%s | Instituto EZ",
-		absolute: "Instituto EZ",
+		template: '%s | Instituto EZ',
+		absolute: 'Instituto EZ',
 	},
 };
 

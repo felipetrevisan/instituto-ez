@@ -1,4 +1,4 @@
-import { Variants } from "framer-motion";
+import type { Variants } from 'framer-motion';
 
 export const textVariants: Variants = {
 	hide: {
@@ -11,7 +11,7 @@ export const textVariants: Variants = {
 		transition: {
 			delayChildren: 1,
 			duration: 2,
-			ease: "easeInOut",
+			ease: 'easeInOut',
 		},
 	},
 };
@@ -27,7 +27,7 @@ export const headerVariants: Variants = {
 		transition: {
 			delayChildren: 1,
 			duration: 2,
-			ease: "easeInOut",
+			ease: 'easeInOut',
 		},
 	},
 };
@@ -38,7 +38,7 @@ export const headerItemsVariants: Variants = {
 	enter: {
 		transition: {
 			delay: 0.8,
-			ease: "easeInOut",
+			ease: 'easeInOut',
 		},
 		opacity: 0,
 		marginTop: -10,
@@ -47,14 +47,14 @@ export const headerItemsVariants: Variants = {
 		transition: {
 			delay: 0.8,
 			duration: 0.8,
-			ease: "easeInOut",
+			ease: 'easeInOut',
 		},
 		opacity: 1,
 		marginTop: 0,
 	},
 	exit: {
 		transition: {
-			ease: "easeInOut",
+			ease: 'easeInOut',
 		},
 		marginTop: [-10, 0],
 		opacity: [0, 1],
@@ -64,24 +64,24 @@ export const headerItemsVariants: Variants = {
 export const headerLogoVariants: Variants = {
 	enter: {
 		transition: {
-			ease: "easeInOut",
+			ease: 'easeInOut',
 		},
 		opacity: 0,
 		marginTop: -10,
-		position: "relative",
+		position: 'relative',
 	},
 	move: {
 		transition: {
 			delay: 0.8,
 			duration: 0.8,
-			ease: "easeInOut",
+			ease: 'easeInOut',
 		},
 		opacity: 1,
 		marginTop: 0,
 	},
 	exit: {
 		transition: {
-			ease: "easeInOut",
+			ease: 'easeInOut',
 		},
 		marginTop: [-10, 0],
 		opacity: [0, 1],
@@ -92,16 +92,16 @@ export const sidebarVariants = {
 	open: (height = 1000) => ({
 		clipPath: `circle(${height * 2 + 200}px at 85% 45px)`,
 		transition: {
-			type: "spring",
+			type: 'spring',
 			stiffness: 20,
 			restDelta: 2,
 		},
 	}),
 	closed: {
-		clipPath: "circle(30px at 85% 45px)",
+		clipPath: 'circle(30px at 85% 45px)',
 		transition: {
 			delay: 0.5,
-			type: "spring",
+			type: 'spring',
 			stiffness: 400,
 			damping: 40,
 		},
@@ -123,7 +123,7 @@ export const slideUpVariants: Variants = {
 		transition: {
 			delay: 0.5,
 			duration: 1,
-			type: "spring",
+			type: 'spring',
 			stiffness: 100,
 		},
 	},

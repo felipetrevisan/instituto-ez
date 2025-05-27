@@ -1,12 +1,13 @@
 import { visionTool } from "@sanity/vision";
-import { PluginOptions, defineConfig } from "sanity";
-import { structureTool } from "sanity/structure";
+import { type PluginOptions, defineConfig } from "sanity";
 import { unsplashImageAsset } from "sanity-plugin-asset-source-unsplash";
+import { iconPicker } from 'sanity-plugin-icon-picker';
+import { structureTool } from "sanity/structure";
 
+import { env } from "@/config/env";
 import { apiVersion, dataset, projectId } from "@/sanity/env";
 import { schema } from "@/sanity/schema";
 import structure from "@/sanity/structures";
-import { env } from "@/config/env";
 
 export default defineConfig({
   basePath: "/studio",
@@ -17,8 +18,8 @@ export default defineConfig({
     components: {
       toolMenu: (props) => {
         const { tools, renderDefault } = props;
-        const structureTool = tools.find(({ name }) => name == "structure");
-        const otherTools = tools.filter(({ name }) => name != "structure");
+        const structureTool = tools.find(({ name }) => name === "structure");
+        const otherTools = tools.filter(({ name }) => name !== "structure");
 
         if (!structureTool) {
           return renderDefault(props);
@@ -37,6 +38,7 @@ export default defineConfig({
     }),
     // Add an image asset source for Unsplash
     unsplashImageAsset(),
+    iconPicker(),
     // Vision lets you query your content with GROQ in the studio
     // https://www.sanity.io/docs/the-vision-plugin
     env.NODE_ENV === "development" && visionTool({ defaultApiVersion: apiVersion }),

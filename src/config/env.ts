@@ -1,10 +1,11 @@
-import { createEnv } from "@t3-oss/env-nextjs";
-import { z } from "zod";
+import { createEnv } from '@t3-oss/env-nextjs';
+import { z } from 'zod';
 
-const nodeEnv = z.enum(["development", "production", "test"]);
+const nodeEnv = z.enum(['development', 'production', 'test']);
 
 function requiredOnEnv(env: z.infer<typeof nodeEnv>) {
-	return (value: any) => {
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+	return (value: any): boolean => {
 		if (env === process.env.NODE_ENV && !value) {
 			return false;
 		}
@@ -15,20 +16,20 @@ function requiredOnEnv(env: z.infer<typeof nodeEnv>) {
 
 export const env = createEnv({
 	server: {
-		SANITY_API_READ_TOKEN: z.string().refine(requiredOnEnv("production")),
+		SANITY_API_READ_TOKEN: z.string().refine(requiredOnEnv('production')),
 	},
 	client: {
 		NEXT_PUBLIC_VERCEL_URL: z.string().url().min(1),
 		NEXT_PUBLIC_SANITY_PROJECT_ID: z.string().min(1),
 		NEXT_PUBLIC_SANITY_DATASET: z
-			.enum(["production", "preview", "development"])
-			.default("production"),
+			.enum(['production', 'preview', 'development'])
+			.default('production'),
 	},
 	shared: {
 		NODE_ENV: nodeEnv,
 		VERCEL_ENV: z
-			.enum(["production", "preview", "development"])
-			.default("development"),
+			.enum(['production', 'preview', 'development'])
+			.default('development'),
 	},
 	experimental__runtimeEnv: {
 		NEXT_PUBLIC_VERCEL_URL: process.env.NEXT_PUBLIC_VERCEL_URL,

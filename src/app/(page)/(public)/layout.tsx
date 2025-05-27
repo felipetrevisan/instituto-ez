@@ -1,7 +1,7 @@
-import { Fragment } from "react";
-import * as App from "@/components/app";
+import * as App from '@/components/app';
+import { Fragment } from 'react';
 
-import "../../globals.scss";
+import '../../globals.css';
 
 export default function RootLayout({
 	children,
