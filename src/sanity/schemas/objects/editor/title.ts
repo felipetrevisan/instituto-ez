@@ -56,8 +56,8 @@ export default defineType({
 		},
 		prepare({ title, subtitle, size }) {
 			return {
-				title: `Título: ${title || 'Sem texto'}`,
-				subtitle: `${subtitle} → ${size}`,
+				title: `Título: ${title || 'Sem Título'}`,
+				subtitle: `${subtitle || "Sem Subtitulo"} → Tamanho: ${size}`,
 			};
 		},
 	},

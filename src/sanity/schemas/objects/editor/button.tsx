@@ -70,10 +70,10 @@ export default defineType({
 			},
 		},
 		{
-			name: 'full_width',
+			name: 'fullWidth',
 			title: 'Full Width',
 			type: 'boolean',
-			initialValue: 'small',
+			initialValue: true,
 			options: {
 				list: [
 					{ title: 'Yes', value: true },
@@ -144,11 +144,12 @@ export default defineType({
 			variant: 'variant',
 			theme: 'theme',
 			icon: 'icon.provider',
+			size: 'size',
 		},
-		prepare({ title, linkTitle, variant, theme, icon }) {
+		prepare({ title, linkTitle, variant, theme, size, icon }) {
 			return {
 				title: `Botão: ${title || 'Sem texto'}`,
-				subtitle: `${variant || 'default'} → ${theme || 'default'} → ${linkTitle || 'Sem link'}`,
+				subtitle: `Variante: ${variant || 'default'} → Tema: ${theme || 'default'} → ${linkTitle || 'Sem link'} → Tamanho: ${size}`,
 				media: preview(icon),
 			};
 		},

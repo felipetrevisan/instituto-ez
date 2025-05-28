@@ -6,9 +6,14 @@ import {
 	type SanityImageSource,
 	getImageDimensions,
 } from '@sanity/asset-utils';
-import { BulbOutlineIcon, LinkIcon, PanelRightIcon } from '@sanity/icons';
+import { BulbOutlineIcon, LinkIcon } from '@sanity/icons';
 import type { VariantProps } from 'class-variance-authority';
-import { AlignCenterIcon, AlignJustifyIcon, AlignLeftIcon, AlignRightIcon } from 'lucide-react';
+import {
+	AlignCenterIcon,
+	AlignJustifyIcon,
+	AlignLeftIcon,
+	AlignRightIcon,
+} from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
@@ -89,8 +94,10 @@ const ButtonComponent = ({ value }: { value: ButtonType }) => {
 		</Button>
 	);
 
+	console.log(fullWidth);
+
 	return (
-		<div className="flex justify-center">
+		<div className={cn('flex justify-center', { 'w-full': fullWidth })}>
 			{action === 'link' ? (
 				<Link href={path} className={cn({ 'w-full': fullWidth })}>
 					{buttonElement}
@@ -139,50 +146,53 @@ const HighlightDecorator = (props: any) => {
 
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>
 const CenterDecorator = (props: any) => {
-	return (
-		<span className="text-center">
-			{props.children}
-		</span>
-	);
+	return <span className="text-center">{props.children}</span>;
 };
 
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>
 const LeftDecorator = (props: any) => {
-	return (
-		<span className="text-left">
-			{props.children}
-		</span>
-	);
+	return <span className="text-left">{props.children}</span>;
 };
 
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>
 const RightDecorator = (props: any) => {
-	return (
-		<span className="text-right">
-			{props.children}
-		</span>
-	);
+	return <span className="text-right">{props.children}</span>;
 };
 
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>
 const JustifyDecorator = (props: any) => {
-	return (
-		<span className="text-justify">
-			{props.children}
-		</span>
-	);
+	return <span className="text-justify">{props.children}</span>;
 };
-
 
 const blockDecorators = [
 	{ title: 'Bold', value: 'strong' },
 	{ title: 'Emphasis', value: 'em' },
 	{ title: 'Code', value: 'code' },
 	{ title: 'Underline', value: 'underline' },
-	{ title: 'Center', value: 'center', component: CenterDecorator, icon: AlignCenterIcon, },
-	{ title: 'Left', value: 'left', component: LeftDecorator, icon: AlignLeftIcon  },
-	{ title: 'Right', value: 'right', component: RightDecorator, icon: AlignRightIcon },
-	{ title: 'Justify', value: 'justify', component: JustifyDecorator, icon: AlignJustifyIcon },
+	{
+		title: 'Center',
+		value: 'center',
+		component: CenterDecorator,
+		icon: () => <AlignCenterIcon size={12} />,
+	},
+	{
+		title: 'Left',
+		value: 'left',
+		component: LeftDecorator,
+		icon: () => <AlignLeftIcon size={12} />,
+	},
+	{
+		title: 'Right',
+		value: 'right',
+		component: RightDecorator,
+		icon: () => <AlignRightIcon size={12} />,
+	},
+	{
+		title: 'Justify',
+		value: 'justify',
+		component: JustifyDecorator,
+		icon: () => <AlignJustifyIcon size={12} />,
+	},
 	{
 		title: 'Highlight',
 		value: 'highlight',
