@@ -12,7 +12,6 @@ export default defineType({
 		orderRankField({ type: 'banner' }),
 		defineField({
 			name: 'title',
-
 			title: 'Title',
 			type: 'string',
 			validation: (Rule) =>

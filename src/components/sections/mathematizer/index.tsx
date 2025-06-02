@@ -11,7 +11,7 @@ export function Mathematizer() {
 	return (
 		<div className="flex flex-col gap-10">
 			<App.PageHeader>
-				<App.Title>Conheça nossos Serviços e Produtos</App.Title>
+				<App.Title>Conheça nossos Produtos</App.Title>
 				<App.Subtitle size="lg">Exclusivos para Empresas</App.Subtitle>
 			</App.PageHeader>
 			<div className="flex flex-col gap-12 lg:gap-28">

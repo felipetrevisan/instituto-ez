@@ -17,6 +17,10 @@ function requiredOnEnv(env: z.infer<typeof nodeEnv>) {
 export const env = createEnv({
 	server: {
 		SANITY_API_READ_TOKEN: z.string().refine(requiredOnEnv('production')),
+		RESEND_API_KEY: z
+			.string()
+			.refine(requiredOnEnv('production'))
+			.refine(requiredOnEnv('development')),
 	},
 	client: {
 		NEXT_PUBLIC_VERCEL_URL: z.string().url().min(1),

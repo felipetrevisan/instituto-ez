@@ -15,6 +15,7 @@ import type { SectionKeys } from '@/types/sections';
 
 export default async function Page() {
 	const { sections } = await getSiteConfig();
+	
 	const avaliableSections = getSections().reduce(
 		(acc, section) => {
 			acc[section.key] = section;
@@ -27,8 +28,8 @@ export default async function Page() {
 		<div className="w-full flex items-center flex-col justify-center gap-20">
 			{sections?.map(({ key, show }) =>
 				show ? (
-					<section className={avaliableSections[key].classes} key={key}>
-						{avaliableSections[key].component}
+					<section className={avaliableSections[key]?.classes || ''} key={key}>
+						{avaliableSections[key]?.component}
 					</section>
 				) : null,
 			)}

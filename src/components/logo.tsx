@@ -5,24 +5,24 @@ import Image from 'next/image';
 import * as React from 'react';
 
 type LogoProps = {
-	height: MotionValue<string>;
-	width: MotionValue<string>;
+	// height: MotionValue<string>;
+	// width: MotionValue<string>;
 	src?: string;
+	showSlogan?: boolean;
+	linkable?: boolean;
 } & HTMLMotionProps<'a'>;
 
 export const Logo = ({
 	className,
-	height,
-	width,
+	// height,
+	// width,
+	showSlogan = true,
+	linkable = true,
 	src,
 	...props
 }: LogoProps) => {
-	return (
-		<motion.a
-			className="relative h-[3.56rem] w-56 flex space-x-2"
-			{...props}
-			href="/"
-		>
+	const logoImage = (
+		<>
 			<Image
 				src={src ?? '/assets/logo.png'}
 				alt="Logo Instituto Ez - Desenvolvimento Humano"
@@ -32,14 +32,32 @@ export const Logo = ({
 				width={57}
 				height={57}
 			/>
-			<span className="flex flex-col justify-center">
-				<p className="font-oswald text-primary text-lg font-bold">
-					Instituto Ez
-				</p>
-				<p className="font-questrial text-primary text-sm font-light text-nowrap">
-					Desenvolvimento Humano
-				</p>
-			</span>
-		</motion.a>
+			{showSlogan && (
+				<span className="flex flex-col justify-center">
+					<p className="font-oswald text-primary text-lg font-bold">
+						Instituto Ez
+					</p>
+					<p className="font-questrial text-primary text-sm font-light text-nowrap">
+						Desenvolvimento Humano
+					</p>
+				</span>
+			)}
+		</>
+	);
+
+	return (
+		<>
+			{linkable ? (
+				<motion.a
+					className="relative h-[3.56rem] w-56 flex space-x-2"
+					{...props}
+					href="/"
+				>
+					{logoImage}
+				</motion.a>
+			) : (
+				logoImage
+			)}
+		</>
 	);
 };

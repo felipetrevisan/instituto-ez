@@ -1,135 +1,195 @@
 import { Button } from '@/components/ui/button';
 import { DialogFooter, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-// import { useToast } from "@/components/ui/use-toast";
+import { useSite } from '@/hooks/use-site';
+import { cn } from '@/lib/utils';
+import { sendEmail } from '@/server/send-email';
 import { type ContactFormSchema, contactFormSchema } from '@/types/contact';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { InfoIcon, Loader2 } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Loader2 } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { MdEmail } from 'react-icons/md';
+import { toast } from 'sonner';
 
 export function ContactForm({
 	isDialog = false,
+	subject = '',
 	onClose,
 }: {
 	isDialog: boolean;
+	subject: string;
 	onClose: () => void;
 }) {
-	// const { toast } = useToast();
+	const [focusedField, setFocusedField] = useState<string | null>('name');
+	const { data } = useSite();
+
+	const fields = [
+		{
+			name: 'name',
+			label: 'Nome',
+			type: 'text',
+			validation: { required: 'Nome é obrigatório' },
+		},
+		{
+			name: 'email',
+			label: 'Email',
+			type: 'email',
+			validation: { required: 'E-mail é obrigatório' },
+		},
+		{
+			name: 'subject',
+			label: 'Assunto',
+			type: 'text',
+			validation: { required: 'Assunto é obrigatória' },
+			className: 'col-span-2',
+			readOnly: subject !== '',
+		},
+		{
+			name: 'message',
+			label: 'Mensagem',
+			type: 'textarea',
+			validation: { required: 'Mensagem é obrigatória' },
+			className: 'col-span-2',
+		},
+	];
 
 	const {
 		register,
 		handleSubmit,
-		formState: { isSubmitting, errors },
+		formState: { isSubmitting, errors, isValid },
+		watch,
 		reset,
+		setValue,
 	} = useForm<ContactFormSchema>({
 		resolver: zodResolver(contactFormSchema),
-		defaultValues: {
-			name: '',
-			email: '',
-			subject: '',
-			message: '',
-		},
 	});
 
+	useEffect(() => {
+		setValue('subject', subject, {
+			shouldValidate: true,
+			shouldDirty: true,
+		});
+	}, [subject, setValue]);
+
 	async function handleSendForm(formData: ContactFormSchema) {
-		//   const { data, error } = await sendEmail(formData);
-		//   if (error) {
-		//     toast({
-		//       title: "Não foi possível enviar a mensagem",
-		//       variant: "destructive",
-		//     });
-		//     return false;
-		//   }
-		//   if (data?.id) {
-		//     toast({
-		//       title: "Mensagem enviada com sucesso",
-		//       variant: "success",
-		//     });
-		//     reset();
-		//   }
-		onClose();
+		if (data) {
+			const { data: emailData, error } = await sendEmail(
+				formData,
+				data.contact.email,
+			);
+			if (error) {
+				toast.warning('Não foi possível enviar a mensagem');
+				return false;
+			}
+			if (emailData?.id) {
+				toast.success('Mensagem enviada com sucesso');
+				reset();
+			}
+			onClose();
+		}
+
+		toast.warning('Não foi possível enviar a mensagem');
+		return false;
 	}
 
 	return (
 		<form onSubmit={handleSubmit(handleSendForm)} className="w-full">
 			<div className="grid gap-4 py-4">
-				<div className="grid grid-cols-1 md:grid-cols-2 items-baseline gap-4">
-					<div>
-						<div className="col-span-3 space-y-4">
-							<Input
-								id="name"
-								placeholder="Seu nome"
-								disabled={isSubmitting}
-								{...register('name')}
-							/>
-							{errors.name && (
-								<p className="flex items-center gap-1 text-sm font-medium text-secondary">
-									<InfoIcon /> {errors.name.message}
-								</p>
-							)}
-						</div>
-					</div>
-					<div>
-						<div className="col-span-3 space-y-4">
-							<Input
-								id="email"
-								placeholder="E-mail"
-								disabled={isSubmitting}
-								icon={MdEmail}
-								{...register('email')}
-							/>
-							{errors.email && (
-								<p className="flex items-center gap-1 text-sm font-medium text-secondary">
-									<InfoIcon />
-									{errors.email.message}
-								</p>
-							)}
-						</div>
-					</div>
-				</div>
-				<div className="grid grid-cols-1 items-baseline gap-4">
-					<div className="col-span-2 space-y-4">
-						<Input
-							id="subject"
-							placeholder="Assunto"
-							disabled={isSubmitting}
-							{...register('subject')}
-						/>
-						{errors.subject && (
-							<p className="flex items-center gap-1 text-sm font-medium text-secondary">
-								<InfoIcon />
-								{errors.subject.message}
-							</p>
-						)}
-					</div>
-				</div>
-				<div className="grid grid-cols-1 items-baseline gap-4">
-					<div className="col-span-2 space-y-4">
-						<Textarea
-							id="message"
-							placeholder="Mensagem"
-							rows={4}
-							disabled={isSubmitting}
-							{...register('message')}
-						/>
-						{errors.message && (
-							<p className="flex items-center gap-1 text-sm font-medium text-secondary">
-								<InfoIcon />
-								{errors.message.message}
-							</p>
-						)}
-					</div>
+				<div className="grid grid-cols-1 md:grid-cols-2 items-baseline gap-8">
+					{fields.map(
+						({ name, label, type, validation, className, readOnly }) => {
+							const value = watch(name as keyof ContactFormSchema);
+							const hasError = !!errors[name as keyof ContactFormSchema];
+							const isFocused = focusedField === name || !!value;
+
+							return (
+								<motion.div
+									key={name}
+									animate={hasError ? { x: [0, -5, 5, -5, 0] } : { x: 0 }}
+									transition={{ duration: 0.4 }}
+									className={cn('relative', className)}
+								>
+									<motion.label
+										className={cn(
+											'absolute left-5 text-secondary font-semibold font-oswald pointer-events-none origin-left',
+											{
+												'text-red-500': hasError,
+												'text-tertiary': isFocused,
+											},
+										)}
+										animate={
+											isFocused
+												? {
+														y: -30,
+														left: 10,
+														scale: 0.8,
+														opacity: 1,
+														fontSize: '20px',
+													}
+												: { y: 10, scale: 1, opacity: 0.5 }
+										}
+										transition={{ duration: 0.25 }}
+										htmlFor={name}
+									>
+										{label}
+									</motion.label>
+									{type === 'textarea' ? (
+										<Textarea
+											{...register(name as keyof ContactFormSchema, validation)}
+											onFocus={() => setFocusedField(name)}
+											onBlur={() => setFocusedField(null)}
+											className={cn('transition-colors', {
+												'border-red-500': hasError,
+											})}
+											rows={20}
+											style={{ resize: 'none' }}
+											animate={{
+												borderRadius: isFocused ? '1rem' : '1.25rem',
+												height: isFocused ? 250 : 100,
+											}}
+											initial={{ height: 200 }}
+										/>
+									) : (
+										<Input
+											type={type}
+											{...register(name as keyof ContactFormSchema, validation)}
+											onFocus={() => setFocusedField(name)}
+											onBlur={() => setFocusedField(null)}
+											className={cn('transition-colors', {
+												'border-red-500': hasError,
+											})}
+											animate={{
+												borderRadius: isFocused ? '1rem' : '1.25rem',
+											}}
+											readOnly={readOnly}
+										/>
+									)}
+									<AnimatePresence>
+										{hasError && (
+											<motion.p
+												className="text-sm text-red-500 mt-1"
+												initial={{ opacity: 0, y: -5 }}
+												animate={{ opacity: 1, y: 0 }}
+												exit={{ opacity: 0, y: -5 }}
+											>
+												{errors[name as keyof ContactFormSchema]?.message}
+											</motion.p>
+										)}
+									</AnimatePresence>
+								</motion.div>
+							);
+						},
+					)}
 				</div>
 			</div>
 			{isDialog && (
-				<DialogFooter>
+				<DialogFooter className="gap-5">
 					<DialogTrigger asChild>
 						<Button
 							type="button"
-							variant="default"
+							variant="outline"
 							theme="tertiary"
 							size="xl"
 							rounded="2xl"
@@ -145,7 +205,7 @@ export function ContactForm({
 						size="xl"
 						type="submit"
 						rounded="2xl"
-						disabled={isSubmitting}
+						disabled={isSubmitting || !isValid}
 						className="w-40"
 					>
 						{isSubmitting ? (
@@ -163,7 +223,7 @@ export function ContactForm({
 						size="xl"
 						type="submit"
 						rounded="full"
-						disabled={isSubmitting}
+						disabled={isSubmitting || !isValid}
 						shadow
 						className="md:w-[200px] w-full"
 					>

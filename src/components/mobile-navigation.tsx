@@ -27,7 +27,7 @@ export const MobileNavigation = ({ navigation }: NavigationProps) => {
 
 	return (
 		<NavigationMenu
-			className="absolute top-[100px] left-10 w-full flex mx-auto lg:hidden lg:items-start"
+			className="w-full flex mx-auto lg:hidden lg:items-start"
 			orientation="vertical"
 		>
 			<NavigationMenuList className="items-end">

@@ -18,6 +18,8 @@ type AppContextProps = {
 	toggleMenu: Cycle;
 	isContactDialogOpen: boolean;
 	setIsContactDialogOpen: Dispatch<SetStateAction<boolean>>;
+	contactSubject: string;
+	setContactSubject: Dispatch<SetStateAction<string>>;
 	isMenuActive: (menu: string) => boolean;
 	isHome: boolean;
 	setActiveMenu: Dispatch<SetStateAction<string>>;
@@ -30,6 +32,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
 	const currentUrl = usePathname();
 	const [isMenuOpen, toggleMenu] = useCycle(false, true);
 	const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
+	const [contactSubject, setContactSubject] = useState('');
+
 	const [activeMenu, setActiveMenu] = useState(currentUrl);
 
 	const isHome = activeMenu === '/';
@@ -53,6 +57,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
 				isMenuOpen,
 				isContactDialogOpen,
 				setIsContactDialogOpen,
+				setContactSubject,
+				contactSubject,
 				isHome,
 				isMenuActive,
 				activeMenu,

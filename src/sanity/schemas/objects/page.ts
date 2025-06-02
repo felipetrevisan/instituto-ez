@@ -1,4 +1,4 @@
-import { annotations, blockDecorators } from '@/sanity/lib/portable-components';
+import config from '@/config/editor';
 import { defineField, defineType } from 'sanity';
 
 export default defineType({
@@ -42,24 +42,7 @@ export default defineType({
 			name: 'content',
 			title: 'Content',
 			type: 'array',
-			of: [
-				{
-					type: 'block',
-					marks: {
-						decorators: blockDecorators,
-						annotations: annotations
-					},
-				},
-				{
-					type: 'buttonLink'
-				},
-				{
-					type: 'image'
-				},
-				{
-					type: 'title'
-				}
-			],
+			of: config,
 			validation: (Rule) =>
 				Rule.required().warning('This field must not be empty.'),
 		}),

@@ -1,4 +1,8 @@
-import { ButtonComponent, ImageComponent, TitleComponent } from '@/sanity/lib/portable-components';
+import AccordionComponent from '@/sanity/lib/components/accordion';
+import AlertComponent from '@/sanity/lib/components/alert';
+import ButtonComponent from '@/sanity/lib/components/button';
+import ImageComponent from '@/sanity/lib/components/image';
+import TitleComponent from '@/sanity/lib/components/title';
 import type { PortableTextComponents } from '@portabletext/react';
 import Link from 'next/link';
 import { Button } from './button';
@@ -7,7 +11,9 @@ export const portableComponents: PortableTextComponents = {
 	types: {
 		image: ImageComponent,
 		buttonLink: ButtonComponent,
-		title: TitleComponent
+		title: TitleComponent,
+		accordion: AccordionComponent,
+		alert: AlertComponent,
 	},
 	marks: {
 		internalLink: ({ value, children }) => {

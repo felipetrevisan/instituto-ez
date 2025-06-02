@@ -20,8 +20,9 @@ import {
 } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Fragment, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import { MdOutlineEmail } from 'react-icons/md';
+import { IconButton } from './animate-ui/buttons/icon';
 import { ContactFormDialog } from './contact-form-dialog';
 import { DesktopNavigation } from './desktop-navigation';
 import { Logo } from './logo';
@@ -78,6 +79,17 @@ function Header({ className }: React.ComponentProps<'div'>) {
 		setCurrentScrollY(val);
 	});
 
+	useEffect(() => {
+		if (isMenuOpen) {
+			document.body.style.overflow = 'hidden';
+		} else {
+			document.body.style.overflow = '';
+		}
+		return () => {
+			document.body.style.overflow = '';
+		};
+	}, [isMenuOpen]);
+
 	return (
 		<motion.header
 			className={cn(
@@ -99,11 +111,7 @@ function Header({ className }: React.ComponentProps<'div'>) {
 			>
 				<Fragment>
 					<Navbar.Brand>
-						<Logo
-							height={logoSizeHeight}
-							width={logoSizeWidth}
-							src={data?.logo && urlForImage(data.logo?.asset).url()}
-						/>
+						<Logo src={data?.logo && urlForImage(data.logo?.asset).url()} />
 					</Navbar.Brand>
 					<motion.div
 						animate={isMenuOpen ? 'open' : 'closed'}
@@ -113,12 +121,15 @@ function Header({ className }: React.ComponentProps<'div'>) {
 						<Navbar.Toggle />
 						<DesktopNavigation navigation={data?.primaryNavigation} />
 						<motion.div
-							className="absolute z-90 top-0 right-0 w-[300px] h-screen bg-slate-200/80 backdrop-blur-2xl lg:hidden"
+							className="fixed z-90 top-0 right-0 w-[300px] h-screen bg-slate-200/80 backdrop-blur-2xl lg:hidden"
 							variants={sidebarVariants}
+							initial="closed"
+							animate={isMenuOpen ? 'open' : 'closed'}
 						>
 							<MotionMobileNavigation
 								navigation={data?.primaryNavigation}
 								variants={menuListVariants}
+								animate={isMenuOpen ? 'open' : 'closed'}
 							/>
 						</motion.div>
 					</motion.div>
@@ -148,7 +159,7 @@ function Content({ className, children }: React.ComponentProps<'div'>) {
 
 function Footer({ className }: React.ComponentProps<'div'>) {
 	const { setIsContactDialogOpen } = useApp();
-	const MotionButton = motion(Button);
+	const { data } = useSite();
 
 	return (
 		<footer
@@ -158,29 +169,29 @@ function Footer({ className }: React.ComponentProps<'div'>) {
 			)}
 		>
 			<div className="fixed bottom-4 right-10 z-50 flex flex-row items-center gap-4">
-				<MotionButton
-					aria-label="Entre em contato"
+				<IconButton
+					icon={MdOutlineEmail}
+					onClick={() => setIsContactDialogOpen(true)}
+					size="lg"
 					whileHover={{ scale: 1.4 }}
 					whileTap={{ scale: 1.4 }}
-					variant="icon"
-					size="2xl"
-					rounded="full"
-					className="flex items-center justify-center gap-2 shadow"
-					onClick={() => setIsContactDialogOpen(true)}
-				>
-					<MdOutlineEmail size={32} />
-					<span className="sr-only">Entre em contato</span>
-				</MotionButton>
+					transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+				/>
 			</div>
 			<div className="container flex flex-row gap-4 items-center justify-center w-full">
 				<div className="flex flex-row justify-center items-center gap-4">
-					<Image
+					{/* <Image
 						src="/assets/logo.png"
 						alt="Logo"
 						width="60"
 						height="60"
 						sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
 						priority
+					/> */}
+					<Logo
+						src={data?.logo && urlForImage(data.logo?.asset).url()}
+						showSlogan={false}
+						linkable={false}
 					/>
 					<p className="text-center text-primary text-opacity-75">
 						© {new Date().getFullYear()} - Todos os direitos reservados
@@ -218,21 +229,52 @@ function Title({
 	variant,
 	size,
 	asChild = false,
+	separator = false,
 	children,
 	...props
 }: React.ComponentProps<'h1'> &
 	VariantProps<typeof titleVariants> & {
 		asChild?: boolean;
+		separator?: boolean;
 	}) {
 	const Comp = asChild ? Slot : 'h1';
 
 	return (
-		<Comp
-			className={cn(titleVariants({ variant, size }), className)}
-			{...props}
-		>
-			{children}
-		</Comp>
+		<div className="flex flex-row gap-4 items-center">
+			{separator && (
+				// biome-ignore lint/a11y/noSvgWithoutTitle: <explanation>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="26"
+					height="7"
+					viewBox="0 0 26 7"
+					fill="none"
+				>
+					<path
+						d="M26 0.999776C26 1.55218 25.2166 2 24.2493 2H7.74961C7.26654 2 6.82911 1.88808 6.51229 1.70704C6.19573 1.52628 6 1.27626 6 1.00007C5.99974 0.447599 6.78343 -0.000149254 7.75053 3.73222e-08H24.2506C25.2171 0.000124446 25.9998 0.447599 26 0.999776Z"
+						className={cn({
+							'fill-primary': variant === 'default',
+							'fill-secondary': variant === 'secondary',
+							'fill-tertiary': variant === 'tertiary',
+						})}
+					/>
+					<path
+						d="M20 5.99978C20 6.55218 19.2166 7 18.2493 7H1.74961C1.26654 7 0.829108 6.88808 0.512287 6.70704C0.195727 6.52628 6.53032e-08 6.27626 6.53032e-08 6.00007C-0.000261194 5.4476 0.783431 4.99985 1.75053 5H18.2506C19.2171 5.00012 19.9998 5.4476 20 5.99978Z"
+						className={cn({
+							'fill-primary': variant === 'default',
+							'fill-secondary': variant === 'secondary',
+							'fill-tertiary': variant === 'tertiary',
+						})}
+					/>
+				</svg>
+			)}
+			<Comp
+				className={cn(titleVariants({ variant, size }), className)}
+				{...props}
+			>
+				{children}
+			</Comp>
+		</div>
 	);
 }
 

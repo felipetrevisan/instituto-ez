@@ -25,6 +25,9 @@ import ribbon from './schemas/objects/ribbon';
 import section from './schemas/objects/section';
 import socialNetworksItem from './schemas/objects/social-networks-item';
 
+import accordion from './schemas/objects/editor/accordion';
+import accordionContent from './schemas/objects/editor/accordion-content';
+import alert from './schemas/objects/editor/alert';
 import buttonLink from './schemas/objects/editor/button';
 import title from './schemas/objects/editor/title';
 
@@ -55,6 +58,9 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 		section,
 
 		buttonLink,
-		title
+		title,
+		accordion,
+		accordionContent,
+		alert
 	],
 };

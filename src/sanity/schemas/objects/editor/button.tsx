@@ -1,12 +1,12 @@
-import { LinkIcon, MenuIcon } from '@sanity/icons';
+import { PackageIcon } from '@sanity/icons';
+import * as Icons from 'react-icons/fa';
 import { defineType } from 'sanity';
-import { preview } from 'sanity-plugin-icon-picker';
 
 export default defineType({
 	name: 'buttonLink',
 	type: 'object',
 	title: 'Button',
-	icon: MenuIcon,
+	icon: PackageIcon,
 	fields: [
 		{
 			name: 'variant',
@@ -92,6 +92,20 @@ export default defineType({
 			name: 'icon',
 			type: 'iconPicker',
 			options: {
+				provider: 'fa',
+				configurations: [
+					{
+						title: 'Font Awesome',
+						provider: 'fa',
+						// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+						icons: (options: any) =>
+							Object.entries(Icons).map(([name, Component]) => ({
+								name,
+								component: () => <Component width="1.5em" height="1em" />,
+								tags: [name],
+							})),
+					},
+				],
 				outputFormat: 'react',
 			},
 		},
@@ -143,14 +157,12 @@ export default defineType({
 			linkTitle: 'link.title',
 			variant: 'variant',
 			theme: 'theme',
-			icon: 'icon.provider',
 			size: 'size',
 		},
-		prepare({ title, linkTitle, variant, theme, size, icon }) {
+		prepare({ title, linkTitle, variant, theme, size }) {
 			return {
 				title: `Botão: ${title || 'Sem texto'}`,
 				subtitle: `Variante: ${variant || 'default'} → Tema: ${theme || 'default'} → ${linkTitle || 'Sem link'} → Tamanho: ${size}`,
-				media: preview(icon),
 			};
 		},
 	},

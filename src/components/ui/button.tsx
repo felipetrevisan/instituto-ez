@@ -1,9 +1,8 @@
+import { cn } from '@/lib/utils';
 import { Slot } from '@radix-ui/react-slot';
 import { type VariantProps, cva } from 'class-variance-authority';
-import type * as React from 'react';
-
-import { cn } from '@/lib/utils';
-import { motion } from 'framer-motion';
+import { type HTMLMotionProps, type Transition, motion } from 'framer-motion';
+import * as React from 'react';
 
 const buttonVariants = cva(
 	'relative overflow-hidden inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive z-1 cursor-pointer',
@@ -14,7 +13,6 @@ const buttonVariants = cva(
 				outline: 'shadow-sm outline outline-2',
 				ghost: 'shadow-none outline-none border-none',
 				link: 'bg-none shadow-none border-none',
-				icon: 'outline outline-2',
 			},
 			theme: {
 				default:
@@ -23,8 +21,6 @@ const buttonVariants = cva(
 					'bg-linear-to-r from-secondary via-secondary/80 to-secondary hover:bg-secondary/30 hover:text-secondary-foreground text-secondary-foreground outline-secondary-foreground/40',
 				tertiary:
 					'bg-linear-to-r from-tertiary via-tertiary/80 to-tertiary text-tertiary-foreground hover:bg-tertiary/30 hover:text-tertiary-foreground outline-tertiary/40 hover:border-tertiary/40',
-				whatsapp:
-					'bg-whatsapp border-2 text-whatsapp-foreground border-whatsapp hover:border-whatsapp-foreground outline-whatsapp hover:outline-whatsapp-foreground hover:border-whatsapp hover:bg-whatsapp-foreground hover:text-whatsapp',
 			},
 			size: {
 				default: 'h-9 px-4 py-2',
@@ -80,70 +76,6 @@ const buttonVariants = cva(
 				theme: 'tertiary',
 				className: '--hover: var(--tertiary)',
 			},
-			// Hover
-			// Default / Primary
-			// {
-			// 	hover: 'effect',
-			// 	variant: 'default',
-			// 	className:
-			// 		'transition-all ease-in-out duration-500 before:bg-primary-foreground hover:text-primary',
-			// },
-			// {
-			// 	hover: 'effect',
-			// 	variant: 'outline',
-			// 	className:
-			// 		'transition-all ease-in-out duration-500 border-primary text-primary before:bg-primary hover:text-primary-foreground',
-			// },
-			// {
-			// 	hover: 'effect',
-			// 	variant: 'ghost',
-			// 	className:
-			// 		'transition-all ease-in-out duration-500 text-primary before:bg-primary hover:text-primary-foreground',
-			// },
-			// Secondary
-			// {
-			// 	hover: 'effect',
-			// 	theme: 'secondary',
-			// 	variant: 'default',
-			// 	className:
-			// 		'transition-all ease-in-out duration-500 before:bg-secondary-foreground hover:text-secondary',
-			// },
-			// {
-			// 	hover: 'effect',
-			// 	theme: 'secondary',
-			// 	variant: 'outline',
-			// 	className:
-			// 		'transition-all ease-in-out duration-500 border-secondary text-secondary before:bg-secondary hover:text-secondary-foreground',
-			// },
-			// {
-			// 	hover: 'effect',
-			// 	theme: 'secondary',
-			// 	variant: 'ghost',
-			// 	className:
-			// 		'transition-all ease-in-out duration-500 text-secondary before:bg-secondary hover:text-secondary-foreground',
-			// },
-			// Tertiary
-			// {
-			// 	hover: 'effect',
-			// 	theme: 'tertiary',
-			// 	variant: 'default',
-			// 	className:
-			// 		'transition-all ease-in-out duration-500 before:bg-tertiary-foreground hover:text-tertiary',
-			// },
-			// {
-			// 	hover: 'effect',
-			// 	theme: 'tertiary',
-			// 	variant: 'outline',
-			// 	className:
-			// 		'transition-all ease-in-out duration-500 border-tertiary text-tertiary before:bg-tertiary hover:text-tertiary-foreground',
-			// },
-			// {
-			// 	hover: 'effect',
-			// 	theme: 'tertiary',
-			// 	variant: 'ghost',
-			// 	className:
-			// 		'transition-all ease-in-out duration-500 text-tertiary before:bg-tertiary hover:text-tertiary-foreground',
-			// },
 
 			// Shadow
 			// Default / Primary
@@ -256,78 +188,134 @@ const buttonVariants = cva(
 				theme: 'tertiary',
 				className: 'bg-transparent text-tertiary !shadow-none',
 			},
-
-			{
-				variant: 'icon',
-				size: 'default',
-				className: 'size-9 p-0 [&_svg]:size-4',
-			},
-			{
-				variant: 'icon',
-				size: 'sm',
-				className: 'size-8 p-0 [&_svg]:size-3',
-			},
-			{
-				variant: 'icon',
-				size: 'lg',
-				className: 'size-10 p-0',
-			},
-			{
-				variant: 'icon',
-				size: 'xl',
-				className: 'size-14 p-0 [&_svg]:size-9',
-			},
-			{
-				variant: 'icon',
-				size: '2xl',
-				className: 'size-16 p-0 [&_svg]:size-8',
-			},
 		],
 	},
 );
 
-function Button({
-	className,
-	variant,
-	theme,
-	size,
-	rounded,
-	effect,
-	shadow,
-	fullWidth,
-	asChild = false,
-	...props
-}: React.ComponentProps<typeof motion.button> &
-	VariantProps<typeof buttonVariants> & {
-		asChild?: boolean;
-	}) {
-	const Comp = asChild ? Slot : 'button';
-	const CompMotion = motion(Comp);
+const rippleVariants = cva('absolute rounded-full size-5 pointer-events-none', {
+	variants: {
+		variant: {
+			default: 'shadow-sm outline outline-2',
+			outline: 'shadow-sm outline outline-2',
+			ghost: 'shadow-none outline-none border-none',
+			link: 'bg-none shadow-none border-none',
+			icon: 'outline outline-2',
+		},
+		theme: {
+			default: 'bg-secondary',
+			secondary: 'bg-tertiary',
+			tertiary: 'bg-primary',
+		},
+	},
+	defaultVariants: {
+		variant: 'default',
+		theme: 'default',
+	},
+});
 
-	return (
-		<CompMotion
-			data-slot="button"
-			whileHover={{ scale: 1.05 }}
-			whileTap={{ scale: 0.9 }}
-			transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-			animate={{
-				transition: { duration: 0.4, ease: 'easeInOut' },
-			}}
-			className={cn(
-				buttonVariants({
-					variant,
-					theme,
-					size,
-					rounded,
-					effect,
-					shadow,
-					fullWidth,
+type Ripple = { id: number; x: number; y: number };
+
+type ButtonProps = HTMLMotionProps<'button'> &
+	VariantProps<typeof buttonVariants> & {
+		children: React.ReactNode;
+		rippleClassName?: string;
+		scale?: number;
+		transition?: Transition;
+		asChild?: boolean;
+	};
+
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+	(
+		{
+			className,
+			onClick,
+			rippleClassName,
+			variant,
+			theme,
+			size,
+			rounded,
+			effect,
+			shadow,
+			fullWidth,
+			scale = 10,
+			transition = { duration: 0.6, ease: 'easeOut' },
+			asChild = false,
+			children,
+			...props
+		},
+		ref,
+	) => {
+		const Comp = asChild ? Slot : 'button';
+		const CompMotion = motion(Comp);
+		const [ripples, setRipples] = React.useState<Ripple[]>([]);
+		const buttonRef = React.useRef<HTMLButtonElement>(null);
+
+		React.useImperativeHandle(
+			ref,
+			() => buttonRef.current as HTMLButtonElement,
+		);
+
+		const createRipple = React.useCallback(
+			(event: React.MouseEvent<HTMLButtonElement>) => {
+				const rect = buttonRef.current?.getBoundingClientRect();
+				if (!rect) return;
+				const x = event.clientX - rect.left;
+				const y = event.clientY - rect.top;
+				const id = Date.now();
+				setRipples((prev) => [...prev, { id, x, y }]);
+				setTimeout(
+					() => setRipples((prev) => prev.filter((r) => r.id !== id)),
+					600,
+				);
+			},
+			[],
+		);
+
+		const handleClick = React.useCallback(
+			(event: React.MouseEvent<HTMLButtonElement>) => {
+				createRipple(event);
+				setTimeout(() => onClick?.(event), 600);
+			},
+			[createRipple, onClick],
+		);
+
+		return (
+			<CompMotion
+				ref={buttonRef}
+				data-slot="button"
+				whileHover={{ scale: 1.1 }}
+				whileTap={{ scale: 0.9 }}
+				transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+				animate={{ transition: { duration: 0.4, ease: 'easeInOut' } }}
+				className={cn(
+					buttonVariants({
+						variant,
+						theme,
+						size,
+						rounded,
+						effect,
+						shadow,
+						fullWidth,
+					}),
 					className,
-				}),
-			)}
-			{...props}
-		/>
-	);
-}
+				)}
+				onClick={handleClick}
+				{...props}
+			>
+				{children}
+				{ripples.map((r) => (
+					<motion.span
+						key={r.id}
+						initial={{ scale: 0, opacity: 0.5 }}
+						animate={{ scale, opacity: 0 }}
+						transition={transition}
+						className={cn(rippleVariants({ variant, theme }), rippleClassName)}
+						style={{ top: r.y - 10, left: r.x - 10 }}
+					/>
+				))}
+			</CompMotion>
+		);
+	},
+);
 
 export { Button, buttonVariants };

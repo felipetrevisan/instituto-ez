@@ -11,7 +11,7 @@ import ReactPlayer from 'react-player/youtube';
 export function Content({ title, content, background, video }: Section) {
 	return (
 		<div className="flex flex-col gap-10">
-			<div className="relative w-screen h-full lg:h-[700px] flex flex-col">
+			<div className="relative w-screen h-full flex flex-col">
 				<div className="absolute top-0 left-0 w-full overflow-hidden z-10">
 					{/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
 					<svg
@@ -41,15 +41,15 @@ export function Content({ title, content, background, video }: Section) {
 					strength={-200}
 					className="w-full overflow-hidden"
 				>
-					<div className="relative container flex h-full p-20 my-20">
+					<div className="relative container flex h-full py-20 my-20">
 						<div className="flex flex-col gap-10 justify-center items-center font-bold font-oswald w-full text-white">
 							<App.Subtitle variant="white" className="absolute top-1">
 								{background.title}
 							</App.Subtitle>
-							<div className="overflow-hidden rounded-2xl shadow max-h-[500px] max-w-full h-[400px] mt-10">
+							<div className="overflow-hidden rounded-2xl shadow h-[300px] md:max-h-[500px] max-w-full md:h-[500px] w-[90vw] md:w-[60vw] mt-10">
 								<ReactPlayer
 									url={video.url}
-									width="60vw"
+									width="100%"
 									height="100%"
 									controls={false}
 									config={{
@@ -86,58 +86,9 @@ export function Content({ title, content, background, video }: Section) {
 				</div>
 			</div>
 			<div className="container flex flex-col gap-10 justify-center items-center">
-				<App.Title className="text-center">
-					{title}
-				</App.Title>
-				<div className="flex flex-col gap-5 justify-center items-center w-full lg:max-w-[70%] text-justify py-10 lg:p-0">
+				<App.Title className="text-center">{title}</App.Title>
+				<div className="flex flex-col gap-5 justify-center items-center w-full lg:max-w-[70%] text-justify py-10 lg:p-0 [&>*]:w-full">
 					<PortableText value={content} components={portableComponents} />
-					{/* <Button
-						variant="default"
-						theme="secondary"
-						rounded="2xl"
-						size="2xl"
-						className="w-full"
-						shadow
-						effect="pulse"
-						onClick={handleOpenContactDialog}
-					>
-						<BookTextIcon /> Entrar em contato
-					</Button>
-					<Button
-						variant="outline"
-						theme="secondary"
-						rounded="2xl"
-						size="2xl"
-						shadow
-						className="w-full"
-						onClick={handleOpenContactDialog}
-					>
-						<BookTextIcon /> Entrar em contato
-					</Button>
-
-					<Button
-						variant="ghost"
-						theme="secondary"
-						rounded="2xl"
-						size="2xl"
-						shadow
-						className="w-full"
-						onClick={handleOpenContactDialog}
-					>
-						<BookTextIcon /> Entrar em contato
-					</Button>
-
-					<Button
-						variant="link"
-						theme="secondary"
-						rounded="2xl"
-						size="2xl"
-						shadow
-						className="w-full"
-						onClick={handleOpenContactDialog}
-					>
-						<BookTextIcon /> Entrar em contato
-					</Button> */}
 				</div>
 			</div>
 		</div>
