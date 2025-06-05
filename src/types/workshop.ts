@@ -1,3 +1,4 @@
+import type { Button } from './global';
 import type { SanityAsset } from './sanityAssets';
 
 export type Workshop = {
@@ -5,4 +6,5 @@ export type Workshop = {
 	title: string;
 	subtitle?: string;
 	background: SanityAsset;
+	button: Button;
 };
