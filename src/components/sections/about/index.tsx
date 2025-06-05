@@ -32,7 +32,7 @@ export function About() {
 							placeholder="blur"
 							blurDataURL={data?.hero?.[0].background.metadata.lqip}
 						/>
-						<div className="absolute flex flex-col text-secondary bg-white/80 md:bg-white h-max max-h-full w-[320px] md:w-[280px] -top-16 -left-1/2 translate-x-1/2 lg:translate-x-0 md:left-20 p-8 border-4 border-x-0 border-secondary gap-2 rounded-2xl backdrop-blur-lg md:backdrop-blur-none">
+						<div className="absolute flex flex-col text-secondary bg-white/80 md:bg-white h-max max-h-full w-[320px] md:w-[280px] -top-16 right-1/2 translate-x-1/2 lg:translate-x-0 md:left-20 p-8 border-4 border-x-0 border-secondary gap-2 rounded-2xl backdrop-blur-lg md:backdrop-blur-none">
 							<h2 className="lg:text-3xl font-bold">{data.hero?.[0].title}</h2>
 							<p className="font-light">{data.hero?.[0].description}</p>
 						</div>
