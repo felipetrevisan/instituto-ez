@@ -4,6 +4,7 @@ export type Button = {
 	label: string;
 	type: LinkType;
 	link: string;
+	params?: string;
 	externalUrl?: string;
 };
 

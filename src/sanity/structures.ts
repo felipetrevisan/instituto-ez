@@ -99,6 +99,7 @@ const structure = (S: StructureBuilder, context: ConfigContext) =>
 						'siteConfig',
 						'navigation',
 						'page',
+						'section',
 						'about',
 						'banner',
 						'service',

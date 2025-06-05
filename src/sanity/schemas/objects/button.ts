@@ -78,6 +78,15 @@ export default defineType({
 				).warning(),
 		}),
 		defineField({
+			name: 'button_internal_params',
+			title: 'Button Link Params',
+			type: 'string',
+			hidden: ({ parent }) =>
+				!parent?.show_button ||
+				(parent?.show_button && parent?.button_link_type !== 'INTERNAL') ||
+				parent?.disable_button,
+		}),
+		defineField({
 			name: 'button_external_url',
 			title: 'Button Link',
 			description: 'Enter the button URL',
