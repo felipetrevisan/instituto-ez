@@ -1,3 +1,5 @@
+'use client';
+
 import { Button } from '@/components/ui/button';
 import { DialogFooter, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
@@ -67,6 +69,8 @@ export function ContactForm({
 	});
 
 	useEffect(() => {
+		if (!subject) return;
+
 		setValue('subject', subject, {
 			shouldValidate: true,
 			shouldDirty: true,
@@ -74,20 +78,26 @@ export function ContactForm({
 	}, [subject, setValue]);
 
 	async function handleSendForm(formData: ContactFormSchema) {
-		if (data) {
-			const { data: emailData, error } = await sendEmail(
-				formData,
-				data.contact.email,
-			);
-			if (error) {
-				toast.warning('Não foi possível enviar a mensagem');
-				return false;
-			}
-			if (emailData?.id) {
-				toast.success('Mensagem enviada com sucesso');
-				reset();
-			}
+		if (!data?.contact?.email) {
+			toast.warning('Email de destino não está configurado.');
+			return false;
+		}
+
+		const { data: emailData, error } = await sendEmail(
+			formData,
+			data.contact.email,
+		);
+
+		if (error) {
+			toast.warning('Não foi possível enviar a mensagem');
+			return false;
+		}
+
+		if (emailData?.id) {
+			toast.success('Mensagem enviada com sucesso');
+			reset();
 			onClose();
+			return true;
 		}
 
 		toast.warning('Não foi possível enviar a mensagem');

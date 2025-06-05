@@ -9,8 +9,9 @@ const resend = new Resend(env.RESEND_API_KEY);
 
 export async function sendEmail(formData: ContactFormSchema, email: string) {
 	const { data, error } = await resend.emails.send({
-		from: `${formData.name} <${formData.email}>`,
+		from: `Contato ${email}`,
 		to: [email],
+		replyTo: formData.email,
 		subject: formData.subject,
 		react: EmailTemplate(formData),
 	});
