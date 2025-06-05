@@ -46,7 +46,7 @@ export function Testimonials() {
 							clickable: true,
 						}}
 						modules={[Pagination, A11y]}
-						className="flex flex-col md:flex-row w-full overflow-visible!"
+						className="flex flex-col md:flex-row w-full md:overflow-visible!"
 					>
 						{data?.map((testimonial, _index) => (
 							<SwiperSlide key={testimonial.id}>

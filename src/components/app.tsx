@@ -35,21 +35,11 @@ function Header({ className }: React.ComponentProps<'div'>) {
 	const [currentScrollY, setCurrentScrollY] = useState(0);
 	const containerRef = useRef<HTMLDivElement | null>(null);
 	const { height } = useDimensions(containerRef);
-	const { isMenuOpen, toggleMenu } = useApp();
+	const { isMenuOpen } = useApp();
 	const { scrollY } = useScroll();
 
 	const scrollYRange = [0, 100, 100];
 
-	const logoSizeHeight = useTransform(scrollY, scrollYRange, [
-		'60px',
-		'56px',
-		'56px',
-	]);
-	const logoSizeWidth = useTransform(scrollY, scrollYRange, [
-		'220px',
-		'174px',
-		'174px',
-	]);
 	const paddingHeaderY = useTransform(scrollY, scrollYRange, [
 		'1.2rem',
 		'1rem',
@@ -93,7 +83,7 @@ function Header({ className }: React.ComponentProps<'div'>) {
 	return (
 		<motion.header
 			className={cn(
-				'lg:fixed lg:z-90 lg:top-0 w-full backdrop-blur-md transition-colors duration-500 bg-transparent h-20',
+				'fixed z-90 top-0 w-full backdrop-blur-md transition-colors duration-500 bg-transparent h-20',
 				{
 					'bg-white/90 backdrop-blur-3xl shadow-2xl': currentScrollY > 80,
 					'backdrop-blur-none': currentScrollY < 80,
@@ -140,12 +130,16 @@ function Header({ className }: React.ComponentProps<'div'>) {
 }
 
 function Content({ className, children }: React.ComponentProps<'div'>) {
-	const { isContactDialogOpen } = useApp();
+	const { isContactDialogOpen, isMenuOpen } = useApp();
 
 	return (
 		<motion.main
 			className={cn(
-				'mt-4 lg:mt-36 container relative h-full flex items-center flex-col justify-center space-x-2',
+				'mt-24 lg:mt-36 container relative h-full flex items-center flex-col justify-center space-x-2',
+				{
+					'before:backdrop-blur-xl before:absolute before:w-full before:h-full before:bg-white/50 before:z-2':
+						isMenuOpen,
+				},
 				className,
 			)}
 		>
@@ -179,15 +173,7 @@ function Footer({ className }: React.ComponentProps<'div'>) {
 				/>
 			</div>
 			<div className="container flex flex-row gap-4 items-center justify-center w-full">
-				<div className="flex flex-row justify-center items-center gap-4">
-					{/* <Image
-						src="/assets/logo.png"
-						alt="Logo"
-						width="60"
-						height="60"
-						sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-						priority
-					/> */}
+				<div className="flex flex-col justify-center items-center gap-4">
 					<Logo
 						src={data?.logo && urlForImage(data.logo?.asset).url()}
 						showSlogan={false}
