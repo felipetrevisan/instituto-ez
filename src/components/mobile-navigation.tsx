@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils';
 import type { Navigation } from '@/types/site';
 import { motion } from 'framer-motion';
 import { Fragment } from 'react';
+import { MotionHighlight, MotionHighlightItem } from './animate-ui/effects/motion-highlight';
 import {
 	NavigationListItem,
 	NavigationMenu,
@@ -31,70 +32,32 @@ export const MobileNavigation = ({ navigation }: NavigationProps) => {
 			orientation="vertical"
 		>
 			<NavigationMenuList className="items-end">
-				{navigation?.items?.map(
-					({ id, hasSubmenu, label, url, submenu, columns }) => (
-						<Fragment key={`frag-${id}`}>
-							{hasSubmenu ? (
-								<MenuItemMotion
-									variants={menuItemVariants}
-									whileHover={{ scale: 1.1 }}
-									whileTap={{ scale: 0.95 }}
+				<MotionHighlight
+					controlledItems
+					hover
+					className="flex flex-col border-b-primary border-b-2 bg-transparent text-primary"
+					mode="parent"
+					containerClassName="flex flex-col justify-center items-center"
+				>
+					{navigation?.items?.map(({ id, label, url }) => (
+						<MenuItemMotion key={id} data-value={id}>
+							<MotionHighlightItem activeClassName="border-b-primary text-primary p-4">
+								<NavigationMenuLink
+									data-active={isMenuActive(url.link)}
+									href={
+										url.isHome || !url.link
+											? '/'
+											: (url.link ?? url.externalUrl)
+									}
+									target={!url.link && url.externalUrl ? '_blank' : undefined}
+									className="relative hover:after:w-full hover:after:animation-pulse hover:after:shadow-xl after:absolute after:w-0 after:bg-primary-foreground after:left-1/2 after:-bottom-1 after:h-[2px] after:rounded-xl after:-translate-x-1/2 after:transition-all"
 								>
-									<NavigationMenuTrigger>{label}</NavigationMenuTrigger>
-									<NavigationMenuContent>
-										<ul
-											className={cn(
-												'flex flex-col gap-3 p-4 w-full items-end',
-												{
-													'md:grid md:grid-cols-1 md:w-[400px] lg:w-[600px]':
-														columns === 1,
-													'md:grid md:grid-cols-2 md:w-[400px] lg:w-[600px]':
-														columns === 2,
-													'md:grid md:grid-cols-3 md:w-[400px] lg:w-[600px]':
-														columns === 3,
-												},
-											)}
-										>
-											{submenu?.map(({ id: submenuId, label, url }) => (
-												<NavigationListItem
-													title={label}
-													key={submenuId}
-													href={
-														url.isHome || !url.link
-															? '/'
-															: (url.link ?? url.externalUrl)
-													}
-													target={
-														!url.link && url.externalUrl ? '_blank' : undefined
-													}
-												/>
-											))}
-										</ul>
-									</NavigationMenuContent>
-								</MenuItemMotion>
-							) : (
-								<MenuItemMotion
-									variants={menuItemVariants}
-									whileHover={{ scale: 1.1 }}
-									whileTap={{ scale: 0.95 }}
-								>
-									<NavigationMenuLink
-										active={(url.link && isMenuActive(url.link)) || false}
-										href={
-											url.isHome || !url.link
-												? '/'
-												: (url.link ?? url.externalUrl)
-										}
-										target={!url.link && url.externalUrl ? '_blank' : undefined}
-										className="relative"
-									>
-										{label}
-									</NavigationMenuLink>
-								</MenuItemMotion>
-							)}
-						</Fragment>
-					),
-				)}
+									{label}
+								</NavigationMenuLink>
+							</MotionHighlightItem>
+						</MenuItemMotion>
+					))}
+				</MotionHighlight>
 			</NavigationMenuList>
 		</NavigationMenu>
 	);

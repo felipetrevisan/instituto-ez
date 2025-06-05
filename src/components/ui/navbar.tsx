@@ -5,14 +5,13 @@ import { type VariantProps, cva } from 'class-variance-authority';
 import {
 	type HTMLMotionProps,
 	type MotionValue,
-	type SVGMotionProps,
 	motion,
 } from 'framer-motion';
 
-const navbarVariants = cva('w-full h-auto sm:px-4 lg:p-2', {
+const navbarVariants = cva('w-full h-auto p-2', {
 	variants: {
 		sticky: {
-			true: 'lg:fixed lg:z-90 lg:top-0 lg:start-0',
+			true: 'fixed z-90 top-0 start-0',
 		},
 		rounded: {
 			none: 'rounded-none',
@@ -38,7 +37,6 @@ function Root({
 		<motion.div
 			className={cn(navbarVariants({ sticky, rounded, className }))}
 			initial={false}
-			// animate={isOpen ? "open" : "closed"}
 			{...props}
 		>
 			<div className="container mx-auto flex flex-wrap items-center justify-between">

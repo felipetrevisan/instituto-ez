@@ -22,7 +22,7 @@ function NavigationMenu({
 			data-slot="navigation-menu"
 			data-viewport={viewport}
 			className={cn(
-				'group/navigation-menu relative flex max-w-max flex-1 items-center justify-center',
+				'group/navigation-menu relative flex max-w-max flex-1 items-center justify-center h-screen lg:h-auto',
 				className,
 			)}
 			{...props}
@@ -63,7 +63,7 @@ function NavigationMenuItem({
 }
 
 const navigationMenuTriggerStyle = cva(
-	'group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium hover:bg-primary hover:text-primary focus:bg-primary focus:text-primary disabled:pointer-events-none disabled:opacity-50 data-[state=open]:hover:bg-primary data-[state=open]:text-primary data-[state=open]:focus:bg-primary data-[state=open]:bg-primary/50 focus-visible:ring-ring/50 outline-none transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1',
+	'group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-3xl lg:text-sm font-medium hover:bg-primary hover:text-primary focus:bg-primary focus:text-primary disabled:pointer-events-none disabled:opacity-50 data-[state=open]:hover:bg-primary data-[state=open]:text-primary data-[state=open]:focus:bg-primary data-[state=open]:bg-primary/50 focus-visible:ring-ring/50 outline-none transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1',
 );
 
 function NavigationMenuTrigger({
@@ -133,7 +133,7 @@ function NavigationMenuLink({
 		<NavigationMenuPrimitive.Link
 			data-slot="navigation-menu-link"
 			className={cn(
-				"text-primary hover:text-primary bg-transparent data-[active=true]:border-b-primary data-[active=true]:text-primary data-[active=true]:p-4 focus:bg-transparent focus:text-primary focus-visible:ring-ring/50 flex flex-col gap-1 rounded-xl p-4 text-sm transition-all outline-none focus-visible:ring-[3px] focus-visible:outline-1 [&_svg:not([class*='size-'])]:size-4",
+				"text-primary hover:text-primary bg-transparent data-[active=true]:border-b-primary data-[active=true]:text-primary data-[active=true]:p-4 focus:bg-transparent focus:text-primary focus-visible:ring-ring/50 flex flex-col lg:gap-1 rounded-xl p-4 text-xl lg:text-sm transition-all outline-none focus-visible:ring-[3px] focus-visible:outline-1 [&_svg:not([class*='size-'])]:size-4",
 				className,
 			)}
 			{...props}
