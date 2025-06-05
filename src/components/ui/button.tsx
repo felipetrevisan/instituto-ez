@@ -222,100 +222,99 @@ type ButtonProps = HTMLMotionProps<'button'> &
 		scale?: number;
 		transition?: Transition;
 		asChild?: boolean;
+		ref?: React.RefObject<HTMLButtonElement>;
 	};
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-	(
-		{
-			className,
-			onClick,
-			rippleClassName,
-			variant,
-			theme,
-			size,
-			rounded,
-			effect,
-			shadow,
-			fullWidth,
-			scale = 10,
-			transition = { duration: 0.6, ease: 'easeOut' },
-			asChild = false,
-			children,
-			...props
+function Button({
+	ref,
+	className,
+	onClick,
+	rippleClassName,
+	variant,
+	theme,
+	size,
+	rounded,
+	effect,
+	shadow,
+	fullWidth,
+	scale = 10,
+	transition = { duration: 0.6, ease: 'easeOut' },
+	asChild = false,
+	children,
+	...props
+}: ButtonProps) {
+	const Comp = asChild ? Slot : 'button';
+	const CompMotion = motion(Comp);
+	const [ripples, setRipples] = React.useState<Ripple[]>([]);
+
+	const localRef = React.useRef<HTMLButtonElement>(null);
+	React.useImperativeHandle(ref, () => localRef.current as HTMLButtonElement);
+
+	const createRipple = React.useCallback(
+		(event: React.MouseEvent<HTMLButtonElement>) => {
+			const rect = localRef.current?.getBoundingClientRect();
+			if (!rect) return;
+			const x = event.clientX - rect.left;
+			const y = event.clientY - rect.top;
+			const id = Date.now();
+			setRipples((prev) => [...prev, { id, x, y }]);
+			setTimeout(
+				() => setRipples((prev) => prev.filter((r) => r.id !== id)),
+				600,
+			);
 		},
-		ref,
-	) => {
-		const Comp = asChild ? Slot : 'button';
-		const CompMotion = motion(Comp);
-		const [ripples, setRipples] = React.useState<Ripple[]>([]);
-		const buttonRef = React.useRef<HTMLButtonElement>(null);
+		[],
+	);
+	const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+		createRipple(event);
 
-		React.useImperativeHandle(
-			ref,
-			() => buttonRef.current as HTMLButtonElement,
-		);
+		const isSubmitButton = (props.type ?? 'button') === 'submit';
 
-		const createRipple = React.useCallback(
-			(event: React.MouseEvent<HTMLButtonElement>) => {
-				const rect = buttonRef.current?.getBoundingClientRect();
-				if (!rect) return;
-				const x = event.clientX - rect.left;
-				const y = event.clientY - rect.top;
-				const id = Date.now();
-				setRipples((prev) => [...prev, { id, x, y }]);
-				setTimeout(
-					() => setRipples((prev) => prev.filter((r) => r.id !== id)),
-					600,
-				);
-			},
-			[],
-		);
+		if (isSubmitButton) {
+			// Deixa o submit rolar normalmente
+			onClick?.(event);
+		} else {
+			// Se for botão comum, aplica atraso se quiser
+			setTimeout(() => onClick?.(event), 600);
+		}
+	};
 
-		const handleClick = React.useCallback(
-			(event: React.MouseEvent<HTMLButtonElement>) => {
-				createRipple(event);
-				setTimeout(() => onClick?.(event), 600);
-			},
-			[createRipple, onClick],
-		);
-
-		return (
-			<CompMotion
-				ref={buttonRef}
-				data-slot="button"
-				whileHover={{ scale: 1.1 }}
-				whileTap={{ scale: 0.9 }}
-				transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-				animate={{ transition: { duration: 0.4, ease: 'easeInOut' } }}
-				className={cn(
-					buttonVariants({
-						variant,
-						theme,
-						size,
-						rounded,
-						effect,
-						shadow,
-						fullWidth,
-					}),
-					className,
-				)}
-				onClick={handleClick}
-				{...props}
-			>
-				{children}
-				{ripples.map((r) => (
-					<motion.span
-						key={r.id}
-						initial={{ scale: 0, opacity: 0.5 }}
-						animate={{ scale, opacity: 0 }}
-						transition={transition}
-						className={cn(rippleVariants({ variant, theme }), rippleClassName)}
-						style={{ top: r.y - 10, left: r.x - 10 }}
-					/>
-				))}
-			</CompMotion>
-		);
-	},
-);
+	return (
+		<CompMotion
+			ref={ref}
+			data-slot="button"
+			whileHover={{ scale: 1.1 }}
+			whileTap={{ scale: 0.9 }}
+			transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+			animate={{ transition: { duration: 0.4, ease: 'easeInOut' } }}
+			className={cn(
+				buttonVariants({
+					variant,
+					theme,
+					size,
+					rounded,
+					effect,
+					shadow,
+					fullWidth,
+				}),
+				className,
+			)}
+			onClick={handleClick}
+			{...props}
+		>
+			{children}
+			{ripples.map((r) => (
+				<motion.span
+					key={r.id}
+					initial={{ scale: 0, opacity: 0.5 }}
+					animate={{ scale, opacity: 0 }}
+					transition={transition}
+					className={cn(rippleVariants({ variant, theme }), rippleClassName)}
+					style={{ top: r.y - 10, left: r.x - 10 }}
+				/>
+			))}
+		</CompMotion>
+	);
+}
 
 export { Button, buttonVariants };
