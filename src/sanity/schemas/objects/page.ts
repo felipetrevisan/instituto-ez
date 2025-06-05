@@ -21,6 +21,13 @@ export default defineType({
 				Rule.required().warning('This field must not be empty.'),
 		}),
 		defineField({
+			name: 'hash',
+			title: 'Hash',
+			type: 'string',
+			validation: (Rule) =>
+				Rule.required().warning('This field must not be empty.'),
+		}),
+		defineField({
 			name: 'video',
 			title: 'Video URL',
 			type: 'url',

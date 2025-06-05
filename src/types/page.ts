@@ -11,6 +11,7 @@ export type Page = {
 
 export type Section = {
 	title: string;
+	hash: string;
 	content: PortableTextBlock[];
 	video: {
 		url: string;

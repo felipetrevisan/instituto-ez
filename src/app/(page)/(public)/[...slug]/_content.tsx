@@ -8,9 +8,9 @@ import { PortableText } from '@portabletext/react';
 import { Parallax } from 'react-parallax';
 import ReactPlayer from 'react-player/youtube';
 
-export function Content({ title, content, background, video }: Section) {
+export function Content({ hash, title, content, background, video }: Section) {
 	return (
-		<div className="flex flex-col gap-10">
+		<div className="flex flex-col gap-10" id={hash}>
 			<div className="relative w-screen h-full flex flex-col">
 				<div className="absolute top-0 left-0 w-full overflow-hidden z-10">
 					{/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
@@ -43,9 +43,9 @@ export function Content({ title, content, background, video }: Section) {
 				>
 					<div className="relative container flex h-full py-20 my-20">
 						<div className="flex flex-col gap-10 justify-center items-center font-bold font-oswald w-full text-white">
-							<App.Subtitle variant="white" className="absolute top-1">
+							{/* <App.Subtitle variant="white" className="absolute top-1">
 								{background.title}
-							</App.Subtitle>
+							</App.Subtitle> */}
 							<div className="overflow-hidden rounded-2xl shadow h-[300px] md:max-h-[500px] max-w-full md:h-[500px] w-[90vw] md:w-[60vw] mt-10">
 								<ReactPlayer
 									url={video.url}
