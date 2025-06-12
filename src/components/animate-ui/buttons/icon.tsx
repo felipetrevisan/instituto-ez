@@ -104,7 +104,7 @@ function IconButton({
 				)}
 			</AnimatePresence>
 
-			<AnimatePresence>
+			{/* <AnimatePresence>
 				{animate && active && (
 					<>
 						<motion.div
@@ -127,7 +127,7 @@ function IconButton({
 						))}
 					</>
 				)}
-			</AnimatePresence>
+			</AnimatePresence> */}
 		</motion.button>
 	);
 }
