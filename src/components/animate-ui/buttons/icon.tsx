@@ -5,7 +5,7 @@ import {
 	type HTMLMotionProps,
 	type Transition,
 	motion,
-} from 'motion/react';
+} from 'framer-motion';
 import type * as React from 'react';
 
 import { cn } from '@/lib/utils';
@@ -30,12 +30,12 @@ const animations = {
 	pulse: {
 		initial: { scale: 1.2, opacity: 0 },
 		animate: { scale: [1.2, 1.8, 1.2], opacity: [0, 0.3, 0] },
-		transition: { duration: 1.2, ease: [0.42, 0, 0.58, 1] }, // ✅ easeInOut bezier
+		transition: { duration: 1.2, ease: [0.42, 0, 0.58, 1] },
 	},
 	glow: {
 		initial: { scale: 1, opacity: 0 },
 		animate: { scale: [1, 1.5], opacity: [0.8, 0] },
-		transition: { duration: 0.8, ease: [0, 0, 0.58, 1] }, // ✅ easeOut bezier
+		transition: { duration: 0.8, ease: [0, 0, 0.58, 1] },
 	},
 	particle: (index: number) => ({
 		initial: { x: '50%', y: '50%', scale: 0, opacity: 0 },
@@ -45,7 +45,7 @@ const animations = {
 			scale: [0, 1, 0],
 			opacity: [0, 1, 0],
 		},
-		transition: { duration: 0.8, delay: index * 0.05, ease: [0, 0, 0.58, 1] }, // ✅
+		transition: { duration: 0.8, delay: index * 0.05, ease: [0, 0, 0.58, 1] },
 	}),
 };
 
