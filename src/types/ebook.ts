@@ -1,10 +1,11 @@
 import type { Button } from './global';
 import type { SanityAsset } from './sanityAssets';
 
-export type Service = {
+export type Ebook = {
 	id: string;
 	title: string;
-	image: SanityAsset;
+	subtitle?: string;
+	background?: SanityAsset;
 	disabled: boolean;
-	button: Button;
+	button?: Button;
 };

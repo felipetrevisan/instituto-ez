@@ -28,7 +28,9 @@ export const siteConfigQuery = groq`
     },
     "sections": sections_home[] {
       "key": key_section,
-      "show": show_section
+      "show": show_section,
+      "title": section_title,
+      "subtitle": section_subtitle
     },
     "primaryNavigation": main_nav-> {
       "items": items[] {
@@ -61,17 +63,24 @@ export const siteConfigQuery = groq`
         "icon": social_network_icon,
         
       }
+    },
+    "testimonialsConfig": {
+      "type": testimonials_type,
+      "theme": testimonials_theme,
+      "variant": testimonials_variant,
+      "rounded": testimonials_rounded,
     }
   }
 `;
 
 export const testimonialsQuery = groq`
-  *[ _type == 'testimonial' ] | order(orderRank) { 
+  *[ _type == 'testimonial' && category == $category ] | order(orderRank) { 
     "id": _id,
     "author": {
       "name": author_name,
     },
     testimonial,
+    category
   }
 `;
 
@@ -107,7 +116,6 @@ export const servicesQuery = groq`
   *[ _type == 'service' ] | order(orderRank) { 
     "id": _id,
     title,
-    description,
     "image": image {
       "asset": asset,
         "metadata": {
@@ -115,6 +123,7 @@ export const servicesQuery = groq`
         "dimensions": asset->metadata.dimensions
       }
     },
+    disabled,
     "button": button {
       "visible": show_button,
       "disabled": disable_button,
@@ -203,8 +212,8 @@ export const mathematizerQuery = groq`
   }
 `;
 
-export const trainingQuery = groq`
-  *[ _type == 'training' ] | order(orderRank) { 
+export const ebookQuery = groq`
+  *[ _type == 'ebook' ] | order(orderRank) { 
     "id": _id,
     title,
     subtitle,
@@ -214,6 +223,16 @@ export const trainingQuery = groq`
         "lqip": asset->metadata.lqip,
         "dimensions": asset->metadata.dimensions
       }
+    },
+    disabled,
+    "button": button {
+      "visible": show_button,
+      "disabled": disable_button,
+      "label": button_label,
+      "type": button_link_type,
+      "link": button_internal_link->slug.current,
+      "params": button_internal_params,
+      "externalUrl": button_external_url
     }
   }
 `;
@@ -223,6 +242,7 @@ export const workshopQuery = groq`
     "id": _id,
     title,
     subtitle,
+    disabled,
     "background": image {
       "asset": asset,
         "metadata": {

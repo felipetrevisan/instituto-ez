@@ -5,7 +5,7 @@ import { type HTMLMotionProps, type Transition, motion } from 'framer-motion';
 import * as React from 'react';
 
 const buttonVariants = cva(
-	'relative overflow-hidden inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive z-1 cursor-pointer',
+	'relative overflow-hidden inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive z-1 cursor-pointer',
 	{
 		variants: {
 			variant: {
@@ -42,6 +42,7 @@ const buttonVariants = cva(
 			},
 			effect: {
 				pulse: 'transition-all duration-75 hover:bg-position-[100%_0]',
+				none: 'transition-none'
 			},
 			fullWidth: {
 				true: 'w-full',
@@ -52,7 +53,7 @@ const buttonVariants = cva(
 			theme: 'default',
 			size: 'default',
 			rounded: 'none',
-			effect: null,
+			effect: 'none',
 			shadow: false,
 			fullWidth: false,
 		},
@@ -221,6 +222,7 @@ type ButtonProps = HTMLMotionProps<'button'> &
 		rippleClassName?: string;
 		scale?: number;
 		transition?: Transition;
+		scaleEffect?: boolean;
 		asChild?: boolean;
 		ref?: React.RefObject<HTMLButtonElement>;
 	};
@@ -239,6 +241,7 @@ function Button({
 	fullWidth,
 	scale = 10,
 	transition = { duration: 0.6, ease: 'easeOut' },
+	scaleEffect = true,
 	asChild = false,
 	children,
 	...props
@@ -283,8 +286,8 @@ function Button({
 		<CompMotion
 			ref={ref}
 			data-slot="button"
-			whileHover={{ scale: 1.1 }}
-			whileTap={{ scale: 0.9 }}
+			whileHover={{ scale: scaleEffect ? 1.1 : 1 }}
+			whileTap={{ scale: scaleEffect? 0.9: 1 }}
 			transition={{ type: 'spring', stiffness: 400, damping: 10 }}
 			animate={{ transition: { duration: 0.4, ease: 'easeInOut' } }}
 			className={cn(

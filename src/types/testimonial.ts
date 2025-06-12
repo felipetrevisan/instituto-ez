@@ -1,4 +1,5 @@
 import type { PortableTextBlock } from 'next-sanity';
+import type { TestimonialType } from './global';
 
 export type Testimonial = {
 	id: string;
@@ -6,4 +7,5 @@ export type Testimonial = {
 		name: string;
 	};
 	testimonial: PortableTextBlock[];
+	category: TestimonialType;
 };

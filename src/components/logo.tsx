@@ -33,7 +33,7 @@ export const Logo = ({
 				height={57}
 			/>
 			{showSlogan && (
-				<span className="flex flex-col justify-center">
+				<span className="flex flex-col justify-center md:hidden xl:flex">
 					<p className="font-oswald text-primary text-lg font-bold">
 						Instituto Ez
 					</p>
@@ -49,7 +49,7 @@ export const Logo = ({
 		<>
 			{linkable ? (
 				<motion.a
-					className="relative h-[3.56rem] w-56 flex space-x-2"
+					className="relative h-[3.56rem] w-56 md:w-auto flex space-x-2"
 					{...props}
 					href="/"
 				>

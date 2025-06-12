@@ -9,10 +9,20 @@ export default defineType({
 	fields: [
 		defineField({
 			name: 'key_section',
-			title: 'Key Section',
+			title: 'Section Key',
 			type: 'string',
 			validation: (Rule) =>
 				Rule.required().warning('This field must not be empty.'),
+		}),
+		defineField({
+			name: 'section_title',
+			title: 'Section Title',
+			type: 'string',
+		}),
+		defineField({
+			name: 'section_subtitle',
+			title: 'Section Subtitle',
+			type: 'string',
 		}),
 		defineField({
 			name: 'show_section',

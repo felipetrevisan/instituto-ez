@@ -10,9 +10,6 @@ export function Lectures() {
 
 	return (
 		<div className="flex flex-col gap-12 lg:gap-28">
-			<App.PageHeader>
-				<App.Title>Conheça nossas Palestras</App.Title>
-			</App.PageHeader>
 			{isLoading && (
 				<>
 					<Skeleton className="lg:absolute lg:left-0" />

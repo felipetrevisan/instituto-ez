@@ -8,9 +8,9 @@ import { PortableText } from '@portabletext/react';
 import { Parallax } from 'react-parallax';
 import ReactPlayer from 'react-player/youtube';
 
-export function Content({ hash, title, content, background, video }: Section) {
+export function Content({ title, content, background, video }: Section) {
 	return (
-		<div className="flex flex-col gap-10" id={hash}>
+		<div className="flex flex-col gap-10">
 			<div className="relative w-screen h-full flex flex-col">
 				<div className="absolute top-0 left-0 w-full overflow-hidden z-10">
 					{/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
@@ -41,12 +41,12 @@ export function Content({ hash, title, content, background, video }: Section) {
 					strength={-200}
 					className="w-full overflow-hidden"
 				>
-					<div className="relative container flex h-full py-20 my-20">
+					<div className="relative flex h-full md:py-20 my-20">
 						<div className="flex flex-col gap-10 justify-center items-center font-bold font-oswald w-full text-white">
 							{/* <App.Subtitle variant="white" className="absolute top-1">
 								{background.title}
 							</App.Subtitle> */}
-							<div className="overflow-hidden rounded-2xl shadow h-[300px] md:max-h-[500px] max-w-full md:h-[500px] w-[90vw] md:w-[60vw] mt-10">
+							<div className="overflow-hidden rounded-2xl shadow h-[300px] lg:h-[500px] md:max-h-[500px] max-w-full w-[90vw] md:w-[60vw] mt-10">
 								<ReactPlayer
 									url={video.url}
 									width="100%"
@@ -85,9 +85,9 @@ export function Content({ hash, title, content, background, video }: Section) {
 					</svg>
 				</div>
 			</div>
-			<div className="container flex flex-col gap-10 justify-center items-center">
+			<div className="container flex flex-col gap-10 justify-center items-center w-screen">
 				<App.Title className="text-center">{title}</App.Title>
-				<div className="flex flex-col gap-5 justify-center items-center w-full lg:max-w-[70%] text-justify py-10 lg:p-0 [&>*]:w-full">
+				<div className="flex flex-col gap-5 justify-center items-center w-full lg:max-w-[90vw] text-justify py-10 lg:p-0 [&>*:not(hr)]:w-full">
 					<PortableText value={content} components={portableComponents} />
 				</div>
 			</div>

@@ -24,11 +24,12 @@ const AlertComponent = ({ value }: { value: AlertType }) => {
 	const IconComponent = icon?.name ? Icons[icon.name] : null;
 
 	return (
-		<div className={cn('flex justify-center')}>
+		<div className={cn('flex justify-center relative')}>
 			<Alert variant={variant} theme={theme}>
-				{IconComponent && <IconComponent />}
-
-				<AlertTitle>{title}</AlertTitle>
+				<AlertTitle>
+					{IconComponent && <IconComponent size={20} />}
+					{title}
+				</AlertTitle>
 				<AlertDescription>{message}</AlertDescription>
 			</Alert>
 		</div>

@@ -1,4 +1,4 @@
-import type { LinkType } from './global';
+import type { BorderRounded, LinkType, Theme, Variant } from './global';
 import type { SanityAsset } from './sanityAssets';
 import type { Section } from './sections';
 
@@ -13,6 +13,12 @@ export type Site = {
 	logo?: SanityAsset;
 	primaryNavigation?: Navigation;
 	socialNavigation?: SocialNetwork;
+	testimonialsConfig: {
+		type: 'ANIMATED' | 'MINIMALIST';
+		theme: keyof typeof Theme;
+		variant: keyof typeof Variant;
+		rounded: keyof typeof BorderRounded;
+	}
 };
 
 export type Navigation = {

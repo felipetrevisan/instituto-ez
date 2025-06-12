@@ -1,6 +1,5 @@
 'use client';
 
-import * as App from '@/components/app';
 import { useServices } from '@/hooks/use-services';
 import { motion } from 'framer-motion';
 import { ServiceCard as Card } from './card';
@@ -11,9 +10,6 @@ export function Services() {
 
 	return (
 		<motion.div layout className="flex flex-col space-y-12 gap-10">
-			<App.PageHeader>
-				<App.Title>Atendimento Neurocognitivo Personalizado</App.Title>
-			</App.PageHeader>
 			<div className="flex flex-col md:flex-row justify-center items-center gap-16 h-full flex-wrap">
 				{isLoading && <Skeleton />}
 				{data?.map((item) => (

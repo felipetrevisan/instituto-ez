@@ -21,18 +21,17 @@ export default defineType({
 				Rule.required().warning('This field must not be empty.'),
 		}),
 		defineField({
-			name: 'description',
-			title: 'Description',
-			type: 'text',
-			validation: (Rule) =>
-				Rule.required().warning('This field must not be empty.'),
-		}),
-		defineField({
 			name: 'image',
 			title: 'Image',
 			type: 'image',
 			validation: (Rule) =>
 				Rule.required().warning('This field must not be empty.'),
+		}),
+		defineField({
+			name: 'disabled',
+			title: 'Disable?',
+			type: 'boolean',
+			initialValue: true,
 		}),
 		defineField({
 			name: 'button',

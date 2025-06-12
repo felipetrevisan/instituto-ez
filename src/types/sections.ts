@@ -3,6 +3,8 @@ import type { ReactNode } from 'react';
 export type Section = {
 	key: string;
 	show: boolean;
+	title?: string;
+	subtitle?: string;
 };
 
 export type SectionKeys = {

@@ -1,4 +1,3 @@
-import config from '@/config/editor';
 import {
 	orderRankField,
 	orderRankOrdering,
@@ -7,54 +6,44 @@ import { MdRequestQuote } from 'react-icons/md';
 import { defineField, defineType } from 'sanity';
 
 export default defineType({
-	name: 'testimonial',
-	title: 'Depoimentos',
+	name: 'ebook',
+	title: 'Ebooks',
 	icon: MdRequestQuote,
 	type: 'document',
 	orderings: [orderRankOrdering],
 	fields: [
-		orderRankField({ type: 'testimonial' }),
+		orderRankField({ type: 'ebook' }),
 		defineField({
-			name: 'author_name',
-			title: 'Author Name',
+			name: 'title',
+			title: 'Title',
 			type: 'string',
 			validation: (Rule) =>
 				Rule.required().warning('This field must not be empty.'),
 		}),
 		defineField({
-			name: 'testimonial',
-			title: 'Testimonial',
-			type: 'array',
-			of: config,
+			name: 'subtitle',
+			title: 'Subtitle',
+			type: 'string',
+		}),
+		defineField({
+			name: 'image',
+			title: 'Image',
+			type: 'image',
 			validation: (Rule) =>
 				Rule.required().warning('This field must not be empty.'),
 		}),
 		defineField({
-			name: 'category',
-			title: 'Category',
-			type: 'string',
-			initialValue: 'home',
-			options: {
-				list: [
-					{ title: 'Home', value: 'home' },
-					{ title: 'Pages', value: 'page' },
-				],
-				layout: 'dropdown',
-			},
+			name: 'disabled',
+			title: 'Disable?',
+			type: 'boolean',
+			initialValue: true,
+		}),
+		defineField({
+			name: 'button',
+			title: 'Button',
+			type: 'button',
 			validation: (Rule) =>
 				Rule.required().warning('This field must not be empty.'),
 		}),
 	],
-	preview: {
-		select: {
-			title: 'author_name',
-			subtitle: 'type',
-		},
-		prepare(selection) {
-			const { title } = selection;
-			return {
-				title,
-			};
-		},
-	},
 });

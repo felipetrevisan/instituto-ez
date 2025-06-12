@@ -71,8 +71,8 @@ const structure = (S: StructureBuilder, context: ConfigContext) =>
 								.title('Matematizador')
 								.child(S.documentTypeList('mathematizer')),
 							orderableDocumentListDeskItem({
-								type: 'training',
-								title: 'Treinamentos',
+								type: 'ebook',
+								title: 'Ebooks',
 								S,
 								context,
 							}),
@@ -107,7 +107,7 @@ const structure = (S: StructureBuilder, context: ConfigContext) =>
 						'immersion',
 						'lecture',
 						'mathematizer',
-						'training',
+						'ebook',
 						'testimonial',
 						'advanced-mentory',
 					].includes(listItem.getId() || ''),

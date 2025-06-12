@@ -28,6 +28,9 @@ const config = [
 	{
 		type: 'alert',
 	},
+	{
+		type: 'divider',
+	},
 ];
 
 export default config;

@@ -37,9 +37,9 @@ export function LectureCard({
 				className={cn(
 					'flex justify-center w-11/12 md:w-4/5 xl:w-1/2 z-10 bg-card/90 shadow-lg rounded-lg absolute top-24',
 					{
-						'translate-x-1/2 right-1/2 md:right-0 xl:translate-x-0 xl:right-80':
+						'translate-x-1/2 right-1/2 xl:translate-x-0 xl:right-80':
 							index % 2 === 0,
-						'-translate-x-1/2 left-1/2 md:left-0 xl:translate-x-0 xl:left-80':
+						'-translate-x-1/2 left-1/2 xl:translate-x-0 xl:left-80':
 							index % 2 !== 0,
 					},
 				)}

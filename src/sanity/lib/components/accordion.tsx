@@ -3,13 +3,18 @@ import {
 	AccordionContent,
 	AccordionItem,
 	AccordionTrigger,
+	type accordionVariants,
 } from '@/components/ui/accordion';
-import { AnimatePresence, motion } from 'framer-motion';
-import { useState } from 'react';
+import type { VariantProps } from 'class-variance-authority';
+
+type AccordionVariants = VariantProps<typeof accordionVariants>;
 
 type AccordionType = {
 	_key: string;
 	content: AccordionContentType[];
+	theme: AccordionVariants['theme'];
+	rounded: AccordionVariants['rounded'];
+	size: AccordionVariants['size'];
 };
 
 type AccordionContentType = {
@@ -20,7 +25,14 @@ type AccordionContentType = {
 
 const AccordionComponent = ({ value }: { value: AccordionType }) => {
 	return (
-		<Accordion type="single" collapsible className="flex flex-col">
+		<Accordion
+			type="single"
+			collapsible
+			className="flex flex-col"
+			theme={value.theme}
+			rounded={value.rounded}
+			size={value.size}
+		>
 			{value.content.map(({ _key, title, content }) => (
 				<AccordionItem key={_key} value={_key}>
 					<AccordionTrigger>

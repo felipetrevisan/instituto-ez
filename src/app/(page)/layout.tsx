@@ -51,7 +51,7 @@ export default function RootLayout({
 			className={`${inter.variable} ${oswald.variable} ${questrial.variable}`}
 			suppressHydrationWarning
 		>
-			<body className="antialiased overflow-x-hidden">
+			<body className="antialiased overflow-x-hidden flex flex-col h-full">
 				<Providers>{children}</Providers>
 				<SpeedInsights />
 			</body>

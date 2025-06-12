@@ -1,64 +1,61 @@
 'use client';
 
-import * as App from '@/components/app';
 import { useTestimonials } from '@/hooks/use-testimonials';
 import { useState } from 'react';
-import { A11y, Pagination } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { TestimonialCard } from './card';
 import { Skeleton } from './skeleton';
 
 import './styles.css';
-import 'swiper/css';
-import 'swiper/css/pagination';
+
+import { TestimonialAnimated } from '@/components/testimonals/animated';
+import { TestimonialMinimalist } from '@/components/testimonals/minimalist';
+import {
+	Carousel,
+	CarouselContent,
+	CarouselDots,
+	CarouselItem,
+} from '@/components/ui/carousel';
+import { useSite } from '@/hooks/use-site';
+import { BorderRounded, TestimonialType, Theme, Variant } from '@/types/global';
+import ClassNames from 'embla-carousel-class-names';
 
 export function Testimonials() {
-	const { data, isLoading } = useTestimonials();
+	const { data: site } = useSite();
+	const { data, isLoading } = useTestimonials(TestimonialType.HOME);
 	const [hoveredIndex, setHoveredIndex] = useState<string | null>(null);
+
+	const { type, theme, variant, rounded } = { type: 'MINIMALIST', theme: Theme.tertiary, variant: Variant.outline, rounded: BorderRounded['2xl'] };
+
+	const TestimonialRender =
+		type === 'MINIMALIST'
+			? TestimonialMinimalist
+			: TestimonialAnimated;
 
 	return (
 		<div className="flex flex-col w-full h-full space-y-14">
-			<App.PageHeader>
-				<App.Title>Depoimentos</App.Title>
-			</App.PageHeader>
 			<div className="flex flex-col justify-center">
 				{isLoading && <Skeleton />}
 				{!isLoading && (
-					<Swiper
-						grabCursor
-						breakpoints={{
-							640: {
-								slidesPerView: 1,
-							},
-							768: {
-								slidesPerView: 1,
-							},
-							1024: {
-								slidesPerView: 2,
-							},
-							1280: {
-								slidesPerView: 2,
-							},
-						}}
-						slidesPerView={1}
-						spaceBetween={40}
-						pagination={{
-							clickable: true,
-						}}
-						modules={[Pagination, A11y]}
-						className="flex flex-col md:flex-row w-full md:overflow-visible!"
-					>
-						{data?.map((testimonial, _index) => (
-							<SwiperSlide key={testimonial.id}>
-								<TestimonialCard
-									key={`testimonial_${testimonial.id}`}
-									item={testimonial}
-									hoveredIndex={hoveredIndex}
-									setHoveredIndex={setHoveredIndex}
-								/>
-							</SwiperSlide>
-						))}
-					</Swiper>
+					<Carousel plugins={[ClassNames()]} className="md:overflow-visible">
+						<CarouselContent rootClassName="md:overflow-visible!">
+							{data?.map((testimonial, _index) => (
+								<CarouselItem
+									key={testimonial.id}
+									className="basis-full md:basis-1/2 lg:basis-1/2 xl:basis-1/2"
+								>
+									<TestimonialRender
+										key={`testimonial_${testimonial.id}`}
+										item={testimonial}
+										hoveredIndex={hoveredIndex}
+										setHoveredIndex={setHoveredIndex}
+										theme={theme}
+										variant={variant}
+										rounded={rounded}
+									/>
+								</CarouselItem>
+							))}
+						</CarouselContent>
+						<CarouselDots className="mt-10" />
+					</Carousel>
 				)}
 			</div>
 		</div>

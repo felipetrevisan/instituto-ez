@@ -1,6 +1,6 @@
 'use client';
 
-// import { Toaster } from '@/components/ui/toaster';
+import { Toaster } from '@/components/ui/sonner';
 import { AppProvider } from '@/hooks/use-app';
 import { Bar } from '@bprogress/next';
 import { ProgressProvider } from '@bprogress/next/app';
@@ -31,7 +31,7 @@ export default function Providers({ children }: { children: ReactNode }) {
 						{children}
 					</AppProvider>
 					<ReactQueryDevtools initialIsOpen={false} />
-					{/* <Toaster /> */}
+					<Toaster />
 				</QueryClientProvider>
 			</ProgressProvider>
 		</ThemeProvider>

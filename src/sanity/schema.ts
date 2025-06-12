@@ -1,12 +1,12 @@
 import type { SchemaTypeDefinition } from 'sanity';
 
 import advancedMentory from './schemas/advanced-mentory';
+import ebook from './schemas/ebooks';
 import immersion from './schemas/immersion';
 import lecture from './schemas/lecture';
 import mathematizer from './schemas/mathematizer';
 import services from './schemas/services';
 import testimonial from './schemas/testimonials';
-import training from './schemas/training';
 import workshop from './schemas/workshops';
 
 import banner from './schemas/banner';
@@ -25,18 +25,21 @@ import ribbon from './schemas/objects/ribbon';
 import section from './schemas/objects/section';
 import socialNetworksItem from './schemas/objects/social-networks-item';
 
-import accordion from './schemas/objects/editor/accordion';
-import accordionContent from './schemas/objects/editor/accordion-content';
-import alert from './schemas/objects/editor/alert';
-import buttonLink from './schemas/objects/editor/button';
-import title from './schemas/objects/editor/title';
+import accordionWidget from './schemas/objects/editor/accordion';
+import accordionContentWidget from './schemas/objects/editor/accordion-content';
+import alertWidget from './schemas/objects/editor/alert';
+import buttonLinkWidget from './schemas/objects/editor/button';
+import dividerWidget from './schemas/objects/editor/divider';
+import eventWidget from './schemas/objects/editor/event';
+import testimonialWidget from './schemas/objects/editor/testimonial';
+import titleWidget from './schemas/objects/editor/title';
 
 export const schema: { types: SchemaTypeDefinition[] } = {
 	types: [
 		settings,
 		testimonial,
 		workshop,
-		training,
+		ebook,
 		services,
 		immersion,
 		advancedMentory,
@@ -57,10 +60,13 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 		aboutCard,
 		section,
 
-		buttonLink,
-		title,
-		accordion,
-		accordionContent,
-		alert
+		buttonLinkWidget,
+		titleWidget,
+		accordionWidget,
+		accordionContentWidget,
+		alertWidget,
+		dividerWidget,
+		eventWidget,
+		testimonialWidget
 	],
 };

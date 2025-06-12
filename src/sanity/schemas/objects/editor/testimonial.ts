@@ -1,14 +1,27 @@
-import { MenuIcon } from '@sanity/icons';
-import { FaQuestion } from 'react-icons/fa';
+import { TextIcon } from '@sanity/icons';
 import { defineType } from 'sanity';
 
 export default defineType({
-	name: 'accordion',
+	name: 'testimonialWidget',
 	type: 'object',
-	title: 'Accordion',
-	icon: MenuIcon,
+	title: 'Testimonial',
+	icon: TextIcon,
 	fields: [
-				{
+		{
+			name: 'variant',
+			title: 'Variant',
+			type: 'string',
+			initialValue: 'default',
+			options: {
+				list: [
+					{ title: 'Default', value: 'default' },
+					{ title: 'Outline', value: 'outline' },
+					{ title: 'Ghost', value: 'ghost' },
+				],
+				layout: 'dropdown',
+			},
+		},
+		{
 			name: 'theme',
 			title: 'Theme',
 			type: 'string',
@@ -39,41 +52,29 @@ export default defineType({
 			},
 		},
 		{
-			name: 'size',
-			title: 'Size',
+			name: 'type',
+			title: 'Type',
 			type: 'string',
-			initialValue: 'sm',
+			initialValue: 'ANIMATED',
 			options: {
 				list: [
-					{ title: 'Default', value: 'default' },
-					{ title: 'Small', value: 'sm' },
-					{ title: 'Large', value: 'lg' },
-					{ title: 'Extra Large', value: 'xl' },
+					{ title: 'Animated', value: 'ANIMATED' },
+					{ title: 'Minimalist', value: 'Minimalist' },
 				],
 				layout: 'dropdown',
 			},
 		},
-		{
-			name: 'content',
-			title: 'Content',
-			type: 'array',
-			of: [{ type: 'accordion-content' }],
-			validation: (Rule) =>
-				Rule.required().warning('Must have at least one content.'),
-		},
 	],
 	preview: {
 		select: {
-			title: 'content.0.title',
 			theme: 'theme',
-			size: 'size',
-			rounded: 'rounded',
+			variant: 'variant',
+			type: 'type',
 		},
-		prepare({ title, theme, size, rounded }) {
+		prepare({ theme, variant, type }) {
 			return {
-				title: `Accordion -> ${title}`,
-				subtitle: `Tema: ${theme || 'default'} -> Size: ${size} -> Rounded: ${rounded}`,
-				media: FaQuestion,
+				title: `Variante: ${variant || 'default'} → Tema: ${theme || 'default'} → ${type}`,
+
 			};
 		},
 	},

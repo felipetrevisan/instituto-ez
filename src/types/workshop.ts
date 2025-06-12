@@ -6,5 +6,6 @@ export type Workshop = {
 	title: string;
 	subtitle?: string;
 	background: SanityAsset;
+	disabled: boolean;
 	button: Button;
 };

@@ -8,17 +8,17 @@ const alertVariants = cva(
 	{
 		variants: {
 			variant: {
-				default: 'shadow-lg outline outline-1',
-				outline: 'shadow-lg outline outline-1',
+				default: 'shadow-[0_0_15px_3px] outline outline-1',
+				outline: 'shadow-[0_0_15px_3px] outline outline-1',
 				ghost: 'shadow-none outline-none border-none',
 			},
 			theme: {
 				default:
-					'bg-primary/20 text-primary-foreground outline-primary border-primary/20 *:data-[slot=alert-title]:text-primary *:data-[slot=alert-title]:text-lg [&>svg]:text-current *:data-[slot=alert-description]:text-primary',
+					'shadow-primary/20 bg-primary/20 text-primary-foreground outline-primary border-primary/20 *:data-[slot=alert-title]:text-primary *:data-[slot=alert-title]:text-lg [&>svg]:fill-primary *:data-[slot=alert-description]:text-primary',
 				secondary:
-					'bg-secondary/20 text-secondary-foreground outline-secondary border-secondary/20 *:data-[slot=alert-title]:text-secondary *:data-[slot=alert-title]:text-lg [&>svg]:text-current *:data-[slot=alert-description]:text-secondary',
+					'shadow-secondary/20 bg-secondary/20 text-secondary-foreground outline-secondary border-secondary/20 *:data-[slot=alert-title]:text-secondary *:data-[slot=alert-title]:text-lg [&>svg]:fill-secondary *:data-[slot=alert-description]:text-secondary',
 				tertiary:
-					'bg-tertiary/20 text-tertiary-foreground outline-tertiary border-tertiary/20 *:data-[slot=alert-title]:text-tertiary *:data-[slot=alert-title]:text-lg [&>svg]:text-current *:data-[slot=alert-description]:text-tertiary',
+					'shadow-tertiary/20 bg-tertiary/20 text-tertiary-foreground outline-tertiary border-tertiary/20 *:data-[slot=alert-title]:text-tertiary *:data-[slot=alert-title]:text-lg [&>svg]:fill-tertiary *:data-[slot=alert-description]:text-tertiary',
 			},
 		},
 		defaultVariants: {
@@ -49,7 +49,7 @@ function AlertTitle({ className, ...props }: React.ComponentProps<'div'>) {
 		<div
 			data-slot="alert-title"
 			className={cn(
-				'col-start-2 line-clamp-1 min-h-4 font-medium tracking-tight mb-4',
+				'col-start-2 line-clamp-1 min-h-4 font-medium tracking-tight mb-4 flex items-center gap-2',
 				className,
 			)}
 			{...props}

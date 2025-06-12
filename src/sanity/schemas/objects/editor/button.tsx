@@ -39,7 +39,7 @@ export default defineType({
 		},
 		{
 			name: 'rounded',
-			title: 'Rounded',
+			title: 'Border Rounded',
 			type: 'string',
 			initialValue: 'full',
 			options: {
@@ -57,7 +57,7 @@ export default defineType({
 			name: 'size',
 			title: 'Size',
 			type: 'string',
-			initialValue: 'small',
+			initialValue: 'sm',
 			options: {
 				list: [
 					{ title: 'Default', value: 'default' },

@@ -46,7 +46,7 @@ export function AdvancedMentory() {
 				<Parallax
 					bgImage={urlForImage(data?.background.asset).url()}
 					strength={-200}
-					className="flex justify-center xl:w-3/4 w-[calc(100vw-10%)] xl:h-[400px] h-[300px] overflow-hidden rounded-lg"
+					className="flex justify-center xl:w-3/4 w-[calc(100vw-10%)] xl:h-[400px] h-[300px] max-h-[300px] xl:max-h-[400px] overflow-hidden rounded-lg"
 				/>
 				<div className="flex justify-center xl:w-3/5 w-[calc(100vw-20%)] h-full -m-40 mb-4 z-10 bg-white/90 backdrop-blur-lg rounded-lg">
 					<div className="flex flex-col justify-start items-center w-full text-secondary p-10 gap-10 overflow-hidden relative">

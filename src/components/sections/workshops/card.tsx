@@ -14,27 +14,30 @@ type Props = {
 const MotionCard = motion(Card);
 
 export function WorkshopCard({
-	item: { background, title, subtitle, button },
+	item: { background, title, subtitle, button, disabled },
 	className,
 }: Props) {
 	const backgroundClass = background
 		? `url('${urlForImage(background.asset)}')`
 		: 'transparent';
 
-	const link = getLink(button);
+	const link = !disabled ? getLink(button) : false;
 
 	const CardRender = () => (
 		<MotionCard
 			variant="ghost"
 			className={cn(
 				'flex items-end justify-center shrink md:shrink-0 rounded-xl bg-card w-[70vw] md:w-160 lg:w-80 h-96 relative bg-cover! shadow-2xl',
+				{
+					'grayscale-100 opacity-80 select-none pointer-events-none': disabled,
+				},
 				className,
 			)}
 			style={{
 				background: backgroundClass,
 			}}
-			whileHover={{ scale: 1.1 }}
-			whileTap={{ scale: 0.9 }}
+			whileHover={{ scale: disabled ? 1 : 1.1 }}
+			whileTap={{ scale: disabled ? 1 : 0.9 }}
 			transition={{ type: 'spring', stiffness: 400, damping: 10 }}
 			animate={{
 				transition: { duration: 0.4, ease: 'easeInOut' },

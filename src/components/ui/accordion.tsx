@@ -2,6 +2,7 @@
 
 import { cn } from '@/lib/utils';
 import * as AccordionPrimitive from '@radix-ui/react-accordion';
+import { type VariantProps, cva } from 'class-variance-authority';
 import {
 	AnimatePresence,
 	type HTMLMotionProps,
@@ -10,6 +11,39 @@ import {
 } from 'framer-motion';
 import { ChevronDownIcon } from 'lucide-react';
 import * as React from 'react';
+
+const accordionVariants = cva('relative', {
+	variants: {
+		theme: {
+			default:
+				'**:data-[slot=accordion-trigger]:text-primary **:data-[slot=accordion-item]:border-primary **:data-[slot=accordion-content]:text-primary **:data-[slot=accordion-trigger]:hover:bg-primary/10',
+			secondary:
+				'**:data-[slot=accordion-trigger]:text-secondary **:data-[slot=accordion-item]:border-secondary  **:data-[slot=accordion-content]:text-secondary **:data-[slot=accordion-trigger]:hover:bg-secondary/10',
+			tertiary:
+				'**:data-[slot=accordion-trigger]:text-tertiary **:data-[slot=accordion-item]:border-tertiary **:data-[slot=accordion-content]:text-tertiary **:data-[slot=accordion-trigger]:hover:bg-tertiary/10',
+		},
+		rounded: {
+			none: '**:data-[slot=accordion-item]:rounded-none **:data-[slot=accordion-trigger]:rounded-none',
+			full: '**:data-[slot=accordion-item]:rounded-full **:data-[slot=accordion-trigger]:rounded-full',
+			lg: '**:data-[slot=accordion-item]:rounded-lg **:data-[slot=accordion-trigger]:rounded-lg',
+			xl: '**:data-[slot=accordion-item]:rounded-2xl **:data-[slot=accordion-trigger]:rounded-2xl',
+			'2xl':
+				'**:data-[slot=accordion-item]:rounded-3xl **:data-[slot=accordion-trigger]:rounded-3xl',
+		},
+		size: {
+			default:
+				'**:data-[slot=accordion-trigger]:clamp-[text,base,lg] [**:data-[slot=accordion-content]>div]:clamp-[text,base,lg]',
+			sm: '**:data-[slot=accordion-trigger]:clamp-[text,sm,base] [**:data-[slot=accordion-content]>div]:clamp-[text,sm,base]',
+			lg: '**:data-[slot=accordion-trigger]:clamp-[text,lg,xl] [**:data-[slot=accordion-content]>div]:clamp-[text,lg,xl]',
+			xl: '**:data-[slot=accordion-trigger]:clamp-[text,xl,2xl] [**:data-[slot=accordion-content]>div]:clamp-[text,xl,2xl]',
+		},
+	},
+	defaultVariants: {
+		theme: 'default',
+		rounded: 'none',
+		size: 'default',
+	},
+});
 
 type AccordionItemContextType = {
 	isOpen: boolean;
@@ -27,10 +61,23 @@ const useAccordionItem = (): AccordionItemContextType => {
 	return context;
 };
 
-type AccordionProps = React.ComponentProps<typeof AccordionPrimitive.Root>;
+type AccordionProps = React.ComponentProps<typeof AccordionPrimitive.Root> &
+	VariantProps<typeof accordionVariants>;
 
-function Accordion({ ...props }: AccordionProps) {
-	return <AccordionPrimitive.Root data-slot="accordion" {...props} />;
+function Accordion({
+	theme,
+	rounded,
+	size,
+	className,
+	...props
+}: AccordionProps) {
+	return (
+		<AccordionPrimitive.Root
+			data-slot="accordion"
+			{...props}
+			className={cn(accordionVariants({ theme, rounded, size }), className)}
+		/>
+	);
 }
 
 type AccordionItemProps = React.ComponentProps<
@@ -47,7 +94,7 @@ function AccordionItem({ children, className, ...props }: AccordionItemProps) {
 			<AccordionPrimitive.Item
 				data-slot="accordion-item"
 				className={cn(
-					'border border-secondary relative backdrop-blur-md bg-transparent/60 mb-3 shadow-xl rounded-3xl',
+					'border relative backdrop-blur-md mb-3 shadow-xl',
 					className,
 				)}
 				{...props}
@@ -116,7 +163,7 @@ const AccordionTrigger = React.forwardRef<
 					ref={triggerRef}
 					data-slot="accordion-trigger"
 					className={cn(
-						'focus-visible:border-ring focus-visible:ring-ring/50 flex flex-1 items-start justify-between gap-4 hover:bg-secondary/10 rounded-3xl px-4 py-5 text-left text-md font-semibold transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&[data-state=open]>svg]:rotate-180',
+						'focus-visible:border-ring focus-visible:ring-ring/50 flex flex-1 items-start justify-between gap-4 px-4 py-5 text-left text-md font-semibold transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&[data-state=open]>svg]:rotate-180',
 						className,
 					)}
 					{...props}
@@ -137,22 +184,6 @@ const AccordionTrigger = React.forwardRef<
 		);
 	},
 );
-
-// function AccordionContent({
-// 	className,
-// 	children,
-// 	...props
-// }: React.ComponentProps<typeof AccordionPrimitive.Content>) {
-// 	return (
-// 		<AccordionPrimitive.Content
-// 			data-slot="accordion-content"
-// 			className="data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden text-sm"
-// 			{...props}
-// 		>
-// 			<div className={cn('pt-0 pb-4', className)}>{children}</div>
-// 		</AccordionPrimitive.Content>
-// 	);
-// }
 
 type AccordionContentProps = React.ComponentProps<
 	typeof AccordionPrimitive.Content
@@ -189,7 +220,7 @@ function AccordionContent({
 						className="overflow-hidden"
 						{...props}
 					>
-						<div className={cn('pb-4 pt-0 text-sm', className)}>{children}</div>
+						<div className={cn('pb-4 pt-0', className)}>{children}</div>
 					</motion.div>
 				</AccordionPrimitive.Content>
 			)}
@@ -208,4 +239,5 @@ export {
 	type AccordionItemProps,
 	type AccordionTriggerProps,
 	type AccordionContentProps,
+	accordionVariants,
 };

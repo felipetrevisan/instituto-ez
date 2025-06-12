@@ -1,12 +1,12 @@
 import { About } from '@/components/sections/about';
 import { AdvancedMentory } from '@/components/sections/advancedMentory';
 import { Banner } from '@/components/sections/banner';
+import { Ebooks } from '@/components/sections/ebooks';
 import { Immersion } from '@/components/sections/immersion';
 import { Lectures } from '@/components/sections/lectures';
 import { Mathematizer } from '@/components/sections/mathematizer';
 import { Services } from '@/components/sections/services';
 import { Testimonials } from '@/components/sections/testimonials';
-import { Training } from '@/components/sections/training';
 import { Workshops } from '@/components/sections/workshops';
 import type { SectionKeys } from '@/types/sections';
 
@@ -26,12 +26,12 @@ export function getSections(): SectionKeys[] {
 		{
 			key: 'service',
 			component: <Services />,
-			classes: 'section relative flex w-full justify-center bg-white',
+			classes: 'section relative flex flex-col gap-10 w-full justify-center bg-white',
 		},
 		{
 			key: 'testimonial',
 			component: <Testimonials />,
-			classes: 'section relative flex w-full justify-center bg-white me-10',
+			classes: 'section relative flex flex-col gap-10 w-full justify-center bg-white',
 		},
 		{
 			key: 'immersion',
@@ -41,12 +41,12 @@ export function getSections(): SectionKeys[] {
 		{
 			key: 'lecture',
 			component: <Lectures />,
-			classes: 'section relative flex flex-col w-screen h-full justify-center',
+			classes: 'section relative flex flex-col gap-10 w-screen h-full justify-center',
 		},
 		{
 			key: 'workshop',
 			component: <Workshops />,
-			classes: 'section relative flex h-full justify-center bg-white',
+			classes: 'section relative flex flex-col gap-10 h-full justify-center bg-white',
 		},
 		{
 			key: 'advanced-mentory',
@@ -54,19 +54,14 @@ export function getSections(): SectionKeys[] {
 			classes: 'section relative flex flex-col w-screen h-full justify-center',
 		},
 		{
-			key: 'lecture',
-			component: <Lectures />,
-			classes: 'section relative flex flex-col w-screen h-full justify-center',
-		},
-		{
 			key: 'mathematizer',
 			component: <Mathematizer />,
-			classes: 'section relative flex flex-col w-screen h-full justify-center',
+			classes: 'section relative flex flex-col gap-10 w-screen h-full justify-center',
 		},
 		{
-			key: 'training',
-			component: <Training />,
-			classes: 'section relative flex h-full justify-center bg-white',
+			key: 'ebooks',
+			component: <Ebooks />,
+			classes: 'section relative flex flex-col gap-10 h-full justify-center bg-white',
 		},
 	];
 }

@@ -2,11 +2,7 @@ import { useApp } from '@/hooks/use-app';
 import { cn } from '@/lib/utils';
 import { Slot } from '@radix-ui/react-slot';
 import { type VariantProps, cva } from 'class-variance-authority';
-import {
-	type HTMLMotionProps,
-	type MotionValue,
-	motion,
-} from 'framer-motion';
+import { type HTMLMotionProps, type MotionValue, motion } from 'framer-motion';
 
 const navbarVariants = cva('w-full h-auto p-2', {
 	variants: {
@@ -39,7 +35,7 @@ function Root({
 			initial={false}
 			{...props}
 		>
-			<div className="container mx-auto flex flex-wrap items-center justify-between">
+			<div className="lg:container mx-auto flex flex-wrap items-center justify-between">
 				{children}
 			</div>
 		</motion.div>
@@ -54,7 +50,7 @@ function Brand({
 	const Comp = asChild ? Slot : 'div';
 
 	return (
-		<Comp className={cn('flex items-center space-x-3', className)} {...props} />
+		<Comp className={cn('flex items-center', className)} {...props} />
 	);
 }
 

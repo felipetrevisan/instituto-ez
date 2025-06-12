@@ -33,6 +33,12 @@ export default defineType({
 				Rule.required().warning('This field must not be empty.'),
 		}),
 		defineField({
+			name: 'disabled',
+			title: 'Disable?',
+			type: 'boolean',
+			initialValue: true,
+		}),
+		defineField({
 			name: 'button',
 			title: 'Button',
 			type: 'button',

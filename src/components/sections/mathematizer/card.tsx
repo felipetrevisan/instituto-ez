@@ -19,11 +19,11 @@ export function MathematizerCard({
 	index,
 }: Props) {
 	const link = getLink(button);
-	
+
 	return (
 		<div
 			className={cn(
-				'relative flex justify-between w-full h-full min-h-[700px] lg:min-h-[500px]',
+				'relative flex justify-between w-full h-full min-h-[700px] lg:min-h-[500px] [&:not(:last-child)]:mb-10 [&:last-child]:mb-10',
 				{
 					'flex-row-reverse': index % 2 !== 0,
 				},
@@ -31,15 +31,15 @@ export function MathematizerCard({
 		>
 			<Parallax
 				bgImage={urlForImage(background.asset).url()}
-				className="flex justify-center w-full lg:w-2/3 h-[362px] overflow-hidden rounded-r-lg"
+				className="flex justify-center w-full xl:w-2/3 h-[362px] overflow-hidden rounded-r-lg"
 			/>
 			<div
 				className={cn(
-					'flex justify-center w-11/12 lg:w-1/2 z-10 bg-card/90 shadow-lg rounded-lg absolute top-24',
+					'flex justify-center w-11/12 xl:w-1/2 z-10 bg-card/90 shadow-lg rounded-lg absolute top-24',
 					{
-						'translate-x-1/2 right-1/2 lg:translate-x-0 lg:right-80':
+						'translate-x-1/2 right-1/2 xl:translate-x-0 xl:right-80':
 							index % 2 === 0,
-						'-translate-x-1/2 left-1/2 lg:translate-x-0 lg:left-80':
+						'-translate-x-1/2 left-1/2 xl:translate-x-0 xl:left-80':
 							index % 2 !== 0,
 					},
 				)}
