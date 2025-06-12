@@ -115,6 +115,7 @@ function Header({ className }: React.ComponentProps<'div'>) {
 							variants={sidebarVariants}
 							initial="closed"
 							animate={isMenuOpen ? 'open' : 'closed'}
+							custom={height}
 						>
 							<MotionMobileNavigation
 								navigation={data?.primaryNavigation}

@@ -92,7 +92,7 @@ export const sidebarVariants = {
 	open: (height = 1000) => ({
 		clipPath: `circle(${height * 2 + 200}px at 85% 45px)`,
 		transition: {
-			type: 'spring',
+			type: 'spring' as const,
 			stiffness: 20,
 			restDelta: 2,
 		},
@@ -101,7 +101,7 @@ export const sidebarVariants = {
 		clipPath: 'circle(30px at 85% 45px)',
 		transition: {
 			delay: 0.5,
-			type: 'spring',
+			type: 'spring' as const,
 			stiffness: 400,
 			damping: 40,
 		},
