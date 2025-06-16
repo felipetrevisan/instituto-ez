@@ -1,4 +1,5 @@
 import { getSiteConfig } from '@/server/get-site-config';
+import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata } from 'next';
 import { Inter, Oswald, Questrial } from 'next/font/google';
@@ -36,7 +37,7 @@ export async function generateMetadata(): Promise<Metadata> {
 			default: title,
 		},
 		description,
-		keywords
+		keywords,
 	};
 }
 
@@ -54,6 +55,7 @@ export default function RootLayout({
 			<body className="antialiased overflow-x-hidden flex flex-col h-full">
 				<Providers>{children}</Providers>
 				<SpeedInsights />
+				<Analytics />
 			</body>
 		</html>
 	);
