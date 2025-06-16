@@ -1,12 +1,46 @@
-import { TextIcon } from '@sanity/icons';
+import { CommentIcon } from '@sanity/icons';
 import { defineType } from 'sanity';
 
 export default defineType({
 	name: 'testimonialWidget',
 	type: 'object',
 	title: 'Testimonial',
-	icon: TextIcon,
+	icon: CommentIcon,
 	fields: [
+		// {
+		// 	name: 'testimonials',
+		// 	title: 'Testimonials',
+		// 	type: 'reference',
+		// 	to: [{ type: 'testimonial' }],
+		// 	options: {
+		// 		filter: ({ document }) => {
+		// 			const selectedCategory = document?.category || 'service';
+		// 			return {
+		// 				filter: 'categories[] == $category',
+		// 				params: { category: selectedCategory },
+		// 			};
+		// 		},
+		// 	},
+		// },
+		{
+			name: 'category',
+			title: 'Category',
+			type: 'string',
+			options: {
+				list: [
+					{ title: 'Sobre', value: 'about' },
+					{ title: 'Imersão', value: 'immersion' },
+					{ title: 'Palestras', value: 'lecture' },
+					{ title: 'Atendimentos', value: 'service' },
+					{ title: 'Matematizador', value: 'mathematizer' },
+					{ title: 'Depoimentos', value: 'testimonial' },
+					{ title: 'Ebooks', value: 'ebook' },
+					{ title: 'Workshops', value: 'workshop' },
+					{ title: 'Mentoria Avançada', value: 'advanced-mentory' },
+				],
+				layout: 'dropdown',
+			},
+		},
 		{
 			name: 'variant',
 			title: 'Variant',
@@ -43,7 +77,6 @@ export default defineType({
 			options: {
 				list: [
 					{ title: 'None', value: 'none' },
-					{ title: 'Full', value: 'full' },
 					{ title: 'Large', value: 'lg' },
 					{ title: 'Extra Large', value: 'xl' },
 					{ title: '2x Extra Large', value: '2xl' },
@@ -59,7 +92,7 @@ export default defineType({
 			options: {
 				list: [
 					{ title: 'Animated', value: 'ANIMATED' },
-					{ title: 'Minimalist', value: 'Minimalist' },
+					{ title: 'Minimalist', value: 'MINIMALIST' },
 				],
 				layout: 'dropdown',
 			},
@@ -74,7 +107,6 @@ export default defineType({
 		prepare({ theme, variant, type }) {
 			return {
 				title: `Variante: ${variant || 'default'} → Tema: ${theme || 'default'} → ${type}`,
-
 			};
 		},
 	},

@@ -106,7 +106,7 @@ export default defineType({
 				defineArrayMember({
 					name: 'about',
 					type: 'section',
-					title: 'About',
+					title: 'Sobre',
 				}),
 				defineArrayMember({
 					name: 'immersion',

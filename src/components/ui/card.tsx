@@ -6,18 +6,18 @@ const cardVariants = cva('relative', {
 	variants: {
 		variant: {
 			default:
-				'shadow-[0_0_15px_3px] **:data-[slot=card-content-action]:bg-white outline outline-2',
+				'shadow-[0_0_15px_3px] outline outline-2',
 			outline:
-				'shadow-[0_0_15px_3px] **:data-[slot=card-content-action]:shadow-[0_0_15px_3px] **:data-[slot=card-content-action]:border-b-0 **:data-[slot=card-content-action]:border-r-0 outline outline-2',
+				'shadow-[0_0_15px_3px] outline outline-2',
 			ghost: 'shadow-none outline-none border-none',
 		},
 		theme: {
 			default:
-				'shadow-primary/20 bg-linear-to-r from-primary via-primary/80 to-primary hover:bg-primary-foreground hover:text-primary-foreground text-primary-foreground outline-primary/40 hover:border-primary/40 **:data-[slot=card-content-action]:border-primary **:data-[slot=card-content-action]:border **:data-[slot=card-content-action]:shadow-primary/20',
+				'shadow-primary/20 bg-linear-to-r from-primary via-primary/80 to-primary hover:bg-primary-foreground hover:text-primary-foreground text-primary-foreground outline-primary/40 hover:border-primary/40',
 			secondary:
-				'shadow-secondary/20 bg-linear-to-r from-secondary via-secondary/80 to-secondary hover:bg-secondary/30 hover:text-secondary-foreground text-secondary-foreground outline-secondary/40 hover:border-secondary/40 **:data-[slot=card-content-action]:border-secondary **:data-[slot=card-content-action]:border **:data-[slot=card-content-action]:shadow-secondary/20',
+				'shadow-secondary/20 bg-linear-to-r from-secondary via-secondary/80 to-secondary hover:bg-secondary/30 hover:text-secondary-foreground text-secondary-foreground outline-secondary/40 hover:border-secondary/40',
 			tertiary:
-				'shadow-tertiary/20 bg-linear-to-r from-tertiary via-tertiary/80 to-tertiary text-tertiary-foreground hover:bg-tertiary/30 hover:text-tertiary-foreground outline-tertiary/40 hover:border-tertiary/40 **:data-[slot=card-content-action]:border-tertiary **:data-[slot=card-content-action]:border **:data-[slot=card-content-action]:shadow-tertiary/20',
+				'shadow-tertiary/20 bg-linear-to-r from-tertiary via-tertiary/80 to-tertiary text-tertiary-foreground hover:bg-tertiary/30 hover:text-tertiary-foreground outline-tertiary/40 hover:border-tertiary/40',
 		},
 		rounded: {
 			none: 'rounded-none **:data-[slot=card-content-action]:rounded-none',

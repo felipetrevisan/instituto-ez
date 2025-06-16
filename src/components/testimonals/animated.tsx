@@ -8,6 +8,8 @@ import { ScrollArea } from '@radix-ui/react-scroll-area';
 import type { VariantProps } from 'class-variance-authority';
 import { motion } from 'framer-motion';
 
+import './styles.css';
+
 const MotionCard = motion(Card);
 
 type CardVariants = VariantProps<typeof cardVariants>;
@@ -16,18 +18,18 @@ type Props = {
 	item: Testimonial;
 	hoveredIndex: string | null;
 	setHoveredIndex: (id: string | null) => void;
-  theme?: CardVariants['theme'];
-  variant?: CardVariants['variant'];
-  rounded?: CardVariants['rounded'];
+	theme?: CardVariants['theme'];
+	variant?: CardVariants['variant'];
+	rounded?: CardVariants['rounded'];
 };
 
 export function TestimonialAnimated({
 	item,
 	hoveredIndex,
 	setHoveredIndex,
-  theme,
-  variant,
-  rounded
+	theme,
+	variant,
+	rounded,
 }: Props) {
 	const isBlurred = hoveredIndex !== null && hoveredIndex !== item.id;
 
@@ -39,6 +41,8 @@ export function TestimonialAnimated({
 			variant={variant}
 			theme={theme}
 			rounded={rounded}
+			data-theme={theme}
+			data-variant={variant}
 			whileHover={{ scale: 1.04 }}
 			whileTap={{ scale: 0.9 }}
 			transition={{ type: 'spring', stiffness: 400, damping: 10 }}
@@ -51,19 +55,14 @@ export function TestimonialAnimated({
 			}}
 		>
 			<CardContent className="flex items-center justify-center w-ful p-0 h-full">
-				<figure className="relative flex flex-col items-center justify-evenly w-full h-full border-0 py-0 px-8">
+				<div className="relative flex flex-col items-center justify-evenly w-full h-full border-0 py-0 px-8">
 					<ScrollArea className="h-3/4 max-w-2xl mx-auto mb-4 lg:mb-8 text-justify relative w-full">
 						<PortableText value={item.testimonial} />
 					</ScrollArea>
-					<figcaption
-						className="absolute flex items-center justify-center -bottom-1 p-3 -right-1"
-						data-slot="card-content-action"
-					>
-						<div className="space-y-0.5 font-bold text-slate-700 text-left rtl:text-right ms-3">
-							<div>{item.author?.name}</div>
-						</div>
-					</figcaption>
-				</figure>
+					<div className="author font-bold" data-slot="card-content-action">
+						{item.author?.name}
+					</div>
+				</div>
 			</CardContent>
 		</MotionCard>
 	);

@@ -4,7 +4,7 @@ import {
 	orderRankOrdering,
 } from '@sanity/orderable-document-list';
 import { MdRequestQuote } from 'react-icons/md';
-import { defineField, defineType } from 'sanity';
+import { defineArrayMember, defineField, defineType } from 'sanity';
 
 export default defineType({
 	name: 'testimonial',
@@ -30,19 +30,28 @@ export default defineType({
 				Rule.required().warning('This field must not be empty.'),
 		}),
 		defineField({
-			name: 'category',
-			title: 'Category',
-			type: 'string',
-			initialValue: 'home',
-			options: {
-				list: [
-					{ title: 'Home', value: 'home' },
-					{ title: 'Pages', value: 'page' },
-				],
-				layout: 'dropdown',
-			},
-			validation: (Rule) =>
-				Rule.required().warning('This field must not be empty.'),
+			name: 'categories',
+			title: 'Categories',
+			type: 'array',
+			of: [
+				defineArrayMember({
+					type: 'string',
+					options: {
+						list: [
+							{ title: 'Sobre', value: 'about' },
+							{ title: 'Imersão', value: 'immersion' },
+							{ title: 'Palestras', value: 'lecture' },
+							{ title: 'Atendimentos', value: 'service' },
+							{ title: 'Matematizador', value: 'mathematizer' },
+							{ title: 'Depoimentos', value: 'testimonial' },
+							{ title: 'Ebooks', value: 'ebook' },
+							{ title: 'Workshops', value: 'workshop' },
+							{ title: 'Mentoria Avançada', value: 'advanced-mentory' },
+						],
+						layout: 'dropdown',
+					},
+				}),
+			],
 		}),
 	],
 	preview: {

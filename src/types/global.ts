@@ -13,11 +13,6 @@ export enum LinkType {
 	INTERNAL = 'INTERNAL',
 }
 
-export enum TestimonialType {
-	HOME = 'home',
-	PAGE = 'pages',
-}
-
 export enum Theme {
 	default = 'default',
 	secondary = 'secondary',

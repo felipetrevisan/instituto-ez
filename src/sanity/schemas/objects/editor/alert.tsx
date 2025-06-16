@@ -1,3 +1,4 @@
+import AlertPreviewComponent from '@/sanity/lib/components/preview/alert';
 import { WarningFilledIcon } from '@sanity/icons';
 import * as Icons from 'react-icons/fa';
 import { defineType } from 'sanity';
@@ -7,6 +8,9 @@ export default defineType({
 	type: 'object',
 	title: 'Alert',
 	icon: WarningFilledIcon,
+	components: {
+		block: AlertPreviewComponent,
+	},
 	fields: [
 		{
 			name: 'title',

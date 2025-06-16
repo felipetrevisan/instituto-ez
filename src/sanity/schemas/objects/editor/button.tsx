@@ -1,3 +1,4 @@
+import ButtonPreviewComponent from '@/sanity/lib/components/preview/button';
 import { PackageIcon } from '@sanity/icons';
 import * as Icons from 'react-icons/fa';
 import { defineType } from 'sanity';
@@ -7,6 +8,9 @@ export default defineType({
 	type: 'object',
 	title: 'Button',
 	icon: PackageIcon,
+	components: {
+		block: ButtonPreviewComponent,
+	},
 	fields: [
 		{
 			name: 'variant',

@@ -1,3 +1,4 @@
+import AccordionPreviewComponent from '@/sanity/lib/components/preview/accordion';
 import { MenuIcon } from '@sanity/icons';
 import { FaQuestion } from 'react-icons/fa';
 import { defineType } from 'sanity';
@@ -7,8 +8,11 @@ export default defineType({
 	type: 'object',
 	title: 'Accordion',
 	icon: MenuIcon,
+	components: {
+		block: AccordionPreviewComponent,
+	},
 	fields: [
-				{
+		{
 			name: 'theme',
 			title: 'Theme',
 			type: 'string',

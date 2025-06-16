@@ -1,11 +1,4 @@
-'use client';
-
-import { useTestimonials } from '@/hooks/use-testimonials';
-import { useState } from 'react';
-import { Skeleton } from './skeleton';
-
-import './styles.css';
-
+import { Skeleton } from '@/components/sections/testimonials/skeleton';
 import { TestimonialAnimated } from '@/components/testimonals/animated';
 import { TestimonialMinimalist } from '@/components/testimonals/minimalist';
 import {
@@ -14,21 +7,28 @@ import {
 	CarouselDots,
 	CarouselItem,
 } from '@/components/ui/carousel';
-import { useSite } from '@/hooks/use-site';
-import { BorderRounded, Theme, Variant } from '@/types/global';
+import { useTestimonials } from '@/hooks/use-testimonials';
+import type { BorderRounded, Theme, Variant } from '@/types/global';
 import ClassNames from 'embla-carousel-class-names';
+import { useState } from 'react';
 
-export function Testimonials() {
-	const { data: site } = useSite();
-	const { data, isLoading } = useTestimonials('service');
+type TestimonialType = {
+	type: 'ANIMATED' | 'MINIMALIST';
+	theme: keyof typeof Theme;
+	variant: keyof typeof Variant;
+	rounded: keyof typeof BorderRounded;
+	category: string;
+};
+
+const TestimonialComponent = ({ value }: { value: TestimonialType }) => {
 	const [hoveredIndex, setHoveredIndex] = useState<string | null>(null);
 
-	const { type, theme, variant, rounded } = site?.testimonialsConfig ?? { type: 'MINIMALIST', theme: Theme.tertiary, variant: Variant.outline, rounded: BorderRounded['2xl'] };
+	const { type, theme, variant, rounded, category } = value;
+
+	const { data, isLoading } = useTestimonials(category);
 
 	const TestimonialRender =
-		type === 'MINIMALIST'
-			? TestimonialMinimalist
-			: TestimonialAnimated;
+		type === 'MINIMALIST' ? TestimonialMinimalist : TestimonialAnimated;
 
 	return (
 		<div className="flex flex-col w-full h-full space-y-14">
@@ -43,7 +43,7 @@ export function Testimonials() {
 									className="basis-full md:basis-1/2 lg:basis-1/2 xl:basis-1/2"
 								>
 									<TestimonialRender
-										key={`testimonial_${testimonial.id}`}
+										key={`testimonial_${category}_${testimonial.id}`}
 										item={testimonial}
 										hoveredIndex={hoveredIndex}
 										setHoveredIndex={setHoveredIndex}
@@ -60,4 +60,6 @@ export function Testimonials() {
 			</div>
 		</div>
 	);
-}
+};
+
+export default TestimonialComponent;

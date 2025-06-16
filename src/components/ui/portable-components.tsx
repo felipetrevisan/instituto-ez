@@ -3,6 +3,7 @@ import AlertComponent from '@/sanity/lib/components/alert';
 import ButtonComponent from '@/sanity/lib/components/button';
 import DividerComponent from '@/sanity/lib/components/divider';
 import ImageComponent from '@/sanity/lib/components/image';
+import TestimonialComponent from '@/sanity/lib/components/testimonial';
 import TitleComponent from '@/sanity/lib/components/title';
 import type { PortableTextComponents } from '@portabletext/react';
 import Link from 'next/link';
@@ -16,6 +17,7 @@ export const portableComponents: PortableTextComponents = {
 		accordion: AccordionComponent,
 		divider: DividerComponent,
 		alert: AlertComponent,
+		testimonialWidget: TestimonialComponent
 	},
 	marks: {
 		internalLink: ({ value, children }) => {

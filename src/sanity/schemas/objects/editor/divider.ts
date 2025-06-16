@@ -1,3 +1,4 @@
+import DividerPreviewComponent from '@/sanity/lib/components/preview/divider';
 import { SplitVerticalIcon } from '@sanity/icons';
 import { defineType } from 'sanity';
 
@@ -6,6 +7,9 @@ export default defineType({
 	type: 'object',
 	title: 'Divider',
 	icon: SplitVerticalIcon,
+	components: {
+		block: DividerPreviewComponent,
+	},
 	fields: [
 		{
 			name: 'shape',

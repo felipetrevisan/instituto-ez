@@ -31,6 +31,9 @@ const config = [
 	{
 		type: 'divider',
 	},
+	{
+		type: 'testimonialWidget',
+	},
 ];
 
 export default config;

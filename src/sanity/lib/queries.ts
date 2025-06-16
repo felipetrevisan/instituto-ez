@@ -74,13 +74,13 @@ export const siteConfigQuery = groq`
 `;
 
 export const testimonialsQuery = groq`
-  *[ _type == 'testimonial' && category == $category ] | order(orderRank) { 
+  *[ _type == 'testimonial' && $category in categories[]] | order(orderRank) { 
     "id": _id,
     "author": {
       "name": author_name,
     },
     testimonial,
-    category
+    categories
   }
 `;
 
