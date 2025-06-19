@@ -37,7 +37,7 @@ export function Ebooks() {
 				{isLoading && <Skeleton />}
 				{!isLoading && (
 					<Carousel plugins={[ClassNames()]} className="overflow-visible">
-						<CarouselDots />
+						<CarouselDots theme="default" />
 						<CarouselContent>
 							{paginatedItems.map((page, pageIndex) => (
 								// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>

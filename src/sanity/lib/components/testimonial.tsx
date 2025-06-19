@@ -54,7 +54,7 @@ const TestimonialComponent = ({ value }: { value: TestimonialType }) => {
 								</CarouselItem>
 							))}
 						</CarouselContent>
-						<CarouselDots className="mt-10" />
+						<CarouselDots className="mt-10" theme={theme} />
 					</Carousel>
 				)}
 			</div>
