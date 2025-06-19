@@ -20,7 +20,7 @@ export function EbookCard({
 	className,
 }: Props) {
 	const backgroundClass = background
-		? `url('${urlForImage(background.asset)}')`
+		? `url('${urlForImage(background.asset)}') no-repeat center center / cover`
 		: 'transparent';
 
 	const link = !disabled && button ? getLink(button) : false;
@@ -35,7 +35,7 @@ export function EbookCard({
 			<MotionCard
 				variant="ghost"
 				className={cn(
-					'flex items-end justify-center shrink md:shrink-0 rounded-xl bg-card w-[70vw] md:w-80 lg:w-80 h-96 relative bg-center! bg-cover! shadow-2xl',
+					'flex items-end justify-center shrink md:shrink-0 rounded-xl bg-card w-[70vw] md:w-80 lg:w-80 h-96 relative shadow-2xl',
 					{
 						'grayscale-100 opacity-80 select-none pointer-events-none':
 							disabled,

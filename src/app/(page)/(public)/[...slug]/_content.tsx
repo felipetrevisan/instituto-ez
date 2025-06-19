@@ -85,7 +85,7 @@ export function Content({ title, content, background, video }: Section) {
 					</svg>
 				</div>
 			</div>
-			<div className="container flex flex-col gap-10 justify-center items-center max-w-[75vw]">
+			<div className="container flex flex-col gap-10 justify-center items-center max-w-screen md:max-w-[75vw]">
 				<App.Title className="text-center">{title}</App.Title>
 				<div className="flex flex-col gap-5 justify-center items-center w-full lg:max-w-[90vw] text-justify py-10 lg:p-0 [&>*:not(hr)]:w-full">
 					<PortableText value={content} components={portableComponents} />

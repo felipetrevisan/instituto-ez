@@ -33,12 +33,14 @@ export function ContactForm({
 			label: 'Nome',
 			type: 'text',
 			validation: { required: 'Nome é obrigatório' },
+			className: 'col-span-2',
 		},
 		{
 			name: 'email',
 			label: 'Email',
 			type: 'email',
 			validation: { required: 'E-mail é obrigatório' },
+			className: 'col-span-2',
 		},
 		{
 			name: 'subject',
@@ -195,7 +197,7 @@ export function ContactForm({
 				</div>
 			</div>
 			{isDialog && (
-				<DialogFooter className="gap-5">
+				<DialogFooter className="gap-5 justify-center">
 					<DialogTrigger asChild>
 						<Button
 							type="button"

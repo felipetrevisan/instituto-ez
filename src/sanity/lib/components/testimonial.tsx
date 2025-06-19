@@ -35,8 +35,8 @@ const TestimonialComponent = ({ value }: { value: TestimonialType }) => {
 			<div className="flex flex-col justify-center">
 				{isLoading && <Skeleton />}
 				{!isLoading && (
-					<Carousel plugins={[ClassNames()]} className="md:overflow-visible">
-						<CarouselContent rootClassName="md:overflow-visible!">
+					<Carousel plugins={[ClassNames()]} className="overflow-visible" theme={theme}>
+						<CarouselContent rootClassName="overflow-visible!">
 							{data?.map((testimonial, _index) => (
 								<CarouselItem
 									key={testimonial.id}

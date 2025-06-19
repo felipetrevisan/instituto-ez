@@ -38,9 +38,9 @@ export function TestimonialMinimalist({
 			data-theme={theme}
 			data-variant={variant}
 		>
-			<CardContent className="flex items-center justify-center w-ful p-0 h-full">
+			<CardContent className="flex items-center justify-center w-full p-0 h-full">
 				<div className="relative flex flex-col items-center justify-evenly w-full h-full border-0 py-0 px-8">
-					<ScrollArea className="h-3/4 max-w-2xl mx-auto mb-4 lg:mb-8 text-justify relative w-full">
+					<ScrollArea className="overflow-scroll h-[300px] md:h-[250px] max-w-2xl mx-auto text-justify relative w-full">
 						<PortableText value={item.testimonial} />
 					</ScrollArea>
 					<div className="author font-bold" data-slot="card-content-action">

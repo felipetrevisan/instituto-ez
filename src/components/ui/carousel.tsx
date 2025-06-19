@@ -8,6 +8,7 @@ import * as React from 'react';
 
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { type VariantProps, cva } from 'class-variance-authority';
 import {
 	MotionHighlight,
 	MotionHighlightItem,
@@ -17,13 +18,6 @@ type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
 type CarouselOptions = UseCarouselParameters[0];
 type CarouselPlugin = UseCarouselParameters[1];
-
-type CarouselProps = {
-	opts?: CarouselOptions & { autoplay?: number };
-	plugins?: CarouselPlugin;
-	orientation?: 'horizontal' | 'vertical';
-	setApi?: (api: CarouselApi) => void;
-};
 
 type CarouselContextProps = {
 	carouselRef: ReturnType<typeof useEmblaCarousel>[0];
@@ -39,6 +33,22 @@ type CarouselContextProps = {
 	selectedIndex: number;
 } & CarouselProps;
 
+const carouselVariants = cva('relative **:data-[slot=carousel-dot]:outline-none **:data-[slot=carousel-dot]:hover:outline-none', {
+	variants: {
+		theme: {
+			default:
+				'**:data-[slot=carousel-dot]:shadow-primary **:data-[slot=carousel-dot]:hover:after:shadow-primary',
+			secondary:
+				'**:data-[slot=carousel-dot]:shadow-secondary **:data-[slot=carousel-dot]:hover:after:shadow-secondary',
+			tertiary:
+				'**:data-[slot=carousel-dot]:shadow-tertiary **:data-[slot=carousel-dot]:hover:after:shadow-tertiary',
+		},
+	},
+	defaultVariants: {
+		theme: 'default',
+	},
+});
+
 const CarouselContext = React.createContext<CarouselContextProps | null>(null);
 
 function useCarousel() {
@@ -50,6 +60,14 @@ function useCarousel() {
 
 	return context;
 }
+
+type CarouselProps = {
+	opts?: CarouselOptions & { autoplay?: number };
+	plugins?: CarouselPlugin;
+	orientation?: 'horizontal' | 'vertical';
+	setApi?: (api: CarouselApi) => void;
+} & React.ComponentProps<'div'> &
+	VariantProps<typeof carouselVariants>;
 
 function Carousel({
 	orientation = 'horizontal',
@@ -147,7 +165,7 @@ function Carousel({
 		>
 			<div
 				onKeyDownCapture={handleKeyDown}
-				className={cn('relative', className)}
+				className={className}
 				// biome-ignore lint/a11y/useSemanticElements: <explanation>
 				role="region"
 				aria-roledescription="carousel"
@@ -259,12 +277,21 @@ function CarouselNext({
 	);
 }
 
-function CarouselDots({ className, ...props }: React.ComponentProps<'div'>) {
+function CarouselDots({
+	className,
+	theme,
+	...props
+}: React.ComponentProps<'div'> & VariantProps<typeof carouselVariants>) {
 	const { scrollSnaps, selectedIndex, goToSlide } = useCarousel();
+
+	console.log(selectedIndex);
 
 	return (
 		<div
-			className="flex flex-wrap justify-center items-center"
+			className={cn(
+				'flex flex-wrap justify-center items-center',
+				carouselVariants({ theme }),
+			)}
 			data-slot="carousel-dots"
 			{...props}
 		>
@@ -272,23 +299,32 @@ function CarouselDots({ className, ...props }: React.ComponentProps<'div'>) {
 				controlledItems
 				hover
 				className="flex flex-row bg-transparent"
-				mode="parent"
-				containerClassName="flex justify-center items-center"
+				mode="children"
 			>
 				{scrollSnaps.map((_, index) => (
 					<MotionHighlightItem
-						activeClassName="after:bg-tertiary/40"
+						activeClassName={cn({
+							'after:bg-primary': theme === 'default',
+							'after:bg-secondary': theme === 'secondary',
+							'after:bg-tertiary': theme === 'tertiary',
+						})}
 						// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
 						key={index}
 					>
 						<Button
 							data-slot="carousel-dot"
 							variant="outline"
+							theme={theme}
 							className={cn(
-								'rounded-full after:shadow-[0_0_0_0.2rem] after:shadow-primary after:rounded-full after:size-2 after:flex after:items-center',
-								index === selectedIndex
-									? 'after:shadow-tertiary after:bg-tertiary'
-									: '',
+								'rounded-full after:shadow-[0_0_0_0.2rem] after:rounded-full after:size-2 after:flex after:items-center',
+								{
+									'after:shadow-primary after:bg-primary':
+										theme === 'default' && selectedIndex === index,
+									'after:shadow-secondary after:bg-secondary':
+										theme === 'secondary' && selectedIndex === index,
+									'after:shadow-tertiary after:bg-tertiary':
+										theme === 'tertiary' && selectedIndex === index,
+								},
 								className,
 							)}
 							onClick={() => goToSlide(index)}

@@ -137,7 +137,7 @@ function Content({ className, children }: React.ComponentProps<'div'>) {
 			className={cn(
 				'mt-24 lg:mt-36 container relative h-full flex items-center flex-col justify-center space-x-2',
 				{
-					'before:backdrop-blur-xl before:absolute before:w-full before:h-full before:bg-white/50 before:z-2':
+					'before:backdrop-blur-xl before:absolute before:w-full before:h-full before:bg-white/50 before:z-50':
 						isMenuOpen,
 				},
 				className,
