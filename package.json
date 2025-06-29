@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "dev:turbo": "next dev --turbopack",
-    "build": "next build --turbopack",
+    "build": "next build",
     "start": "next start",
     "lint:check": "pnpm biome check --formatter-enabled=true --linter-enabled=true --organize-imports-enabled=false ./src",
     "lint:organize": "pnpm biome check --formatter-enabled=false --linter-enabled=false --organize-imports-enabled=true --write ./src",
