@@ -1,21 +1,19 @@
 'use client';
 
-import { menuItemVariants } from '@/config/animation';
-import { useApp } from '@/hooks/use-app';
-import { cn } from '@/lib/utils';
-import type { Navigation } from '@/types/site';
-import { motion } from 'framer-motion';
-import { Fragment } from 'react';
-import { MotionHighlight, MotionHighlightItem } from './animate-ui/effects/motion-highlight';
 import {
-	NavigationListItem,
 	NavigationMenu,
-	NavigationMenuContent,
 	NavigationMenuItem,
 	NavigationMenuLink,
 	NavigationMenuList,
-	NavigationMenuTrigger,
-} from './ui/navigation-menu';
+} from '@/components/ui/navigation-menu';
+import { useApp } from '@/hooks/use-app';
+import type { Navigation } from '@/types/site';
+import { motion } from 'framer-motion';
+import {
+	MotionHighlight,
+	MotionHighlightItem,
+} from '../animate-ui/effects/motion-highlight';
+import { Skeleton } from '../ui/skeleton';
 
 type NavigationProps = {
 	navigation?: Navigation;
@@ -23,21 +21,18 @@ type NavigationProps = {
 
 const MenuItemMotion = motion(NavigationMenuItem);
 
-export const MobileNavigation = ({ navigation }: NavigationProps) => {
+export const DesktopNavigation = ({ navigation }: NavigationProps) => {
 	const { isMenuActive } = useApp();
 
 	return (
-		<NavigationMenu
-			className="w-full flex mx-auto lg:hidden lg:items-start"
-			orientation="vertical"
-		>
-			<NavigationMenuList className="items-end">
+		<NavigationMenu className="hidden lg:flex">
+			<NavigationMenuList>
 				<MotionHighlight
 					controlledItems
 					hover
-					className="flex flex-col border-b-primary border-b-2 bg-transparent text-primary"
+					className="flex flex-row border-b-primary border-b-2 bg-transparent text-primary"
 					mode="parent"
-					containerClassName="flex flex-col justify-center items-center"
+					containerClassName="flex justify-center items-center"
 				>
 					{navigation?.items?.map(({ id, label, url }) => (
 						<MenuItemMotion key={id} data-value={id}>
@@ -62,3 +57,19 @@ export const MobileNavigation = ({ navigation }: NavigationProps) => {
 		</NavigationMenu>
 	);
 };
+
+export const DesktopNavigationSkeleton = () => {
+	return (
+		<div className="hidden lg:flex">
+			<div className="flex flex-row gap-4">
+				<Skeleton className="w-1/3 h-10" />
+				<Skeleton className="w-1/3 h-10" />
+				<Skeleton className="w-1/3 h-10" />
+				<Skeleton className="w-1/3 h-10" />
+				<Skeleton className="w-1/3 h-10" />
+				<Skeleton className="w-1/3 h-10" />
+			</div>
+		</div>
+	);
+};
+

@@ -284,8 +284,6 @@ function CarouselDots({
 }: React.ComponentProps<'div'> & VariantProps<typeof carouselVariants>) {
 	const { scrollSnaps, selectedIndex, goToSlide } = useCarousel();
 
-	console.log(selectedIndex);
-
 	return (
 		<div
 			className={cn(

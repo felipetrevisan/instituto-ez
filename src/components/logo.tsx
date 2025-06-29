@@ -5,8 +5,6 @@ import Image from 'next/image';
 import * as React from 'react';
 
 type LogoProps = {
-	// height: MotionValue<string>;
-	// width: MotionValue<string>;
 	src?: string;
 	showSlogan?: boolean;
 	linkable?: boolean;
@@ -14,8 +12,6 @@ type LogoProps = {
 
 export const Logo = ({
 	className,
-	// height,
-	// width,
 	showSlogan = true,
 	linkable = true,
 	src,

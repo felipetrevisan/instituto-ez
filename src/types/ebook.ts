@@ -5,7 +5,12 @@ export type Ebook = {
 	id: string;
 	title: string;
 	subtitle?: string;
-	background?: SanityAsset;
+	slug: string;
+	description?: string;
+	image: {
+		preview: SanityAsset;
+		large: SanityAsset;
+	}
 	disabled: boolean;
 	button?: Button;
 };

@@ -1,6 +1,5 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
 import { Dialog } from '@/components/ui/dialog';
 import * as Navbar from '@/components/ui/navbar';
 import { menuListVariants, sidebarVariants } from '@/config/animation';
@@ -9,6 +8,7 @@ import { useDimensions } from '@/hooks/use-dimension';
 import { useSite } from '@/hooks/use-site';
 import { cn } from '@/lib/utils';
 import { urlForImage } from '@/sanity/lib/utils';
+import type { Site } from '@/types/site';
 import { Slot } from '@radix-ui/react-slot';
 import { type VariantProps, cva } from 'class-variance-authority';
 import {
@@ -18,20 +18,22 @@ import {
 	useScroll,
 	useTransform,
 } from 'framer-motion';
-import Image from 'next/image';
 import Link from 'next/link';
 import { Fragment, useEffect, useRef, useState } from 'react';
 import { MdOutlineEmail } from 'react-icons/md';
 import { IconButton } from './animate-ui/buttons/icon';
 import { ContactFormDialog } from './contact-form-dialog';
-import { DesktopNavigation } from './desktop-navigation';
 import { Logo } from './logo';
-import { MobileNavigation } from './mobile-navigation';
+import { DesktopNavigation, DesktopNavigationSkeleton } from './navigation/desktop-navigation';
+import { MobileNavigation } from './navigation/mobile-navigation';
 
 const MotionMobileNavigation = motion(MobileNavigation);
 
-function Header({ className }: React.ComponentProps<'div'>) {
-	const { data } = useSite();
+type HeaderProps = {
+	data: Site
+} & React.ComponentProps<'div'>;
+
+function Header({ className, data }: HeaderProps) {
 	const [currentScrollY, setCurrentScrollY] = useState(0);
 	const containerRef = useRef<HTMLDivElement | null>(null);
 	const { height } = useDimensions(containerRef);
@@ -109,7 +111,7 @@ function Header({ className }: React.ComponentProps<'div'>) {
 						ref={containerRef}
 					>
 						<Navbar.Toggle />
-						<DesktopNavigation navigation={data?.primaryNavigation} />
+						{!data ? <DesktopNavigationSkeleton /> : <DesktopNavigation navigation={data?.primaryNavigation} />}
 						<motion.div
 							className="fixed z-90 top-0 right-0 w-[300px] h-screen bg-slate-200/90 backdrop-blur-3xl lg:hidden"
 							variants={sidebarVariants}

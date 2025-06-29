@@ -2,6 +2,7 @@ import AccordionComponent from '@/sanity/lib/components/accordion';
 import AlertComponent from '@/sanity/lib/components/alert';
 import ButtonComponent from '@/sanity/lib/components/button';
 import DividerComponent from '@/sanity/lib/components/divider';
+import EbooksComponent from '@/sanity/lib/components/ebooks';
 import ImageComponent from '@/sanity/lib/components/image';
 import TestimonialComponent from '@/sanity/lib/components/testimonial';
 import TitleComponent from '@/sanity/lib/components/title';
@@ -17,7 +18,8 @@ export const portableComponents: PortableTextComponents = {
 		accordion: AccordionComponent,
 		divider: DividerComponent,
 		alert: AlertComponent,
-		testimonialWidget: TestimonialComponent
+		testimonialWidget: TestimonialComponent,
+		ebooksWidget: EbooksComponent
 	},
 	marks: {
 		internalLink: ({ value, children }) => {
@@ -52,13 +54,13 @@ export const portableComponents: PortableTextComponents = {
 
 	list: {
 		bullet: ({ children }) => (
-			<ul className="flex flex-col list-disc gap-2 p-4">{children}</ul>
+			<ul className="flex flex-col list-disc gap-2 p-4 divide-y divide-primary/30 [&>li]:py-2">{children}</ul>
 		),
 		number: ({ children }) => (
-			<ol className="flex flex-col list-decimal gap-2 p-4">{children}</ol>
+			<ol className="flex flex-col list-decimal gap-2 p-4 divide-y divide-primary/30 [&>li]:py-2">{children}</ol>
 		),
 		checkmarks: ({ children }) => (
-			<ol className="flex flex-col text-lg gap-2 p-4">{children}</ol>
+			<ol className="flex flex-col gap-2 p-4 divide-y divide-primary/30 [&>li]:py-2">{children}</ol>
 		),
 	},
 };

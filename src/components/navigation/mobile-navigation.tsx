@@ -1,19 +1,21 @@
 'use client';
 
-import {
-	NavigationMenu,
-	NavigationMenuItem,
-	NavigationMenuLink,
-	NavigationMenuList,
-} from '@/components/ui/navigation-menu';
+import { menuItemVariants } from '@/config/animation';
 import { useApp } from '@/hooks/use-app';
+import { cn } from '@/lib/utils';
 import type { Navigation } from '@/types/site';
 import { motion } from 'framer-motion';
 import { Fragment } from 'react';
+import { MotionHighlight, MotionHighlightItem } from '../animate-ui/effects/motion-highlight';
 import {
-	MotionHighlight,
-	MotionHighlightItem,
-} from './animate-ui/effects/motion-highlight';
+	NavigationListItem,
+	NavigationMenu,
+	NavigationMenuContent,
+	NavigationMenuItem,
+	NavigationMenuLink,
+	NavigationMenuList,
+	NavigationMenuTrigger,
+} from '../ui/navigation-menu';
 
 type NavigationProps = {
 	navigation?: Navigation;
@@ -21,18 +23,21 @@ type NavigationProps = {
 
 const MenuItemMotion = motion(NavigationMenuItem);
 
-export const DesktopNavigation = ({ navigation }: NavigationProps) => {
+export const MobileNavigation = ({ navigation }: NavigationProps) => {
 	const { isMenuActive } = useApp();
 
 	return (
-		<NavigationMenu className="hidden lg:flex">
-			<NavigationMenuList>
+		<NavigationMenu
+			className="w-full flex mx-auto lg:hidden lg:items-start"
+			orientation="vertical"
+		>
+			<NavigationMenuList className="items-end">
 				<MotionHighlight
 					controlledItems
 					hover
-					className="flex flex-row border-b-primary border-b-2 bg-transparent text-primary"
+					className="flex flex-col border-b-primary border-b-2 bg-transparent text-primary"
 					mode="parent"
-					containerClassName="flex justify-center items-center"
+					containerClassName="flex flex-col justify-center items-center"
 				>
 					{navigation?.items?.map(({ id, label, url }) => (
 						<MenuItemMotion key={id} data-value={id}>

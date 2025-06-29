@@ -6,15 +6,14 @@ import {
 	CarouselDots,
 	CarouselItem,
 } from '@/components/ui/carousel';
-import { useEbook } from '@/hooks/use-ebook';
-import { Ebook } from '@/types/ebook';
+import { useEbooks } from '@/hooks/use-ebook';
 import ClassNames from 'embla-carousel-class-names';
 import { motion } from 'framer-motion';
 import { EbookCard as Card } from './card';
 import { Skeleton } from './skeleton';
 
 export function Ebooks() {
-	const { data, isLoading } = useEbook();
+	const { data, isLoading } = useEbooks();
 
 	const paginate = (pageSize: number) => {
 		const pagseSize = pageSize ?? 6;

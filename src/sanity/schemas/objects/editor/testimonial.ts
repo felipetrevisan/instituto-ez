@@ -7,21 +7,6 @@ export default defineType({
 	title: 'Testimonial',
 	icon: CommentIcon,
 	fields: [
-		// {
-		// 	name: 'testimonials',
-		// 	title: 'Testimonials',
-		// 	type: 'reference',
-		// 	to: [{ type: 'testimonial' }],
-		// 	options: {
-		// 		filter: ({ document }) => {
-		// 			const selectedCategory = document?.category || 'service';
-		// 			return {
-		// 				filter: 'categories[] == $category',
-		// 				params: { category: selectedCategory },
-		// 			};
-		// 		},
-		// 	},
-		// },
 		{
 			name: 'category',
 			title: 'Category',

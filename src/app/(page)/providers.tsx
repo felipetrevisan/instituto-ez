@@ -22,7 +22,7 @@ export default function Providers({ children }: { children: ReactNode }) {
 			<ProgressProvider
 				height="6px"
 				color="#430a88"
-				options={{ showSpinner: false }}
+				options={{ showSpinner: true }}
 				shallowRouting
 			>
 				<QueryClientProvider client={queryClient}>

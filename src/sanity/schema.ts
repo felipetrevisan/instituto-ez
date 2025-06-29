@@ -17,6 +17,8 @@ import page from './schemas/page';
 
 import aboutCard from './schemas/objects/about-card';
 import button from './schemas/objects/button';
+import coverImage from './schemas/objects/cover-image';
+import grid from './schemas/objects/grid';
 import link from './schemas/objects/link';
 import navigationItem from './schemas/objects/navigation-item';
 import navigationSubmenuItem from './schemas/objects/navigation-submenu-item';
@@ -30,6 +32,7 @@ import accordionContentWidget from './schemas/objects/editor/accordion-content';
 import alertWidget from './schemas/objects/editor/alert';
 import buttonLinkWidget from './schemas/objects/editor/button';
 import dividerWidget from './schemas/objects/editor/divider';
+import ebooksWidget from './schemas/objects/editor/ebooks';
 import eventWidget from './schemas/objects/editor/event';
 import testimonialWidget from './schemas/objects/editor/testimonial';
 import titleWidget from './schemas/objects/editor/title';
@@ -56,6 +59,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 		link,
 		button,
 		ribbon,
+		coverImage,
+		grid,
 		pageSection,
 		aboutCard,
 		section,
@@ -67,6 +72,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 		alertWidget,
 		dividerWidget,
 		eventWidget,
-		testimonialWidget
+		testimonialWidget,
+		ebooksWidget,
 	],
 };

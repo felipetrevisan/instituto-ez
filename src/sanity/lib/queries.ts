@@ -216,12 +216,59 @@ export const ebookQuery = groq`
   *[ _type == 'ebook' ] | order(orderRank) { 
     "id": _id,
     title,
+    "slug": slug.current,
     subtitle,
-    "background": image {
-      "asset": asset,
+    description,
+    "image": images {
+      "preview": small_image {
+        "asset": asset,
         "metadata": {
-        "lqip": asset->metadata.lqip,
-        "dimensions": asset->metadata.dimensions
+          "lqip": asset->metadata.lqip,
+          "dimensions": asset->metadata.dimensions
+        }
+      },
+      "large": large_image {
+        "asset": asset,
+        "metadata": {
+          "lqip": asset->metadata.lqip,
+          "dimensions": asset->metadata.dimensions
+        }
+      }
+    },
+    disabled,
+    "button": button {
+      "visible": show_button,
+      "disabled": disable_button,
+      "label": button_label,
+      "type": button_link_type,
+      "link": button_internal_link->slug.current,
+      "params": button_internal_params,
+      "externalUrl": button_external_url
+    }
+  }
+`;
+
+export const ebookQueryBySlug = groq`
+  *[ _type == 'ebook' && slug.current == $slug] [0] { 
+    "id": _id,
+    title,
+    "slug": slug.current,
+    subtitle,
+    description,
+    "image": images {
+      "preview": small_image {
+        "asset": asset,
+        "metadata": {
+          "lqip": asset->metadata.lqip,
+          "dimensions": asset->metadata.dimensions
+        }
+      },
+      "large": large_image {
+        "asset": asset,
+        "metadata": {
+          "lqip": asset->metadata.lqip,
+          "dimensions": asset->metadata.dimensions
+        }
       }
     },
     disabled,

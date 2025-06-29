@@ -34,6 +34,9 @@ const config = [
 	{
 		type: 'testimonialWidget',
 	},
+	{
+		type: 'ebooksWidget',
+	},
 ];
 
 export default config;

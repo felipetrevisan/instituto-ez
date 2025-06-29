@@ -30,7 +30,7 @@ const cardVariants = cva('relative', {
 	defaultVariants: {
 		variant: 'default',
 		theme: 'default',
-		rounded: 'full',
+		rounded: 'xl',
 	},
 	compoundVariants: [
 		{
@@ -46,6 +46,23 @@ const cardVariants = cva('relative', {
 		},
 		{
 			variant: 'outline',
+			theme: 'tertiary',
+			className:
+				'bg-transparent text-tertiary hover:bg-transparent hover:text-tertiary',
+		},
+		{
+			variant: 'ghost',
+			className:
+				'bg-transparent text-primary hover:bg-transparent hover:text-primary',
+		},
+		{
+			variant: 'ghost',
+			theme: 'secondary',
+			className:
+				'bg-transparent text-secondary hover:bg-transparent hover:text-secondary',
+		},
+		{
+			variant: 'ghost',
 			theme: 'tertiary',
 			className:
 				'bg-transparent text-tertiary hover:bg-transparent hover:text-tertiary',

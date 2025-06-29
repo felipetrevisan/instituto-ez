@@ -21,14 +21,30 @@ export default defineType({
 				Rule.required().warning('This field must not be empty.'),
 		}),
 		defineField({
+			name: 'slug',
+			title: 'Slug',
+			type: 'slug',
+			options: {
+				source: 'title',
+				maxLength: 96,
+			},
+			validation: (Rule) =>
+				Rule.required().warning('This field must not be empty.'),
+		}),
+		defineField({
 			name: 'subtitle',
 			title: 'Subtitle',
 			type: 'string',
 		}),
 		defineField({
-			name: 'image',
-			title: 'Image',
-			type: 'image',
+			name: 'description',
+			title: 'Description',
+			type: 'text',
+		}),
+		defineField({
+			name: 'images',
+			title: 'Images',
+			type: 'cover-image',
 			validation: (Rule) =>
 				Rule.required().warning('This field must not be empty.'),
 		}),

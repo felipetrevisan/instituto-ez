@@ -23,7 +23,7 @@ const buttonVariants = cva(
 					'bg-linear-to-r from-tertiary via-tertiary/80 to-tertiary text-tertiary-foreground hover:bg-tertiary/30 hover:text-tertiary-foreground outline-tertiary/40 hover:border-tertiary/40',
 			},
 			size: {
-				default: 'h-9 px-4 py-2',
+				default: 'max-w-fit px-4 py-2',
 				sm: 'h-8 px-3 text-xs',
 				lg: 'h-10 px-8',
 				xl: 'h-14 text-md px-6',
