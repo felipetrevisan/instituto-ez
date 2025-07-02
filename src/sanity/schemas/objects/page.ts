@@ -7,6 +7,13 @@ export default defineType({
 	type: 'object',
 	fields: [
 		defineField({
+			name: 'hash',
+			title: 'Hash',
+			type: 'string',
+			validation: (Rule) =>
+				Rule.required().warning('This field must not be empty.'),
+		}),
+		defineField({
 			name: 'background',
 			title: 'Background',
 			type: 'image',
@@ -17,33 +24,52 @@ export default defineType({
 			name: 'background_title',
 			title: 'Background Title',
 			type: 'string',
-			validation: (Rule) =>
-				Rule.required().warning('This field must not be empty.'),
 		}),
 		defineField({
-			name: 'hash',
-			title: 'Hash',
+			name: 'background_type',
+			title: 'Background Type',
 			type: 'string',
-			validation: (Rule) =>
-				Rule.required().warning('This field must not be empty.'),
+			initialValue: 'VIDEO',
+			options: {
+				list: [
+					{ title: 'Video', value: 'VIDEO' },
+					{ title: 'Image', value: 'IMAGE' },
+				],
+				layout: 'radio',
+			},
 		}),
 		defineField({
 			name: 'video',
 			title: 'Video URL',
 			type: 'url',
+			hidden: ({ parent }) => parent?.background_type !== 'VIDEO',
 			validation: (Rule) =>
-				Rule.required()
-					.uri({
-						scheme: ['http', 'https'],
-					})
-					.warning('This field must be a valid url.'),
+				Rule.custom((field, context) => {
+					if (context?.document?.background_type === 'VIDEO' && !field) {
+						return 'This field must not be empty.';
+					}
+					return true;
+				}).uri({
+					scheme: ['http', 'https'],
+				}),
+		}),
+		defineField({
+			name: 'image',
+			title: 'Image',
+			type: 'image',
+			hidden: ({ parent }) => parent?.background_type !== 'IMAGE',
+			validation: (Rule) =>
+				Rule.custom((field, context) => {
+					if (context?.document?.background_type === 'IMAGE' && !field) {
+						return 'This field must not be empty.';
+					}
+					return true;
+				}),
 		}),
 		defineField({
 			name: 'title',
 			title: 'Title',
 			type: 'string',
-			validation: (Rule) =>
-				Rule.required().warning('This field must not be empty.'),
 		}),
 		defineField({
 			name: 'content',

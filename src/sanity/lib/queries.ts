@@ -309,7 +309,7 @@ export const workshopQuery = groq`
   }
 `;
 
-export const pageQuery = groq`* [slug.current == $slug] [0] {
+export const pageQueryWithSlug = groq`*[ _type == 'page' && slug.current == $slug] [0] {
   "id": _id,
   title,
   description,
@@ -317,6 +317,23 @@ export const pageQuery = groq`* [slug.current == $slug] [0] {
   "sections": section[] {
     title,
     hash,
+    "media": {
+      "type": background_type,
+      background_type == "IMAGE" => {
+        "image": image {
+          "asset": asset,
+          "metadata": {
+            "lqip": asset->metadata.lqip,
+            "dimensions": asset->metadata.dimensions
+          }
+        }
+      },
+      background_type == "VIDEO" => {
+        "video": {
+          "url": video
+        }
+      }
+    },
     content[] {
       ...,
       _type == "buttonLink" => {
@@ -324,13 +341,10 @@ export const pageQuery = groq`* [slug.current == $slug] [0] {
         link->{slug},
       }
     },
-    "video": {
-      "url": video,
-    },
     "background": {
       "image": background {
         "asset": asset,
-         "metadata": {
+        "metadata": {
           "lqip": asset->metadata.lqip,
           "dimensions": asset->metadata.dimensions
         }
@@ -338,6 +352,13 @@ export const pageQuery = groq`* [slug.current == $slug] [0] {
       "title": background_title
     }
   }
+}`;
+
+export const pageQuery = groq`*[ _type == 'page'] {
+  "id": _id,
+  title,
+  description,
+  "slug": slug.current
 }`;
 
 export const bannerQuery = groq`

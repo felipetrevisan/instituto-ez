@@ -1,4 +1,5 @@
 import { theme } from 'https://themer.sanity.build/api/hues?default=49197f;600&primary=3f156e;600&transparent=4b395f;600&positive=43d675;300&caution=fbd024;200&lightest=fcfcfd&darkest=110d16';
+import { colorInput } from '@sanity/color-input';
 import { visionTool } from '@sanity/vision';
 import { type PluginOptions, defineConfig } from 'sanity';
 import { unsplashImageAsset } from 'sanity-plugin-asset-source-unsplash';
@@ -15,7 +16,7 @@ export default defineConfig({
 	projectId,
 	dataset,
 	schema,
-	theme,
+	//theme,
 	studio: {
 		components: {
 			toolMenu: (props) => {
@@ -41,6 +42,7 @@ export default defineConfig({
 		// Add an image asset source for Unsplash
 		unsplashImageAsset(),
 		iconPicker(),
+		colorInput(),
 		// Vision lets you query your content with GROQ in the studio
 		// https://www.sanity.io/docs/the-vision-plugin
 		env.NODE_ENV === 'development' &&

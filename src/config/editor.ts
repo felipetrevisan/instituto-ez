@@ -1,13 +1,8 @@
-import {
-	annotations,
-	decorators,
-	styles,
-} from '@/sanity/lib/portable-components';
+import { annotations, decorators } from '@/sanity/lib/portable-components';
 
 const config = [
 	{
 		type: 'block',
-		styles,
 		marks: {
 			decorators,
 			annotations,
@@ -36,6 +31,9 @@ const config = [
 	},
 	{
 		type: 'ebooksWidget',
+	},
+	{
+		type: 'list',
 	},
 ];
 

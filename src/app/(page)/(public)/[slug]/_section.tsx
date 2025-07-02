@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils';
 import { urlForImage } from '@/sanity/lib/utils';
 import type { Section } from '@/types/page';
 import { PortableText } from '@portabletext/react';
+import Image from 'next/image';
 import { Parallax } from 'react-parallax';
 import ReactPlayer from 'react-player/youtube';
 
@@ -13,7 +14,7 @@ export function SectionContent({
 	title,
 	content,
 	background,
-	video,
+	media,
 	slug,
 }: Section & { slug: string }) {
 	return (
@@ -48,21 +49,37 @@ export function SectionContent({
 					strength={-200}
 					className="w-full overflow-hidden"
 				>
-					<div className="relative flex h-full md:py-20 my-20">
-						<div className="flex flex-col gap-10 justify-center items-center font-bold font-oswald w-full text-white">
-							<div className="overflow-hidden rounded-2xl shadow h-[300px] lg:h-[500px] md:max-h-[500px] max-w-full w-[90vw] md:w-[60vw] mt-10">
-								<ReactPlayer
-									url={video.url}
-									width="100%"
-									height="100%"
-									controls={false}
-									config={{
-										playerVars: { playsinline: 1, fs: 0 },
-									}}
-								/>
+					{media.type === 'IMAGE' && media.image ? (
+						<div className="relative flex h-full md:py-20 my-20">
+							<div className="flex flex-col gap-10 justify-center items-center font-bold font-oswald w-full text-white">
+								<div className="relative overflow-hidden rounded-2xl shadow h-[300px] lg:h-[500px] md:max-h-[500px] max-w-full w-[90vw] md:w-[60vw] mt-10">
+									<Image
+										src={urlForImage(media.image.asset).url()}
+										alt=""
+										fill
+										placeholder="blur"
+										blurDataURL={media.image.metadata.lqip}
+									/>
+								</div>
 							</div>
 						</div>
-					</div>
+					) : (
+						<div className="relative flex h-full">
+							<div className="flex flex-col gap-10 justify-center items-center font-bold font-oswald w-full text-white">
+								<div className="overflow-hidden rounded-2xl shadow h-[300px] lg:h-[650px] max-w-full w-[90vw] md:w-screen">
+									<ReactPlayer
+										url={media.video?.url}
+										width="100%"
+										height="100%"
+										controls={false}
+										config={{
+											playerVars: { playsinline: 1, fs: 0 },
+										}}
+									/>
+								</div>
+							</div>
+						</div>
+					)}
 				</Parallax>
 				<div className="absolute bottom-0 left-0 w-full overflow-hidden rotate-180">
 					{/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
@@ -95,7 +112,7 @@ export function SectionContent({
 					{ 'w-[65vw]': slug !== 'ebooks', 'w-screen': slug === 'ebooks' },
 				)}
 			>
-				<App.Title className="text-center">{title}</App.Title>
+				{title && <App.Title className="text-center">{title}</App.Title>}
 				<div className="flex flex-col gap-5 justify-center items-center w-full lg:max-w-[90vw] py-10 lg:p-0 [&>*:not(hr)]:w-full">
 					<PortableText value={content} components={portableComponents} />
 				</div>

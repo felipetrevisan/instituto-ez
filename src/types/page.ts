@@ -10,14 +10,18 @@ export type Page = {
 };
 
 export type Section = {
-	title: string;
+	title?: string;
 	hash: string;
 	content: PortableTextBlock[];
-	video: {
-		url: string;
-	};
+	media: {
+		type: 'VIDEO' | 'IMAGE';
+		video?: {
+			url: string;
+		};
+		image?: SanityAsset;
+	},
 	background: {
 		image: SanityAsset;
-		title: string;
+		title?: string;
 	};
 };

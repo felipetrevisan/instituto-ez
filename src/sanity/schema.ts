@@ -34,6 +34,8 @@ import buttonLinkWidget from './schemas/objects/editor/button';
 import dividerWidget from './schemas/objects/editor/divider';
 import ebooksWidget from './schemas/objects/editor/ebooks';
 import eventWidget from './schemas/objects/editor/event';
+import listWidget from './schemas/objects/editor/list';
+import richText from './schemas/objects/editor/rich-text';
 import testimonialWidget from './schemas/objects/editor/testimonial';
 import titleWidget from './schemas/objects/editor/title';
 
@@ -74,5 +76,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 		eventWidget,
 		testimonialWidget,
 		ebooksWidget,
+		listWidget,
+		richText
 	],
 };
