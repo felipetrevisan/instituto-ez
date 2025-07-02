@@ -25,7 +25,7 @@ const ListComponent = ({ value }: { value: ListType }) => {
 
 	return (
 		<ul
-			className={cn('flex flex-col p-4 gap-2 [&>li]:py-2', {
+			className={cn('flex flex-col gap-2 [&>li]:py-2', {
 				'divide-y divide-primary/30': divider,
 				'list-disc': bullet_type === 'none',
 			})}

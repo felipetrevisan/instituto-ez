@@ -2,6 +2,7 @@ import { EbookCard } from '@/components/sections/ebooks/card';
 import { Skeleton } from '@/components/sections/testimonials/skeleton';
 import { useEbooks } from '@/hooks/use-ebook';
 import { cn } from '@/lib/utils';
+import type { Theme } from '@/types/global';
 
 type GridSize = 1 | 2 | 3 | 4 | 5;
 
@@ -21,9 +22,13 @@ const rowClassMap: Record<GridSize, string> = {
 	5: 'grid-rows-1 md:grid-rows-5',
 };
 
-const EbooksComponent = ({
-	value,
-}: { value: { rows: number; columns: number } }) => {
+type EbooksType = {
+	rows: number;
+	columns: number;
+	theme: keyof typeof Theme;
+};
+
+const EbooksComponent = ({ value }: { value: EbooksType }) => {
 	const { data, isLoading } = useEbooks();
 
 	const classGridColumn =
@@ -44,7 +49,7 @@ const EbooksComponent = ({
 						)}
 					>
 						{data?.map((ebook, _index) => (
-							<EbookCard item={ebook} full key={ebook.id} />
+							<EbookCard item={ebook} full key={ebook.id} theme={value.theme} />
 						))}
 					</div>
 				)}

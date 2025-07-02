@@ -12,6 +12,20 @@ export default defineType({
 			title: 'Grid',
 			type: 'grid',
 		},
+		{
+			name: 'theme',
+			title: 'Theme',
+			type: 'string',
+			initialValue: 'default',
+			options: {
+				list: [
+					{ title: 'Default', value: 'default' },
+					{ title: 'Secondary', value: 'secondary' },
+					{ title: 'Tertiary', value: 'tertiary' },
+				],
+				layout: 'dropdown',
+			},
+		},
 	],
 	preview: {
 		select: {

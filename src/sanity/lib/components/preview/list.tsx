@@ -27,7 +27,7 @@ const ListPreviewComponent = (props: BlockProps) => {
 				<Card padding={[4, 5, 6]}>
 					<Stack space={4}>
 						<ul
-							className={cn('flex flex-col p-4 gap-2 [&>li]:py-2', {
+							className={cn('flex flex-col gap-2 [&>li]:py-2', {
 								'divide-y divide-primary/30': divider,
 								'list-disc': bullet_type === 'none',
 							})}

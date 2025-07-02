@@ -15,12 +15,13 @@ import { motion } from 'framer-motion';
 
 import './styles.css';
 import { Button } from '@/components/ui/button';
+import type { Theme } from '@/types/global';
 import Image from 'next/image';
-import { useState } from 'react';
 
 type Props = {
 	item: Ebook;
 	full?: boolean;
+	theme: keyof typeof Theme;
 } & CardProps;
 
 const MotionCard = motion(Card);
@@ -28,6 +29,7 @@ const MotionCard = motion(Card);
 export function EbookCard({
 	item: { image, slug, title, subtitle, description, button, disabled },
 	full = false,
+	theme,
 	className,
 }: Props) {
 	const backgroundClass = image.preview
@@ -39,14 +41,21 @@ export function EbookCard({
 	const CardRender = () => (
 		<div className="relative w-fit">
 			{disabled && (
-				<div className="text-base font-bold text-white ribbon filter-none">
+				<div
+					className={cn('text-base font-bold text-white ribbon filter-none', {
+						'ribbon-primary': theme === 'default',
+						'ribbon-secondary': theme === 'secondary',
+						'ribbon-tertiary': theme === 'tertiary',
+					})}
+				>
 					Em breve
 				</div>
 			)}
 			<MotionCard
 				variant="ghost"
+				theme={theme}
 				className={cn(
-					'flex flex-col md:flex-row items-end justify-center shrink md:shrink-0 rounded-xl bg-card w-[70vw] md:w-80 lg:w-80 h-96 relative shadow-2xl',
+					'flex flex-col md:flex-row items-end justify-center shrink md:shrink-0 bg-card w-[70vw] md:w-80 lg:w-80 h-96 relative shadow-2xl',
 					{
 						'grayscale-100 opacity-80 select-none pointer-events-none':
 							disabled,
@@ -62,25 +71,35 @@ export function EbookCard({
 				animate={{
 					transition: { duration: 0.4, ease: 'easeInOut' },
 				}}
-			>
-				</MotionCard>
+			/>
 		</div>
 	);
 
 	const CardFullRender = () => (
 		<div className="relative w-full">
-			<div className="md:hidden flex justify-center item-center ribbon ribbon-primary text-base font-bold uppercase backdrop-blur-2xl p-5 text-center">
+			<div
+				className={cn(
+					'flex justify-center item-center ribbon text-base font-bold uppercase -mt-7 p-5 text-center',
+					{
+						'ribbon-primary': theme === 'default',
+						'ribbon-secondary': theme === 'secondary',
+						'ribbon-tertiary': theme === 'tertiary',
+					},
+				)}
+			>
 				{title}
 			</div>
-
 			<MotionCard
 				variant="ghost"
+				theme={theme}
 				className={cn(
-					'flex flex-col md:flex-row justify-center shrink md:shrink-0 relative rounded-2xl shadow-xl w-full h-full md:h-[300px] border-1! border-primary/50 overflow-hidden',
+					'flex flex-col md:flex-row justify-center shrink md:shrink-0 relative shadow-xl w-full h-full md:h-[300px] border-1! border-primary/50 overflow-hidden',
 					{
 						'grayscale-[85%] opacity-80 select-none pointer-events-none':
 							disabled,
 						'md:flex-col': !description,
+						'rounded-t-2xl': button,
+						'rounded-2xl': !button,
 					},
 					className,
 				)}
@@ -116,30 +135,26 @@ export function EbookCard({
 						</motion.div>
 					</CardHeader>
 				)}
-				<CardContent className="relative flex flex-col justify-between p-0 gap-4 w-full">
-					{description && (
-						<div className="p-5 md:px-3 md:py-2">{description}</div>
-					)}
-					{button && (
-						<div
-							className={cn('relative w-full md:p-5', {
-								'md:absolute md:bottom-0': description,
-							})}
-						>
-							<Button
-								disabled={disabled}
-								fullWidth
-								size="xl"
-								rounded="2xl"
-								className="m-0"
-								scaleEffect={false}
-							>
-								{!disabled ? button.label : 'Em breve'}
-							</Button>
-						</div>
-					)}
-				</CardContent>
+				{description && (
+					<CardContent className="relative flex flex-col justify-center p-0 gap-4 w-full">
+						<div className="p-5 md:text-justify">{description}</div>
+					</CardContent>
+				)}
 			</MotionCard>
+			{button && (
+				<div className="flex justify-center item-center rounded-b-3xl overflow-hidden">
+					<Button
+						disabled={disabled}
+						theme={theme}
+						fullWidth
+						size="xl"
+						className="m-0"
+						scaleEffect={false}
+					>
+						{!disabled ? button.label : 'Em breve'}
+					</Button>
+				</div>
+			)}
 		</div>
 	);
 

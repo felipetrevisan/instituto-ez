@@ -16,7 +16,7 @@ export default defineConfig({
 	projectId,
 	dataset,
 	schema,
-	//theme,
+	theme,
 	studio: {
 		components: {
 			toolMenu: (props) => {
