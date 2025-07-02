@@ -43,7 +43,7 @@ export function Ebooks() {
 								<CarouselItem key={pageIndex} className="w-full py-24">
 									<div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 md:grid-rows-2 gap-18 place-items-center">
 										{page.map((ebook) => (
-											<Card key={ebook.id} item={ebook} />
+											<Card key={ebook.id} item={ebook} theme="default" />
 										))}
 									</div>
 								</CarouselItem>
