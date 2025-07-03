@@ -95,10 +95,11 @@
   padding-inline: 2rem;
 }
 
+@utility bg-ebooks {
+	background-image: url("/assets/images/bg-ebook.png");
+}
+
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
   body {
     @apply bg-background text-foreground;
   }

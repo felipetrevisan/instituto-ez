@@ -7,6 +7,7 @@ import ImageComponent from '@/sanity/lib/components/image';
 import ListComponent from '@/sanity/lib/components/list';
 import TestimonialComponent from '@/sanity/lib/components/testimonial';
 import TitleComponent from '@/sanity/lib/components/title';
+import { TextAlignDecorator } from '@/sanity/lib/portable-components';
 import type { PortableTextComponents } from '@portabletext/react';
 import { LinkIcon } from 'lucide-react';
 import Link from 'next/link';
@@ -25,6 +26,10 @@ export const portableComponents: PortableTextComponents = {
 		list: ListComponent,
 	},
 	marks: {
+		justify: (props) => TextAlignDecorator(props, 'justify'),
+		center: (props) => TextAlignDecorator(props, 'center'),
+		left: (props) => TextAlignDecorator(props, 'left'),
+		right: (props) => TextAlignDecorator(props, 'right'),
 		internalLink: ({ value, children }) => {
 			const { slug = {} } = value;
 			const href = `/${slug.current}`;

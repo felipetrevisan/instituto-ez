@@ -109,7 +109,7 @@ export function SectionContent({
 			<div
 				className={cn(
 					'container flex flex-col gap-10 justify-center items-center',
-					{ 'w-[65vw]': slug !== 'ebooks', 'w-screen': slug === 'ebooks' },
+					{ 'w-screen md:w-[65vw]': slug !== 'ebooks', 'w-screen': slug === 'ebooks' },
 				)}
 			>
 				{title && <App.Title className="text-center">{title}</App.Title>}

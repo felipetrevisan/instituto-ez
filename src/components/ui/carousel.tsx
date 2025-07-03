@@ -279,16 +279,20 @@ function CarouselNext({
 
 function CarouselDots({
 	className,
+	rootClassName,
 	theme,
 	...props
-}: React.ComponentProps<'div'> & VariantProps<typeof carouselVariants>) {
+}: React.ComponentProps<'div'> & VariantProps<typeof carouselVariants> & { rootClassName?: string }) {
 	const { scrollSnaps, selectedIndex, goToSlide } = useCarousel();
+
+	if (!scrollSnaps.length || scrollSnaps.length < 2) return null;
 
 	return (
 		<div
 			className={cn(
 				'flex flex-wrap justify-center items-center',
 				carouselVariants({ theme }),
+				rootClassName,
 			)}
 			data-slot="carousel-dots"
 			{...props}

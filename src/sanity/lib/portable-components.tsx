@@ -11,7 +11,7 @@ const HighlightDecorator = (props: any) => {
 };
 
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-const TextAlignDecorator = (props: any, align: string) => {
+export const TextAlignDecorator = (props: any, align: string) => {
 	const alignMap = {
 		center: 'text-center',
 		right: 'text-right',
@@ -36,7 +36,6 @@ const basicDecorators = [
 		component: HighlightDecorator,
 	},
 ];
-
 
 const decorators = [
 	{ title: 'Bold', value: 'strong' },

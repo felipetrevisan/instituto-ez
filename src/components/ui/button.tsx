@@ -9,7 +9,7 @@ const buttonVariants = cva(
 	{
 		variants: {
 			variant: {
-				default: 'shadow-sm outline outline-2',
+				default: 'shadow-sm outline-none',
 				outline: 'shadow-sm outline outline-2',
 				ghost: 'shadow-none outline-none border-none',
 				link: 'bg-none shadow-none border-none',

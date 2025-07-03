@@ -190,7 +190,7 @@ function Footer({ className }: React.ComponentProps<'div'>) {
 	);
 }
 
-export const titleVariants = cva('font-oswald font-bold text-center', {
+export const titleVariants = cva('font-oswald font-bold md:text-center', {
 	variants: {
 		variant: {
 			default: 'text-primary',

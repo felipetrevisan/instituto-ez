@@ -6,7 +6,7 @@ import { SectionContent } from './_section';
 export function Content({ data, slug }: { data: Page; slug: string }) {
 	return (
 		<>
-			{data?.sections.map((section, index) => (
+			{data?.sections.map((section) => (
 				<section
 					key={section.hash}
 					id={section.hash}

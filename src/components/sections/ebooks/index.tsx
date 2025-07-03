@@ -36,12 +36,12 @@ export function Ebooks() {
 				{isLoading && <Skeleton />}
 				{!isLoading && (
 					<Carousel plugins={[ClassNames()]} className="overflow-visible">
-						<CarouselDots theme="default" />
+						<CarouselDots theme="default" rootClassName="pb-24" />
 						<CarouselContent>
 							{paginatedItems.map((page, pageIndex) => (
 								// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-								<CarouselItem key={pageIndex} className="w-full py-24">
-									<div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 md:grid-rows-2 gap-18 place-items-center">
+								<CarouselItem key={pageIndex} className="w-full">
+									<div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 md:grid-rows-2 gap-12 gap-y-12 place-items-center">
 										{page.map((ebook) => (
 											<Card key={ebook.id} item={ebook} theme="default" />
 										))}

@@ -8,6 +8,12 @@ export default defineType({
 	icon: MdImage,
 	fields: [
 		defineField({
+			name: 'background_image',
+			title: 'Background Image',
+			type: 'image',
+			description: 'This image will be used as a background for the card image. Only in Ebooks Catalog. You can leave blank to use background transparent',
+		}),
+		defineField({
 			name: 'small_image',
 			title: 'Small Image',
 			type: 'image',

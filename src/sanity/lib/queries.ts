@@ -220,6 +220,13 @@ export const ebookQuery = groq`
     subtitle,
     description,
     "image": images {
+      "background": background_image {
+        "asset": asset,
+        "metadata": {
+          "lqip": asset->metadata.lqip,
+          "dimensions": asset->metadata.dimensions
+        }
+      },
       "preview": small_image {
         "asset": asset,
         "metadata": {

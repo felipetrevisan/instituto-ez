@@ -8,6 +8,7 @@ export type Ebook = {
 	slug: string;
 	description?: string;
 	image: {
+		background?: SanityAsset;
 		preview: SanityAsset;
 		large: SanityAsset;
 	}
