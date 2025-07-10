@@ -24,6 +24,9 @@ const config = [
 		type: 'alert',
 	},
 	{
+		type: 'tabsWidget',
+	},
+	{
 		type: 'divider',
 	},
 	{

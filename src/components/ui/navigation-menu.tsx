@@ -1,9 +1,7 @@
+import { cn } from '@/lib/utils';
 import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
 import { cva } from 'class-variance-authority';
 import { ChevronDownIcon, icons } from 'lucide-react';
-import type * as React from 'react';
-
-import { cn } from '@/lib/utils';
 
 type NavigationMenuProps = React.ComponentProps<
 	typeof NavigationMenuPrimitive.Root

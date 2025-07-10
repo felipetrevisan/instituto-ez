@@ -137,7 +137,7 @@ function Content({ className, children }: React.ComponentProps<'div'>) {
 	return (
 		<motion.main
 			className={cn(
-				'mt-24 lg:mt-36 container relative h-full flex items-center flex-col justify-center space-x-2',
+				'mt-24 lg:mt-36 container relative h-full flex items-center flex-col justify-center',
 				{
 					'before:backdrop-blur-xl before:absolute before:w-full before:h-full before:bg-white/50 before:z-50':
 						isMenuOpen,
@@ -190,7 +190,7 @@ function Footer({ className }: React.ComponentProps<'div'>) {
 	);
 }
 
-export const titleVariants = cva('font-oswald font-bold md:text-center', {
+export const titleVariants = cva('font-oswald font-bold', {
 	variants: {
 		variant: {
 			default: 'text-primary',
@@ -203,7 +203,8 @@ export const titleVariants = cva('font-oswald font-bold md:text-center', {
 			sm: 'clamp-[text,sm,lg]',
 			lg: 'clamp-[text,lg,2xl]',
 			xl: 'clamp-[text,xl,2xl]',
-			'2xl': 'clamp-[text,2xl,8xl]',
+			'2xl': 'clamp-[text,2xl,4xl]',
+			'3xl': 'clamp-[text,4xl,8xl]',
 		},
 	},
 	defaultVariants: {

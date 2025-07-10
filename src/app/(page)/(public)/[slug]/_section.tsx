@@ -67,7 +67,7 @@ export function SectionContent({
 						<div className="relative flex h-full">
 							<div className="flex flex-col gap-10 justify-center items-center font-bold font-oswald w-full text-white">
 								<div className="overflow-hidden rounded-2xl shadow h-[300px] lg:h-[650px] max-w-full w-[90vw] md:w-screen">
-									<ReactPlayer
+									{/* <ReactPlayer
 										url={media.video?.url}
 										width="100%"
 										height="100%"
@@ -75,7 +75,7 @@ export function SectionContent({
 										config={{
 											playerVars: { playsinline: 1, fs: 0 },
 										}}
-									/>
+									/> */}
 								</div>
 							</div>
 						</div>
@@ -109,11 +109,21 @@ export function SectionContent({
 			<div
 				className={cn(
 					'container flex flex-col gap-10 justify-center items-center',
-					{ 'w-screen md:w-[65vw]': slug !== 'ebooks', 'w-screen': slug === 'ebooks' },
+					{
+						'w-screen xl:w-[65vw]': slug !== 'ebooks',
+						'w-screen': slug === 'ebooks',
+					},
 				)}
 			>
 				{title && <App.Title className="text-center">{title}</App.Title>}
-				<div className="flex flex-col gap-5 justify-center items-center w-full lg:max-w-[90vw] py-10 lg:p-0 [&>*:not(hr)]:w-full">
+				<div
+					className={cn(
+						'flex flex-col gap-5 justify-center items-center w-full lg:max-w-[90vw] py-10 lg:p-0 [&>*:not(hr)]:w-full',
+						{
+							'gap-10': slug === 'ebooks',
+						},
+					)}
+				>
 					<PortableText value={content} components={portableComponents} />
 				</div>
 			</div>

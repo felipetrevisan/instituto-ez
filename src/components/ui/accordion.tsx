@@ -110,80 +110,71 @@ type AccordionTriggerProps = React.ComponentProps<
 > & {
 	transition?: Transition;
 	chevron?: boolean;
+	ref?: React.RefObject<HTMLButtonElement>;
 };
 
-const AccordionTrigger = React.forwardRef<
-	HTMLButtonElement,
-	AccordionTriggerProps
->(
-	(
-		{
-			className,
-			children,
-			transition = { type: 'spring', stiffness: 150, damping: 22 },
-			chevron = true,
-			...props
-		},
-		ref,
-	) => {
-		const triggerRef = React.useRef<HTMLButtonElement | null>(null);
-		React.useImperativeHandle(
-			ref,
-			() => triggerRef.current as HTMLButtonElement,
-		);
-		const { isOpen, setIsOpen } = useAccordionItem();
+function AccordionTrigger({
+	ref,
+	className,
+	children,
+	transition = { type: 'spring', stiffness: 150, damping: 22 },
+	chevron = true,
+	...props
+}: AccordionTriggerProps) {
+	const triggerRef = React.useRef<HTMLButtonElement | null>(null);
+	React.useImperativeHandle(ref, () => triggerRef.current as HTMLButtonElement);
+	const { isOpen, setIsOpen } = useAccordionItem();
 
-		React.useEffect(() => {
-			const node = triggerRef.current;
-			if (!node) return;
+	React.useEffect(() => {
+		const node = triggerRef.current;
+		if (!node) return;
 
-			const observer = new MutationObserver((mutationsList) => {
-				// biome-ignore lint/complexity/noForEach: <explanation>
-				mutationsList.forEach((mutation) => {
-					if (mutation.attributeName === 'data-state') {
-						const currentState = node.getAttribute('data-state');
-						setIsOpen(currentState === 'open');
-					}
-				});
+		const observer = new MutationObserver((mutationsList) => {
+			// biome-ignore lint/complexity/noForEach: <explanation>
+			mutationsList.forEach((mutation) => {
+				if (mutation.attributeName === 'data-state') {
+					const currentState = node.getAttribute('data-state');
+					setIsOpen(currentState === 'open');
+				}
 			});
-			observer.observe(node, {
-				attributes: true,
-				attributeFilter: ['data-state'],
-			});
-			const initialState = node.getAttribute('data-state');
-			setIsOpen(initialState === 'open');
-			return () => {
-				observer.disconnect();
-			};
-		}, [setIsOpen]);
+		});
+		observer.observe(node, {
+			attributes: true,
+			attributeFilter: ['data-state'],
+		});
+		const initialState = node.getAttribute('data-state');
+		setIsOpen(initialState === 'open');
+		return () => {
+			observer.disconnect();
+		};
+	}, [setIsOpen]);
 
-		return (
-			<AccordionPrimitive.Header data-slot="accordion-header" className="flex">
-				<AccordionPrimitive.Trigger
-					ref={triggerRef}
-					data-slot="accordion-trigger"
-					className={cn(
-						'focus-visible:border-ring focus-visible:ring-ring/50 flex flex-1 items-start justify-between gap-4 px-4 py-5 text-left text-md font-semibold transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&[data-state=open]>svg]:rotate-180',
-						className,
-					)}
-					{...props}
-				>
-					{children}
+	return (
+		<AccordionPrimitive.Header data-slot="accordion-header" className="flex">
+			<AccordionPrimitive.Trigger
+				ref={triggerRef}
+				data-slot="accordion-trigger"
+				className={cn(
+					'focus-visible:border-ring focus-visible:ring-ring/50 flex flex-1 items-start justify-between gap-4 px-4 py-5 text-left text-md font-semibold transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&[data-state=open]>svg]:rotate-180',
+					className,
+				)}
+				{...props}
+			>
+				{children}
 
-					{chevron && (
-						<motion.div
-							data-slot="accordion-trigger-chevron"
-							animate={{ rotate: isOpen ? 180 : 0 }}
-							transition={transition}
-						>
-							<ChevronDownIcon className="size-5 shrink-0" />
-						</motion.div>
-					)}
-				</AccordionPrimitive.Trigger>
-			</AccordionPrimitive.Header>
-		);
-	},
-);
+				{chevron && (
+					<motion.div
+						data-slot="accordion-trigger-chevron"
+						animate={{ rotate: isOpen ? 180 : 0 }}
+						transition={transition}
+					>
+						<ChevronDownIcon className="size-5 shrink-0" />
+					</motion.div>
+				)}
+			</AccordionPrimitive.Trigger>
+		</AccordionPrimitive.Header>
+	);
+}
 
 type AccordionContentProps = React.ComponentProps<
 	typeof AccordionPrimitive.Content

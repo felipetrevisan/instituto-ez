@@ -9,7 +9,6 @@ import {
 	motion,
 } from 'framer-motion';
 import { XIcon } from 'lucide-react';
-import type * as React from 'react';
 import {
 	createContext,
 	useCallback,

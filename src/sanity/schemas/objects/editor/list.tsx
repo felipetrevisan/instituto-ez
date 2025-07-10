@@ -1,5 +1,4 @@
 import ListPreviewComponent from '@/sanity/lib/components/preview/list';
-import { annotations, basicDecorators } from '@/sanity/lib/portable-components';
 import { ListIcon } from '@sanity/icons';
 import * as Icons from 'react-icons/fa';
 import { defineType } from 'sanity';

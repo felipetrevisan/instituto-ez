@@ -291,6 +291,86 @@ export const ebookQueryBySlug = groq`
   }
 `;
 
+export const ebooksCollectionQuery = groq`
+  *[ _type == 'ebooks-collection'] { 
+    "id": _id,
+    title,
+    ebooks[]->{
+      "id": _id,
+      title,
+      "slug": slug.current,
+      subtitle,
+      description,
+      "image": images {
+        "preview": small_image {
+          "asset": asset,
+          "metadata": {
+            "lqip": asset->metadata.lqip,
+            "dimensions": asset->metadata.dimensions
+          }
+        },
+        "large": large_image {
+          "asset": asset,
+          "metadata": {
+            "lqip": asset->metadata.lqip,
+            "dimensions": asset->metadata.dimensions
+          }
+        }
+      },
+      disabled,
+      "button": button {
+        "visible": show_button,
+        "disabled": disable_button,
+        "label": button_label,
+        "type": button_link_type,
+        "link": button_internal_link->slug.current,
+        "params": button_internal_params,
+        "externalUrl": button_external_url
+      }
+    }
+  }
+`;
+
+export const ebooksCollectionQueryByCollection = groq`
+  *[ _type == 'ebooks-collection' && _id == $id] [0] { 
+    "id": _id,
+    title,
+    ebooks[]->{
+      "id": _id,
+      title,
+      "slug": slug.current,
+      subtitle,
+      description,
+      "image": images {
+        "preview": small_image {
+          "asset": asset,
+          "metadata": {
+            "lqip": asset->metadata.lqip,
+            "dimensions": asset->metadata.dimensions
+          }
+        },
+        "large": large_image {
+          "asset": asset,
+          "metadata": {
+            "lqip": asset->metadata.lqip,
+            "dimensions": asset->metadata.dimensions
+          }
+        }
+      },
+      disabled,
+      "button": button {
+        "visible": show_button,
+        "disabled": disable_button,
+        "label": button_label,
+        "type": button_link_type,
+        "link": button_internal_link->slug.current,
+        "params": button_internal_params,
+        "externalUrl": button_external_url
+      }
+    }
+  }
+`;
+
 export const workshopQuery = groq`
   *[ _type == 'workshop' ] | order(orderRank) { 
     "id": _id,

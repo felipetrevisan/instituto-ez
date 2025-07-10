@@ -5,6 +5,7 @@ import DividerComponent from '@/sanity/lib/components/divider';
 import EbooksComponent from '@/sanity/lib/components/ebooks';
 import ImageComponent from '@/sanity/lib/components/image';
 import ListComponent from '@/sanity/lib/components/list';
+import TabsComponent from '@/sanity/lib/components/tabs';
 import TestimonialComponent from '@/sanity/lib/components/testimonial';
 import TitleComponent from '@/sanity/lib/components/title';
 import { TextAlignDecorator } from '@/sanity/lib/portable-components';
@@ -24,6 +25,7 @@ export const portableComponents: PortableTextComponents = {
 		testimonialWidget: TestimonialComponent,
 		ebooksWidget: EbooksComponent,
 		list: ListComponent,
+		tabsWidget: TabsComponent,
 	},
 	marks: {
 		justify: (props) => TextAlignDecorator(props, 'justify'),

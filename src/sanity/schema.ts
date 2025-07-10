@@ -1,7 +1,8 @@
 import type { SchemaTypeDefinition } from 'sanity';
 
 import advancedMentory from './schemas/advanced-mentory';
-import ebook from './schemas/ebooks';
+import ebookCatalog from './schemas/ebooks/catalog';
+import ebookCollection from './schemas/ebooks/collection';
 import immersion from './schemas/immersion';
 import lecture from './schemas/lecture';
 import mathematizer from './schemas/mathematizer';
@@ -36,6 +37,7 @@ import ebooksWidget from './schemas/objects/editor/ebooks';
 import eventWidget from './schemas/objects/editor/event';
 import listWidget from './schemas/objects/editor/list';
 import richText from './schemas/objects/editor/rich-text';
+import tabsWidget from './schemas/objects/editor/tabs';
 import testimonialWidget from './schemas/objects/editor/testimonial';
 import titleWidget from './schemas/objects/editor/title';
 
@@ -44,7 +46,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 		settings,
 		testimonial,
 		workshop,
-		ebook,
+		ebookCatalog,
+		ebookCollection,
 		services,
 		immersion,
 		advancedMentory,
@@ -77,6 +80,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 		testimonialWidget,
 		ebooksWidget,
 		listWidget,
-		richText
+		richText,
+		tabsWidget
 	],
 };

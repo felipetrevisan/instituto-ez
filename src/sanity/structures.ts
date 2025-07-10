@@ -1,5 +1,5 @@
 import { orderableDocumentListDeskItem } from '@sanity/orderable-document-list';
-import { MdPages, MdSettings } from 'react-icons/md';
+import { MdComment, MdPages, MdSettings } from 'react-icons/md';
 import type { ConfigContext } from 'sanity';
 import type { StructureBuilder } from 'sanity/structure';
 
@@ -71,12 +71,6 @@ const structure = (S: StructureBuilder, context: ConfigContext) =>
 								.title('Matematizador')
 								.child(S.documentTypeList('mathematizer')),
 							orderableDocumentListDeskItem({
-								type: 'ebook',
-								title: 'Ebooks',
-								S,
-								context,
-							}),
-							orderableDocumentListDeskItem({
 								type: 'testimonial',
 								title: 'Depoimentos',
 								S,
@@ -91,6 +85,29 @@ const structure = (S: StructureBuilder, context: ConfigContext) =>
 				.title('Pages')
 				.icon(MdPages)
 				.child(S.documentTypeList('page')),
+
+			S.divider(),
+			S.listItem()
+				.title('Ebooks')
+				.icon(MdComment)
+				.child(
+					S.list()
+						.title('Ebooks')
+						.items([
+							orderableDocumentListDeskItem({
+								type: 'ebook',
+								title: 'Catálogo',
+								S,
+								context,
+							}),
+							orderableDocumentListDeskItem({
+								type: 'ebooks-collection',
+								title: 'Coleções',
+								S,
+								context,
+							}),
+						]),
+				),
 
 			S.divider(),
 			...S.documentTypeListItems().filter(
@@ -108,6 +125,7 @@ const structure = (S: StructureBuilder, context: ConfigContext) =>
 						'lecture',
 						'mathematizer',
 						'ebook',
+						'ebooks-collection',
 						'testimonial',
 						'advanced-mentory',
 					].includes(listItem.getId() || ''),

@@ -4,13 +4,46 @@ import { defineType } from 'sanity';
 export default defineType({
 	name: 'ebooksWidget',
 	type: 'object',
-	title: 'Ebooks',
+	title: 'Ebooks Collection',
 	icon: CommentIcon,
 	fields: [
+		{
+			name: 'type',
+			title: 'Collection Type',
+			type: 'string',
+			initialValue: 'grid',
+			options: {
+				list: [
+					{ title: 'Grid', value: 'grid' },
+					{ title: 'Carousel', value: 'carousel' },
+				],
+				layout: 'radio',
+			},
+		},
+		{
+			name: 'collection',
+			title: 'Collection',
+			type: 'reference',
+			to: { type: 'ebooks-collection' },
+		},
 		{
 			name: 'grid',
 			title: 'Grid',
 			type: 'grid',
+			hidden: ({ parent }) => parent.type !== 'grid',
+		},
+		{
+			name: 'appareance',
+			title: 'Appareance',
+			type: 'string',
+			initialValue: 'full',
+			options: {
+				list: [
+					{ title: 'Only Image Card', value: 'small' },
+					{ title: 'Full Card', value: 'full' },
+				],
+				layout: 'radio',
+			},
 		},
 		{
 			name: 'theme',
@@ -29,13 +62,14 @@ export default defineType({
 	],
 	preview: {
 		select: {
-			rows: 'grid.rows',
-			columns: 'grid.columns',
+			type: 'type',
+			appareance: 'appareance',
+			theme: 'theme',
 		},
-		prepare({ rows, columns }) {
+		prepare({ type, theme, appareance }) {
 			return {
 				title: 'Ebooks',
-				subtitle: `Grid ${rows} x ${columns}`,
+				subtitle: `Tipo: ${type} → Tema: ${theme} → Estilo Visual: ${appareance}`,
 			};
 		},
 	},

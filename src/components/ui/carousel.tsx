@@ -1,14 +1,13 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+import { type VariantProps, cva } from 'class-variance-authority';
 import useEmblaCarousel, {
 	type UseEmblaCarouselType,
 } from 'embla-carousel-react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
-import * as React from 'react';
-
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
-import { type VariantProps, cva } from 'class-variance-authority';
+import React from 'react';
 import {
 	MotionHighlight,
 	MotionHighlightItem,

@@ -15,3 +15,9 @@ export type Ebook = {
 	disabled: boolean;
 	button?: Button;
 };
+
+export type EbookCollection = {
+	id: string;
+	title: string;
+	ebooks?: Ebook[];
+};
