@@ -1,0 +1,23 @@
+import { portableBlocks } from '@ez/shared/sanity/portable/blocks'
+import { portableLists } from '@ez/shared/sanity/portable/lists'
+import { portableMarks } from '@ez/shared/sanity/portable/marks'
+import { portableTypes } from '@ez/shared/sanity/portable/type'
+import { EbooksWrapper } from '@ez/web/components/portable/ebooks'
+import { TabsWrapper } from '@ez/web/components/portable/tabs'
+import { TestimonialsWrapper } from '@ez/web/components/portable/testimonials'
+
+export const createPortableComponents = () => {
+  const types = {
+    ...portableTypes,
+    testimonialWidget: TestimonialsWrapper,
+    ebooksWidget: EbooksWrapper,
+    tabsWidget: TabsWrapper,
+  }
+
+  return {
+    types,
+    block: portableBlocks,
+    marks: portableMarks,
+    list: portableLists,
+  }
+}

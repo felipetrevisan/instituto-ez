@@ -1,0 +1,43 @@
+{
+  "name": "@ez/web",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@ez/shared": "workspace:*",
+    "@hookform/resolvers": "^4.1.3",
+    "@bprogress/next": "3.2.12",
+    "@next/third-parties": "^15.2.2",
+    "@portabletext/react": "3.2.1",
+    "@radix-ui/react-slot": "^1.2.2",
+    "@react-email/components": "^0.0.25",
+    "@tanstack/react-query": "^5.24.8",
+    "@tanstack/react-query-devtools": "^5.25.0",
+    "@vercel/analytics": "1.5.0",
+    "@vercel/speed-insights": "^1.0.10",
+    "embla-carousel-autoplay": "^8.6.0",
+    "embla-carousel-class-names": "8.6.0",
+    "embla-carousel-fade": "8.6.0",
+    "embla-carousel-react": "^8.6.0",
+    "next": "^15.1.6",
+    "next-themes": "^0.4.6",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-hook-form": "^7.56.3",
+    "react-parallax": "^3.5.1",
+    "react-player": "^2.16.0",
+    "resend": "4.5.1",
+    "tailwind-clamp": "4.0.13",
+		"tailwind-merge": "^2.6.0",
+		"tailwindcss-animate": "^1.0.7"
+  },
+  "devDependencies": {
+ 		"@tailwindcss/postcss": "4.1.7",
+    "postcss": "^8",
+		"tailwindcss": "^4.1.7",
+		"tw-animate-css": "1.2.9"
+	}
+}

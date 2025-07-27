@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .swiper {
+    --swiper-pagination-bottom: -3rem;
+
+    .swiper-pagination-horizontal {
+      @apply mt-10 bottom-0 flex justify-center items-center;
+
+      .swiper-pagination-bullet {
+        @apply size-2! rounded-full;
+
+        &.swiper-pagination-bullet-active {
+          @apply size-3!;
+          background-color: var(--color-tertiary) !important;
+        }
+      }
+    }
+  }
+}

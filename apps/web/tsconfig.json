@@ -1,0 +1,37 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "baseUrl": "./src",
+    "paths": {
+      "@ez/web/*": ["*"],
+      "@ez/shared/*": ["../../../packages/shared/src/*"]
+    }
+  },
+  "include": [
+    "src/video.d.ts",
+    "web/next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+ ],
+  "exclude": [
+    "node_modules"
+  ],
+  "watchOptions": {
+    "excludeDirectories": [
+      "node_modules",
+      ".next",
+      ".turbo"
+    ]
+  }
+}

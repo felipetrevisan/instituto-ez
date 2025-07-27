@@ -1,0 +1,51 @@
+[data-variant="default"] {
+  &[data-theme="default"] .author {
+    --bc: var(--color-primary-foreground);
+    --fc: var(--color-primary);
+  }
+
+  &[data-theme="secondary"] .author {
+    --bc: var(--color-secondary-foreground);
+    --fc: var(--color-secondary);
+  }
+
+  &[data-theme="tertiary"] .author {
+    --bc: var(--color-tertiary-foreground);
+    --fc: var(--color-tertiary);
+  }
+}
+
+[data-variant="outline"] {
+  &[data-theme="default"] .author {
+    --bc: var(--color-primary);
+    --fc: var(--color-primary-foreground);
+  }
+
+  &[data-theme="secondary"] .author {
+    --bc: var(--color-secondary);
+    --fc: var(--color-secondary-foreground);
+  }
+
+  &[data-theme="tertiary"] .author {
+    --bc: var(--color-tertiary);
+    --fc: var(--color-tertiary-foreground);
+  }
+}
+
+.author {
+  --r: .4em;
+
+  position: absolute;
+  bottom: 20px;
+  right: calc(-1.7 * var(--r));
+  line-height: 1.8;
+  color: var(--fc);
+  padding: calc(2 * var(--r)) .5em 0;
+  border-radius: 0 var(--r) var(--r) 0;
+  background: radial-gradient(100% 50% at right, var(--bc) 98%, #0000 101%) 0 100% / .5lh
+    calc(100% - 2 * var(--r)), radial-gradient(100% 50% at left, #0005 98%, #0000 101%) 100% 0 /
+    var(--r) calc(2 * var(--r)),
+    conic-gradient(at calc(100% - var(--r)) calc(2 * var(--r)), var(--bc) 75%, #0000 0) 100% 0 /
+    calc(101% - .5lh) 100%;
+  background-repeat: no-repeat;
+}
