@@ -21,5 +21,9 @@
     "test": {
       "outputs": []
     }
-  }
+  },
+  "globalEnv": [
+    "SANITY_API_READ_TOKEN",
+    "RESEND_API_KEY"
+  ]
 }
