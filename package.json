@@ -7,9 +7,7 @@
     "packages/*"
   ],
   "scripts": {
-    "build:tailwind": "tailwindcss -i ./packages/shared/ui/styles/style.css -o ./apps/web/app/globals.css",
-    "build:web": "pnpm --filter web run build",
-    "build": "pnpm run build:tailwind && pnpm run build:web && pnpm run build:studio",
+    "build-tw": "tailwindcss -i ./packages/shared/src/styles/style.css -o ./apps/web/src/app/styles.css",
     "dev:web": "pnpm --filter web dev",
     "dev:studio": "pnpm --filter studio dev",
     "lint:web:check": "pnpm biome check --formatter-enabled=true --linter-enabled=true --organize-imports-enabled=false ./web/src",
@@ -38,6 +36,7 @@
     "@types/node": "^20",
     "@types/react": "19.1.8",
     "@types/react-dom": "19.1.6",
+    "tailwindcss": "^4.1.7",
     "turbo": "2.5.5",
     "typescript": "^5.8"
   },

@@ -1,12 +1,10 @@
-import { getEbookBySlug, getEbooks } from '../../../../../server/get-ebook'
+import { getEbookBySlug, getEbooks } from '@ez/web/server/get-ebook'
 import { Content } from './_content'
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
 
   const data = await getEbookBySlug(slug)
-
-  console.log(data)
 
   return (
     <div className="w-full flex items-center flex-col justify-center space-y-14">

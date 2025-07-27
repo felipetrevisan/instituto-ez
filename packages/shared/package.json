@@ -48,7 +48,7 @@
 		"node": "22.x"
 	},
 	"exports": {
-		"./globals.css": "./src/ui/styles/style.css",
+		"./styles.css": "./src/styles/style.css",
     "./postcss.config": "./postcss.config.mjs",
 		"./icons/*": "./src/icons/*.ts",
     "./lib/*": "./src/lib/*.ts",

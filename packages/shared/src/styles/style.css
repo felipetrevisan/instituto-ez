@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
-@source "apps/web/**/*.{ts,tsx}";
-@source "apps/studio/**/*.{ts,tsx}";
-@source "packages/shared/**/*.{ts,tsx}";
+@source "../../../../apps/web/**/*.{ts,tsx}";
+@source "../../../../apps/studio/**/*.{ts,tsx}";
+@source "../**/*.{ts,tsx,css}";
 
 @plugin "tailwind-clamp";
 @plugin "tailwindcss-animate";

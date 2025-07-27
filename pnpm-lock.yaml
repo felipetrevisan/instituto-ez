@@ -54,6 +54,9 @@ importers:
       '@types/react-dom':
         specifier: 19.1.6
         version: 19.1.6(@types/react@19.1.8)
+      tailwindcss:
+        specifier: ^4.1.7
+        version: 4.1.11
       turbo:
         specifier: 2.5.5
         version: 2.5.5

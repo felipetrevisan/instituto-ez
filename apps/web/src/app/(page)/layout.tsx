@@ -5,7 +5,7 @@ import type { Metadata } from 'next'
 import { Inter, Oswald, Questrial } from 'next/font/google'
 import Providers from './providers'
 
-import '../globals.css'
+import './../styles.css'
 
 const inter = Inter({
   subsets: ['latin'],
