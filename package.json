@@ -7,7 +7,6 @@
     "packages/*"
   ],
   "scripts": {
-    "build-tw": "tailwindcss -i ./packages/shared/src/styles/style.css -o ./apps/web/src/app/styles.css",
     "build": "turbo run build",
     "dev:web": "pnpm --filter web dev",
     "dev:studio": "pnpm --filter studio dev",
