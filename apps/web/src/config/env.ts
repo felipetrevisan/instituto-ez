@@ -16,8 +16,6 @@ function requiredOnEnv(env: z.infer<typeof nodeEnv>) {
 
 export const env = createEnv({
   server: {
-    SANITY_PROJECT_ID: z.string().min(1),
-    SANITY_DATASET: z.string().default('production'),
     SANITY_API_READ_TOKEN: z.string().refine(requiredOnEnv('production')),
     RESEND_API_KEY: z
       .string()
@@ -37,8 +35,6 @@ export const env = createEnv({
   },
   runtimeEnv: {
     SANITY_API_READ_TOKEN: process.env.SANITY_API_READ_TOKEN,
-    SANITY_PROJECT_ID: process.env.SANITY_PROJECT_ID,
-    SANITY_DATASET: process.env.SANITY_DATASET,
     RESEND_API_KEY: process.env.RESEND_API_KEY,
     NEXT_PUBLIC_SANITY_PROJECT_ID: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
     NEXT_PUBLIC_SANITY_DATASET: process.env.NEXT_PUBLIC_SANITY_DATASET,

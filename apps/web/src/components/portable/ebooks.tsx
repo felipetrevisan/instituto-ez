@@ -8,7 +8,7 @@ import type { Ebook, EbookCollection } from '@ez/web/types/ebook'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import '@@ez/web/components/sections/ebooks/styles.css'
+import '@ez/web/components/sections/ebooks/styles.css'
 
 export const EbooksWrapper = ({
   value,

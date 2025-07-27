@@ -46,26 +46,3 @@
     conic-gradient(from 90deg at var(--r) calc(100% - 2 * var(--r)), #0000 25%, var(--bg) 0) 0 0 /
     calc(100% - var(--r)) 100%;
 }
-
-/* .ribbon-alt {
-	--d: .8em;
-
-	position: absolute;
-	bottom: -4em;
-	translate: 0 -50%;
-	inset-inline: calc(-1 * var(--d));
-	padding-block: var(--d);
-	line-height: 1.8;
-	clip-path: polygon(
-		0 var(--d),
-		calc(100% - var(--d)) var(--d),
-		calc(100% - var(--d)) 0,
-		100% var(--d),
-		100% calc(100% - var(--d)),
-		var(--d) calc(100% - var(--d)),
-		var(--d) 100%,
-		0 calc(100% - var(--d))
-	);
-	border-image: conic-gradient(var(--color-primary) 0 0) 50% / var(--d);
-	background-color: white;
-} */

@@ -4,8 +4,8 @@ import {
   TestimonialComponent,
   type TestimonialType,
 } from '@ez/shared/sanity/components/testimonial'
+import { Skeleton } from '@ez/web/components/sections/testimonials/skeleton'
 import { useTestimonials } from '@ez/web/hooks/use-testimonials'
-import { Skeleton } from '../sections/testimonials/skeleton'
 
 export const TestimonialsWrapper = ({
   value,

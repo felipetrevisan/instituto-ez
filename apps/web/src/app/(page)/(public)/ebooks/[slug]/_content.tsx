@@ -207,7 +207,7 @@ export function Content({ data }: { data: Ebook }) {
                           </div>
                         </div>
                       )}
-                      <div className="flex flex-col">
+                      {/* <div className="flex flex-col">
                         <dt className="mb-2 flex flex-col justify-center items-center gap-2 min-h-[72px]">
                           {meta.prefix && (
                             <span className="text-sm font-medium opacity-70">{meta.prefix}</span>
@@ -225,7 +225,7 @@ export function Content({ data }: { data: Ebook }) {
                           )}
                         </dt>
                         <dd className="text-gray-500 dark:text-gray-400">{meta.title}</dd>
-                      </div>
+                      </div> */}
                     </div>
                   </CardContent>
                 </Card>
