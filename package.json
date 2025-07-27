@@ -7,6 +7,9 @@
     "packages/*"
   ],
   "scripts": {
+    "build:tailwind": "tailwindcss -i ./packages/shared/ui/styles/style.css -o ./apps/web/app/globals.css",
+    "build:web": "pnpm --filter web run build",
+    "build": "pnpm run build:tailwind && pnpm run build:web && pnpm run build:studio",
     "dev:web": "pnpm --filter web dev",
     "dev:studio": "pnpm --filter studio dev",
     "lint:web:check": "pnpm biome check --formatter-enabled=true --linter-enabled=true --organize-imports-enabled=false ./web/src",
