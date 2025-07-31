@@ -45,7 +45,7 @@ export function AnimatedCounter({
 
   return (
     <motion.span
-      className="font-bold text-4xl text-primary"
+      className="font-bold text-4xl"
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}

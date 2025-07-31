@@ -7,6 +7,7 @@ const cardVariants = cva('relative', {
       default: 'shadow-[0_0_15px_3px] outline outline-2',
       outline: 'shadow-[0_0_15px_3px] outline outline-2',
       ghost: 'shadow-none outline-none border-none',
+      custom: ''
     },
     theme: {
       default:
@@ -15,6 +16,7 @@ const cardVariants = cva('relative', {
         'shadow-secondary/20 bg-linear-to-r from-secondary via-secondary/80 to-secondary hover:bg-secondary/30 hover:text-secondary-foreground text-secondary-foreground outline-secondary/40 hover:border-secondary/40',
       tertiary:
         'shadow-tertiary/20 bg-linear-to-r from-tertiary via-tertiary/80 to-tertiary text-tertiary-foreground hover:bg-tertiary/30 hover:text-tertiary-foreground outline-tertiary/40 hover:border-tertiary/40',
+      custom: ''
     },
     rounded: {
       none: 'rounded-none **:data-[slot=card-content-action]:rounded-none',

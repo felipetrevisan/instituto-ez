@@ -23,7 +23,11 @@ export default defineType({
     },
     {
       name: 'theme',
-      title: 'Theme',
+      title: 'Themes',
+    },
+    {
+      name: 'questions',
+      title: 'Questions',
     },
     {
       name: 'link',
@@ -84,6 +88,14 @@ export default defineType({
       title: 'Theme',
       type: 'theme',
       group: ['theme'],
+    }),
+    defineField({
+      name: 'questions',
+      title: 'Questions',
+      type: 'array',
+      group: ['questions'],
+      of: [{ type: 'accordion-content' }],
+      validation: (Rule) => Rule.required().warning('Must have at least one content.'),
     }),
     defineField({
       name: 'disabled',

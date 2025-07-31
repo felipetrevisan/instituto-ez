@@ -13,9 +13,10 @@ const accordionVariants = cva('relative', {
       default:
         '**:data-[slot=accordion-trigger]:text-primary **:data-[slot=accordion-item]:border-primary **:data-[slot=accordion-content]:text-primary **:data-[slot=accordion-trigger]:hover:bg-primary/10',
       secondary:
-        '**:data-[slot=accordion-trigger]:text-secondary **:data-[slot=accordion-item]:border-secondary  **:data-[slot=accordion-content]:text-secondary **:data-[slot=accordion-trigger]:hover:bg-secondary/10',
+        '**:data-[slot=accordion-trigger]:text-secondary **:data-[slot=accordion-item]:border-secondary **:data-[slot=accordion-content]:text-secondary **:data-[slot=accordion-trigger]:hover:bg-secondary/10',
       tertiary:
         '**:data-[slot=accordion-trigger]:text-tertiary **:data-[slot=accordion-item]:border-tertiary **:data-[slot=accordion-content]:text-tertiary **:data-[slot=accordion-trigger]:hover:bg-tertiary/10',
+      custom: '',
     },
     rounded: {
       none: '**:data-[slot=accordion-item]:rounded-none **:data-[slot=accordion-trigger]:rounded-none',

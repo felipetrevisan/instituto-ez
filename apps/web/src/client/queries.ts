@@ -263,6 +263,10 @@ export const ebookQueryBySlug = groq`
     subtitle,
     description,
     theme,
+    "questions": questions[] {
+      title,
+      content,
+    },
     "chapters": chapters[] {
       "media": media {
         type,

@@ -6,9 +6,29 @@ import { urlForImage } from '@ez/web/config/image'
 import type { Section } from '@ez/web/types/page'
 import { createPortableComponents } from '@ez/web/utils/create-portable-components'
 import { PortableText } from '@portabletext/react'
+import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { Parallax } from 'react-parallax'
 import ReactPlayer from 'react-player/youtube'
+
+const cards = [
+  {
+    title: 'Aprenda com exemplos práticos',
+    description: 'Nosso conteúdo é direto ao ponto e focado em resolver problemas reais.',
+    image:
+      'https://cdn.sanity.io/images/pu7kz9iu/production/3be4a9a452a6925419f75419173b65e74c1d152a-767x1000.png?fit=max&auto=format',
+  },
+  {
+    title: 'Domine os fundamentos',
+    description: 'Você vai entender os conceitos essenciais para construir projetos do zero.',
+    image: '/images/example2.jpg',
+  },
+  {
+    title: 'Evolua com confiança',
+    description: 'Construa conhecimento progressivo com base sólida e apoio visual.',
+    image: '/images/example3.jpg',
+  },
+]
 
 export function SectionContent({
   title,

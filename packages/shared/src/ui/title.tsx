@@ -19,7 +19,7 @@ export const titleVariants = cva('font-oswald font-bold', {
       white: 'text-white',
     },
     size: {
-      default: 'clamp-[text,2xl,6xl]',
+      default: 'clamp-[text,2xl,4xl]',
       sm: 'clamp-[text,sm,lg]',
       lg: 'clamp-[text,lg,2xl]',
       xl: 'clamp-[text,xl,2xl]',

@@ -2,7 +2,13 @@ import { createPortableComponents } from '@ez/shared/sanity/portable'
 import type { SanityAsset } from '@ez/shared/types/assets'
 import type { Theme, Variant } from '@ez/shared/types/global'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ez/shared/ui/tabs'
-import { PortableText, type PortableTextBlock, type PortableTextComponents } from '@portabletext/react'
+import {
+  PortableText,
+  type PortableTextBlock,
+  type PortableTextComponents,
+} from '@portabletext/react'
+import type { SanityImageSource } from '@sanity/asset-utils'
+import type { ImageUrlBuilder } from '@sanity/image-url/lib/types/builder'
 import * as Icons from 'react-icons/fa'
 
 export type TabsType = {
@@ -23,9 +29,14 @@ type TabItem = {
 type TabsComponentProps = {
   value: TabsType
   portableComponentsOverrides?: Partial<PortableTextComponents>
+  imageBuilder: (assets: SanityImageSource) => ImageUrlBuilder
 }
 
-const TabsComponent = ({ value, portableComponentsOverrides }: TabsComponentProps) => {
+const TabsComponent = ({
+  value,
+  portableComponentsOverrides,
+  imageBuilder,
+}: TabsComponentProps) => {
   if (!value.tabs) return null
 
   const { tabs, theme, variant } = value
@@ -36,13 +47,13 @@ const TabsComponent = ({ value, portableComponentsOverrides }: TabsComponentProp
 
     const ImageComponent =
       tab.prefix === 'image' && tab.image ? (
-        <span>image</span>
-        // <Image
-        // 	src={urlForImage(tab.image.asset).url()}
-        // 	alt=""
-        // 	width={24}
-        // 	height={24}
-        // />
+        <img
+          src={imageBuilder(tab.image.asset).url()}
+          alt=""
+          width={24}
+          height={24}
+          className="rounded-full"
+        />
       ) : null
 
     return IconComponent ? <IconComponent /> : ImageComponent

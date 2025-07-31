@@ -38,6 +38,9 @@ const config = [
   {
     type: 'list',
   },
+  {
+    type: 'cardsWidget',
+  },
 ]
 
 export default config

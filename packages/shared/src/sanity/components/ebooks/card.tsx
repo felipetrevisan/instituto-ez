@@ -161,14 +161,6 @@ export function EbookCard({
                   blurDataURL={image.preview.metadata.lqip}
                   className={cn('object-cover md:object-contain h-max rounded-xl')}
                 />
-                {/* <Image
-                  src={imageBuilder(image.preview.asset).url()}
-                  alt=""
-                  fill
-                  placeholder="blur"
-                  blurDataURL={image.preview.metadata.lqip}
-                  className={cn('object-cover md:object-contain h-max rounded-xl')}
-                /> */}
               </motion.div>
             </CardHeader>
           )}
@@ -179,7 +171,6 @@ export function EbookCard({
                 <div className="p-5 text-justify">{description}</div>
               </ScrollArea>
             )}
-
             {button && (
               <>
                 {link && (

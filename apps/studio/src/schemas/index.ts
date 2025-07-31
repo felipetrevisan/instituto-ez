@@ -35,6 +35,7 @@ import accordionWidget from './objects/editor/accordion'
 import accordionContentWidget from './objects/editor/accordion-content'
 import alertWidget from './objects/editor/alert'
 import buttonLinkWidget from './objects/editor/button'
+import cardsWidget from './objects/editor/cards'
 import dividerWidget from './objects/editor/divider'
 import ebooksWidget from './objects/editor/ebooks'
 import listWidget from './objects/editor/list'
@@ -86,5 +87,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     listWidget,
     richText,
     tabsWidget,
+    cardsWidget,
   ],
 }

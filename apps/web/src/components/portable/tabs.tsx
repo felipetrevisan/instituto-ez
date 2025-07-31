@@ -1,4 +1,5 @@
 import { TabsComponent, type TabsType } from '@ez/shared/sanity/components/tabs'
+import { urlForImage } from '@ez/web/config/image'
 import { EbooksWrapper } from './ebooks'
 
 export const TabsWrapper = ({ value }: { value: TabsType }) => {
@@ -10,6 +11,7 @@ export const TabsWrapper = ({ value }: { value: TabsType }) => {
           ebooksWidget: ({ value }) => <EbooksWrapper value={value} />,
         },
       }}
+      imageBuilder={urlForImage}
     />
   )
 }

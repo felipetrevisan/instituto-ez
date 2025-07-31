@@ -15,7 +15,7 @@ export default defineType({
     defineField({
       name: 'text',
       title: 'Text',
-      type: 'number',
+      type: 'text',
     }),
     defineField({
       name: 'media',

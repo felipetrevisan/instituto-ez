@@ -11,8 +11,8 @@ export type Ebook = {
   chapters: Chapter[]
   theme: {
     text: string
-    primary: string
-    secondary: string
+    primary: Color
+    secondary: Color
   }
   image: {
     background?: SanityAsset
@@ -21,6 +21,14 @@ export type Ebook = {
   }
   disabled: boolean
   button?: Button
+}
+
+export type Color = {
+  alpha: number
+  hex: string
+  hsl: { _type: 'hslaColor'; a: number; h: number; l: number; s: number }
+  hsv: { _type: 'hsvaColor'; a: number; h: number; s: number; v: number }
+  rgb: { _type: 'rgbaColor'; a: number; r: number; g: number; b: number }
 }
 
 export type EbookCollection = {

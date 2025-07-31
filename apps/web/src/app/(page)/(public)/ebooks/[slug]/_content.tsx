@@ -1,23 +1,25 @@
 'use client'
 
-import { DownloadIcon } from '@ez/shared/icons'
+import { ChevronLeftIcon, DownloadIcon } from '@ez/shared/icons'
 import { FaIcons } from '@ez/shared/icons'
+import { cn } from '@ez/shared/lib/utils'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@ez/shared/ui'
 import { AnimatedCounter } from '@ez/shared/ui/animated/counter'
 import { Card, CardContent } from '@ez/shared/ui/card'
-import { Title } from '@ez/shared/ui/title'
+import { Subtitle, Title } from '@ez/shared/ui/title'
 import { urlForImage } from '@ez/web/config/image'
 import type { Ebook, Media } from '@ez/web/types/ebook'
-import { motion, useMotionValue, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { useState } from 'react'
+import Link from 'next/link'
+import { AnimatedButton } from './_button'
+
+type CSSVariables = {
+  [key: `--${string}`]: string
+}
 
 export function Content({ data }: { data: Ebook }) {
-  const { id, title, description, metadata, chapters } = data
-
-  const [hovered, setHovered] = useState(false)
-
-  const width = useMotionValue(48)
-  const justify = useTransform(width, (w) => (w > 100 ? 'flex-start' : 'center'))
+  const { id, title, description, metadata, chapters, theme } = data
 
   const getIcon = (media: Media) => {
     const IconComponent =
@@ -33,9 +35,32 @@ export function Content({ data }: { data: Ebook }) {
     return IconComponent ? <IconComponent /> : ImageComponent
   }
 
+  const DownloadIconMotion = motion(DownloadIcon)
+  const ChevronLeftIconMotion = motion(ChevronLeftIcon)
+
+  const style: React.CSSProperties & CSSVariables = {
+    '--primary-c': `${theme?.primary?.hex ?? 'var(--primary)'}`,
+    '--secondary-c': `${theme?.secondary?.hex ?? 'var(--secondary)'}`,
+  }
+
   return (
     <>
-      <header className="relative h-[600px] w-screen bg-gradient-to-br from-primary/90 to-secondary/90 text-white overflow-hidden py-12 px-6">
+      <header
+        className="relative h-[600px] w-screen text-white overflow-hidden py-12 px-6 bg-gradient-to-br from-[var(--primary-c)]/90 to-[var(--secondary-c)]/90 flex flex-col items-center justify-center bg-ebooks bg-[auto,cover]"
+        style={style}
+      >
+        <Link href="/ebooks" className="w-full">
+          <AnimatedButton
+            label="Voltar para o Catálogo"
+            icon={<ChevronLeftIconMotion />}
+            animateMaps={{
+              width: { initial: 48, hovered: 260 },
+              paddingLeft: { initial: 20, hovered: 16 },
+              scale: { initial: 1, hovered: 1.1 },
+            }}
+            className="absolute text-[var(--primary-c)] fill-[var(--primary-c)] after:absolute after:inset-0 after:rounded-xl after:bg-white/20 after:blur after:animate-pulse"
+          />
+        </Link>
         <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
           <motion.div
             className="max-w-xl relative z-10"
@@ -59,39 +84,16 @@ export function Content({ data }: { data: Ebook }) {
             >
               {description}
             </motion.p>
-            <motion.button
-              className="flex items-center bg-white text-primary font-bold py-3 rounded-full shadow-lg overflow-hidden cursor-pointer"
-              style={{ width, justifyContent: justify }}
-              initial={{ width: 48, paddingLeft: 20, scale: 1 }}
-              animate={{
-                width: hovered ? 160 : 48,
-                paddingLeft: hovered ? 16 : 20,
-                scale: hovered ? 1.10 : 1,
+            <AnimatedButton
+              label="Baixe Agora"
+              icon={<DownloadIconMotion />}
+              animateMaps={{
+                width: { initial: 48, hovered: 200 },
+                paddingLeft: { initial: 20, hovered: 16 },
+                scale: { initial: 1, hovered: 1.1 },
               }}
-              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-              onHoverStart={() => setHovered(true)}
-              onHoverEnd={() => setHovered(false)}
-            >
-              <DownloadIcon className="size-5 flex-shrink-0" />
-              <motion.span
-                className="ml-2 overflow-hidden whitespace-nowrap"
-                initial={{ opacity: 0, x: -10 }}
-                animate={{
-                  opacity: hovered ? 1 : 0,
-                  x: hovered ? 0 : -10,
-                }}
-                transition={{
-                  type: 'spring',
-                  stiffness: 500,
-                  damping: 20,
-                  bounce: 0.4,
-                  delay: 0.05,
-                }}
-              >
-                Download
-              </motion.span>
-            </motion.button>
-            <p className="text-sm mt-2">* Available in PDF, ePUB, Mobi & Kindle.</p>
+              className="text-[var(--primary-c)] fill-[var(--primary-c)]"
+            />
           </motion.div>
           <motion.div
             className="relative z-10 size-[550px] mt-10 md:mt-0 rounded-xl overflow-hidden"
@@ -124,22 +126,26 @@ export function Content({ data }: { data: Ebook }) {
         </div>
       </header>
       {metadata?.length > 0 && (
-        <section className="container bg-white py-12 px-6 flex flex-row justify-center items-center gap-x-5">
+        <section className="container bg-white py-12 px-6 flex flex-wrap justify-center gap-10">
           {metadata?.map((meta, index) => (
             <Card
               key={`${id}_${
                 // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
                 index
               }`}
-              variant="outline"
-              className="h-[180px] w-[200px] transition-all duration-300 shadow-sm hover:shadow-xl hover:-translate-y-1 bg-white/80 hover:bg-white/90 backdrop-blur-md"
+              variant="custom"
+              theme="custom"
+              className={cn(
+                'h-[180px] w-[200px] transition-all duration-300 shadow-sm hover:shadow-xl hover:-translate-y-1 backdrop-blur-md outline-none shadow-[var(--primary-c)]/50 bg-gradient-to-br from-[var(--primary-c)]/90 to-[var(--secondary-c)]/90 p-0.5',
+              )}
               rounded="2xl"
+              style={style}
             >
-              <CardContent className="p-5 flex justify-center items-center h-full relative">
+              <CardContent className="bg-white flex justify-center items-center h-full relative rounded-3xl">
                 <div className="flex flex-col items-center justify-center">
                   {meta.media.type !== 'none' && (
-                    <div className="rounded-full size-14 [&_svg]:size-8 order-1 border-primary bg-gradient-to-br from-white via-primary/10 to-white text-primary-foreground shadow-md absolute -top-7">
-                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 stroke-[1.5] text-primary">
+                    <div className="rounded-full size-14 [&_svg]:size-8 order-1 bg-white shadow-md absolute -top-7">
+                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 stroke-[1.5] text-[var(--primary-c)]">
                         {getIcon(meta.media)}
                       </div>
                     </div>
@@ -147,21 +153,27 @@ export function Content({ data }: { data: Ebook }) {
                   <div className="flex flex-col">
                     <dt className="mb-2 flex flex-col justify-center items-center gap-2 min-h-[72px]">
                       {meta.prefix && (
-                        <span className="text-sm font-medium opacity-70">{meta.prefix}</span>
+                        <span className="text-sm font-medium opacity-70 text-[var(--primary-c)]">
+                          {meta.prefix}
+                        </span>
                       )}
                       {meta.type === 'string' && (
-                        <span className="text-3xl font-bold text-primary">{meta.value}</span>
+                        <span className="text-3xl font-bold text-[var(--primary-c)]">
+                          {meta.value}
+                        </span>
                       )}
                       {meta.type === 'number' && Number(meta.value) > 0 && (
-                        <span className="text-3xl font-bold text-primary">
+                        <span className="text-3xl font-bold text-[var(--primary-c)]">
                           <AnimatedCounter from={0} to={Number(meta.value)} />
                         </span>
                       )}
                       {meta.suffix && (
-                        <span className="text-sm font-medium opacity-70">{meta.suffix}</span>
+                        <span className="text-sm font-medium opacity-70 text-[var(--primary-c)]">
+                          {meta.suffix}
+                        </span>
                       )}
                     </dt>
-                    <dd className="text-gray-500 dark:text-gray-400">{meta.title}</dd>
+                    <dd className="text-gray-500">{meta.title}</dd>
                   </div>
                 </div>
               </CardContent>
@@ -169,7 +181,26 @@ export function Content({ data }: { data: Ebook }) {
           ))}
         </section>
       )}
-      <section className="relative bg-gradient-to-b from-gray-100 via-gray-200 to-gray-300 mt-10 py-12 px-6 flex flex-row gap-4 min-h-[500px] w-screen">
+      <section className="relative py-12 px-6 flex flex-row gap-4 w-screen" style={style}>
+        <div className="container flex flex-col justify-center items-center gap-4">
+          <Title
+            size="2xl"
+            className="text-[var(--primary-c)] font-questrial font-semibold text-center relative after:absolute after:w-[40%] after:bg-[var(--primary-c)]/60 after:left-1/2 after:-bottom-1 after:h-[2px] after:rounded-xl after:-translate-x-1/2 after:transition-all"
+          >
+            O que você vai encontrar nesse Ebook
+          </Title>
+          <Subtitle size="lg">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. In rem quae nobis atque
+            eligendi voluptatem deleniti, enim sint impedit excepturi debitis quidem, dicta, ratione
+            doloribus corporis vitae velit amet temporibus.
+          </Subtitle>
+        </div>
+      </section>
+
+      <section
+        className="relative bg-gradient-to-b from-[var(--secondary-c)]/50 via-[var(--primary-c)]/20 to-white mt-10 py-52 px-6 flex flex-row gap-4 min-h-[500px] w-screen bg-ebooks-lines bg-[auto,contain]"
+        style={style}
+      >
         <div className="absolute left-0 top-0 w-full rotate-180 overflow-hidden">
           {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
@@ -179,59 +210,112 @@ export function Content({ data }: { data: Ebook }) {
             />
           </svg>
         </div>
-        <div className="container flex flex-col justify-center items-center">
-          <Title className="">Visão Geral</Title>
-          <h3>
+        <div className="container flex flex-col justify-center items-center gap-4">
+          <Title
+            size="2xl"
+            className="text-[var(--primary-c)] font-questrial font-semibold text-center relative after:absolute after:w-[40%] after:bg-[var(--primary-c)]/60 after:left-1/2 after:-bottom-1 after:h-[2px] after:rounded-xl after:-translate-x-1/2 after:transition-all"
+          >
+            Visão Geral
+          </Title>
+          <Subtitle size="lg">
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. In rem quae nobis atque
             eligendi voluptatem deleniti, enim sint impedit excepturi debitis quidem, dicta, ratione
             doloribus corporis vitae velit amet temporibus.
-          </h3>
+          </Subtitle>
+          <Title
+            size="2xl"
+            className="text-[var(--primary-c)] font-questrial font-semibold text-center relative after:absolute after:w-[40%] after:bg-[var(--primary-c)]/60 after:left-1/2 after:-bottom-1 after:h-[2px] after:rounded-xl after:-translate-x-1/2 after:transition-all"
+          >
+            Capítulos
+          </Title>
           {chapters?.length > 0 && (
-            <div className="py-12 px-6 flex flex-row justify-center items-center gap-x-5">
-              {chapters?.map((meta, index) => (
+            <div className="container py-12 px-6 flex flex-wrap justify-center gap-10">
+              {chapters?.map((chapter, index) => (
                 <Card
                   key={`${id}_${
                     // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
                     index
                   }`}
-                  variant="outline"
-                  className="h-[180px] w-[200px] transition-all duration-300 shadow-sm hover:shadow-xl hover:-translate-y-1 bg-white/80 hover:bg-white/90 backdrop-blur-md"
+                  variant="custom"
+                  theme="custom"
+                  className={cn(
+                    'h-[320px] w-[320px] transition-all duration-300 shadow-sm hover:shadow-xl hover:-translate-y-1 backdrop-blur-md outline-none shadow-[var(--primary-c)]/50 bg-gradient-to-br from-[var(--primary-c)]/90 to-[var(--secondary-c)]/90 p-0.5',
+                  )}
                   rounded="2xl"
+                  style={style}
                 >
-                  <CardContent className="p-5 flex justify-center items-center h-full relative">
+                  <CardContent className="bg-white flex justify-center items-center h-full relative rounded-3xl">
                     <div className="flex flex-col items-center justify-center">
-                      {meta.media.type !== 'none' && (
-                        <div className="rounded-full size-14 [&_svg]:size-8 order-1 border-primary bg-gradient-to-br from-white via-primary/10 to-white text-primary shadow-md absolute -top-7">
-                          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 stroke-[1.5] text-primary">
-                            {getIcon(meta.media)}
+                      {chapter.media.type !== 'none' && (
+                        <div className="rounded-full size-14 [&_svg]:size-8 order-1 bg-white shadow-md">
+                          <div className="stroke-[1.5] text-[var(--primary-c)]">
+                            {getIcon(chapter.media)}
                           </div>
                         </div>
                       )}
-                      {/* <div className="flex flex-col">
-                        <dt className="mb-2 flex flex-col justify-center items-center gap-2 min-h-[72px]">
-                          {meta.prefix && (
-                            <span className="text-sm font-medium opacity-70">{meta.prefix}</span>
-                          )}
-                          {meta.type === 'string' && (
-                            <span className="text-3xl font-bold text-primary">{meta.value}</span>
-                          )}
-                          {meta.type === 'number' && Number(meta.value) > 0 && (
-                            <span className="text-3xl font-bold text-primary">
-                              <AnimatedCounter from={0} to={Number(meta.value)} />
-                            </span>
-                          )}
-                          {meta.suffix && (
-                            <span className="text-sm font-medium opacity-70">{meta.suffix}</span>
-                          )}
-                        </dt>
-                        <dd className="text-gray-500 dark:text-gray-400">{meta.title}</dd>
-                      </div> */}
+                      <div className="flex flex-col">
+                        <h2 className="text-zinc-700 font-questrial font-extrabold text-2xl">
+                          {chapter.title}
+                        </h2>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
               ))}
             </div>
           )}
+        </div>
+      </section>
+
+      <section
+        className="relative bg-gradient-to-b from-[var(--secondary-c)]/50 to-white mt-10 py-52 px-6 flex flex-row gap-4 min-h-[500px] w-screen"
+        style={style}
+      >
+        <div className="absolute left-0 top-0 w-full overflow-hidden">
+          {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1200 120"
+            preserveAspectRatio="none"
+            className="h-[83px] w-[calc(100%+1.3px)]"
+          >
+            <path
+              d="M0,0V6c0,21.6,291,111.46,741,110.26,445.39,3.6,459-88.3,459-110.26V0Z"
+              className="fill-white"
+            />
+          </svg>
+        </div>
+        <div className="container flex flex-col justify-center items-center gap-4">
+          <Title
+            size="2xl"
+            className="text-[var(--primary-c)] font-questrial font-semibold text-center relative after:absolute after:w-[40%] after:bg-[var(--primary-c)]/60 after:left-1/2 after:-bottom-1 after:h-[2px] after:rounded-xl after:-translate-x-1/2 after:transition-all"
+          >
+            Perguntas Frequentes
+          </Title>
+          <div className="max-w-3xl w-full">
+            <Accordion type="single" rounded="2xl" theme="custom">
+              <AccordionItem value="1">
+                <AccordionTrigger>Teste</AccordionTrigger>
+                <AccordionContent>Teste</AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="2">
+                <AccordionTrigger>Teste</AccordionTrigger>
+                <AccordionContent>Teste</AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="3">
+                <AccordionTrigger>Teste</AccordionTrigger>
+                <AccordionContent>Teste</AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="4">
+                <AccordionTrigger>Teste</AccordionTrigger>
+                <AccordionContent>Teste</AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="5">
+                <AccordionTrigger>Teste</AccordionTrigger>
+                <AccordionContent>Teste</AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </div>
         </div>
       </section>
     </>
