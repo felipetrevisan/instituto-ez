@@ -1,3 +1,4 @@
+import { cn } from '@ez/shared/lib/utils'
 import { createPortableComponents } from '@ez/shared/sanity/portable'
 import type { SanityAsset } from '@ez/shared/types/assets'
 import type { Theme, Variant } from '@ez/shared/types/global'
@@ -9,6 +10,8 @@ import {
 } from '@portabletext/react'
 import type { SanityImageSource } from '@sanity/asset-utils'
 import type { ImageUrlBuilder } from '@sanity/image-url/lib/types/builder'
+import { motion } from 'motion/react'
+import { useState } from 'react'
 import * as Icons from 'react-icons/fa'
 
 export type TabsType = {
@@ -40,6 +43,7 @@ const TabsComponent = ({
   if (!value.tabs) return null
 
   const { tabs, theme, variant } = value
+  const [activeTab, setActiveTab] = useState(tabs[0].id.current)
 
   const getIcon = (tab: TabItem) => {
     const IconComponent =
@@ -62,19 +66,44 @@ const TabsComponent = ({
   const icon = (tab: TabItem) => getIcon(tab)
 
   return (
-    <Tabs defaultValue={tabs[0].id.current}>
+    <Tabs defaultValue={tabs[0].id.current} onValueChange={setActiveTab} className="w-full">
       <TabsList theme={theme} variant={variant}>
-        {tabs.map((tab) => (
-          <TabsTrigger
-            key={`tab_${tab.id.current}`}
-            value={tab.id.current}
-            theme={theme}
-            variant={variant}
-            className="gap-2"
-          >
-            {icon && <div>{icon(tab)}</div>} <span>{tab.title}</span>
-          </TabsTrigger>
-        ))}
+        {tabs.map((tab) => {
+          const isActive = tab.id.current === activeTab
+
+          return (
+            <TabsTrigger
+              key={`tab_${tab.id.current}`}
+              value={tab.id.current}
+              className={cn(
+                'relative z-10 flex items-center rounded-full font-bold font-oswald transition-all duration-300',
+              )}
+              theme={theme}
+              variant={variant}
+            >
+              <motion.div
+                initial={{ scale: 1 }}
+                animate={{ scale: isActive ? 1.2 : 1 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                className="flex items-center gap-3"
+              >
+                {icon && (
+                  <motion.div
+                    initial={false}
+                    animate={{
+                      scale: isActive ? 1.2 : 1,
+                      rotate: isActive ? 0 : -2,
+                    }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                  >
+                    {icon(tab)}
+                  </motion.div>
+                )}
+                {tab.title}
+              </motion.div>
+            </TabsTrigger>
+          )
+        })}
       </TabsList>
       {tabs.map((tab) => (
         <TabsContent key={`tab_content_${tab.id.current}`} value={tab.id.current}>

@@ -38,7 +38,7 @@ const AccordionComponent = ({ value }: { value: AccordionType }) => {
           <AccordionTrigger>
             <span>{title}</span>
           </AccordionTrigger>
-          <AccordionContent className="relative px-4 pb-8 pt-0">{content}</AccordionContent>
+          <AccordionContent className='relative px-4 pt-0 pb-8'>{content}</AccordionContent>
         </AccordionItem>
       ))}
     </Accordion>

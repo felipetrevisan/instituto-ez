@@ -1,5 +1,6 @@
 'use client'
 
+import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
 import { type HTMLMotionProps, motion } from 'framer-motion'
 import Image from 'next/image'
 import * as React from 'react'
@@ -30,8 +31,8 @@ export const Logo = ({
       />
       {showSlogan && (
         <span className="flex flex-col justify-center md:hidden xl:flex">
-          <p className="font-oswald text-primary text-lg font-bold">Instituto Ez</p>
-          <p className="font-questrial text-primary text-sm font-light text-nowrap">
+          <p className="font-bold font-oswald text-lg text-primary">Instituto Ez</p>
+          <p className="text-nowrap font-light font-questrial text-primary text-sm">
             Desenvolvimento Humano
           </p>
         </span>
@@ -43,9 +44,9 @@ export const Logo = ({
     <>
       {linkable ? (
         <motion.a
-          className="relative h-[3.56rem] w-56 md:w-auto flex space-x-2"
+          className="relative flex h-[3.56rem] w-56 space-x-2 md:w-auto"
           {...props}
-          href="/"
+          href={getLocalizedLink('/')}
         >
           {logoImage}
         </motion.a>

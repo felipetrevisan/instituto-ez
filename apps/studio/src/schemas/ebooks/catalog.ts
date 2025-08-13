@@ -10,6 +10,10 @@ export default defineType({
   orderings: [orderRankOrdering],
   groups: [
     {
+      name: 'seo',
+      title: 'SEO',
+    },
+    {
       name: 'cover',
       title: 'Cover Images',
     },
@@ -53,6 +57,20 @@ export default defineType({
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),
     defineField({
+      name: 'seoDescription',
+      title: 'Description',
+      type: 'string',
+      group: ['seo'],
+      validation: (Rule) => Rule.required().warning('This field must not be empty.'),
+    }),
+    defineField({
+      name: 'seoKeywords',
+      title: 'Keywords',
+      type: 'string',
+      group: ['seo'],
+      validation: (Rule) => Rule.required().warning('This field must not be empty.'),
+    }),
+    defineField({
       name: 'subtitle',
       title: 'Subtitle',
       type: 'string',
@@ -61,6 +79,16 @@ export default defineType({
       name: 'description',
       title: 'Description',
       type: 'text',
+    }),
+    defineField({
+      name: 'overview',
+      title: 'Overview',
+      type: 'ebooksOverview',
+    }),
+    defineField({
+      name: 'index',
+      title: 'Index',
+      type: 'ebooksIndex',
     }),
     defineField({
       name: 'data',

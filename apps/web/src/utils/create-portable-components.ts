@@ -13,7 +13,7 @@ export const createPortableComponents = () => {
     testimonialWidget: TestimonialsWrapper,
     ebooksWidget: EbooksWrapper,
     tabsWidget: TabsWrapper,
-    cardsWidget: CardsWrapper
+    cardsWidget: CardsWrapper,
   }
 
   return {

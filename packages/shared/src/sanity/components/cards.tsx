@@ -1,5 +1,4 @@
 import { cn } from '@ez/shared/lib/utils'
-import { createPortableComponents } from '@ez/shared/sanity/portable'
 import type { SanityAsset } from '@ez/shared/types/assets'
 import type { Theme } from '@ez/shared/types/global'
 import {
@@ -22,7 +21,7 @@ type CardItem = {
   image: SanityAsset
 }
 
-type TabsComponentProps = {
+type CardsComponentProps = {
   value: CardsType
   portableComponentsOverrides?: Partial<PortableTextComponents>
   imageBuilder: (assets: SanityImageSource) => ImageUrlBuilder
@@ -34,13 +33,13 @@ const CardsComponent = ({
   portableComponentsOverrides,
   imageBuilder,
   ImageComponent,
-}: TabsComponentProps) => {
+}: CardsComponentProps) => {
   if (!value.cards) return null
 
   const { cards, theme } = value
 
   return (
-    <>
+    <div className="flex flex-col gap-8">
       {cards.map((card, index) => (
         <motion.div
           // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
@@ -51,7 +50,7 @@ const CardsComponent = ({
           transition={{ duration: 0.6, delay: index * 0.1 }}
           whileHover={{ scale: 1.05, transition: { duration: 0.3, ease: 'circInOut' } }}
           className={cn(
-            'w-full relative group rounded-3xl p-[3px] bg-gradient-to-r shadow-lg transition-shadow',
+            'group relative w-full rounded-3xl bg-gradient-to-r p-[3px] shadow-lg transition-shadow',
             {
               'from-primary via-secondary to-primary/40 hover:shadow-primary/30':
                 theme === 'default',
@@ -62,8 +61,8 @@ const CardsComponent = ({
             },
           )}
         >
-          <div className="flex flex-col md:flex-row items-stretch bg-white rounded-[calc(1.5rem-3px)] overflow-hidden min-h-[200px]">
-            <div className="relative w-full md:w-1/3 h-64 md:h-auto">
+          <div className="flex min-h-[200px] flex-col items-stretch overflow-hidden rounded-[calc(1.5rem-3px)] bg-white md:flex-row">
+            <div className="relative h-auto w-full md:h-auto md:w-1/3">
               <ImageComponent
                 src={imageBuilder(card.image.asset).url()}
                 alt=""
@@ -71,27 +70,24 @@ const CardsComponent = ({
                 className="object-cover"
               />
             </div>
-            <div className="w-full md:w-2/3 p-6 flex flex-col justify-between">
-              <div>
-                <h3
-                  className={cn('text-2xl font-bold mb-2 flex items-center gap-2', {
-                    'text-primary': theme === 'default',
-                    'text-secondary': theme === 'secondary',
-                    'text-tertiary': theme === 'tertiary',
-                  })}
-                >
-                  {card.title}
-                </h3>
-                <PortableText
-                  value={card.content}
-                  components={createPortableComponents(portableComponentsOverrides)}
-                />
+            <div className="flex w-full flex-col justify-between p-6 md:w-2/3">
+              <h3
+                className={cn('mb-2 flex items-center gap-2 font-bold text-2xl', {
+                  'text-primary': theme === 'default',
+                  'text-secondary': theme === 'secondary',
+                  'text-tertiary': theme === 'tertiary',
+                })}
+              >
+                {card.title}
+              </h3>
+              <div className='flex flex-col gap-4'>
+                <PortableText value={card.content} components={portableComponentsOverrides} />
               </div>
             </div>
           </div>
         </motion.div>
       ))}
-    </>
+    </div>
   )
 }
 

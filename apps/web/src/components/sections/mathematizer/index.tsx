@@ -8,7 +8,7 @@ export function Mathematizer() {
   const { data, isLoading } = useMathematizer()
 
   return (
-    <div className="flex flex-col gap-12 lg:gap-28">
+    <div className="flex flex-col">
       {isLoading && (
         <>
           <Skeleton className="lg:absolute lg:left-0" />

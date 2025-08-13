@@ -25,7 +25,7 @@ export function TestimonialMinimalist({ item, theme, variant, rounded }: Props) 
   return (
     <MotionCard
       className={cn(
-        'overflow-visible h-[400px] max-h-[400px] xl:h-[300px] xl:max-h-[300px] group relative select-none cursor-pointer p-1 transition-all',
+        'group relative h-[400px] max-h-[400px] cursor-pointer select-none overflow-visible p-1 transition-all xl:h-[300px] xl:max-h-[300px]',
       )}
       variant={variant}
       theme={theme}
@@ -33,9 +33,9 @@ export function TestimonialMinimalist({ item, theme, variant, rounded }: Props) 
       data-theme={theme}
       data-variant={variant}
     >
-      <CardContent className="flex items-center justify-center w-full p-0 h-full">
-        <div className="relative flex flex-col items-center justify-evenly w-full h-full border-0 py-0 px-8">
-          <ScrollArea className="overflow-scroll h-[300px] md:h-[250px] max-w-2xl mx-auto text-justify relative w-full">
+      <CardContent className='flex h-full w-full items-center justify-center p-0'>
+        <div className='relative flex h-full w-full flex-col items-center justify-evenly border-0 px-8 py-0'>
+          <ScrollArea className='relative mx-auto h-[300px] w-full max-w-2xl overflow-scroll text-justify md:h-[250px]'>
             <PortableText value={item.testimonial} />
           </ScrollArea>
           <div className="author font-bold" data-slot="card-content-action">

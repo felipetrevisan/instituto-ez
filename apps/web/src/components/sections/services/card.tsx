@@ -7,6 +7,7 @@ import { Carousel, CarouselContent, CarouselItem } from '@ez/shared/ui/carousel'
 import { ButtonLink } from '@ez/web/components/app'
 import { urlForImage } from '@ez/web/config/image'
 import type { Service } from '@ez/web/types/service'
+import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
 import Autoplay from 'embla-carousel-autoplay'
 import ClassNames from 'embla-carousel-class-names'
 import { motion } from 'framer-motion'
@@ -26,9 +27,9 @@ export function ServiceCard({ item: { image, title, button, disabled }, classNam
     <MotionCard
       variant="ghost"
       className={cn(
-        'flex items-end justify-center shrink md:shrink-0 rounded-xl bg-card w-[70vw] md:w-160 h-[400px] relative bg-cover! shadow-2xl',
+        'relative flex h-[400px] w-[70vw] shrink items-end justify-center rounded-xl bg-card bg-cover! shadow-2xl md:w-160 md:shrink-0',
         {
-          'grayscale-100 opacity-80 select-none pointer-events-none': disabled,
+          'pointer-events-none select-none opacity-80 grayscale-100': disabled,
         },
         className,
       )}
@@ -42,23 +43,23 @@ export function ServiceCard({ item: { image, title, button, disabled }, classNam
         transition: { duration: 0.4, ease: 'easeInOut' },
       }}
     >
-      <CardFooter className="backdrop-blur-2xl bg-black/50 flex flex-col justify-center gap-4 p-4 h-20 w-full rounded-2xl font-oswald">
+      <CardFooter className='flex h-20 w-full flex-col justify-center gap-4 rounded-2xl bg-black/50 p-4 font-oswald backdrop-blur-2xl'>
         <Carousel
           opts={{ loop: true, duration: 30 }}
           plugins={[ClassNames(), Autoplay({ playOnInit: true, delay: 3000 })]}
         >
           <CarouselContent>
-            <CarouselItem className="flex justify-center items-center basis-full">
-              <span className="text-orange-400 font-semibold text-xl text-center">{title}</span>
+            <CarouselItem className='flex basis-full items-center justify-center'>
+              <span className='text-center font-semibold text-orange-400 text-xl'>{title}</span>
             </CarouselItem>
             {button.visible && (
-              <CarouselItem className="flex justify-center items-center basis-full">
+              <CarouselItem className='flex basis-full items-center justify-center'>
                 <Button
                   variant="default"
                   theme="tertiary"
                   rounded="xl"
                   size="2xl"
-                  className="uppercase font-bold w-full"
+                  className='w-full font-bold uppercase'
                   disabled={button.disabled}
                   effect="none"
                   scaleEffect={false}
@@ -76,7 +77,7 @@ export function ServiceCard({ item: { image, title, button, disabled }, classNam
   return (
     <>
       {link ? (
-        <ButtonLink href={link} passHref>
+        <ButtonLink href={getLocalizedLink(link)}  passHref>
           <CardRender />
         </ButtonLink>
       ) : (

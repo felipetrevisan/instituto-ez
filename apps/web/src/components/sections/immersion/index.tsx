@@ -18,14 +18,14 @@ export function Immersion() {
 
   return (
     <>
-      <div className="relative flex flex-col items-center w-full h-full bg-muted p-40 gap-10">
-        <div className="absolute top-0 left-0 w-full overflow-hidden z-10">
+      <div className='relative flex h-full w-full flex-col items-center gap-10 bg-muted p-40'>
+        <div className='absolute top-0 left-0 z-10 w-full overflow-hidden'>
           {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 1200 120"
             preserveAspectRatio="none"
-            className="relative w-[calc(141%+1.3px)] h-[85px]"
+            className='relative h-[85px] w-[calc(141%+1.3px)]'
           >
             <path
               d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"
@@ -45,21 +45,21 @@ export function Immersion() {
         </div>
         <Parallax
           bgImage={urlForImage(data?.background.asset).url()}
-          className="flex justify-center xl:w-3/4 w-[calc(100vw-10%)] xl:h-[400px] h-[300px] max-h-[300px] xl:max-h-[400px] overflow-hidden rounded-lg"
+          className='flex h-[300px] max-h-[300px] w-[calc(100vw-10%)] justify-center overflow-hidden rounded-lg xl:h-[400px] xl:max-h-[400px] xl:w-3/4'
         />
-        <div className="flex justify-center xl:w-3/5 w-[calc(100vw-20%)] h-full -m-40 mb-4 z-10 bg-white/90 backdrop-blur-lg rounded-lg">
-          <div className="flex flex-col justify-start items-center w-full text-secondary p-10 gap-10 relative overflow-hidden">
+        <div className='-m-40 z-10 mb-4 flex h-full w-[calc(100vw-20%)] justify-center rounded-lg bg-white/90 backdrop-blur-lg xl:w-3/5'>
+          <div className='relative flex w-full flex-col items-center justify-start gap-10 overflow-hidden p-10 text-secondary'>
             {data?.ribbon.show && (
-              <div className="absolute transform -rotate-45 bg-red-800 text-center text-white font-semibold py-1 left-[-35px] top-[32px] w-[170px] uppercase animate-pulse">
+              <div className='-rotate-45 absolute top-[32px] left-[-35px] w-[170px] transform animate-pulse bg-red-800 py-1 text-center font-semibold text-white uppercase'>
                 {data?.ribbon.text}
               </div>
             )}
             <div className="flex flex-col items-start justify-start">
-              <h3 className="clamp-[text,xl,4xl] text-center lg:ext-left font-bold font-oswald">
+              <h3 className='clamp-[text,xl,4xl] lg:ext-left text-center font-bold font-oswald'>
                 {data?.title}
               </h3>
             </div>
-            <div className="font-light text-justify text-md font-questrial leading-7">
+            <div className='text-justify font-light font-questrial text-md leading-7'>
               <PortableText value={data?.content} components={createPortableComponents()} />
             </div>
           </div>
@@ -68,14 +68,14 @@ export function Immersion() {
           <ButtonLink
             href={link}
             passHref
-            className="flex justify-center w-[calc(100vw-20%)] xl:w-3/5"
+            className='flex w-[calc(100vw-20%)] justify-center xl:w-3/5'
           >
             <Button
               variant="default"
               theme="tertiary"
               rounded="xl"
               size="2xl"
-              className="uppercase font-bold w-full"
+              className='w-full font-bold uppercase'
               disabled={data?.button.disabled}
             >
               {data?.button.label}
@@ -83,13 +83,13 @@ export function Immersion() {
           </ButtonLink>
         )}
       </div>
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden rotate-180">
+      <div className='absolute bottom-0 left-0 w-full rotate-180 overflow-hidden'>
         {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1200 120"
           preserveAspectRatio="none"
-          className="relative w-[calc(141%+1.3px)] h-[85px]"
+          className='relative h-[85px] w-[calc(141%+1.3px)]'
         >
           <path
             d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"

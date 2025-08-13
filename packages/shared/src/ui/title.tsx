@@ -10,7 +10,7 @@ type TitleProps = {
   className?: string
 }
 
-export const titleVariants = cva('font-oswald font-bold', {
+export const titleVariants = cva('font-bold font-oswald', {
   variants: {
     variant: {
       default: 'text-primary',
@@ -49,7 +49,7 @@ function Title({
   const Comp = asChild ? Slot : 'h1'
 
   return (
-    <div className="flex flex-row gap-2 items-center justify-center md:justify-start">
+    <div className='flex flex-row items-center justify-center gap-2 md:justify-start'>
       {separator && (
         // biome-ignore lint/a11y/noSvgWithoutTitle: <explanation>
         <svg
@@ -99,7 +99,7 @@ function Subtitle({
 
   return (
     <Comp
-      className={cn(titleVariants({ variant, size }), 'font-light mt-5 text-center', className)}
+      className={cn(titleVariants({ variant, size }), 'mt-5 text-center font-light', className)}
       {...props}
     >
       {children}

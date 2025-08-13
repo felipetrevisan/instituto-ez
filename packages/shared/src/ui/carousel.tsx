@@ -1,7 +1,7 @@
 'use client'
 
 import { cn } from '@ez/shared/lib/utils'
-import { MotionHighlight, MotionHighlightItem } from '@ez/shared/ui/animated/motion-highlight'
+import { MotionHighlight, MotionHighlightItem } from '@ez/shared/ui/animated/effects/motion-highlight'
 import { type VariantProps, cva } from 'class-variance-authority'
 import useEmblaCarousel, { type UseEmblaCarouselType } from 'embla-carousel-react'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
@@ -227,8 +227,8 @@ function CarouselPrevious({
       className={cn(
         'absolute size-8 rounded-full',
         orientation === 'horizontal'
-          ? 'top-1/2 -left-12 -translate-y-1/2'
-          : '-top-12 left-1/2 -translate-x-1/2 rotate-90',
+          ? '-left-12 -translate-y-1/2 top-1/2'
+          : '-top-12 -translate-x-1/2 left-1/2 rotate-90',
         className,
       )}
       disabled={!canScrollPrev}
@@ -255,8 +255,8 @@ function CarouselNext({
       className={cn(
         'absolute size-8 rounded-full',
         orientation === 'horizontal'
-          ? 'top-1/2 -right-12 -translate-y-1/2'
-          : '-bottom-12 left-1/2 -translate-x-1/2 rotate-90',
+          ? '-right-12 -translate-y-1/2 top-1/2'
+          : '-bottom-12 -translate-x-1/2 left-1/2 rotate-90',
         className,
       )}
       disabled={!canScrollNext}
@@ -283,7 +283,7 @@ function CarouselDots({
   return (
     <div
       className={cn(
-        'flex flex-wrap justify-center items-center gap-2',
+        'flex flex-wrap items-center justify-center gap-2',
         carouselVariants({ theme }),
         rootClassName,
       )}
@@ -311,13 +311,13 @@ function CarouselDots({
               variant="outline"
               theme={theme}
               className={cn(
-                'rounded-full after:shadow-[0_0_0_0.17rem] after:rounded-full after:size-2 after:flex after:items-center px-1 hover:bg-transparent',
+                'rounded-full px-1 after:flex after:size-2 after:items-center after:rounded-full after:shadow-[0_0_0_0.17rem] hover:bg-transparent',
                 {
-                  'after:shadow-primary after:bg-primary':
+                  'after:bg-primary after:shadow-primary':
                     theme === 'default' && selectedIndex === index,
-                  'after:shadow-secondary after:bg-secondary':
+                  'after:bg-secondary after:shadow-secondary':
                     theme === 'secondary' && selectedIndex === index,
-                  'after:shadow-tertiary after:bg-tertiary':
+                  'after:bg-tertiary after:shadow-tertiary':
                     theme === 'tertiary' && selectedIndex === index,
                 },
                 className,

@@ -15,7 +15,7 @@ export function Banner() {
   if (!isLoading && !data) return <></>
 
   return (
-    <motion.div layout className="relative w-full h-[200px] lg:h-[350px] flex flex-col">
+    <motion.div layout className='relative flex h-[200px] w-full flex-col lg:h-[350px]'>
       {isLoading && <Skeleton />}
       {!isLoading && (
         <Carousel
@@ -27,7 +27,7 @@ export function Banner() {
               <CarouselItem key={id} className="basis-full">
                 <Parallax
                   bgImage={urlForImage(image.asset).url()}
-                  className="w-full h-full overflow-hidden lg:rounded-lg"
+                  className='h-full w-full overflow-hidden lg:rounded-lg'
                 >
                   <motion.div
                     className="flex h-[200px] lg:h-[350px]"
@@ -36,9 +36,9 @@ export function Banner() {
                     initial="hide"
                   >
                     {/* absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 */}
-                    <div className="flex flex-col justify-center items-center font-bold font-oswald w-full p-5 md:p-5 lg:p-5 xl:p-0 text-white">
+                    <div className='flex w-full flex-col items-center justify-center p-5 font-bold font-oswald text-white md:p-5 lg:p-5 xl:p-0'>
                       <motion.h3 className="clamp-[text,4xl,6xl] italic">{title}</motion.h3>
-                      <motion.h1 className="clamp-[text,2xl,6xl] w-full xl:w-3/5 text-center">
+                      <motion.h1 className='clamp-[text,2xl,6xl] w-full text-center xl:w-3/5'>
                         {subtitle}
                       </motion.h1>
                     </div>

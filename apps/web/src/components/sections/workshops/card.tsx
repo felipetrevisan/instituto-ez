@@ -5,6 +5,7 @@ import { Card, CardFooter, type CardProps } from '@ez/shared/ui/card'
 import { ButtonLink } from '@ez/web/components/app'
 import { urlForImage } from '@ez/web/config/image'
 import type { Workshop } from '@ez/web/types/workshop'
+import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
 import { motion } from 'framer-motion'
 
 type Props = {
@@ -25,9 +26,9 @@ export function WorkshopCard({
     <MotionCard
       variant="ghost"
       className={cn(
-        'flex items-end justify-center shrink md:shrink-0 rounded-xl bg-card w-[70vw] md:w-160 lg:w-80 h-96 relative bg-cover! shadow-2xl',
+        'relative flex h-96 w-[70vw] shrink items-end justify-center rounded-xl bg-card bg-cover! shadow-2xl md:w-160 md:shrink-0 lg:w-80',
         {
-          'grayscale-100 opacity-80 select-none pointer-events-none': disabled,
+          'pointer-events-none select-none opacity-80 grayscale-100': disabled,
         },
         className,
       )}
@@ -41,9 +42,9 @@ export function WorkshopCard({
         transition: { duration: 0.4, ease: 'easeInOut' },
       }}
     >
-      <CardFooter className="bg-black/80 flex flex-col justify-center items-center gap-4 p-4 w-[calc(100%-10px)] h-28 rounded-2xl font-oswald border border-white/40 backdrop-blur-xl">
-        <span className="text-orange-400 font-bold text-2xl text-center">{title}</span>
-        {subtitle && <span className="text-white font-bold text-2xl">{subtitle}</span>}
+      <CardFooter className='flex h-28 w-[calc(100%-10px)] flex-col items-center justify-center gap-4 rounded-2xl border border-white/40 bg-black/80 p-4 font-oswald backdrop-blur-xl'>
+        <span className='text-center font-bold text-2xl text-orange-400'>{title}</span>
+        {subtitle && <span className='font-bold text-2xl text-white'>{subtitle}</span>}
       </CardFooter>
     </MotionCard>
   )
@@ -51,7 +52,7 @@ export function WorkshopCard({
   return (
     <>
       {link ? (
-        <ButtonLink href={link} passHref>
+        <ButtonLink href={getLocalizedLink(link)}  passHref>
           <CardRender />
         </ButtonLink>
       ) : (

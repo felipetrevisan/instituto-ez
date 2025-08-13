@@ -16,7 +16,7 @@ export default async function Page() {
   )
 
   return (
-    <div className="w-full flex items-center flex-col justify-center gap-20">
+    <div className='flex w-full flex-col items-center justify-center gap-20'>
       {sections?.map(({ key, show, title, subtitle }: Section) =>
         show ? (
           <section className={avaliableSections[key]?.classes || ''} key={key}>

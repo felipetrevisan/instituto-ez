@@ -1,0 +1,40 @@
+.timeline {
+  display: flex;
+  position: relative;
+}
+
+.timeline > li {
+  grid-template-rows: var(--timeline-row-start, minmax(0, 1fr)) auto var(
+      --timeline-row-end,
+      minmax(0, 1fr)
+    );
+  grid-template-columns: var(--timeline-col-start, minmax(0, 1fr)) auto var(
+      --timeline-col-end,
+      minmax(0, 1fr)
+    );
+  flex-shrink: 0;
+  align-items: center;
+  display: grid;
+  position: relative;
+}
+
+/* .timeline-vertical > li {
+  --timeline-row-start: minmax(0, 1fr);
+  --timeline-row-end: minmax(0, 1fr);
+  justify-items: center;
+} */
+
+.timeline-middle {
+  grid-row-start: 2;
+  grid-column-start: 2;
+}
+
+.timeline-vertical .timeline-start {
+  grid-area: 1 / 1 / 4 / 2;
+  place-self: center flex-end;
+}
+
+.timeline-vertical.timeline-snap-icon > li {
+  --timeline-col-start: minmax(0, 1fr);
+  --timeline-row-start: .5rem;
+}

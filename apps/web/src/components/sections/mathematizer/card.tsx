@@ -6,6 +6,7 @@ import { Button } from '@ez/shared/ui/button'
 import { ButtonLink } from '@ez/web/components/app'
 import { urlForImage } from '@ez/web/config/image'
 import type { Mathematizer } from '@ez/web/types/mathematizer'
+import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
 import { PortableText } from '@portabletext/react'
 import { Parallax } from 'react-parallax'
 
@@ -20,7 +21,7 @@ export function MathematizerCard({ item: { button, background, content, title },
   return (
     <div
       className={cn(
-        'relative flex justify-between w-full h-full min-h-[700px] lg:min-h-[500px] [&:not(:last-child)]:mb-10 [&:last-child]:mb-10',
+        'relative flex h-full min-h-[700px] w-full justify-between lg:min-h-[500px] [&:last-child]:mb-10 [&:not(:last-child)]:mb-10',
         {
           'flex-row-reverse': index % 2 !== 0,
         },
@@ -28,31 +29,31 @@ export function MathematizerCard({ item: { button, background, content, title },
     >
       <Parallax
         bgImage={urlForImage(background.asset).url()}
-        className="flex justify-center w-full xl:w-2/3 h-[362px] overflow-hidden rounded-r-lg"
+        className="flex h-[362px] w-full justify-center overflow-hidden rounded-r-lg xl:w-2/3"
       />
       <div
         className={cn(
-          'flex justify-center w-11/12 xl:w-1/2 z-10 bg-card/90 shadow-lg rounded-lg absolute top-24',
+          'absolute top-24 z-10 flex w-11/12 justify-center rounded-lg bg-card/90 shadow-lg xl:w-1/2',
           {
-            'translate-x-1/2 right-1/2 xl:translate-x-0 xl:right-80': index % 2 === 0,
-            '-translate-x-1/2 left-1/2 xl:translate-x-0 xl:left-80': index % 2 !== 0,
+            'right-1/2 translate-x-1/2 xl:right-80 xl:translate-x-0': index % 2 === 0,
+            '-translate-x-1/2 left-1/2 xl:left-80 xl:translate-x-0': index % 2 !== 0,
           },
         )}
       >
-        <div className="relative flex flex-col justify-start items-start w-full h-full text-secondary p-10 gap-10">
-          <h3 className="clamp-[text,xl,4xl] text-center lg:text-left font-bold font-oswald">
+        <div className="relative flex h-full w-full flex-col items-start justify-start gap-10 p-10 text-secondary">
+          <h3 className="clamp-[text,xl,4xl] text-center font-bold font-oswald lg:text-left">
             {title}
           </h3>
-          <div className="flex flex-col font-light text-justify text-md font-questrial leading-7 gap-10 min-h-40">
+          <div className='flex min-h-60 flex-col justify-between gap-10 text-justify font-light font-questrial text-md leading-7'>
             <PortableText value={content} components={createPortableComponents()} />
             {button.visible && link && (
-              <ButtonLink href={link} passHref className="flex justify-center w-full">
+              <ButtonLink href={getLocalizedLink(link)}  passHref className="flex w-full justify-center">
                 <Button
                   variant="default"
                   theme="tertiary"
                   rounded="xl"
                   size="2xl"
-                  className="uppercase font-bold w-full"
+                  className="w-full font-bold uppercase"
                   disabled={button.disabled}
                 >
                   {button.label}

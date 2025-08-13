@@ -7,8 +7,21 @@ export type Ebook = {
   subtitle?: string
   slug: string
   description?: string
+  seo: {
+    description: string
+    keywords: string
+  }
+  overview: {
+    title?: string
+    description?: string
+  }
+  index: {
+    title?: string
+    description?: string
+  }
   metadata: Metadata[]
   chapters: Chapter[]
+  questions?: Question[]
   theme: {
     text: string
     primary: Color
@@ -57,4 +70,9 @@ export type Media = {
   type: 'none' | 'icon' | 'image'
   icon?: { name: string }
   image?: SanityAsset
+}
+
+export type Question = {
+  title: string
+  text: string
 }

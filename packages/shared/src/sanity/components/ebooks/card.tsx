@@ -41,6 +41,7 @@ type Props = {
   item: Ebook
   full?: boolean
   theme: keyof typeof Theme
+  locale: string
   LinkComponent: React.ComponentType<LinkComponentProps>
   ImageComponent: React.ComponentType<ImageComponentProps>
   imageBuilder: (assets: SanityImageSource) => ImageUrlBuilder
@@ -49,9 +50,10 @@ type Props = {
 const MotionCard = motion(Card)
 
 export function EbookCard({
-  item: { image, slug, title, subtitle, description, button, disabled },
+  item: { image, slug, title, description, button, disabled },
   full = false,
   theme,
+  locale,
   LinkComponent,
   ImageComponent,
   imageBuilder,
@@ -67,7 +69,7 @@ export function EbookCard({
     <div className="relative w-fit">
       {disabled && (
         <div
-          className={cn('text-base font-bold text-white ribbon filter-none', {
+          className={cn('ribbon font-bold text-base text-white filter-none', {
             'ribbon-primary': theme === 'default',
             'ribbon-secondary': theme === 'secondary',
             'ribbon-tertiary': theme === 'tertiary',
@@ -80,9 +82,9 @@ export function EbookCard({
         variant="ghost"
         theme={theme}
         className={cn(
-          'flex flex-col md:flex-row items-end justify-center shrink md:shrink-0 bg-card w-[70vw] md:w-80 lg:w-80 h-96 relative shadow-2xl',
+          'relative flex h-96 w-[70vw] shrink flex-col items-end justify-center bg-card shadow-2xl md:w-80 md:shrink-0 md:flex-row lg:w-80',
           {
-            'grayscale-100 opacity-80 select-none pointer-events-none': disabled,
+            'pointer-events-none select-none opacity-80 grayscale-100': disabled,
           },
           className,
         )}
@@ -108,7 +110,7 @@ export function EbookCard({
       <div className="relative w-full">
         <div
           className={cn(
-            'flex justify-center item-center ribbon text-base font-bold uppercase -mt-7 p-5 text-center',
+            'item-center ribbon -mt-7 flex justify-center p-5 text-center font-bold text-base uppercase',
             {
               'ribbon-primary': theme === 'default',
               'ribbon-secondary': theme === 'secondary',
@@ -122,9 +124,9 @@ export function EbookCard({
           variant="ghost"
           theme={theme}
           className={cn(
-            'flex flex-col md:flex-row justify-center shrink md:shrink-0 relative shadow-xl w-full h-full md:min-h-[400px] md:h-[400px] md:max-h-[400px]border-1! border-primary/50 overflow-hidden',
+            'relative flex h-full w-full shrink flex-col justify-center overflow-hidden border-primary/50 shadow-xl md:h-[400px] md:max-h-[400px]border-1! md:min-h-[400px] md:shrink-0 md:flex-row',
             {
-              'grayscale-[85%] opacity-80 select-none pointer-events-none': disabled,
+              'pointer-events-none select-none opacity-80 grayscale-[85%]': disabled,
               'md:flex-col': !description,
               'rounded-t-2xl': button,
               'rounded-2xl': !button,
@@ -135,7 +137,7 @@ export function EbookCard({
           {image.preview && (
             <CardHeader
               className={cn(
-                'relative h-[40vh] md:h-full overflow-visible p-0 aspect-[2/3] md:aspect-[1/2] lg:aspect-[2/3]',
+                'relative aspect-[2/3] h-[40vh] overflow-visible p-0 md:aspect-[1/2] md:h-full lg:aspect-[2/3]',
                 { 'bg-[#f5f5f5] md:w-full': !description },
               )}
               style={{
@@ -144,7 +146,7 @@ export function EbookCard({
               }}
             >
               <motion.div
-                className={cn('absolute inset-0 overflow-visible md:w-full md:h-full', {
+                className={cn('absolute inset-0 overflow-visible md:h-full md:w-full', {
                   'md:w-full': !description,
                 })}
                 variants={{
@@ -159,29 +161,29 @@ export function EbookCard({
                   fill
                   placeholder="blur"
                   blurDataURL={image.preview.metadata.lqip}
-                  className={cn('object-cover md:object-contain h-max rounded-xl')}
+                  className={cn('h-max rounded-xl object-cover md:object-contain')}
                 />
               </motion.div>
             </CardHeader>
           )}
-          <CardContent className="relative flex flex-col p-0 gap-4 w-full">
+          <CardContent className='relative flex w-full flex-col gap-4 p-0'>
             {description && (
-              <ScrollArea className="md:max-h-[315px] overflow-auto">
-                <div className="absolute bottom-0 h-6 w-full pointer-events-none bg-gradient-to-t from-white/90 to-transparent z-10" />
+              <ScrollArea className='overflow-auto md:max-h-[315px]'>
+                <div className='pointer-events-none absolute bottom-0 z-10 h-6 w-full bg-gradient-to-t from-white/90 to-transparent' />
                 <div className="p-5 text-justify">{description}</div>
               </ScrollArea>
             )}
             {button && (
               <>
                 {link && (
-                  <LinkComponent href={`/ebooks/${slug}`}>
-                    <div className="flex justify-center item-center overflow-hidden">
+                  <LinkComponent href={`/${locale}/ebooks/${slug}`}>
+                    <div className='item-center flex justify-center overflow-hidden'>
                       <Button
                         disabled={disabled}
                         theme={theme}
                         fullWidth
                         size="xl"
-                        className="mb-10 md:m-0 md:absolute md:bottom-5 md:left-1/2 md:-translate-x-1/2 w-3/4"
+                        className='md:-translate-x-1/2 mb-10 w-3/4 md:absolute md:bottom-5 md:left-1/2 md:m-0'
                         rounded="2xl"
                         scaleEffect={false}
                       >
@@ -191,13 +193,13 @@ export function EbookCard({
                   </LinkComponent>
                 )}
                 {!link && (
-                  <div className="flex justify-center item-center overflow-hidden">
+                  <div className='item-center flex justify-center overflow-hidden'>
                     <Button
                       disabled={disabled}
                       theme={theme}
                       fullWidth
                       size="xl"
-                      className="mb-10 md:m-0 md:absolute md:bottom-5 md:left-1/2 md:-translate-x-1/2 w-3/4"
+                      className='md:-translate-x-1/2 mb-10 w-3/4 md:absolute md:bottom-5 md:left-1/2 md:m-0'
                       rounded="2xl"
                       scaleEffect={false}
                     >
@@ -216,7 +218,7 @@ export function EbookCard({
   return (
     <>
       {link && !full ? (
-        <LinkComponent href={`/ebooks/${slug}`}>
+        <LinkComponent href={`/${locale}/ebooks/${slug}`}>
           <CardRender />
         </LinkComponent>
       ) : (

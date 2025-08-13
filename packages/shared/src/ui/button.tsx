@@ -4,30 +4,39 @@ import { type VariantProps, cva } from 'class-variance-authority'
 import { type HTMLMotionProps, type Transition, motion } from 'framer-motion'
 import React from 'react'
 
+enum Size {
+  default = 'default',
+  sm = 'sm',
+  lg = 'lg',
+  xl = 'xl',
+  '2xl' = 'xxl',
+  full = 'full',
+}
+
 const buttonVariants = cva(
-  'relative overflow-hidden inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive z-1 cursor-pointer',
+  'relative z-1 inline-flex cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-md font-medium text-sm outline-none transition-all focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0',
   {
     variants: {
       variant: {
         default: 'shadow-sm outline-none',
         outline: 'shadow-sm outline outline-2',
-        ghost: 'shadow-none outline-none border-none',
-        link: 'bg-none shadow-none border-none',
+        ghost: 'border-none shadow-none outline-none',
+        link: 'border-none bg-none shadow-none',
       },
       theme: {
         default:
-          'bg-linear-to-r from-primary via-primary/80 to-primary hover:bg-primary-foreground hover:text-primary-foreground text-primary-foreground outline-primary-foreground/40',
+          'bg-linear-to-r from-primary via-primary/80 to-primary text-primary-foreground outline-primary-foreground/40 hover:bg-primary-foreground hover:text-primary-foreground',
         secondary:
-          'bg-linear-to-r from-secondary via-secondary/80 to-secondary hover:bg-secondary/30 hover:text-secondary-foreground text-secondary-foreground outline-secondary-foreground/40',
+          'bg-linear-to-r from-secondary via-secondary/80 to-secondary text-secondary-foreground outline-secondary-foreground/40 hover:bg-secondary/30 hover:text-secondary-foreground',
         tertiary:
-          'bg-linear-to-r from-tertiary via-tertiary/80 to-tertiary text-tertiary-foreground hover:bg-tertiary/30 hover:text-tertiary-foreground outline-tertiary/40 hover:border-tertiary/40',
+          'bg-linear-to-r from-tertiary via-tertiary/80 to-tertiary text-tertiary-foreground outline-tertiary/40 hover:border-tertiary/40 hover:bg-tertiary/30 hover:text-tertiary-foreground',
       },
       size: {
         default: 'max-w-fit px-4 py-2',
         sm: 'h-8 px-3 text-xs',
         lg: 'h-10 px-8',
-        xl: 'h-14 text-md px-6',
-        '2xl': 'h-16 text-md px-8',
+        xl: 'h-14 px-6 text-md',
+        '2xl': 'h-16 px-8 text-md',
       },
       rounded: {
         none: 'rounded-none',
@@ -84,19 +93,19 @@ const buttonVariants = cva(
         shadow: true,
         variant: 'default',
         className:
-          'shadow-primary-foreground/40 hover:shadow-primary-foreground transition-shadow ease-in-out duration-500',
+          'shadow-primary-foreground/40 transition-shadow duration-500 ease-in-out hover:shadow-primary-foreground',
       },
       {
         shadow: true,
         variant: 'outline',
         className:
-          'shadow-primary-foreground/40 hover:shadow-primary-foreground transition-shadow ease-in-out duration-500',
+          'shadow-primary-foreground/40 transition-shadow duration-500 ease-in-out hover:shadow-primary-foreground',
       },
       {
         shadow: true,
         variant: 'ghost',
         className:
-          'shadow-primary-foreground/40 hover:shadow-primary-foreground transition-shadow ease-in-out duration-500',
+          'shadow-primary-foreground/40 transition-shadow duration-500 ease-in-out hover:shadow-primary-foreground',
       },
       // Secondary
       {
@@ -104,21 +113,21 @@ const buttonVariants = cva(
         theme: 'secondary',
         variant: 'default',
         className:
-          'shadow-secondary/40 hover:shadow-secondary transition-shadow ease-in-out duration-500',
+          'shadow-secondary/40 transition-shadow duration-500 ease-in-out hover:shadow-secondary',
       },
       {
         shadow: true,
         theme: 'secondary',
         variant: 'outline',
         className:
-          'shadow-secondary/40 hover:shadow-secondary transition-shadow ease-in-out duration-500',
+          'shadow-secondary/40 transition-shadow duration-500 ease-in-out hover:shadow-secondary',
       },
       {
         shadow: true,
         theme: 'secondary',
         variant: 'ghost',
         className:
-          'shadow-secondary/40 hover:shadow-secondary transition-shadow ease-in-out duration-500',
+          'shadow-secondary/40 transition-shadow duration-500 ease-in-out hover:shadow-secondary',
       },
       // Tertiary
       {
@@ -126,21 +135,21 @@ const buttonVariants = cva(
         theme: 'secondary',
         variant: 'default',
         className:
-          'shadow-tertiary/40 hover:shadow-tertiary transition-shadow ease-in-out duration-500',
+          'shadow-tertiary/40 transition-shadow duration-500 ease-in-out hover:shadow-tertiary',
       },
       {
         shadow: true,
         theme: 'tertiary',
         variant: 'outline',
         className:
-          'shadow-tertiary/40 hover:shadow-tertiary transition-shadow ease-in-out duration-500',
+          'shadow-tertiary/40 transition-shadow duration-500 ease-in-out hover:shadow-tertiary',
       },
       {
         shadow: true,
         theme: 'tertiary',
         variant: 'ghost',
         className:
-          'shadow-tertiary/40 hover:shadow-tertiary transition-shadow ease-in-out duration-500',
+          'shadow-tertiary/40 transition-shadow duration-500 ease-in-out hover:shadow-tertiary',
       },
 
       // Outline
@@ -161,45 +170,45 @@ const buttonVariants = cva(
 
       {
         variant: 'ghost',
-        className: 'bg-transparent text-primary',
+        className: 'bg-transparent text-primary hover:bg-primary',
       },
       {
         variant: 'ghost',
         theme: 'secondary',
-        className: 'bg-transparent text-secondary',
+        className: 'bg-transparent text-secondary hover:bg-secondary',
       },
       {
         variant: 'ghost',
         theme: 'tertiary',
-        className: 'bg-transparent text-tertiary',
+        className: 'bg-transparent text-tertiary hover:bg-tertiary',
       },
 
       {
         variant: 'link',
         theme: 'default',
-        className: 'bg-transparent text-primary !shadow-none',
+        className: '!shadow-none bg-transparent text-primary',
       },
       {
         variant: 'link',
         theme: 'secondary',
-        className: 'bg-transparent text-secondary !shadow-none',
+        className: '!shadow-none bg-transparent text-secondary',
       },
       {
         variant: 'link',
         theme: 'tertiary',
-        className: 'bg-transparent text-tertiary !shadow-none',
+        className: '!shadow-none bg-transparent text-tertiary',
       },
     ],
   },
 )
 
-const rippleVariants = cva('absolute rounded-full size-5 pointer-events-none', {
+const rippleVariants = cva('pointer-events-none absolute size-5 rounded-full', {
   variants: {
     variant: {
       default: 'shadow-sm outline outline-2',
       outline: 'shadow-sm outline outline-2',
-      ghost: 'shadow-none outline-none border-none',
-      link: 'bg-none shadow-none border-none',
+      ghost: 'border-none shadow-none outline-none',
+      link: 'border-none bg-none shadow-none',
       icon: 'outline outline-2',
     },
     theme: {
@@ -262,16 +271,15 @@ function Button({
     setRipples((prev) => [...prev, { id, x, y }])
     setTimeout(() => setRipples((prev) => prev.filter((r) => r.id !== id)), 600)
   }, [])
+
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     createRipple(event)
 
     const isSubmitButton = (props.type ?? 'button') === 'submit'
 
     if (isSubmitButton) {
-      // Deixa o submit rolar normalmente
       onClick?.(event)
     } else {
-      // Se for botão comum, aplica atraso se quiser
       setTimeout(() => onClick?.(event), 600)
     }
   }
@@ -280,6 +288,7 @@ function Button({
     <CompMotion
       ref={ref}
       data-slot="button"
+      data-size={Size[size as keyof typeof Size] || Size.full}
       whileHover={{ scale: scaleEffect ? 1.1 : 1 }}
       whileTap={{ scale: scaleEffect ? 0.9 : 1 }}
       transition={{ type: 'spring', stiffness: 400, damping: 10 }}

@@ -10,15 +10,12 @@
     "build": "turbo run build",
     "dev:web": "pnpm --filter web dev",
     "dev:studio": "pnpm --filter studio dev",
-    "lint:web:check": "pnpm biome check --formatter-enabled=true --linter-enabled=true --organize-imports-enabled=false ./web/src",
-    "lint:web:organize": "pnpm biome check --formatter-enabled=false --linter-enabled=false --organize-imports-enabled=true --write ./web/src",
-    "lint:web:format": "pnpm biome format --write ./web/src",
-    "lint:packages:check": "pnpm biome check --formatter-enabled=true --linter-enabled=true --organize-imports-enabled=false ./packages",
-    "lint:packages:organize": "pnpm biome check --formatter-enabled=false --linter-enabled=false --organize-imports-enabled=true --write ./packages",
-    "lint:packages:format": "pnpm biome format --write ./packages",
-    "lint:studio:check": "pnpm biome check --formatter-enabled=true --linter-enabled=true --organize-imports-enabled=false ./studio/src",
-    "lint:studio:organize": "pnpm biome check --formatter-enabled=false --linter-enabled=false --organize-imports-enabled=true --write ./studio/src",
-    "lint:studio:format": "pnpm biome format --write ./studio/src"
+    "lint:apps:check": "pnpm biome check --formatter-enabled=true --linter-enabled=true --organize-imports-enabled=false ./apps/**/src",
+    "lint:apps:organize": "pnpm biome check --formatter-enabled=false --linter-enabled=false --organize-imports-enabled=true --write ./apps/**/src",
+    "lint:apps:format": "pnpm biome format --write ./apps/**/src",
+    "lint:packages:check": "pnpm biome check --formatter-enabled=true --linter-enabled=true --organize-imports-enabled=false ./packages/src",
+    "lint:packages:organize": "pnpm biome check --formatter-enabled=false --linter-enabled=false --organize-imports-enabled=true --write ./packages/src",
+    "lint:packages:format": "pnpm biome format --write ./packages/src"
   },
   "dependencies": {
     "@t3-oss/env-core": "0.13.8",

@@ -1,19 +1,25 @@
-import 'dotenv/config';
+import createNextIntlPlugin from 'next-intl/plugin'
 
-export const runtime = 'edge';
+export const runtime = 'edge'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	transpilePackages: ['lucide-react', '@ez/shared'],
-	images: {
-		remotePatterns: [
-			{
-				protocol: 'https',
-				hostname: 'cdn.sanity.io',
-			},
-		],
-	},
-	//experimental: { urlImports: ['https://themer.sanity.build/'] },
-};
+  transpilePackages: ['lucide-react', '@ez/shared'],
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.sanity.io',
+      },
+    ],
+  },
+  //experimental: { urlImports: ['https://themer.sanity.build/'] },
+}
 
-export default nextConfig;
+const withNextIntl = createNextIntlPlugin({
+  experimental: {
+    createMessagesDeclaration: './messages/en.json'
+  }
+});
+
+export default withNextIntl(nextConfig)

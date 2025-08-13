@@ -6,29 +6,8 @@ import { urlForImage } from '@ez/web/config/image'
 import type { Section } from '@ez/web/types/page'
 import { createPortableComponents } from '@ez/web/utils/create-portable-components'
 import { PortableText } from '@portabletext/react'
-import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { Parallax } from 'react-parallax'
-import ReactPlayer from 'react-player/youtube'
-
-const cards = [
-  {
-    title: 'Aprenda com exemplos práticos',
-    description: 'Nosso conteúdo é direto ao ponto e focado em resolver problemas reais.',
-    image:
-      'https://cdn.sanity.io/images/pu7kz9iu/production/3be4a9a452a6925419f75419173b65e74c1d152a-767x1000.png?fit=max&auto=format',
-  },
-  {
-    title: 'Domine os fundamentos',
-    description: 'Você vai entender os conceitos essenciais para construir projetos do zero.',
-    image: '/images/example2.jpg',
-  },
-  {
-    title: 'Evolua com confiança',
-    description: 'Construa conhecimento progressivo com base sólida e apoio visual.',
-    image: '/images/example3.jpg',
-  },
-]
 
 export function SectionContent({
   title,
@@ -39,14 +18,14 @@ export function SectionContent({
 }: Section & { slug: string }) {
   return (
     <div className="flex flex-col gap-10">
-      <div className="relative w-screen h-full flex flex-col">
-        <div className="absolute top-0 left-0 w-full overflow-hidden z-10">
+      <div className='relative flex h-full w-screen flex-col'>
+        <div className='absolute top-0 left-0 z-10 w-full overflow-hidden'>
           {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 1200 120"
             preserveAspectRatio="none"
-            className="relative w-[calc(141%+1.3px)] h-[85px]"
+            className='relative h-[85px] w-[calc(141%+1.3px)]'
           >
             <path
               d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"
@@ -70,9 +49,9 @@ export function SectionContent({
           className="w-full overflow-hidden"
         >
           {media.type === 'IMAGE' && media.image ? (
-            <div className="relative flex h-full md:py-20 my-20">
-              <div className="flex flex-col gap-10 justify-center items-center font-bold font-oswald w-full text-white">
-                <div className="relative overflow-hidden rounded-2xl shadow h-[300px] lg:h-[500px] md:max-h-[500px] max-w-full w-[90vw] md:w-[60vw] mt-10">
+            <div className='relative my-20 flex h-full md:py-20'>
+              <div className='flex w-full flex-col items-center justify-center gap-10 font-bold font-oswald text-white'>
+                <div className='relative mt-10 h-[300px] w-[90vw] max-w-full overflow-hidden rounded-2xl shadow md:max-h-[500px] md:w-[60vw] lg:h-[500px]'>
                   <Image
                     src={urlForImage(media.image.asset).url()}
                     alt=""
@@ -85,8 +64,8 @@ export function SectionContent({
             </div>
           ) : (
             <div className="relative flex h-full">
-              <div className="flex flex-col gap-10 justify-center items-center font-bold font-oswald w-full text-white">
-                <div className="overflow-hidden rounded-2xl shadow h-[300px] lg:h-[650px] max-w-full w-[90vw] md:w-screen">
+              <div className='flex w-full flex-col items-center justify-center gap-10 font-bold font-oswald text-white'>
+                <div className='h-[300px] w-[90vw] max-w-full overflow-hidden rounded-2xl shadow md:w-screen lg:h-[650px]'>
                   {/* <ReactPlayer
 										url={media.video?.url}
 										width="100%"
@@ -101,13 +80,13 @@ export function SectionContent({
             </div>
           )}
         </Parallax>
-        <div className="absolute bottom-0 left-0 w-full overflow-hidden rotate-180">
+        <div className='absolute bottom-0 left-0 w-full rotate-180 overflow-hidden'>
           {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 1200 120"
             preserveAspectRatio="none"
-            className="relative w-[calc(141%+1.3px)] h-[85px]"
+            className='relative h-[85px] w-[calc(141%+1.3px)]'
           >
             <path
               d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"
@@ -127,7 +106,7 @@ export function SectionContent({
         </div>
       </div>
       <div
-        className={cn('container flex flex-col gap-10 justify-center items-center', {
+        className={cn('container flex flex-col items-center justify-center gap-10', {
           'w-screen xl:w-[65vw]': slug !== 'ebooks',
           'w-screen': slug === 'ebooks',
         })}
@@ -135,7 +114,7 @@ export function SectionContent({
         {title && <Title className="text-center">{title}</Title>}
         <div
           className={cn(
-            'flex flex-col gap-5 justify-center items-center w-full lg:max-w-[90vw] py-10 lg:p-0 [&>*:not(hr)]:w-full',
+            'flex w-full flex-col items-center justify-center gap-5 py-10 lg:max-w-[90vw] lg:p-0 [&>*:not(hr)]:w-full',
             {
               'gap-10': slug === 'ebooks',
             },

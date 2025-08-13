@@ -41,6 +41,7 @@ export type EbooksType = {
   appareance: 'small' | 'full'
   collection?: { _ref: string; _type: string }
   theme: keyof typeof Theme
+  locale: string
   ebooks: Ebook[] | undefined
   title: string | undefined
   LinkComponent: React.ComponentType<LinkComponentProps>
@@ -49,7 +50,17 @@ export type EbooksType = {
 }
 
 const EbooksComponent = ({ value }: { value: EbooksType }) => {
-  const { type, appareance, theme, ebooks, title, LinkComponent, ImageComponent, imageBuilder } = value
+  const {
+    type,
+    appareance,
+    theme,
+    ebooks,
+    locale,
+    title,
+    LinkComponent,
+    ImageComponent,
+    imageBuilder,
+  } = value
 
   if (!ebooks || ebooks.length === 0) return null
 
@@ -59,6 +70,7 @@ const EbooksComponent = ({ value }: { value: EbooksType }) => {
         ebooks={ebooks}
         theme={theme}
         appareance={appareance}
+        locale={locale}
         title={title}
         LinkComponent={LinkComponent}
         ImageComponent={ImageComponent}
@@ -73,6 +85,7 @@ const EbooksComponent = ({ value }: { value: EbooksType }) => {
         ebooks={ebooks}
         theme={value.theme}
         appareance={value.appareance}
+        locale={locale}
         title={title}
         LinkComponent={LinkComponent}
         ImageComponent={ImageComponent}
@@ -86,6 +99,7 @@ const EbookGridComponent = ({
   ebooks,
   theme,
   appareance,
+  locale,
   title,
   TitleComponent = Title,
   LinkComponent,
@@ -95,6 +109,7 @@ const EbookGridComponent = ({
   ebooks: Ebook[] | undefined
   theme: EbooksType['theme']
   appareance: EbooksType['appareance']
+  locale: string
   title?: string | undefined
   TitleComponent?: React.ComponentType<{ children: React.ReactNode }>
   LinkComponent: React.ComponentType<LinkComponentProps>
@@ -102,14 +117,14 @@ const EbookGridComponent = ({
   imageBuilder: (assets: SanityImageSource) => ImageUrlBuilder
 }) => {
   return (
-    <div className="flex flex-col w-full h-full space-y-14">
+    <div className="flex h-full w-full flex-col space-y-14">
       <div className="flex flex-col justify-center gap-10">
         {ebooks && (
           <>
             {title && <TitleComponent>{title}</TitleComponent>}
             <div
-              className={cn('grid gap-12 gap-y-12 place-items-center grid-cols-1', {
-                'md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-2': appareance === 'full',
+              className={cn('grid grid-cols-1 place-items-center gap-12 gap-y-12', {
+                'md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2': appareance === 'full',
                 'md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-4': appareance === 'small',
               })}
             >
@@ -119,6 +134,7 @@ const EbookGridComponent = ({
                   full={appareance === 'full'}
                   key={ebook.id}
                   theme={theme}
+                  locale={locale}
                   LinkComponent={LinkComponent}
                   ImageComponent={ImageComponent}
                   imageBuilder={imageBuilder}
@@ -136,6 +152,7 @@ const EbookCarouselComponent = ({
   ebooks,
   theme,
   appareance,
+  locale,
   title,
   TitleComponent = Title,
   LinkComponent,
@@ -145,6 +162,7 @@ const EbookCarouselComponent = ({
   ebooks: Ebook[] | undefined
   theme: EbooksType['theme']
   appareance: EbooksType['appareance']
+  locale: string
   title?: string | undefined
   TitleComponent?: React.ComponentType<{ children: React.ReactNode }>
   LinkComponent: React.ComponentType<LinkComponentProps>
@@ -152,8 +170,8 @@ const EbookCarouselComponent = ({
   imageBuilder: (assets: SanityImageSource) => ImageUrlBuilder
 }) => {
   return (
-    <div className="flex flex-col w-full h-full space-y-14">
-      <div className="flex flex-col justify-center gap-10">
+    <div className="flex h-full w-full flex-col space-y-14">
+      <div className="flex flex-col gap-10">
         {title && <TitleComponent>{title}</TitleComponent>}
         <Carousel plugins={[ClassNames()]} className="overflow-visible">
           <CarouselContent className="gap-4" rootClassName="overflow-visible">
@@ -166,6 +184,7 @@ const EbookCarouselComponent = ({
                   item={ebook}
                   full={appareance === 'full'}
                   theme={theme}
+                  locale={locale}
                   LinkComponent={LinkComponent}
                   ImageComponent={ImageComponent}
                   imageBuilder={imageBuilder}

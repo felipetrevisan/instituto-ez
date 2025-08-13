@@ -6,7 +6,8 @@ export const siteConfigQuery = groq`
     description,
     keywords,
     "contact": {
-      email
+      "form": contactForm,
+      "email": email,
     },
     "logo": logo {
       "asset": asset,
@@ -263,9 +264,21 @@ export const ebookQueryBySlug = groq`
     subtitle,
     description,
     theme,
+    "seo": {
+      "description": seoDescription,
+      "keywords": seoKeywords
+    },
+    "overview": overview {
+      title,
+      description
+    },
+    "index": index {
+      title,
+      description
+    },
     "questions": questions[] {
       title,
-      content,
+      "text": content
     },
     "chapters": chapters[] {
       "media": media {
@@ -273,7 +286,7 @@ export const ebookQueryBySlug = groq`
         icon,
         image
       },
-      title,
+      title
     },
     "metadata": data[] {
       "media": media {
@@ -285,7 +298,7 @@ export const ebookQueryBySlug = groq`
       prefix,
       title,
       value,
-      type,
+      type
     },
     "image": images {
       "preview": small_image {
@@ -486,4 +499,31 @@ export const bannerQuery = groq`
       }
     }
   }
+`
+export const contactFormQuery = groq`
+  *[_type == "contactForm" && _id == $formId] {
+    title,
+    showtitle,
+    _id,
+    id,
+    class,
+    fields[] {
+      label,
+      name,
+      type,
+      isRequired,
+      helpText,
+      note,
+      showPlaceholder,
+      selectOptions,
+      placeholder,
+      radioOptions,
+      checkboxOptions,
+      options[]{
+        value,
+        label
+      },
+    },
+    submitButtonText
+  }[0]
 `

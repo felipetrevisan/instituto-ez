@@ -21,18 +21,18 @@ type ButtonType = {
 }
 
 const ButtonComponent = ({ value }: { value: ButtonType }) => {
-  const { setIsContactDialogOpen, setContactSubject } = useShared();
+  const { setIsContactDialogOpen, setContactSubject } = useShared()
 
   const { label, link, variant, theme, size, rounded, fullWidth, action, icon, subject } = value
 
   const IconComponent = icon?.name ? Icons[icon.name] : null
 
   const handleClick = () => {
-  	if (action === 'dialog') {
-  		setIsContactDialogOpen(true);
-  		setContactSubject(subject);
-  	}
-  };
+    if (action === 'dialog') {
+      setIsContactDialogOpen(true)
+      setContactSubject(subject)
+    }
+  }
 
   const path = link?.slug?.current ? `/${link.slug.current}` : '/'
 
@@ -52,7 +52,7 @@ const ButtonComponent = ({ value }: { value: ButtonType }) => {
   )
 
   return (
-    <div className={cn('flex justify-center', { 'w-full': fullWidth })}>
+    <div className={cn('flex justify-center p-4', { 'w-full': fullWidth })}>
       {action === 'link' ? (
         <Link href={path} className={cn({ 'w-full': fullWidth })}>
           {button}

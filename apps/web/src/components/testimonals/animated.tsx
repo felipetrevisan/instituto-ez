@@ -36,7 +36,7 @@ export function TestimonialAnimated({
   return (
     <MotionCard
       className={cn(
-        'overflow-visible h-[400px] max-h-[400px] xl:h-[300px] xl:max-h-[300px] group relative select-none cursor-pointer p-1 transition-all',
+        'group relative h-[400px] max-h-[400px] cursor-pointer select-none overflow-visible p-1 transition-all xl:h-[300px] xl:max-h-[300px]',
       )}
       variant={variant}
       theme={theme}
@@ -54,9 +54,9 @@ export function TestimonialAnimated({
         transition: { duration: 0.4, ease: 'easeInOut' },
       }}
     >
-      <CardContent className="flex items-center justify-center w-ful p-0 h-full">
-        <div className="relative flex flex-col items-center justify-evenly w-full h-full border-0 py-0 px-8">
-          <ScrollArea className="h-3/4 max-w-2xl mx-auto mb-4 lg:mb-8 text-justify relative w-full">
+      <CardContent className='flex h-full w-ful items-center justify-center p-0'>
+        <div className='relative flex h-full w-full flex-col items-center justify-evenly border-0 px-8 py-0'>
+          <ScrollArea className='relative mx-auto mb-4 h-3/4 w-full max-w-2xl text-justify lg:mb-8'>
             <PortableText value={item.testimonial} />
           </ScrollArea>
           <div className="author font-bold" data-slot="card-content-action">

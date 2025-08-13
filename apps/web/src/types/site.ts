@@ -7,7 +7,10 @@ export type Site = {
   title: string
   description?: string
   keywords?: string
-  contact: { email: string }
+  contact: { 
+    form: { _ref: string }
+    email: string
+  }
   hero: Hero[]
   sections: Section[]
   logo?: SanityAsset

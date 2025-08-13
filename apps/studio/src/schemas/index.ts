@@ -1,36 +1,29 @@
 import type { SchemaTypeDefinition } from 'sanity'
 
+// Documents
 import advancedMentory from './documents/advanced-mentory'
+import banner from './documents/banner'
 import immersion from './documents/immersion'
 import lecture from './documents/lecture'
 import mathematizer from './documents/mathematizer'
+import navigation from './documents/navigation'
+import page from './documents/page'
 import services from './documents/services'
+import settings from './documents/settings'
 import testimonial from './documents/testimonials'
 import workshop from './documents/workshops'
 import ebookCatalog from './ebooks/catalog'
 import ebookCollection from './ebooks/collection'
 
-import banner from './documents/banner'
-import settings from './documents/settings'
-
-import navigation from './documents/navigation'
-import page from './documents/page'
-
+// Objects
 import aboutCard from './objects/about-card'
 import button from './objects/button'
 import coverImage from './objects/cover-image'
 import chapters from './objects/ebooks/chapters'
+import ebooksIndex from './objects/ebooks/content'
 import metadata from './objects/ebooks/metadata'
+import ebooksOverview from './objects/ebooks/overview'
 import theme from './objects/ebooks/theme'
-import icon from './objects/icon'
-import link from './objects/link'
-import navigationItem from './objects/navigation-item'
-import navigationSubmenuItem from './objects/navigation-submenu-item'
-import pageSection from './objects/page'
-import ribbon from './objects/ribbon'
-import section from './objects/section'
-import socialNetworksItem from './objects/social-networks-item'
-
 import accordionWidget from './objects/editor/accordion'
 import accordionContentWidget from './objects/editor/accordion-content'
 import alertWidget from './objects/editor/alert'
@@ -43,9 +36,18 @@ import richText from './objects/editor/rich-text'
 import tabsWidget from './objects/editor/tabs'
 import testimonialWidget from './objects/editor/testimonial'
 import titleWidget from './objects/editor/title'
+import icon from './objects/icon'
+import link from './objects/link'
+import navigationItem from './objects/navigation-item'
+import navigationSubmenuItem from './objects/navigation-submenu-item'
+import pageSection from './objects/page'
+import ribbon from './objects/ribbon'
+import section from './objects/section'
+import socialNetworksItem from './objects/social-networks-item'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
+    // Documents
     settings,
     testimonial,
     workshop,
@@ -57,10 +59,10 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     mathematizer,
     lecture,
     banner,
-
     page,
-
     navigation,
+
+    // Objects
     navigationItem,
     navigationSubmenuItem,
     socialNetworksItem,
@@ -75,7 +77,10 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     pageSection,
     aboutCard,
     section,
-
+    ebooksOverview,
+    ebooksIndex,
+    
+    // Editor Widgets
     buttonLinkWidget,
     titleWidget,
     accordionWidget,

@@ -5,88 +5,93 @@ import { type HTMLMotionProps, type Transition, motion } from 'motion/react'
 import * as React from 'react'
 
 import { cn } from '@ez/shared/lib/utils'
-import { MotionHighlight, MotionHighlightItem } from '@ez/shared/ui/animated/motion-highlight'
+import { MotionHighlight, MotionHighlightItem } from '@ez/shared/ui/animated/effects/motion-highlight'
 import { type VariantProps, cva } from 'class-variance-authority'
 
 type TabsProps = React.ComponentProps<typeof TabsPrimitive.Root>
 
-const tabVariants = cva('relative overflow-hidden flex flex-col md:flex-row', {
-  variants: {
-    variant: {
-      default: 'text-center shadow-sm flex divide-x',
-      outline: 'outline outline-2 divide-x border-1',
-      ghost:
-        'shadow-none outline-none bg-transparent after:absolute after:bottom-0 after:w-full after:border-b-1 after:h-[2px] after:border-b-slate-500/40',
+const tabVariants = cva(
+  'relative flex flex-col items-center overflow-hidden rounded-full bg-neutral-100 text-center text-white shadow-lg md:flex-row',
+  {
+    variants: {
+      variant: {
+        default: 'border border-neutral-200 shadow-sm',
+        outline: 'border border-1 border-neutral-200 outline outline-2',
+        ghost: 'border-none bg-transparent shadow-none',
+      },
+      theme: {
+        default:
+          'text-primary-foreground shadow-primary/20 outline-primary/40 hover:border-primary/40',
+        secondary:
+          'text-secondary-foreground shadow-secondary/20 outline-secondary/40 hover:border-secondary/40',
+        tertiary:
+          'text-tertiary-foreground shadow-tertiary/20 outline-tertiary/40 hover:border-tertiary/40',
+      },
+      rounded: {
+        none: 'rounded-none',
+        full: 'rounded-full',
+        lg: 'rounded-lg',
+        xl: 'rounded-2xl',
+        '2xl': 'rounded-3xl',
+      },
     },
-    theme: {
-      default:
-        'shadow-primary/20 bg-linear-to-r from-primary/60 via-primary/80 to-primary/60 text-primary-foreground outline-primary/40 hover:border-primary/40',
-      secondary:
-        'shadow-secondary/20 bg-linear-to-r from-secondary/60 via-secondary/80 to-secondary/60 text-secondary-foreground outline-secondary/40 hover:border-secondary/40',
-      tertiary:
-        'shadow-tertiary/20 bg-linear-to-r from-tertiary/60 via-tertiary/80 to-tertiary/60 text-tertiary-foreground outline-tertiary/40 hover:border-tertiary/40',
-    },
-    rounded: {
-      none: 'rounded-none',
-      full: 'rounded-full',
-      lg: 'rounded-lg',
-      xl: 'rounded-2xl',
-      '2xl': 'rounded-3xl',
-    },
-  },
-  defaultVariants: {
-    variant: 'default',
-    theme: 'default',
-    rounded: 'xl',
-  },
-  compoundVariants: [
-    {
-      variant: 'outline',
+    defaultVariants: {
+      variant: 'default',
       theme: 'default',
-      className:
-        'shadow-primary/20 bg-transparent text-primary outline-primary/40 hover:border-primary/40',
+      rounded: 'xl',
     },
-    {
-      variant: 'outline',
-      theme: 'secondary',
-      className:
-        'shadow-secondary/20 bg-transparent text-secondary outline-secondary/40 hover:border-secondary/40',
-    },
-    {
-      variant: 'outline',
-      theme: 'tertiary',
-      className:
-        'shadow-tertiary/20 bg-transparent text-tertiary outline-tertiary/40 hover:border-tertiary/40',
-    },
-    {
-      variant: 'ghost',
-      theme: 'default',
-      className: 'bg-transparent text-primary rounded-none shadow-none',
-    },
-    {
-      variant: 'ghost',
-      theme: 'secondary',
-      className: 'bg-transparent text-secondary rounded-none shadow-none',
-    },
-    {
-      variant: 'ghost',
-      theme: 'tertiary',
-      className: 'bg-transparent text-tertiary rounded-none shadow-none',
-    },
-  ],
-})
+    compoundVariants: [
+      {
+        variant: 'outline',
+        theme: 'default',
+        className:
+          'bg-transparent text-primary shadow-primary/20 outline-primary/40 hover:border-primary/40',
+      },
+      {
+        variant: 'outline',
+        theme: 'secondary',
+        className:
+          'bg-transparent text-secondary shadow-secondary/20 outline-secondary/40 hover:border-secondary/40',
+      },
+      {
+        variant: 'outline',
+        theme: 'tertiary',
+        className:
+          'bg-transparent text-tertiary shadow-tertiary/20 outline-tertiary/40 hover:border-tertiary/40',
+      },
+      {
+        variant: 'ghost',
+        theme: 'default',
+        className: 'rounded-none bg-transparent text-primary text-primary shadow-none shadow-primary/20 outline-primary/40 hover:border-primary/40',
 
-const tabHighlightVariants = cva('absolute z-0', {
+      },
+      {
+        variant: 'ghost',
+        theme: 'secondary',
+        className: 'rounded-none bg-transparent text-secondary text-secondary shadow-none shadow-secondary/20 outline-secondary/40 hover:border-secondary/40',
+      },
+      {
+        variant: 'ghost',
+        theme: 'tertiary',
+        className:
+          'rounded-none bg-transparent text-tertiary text-tertiary shadow-none shadow-tertiary/20 outline-tertiary/40 hover:border-tertiary/40',
+      },
+    ],
+  },
+)
+
+const tabHighlightVariants = cva('absolute rounded-full', {
   variants: {
     variant: {
-      default: 'bg-white/80',
-      outline: '',
+      default: '',
+      outline: 'border-2 outline-2',
       ghost: '',
     },
     theme: {
-      default: 'text-primary shadow-primary shadow-xl',
-      secondary: 'text-secondary shadow-secondary shadow-xl',
-      tertiary: 'text-tertiary shadow-tertiary shadow-xl',
+      default: 'bg-gradient-to-r from-primary/40 to-primary/80 text-primary opacity-30 blur-sm',
+      secondary:
+        'bg-gradient-to-r from-secondary/40 to-secondary/80 text-secondary opacity-30 blur-sm',
+      tertiary: 'bg-gradient-to-r from-tertiary/40 to-tertiary/80 text-tertiary opacity-30 blur-sm',
     },
   },
   defaultVariants: {
@@ -98,52 +103,52 @@ const tabHighlightVariants = cva('absolute z-0', {
       variant: 'outline',
       theme: 'default',
       className:
-        'bg-linear-to-r from-primary/60 via-primary/80 to-primary/60 text-primary shadow-primary',
+        'border-primary bg-none bg-white text-primary opacity-1 shadow-primary outline-primary',
     },
     {
       variant: 'outline',
       theme: 'secondary',
       className:
-        'bg-linear-to-r from-secondary/60 via-secondary/80 to-secondary/60 text-secondary shadow-secondary',
+        'border-secondary bg-none bg-white text-secondary opacity-1 shadow-secondary outline-secondary',
     },
     {
       variant: 'outline',
       theme: 'tertiary',
       className:
-        'bg-linear-to-r from-tertiary/60 via-tertiary/80 to-tertiary/60 text-tertiary shadow-tertiary',
+        'border-tertiary bg-none bg-white text-tertiary opacity-1 shadow-tertiary outline-tertiary',
     },
     {
       variant: 'ghost',
       theme: 'default',
-      className: 'bg-transparent text-primary border-b-2 border-b-primary shadow-none',
+      className: 'border-primary bg-none bg-white text-primary opacity-1 shadow-primary outline-primary',
     },
     {
       variant: 'ghost',
       theme: 'secondary',
-      className: 'bg-transparent text-secondary border-b-2 border-b-secondary shadow-none',
+      className: 'border-secondary bg-none bg-white text-secondary opacity-1 shadow-secondary outline-secondary',
     },
     {
       variant: 'ghost',
       theme: 'tertiary',
-      className: 'bg-transparent text-tertiary border-b-2 border-b-tertiary shadow-none',
+      className:
+        'border-tertiary bg-none bg-white text-tertiary opacity-1 shadow-tertiary outline-tertiary',
     },
   ],
 })
 
 const tabsTriggerVariants = cva(
-  'inline-flex cursor-pointer items-center size-full justify-center whitespace-nowrap p-4 font-bold ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 z-[1]',
+  'relative z-1 inline-flex size-full cursor-pointer items-center justify-center whitespace-nowrap p-4 font-bold ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {
-        default: 'data-[state=active]:backdrop-blur-md',
-        outline: 'data-[state=active]:backdrop-blur-md',
-        ghost:
-          'border-b border-transparent data-[state=active]:border-b-[3px] data-[state=active]:border-b-current relative hover:after:animation-pulse hover:after:shadow-xl after:absolute after:w-0 after:left-1/2 after:-bottom-1 after:h-[2px] after:-translate-x-1/2 after:transition-all',
+        default: 'data-[state=active]:bg-transparent data-[state=active]:backdrop-blur-md',
+        outline: 'data-[state=active]:border-1 data-[state=active]:backdrop-blur-md',
+        ghost: 'data-[state=active]:border-1 data-[state=active]:backdrop-blur-md',
       },
       theme: {
-        default: 'text-primary-foreground data-[state=active]:text-primary',
-        secondary: 'text-secondary-foreground data-[state=active]:text-secondary',
-        tertiary: 'text-tertiary-foreground data-[state=active]:text-tertiary',
+        default: 'text-primary data-[state=active]:text-primary-foreground',
+        secondary: 'text-secondary data-[state=active]:text-secondary-foreground',
+        tertiary: 'text-tertiary data-[state=active]:text-tertiary-foreground',
       },
     },
     defaultVariants: {
@@ -153,32 +158,33 @@ const tabsTriggerVariants = cva(
       {
         variant: 'outline',
         theme: 'default',
-        className: 'text-primary data-[state=active]:text-primary-foreground',
+        className: 'data-[state=active]:border-primary data-[state=active]:text-primary',
       },
       {
         variant: 'outline',
         theme: 'secondary',
-        className: 'text-secondary data-[state=active]:text-secondary-foreground',
+        className: 'data-[state=active]:border-secondary data-[state=active]:text-secondary',
       },
       {
         variant: 'outline',
         theme: 'tertiary',
-        className: 'text-tertiary data-[state=active]:text-tertiary-foreground',
+        className: 'data-[state=active]:border-tertiary data-[state=active]:text-tertiary',
       },
       {
         variant: 'ghost',
         theme: 'default',
-        className: 'text-primary after:bg-primary',
+        className: 'data-[state=active]:border-primary data-[state=active]:bg-primary/10 data-[state=active]:text-primary',
       },
       {
         variant: 'ghost',
         theme: 'secondary',
-        className: 'text-secondary after:bg-secondary',
+        className: 'data-[state=active]:border-secondary data-[state=active]:bg-secondary/10 data-[state=active]:text-secondary',
       },
       {
         variant: 'ghost',
         theme: 'tertiary',
-        className: 'text-tertiary after:bg-tertiary',
+        className:
+          'data-[state=active]:border-tertiary data-[state=active]:bg-tertiary/10 data-[state=active]:text-tertiary',
       },
     ],
   },
@@ -270,13 +276,22 @@ function TabsList({
 }
 
 type TabsTriggerProps = React.ComponentProps<typeof TabsPrimitive.Trigger> &
-  VariantProps<typeof tabsTriggerVariants>
+  VariantProps<typeof tabsTriggerVariants> & {
+    rootClassName?: string
+  }
 
-function TabsTrigger({ className, value, variant, theme, ...props }: TabsTriggerProps) {
+function TabsTrigger({
+  rootClassName,
+  className,
+  value,
+  variant,
+  theme,
+  ...props
+}: TabsTriggerProps) {
   return (
     <MotionHighlightItem
       value={value}
-      className="size-full"
+      className={cn('size-full', rootClassName)}
       transition={{ type: 'spring', stiffness: 200, damping: 20 }}
     >
       <TabsPrimitive.Trigger

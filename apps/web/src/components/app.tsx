@@ -4,10 +4,11 @@ import { useShared } from '@ez/shared/hooks/use-shared'
 import { MailIcon } from '@ez/shared/icons'
 import { cn } from '@ez/shared/lib/utils'
 import { getImageUrlBuilder } from '@ez/shared/sanity/image'
-import { IconButton } from '@ez/shared/ui/animated/button-icon'
+import { IconButton } from '@ez/shared/ui/animated/button/icon-button'
 import { Dialog } from '@ez/shared/ui/dialog'
 import * as Navbar from '@ez/web/components/ui/navbar'
 import { menuListVariants, sidebarVariants } from '@ez/web/config/animation'
+import { env } from '@ez/web/config/env'
 import { urlForImage } from '@ez/web/config/image'
 import { useApp } from '@ez/web/hooks/use-app'
 import { useDimensions } from '@ez/web/hooks/use-dimension'
@@ -16,7 +17,6 @@ import type { Site } from '@ez/web/types/site'
 import { motion, useAnimation, useMotionValueEvent, useScroll, useTransform } from 'framer-motion'
 import Link from 'next/link'
 import { Fragment, useEffect, useRef, useState } from 'react'
-import { env } from '../config/env'
 import { ContactFormDialog } from './contact-form-dialog'
 import { Logo } from './logo'
 import { DesktopNavigation, DesktopNavigationSkeleton } from './navigation/desktop-navigation'
@@ -76,9 +76,9 @@ function Header({ className, data }: HeaderProps) {
   return (
     <motion.header
       className={cn(
-        'fixed z-90 top-0 w-full backdrop-blur-md transition-colors duration-500 bg-transparent h-20',
+        'fixed top-0 z-90 h-20 w-full bg-transparent backdrop-blur-md transition-colors duration-500',
         {
-          'bg-white/90 backdrop-blur-3xl shadow-2xl': currentScrollY > 80,
+          'bg-white/90 shadow-md backdrop-blur-3xl': currentScrollY > 80,
           'backdrop-blur-none': currentScrollY < 80,
         },
         className,
@@ -104,7 +104,7 @@ function Header({ className, data }: HeaderProps) {
               <DesktopNavigation navigation={data?.primaryNavigation} />
             )}
             <motion.div
-              className="fixed z-90 top-0 right-0 w-[300px] h-screen bg-slate-200/90 backdrop-blur-3xl lg:hidden"
+              className='fixed top-0 right-0 z-90 h-screen w-[300px] bg-slate-200/90 backdrop-blur-3xl lg:hidden'
               variants={sidebarVariants}
               initial="closed"
               animate={isMenuOpen ? 'open' : 'closed'}
@@ -129,9 +129,9 @@ function Content({ className, children }: React.ComponentProps<'div'>) {
   return (
     <motion.main
       className={cn(
-        'mt-24 container relative h-full flex items-center flex-col justify-center',
+        'container relative mt-24 flex h-full flex-col items-center justify-center',
         {
-          'before:backdrop-blur-xl before:absolute before:w-full before:h-full before:bg-white/50 before:z-50':
+          'before:absolute before:z-50 before:h-full before:w-full before:bg-white/50 before:backdrop-blur-xl':
             isMenuOpen,
         },
         className,
@@ -154,9 +154,9 @@ function Footer({ className }: React.ComponentProps<'div'>) {
 
   return (
     <footer
-      className={cn('flex flex-col w-full select-none items-center p-5 relative mt-24', className)}
+      className={cn('relative mt-24 flex w-full select-none flex-col items-center p-5', className)}
     >
-      <div className="fixed bottom-4 right-10 z-50 flex flex-row items-center gap-4">
+      <div className='fixed right-10 bottom-4 z-50 flex flex-row items-center gap-4'>
         <IconButton
           icon={MailIcon}
           onClick={() => setIsContactDialogOpen(true)}
@@ -166,8 +166,8 @@ function Footer({ className }: React.ComponentProps<'div'>) {
           transition={{ type: 'spring', stiffness: 400, damping: 10 }}
         />
       </div>
-      <div className="container flex flex-row gap-4 items-center justify-center w-full">
-        <div className="flex flex-col justify-center items-center gap-4">
+      <div className='container flex w-full flex-row items-center justify-center gap-4'>
+        <div className='flex flex-col items-center justify-center gap-4'>
           <Logo
             src={data?.logo && urlForImage(data.logo?.asset).url()}
             showSlogan={false}
@@ -191,7 +191,7 @@ function PageHeader({
 }) {
   return (
     <div
-      className={cn('w-full flex flex-col justify-center items-center font-oswald', className)}
+      className={cn('flex w-full flex-col items-center justify-center font-oswald', className)}
       {...props}
     >
       {children}

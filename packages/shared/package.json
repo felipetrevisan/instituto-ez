@@ -55,6 +55,7 @@
     "./sanity/*": "./src/sanity/*.tsx",
 		"./types/*": "./src/types/*.tsx",
     "./ui/*": "./src/ui/*.ts",
+		"./ui/animated/*": "./src/ui/animated/*.tsx",
 		"./hooks/*": "./src/hooks/*.tsx"
 	}
 }

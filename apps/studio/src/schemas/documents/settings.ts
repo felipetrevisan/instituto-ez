@@ -52,7 +52,7 @@ export default defineType({
       title: 'Keywords',
       type: 'string',
       group: ['seo'],
-      validation: (Rule) => Rule.required().warning('As palavras chaves é obrigatória.'),
+      validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),
     defineField({
       name: 'logo',
@@ -155,7 +155,7 @@ export default defineType({
       group: ['navigation'],
       to: { type: 'navigation' },
       validation: (Rule) =>
-        Rule.custom((field, context) =>
+        Rule.custom((_field, context) =>
           !context?.document?.main_nav && !context?.document?.social_nav
             ? 'Main navigation must be configured.'
             : true,
@@ -169,7 +169,7 @@ export default defineType({
       group: ['navigation'],
       to: { type: 'navigation' },
       validation: (Rule) =>
-        Rule.custom((field, context) =>
+        Rule.custom((_field, context) =>
           !context?.document?.main_nav && !context?.document?.social_nav
             ? 'Social networks links must be configured'
             : true,
@@ -234,6 +234,14 @@ export default defineType({
         ],
         layout: 'dropdown',
       },
+    }),
+    defineField({
+      name: 'contactForm',
+      title: 'Contact Form',
+      group: ['contact'],
+      type: 'reference',
+      to: [{ type: 'contactForm' }],
+      description: 'Select a contact form to display.',
     }),
   ],
 })

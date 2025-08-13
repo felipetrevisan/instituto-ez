@@ -27,7 +27,7 @@ export function Ebooks() {
 
   return (
     <motion.div layout className="flex flex-col space-y-12">
-      <div className="flex flex-col md:flex-row justify-center items-center gap-16 h-full flex-wrap">
+      <div className='flex h-full flex-col flex-wrap items-center justify-center gap-16 md:flex-row'>
         {isLoading && <Skeleton />}
         {!isLoading && (
           <Carousel plugins={[ClassNames()]} className="overflow-visible">
@@ -36,7 +36,7 @@ export function Ebooks() {
               {paginatedItems.map((page, pageIndex) => (
                 // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
                 <CarouselItem key={pageIndex} className="w-full">
-                  <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 md:grid-rows-2 gap-12 gap-y-12 place-items-center">
+                  <div className='grid grid-cols-1 place-items-center gap-12 gap-y-12 md:grid-cols-3 md:grid-rows-2 lg:grid-cols-3'>
                     {page.map((ebook) => (
                       <Card key={ebook.id} item={ebook} theme="default" />
                     ))}

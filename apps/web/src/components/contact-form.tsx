@@ -7,13 +7,14 @@ import { Button } from '@ez/shared/ui/button'
 import { DialogFooter, DialogTrigger } from '@ez/shared/ui/dialog'
 import { Input } from '@ez/shared/ui/input'
 import { Textarea } from '@ez/shared/ui/textarea'
+import { useForm as useBaseForm } from '@ez/web/hooks/use-form'
 import { useSite } from '@ez/web/hooks/use-site'
-import { sendEmail } from '@ez/web/server/send-email'
 import { type ContactFormSchema, contactFormSchema } from '@ez/web/types/contact'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { sendEmail } from '../server/send-email'
 
 export function ContactForm({
   isDialog = false,
@@ -25,39 +26,12 @@ export function ContactForm({
   onCloseAction: () => void
 }) {
   const [focusedField, setFocusedField] = useState<string | null>('name')
-  const { data } = useSite()
 
-  const fields = [
-    {
-      name: 'name',
-      label: 'Nome',
-      type: 'text',
-      validation: { required: 'Nome é obrigatório' },
-      className: 'col-span-2',
-    },
-    {
-      name: 'email',
-      label: 'Email',
-      type: 'email',
-      validation: { required: 'E-mail é obrigatório' },
-      className: 'col-span-2',
-    },
-    {
-      name: 'subject',
-      label: 'Assunto',
-      type: 'text',
-      validation: { required: 'Assunto é obrigatória' },
-      className: 'col-span-2',
-      readOnly: subject !== '',
-    },
-    {
-      name: 'message',
-      label: 'Mensagem',
-      type: 'textarea',
-      validation: { required: 'Mensagem é obrigatória' },
-      className: 'col-span-2',
-    },
-  ]
+  const { data: settings } = useSite()
+
+  if (settings?.contact?.form._ref === undefined) return
+
+  const { data: form } = useBaseForm(settings?.contact.form._ref || '')
 
   const {
     register,
@@ -80,13 +54,13 @@ export function ContactForm({
   }, [subject, setValue])
 
   async function handleSendForm(formData: ContactFormSchema) {
-    if (!data?.contact?.email) {
+    if (!settings?.contact?.email) {
       toast.warning('Email de destino não está configurado.')
       return false
     }
 
-    const { data: emailData, error } = await sendEmail(formData, data.contact.email)
-
+    const { data: emailData, error } = await sendEmail(formData, settings.contact.email)
+    
     if (error) {
       toast.warning('Não foi possível enviar a mensagem')
       return false
@@ -98,7 +72,7 @@ export function ContactForm({
       onCloseAction()
       return true
     }
-
+    
     toast.warning('Não foi possível enviar a mensagem')
     return false
   }
@@ -106,8 +80,8 @@ export function ContactForm({
   return (
     <form onSubmit={handleSubmit(handleSendForm)} className="w-full">
       <div className="grid gap-4 py-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 items-baseline gap-8">
-          {fields.map(({ name, label, type, validation, className, readOnly }) => {
+        <div className="grid grid-cols-1 items-baseline gap-8 md:grid-cols-2">
+          {form?.fields.map(({ name, label, type, isRequired }) => {
             const value = watch(name as keyof ContactFormSchema)
             const hasError = !!errors[name as keyof ContactFormSchema]
             const isFocused = focusedField === name || !!value
@@ -117,11 +91,11 @@ export function ContactForm({
                 key={name}
                 animate={hasError ? { x: [0, -5, 5, -5, 0] } : { x: 0 }}
                 transition={{ duration: 0.4 }}
-                className={cn('relative', className)}
+                className={cn('relative col-span-2')}
               >
                 <motion.label
                   className={cn(
-                    'absolute left-5 text-secondary font-semibold font-oswald pointer-events-none origin-left',
+                    'pointer-events-none absolute left-5 origin-left font-oswald font-semibold text-secondary',
                     {
                       'text-red-500': hasError,
                       'text-tertiary': isFocused,
@@ -145,7 +119,10 @@ export function ContactForm({
                 </motion.label>
                 {type === 'textarea' ? (
                   <Textarea
-                    {...register(name as keyof ContactFormSchema, validation)}
+                    {...register(
+                      name as keyof ContactFormSchema,
+                      isRequired ? { required: `${label} é obrigatório` } : {},
+                    )}
                     onFocus={() => setFocusedField(name)}
                     onBlur={() => setFocusedField(null)}
                     className={cn('transition-colors', {
@@ -162,7 +139,10 @@ export function ContactForm({
                 ) : (
                   <Input
                     type={type}
-                    {...register(name as keyof ContactFormSchema, validation)}
+                    {...register(
+                      name as keyof ContactFormSchema,
+                      isRequired ? { required: `${label} é obrigatório` } : {},
+                    )}
                     onFocus={() => setFocusedField(name)}
                     onBlur={() => setFocusedField(null)}
                     className={cn('transition-colors', {
@@ -171,13 +151,13 @@ export function ContactForm({
                     animate={{
                       borderRadius: isFocused ? '1rem' : '1.25rem',
                     }}
-                    readOnly={readOnly}
+                    readOnly={name === 'subject' && subject !== ''}
                   />
                 )}
                 <AnimatePresence>
                   {hasError && (
                     <motion.p
-                      className="text-sm text-red-500 mt-1"
+                      className="mt-1 text-red-500 text-sm"
                       initial={{ opacity: 0, y: -5 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -5 }}
@@ -192,7 +172,7 @@ export function ContactForm({
         </div>
       </div>
       {isDialog && (
-        <DialogFooter className="gap-5 justify-center">
+        <DialogFooter className="justify-center gap-5">
           <DialogTrigger asChild>
             <Button
               type="button"
@@ -228,9 +208,9 @@ export function ContactForm({
             rounded="full"
             disabled={isSubmitting || !isValid}
             shadow
-            className="md:w-[200px] w-full"
+            className="w-full md:w-[200px]"
           >
-            {isSubmitting ? <Loader2Icon className="mr-2 h-4 w-4 animate-spin" /> : 'Enviar'}
+            {isSubmitting ? <Loader2Icon className="mr-2 h-4 w-4 animate-spin" /> : form?.submitButtonText}
           </Button>
         </div>
       )}

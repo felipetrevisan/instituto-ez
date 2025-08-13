@@ -9,20 +9,20 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import '@ez/web/components/sections/ebooks/styles.css'
+import { useLocale } from 'next-intl'
 
 export const EbooksWrapper = ({
   value,
 }: {
   value: Omit<EbooksType, 'ebooks' | 'title'>
 }) => {
+  const locale = useLocale()
   const { appareance, theme, type, collection } = value
-
   const { data, isLoading } = collection ? useEbookByCollection(collection._ref) : useEbooks()
 
   if (isLoading) return <Skeleton />
 
   const ebooks = collection ? (data as EbookCollection).ebooks : (data as Ebook[])
-
   const title = collection ? (data as EbookCollection).title : undefined
 
   return (
@@ -31,6 +31,7 @@ export const EbooksWrapper = ({
         type,
         appareance,
         theme,
+        locale,
         ebooks,
         title,
         LinkComponent: Link,

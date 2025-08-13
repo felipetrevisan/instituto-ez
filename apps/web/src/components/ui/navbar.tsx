@@ -5,10 +5,10 @@ import { type VariantProps, cva } from 'class-variance-authority'
 import { type HTMLMotionProps, type MotionValue, motion } from 'framer-motion'
 import type React from 'react'
 
-const navbarVariants = cva('w-full h-auto p-2', {
+const navbarVariants = cva('h-auto w-full p-2', {
   variants: {
     sticky: {
-      true: 'fixed z-90 top-0 start-0',
+      true: 'fixed start-0 top-0 z-90',
     },
     rounded: {
       none: 'rounded-none',
@@ -35,7 +35,7 @@ function Root({
       initial={false}
       {...props}
     >
-      <div className="lg:container mx-auto flex flex-wrap items-center justify-between">
+      <div className='mx-auto flex flex-wrap items-center justify-between lg:container'>
         {children}
       </div>
     </motion.div>
@@ -68,7 +68,7 @@ function Toggle({ className, ...props }: React.ComponentProps<'button'>) {
   return (
     <button
       className={cn(
-        'absolute top-6 right-5 z-100 rounded-full cursor-pointer flex justify-center items-center size-12 text-sm lg:hidden',
+        'absolute top-6 right-5 z-100 flex size-12 cursor-pointer items-center justify-center rounded-full text-sm lg:hidden',
         className,
       )}
       {...props}
@@ -109,7 +109,7 @@ function Background({
   return (
     <motion.div
       className={cn(
-        'absolute flex justify-center top-0 right-0 bottom-0 shadow-xl bg-accent backdrop-blur-xl md:hidden w-7/12 md:w-9/12 h-screen border-l-4 border-secondary',
+        'absolute top-0 right-0 bottom-0 flex h-screen w-7/12 justify-center border-secondary border-l-4 bg-accent shadow-xl backdrop-blur-xl md:hidden md:w-9/12',
         className,
       )}
       {...props}
