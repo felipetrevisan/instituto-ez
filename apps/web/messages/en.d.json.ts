@@ -2,6 +2,9 @@
 // See: https://next-intl.dev/docs/workflows/typescript#messages-arguments
 
 declare const messages: {
+  "Manifest": {
+    "name": "Instituto EZ"
+  },
   "DialogContact": {
     "title": "How can we help you?"
   },

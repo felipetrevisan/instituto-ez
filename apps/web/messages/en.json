@@ -1,4 +1,7 @@
 {
+  "Manifest": {
+    "name": "Instituto EZ"
+  },
   "DialogContact": {
     "title": "How can we help you?"
   },
