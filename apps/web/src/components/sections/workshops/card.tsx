@@ -6,7 +6,7 @@ import { ButtonLink } from '@ez/web/components/app'
 import { urlForImage } from '@ez/web/config/image'
 import type { Workshop } from '@ez/web/types/workshop'
 import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 
 type Props = {
   item: Workshop

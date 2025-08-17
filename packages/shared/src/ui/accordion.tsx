@@ -3,8 +3,8 @@
 import { cn } from '@ez/shared/lib/utils'
 import * as AccordionPrimitive from '@radix-ui/react-accordion'
 import { type VariantProps, cva } from 'class-variance-authority'
-import { AnimatePresence, type HTMLMotionProps, type Transition, motion } from 'framer-motion'
 import { ChevronDownIcon } from 'lucide-react'
+import { AnimatePresence, type HTMLMotionProps, type Transition, motion } from 'motion/react'
 import * as React from 'react'
 
 const accordionVariants = cva('relative', {

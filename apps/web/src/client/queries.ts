@@ -281,11 +281,8 @@ export const ebookQueryBySlug = groq`
       "text": content
     },
     "chapters": chapters[] {
-      "media": media {
-        type,
-        icon,
-        image
-      },
+      "id": _id,
+      content,
       title
     },
     "metadata": data[] {

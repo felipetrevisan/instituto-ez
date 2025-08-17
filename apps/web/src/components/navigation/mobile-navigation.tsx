@@ -10,7 +10,7 @@ import {
 import { useApp } from '@ez/web/hooks/use-app'
 import type { Navigation } from '@ez/web/types/site'
 import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 
 type NavigationProps = {
   navigation?: Navigation

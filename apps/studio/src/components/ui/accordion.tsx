@@ -4,18 +4,18 @@ import { cn } from '@ez/studio/lib/utils'
 import * as AccordionPrimitive from '@radix-ui/react-accordion'
 import { ChevronDownIcon } from '@sanity/icons'
 import { type VariantProps, cva } from 'class-variance-authority'
-import { AnimatePresence, type HTMLMotionProps, type Transition, motion } from 'framer-motion'
+import { AnimatePresence, type HTMLMotionProps, type Transition, motion } from 'motion/react'
 import * as React from 'react'
 
 const accordionVariants = cva('relative', {
   variants: {
     theme: {
       default:
-        '**:data-[slot=accordion-trigger]:text-primary **:data-[slot=accordion-item]:border-primary **:data-[slot=accordion-content]:text-primary **:data-[slot=accordion-trigger]:hover:bg-primary/10',
+        '**:data-[slot=accordion-item]:border-primary **:data-[slot=accordion-content]:text-primary **:data-[slot=accordion-trigger]:text-primary **:data-[slot=accordion-trigger]:hover:bg-primary/10',
       secondary:
-        '**:data-[slot=accordion-trigger]:text-secondary **:data-[slot=accordion-item]:border-secondary  **:data-[slot=accordion-content]:text-secondary **:data-[slot=accordion-trigger]:hover:bg-secondary/10',
+        '**:data-[slot=accordion-item]:border-secondary **:data-[slot=accordion-content]:text-secondary **:data-[slot=accordion-trigger]:text-secondary **:data-[slot=accordion-trigger]:hover:bg-secondary/10',
       tertiary:
-        '**:data-[slot=accordion-trigger]:text-tertiary **:data-[slot=accordion-item]:border-tertiary **:data-[slot=accordion-content]:text-tertiary **:data-[slot=accordion-trigger]:hover:bg-tertiary/10',
+        '**:data-[slot=accordion-item]:border-tertiary **:data-[slot=accordion-content]:text-tertiary **:data-[slot=accordion-trigger]:text-tertiary **:data-[slot=accordion-trigger]:hover:bg-tertiary/10',
     },
     rounded: {
       none: '**:data-[slot=accordion-item]:rounded-none **:data-[slot=accordion-trigger]:rounded-none',
@@ -78,7 +78,7 @@ function AccordionItem({ children, className, ...props }: AccordionItemProps) {
     <AccordionItemContext.Provider value={{ isOpen, setIsOpen }}>
       <AccordionPrimitive.Item
         data-slot="accordion-item"
-        className={cn('border relative backdrop-blur-md mb-3 shadow-xl', className)}
+        className={cn('relative mb-3 border shadow-xl backdrop-blur-md', className)}
         {...props}
       >
         {children}
@@ -135,7 +135,7 @@ function AccordionTrigger({
         ref={triggerRef}
         data-slot="accordion-trigger"
         className={cn(
-          'focus-visible:border-ring focus-visible:ring-ring/50 flex flex-1 items-start justify-between gap-4 px-4 py-5 text-left text-md font-semibold transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&[data-state=open]>svg]:rotate-180',
+          'flex flex-1 items-start justify-between gap-4 px-4 py-5 text-left font-semibold text-md outline-none transition-all focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 [&[data-state=open]>svg]:rotate-180',
           className,
         )}
         {...props}
@@ -188,7 +188,7 @@ function AccordionContent({
             className="overflow-hidden"
             {...props}
           >
-            <div className={cn('pb-4 pt-0', className)}>{children}</div>
+            <div className={cn('pt-0 pb-4', className)}>{children}</div>
           </motion.div>
         </AccordionPrimitive.Content>
       )}

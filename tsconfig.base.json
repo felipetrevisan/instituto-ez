@@ -16,7 +16,7 @@
     "paths": {
       "@ez/shared/*": ["packages/shared/src/*"],
       "@ez/web/*": ["apps/web/src/*"],
-      "@ez/studio/*": ["app/studio/src/*"]
+      "@ez/studio/*": ["apps/studio/src/*"]
     }
   }
 }

@@ -1,7 +1,7 @@
 import { cn } from '@ez/shared/lib/utils'
 import { Slot } from '@radix-ui/react-slot'
 import { type VariantProps, cva } from 'class-variance-authority'
-import { type HTMLMotionProps, type Transition, motion } from 'framer-motion'
+import { type HTMLMotionProps, type Transition, motion } from 'motion/react'
 import React from 'react'
 
 enum Size {

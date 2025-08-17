@@ -2,8 +2,8 @@
 
 import { cn } from '@ez/shared/lib/utils'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
-import { AnimatePresence, type HTMLMotionProps, type Transition, motion } from 'framer-motion'
 import { XIcon } from 'lucide-react'
+import { AnimatePresence, type HTMLMotionProps, type Transition, motion } from 'motion/react'
 import { createContext, useCallback, useContext, useEffect, useState } from 'react'
 
 type DialogContextType = {

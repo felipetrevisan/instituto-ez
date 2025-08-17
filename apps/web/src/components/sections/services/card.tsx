@@ -10,7 +10,7 @@ import type { Service } from '@ez/web/types/service'
 import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
 import Autoplay from 'embla-carousel-autoplay'
 import ClassNames from 'embla-carousel-class-names'
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 
 type Props = {
   item: Service

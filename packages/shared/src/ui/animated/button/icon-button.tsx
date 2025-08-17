@@ -1,6 +1,6 @@
 'use client'
 
-import { AnimatePresence, type HTMLMotionProps, type Transition, motion } from 'framer-motion'
+import { AnimatePresence, type HTMLMotionProps, type Transition, motion } from 'motion/react'
 import type * as React from 'react'
 
 import { cn } from '@ez/shared/lib/utils'

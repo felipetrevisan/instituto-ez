@@ -5,7 +5,7 @@ import { textVariants } from '@ez/web/config/animation'
 import { urlForImage } from '@ez/web/config/image'
 import { useBanner } from '@ez/web/hooks/use-banner'
 import ClassNames from 'embla-carousel-class-names'
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 import { Parallax } from 'react-parallax'
 import { Skeleton } from './skeleton'
 

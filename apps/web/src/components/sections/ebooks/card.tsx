@@ -8,7 +8,7 @@ import { ScrollArea } from '@ez/shared/ui/scroll-area'
 import { ButtonLink } from '@ez/web/components/app'
 import { urlForImage } from '@ez/web/config/image'
 import type { Ebook } from '@ez/web/types/ebook'
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 import Image from 'next/image'
 
 import './styles.css'
@@ -130,6 +130,7 @@ export function EbookCard({
                   fill
                   placeholder="blur"
                   blurDataURL={image.preview.metadata.lqip}
+                  priority
                   className={cn('h-max rounded-xl object-cover md:object-contain')}
                 />
               </motion.div>

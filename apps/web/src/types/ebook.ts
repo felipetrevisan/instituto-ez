@@ -1,5 +1,6 @@
 import type { SanityAsset } from '@ez/shared/types/assets'
 import type { Button } from '@ez/shared/types/global'
+import type { PortableTextBlock } from 'next-sanity'
 
 export type Ebook = {
   id: string
@@ -61,9 +62,9 @@ export type Metadata = {
 }
 
 export type Chapter = {
+  id: string
   title: string
-  text: string
-  media: Media
+  content: PortableTextBlock[]
 }
 
 export type Media = {

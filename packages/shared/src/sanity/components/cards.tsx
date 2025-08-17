@@ -8,7 +8,7 @@ import {
 } from '@portabletext/react'
 import type { SanityImageSource } from '@sanity/asset-utils'
 import type { ImageUrlBuilder } from '@sanity/image-url/lib/types/builder'
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 
 export type CardsType = {
   cards: CardItem[]
@@ -68,6 +68,7 @@ const CardsComponent = ({
                 alt=""
                 fill
                 className="object-cover"
+                priority
               />
             </div>
             <div className="flex w-full flex-col justify-between p-6 md:w-2/3">

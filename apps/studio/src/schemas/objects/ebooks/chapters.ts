@@ -1,3 +1,4 @@
+import config from '@ez/studio/config/editor'
 import { BlockContentIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
@@ -13,9 +14,11 @@ export default defineType({
       type: 'string',
     }),
     defineField({
-      name: 'text',
-      title: 'Text',
-      type: 'text',
+      name: 'content',
+      title: 'Content',
+      type: 'array',
+      of: config,
+      validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),
     defineField({
       name: 'media',

@@ -1,7 +1,7 @@
 'use client'
 
 import { useServices } from '@ez/web/hooks/use-services'
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 import { ServiceCard as Card } from './card'
 import { Skeleton } from './skeleton'
 

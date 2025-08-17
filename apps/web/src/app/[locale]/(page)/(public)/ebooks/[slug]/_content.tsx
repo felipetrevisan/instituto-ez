@@ -3,35 +3,27 @@
 import { ChevronLeftIcon, DownloadIcon } from '@ez/shared/icons'
 import { FaIcons } from '@ez/shared/icons'
 import { cn } from '@ez/shared/lib/utils'
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-  Carousel,
-  CarouselContent,
-  CarouselDots,
-  CarouselItem,
-} from '@ez/shared/ui'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@ez/shared/ui'
+import { LiquidButton } from '@ez/shared/ui/animated/button/liquid-button'
 import { CountingNumber } from '@ez/shared/ui/animated/counter'
 import { Magnetic } from '@ez/shared/ui/animated/effects/magnetic'
 import { RollingText } from '@ez/shared/ui/animated/text/rolling'
 import { TypingText } from '@ez/shared/ui/animated/text/typing'
-
 import { Card, CardContent } from '@ez/shared/ui/card'
 import { Subtitle, Title } from '@ez/shared/ui/title'
 import { urlForImage } from '@ez/web/config/image'
 import type { Ebook, Media } from '@ez/web/types/ebook'
 import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { AnimatedButton, BlobBottomButton } from './_button'
+import HTMLFlipBook from 'react-pageflip'
+import { AnimatedButton } from './_button'
 import StickyHeader from './_sticky-header'
 
 import './styles.css'
-import ClassNames from 'embla-carousel-class-names'
-import { ChapterCard } from './_chapters'
+import { PageBook } from './_chapters/chapter'
+import { CoverBook } from './_chapters/cover'
 
 type CSSVariables = {
   [key: `--${string}`]: string
@@ -51,7 +43,12 @@ export function Content({ data }: { data: Ebook }) {
 
     const ImageComponent =
       media.type === 'image' && media.image ? (
-        <Image src={urlForImage(media.image.asset).url()} alt="" width={24} height={24} />
+        <Image
+          src={urlForImage(media.image.asset).width(24).height(24).auto('format').quality(80).url()}
+          alt=""
+          width={24}
+          height={24}
+        />
       ) : null
 
     return IconComponent ? <IconComponent /> : ImageComponent
@@ -96,13 +93,18 @@ export function Content({ data }: { data: Ebook }) {
                   cursor
                   duration={1.1}
                   holdDelay={1}
-                  className="mb-8 max-w-prose font-semibold text-lg text-white/90 leading-relaxed md:text-justify"
+                  className="mb-6 max-w-prose font-semibold text-lg text-white/90 leading-relaxed md:text-justify"
                 />
-                <BlobBottomButton
-                  label="Baixe Agora"
-                  icon={<DownloadIconMotion />}
-                  className="fill-[var(--primary-c)] text-[var(--primary-c)]"
-                />
+                <LiquidButton
+                  variant="outline"
+                  theme="custom"
+                  size="2xl"
+                  rounded="2xl"
+                  //className="fill-[var(--primary-c)] text-[var(--primary-c)]"
+                  className="w-full max-w-[250px]"
+                >
+                  <DownloadIconMotion /> Baixe Agora
+                </LiquidButton>
               </div>
             </motion.div>
             <motion.div
@@ -112,7 +114,7 @@ export function Content({ data }: { data: Ebook }) {
               transition={{ duration: 0.8, delay: 0.6 }}
             >
               <Image
-                src={urlForImage(data.image.large.asset).url()}
+                src={urlForImage(data.image.large.asset).auto('format').quality(80).url()}
                 alt="Book Cover"
                 fill
                 className="object-cover"
@@ -251,21 +253,52 @@ export function Content({ data }: { data: Ebook }) {
                 Capítulos
               </Title>
               {chapters?.length > 0 && (
-                <div className='container flex flex-wrap gap-10 overflow-visible px-6 py-12'>
-                  <Carousel plugins={[ClassNames()]}>
-                    <CarouselContent>
-                      {chapters?.map((chapter, index) => (
-                        <CarouselItem
-                          // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-                          key={index}
-                          className="basis-full md:basis-1/2 lg:basis-1/2 xl:basis-1/2"
-                        >
-                          <ChapterCard item={chapter} id={index} />
-                        </CarouselItem>
-                      ))}
-                    </CarouselContent>
-                    <CarouselDots rootClassName="mt-10" />
-                  </Carousel>
+                <div className="px-6 py-12">
+                  <HTMLFlipBook
+                    width={550}
+                    height={733}
+                    size="stretch"
+                    minWidth={315}
+                    maxWidth={1000}
+                    minHeight={400}
+                    maxHeight={1533}
+                    maxShadowOpacity={0.5}
+                    showCover={true}
+                    mobileScrollSupport={true}
+                    drawShadow
+                    usePortrait={false}
+                    className="open-book rounded-2xl shadow-lg"
+                    style={{}}
+                    startPage={0}
+                    flippingTime={0}
+                    startZIndex={0}
+                    autoSize={false}
+                    clickEventForward={false}
+                    useMouseEvents={false}
+                    swipeDistance={0}
+                    showPageCorners={false}
+                    disableFlipByClick={false}
+                  >
+                    <CoverBook>
+                      <Image
+                        src={urlForImage(data.image.large.asset).auto('format').quality(80).url()}
+                        alt="Book Cover"
+                        fill
+                        className="object-cover"
+                        priority
+                      />
+                    </CoverBook>
+                    {chapters?.map((chapter, index) => (
+                      <PageBook
+                        key={chapter.id}
+                        className={cn('--hard --left', {
+                          '--left': index % 2 === 0,
+                          '--right': index % 2 !== 0,
+                        })}
+                        chapter={chapter}
+                      />
+                    ))}
+                  </HTMLFlipBook>
                 </div>
               )}
             </div>

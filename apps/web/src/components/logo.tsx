@@ -1,7 +1,7 @@
 'use client'
 
 import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
-import { type HTMLMotionProps, motion } from 'framer-motion'
+import { type HTMLMotionProps, motion } from 'motion/react'
 import Image from 'next/image'
 import * as React from 'react'
 
@@ -22,7 +22,7 @@ export const Logo = ({
     <>
       <Image
         src={src ?? '/assets/logo.png'}
-        alt="Logo Instituto Ez - Desenvolvimento Humano"
+        alt="Instituto Ez - Desenvolvimento Humano"
         className="h-full"
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         priority

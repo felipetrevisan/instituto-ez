@@ -6,7 +6,7 @@ import { ScrollArea } from '@ez/shared/ui/scroll-area'
 import type { Testimonial } from '@ez/web/types/testimonial'
 import { PortableText } from '@portabletext/react'
 import type { VariantProps } from 'class-variance-authority'
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 
 import './styles.css'
 

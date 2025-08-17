@@ -18,14 +18,14 @@ export function SectionContent({
 }: Section & { slug: string }) {
   return (
     <div className="flex flex-col gap-10">
-      <div className='relative flex h-full w-screen flex-col'>
-        <div className='absolute top-0 left-0 z-10 w-full overflow-hidden'>
+      <div className="relative flex h-full w-screen flex-col">
+        <div className="absolute top-0 left-0 z-10 w-full overflow-hidden">
           {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 1200 120"
             preserveAspectRatio="none"
-            className='relative h-[85px] w-[calc(141%+1.3px)]'
+            className="relative h-[85px] w-[calc(141%+1.3px)]"
           >
             <path
               d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"
@@ -44,18 +44,19 @@ export function SectionContent({
           </svg>
         </div>
         <Parallax
-          bgImage={urlForImage(background.image.asset).url()}
+          bgImage={urlForImage(background.image.asset).auto('format').quality(80).url()}
           strength={-200}
           className="w-full overflow-hidden"
         >
           {media.type === 'IMAGE' && media.image ? (
-            <div className='relative my-20 flex h-full md:py-20'>
-              <div className='flex w-full flex-col items-center justify-center gap-10 font-bold font-oswald text-white'>
-                <div className='relative mt-10 h-[300px] w-[90vw] max-w-full overflow-hidden rounded-2xl shadow md:max-h-[500px] md:w-[60vw] lg:h-[500px]'>
+            <div className="relative my-20 flex h-full md:py-20">
+              <div className="flex w-full flex-col items-center justify-center gap-10 font-bold font-oswald text-white">
+                <div className="relative mt-10 h-[300px] w-[90vw] max-w-full overflow-hidden rounded-2xl shadow md:max-h-[500px] md:w-[60vw] lg:h-[500px]">
                   <Image
-                    src={urlForImage(media.image.asset).url()}
+                    src={urlForImage(media.image.asset).auto('format').quality(80).url()}
                     alt=""
                     fill
+                    priority
                     placeholder="blur"
                     blurDataURL={media.image.metadata.lqip}
                   />
@@ -64,8 +65,8 @@ export function SectionContent({
             </div>
           ) : (
             <div className="relative flex h-full">
-              <div className='flex w-full flex-col items-center justify-center gap-10 font-bold font-oswald text-white'>
-                <div className='h-[300px] w-[90vw] max-w-full overflow-hidden rounded-2xl shadow md:w-screen lg:h-[650px]'>
+              <div className="flex w-full flex-col items-center justify-center gap-10 font-bold font-oswald text-white">
+                <div className="h-[300px] w-[90vw] max-w-full overflow-hidden rounded-2xl shadow md:w-screen lg:h-[650px]">
                   {/* <ReactPlayer
 										url={media.video?.url}
 										width="100%"
@@ -80,13 +81,13 @@ export function SectionContent({
             </div>
           )}
         </Parallax>
-        <div className='absolute bottom-0 left-0 w-full rotate-180 overflow-hidden'>
+        <div className="absolute bottom-0 left-0 w-full rotate-180 overflow-hidden">
           {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 1200 120"
             preserveAspectRatio="none"
-            className='relative h-[85px] w-[calc(141%+1.3px)]'
+            className="relative h-[85px] w-[calc(141%+1.3px)]"
           >
             <path
               d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"

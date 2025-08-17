@@ -2,7 +2,7 @@ import { cn } from '@ez/shared/lib/utils'
 import { useApp } from '@ez/web/hooks/use-app'
 import { Slot } from '@radix-ui/react-slot'
 import { type VariantProps, cva } from 'class-variance-authority'
-import { type HTMLMotionProps, type MotionValue, motion } from 'framer-motion'
+import { type HTMLMotionProps, type MotionValue, motion } from 'motion/react'
 import type React from 'react'
 
 const navbarVariants = cva('h-auto w-full p-2', {

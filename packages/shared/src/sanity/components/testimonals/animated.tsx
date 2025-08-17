@@ -6,7 +6,7 @@ import { Card, CardContent, type cardVariants } from '@ez/shared/ui/card'
 import { ScrollArea } from '@ez/shared/ui/scroll-area'
 import { PortableText } from '@portabletext/react'
 import type { VariantProps } from 'class-variance-authority'
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 
 import './styles.css'
 

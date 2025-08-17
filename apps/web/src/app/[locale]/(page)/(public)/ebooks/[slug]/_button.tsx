@@ -1,6 +1,6 @@
 import { cn } from '@ez/shared/lib/utils'
 import { useIsMobile } from '@ez/web/hooks/use-mobile'
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 import { useState } from 'react'
 
 type AnimatedValue = {

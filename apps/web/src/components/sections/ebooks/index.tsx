@@ -3,7 +3,7 @@
 import { Carousel, CarouselContent, CarouselDots, CarouselItem } from '@ez/shared/ui/carousel'
 import { useEbooks } from '@ez/web/hooks/use-ebook'
 import ClassNames from 'embla-carousel-class-names'
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 import { EbookCard as Card } from './card'
 import { Skeleton } from './skeleton'
 

@@ -1,7 +1,7 @@
 'use client'
 
 import { useWorkshop } from '@ez/web/hooks/use-workshop'
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 import { WorkshopCard as Card } from './card'
 import { Skeleton } from './skeleton'
 

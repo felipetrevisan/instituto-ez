@@ -1,6 +1,6 @@
 'use client'
 
-import { animate } from 'framer-motion'
+import { animate } from 'motion/react'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 

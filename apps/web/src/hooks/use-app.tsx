@@ -1,6 +1,6 @@
 'use client'
 
-import { type Cycle, useCycle } from 'framer-motion'
+import { type Cycle, useCycle } from 'motion/react'
 import { usePathname } from 'next/navigation'
 import {
   type Dispatch,

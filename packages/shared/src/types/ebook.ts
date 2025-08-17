@@ -1,5 +1,6 @@
 import type { SanityAsset } from '@ez/shared/types/assets'
 import type { Button } from '@ez/shared/types/global'
+import type { PortableTextBlock } from '@portabletext/react'
 
 export type Ebook = {
   id: string
@@ -21,7 +22,6 @@ export type Ebook = {
   }
   metadata: Metadata[]
   chapters: Chapter[]
-  questions?: Question[]
   theme: {
     text: string
     primary: Color
@@ -32,6 +32,7 @@ export type Ebook = {
     preview: SanityAsset
     large: SanityAsset
   }
+  questions?: Question[]
   disabled: boolean
   button?: Button
 }
@@ -61,9 +62,9 @@ export type Metadata = {
 }
 
 export type Chapter = {
+  id: string
   title: string
-  text: string
-  media: Media
+  content: PortableTextBlock[]
 }
 
 export type Media = {

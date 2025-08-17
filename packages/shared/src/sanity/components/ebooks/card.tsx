@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, type CardProps } from '@ez/shared/ui/car
 import { ScrollArea } from '@ez/shared/ui/scroll-area'
 import type { SanityImageSource } from '@sanity/asset-utils'
 import type { ImageUrlBuilder } from '@sanity/image-url/lib/types/builder'
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 
 type LinkComponentProps = {
   href: string
@@ -160,6 +160,7 @@ export function EbookCard({
                   alt=""
                   fill
                   placeholder="blur"
+                  priority
                   blurDataURL={image.preview.metadata.lqip}
                   className={cn('h-max rounded-xl object-cover md:object-contain')}
                 />

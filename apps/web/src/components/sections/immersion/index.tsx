@@ -2,6 +2,7 @@
 
 import { getLink } from '@ez/shared/lib/utils'
 import { createPortableComponents } from '@ez/shared/sanity/portable'
+import { Skeleton } from '@ez/shared/ui'
 import { Button } from '@ez/shared/ui/button'
 import { ButtonLink } from '@ez/web/components/app'
 import { urlForImage } from '@ez/web/config/image'
@@ -12,7 +13,7 @@ import { Parallax } from 'react-parallax'
 export function Immersion() {
   const { data, isLoading } = useImmersion()
 
-  if (isLoading || !data) return <></>
+  if (isLoading || !data) return <Skeleton />
 
   const link = getLink(data?.button)
 

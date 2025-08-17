@@ -4,7 +4,7 @@ import { urlForImage } from '@ez/web/config/image'
 import { useStickyBar } from '@ez/web/hooks/use-sticky-bar'
 import type { Ebook } from '@ez/web/types/ebook'
 import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'motion/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { AnimatedButton } from './_button'
@@ -38,17 +38,25 @@ export default function StickyHeader({ title, image }: Ebook) {
                 className="relative fill-[var(--primary-c)] text-[var(--primary-c)] after:absolute after:inset-0 after:animate-pulse after:rounded-xl after:bg-white/20"
               />
             </Link>
-            <h1 className='font- relative flex w-[70vw] justify-center font-semibold text-2xl text-[var(--primary-c)]'>
-              <Image
-                src={urlForImage(image.large.asset).url()}
-                alt="Book Cover"
-                fill
-                className="object-cover"
-                priority
-              />
-              {title}
-            </h1>
-            <LiquidButton className="fill-[var(--primary-c)] text-[var(--primary-c)]">
+            <div className="flex w-[70vw] items-center justify-center">
+              <div className="relative size-10">
+                <Image
+                  src={urlForImage(image.large.asset).width(64).height(64).auto('format').quality(80).url()}
+                  alt="Book Cover"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </div>
+              <h1 className="font-bold font-questrial text-2xl text-[var(--primary-c)]">{title}</h1>
+            </div>
+            <LiquidButton
+              variant="default"
+              theme="default"
+              rounded="2xl"
+              //className="fill-[var(--primary-c)] text-[var(--primary-c)]"
+              className="w-full max-w-[250px]"
+            >
               <DownloadIconMotion /> Baixe Agora
             </LiquidButton>
           </div>
