@@ -11,6 +11,7 @@ import { useApp } from '@ez/web/hooks/use-app'
 import type { Navigation } from '@ez/web/types/site'
 import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
 import { motion } from 'motion/react'
+import { useLocale } from 'next-intl'
 
 type NavigationProps = {
   navigation?: Navigation
@@ -19,8 +20,8 @@ type NavigationProps = {
 const MenuItemMotion = motion(NavigationMenuItem)
 
 export const MobileNavigation = ({ navigation }: NavigationProps) => {
+  const locale = useLocale()
   const { isMenuActive } = useApp()
-
 
   return (
     <NavigationMenu className="mx-auto flex w-full lg:hidden lg:items-start" orientation="vertical">
@@ -37,7 +38,7 @@ export const MobileNavigation = ({ navigation }: NavigationProps) => {
               <MotionHighlightItem activeClassName="border-b-primary text-primary p-4">
                 <NavigationMenuLink
                   data-active={isMenuActive(url.link)}
-                  href={getLocalizedLink(
+                  href={getLocalizedLink(locale,
                     url.isHome || !url.link ? '/' : (url.link ?? url.externalUrl),
                     url.type === 'EXTERNAL',
                   )}

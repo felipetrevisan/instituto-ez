@@ -8,6 +8,7 @@ import { urlForImage } from '@ez/web/config/image'
 import type { Mathematizer } from '@ez/web/types/mathematizer'
 import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
 import { PortableText } from '@portabletext/react'
+import { useLocale } from 'next-intl'
 import { Parallax } from 'react-parallax'
 
 type Props = {
@@ -16,6 +17,7 @@ type Props = {
 }
 
 export function MathematizerCard({ item: { button, background, content, title }, index }: Props) {
+  const locale = useLocale()
   const link = getLink(button)
 
   return (
@@ -47,7 +49,7 @@ export function MathematizerCard({ item: { button, background, content, title },
           <div className='flex min-h-60 flex-col justify-between gap-10 text-justify font-light font-questrial text-md leading-7'>
             <PortableText value={content} components={createPortableComponents()} />
             {button.visible && link && (
-              <ButtonLink href={getLocalizedLink(link)}  passHref className="flex w-full justify-center">
+              <ButtonLink href={getLocalizedLink(locale, link)}  passHref className="flex w-full justify-center">
                 <Button
                   variant="default"
                   theme="tertiary"

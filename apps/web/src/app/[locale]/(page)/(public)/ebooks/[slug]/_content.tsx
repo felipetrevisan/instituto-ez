@@ -22,6 +22,7 @@ import { AnimatedButton } from './_button'
 import StickyHeader from './_sticky-header'
 
 import './styles.css'
+import { useLocale } from 'next-intl'
 import { PageBook } from './_chapters/chapter'
 import { CoverBook } from './_chapters/cover'
 
@@ -33,6 +34,7 @@ const DownloadIconMotion = motion(DownloadIcon)
 const ChevronLeftIconMotion = motion(ChevronLeftIcon)
 
 export function Content({ data }: { data: Ebook }) {
+  const locale = useLocale()
   const { id, title, description, metadata, chapters, questions, overview, theme } = data
 
   const getIcon = (media: Media) => {
@@ -63,7 +65,7 @@ export function Content({ data }: { data: Ebook }) {
     <div className="flex w-full flex-col items-center justify-center space-y-14" style={style}>
       <div className="relative flex w-screen flex-col items-center justify-center">
         <header className="relative flex w-screen flex-col items-center justify-center overflow-hidden bg-[auto,cover] bg-ebooks bg-gradient-to-br from-[var(--primary-c)]/90 to-[var(--secondary-c)]/90 px-6 py-12 text-white md:h-[600px]">
-          <Link href={getLocalizedLink('/ebooks')} className="absolute top-4 right-4 w-full">
+          <Link href={getLocalizedLink(locale, '/ebooks')} className="absolute top-4 right-4 w-full">
             <AnimatedButton
               label="Voltar para o Catálogo"
               icon={<ChevronLeftIconMotion />}
@@ -257,7 +259,7 @@ export function Content({ data }: { data: Ebook }) {
                   <HTMLFlipBook
                     width={550}
                     height={733}
-                    size="stretch"
+                    size="fixed"
                     minWidth={315}
                     maxWidth={1000}
                     minHeight={400}
@@ -267,17 +269,8 @@ export function Content({ data }: { data: Ebook }) {
                     mobileScrollSupport={true}
                     drawShadow
                     usePortrait={false}
-                    className="open-book rounded-2xl shadow-lg"
-                    style={{}}
-                    startPage={0}
-                    flippingTime={0}
-                    startZIndex={0}
                     autoSize={false}
-                    clickEventForward={false}
-                    useMouseEvents={false}
-                    swipeDistance={0}
-                    showPageCorners={false}
-                    disableFlipByClick={false}
+                    className="open-book rounded-2xl shadow-lg"
                   >
                     <CoverBook>
                       <Image

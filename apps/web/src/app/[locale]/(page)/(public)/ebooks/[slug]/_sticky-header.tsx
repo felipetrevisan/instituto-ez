@@ -5,6 +5,7 @@ import { useStickyBar } from '@ez/web/hooks/use-sticky-bar'
 import type { Ebook } from '@ez/web/types/ebook'
 import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
 import { AnimatePresence, motion } from 'motion/react'
+import { useLocale } from 'next-intl'
 import Image from 'next/image'
 import Link from 'next/link'
 import { AnimatedButton } from './_button'
@@ -13,6 +14,7 @@ const DownloadIconMotion = motion(DownloadIcon)
 const ChevronLeftIconMotion = motion(ChevronLeftIcon)
 
 export default function StickyHeader({ title, image }: Ebook) {
+  const locale = useLocale()
   const showSticky = useStickyBar(400, 100)
 
   return (
@@ -26,7 +28,7 @@ export default function StickyHeader({ title, image }: Ebook) {
           className="fixed top-20 right-0 left-0 z-50 flex items-center justify-between bg-white p-4 shadow-md backdrop-blur-xl"
         >
           <div className="flex items-center justify-between gap-5">
-            <Link href={getLocalizedLink('/ebooks')} className="w-[10vw]">
+            <Link href={getLocalizedLink(locale, '/ebooks')} className="w-[10vw]">
               <AnimatedButton
                 label="Voltar para o Catálogo"
                 icon={<ChevronLeftIconMotion />}

@@ -9,9 +9,11 @@ import { urlForImage } from '@ez/web/config/image'
 import { useAdvancedMentory } from '@ez/web/hooks/use-advanced-mentory'
 import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
 import { PortableText } from '@portabletext/react'
+import { useLocale } from 'next-intl'
 import { Parallax } from 'react-parallax'
 
 export function AdvancedMentory() {
+  const locale = useLocale()
   const { data, isLoading } = useAdvancedMentory()
 
 if (isLoading || !data) return <Skeleton />
@@ -69,7 +71,7 @@ if (isLoading || !data) return <Skeleton />
         </div>
         {data?.button.visible && (
           <ButtonLink
-            href={getLocalizedLink(link as string)}
+            href={getLocalizedLink(locale, link as string)}
             disabled={data?.button.disabled}
             className='flex w-[calc(100vw-20%)] justify-center xl:w-3/5'
           >

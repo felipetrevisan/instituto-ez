@@ -2,6 +2,7 @@
 
 import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
 import { type HTMLMotionProps, motion } from 'motion/react'
+import { useLocale } from 'next-intl'
 import Image from 'next/image'
 import * as React from 'react'
 
@@ -18,6 +19,8 @@ export const Logo = ({
   src,
   ...props
 }: LogoProps) => {
+  const locale = useLocale()
+
   const logoImage = (
     <>
       <Image
@@ -46,7 +49,7 @@ export const Logo = ({
         <motion.a
           className="relative flex h-[3.56rem] w-56 space-x-2 md:w-auto"
           {...props}
-          href={getLocalizedLink('/')}
+          href={getLocalizedLink(locale, '/')}
         >
           {logoImage}
         </motion.a>

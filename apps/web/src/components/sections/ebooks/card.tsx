@@ -13,6 +13,7 @@ import Image from 'next/image'
 
 import './styles.css'
 import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
+import { useLocale } from 'next-intl'
 
 type Props = {
   item: Ebook
@@ -28,6 +29,7 @@ export function EbookCard({
   theme,
   className,
 }: Props) {
+  const locale = useLocale()
   const backgroundClass = image.preview
     ? `url('${urlForImage(image.preview.asset)}') no-repeat center center / cover`
     : 'transparent'
@@ -147,7 +149,7 @@ export function EbookCard({
             {button && (
               <>
                 {link && (
-                  <ButtonLink href={getLocalizedLink(`/ebooks/${slug}`)} passHref>
+                  <ButtonLink href={getLocalizedLink(locale, `/ebooks/${slug}`)} passHref>
                     <div className='item-center flex justify-center overflow-hidden'>
                       <Button
                         disabled={disabled}
@@ -189,7 +191,7 @@ export function EbookCard({
   return (
     <>
       {link && !full ? (
-        <ButtonLink href={getLocalizedLink(`/ebooks/${slug}`)}  passHref>
+        <ButtonLink href={getLocalizedLink(locale, `/ebooks/${slug}`)}  passHref>
           <CardRender />
         </ButtonLink>
       ) : (

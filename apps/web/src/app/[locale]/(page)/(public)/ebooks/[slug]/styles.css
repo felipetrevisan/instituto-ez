@@ -67,7 +67,7 @@
 }
 
 .open-book:before {
-  background-color: #8b4513;
+  background-color: var(--primary-c);
   border-radius: 0.25em;
   bottom: -1em;
   content: "";

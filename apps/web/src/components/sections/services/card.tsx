@@ -11,6 +11,7 @@ import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
 import Autoplay from 'embla-carousel-autoplay'
 import ClassNames from 'embla-carousel-class-names'
 import { motion } from 'motion/react'
+import { useLocale } from 'next-intl'
 
 type Props = {
   item: Service
@@ -19,6 +20,7 @@ type Props = {
 const MotionCard = motion(Card)
 
 export function ServiceCard({ item: { image, title, button, disabled }, className }: Props) {
+  const locale = useLocale()
   const backgroundClass = image ? `url('${urlForImage(image.asset)}')` : 'transparent'
 
   const link = !disabled ? getLink(button) : false
@@ -77,7 +79,7 @@ export function ServiceCard({ item: { image, title, button, disabled }, classNam
   return (
     <>
       {link ? (
-        <ButtonLink href={getLocalizedLink(link)}  passHref>
+        <ButtonLink href={getLocalizedLink(locale, link)}  passHref>
           <CardRender />
         </ButtonLink>
       ) : (

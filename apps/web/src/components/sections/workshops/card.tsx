@@ -7,6 +7,7 @@ import { urlForImage } from '@ez/web/config/image'
 import type { Workshop } from '@ez/web/types/workshop'
 import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
 import { motion } from 'motion/react'
+import { useLocale } from 'next-intl'
 
 type Props = {
   item: Workshop
@@ -18,6 +19,7 @@ export function WorkshopCard({
   item: { background, title, subtitle, button, disabled },
   className,
 }: Props) {
+  const locale = useLocale()
   const backgroundClass = background ? `url('${urlForImage(background.asset)}')` : 'transparent'
 
   const link = !disabled ? getLink(button) : false
@@ -52,7 +54,7 @@ export function WorkshopCard({
   return (
     <>
       {link ? (
-        <ButtonLink href={getLocalizedLink(link)}  passHref>
+        <ButtonLink href={getLocalizedLink(locale, link)}  passHref>
           <CardRender />
         </ButtonLink>
       ) : (
