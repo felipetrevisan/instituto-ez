@@ -98,11 +98,10 @@ export default defineType({
       of: [{ type: 'metadata' }],
     }),
     defineField({
-      name: 'chapters',
+      name: 'chapter',
       title: 'Chapters',
-      type: 'array',
+      type: 'chapter',
       group: ['chapters'],
-      of: [{ type: 'chapters' }],
     }),
     defineField({
       name: 'images',
@@ -140,4 +139,16 @@ export default defineType({
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),
   ],
+  preview: {
+    select: {
+      image: "images.small_image",
+      title: "title"
+    },
+    prepare({ image, title }) {
+      return {
+        media: image,
+        title
+      }
+    }
+  }
 })

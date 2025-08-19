@@ -18,5 +18,11 @@ export default defineType({
       type: 'text',
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),
+    defineField({
+      name: 'video',
+      title: 'Video URL',
+      type: 'url',
+      validation: (Rule) => Rule.required().warning('This field must not be empty.'),
+    }),
   ],
 })

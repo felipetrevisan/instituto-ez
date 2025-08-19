@@ -19,9 +19,13 @@ export type Ebook = {
   index: {
     title?: string
     description?: string
+    video?: string
   }
   metadata: Metadata[]
-  chapters: Chapter[]
+  chapter: {
+    cover?: SanityAsset
+    chapters: Chapter[]
+  }
   theme: {
     text: string
     primary: Color

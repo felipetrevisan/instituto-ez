@@ -20,10 +20,5 @@ export default defineType({
       of: config,
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),
-    defineField({
-      name: 'media',
-      title: 'Media Type',
-      type: 'media',
-    }),
   ],
 })

@@ -75,6 +75,7 @@ const EbooksComponent = ({ value }: { value: EbooksType }) => {
         LinkComponent={LinkComponent}
         ImageComponent={ImageComponent}
         imageBuilder={imageBuilder}
+        TitleComponent={Title}
       />
     )
   }
@@ -111,7 +112,7 @@ const EbookGridComponent = ({
   appareance: EbooksType['appareance']
   locale: string
   title?: string | undefined
-  TitleComponent?: React.ComponentType<{ children: React.ReactNode }>
+  TitleComponent?: React.ComponentType<React.ComponentProps<typeof Title>>
   LinkComponent: React.ComponentType<LinkComponentProps>
   ImageComponent: React.ComponentType<ImageComponentProps>
   imageBuilder: (assets: SanityImageSource) => ImageUrlBuilder
@@ -121,7 +122,7 @@ const EbookGridComponent = ({
       <div className="flex flex-col justify-center gap-10">
         {ebooks && (
           <>
-            {title && <TitleComponent>{title}</TitleComponent>}
+            {title && <TitleComponent variant={theme}>{title}</TitleComponent>}
             <div
               className={cn('grid grid-cols-1 place-items-center gap-12 gap-y-12', {
                 'md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2': appareance === 'full',
@@ -164,7 +165,7 @@ const EbookCarouselComponent = ({
   appareance: EbooksType['appareance']
   locale: string
   title?: string | undefined
-  TitleComponent?: React.ComponentType<{ children: React.ReactNode }>
+  TitleComponent?: React.ComponentType<React.ComponentProps<typeof Title>>
   LinkComponent: React.ComponentType<LinkComponentProps>
   ImageComponent: React.ComponentType<ImageComponentProps>
   imageBuilder: (assets: SanityImageSource) => ImageUrlBuilder
@@ -172,7 +173,7 @@ const EbookCarouselComponent = ({
   return (
     <div className="flex h-full w-full flex-col space-y-14">
       <div className="flex flex-col gap-10">
-        {title && <TitleComponent>{title}</TitleComponent>}
+        {title && <TitleComponent variant={theme}>{title}</TitleComponent>}
         <Carousel plugins={[ClassNames()]} className="overflow-visible">
           <CarouselContent className="gap-4" rootClassName="overflow-visible">
             {ebooks?.map((ebook) => (

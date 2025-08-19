@@ -19,6 +19,7 @@ import ebookCollection from './ebooks/collection'
 import aboutCard from './objects/about-card'
 import button from './objects/button'
 import coverImage from './objects/cover-image'
+import chapter from './objects/ebooks/chapter'
 import chapters from './objects/ebooks/chapters'
 import ebooksIndex from './objects/ebooks/content'
 import metadata from './objects/ebooks/metadata'
@@ -73,6 +74,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     icon,
     metadata,
     chapters,
+    chapter,
     theme,
     pageSection,
     aboutCard,
