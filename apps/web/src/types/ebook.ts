@@ -37,15 +37,25 @@ export type Ebook = {
     secondary: Color
     tertiary: Color
     button: {
-      default: Color
-      hover: Color
       header: {
-        default: Color
-        hover: Color
+        default: {
+          text: Color
+          background: Color
+        }
+        hover: {
+          text: Color
+          background: Color
+        }
       }
       stickyHeader: {
-        default: Color
-        hover: Color
+        default: {
+          text: Color
+          background: Color
+        }
+        hover: {
+          text: Color
+          background: Color
+        }
       }
     }
   }
