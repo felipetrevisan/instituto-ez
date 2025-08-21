@@ -1,5 +1,6 @@
 'use client'
 
+import { useSite } from '@ez/web/hooks/use-site'
 import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
 import { type HTMLMotionProps, motion } from 'motion/react'
 import { useLocale } from 'next-intl'
@@ -20,6 +21,7 @@ export const Logo = ({
   ...props
 }: LogoProps) => {
   const locale = useLocale()
+  const { data } = useSite()
 
   const logoImage = (
     <>
@@ -33,10 +35,10 @@ export const Logo = ({
         height={57}
       />
       {showSlogan && (
-        <span className="flex flex-col justify-center md:hidden xl:flex">
-          <p className="font-bold font-oswald text-lg text-primary">Instituto Ez</p>
+        <span className="flex flex-col justify-center">
+          <p className="font-bold font-oswald text-lg text-primary">{data?.title}</p>
           <p className="text-nowrap font-light font-questrial text-primary text-sm">
-            Desenvolvimento Humano
+            {data?.slogan}
           </p>
         </span>
       )}

@@ -12,6 +12,11 @@ export type Ebook = {
     description: string
     keywords: string
   }
+  download: {
+    disabled: boolean
+    label: string
+    url: string
+  }
   overview: {
     title?: string
     description?: string
@@ -23,13 +28,26 @@ export type Ebook = {
   }
   metadata: Metadata[]
   chapter: {
-    cover?: SanityAsset 
+    cover?: SanityAsset
     chapters: Chapter[]
-  },
+  }
   theme: {
     text: string
     primary: Color
     secondary: Color
+    tertiary: Color
+    button: {
+      default: Color
+      hover: Color
+      header: {
+        default: Color
+        hover: Color
+      }
+      stickyHeader: {
+        default: Color
+        hover: Color
+      }
+    }
   }
   image: {
     background?: SanityAsset
@@ -66,8 +84,6 @@ export type Metadata = {
 }
 
 export type Chapter = {
-  id: string
-  title: string
   content: PortableTextBlock[]
 }
 

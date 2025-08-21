@@ -1,11 +1,11 @@
-import { EditIcon } from '@sanity/icons'
+import { ColorWheelIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
   name: 'theme',
   title: 'Theme',
   type: 'object',
-  icon: EditIcon,
+  icon: ColorWheelIcon,
   fields: [
     defineField({
       name: 'text',
@@ -21,6 +21,21 @@ export default defineType({
       name: 'secondary',
       title: 'Secondary Color',
       type: 'color',
+    }),
+    defineField({
+      name: 'tertiary',
+      title: 'Tertiary Color',
+      type: 'color',
+    }),
+    defineField({
+      name: 'header_button',
+      title: 'Header Button',
+      type: 'theme_button_color',
+    }),
+    defineField({
+      name: 'sticky_header_button',
+      title: 'Sticky Header Button',
+      type: 'theme_button_color',
     }),
   ],
 })

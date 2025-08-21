@@ -5,7 +5,7 @@ type CoverBookProps = React.ComponentProps<'div'> & {
 export const CoverBook = ({ children, ref }: CoverBookProps) => {
   return (
     <div
-      className='--right --hard --simple overflow-hidden bg-white p-20 shadow-2xl'
+      className="--right --hard --simple overflow-hidden bg-white p-20 shadow-2xl"
       ref={ref}
       data-density="hard"
     >

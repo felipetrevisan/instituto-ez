@@ -8,7 +8,7 @@
   touch-action: pan-y;
 }
 
-.sft__wrapper {
+.stf__wrapper {
   position: relative;
   width: 100%;
   box-sizing: border-box;
@@ -59,60 +59,50 @@
   top: 0;
 }
 
-.open-book:before {
-  background-color: var(--primary-c);
-  bottom: -1em;
-  content: "";
-  left: -1em;
-  position: absolute;
-  right: -1em;
-  top: -1em;
-  z-index: -1;
-  inset: 0;
+.open-book,
+.open-book .stf__parent {
+  width: 100% !important;
+  max-width: min(420px, calc(100vw - 2rem)) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
-.open-book:after {
-  background: linear-gradient(
-    to right,
-    transparent 0%,
-    rgba(0, 0, 0, 0.2) 46%,
-    rgba(0, 0, 0, 0.5) 49%,
-    rgba(0, 0, 0, 0.6) 50%,
-    rgba(0, 0, 0, 0.5) 51%,
-    rgba(0, 0, 0, 0.2) 52%,
-    transparent 100%
-  );
-  bottom: -1em;
-  content: "";
-  left: 50%;
-  position: absolute;
-  top: -1em;
-  transform: translate(-50%, 0);
-  width: 4em;
-  z-index: 1;
-  inset: 0 50%;
+@media (min-width: 768px) {
+  .open-book,
+  .open-book .stf__parent {
+    max-width: none !important;
+  }
 }
 
-.chapter-title {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  &::before,
-  &::after {
+@media (min-width: 768px) {
+  .open-book:before {
+    bottom: -1em;
     content: "";
-    display: block;
-    height: 0.09em;
-    min-width: 30vw;
+    left: -1em;
+    position: absolute;
+    right: -1em;
+    top: -1em;
+    z-index: -1;
   }
 
-  &::before {
-    background: linear-gradient(to right, rgba(240, 240, 240, 0), var(--primary-c));
-    margin-right: 4vh;
-  }
-
-  &::after {
-    background: linear-gradient(to left, rgba(240, 240, 240, 0), var(--primary-c));
-    margin-left: 4vh;
+  .open-book:after {
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(255, 255, 255, 0.2) 46%,
+      var(--primary-c) 49%,
+      var(--secondary-c) 50%,
+      rgba(255, 255, 255, 0.5) 51%,
+      rgba(255, 255, 255, 0.2) 52%,
+      transparent 100%
+    );
+    bottom: -1em;
+    content: "";
+    left: 50%;
+    position: absolute;
+    top: -1em;
+    transform: translate(-50%, 0);
+    width: 4em;
+    z-index: 1;
   }
 }

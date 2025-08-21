@@ -23,7 +23,7 @@ const ImageComponent = ({
         // Avoid jumping around with aspect-ratio CSS property
         aspectRatio: width / height,
       }}
-      className="rounded-2xl overflow-hidden"
+      className="overflow-hidden rounded-2xl"
     />
   )
 }

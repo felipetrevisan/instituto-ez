@@ -55,6 +55,13 @@ export default defineType({
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),
     defineField({
+      name: 'slogan',
+      title: 'Site Slogan',
+      type: 'string',
+      group: ['site'],
+      validation: (Rule) => Rule.required().warning('This field must not be empty.'),
+    }),
+    defineField({
       name: 'logo',
       title: 'Site Logo',
       type: 'image',

@@ -107,7 +107,7 @@ export function BlobBottomButton({ label, icon, className, onClick }: BlobBottom
           {icon && <div>{icon}</div>}
           <span className="ml-2 overflow-hidden whitespace-nowrap">{label}</span>
         </span>
-        <span className='-z-1 absolute top-0 left-0 h-full w-full overflow-hidden rounded-4xl bg-white'>
+        <span className="-z-1 absolute top-0 left-0 h-full w-full overflow-hidden rounded-4xl bg-white">
           <span className="filter-[url('#goo')] relative block h-full">
             <span className="translate-3d hover:translate-z-0 supports-[filter:url('#goo')]:hover:translate-z-0 absolute top-[2px] left-[calc(0*(120%/4))] h-full w-[calc(100%/4)] translate-x-0 translate-y-[150%] rounded-full bg-cyan-300 transition-transform delay-[calc(0*0.08s)] duration-450 hover:scale-[1.7] supports-[filter:url('#goo')]:translate-x-0 supports-[filter:url('#goo')]:translate-y-[150%] supports-[filter:url('#goo')]:hover:scale-[1.4]:" />
             <span className="translate-3d hover:translate-z-0 supports-[filter:url('#goo')]:hover:translate-z-0 absolute top-[2px] left-[calc(1*(120%/4))] h-full w-[calc(100%/4)] translate-x-0 translate-y-[150%] rounded-full bg-cyan-300 transition-transform delay-[calc(1*0.08s)] duration-450 hover:scale-[1.7] supports-[filter:url('#goo')]:translate-x-0 supports-[filter:url('#goo')]:translate-y-[150%] supports-[filter:url('#goo')]:hover:scale-[1.4]:" />

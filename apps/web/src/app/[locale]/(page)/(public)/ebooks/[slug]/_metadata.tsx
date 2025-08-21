@@ -2,6 +2,7 @@ import { FaIcons } from '@ez/shared/icons'
 import { cn } from '@ez/shared/lib/utils'
 import { CountingNumber } from '@ez/shared/ui/animated/counter'
 import { Magnetic } from '@ez/shared/ui/animated/effects/magnetic'
+import { HighlightText } from '@ez/shared/ui/animated/text/highlight'
 import { RollingText } from '@ez/shared/ui/animated/text/rolling'
 import { Card, CardContent } from '@ez/shared/ui/card'
 import { urlForImage } from '@ez/web/config/image'
@@ -20,7 +21,7 @@ export function Metadata({ data }: { data: Ebook }) {
     const ImageComponent =
       media.type === 'image' && media.image ? (
         <Image
-          src={urlForImage(media.image.asset).width(24).height(24).auto('format').quality(80).url()}
+          src={urlForImage(media.image.asset).width(24).height(24).format('webp').quality(80).url()}
           alt=""
           width={24}
           height={24}
@@ -33,10 +34,10 @@ export function Metadata({ data }: { data: Ebook }) {
   return (
     <>
       {metadata?.length > 0 && (
-        <section className="container flex flex-wrap justify-center gap-10 bg-white px-6 py-12">
+        <section className="grid grid-cols-2 gap-x-2 gap-y-10 bg-white py-12 md:container md:gap-10 md:px-6 md:[grid-template-columns:repeat(auto-fit,minmax(200px,1fr))]">
           {metadata?.map((meta, index) => (
             <Magnetic
-              key={`${id}_${
+              key={`metadata_${id}_${
                 // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
                 index
               }`}
@@ -67,9 +68,10 @@ export function Metadata({ data }: { data: Ebook }) {
                           </span>
                         )}
                         {meta.type === 'string' && (
-                          <span className="font-bold text-3xl text-[var(--primary-c)]">
-                            {meta.value}
-                          </span>
+                          <HighlightText
+                            className="from-[var(--primary-c)] to-[var(--secondary-c)] font-bold text-3xl text-white"
+                            text={meta.text || '-'}
+                          />
                         )}
                         {meta.type === 'number' && Number(meta.value) > 0 && (
                           <span className="font-bold text-3xl text-[var(--primary-c)]">
@@ -83,7 +85,7 @@ export function Metadata({ data }: { data: Ebook }) {
                         )}
                       </dt>
                       <dd className="text-center font-bold text-[var(--primary-c)]">
-                        <RollingText text={meta.title} />
+                        {meta.title}
                       </dd>
                     </div>
                   </div>

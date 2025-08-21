@@ -32,3 +32,8 @@ export enum BorderRounded {
   xl = 'xl',
   '2xl' = '2xl',
 }
+
+export enum PageType {
+  page = 'page',
+  landing = 'landing',
+}

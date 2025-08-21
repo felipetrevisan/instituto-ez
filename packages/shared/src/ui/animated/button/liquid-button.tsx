@@ -39,8 +39,7 @@ const buttonVariants = cva(
       variant: {
         default:
           'text-primary shadow-md [--liquid-button-color:var(--primary)] hover:text-primary-foreground',
-        outline:
-          '!bg-white/60 text-primary shadow-none outline-2',
+        outline: '!bg-white/60 text-primary shadow-none outline-2',
       },
       theme: {
         default:
@@ -49,8 +48,7 @@ const buttonVariants = cva(
           '!bg-secondary border-secondary text-secondary-foreground shadow-secondary [--liquid-button-color:var(--secondary-foreground)] hover:text-secondary',
         tertiary:
           '!bg-tertiary border-tertiary text-tertiary-foreground shadow-tertiary [--liquid-button-color:var(--tertiary-foreground)] hover:text-tertiary',
-        custom:
-          '',
+        custom: '',
       },
       size: {
         default: 'max-w-fit px-4 py-2',
@@ -69,6 +67,9 @@ const buttonVariants = cva(
       fullWidth: {
         true: 'w-full',
       },
+      sticky: {
+        true: '',
+      },
     },
     defaultVariants: {
       variant: 'default',
@@ -76,27 +77,40 @@ const buttonVariants = cva(
       size: 'default',
       rounded: 'none',
       fullWidth: false,
+      sticky: false,
     },
     compoundVariants: [
       {
         variant: 'outline',
         theme: 'default',
-        className: '!bg-white border-white text-primary [--liquid-button-color:var(--primary)] hover:text-primary-foreground',
+        className:
+          '!bg-white border-white text-primary [--liquid-button-color:var(--primary)] hover:text-primary-foreground',
       },
       {
         variant: 'outline',
         theme: 'secondary',
-        className: '!bg-white border-white text-secondary [--liquid-button-color:var(--secondary)] hover:text-secondary-foreground',
+        className:
+          '!bg-white border-white text-secondary [--liquid-button-color:var(--secondary)] hover:text-secondary-foreground',
       },
       {
         variant: 'outline',
         theme: 'tertiary',
-        className: '!bg-white border-white text-tertiary [--liquid-button-color:var(--tertiary)] hover:text-tertiary-foreground',
+        className:
+          '!bg-white border-white text-tertiary [--liquid-button-color:var(--tertiary)] hover:text-tertiary-foreground',
       },
       {
         variant: 'outline',
         theme: 'custom',
-        className: '!bg-white border-white text-primary-c [--liquid-button-color:var(--primary-c)] hover:text-primary-c',
+        sticky: false,
+        className:
+          '!bg-[var(--header-button-default-background)] border--[var(--header-button-default-background)] text-[var(--header-button-default-text)] [--liquid-button-color:var(--header-button-hover-background)] hover:text-[var(--header-button-hover-text)]',
+      },
+      {
+        variant: 'outline',
+        theme: 'custom',
+        sticky: true,
+        className:
+          '!bg-[var(--header-sticky-button-default-background)] border--[var(--header-sticky-button-default-background)] text-[var(--header-sticky-button-default-background)] [--liquid-button-color:var(--header-sticky-button-hover-background)] hover:text-[var(--header-sticky-button-hover-text)]',
       },
     ],
   },
@@ -110,6 +124,7 @@ function LiquidButton({
   theme,
   rounded,
   size,
+  sticky,
   fullWidth,
   ...props
 }: LiquidButtonProps) {
@@ -117,7 +132,9 @@ function LiquidButton({
     <motion.button
       whileTap={{ scale: 0.95 }}
       whileHover={{ scale: 1.05 }}
-      className={cn(buttonVariants({ variant, size, theme, rounded, fullWidth, className }))}
+      className={cn(
+        buttonVariants({ variant, size, theme, sticky, rounded, fullWidth, className }),
+      )}
       {...props}
     />
   )

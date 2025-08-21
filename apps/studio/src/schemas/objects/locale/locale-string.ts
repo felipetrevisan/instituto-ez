@@ -26,10 +26,12 @@ export const localeString = defineType({
     },
   ],
   // Dynamically define one field per language
-  fields: supportedLanguages.map((lang) => defineField({
-    title: lang.title,
-    name: lang.id,
-    type: 'string',
-    fieldset: lang.isDefault ? undefined : 'translations',
-  }))
+  fields: supportedLanguages.map((lang) =>
+    defineField({
+      title: lang.title,
+      name: lang.id,
+      type: 'string',
+      fieldset: lang.isDefault ? undefined : 'translations',
+    }),
+  ),
 })

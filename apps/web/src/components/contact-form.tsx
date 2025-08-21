@@ -60,7 +60,7 @@ export function ContactForm({
     }
 
     const { data: emailData, error } = await sendEmail(formData, settings.contact.email)
-    
+
     if (error) {
       toast.warning('Não foi possível enviar a mensagem')
       return false
@@ -72,7 +72,7 @@ export function ContactForm({
       onCloseAction()
       return true
     }
-    
+
     toast.warning('Não foi possível enviar a mensagem')
     return false
   }
@@ -210,7 +210,11 @@ export function ContactForm({
             shadow
             className="w-full md:w-[200px]"
           >
-            {isSubmitting ? <Loader2Icon className="mr-2 h-4 w-4 animate-spin" /> : form?.submitButtonText}
+            {isSubmitting ? (
+              <Loader2Icon className="mr-2 h-4 w-4 animate-spin" />
+            ) : (
+              form?.submitButtonText
+            )}
           </Button>
         </div>
       )}

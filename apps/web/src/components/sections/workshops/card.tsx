@@ -20,7 +20,9 @@ export function WorkshopCard({
   className,
 }: Props) {
   const locale = useLocale()
-  const backgroundClass = background ? `url('${urlForImage(background.asset)}')` : 'transparent'
+  const backgroundClass = background
+    ? `url('${urlForImage(background.asset).format('webp').quality(80)}')`
+    : 'transparent'
 
   const link = !disabled ? getLink(button) : false
 
@@ -28,7 +30,7 @@ export function WorkshopCard({
     <MotionCard
       variant="ghost"
       className={cn(
-        'relative flex h-96 w-[70vw] shrink items-end justify-center rounded-xl bg-card bg-cover! shadow-2xl md:w-160 md:shrink-0 lg:w-80',
+        'relative flex h-96 shrink-0 items-end justify-center rounded-xl bg-card bg-cover! shadow-2xl',
         {
           'pointer-events-none select-none opacity-80 grayscale-100': disabled,
         },
@@ -44,9 +46,9 @@ export function WorkshopCard({
         transition: { duration: 0.4, ease: 'easeInOut' },
       }}
     >
-      <CardFooter className='flex h-28 w-[calc(100%-10px)] flex-col items-center justify-center gap-4 rounded-2xl border border-white/40 bg-black/80 p-4 font-oswald backdrop-blur-xl'>
-        <span className='text-center font-bold text-2xl text-orange-400'>{title}</span>
-        {subtitle && <span className='font-bold text-2xl text-white'>{subtitle}</span>}
+      <CardFooter className="flex h-28 w-[calc(100%-10px)] flex-col items-center justify-center gap-4 rounded-2xl border border-white/40 bg-black/80 p-4 font-oswald backdrop-blur-xl">
+        <span className="text-center font-bold text-orange-400 text-xl">{title}</span>
+        {subtitle && <span className="font-bold text-lg text-white">{subtitle}</span>}
       </CardFooter>
     </MotionCard>
   )
@@ -54,7 +56,7 @@ export function WorkshopCard({
   return (
     <>
       {link ? (
-        <ButtonLink href={getLocalizedLink(locale, link)}  passHref>
+        <ButtonLink href={getLocalizedLink(locale, link)} passHref>
           <CardRender />
         </ButtonLink>
       ) : (

@@ -21,7 +21,9 @@ const MotionCard = motion(Card)
 
 export function ServiceCard({ item: { image, title, button, disabled }, className }: Props) {
   const locale = useLocale()
-  const backgroundClass = image ? `url('${urlForImage(image.asset)}')` : 'transparent'
+  const backgroundClass = image
+    ? `url('${urlForImage(image.asset).format('webp').quality(80)}')`
+    : 'transparent'
 
   const link = !disabled ? getLink(button) : false
 
@@ -45,23 +47,25 @@ export function ServiceCard({ item: { image, title, button, disabled }, classNam
         transition: { duration: 0.4, ease: 'easeInOut' },
       }}
     >
-      <CardFooter className='flex h-20 w-full flex-col justify-center gap-4 rounded-2xl bg-black/50 p-4 font-oswald backdrop-blur-2xl'>
+      <CardFooter className="flex h-20 w-full flex-col justify-center gap-4 rounded-2xl bg-black/50 p-4 font-oswald backdrop-blur-2xl">
         <Carousel
           opts={{ loop: true, duration: 30 }}
           plugins={[ClassNames(), Autoplay({ playOnInit: true, delay: 3000 })]}
         >
           <CarouselContent>
-            <CarouselItem className='flex basis-full items-center justify-center'>
-              <span className='text-center font-semibold text-orange-400 text-xl'>{title}</span>
+            <CarouselItem className="flex basis-full items-center justify-center">
+              <span className="text-center font-semibold text-orange-400 [font-size:_clamp(1rem,5vw,1.2rem)]">
+                {title}
+              </span>
             </CarouselItem>
             {button.visible && (
-              <CarouselItem className='flex basis-full items-center justify-center'>
+              <CarouselItem className="flex basis-full items-center justify-center">
                 <Button
                   variant="default"
                   theme="tertiary"
                   rounded="xl"
                   size="2xl"
-                  className='w-full font-bold uppercase'
+                  className="w-full font-bold uppercase"
                   disabled={button.disabled}
                   effect="none"
                   scaleEffect={false}
@@ -79,7 +83,7 @@ export function ServiceCard({ item: { image, title, button, disabled }, classNam
   return (
     <>
       {link ? (
-        <ButtonLink href={getLocalizedLink(locale, link)}  passHref>
+        <ButtonLink href={getLocalizedLink(locale, link)} passHref>
           <CardRender />
         </ButtonLink>
       ) : (

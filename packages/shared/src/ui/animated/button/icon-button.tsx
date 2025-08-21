@@ -19,6 +19,7 @@ const themes = {
     'bg-linear-to-r from-secondary via-secondary/80 to-secondary hover:bg-secondary/30 hover:text-secondary-foreground text-secondary-foreground outline-secondary-foreground/40',
   tertiary:
     'bg-linear-to-r from-tertiary via-tertiary/80 to-tertiary text-tertiary-foreground hover:bg-tertiary/30 hover:text-tertiary-foreground outline-tertiary/40 hover:border-tertiary/40',
+  custom: '',
 }
 
 type IconButtonProps = Omit<HTMLMotionProps<'button'>, 'color'> & {

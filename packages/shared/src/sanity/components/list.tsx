@@ -44,10 +44,7 @@ const ListComponent = ({ value }: { value: ListType }) => {
             </div>
           )}
           <div>
-            <PortableText
-              value={item.content}
-              components={createPortableComponents()}
-            />
+            <PortableText value={item.content} components={createPortableComponents()} />
           </div>
         </li>
       ))}

@@ -19,12 +19,12 @@ export const titleVariants = cva('font-bold font-oswald', {
       white: 'text-white',
     },
     size: {
-      default: 'clamp-[text,2xl,4xl]',
-      sm: 'clamp-[text,sm,lg]',
-      lg: 'clamp-[text,lg,2xl]',
-      xl: 'clamp-[text,xl,2xl]',
-      '2xl': 'clamp-[text,2xl,4xl]',
-      '3xl': 'clamp-[text,4xl,8xl]',
+      default: 'text-2xl',
+      sm: 'text-sm',
+      lg: 'text-xl md:text-lg',
+      xl: 'text-xl',
+      '2xl': 'text-2xl md:text-3xl',
+      '3xl': 'text-3xl md:text-4xl',
     },
   },
   defaultVariants: {
@@ -49,7 +49,7 @@ function Title({
   const Comp = asChild ? Slot : 'h1'
 
   return (
-    <div className='flex flex-row items-center justify-center gap-2 md:justify-start'>
+    <div className="flex flex-row items-center justify-center gap-2 md:justify-start">
       {separator && (
         // biome-ignore lint/a11y/noSvgWithoutTitle: <explanation>
         <svg

@@ -27,8 +27,8 @@ export function LectureCard({ item: { button, background, content, title }, inde
       })}
     >
       <Parallax
-        bgImage={urlForImage(background.asset).url()}
-        className='flex h-[362px] w-full justify-center overflow-hidden rounded-r-lg xl:w-2/3'
+        bgImage={urlForImage(background.asset).format('webp').quality(80).url()}
+        className="flex h-[362px] w-full justify-center overflow-hidden rounded-r-lg xl:w-2/3"
       />
       <div
         className={cn(
@@ -39,21 +39,25 @@ export function LectureCard({ item: { button, background, content, title }, inde
           },
         )}
       >
-        <div className='relative flex h-full w-full flex-col items-start justify-start gap-10 p-10 text-secondary'>
-          <h3 className='clamp-[text,xl,4xl] text-center font-bold font-oswald lg:text-left'>
+        <div className="relative flex h-full w-full flex-col items-start justify-start gap-10 p-10 text-secondary">
+          <h3 className="clamp-[text,xl,4xl] text-center font-bold font-oswald lg:text-left">
             {title}
           </h3>
-          <div className='flex min-h-40 flex-col gap-10 text-justify font-light font-questrial text-md leading-7'>
+          <div className="flex min-h-40 flex-col gap-10 text-justify font-light font-questrial text-md leading-7">
             <PortableText value={content} components={createPortableComponents()} />
             {button.visible && link && (
-              <ButtonLink href={getLocalizedLink(locale, link)} passHref className='flex w-full justify-center'>
+              <ButtonLink
+                href={getLocalizedLink(locale, link)}
+                passHref
+                className="flex w-full justify-center"
+              >
                 <Button
                   variant="default"
                   theme="tertiary"
                   rounded="xl"
                   size="2xl"
                   effect="pulse"
-                  className='w-full font-bold uppercase'
+                  className="w-full font-bold uppercase"
                   disabled={button.disabled}
                 >
                   {button.label}

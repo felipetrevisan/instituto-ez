@@ -5,7 +5,10 @@ import { type HTMLMotionProps, type Transition, motion } from 'motion/react'
 import * as React from 'react'
 
 import { cn } from '@ez/shared/lib/utils'
-import { MotionHighlight, MotionHighlightItem } from '@ez/shared/ui/animated/effects/motion-highlight'
+import {
+  MotionHighlight,
+  MotionHighlightItem,
+} from '@ez/shared/ui/animated/effects/motion-highlight'
 import { type VariantProps, cva } from 'class-variance-authority'
 
 type TabsProps = React.ComponentProps<typeof TabsPrimitive.Root>
@@ -62,13 +65,14 @@ const tabVariants = cva(
       {
         variant: 'ghost',
         theme: 'default',
-        className: 'rounded-none bg-transparent text-primary text-primary shadow-none shadow-primary/20 outline-primary/40 hover:border-primary/40',
-
+        className:
+          'rounded-none bg-transparent text-primary text-primary shadow-none shadow-primary/20 outline-primary/40 hover:border-primary/40',
       },
       {
         variant: 'ghost',
         theme: 'secondary',
-        className: 'rounded-none bg-transparent text-secondary text-secondary shadow-none shadow-secondary/20 outline-secondary/40 hover:border-secondary/40',
+        className:
+          'rounded-none bg-transparent text-secondary text-secondary shadow-none shadow-secondary/20 outline-secondary/40 hover:border-secondary/40',
       },
       {
         variant: 'ghost',
@@ -120,12 +124,14 @@ const tabHighlightVariants = cva('absolute rounded-full', {
     {
       variant: 'ghost',
       theme: 'default',
-      className: 'border-primary bg-none bg-white text-primary opacity-1 shadow-primary outline-primary',
+      className:
+        'border-primary bg-none bg-white text-primary opacity-1 shadow-primary outline-primary',
     },
     {
       variant: 'ghost',
       theme: 'secondary',
-      className: 'border-secondary bg-none bg-white text-secondary opacity-1 shadow-secondary outline-secondary',
+      className:
+        'border-secondary bg-none bg-white text-secondary opacity-1 shadow-secondary outline-secondary',
     },
     {
       variant: 'ghost',
@@ -173,12 +179,14 @@ const tabsTriggerVariants = cva(
       {
         variant: 'ghost',
         theme: 'default',
-        className: 'data-[state=active]:border-primary data-[state=active]:bg-primary/10 data-[state=active]:text-primary',
+        className:
+          'data-[state=active]:border-primary data-[state=active]:bg-primary/10 data-[state=active]:text-primary',
       },
       {
         variant: 'ghost',
         theme: 'secondary',
-        className: 'data-[state=active]:border-secondary data-[state=active]:bg-secondary/10 data-[state=active]:text-secondary',
+        className:
+          'data-[state=active]:border-secondary data-[state=active]:bg-secondary/10 data-[state=active]:text-secondary',
       },
       {
         variant: 'ghost',

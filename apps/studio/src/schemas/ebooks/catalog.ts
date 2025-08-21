@@ -26,8 +26,16 @@ export default defineType({
       title: 'Chapters',
     },
     {
+      name: 'overview',
+      title: 'Overview',
+    },
+    {
+      name: 'index',
+      title: 'Index',
+    },
+    {
       name: 'theme',
-      title: 'Themes',
+      title: 'Theme',
     },
     {
       name: 'questions',
@@ -81,14 +89,22 @@ export default defineType({
       type: 'text',
     }),
     defineField({
+      name: 'download',
+      title: 'Download',
+      type: 'download_link',
+      group: ['link'],
+    }),
+    defineField({
       name: 'overview',
       title: 'Overview',
       type: 'ebooksOverview',
+      group: ['overview'],
     }),
     defineField({
       name: 'index',
       title: 'Index',
       type: 'ebooksIndex',
+      group: ['index'],
     }),
     defineField({
       name: 'data',
@@ -129,7 +145,6 @@ export default defineType({
       title: 'Disable?',
       type: 'boolean',
       initialValue: true,
-      group: ['link'],
     }),
     defineField({
       name: 'button',
@@ -141,14 +156,14 @@ export default defineType({
   ],
   preview: {
     select: {
-      image: "images.small_image",
-      title: "title"
+      image: 'images.small_image',
+      title: 'title',
     },
     prepare({ image, title }) {
       return {
         media: image,
-        title
+        title,
       }
-    }
-  }
+    },
+  },
 })

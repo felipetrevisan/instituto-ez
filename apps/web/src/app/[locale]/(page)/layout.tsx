@@ -72,9 +72,7 @@ export default async function RootLayoutt({ children, params }: Props) {
     >
       <body className="flex h-full flex-col overflow-x-hidden antialiased">
         <Providers>
-          <NextIntlClientProvider>
-            {children}
-          </NextIntlClientProvider>
+          <NextIntlClientProvider>{children}</NextIntlClientProvider>
         </Providers>
         <SpeedInsights />
         <Analytics />

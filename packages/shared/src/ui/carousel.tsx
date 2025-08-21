@@ -1,7 +1,10 @@
 'use client'
 
 import { cn } from '@ez/shared/lib/utils'
-import { MotionHighlight, MotionHighlightItem } from '@ez/shared/ui/animated/effects/motion-highlight'
+import {
+  MotionHighlight,
+  MotionHighlightItem,
+} from '@ez/shared/ui/animated/effects/motion-highlight'
 import { type VariantProps, cva } from 'class-variance-authority'
 import useEmblaCarousel, { type UseEmblaCarouselType } from 'embla-carousel-react'
 import { ArrowLeft, ArrowRight } from 'lucide-react'

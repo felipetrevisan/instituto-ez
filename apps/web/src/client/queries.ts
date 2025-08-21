@@ -5,6 +5,7 @@ export const siteConfigQuery = groq`
     title,
     description,
     keywords,
+    slogan,
     "contact": {
       "form": contactForm,
       "email": email,
@@ -263,10 +264,42 @@ export const ebookQueryBySlug = groq`
     "slug": slug.current,
     subtitle,
     description,
-    theme,
+    "theme": theme {
+      text,
+      primary,
+      secondary,
+      tertiary,
+      "button": {
+        "header": header_button {
+          "default": {
+            "text": text_default,
+            "background": default
+          },
+          "hover": {
+            "text": text_hover,
+            "background": hover
+          },
+        },
+        "stickyHeader": sticky_header_button {
+          "default": {
+            "text": text_default,
+            "background": default
+          },
+          "hover": {
+            "text": text_hover,
+            "background": hover
+          },
+        }
+      }
+    },
     "seo": {
       "description": seoDescription,
       "keywords": seoKeywords
+    },
+    "download": download {
+      disabled,
+      label,
+      url
     },
     "overview": overview {
       title,
@@ -274,7 +307,8 @@ export const ebookQueryBySlug = groq`
     },
     "index": index {
       title,
-      description
+      description,
+      video
     },
     "questions": questions[] {
       title,
@@ -289,8 +323,7 @@ export const ebookQueryBySlug = groq`
         }
       },
       "chapters": chapters[] {
-        content,
-        title
+        content
       }
     },
     "metadata": data[] {
@@ -303,6 +336,7 @@ export const ebookQueryBySlug = groq`
       prefix,
       title,
       value,
+      text,
       type
     },
     "image": images {

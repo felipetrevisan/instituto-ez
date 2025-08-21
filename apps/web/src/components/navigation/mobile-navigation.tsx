@@ -1,6 +1,9 @@
 'use client'
 
-import { MotionHighlight, MotionHighlightItem } from '@ez/shared/ui/animated/effects/motion-highlight'
+import {
+  MotionHighlight,
+  MotionHighlightItem,
+} from '@ez/shared/ui/animated/effects/motion-highlight'
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -38,12 +41,13 @@ export const MobileNavigation = ({ navigation }: NavigationProps) => {
               <MotionHighlightItem activeClassName="border-b-primary text-primary p-4">
                 <NavigationMenuLink
                   data-active={isMenuActive(url.link)}
-                  href={getLocalizedLink(locale,
+                  href={getLocalizedLink(
+                    locale,
                     url.isHome || !url.link ? '/' : (url.link ?? url.externalUrl),
                     url.type === 'EXTERNAL',
                   )}
                   target={!url.link && url.externalUrl ? '_blank' : undefined}
-                  className='hover:after:animation-pulse after:-bottom-1 after:-translate-x-1/2 relative after:absolute after:left-1/2 after:h-[2px] after:w-0 after:rounded-xl after:bg-primary-foreground after:transition-all hover:after:w-full hover:after:shadow-xl'
+                  className="hover:after:animation-pulse after:-bottom-1 after:-translate-x-1/2 relative after:absolute after:left-1/2 after:h-[2px] after:w-0 after:rounded-xl after:bg-primary-foreground after:transition-all hover:after:w-full hover:after:shadow-xl"
                 >
                   {label}
                 </NavigationMenuLink>

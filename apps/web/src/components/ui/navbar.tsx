@@ -35,7 +35,7 @@ function Root({
       initial={false}
       {...props}
     >
-      <div className='mx-auto flex flex-wrap items-center justify-between lg:container'>
+      <div className="mx-auto flex flex-wrap items-center justify-between lg:container">
         {children}
       </div>
     </motion.div>
@@ -63,7 +63,7 @@ const Path = (props: React.ComponentProps<typeof motion.path>) => (
 )
 
 function Toggle({ className, ...props }: React.ComponentProps<'button'>) {
-  const { toggleMenu } = useApp()
+  const { toggleMenu, isNormalPage } = useApp()
 
   return (
     <button

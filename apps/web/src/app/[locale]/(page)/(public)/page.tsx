@@ -16,13 +16,15 @@ export default async function Page() {
   )
 
   return (
-    <div className='flex w-full flex-col items-center justify-center gap-20'>
+    <div className="flex w-full flex-col items-center justify-center gap-20">
       {sections?.map(({ key, show, title, subtitle }: Section) =>
         show ? (
           <section className={avaliableSections[key]?.classes || ''} key={key}>
             {title && (
               <App.PageHeader>
-                <Title>{title}</Title>
+                <Title size="2xl" className="text-center">
+                  {title}
+                </Title>
                 {subtitle && <Subtitle size="xl">{subtitle}</Subtitle>}
               </App.PageHeader>
             )}

@@ -12,11 +12,6 @@
     url("/assets/images/bg-ebooks-pattern.png");
 }
 
-@utility bg-ebooks-lines {
-  background-image: linear-gradient(var(--tw-gradient-stops)),
-    url("/assets/images/bg-ebooks-pattern-lines.png");
-}
-
 @layer base {
   body {
     @apply bg-background text-foreground;

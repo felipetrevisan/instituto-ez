@@ -1,6 +1,7 @@
 import { cn } from '@ez/shared/lib/utils'
 import { Subtitle, Title } from '@ez/shared/ui/title'
 import { urlForImage } from '@ez/web/config/image'
+import { useIsMobile } from '@ez/web/hooks/use-mobile'
 import type { Ebook } from '@ez/web/types/ebook'
 import Image from 'next/image'
 import HTMLFlipBook from 'react-pageflip'
@@ -10,10 +11,19 @@ import { CoverBook } from './_chapters/cover'
 import './styles.css'
 
 export function Overview({ data }: { data: Ebook }) {
+  const isMobile = useIsMobile(640)
   const { overview, chapter, id } = data
 
   return (
-    <section className="relative mt-10 flex min-h-[500px] w-screen flex-row gap-4 bg-[auto,contain] bg-ebooks bg-gradient-to-b from-slate-100 via-slate-200 to-white px-6 pt-52">
+    <section
+      className={cn(
+        'relative mt-10 flex min-h-[500px] w-screen flex-row gap-4 bg-[auto,contain] bg-ebooks bg-gradient-to-b from-slate-100 via-slate-200 to-white px-6',
+        {
+          'pt-20': !overview,
+          'pt-52': overview,
+        },
+      )}
+    >
       <div className="absolute top-0 left-0 w-full rotate-180 overflow-hidden">
         {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
@@ -35,7 +45,7 @@ export function Overview({ data }: { data: Ebook }) {
             <Subtitle size="lg">{overview.description}</Subtitle>
           </div>
         )}
-        <div className="flex flex-col items-center justify-center gap-2">
+        <div className="flex flex-col items-center justify-center gap-8">
           <Title
             size="2xl"
             className="after:-bottom-1 after:-translate-x-1/2 relative text-center font-questrial font-semibold text-[var(--primary-c)] after:absolute after:left-1/2 after:h-[2px] after:w-[40%] after:rounded-xl after:bg-[var(--primary-c)]/60 after:transition-all"
@@ -43,27 +53,27 @@ export function Overview({ data }: { data: Ebook }) {
             Capítulos
           </Title>
           {chapter && chapter.chapters?.length > 0 && (
-            <div className="px-6 py-12">
+            <div className="flex w-full justify-center px-4">
               <HTMLFlipBook
                 width={400}
                 height={540}
-                size="fixed"
+                size={isMobile ? 'stretch' : 'fixed'}
                 minWidth={315}
                 maxWidth={1000}
                 minHeight={400}
                 maxHeight={1533}
                 maxShadowOpacity={0.5}
-                showCover={true}
-                mobileScrollSupport={true}
+                showCover
+                mobileScrollSupport
                 drawShadow
-                usePortrait={false}
-                autoSize={false}
-                className="open-book"
+                usePortrait={isMobile}
+                autoSize={isMobile}
+                className="open-book md:h-[733px] md:w-[550px]"
               >
                 {chapter.cover && (
                   <CoverBook>
                     <Image
-                      src={urlForImage(chapter.cover.asset).auto('format').quality(80).url()}
+                      src={urlForImage(chapter.cover.asset).format('webp').quality(80).url()}
                       alt="Book Cover"
                       fill
                       className="object-cover"

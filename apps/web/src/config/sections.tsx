@@ -45,7 +45,7 @@ export function getSections(): SectionKeys[] {
     {
       key: 'workshop',
       component: <Workshops />,
-      classes: 'section relative flex flex-col gap-10 h-full justify-center bg-white',
+      classes: 'section relative flex flex-col gap-10 h-full justify-center bg-white w-full',
     },
     {
       key: 'advanced-mentory',

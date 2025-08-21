@@ -5,9 +5,10 @@ import type { Section } from './sections'
 export type Site = {
   id: string
   title: string
+  slogan: string
   description?: string
   keywords?: string
-  contact: { 
+  contact: {
     form: { _ref: string }
     email: string
   }

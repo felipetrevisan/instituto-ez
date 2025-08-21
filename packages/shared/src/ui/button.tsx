@@ -32,11 +32,11 @@ const buttonVariants = cva(
           'bg-linear-to-r from-tertiary via-tertiary/80 to-tertiary text-tertiary-foreground outline-tertiary/40 hover:border-tertiary/40 hover:bg-tertiary/30 hover:text-tertiary-foreground',
       },
       size: {
-        default: 'max-w-fit px-4 py-2',
-        sm: 'h-8 px-3 text-xs',
-        lg: 'h-10 px-8',
-        xl: 'h-14 px-6 text-md',
-        '2xl': 'h-16 px-8 text-md',
+        default: 'max-w-fit px-4 py-2 text-md',
+        sm: 'h-8 px-3 text-sm',
+        lg: 'h-10 px-8 text-sm md:text-md',
+        xl: 'h-14 px-6 text-md md:text-lg',
+        '2xl': 'h-16 px-8 text-md md:text-lg',
       },
       rounded: {
         none: 'rounded-none',

@@ -33,9 +33,9 @@ export function TestimonialMinimalist({ item, theme, variant, rounded }: Props) 
       data-theme={theme}
       data-variant={variant}
     >
-      <CardContent className='flex h-full w-full items-center justify-center p-0'>
-        <div className='relative flex h-full w-full flex-col items-center justify-evenly border-0 px-8 py-0'>
-          <ScrollArea className='relative mx-auto h-[300px] w-full max-w-2xl overflow-scroll text-justify md:h-[250px]'>
+      <CardContent className="flex h-full w-full items-center justify-center p-0">
+        <div className="relative flex h-full w-full flex-col items-center justify-evenly border-0 px-8 py-0">
+          <ScrollArea className="relative mx-auto h-[300px] w-full max-w-2xl overflow-scroll text-justify md:h-[250px]">
             <PortableText value={item.testimonial} />
           </ScrollArea>
           <div className="author font-bold" data-slot="card-content-action">

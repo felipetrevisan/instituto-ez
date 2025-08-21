@@ -9,11 +9,13 @@ export function Workshops() {
   const { data, isLoading } = useWorkshop()
 
   return (
-    <motion.div layout className="flex flex-col space-y-12">
-      <div className='flex h-full flex-col flex-wrap items-center justify-center gap-16 md:flex-row'>
+    <motion.div layout className="flex flex-col">
+      <div className="flex flex-wrap justify-center gap-8">
         {isLoading && <Skeleton />}
         {data?.map((item) => (
-          <Card key={item.id} item={item} />
+          <div className="w-[300px] flex-none" key={item.id}>
+            <Card item={item} />
+          </div>
         ))}
       </div>
     </motion.div>

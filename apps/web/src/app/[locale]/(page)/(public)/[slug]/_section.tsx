@@ -44,7 +44,7 @@ export function SectionContent({
           </svg>
         </div>
         <Parallax
-          bgImage={urlForImage(background.image.asset).auto('format').quality(80).url()}
+          bgImage={urlForImage(background.image.asset).format('webp').quality(80).url()}
           strength={-200}
           className="w-full overflow-hidden"
         >
@@ -53,7 +53,7 @@ export function SectionContent({
               <div className="flex w-full flex-col items-center justify-center gap-10 font-bold font-oswald text-white">
                 <div className="relative mt-10 h-[300px] w-[90vw] max-w-full overflow-hidden rounded-2xl shadow md:max-h-[500px] md:w-[60vw] lg:h-[500px]">
                   <Image
-                    src={urlForImage(media.image.asset).auto('format').quality(80).url()}
+                    src={urlForImage(media.image.asset).format('webp').quality(80).url()}
                     alt=""
                     fill
                     priority
@@ -115,7 +115,7 @@ export function SectionContent({
         {title && <Title className="text-center">{title}</Title>}
         <div
           className={cn(
-            'flex w-full flex-col items-center justify-center gap-5 py-10 lg:max-w-[90vw] lg:p-0 [&>*:not(hr)]:w-full',
+            'flex w-full flex-col items-center justify-center gap-5 py-10 [font-size:_clamp(1rem,7vw,1.05rem)] lg:max-w-[90vw] lg:p-0 [&>*:not(hr)]:w-full',
             {
               'gap-10': slug === 'ebooks',
             },

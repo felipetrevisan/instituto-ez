@@ -111,7 +111,7 @@ const structure = (S: StructureBuilder, context: ConfigContext) =>
             'ebooks-collection',
             'testimonial',
             'advanced-mentory',
-            'formGeneralSettings'
+            'formGeneralSettings',
           ].includes(listItem.getId() || ''),
       ),
     ])

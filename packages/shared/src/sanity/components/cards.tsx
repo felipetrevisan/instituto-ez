@@ -81,7 +81,7 @@ const CardsComponent = ({
               >
                 {card.title}
               </h3>
-              <div className='flex flex-col gap-4'>
+              <div className="flex flex-col gap-4">
                 <PortableText value={card.content} components={portableComponentsOverrides} />
               </div>
             </div>

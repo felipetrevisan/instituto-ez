@@ -3,7 +3,7 @@ export function getLocalizedLink(locale: string, link: string, isExternal = fals
 
   // if the link starts with a slash, it is considered a relative path
   if (link.startsWith('/')) {
-     localizedLink = `/${locale}${link}`
+    localizedLink = `/${locale}${link}`
   }
 
   return !isExternal ? localizedLink : link

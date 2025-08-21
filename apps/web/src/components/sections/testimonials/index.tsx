@@ -27,7 +27,7 @@ export function Testimonials() {
   const TestimonialRender = type === 'MINIMALIST' ? TestimonialMinimalist : TestimonialAnimated
 
   return (
-    <div className='flex h-full w-full flex-col space-y-14'>
+    <div className="flex h-full w-full flex-col space-y-14">
       <div className="flex flex-col justify-center">
         {isLoading && <Skeleton />}
         {!isLoading && (

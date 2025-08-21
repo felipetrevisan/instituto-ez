@@ -1,7 +1,10 @@
 import { ChevronLeftIcon, DownloadIcon } from '@ez/shared/icons'
+import { GradientBackground } from '@ez/shared/ui/animated/backgrounds/gradient'
+import { IconButton } from '@ez/shared/ui/animated/button/icon-button'
 import { LiquidButton } from '@ez/shared/ui/animated/button/liquid-button'
-import { TypingText } from '@ez/shared/ui/animated/text/typing'
+import { WritingText } from '@ez/shared/ui/animated/text/writting'
 import { urlForImage } from '@ez/web/config/image'
+import { useIsMobile } from '@ez/web/hooks/use-mobile'
 import type { Ebook } from '@ez/web/types/ebook'
 import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
 import { motion } from 'motion/react'
@@ -16,22 +19,35 @@ const ChevronLeftIconMotion = motion(ChevronLeftIcon)
 
 export function Header({ data }: { data: Ebook }) {
   const locale = useLocale()
-  const { title, description, image } = data
+  const isMobile = useIsMobile(640)
+
+  const { title, description, image, download } = data
 
   return (
     <>
-      <header className="relative flex w-screen flex-col items-center justify-center overflow-hidden bg-[auto,cover] bg-ebooks bg-gradient-to-br from-[var(--primary-c)]/90 to-[var(--secondary-c)]/90 px-6 py-12 text-white md:h-[600px]">
-        <Link href={getLocalizedLink(locale, '/ebooks')} className="absolute top-4 right-4 w-full">
-          <AnimatedButton
-            label="Voltar para o Catálogo"
-            icon={<ChevronLeftIconMotion />}
-            animateMaps={{
-              width: { initial: 48, hovered: 260 },
-              paddingLeft: { initial: 20, hovered: 16 },
-              scale: { initial: 1, hovered: 1.1 },
-            }}
-            className="mb-10 fill-[var(--primary-c)] text-[var(--primary-c)] after:absolute after:inset-0 after:animate-pulse after:rounded-xl after:bg-white/20 after:blur md:absolute md:mb-0"
-          />
+      <GradientBackground className="relative flex w-screen flex-col items-center justify-center overflow-hidden from-[var(--primary-c)] via-[var(--secondary-c)] to-[var(--tertiary-c)]/40 pb-12 text-white md:h-[600px] md:px-6 md:py-12">
+        <Link
+          href={getLocalizedLink(locale, '/ebooks')}
+          className="container my-8 w-full md:absolute md:top-4 md:left-5 md:my-0"
+        >
+          {!isMobile ? (
+            <AnimatedButton
+              label="Voltar para o Catálogo"
+              icon={<ChevronLeftIconMotion />}
+              animateMaps={{
+                width: { initial: 48, hovered: 260 },
+                paddingLeft: { initial: 20, hovered: 16 },
+                scale: { initial: 1, hovered: 1.1 },
+              }}
+              className="mb-10 fill-[var(--primary-c)] text-[var(--primary-c)] after:absolute after:inset-0 after:animate-pulse after:rounded-xl after:bg-white/20 after:blur md:absolute md:mb-0"
+            />
+          ) : (
+            <IconButton
+              icon={ChevronLeftIcon}
+              theme="custom"
+              className="bg-white fill-[var(--primary-c)] text-[var(--primary-c)]"
+            />
+          )}
         </Link>
         <div className="container mx-auto flex flex-col items-center justify-between gap-10 md:flex-row">
           <motion.div
@@ -40,45 +56,59 @@ export function Header({ data }: { data: Ebook }) {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <TypingText
-              asChild="h1"
-              text={title as string}
-              className="mt-20 mb-6 font-extrabold text-3xl leading-tight drop-shadow-md md:text-4xl"
-            />
-            <div className="flex flex-col gap-4">
-              <TypingText
-                text={description as string}
-                cursor
-                duration={1.1}
-                holdDelay={1}
-                className="mb-6 max-w-prose font-semibold text-lg text-white/90 leading-relaxed md:text-justify"
+            {isMobile ? (
+              <h1 className="mt-10 mb-6 text-center font-extrabold leading-tight drop-shadow-md [font-size:_clamp(1rem,5vw,1.2rem)] md:mt-20">
+                {title}
+              </h1>
+            ) : (
+              <WritingText
+                asChild="h1"
+                text={title as string}
+                className="mt-20 mb-6 font-extrabold leading-tight drop-shadow-md md:[font-size:_clamp(1rem,5vw,1.8rem)]"
               />
-              <LiquidButton
-                variant="outline"
-                theme="custom"
-                size="2xl"
-                rounded="2xl"
-                //className="fill-[var(--primary-c)] text-[var(--primary-c)]"
-                className="w-full max-w-[250px]"
-              >
-                <DownloadIconMotion /> Baixe Agora
-              </LiquidButton>
+            )}
+            <div className="flex flex-col">
+              {isMobile ? (
+                <span className="mb-6 max-w-prose text-justify font-semibold text-white/90 leading-relaxed [font-size:_clamp(1rem,5vw,1.1rem)]">
+                  {description}
+                </span>
+              ) : (
+                <WritingText
+                  text={description as string}
+                  className="mb-6 max-w-prose font-semibold text-white/90 leading-relaxed md:[font-size:_clamp(1rem,5vw,1.02rem)] lg:[font-size:_clamp(1rem,5vw,1.2rem)]"
+                />
+              )}
+              {!download.disabled && (
+                <Link href={download.url} target="_blank">
+                  <LiquidButton
+                    variant="outline"
+                    theme="custom"
+                    size={isMobile ? 'xl' : '2xl'}
+                    rounded={isMobile ? 'xl' : '2xl'}
+                    className="w-full md:w-auto md:max-w-[250px]"
+                  >
+                    <DownloadIconMotion /> {download.label || 'Baixe Agora'}
+                  </LiquidButton>
+                </Link>
+              )}
             </div>
           </motion.div>
-          <motion.div
-            className="relative z-10 mt-10 size-[550px] overflow-hidden rounded-xl md:mt-0"
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-          >
-            <Image
-              src={urlForImage(image.large.asset).auto('format').quality(80).url()}
-              alt="Book Cover"
-              fill
-              className="object-cover"
-              priority
-            />
-          </motion.div>
+          {!isMobile && (
+            <motion.div
+              className="relative z-10 mt-10 size-[550px] overflow-hidden rounded-xl md:mt-0 md:size-[400px] lg:size-[550px]"
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+              <Image
+                src={urlForImage(image.large.asset).format('webp').quality(80).url()}
+                alt="Book Cover"
+                fill
+                className="object-cover"
+                priority
+              />
+            </motion.div>
+          )}
         </div>
         <div className="absolute bottom-0 left-0 hidden w-full rotate-180 md:block">
           {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
@@ -94,7 +124,7 @@ export function Header({ data }: { data: Ebook }) {
             />
           </svg>
         </div>
-      </header>
+      </GradientBackground>
       <StickyHeader {...data} />
     </>
   )

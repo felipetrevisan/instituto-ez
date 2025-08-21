@@ -9,11 +9,6 @@ export default defineType({
   icon: BlockContentIcon,
   fields: [
     defineField({
-      name: 'title',
-      title: 'Title',
-      type: 'string',
-    }),
-    defineField({
       name: 'content',
       title: 'Content',
       type: 'array',

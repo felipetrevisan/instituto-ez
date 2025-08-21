@@ -7,25 +7,25 @@ export const routing = defineRouting({
   pathnames: {
     '/': '/',
     '/sobre': {
-      'en': '/about',
+      en: '/about',
     },
     '/atendimentos': {
-      'en': '/services',
+      en: '/services',
     },
     '/imersao': {
-      'en': '/immersion',
+      en: '/immersion',
     },
     '/workshops': {
-      'en': '/workshops',
+      en: '/workshops',
     },
     '/mentoria': {
-      'en': '/advanced-mentory',
+      en: '/advanced-mentory',
     },
     '/ebooks': {
-      'en': '/ebooks',
+      en: '/ebooks',
     },
     '/contato': {
-      'en': '/contact',
+      en: '/contact',
     },
   },
 })

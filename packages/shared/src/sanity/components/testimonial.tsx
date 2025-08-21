@@ -20,10 +20,10 @@ const TestimonialComponent = ({ value }: { value: TestimonialType }) => {
   const { type, theme, variant, rounded, testimonials: data, category } = value
 
   return (
-    <div className="flex flex-col w-full md:w-[80vw]! lg:w-[80vw]! xl:w-full h-full space-y-14">
+    <div className="flex h-full w-full flex-col space-y-14 md:w-[80vw]! lg:w-[80vw]! xl:w-full">
       <div className="flex flex-col justify-center">
         <Carousel plugins={[ClassNames()]} className="overflow-visible" theme={theme}>
-          <CarouselContent rootClassName="overflow-visible!">
+          <CarouselContent rootClassName="p-5">
             {data?.map((testimonial, _index) => (
               <CarouselItem
                 key={testimonial.id}

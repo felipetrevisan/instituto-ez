@@ -11,12 +11,11 @@ type PageBookProps = React.ComponentProps<'div'> & {
 export const PageBook = ({ chapter, className, ref }: PageBookProps) => {
   return (
     <div
-      className={cn('overflow-hidden bg-white p-10 shadow-2xl', className)}
+      className={cn('overflow-hidden bg-white shadow-2xl', className)}
       ref={ref}
       data-density="0"
     >
       <div className="flex flex-col justify-center">
-        <h2 className='chapter-title font-bold text-[var(--primary-c)] text-xl'>{chapter.title}</h2>
         <PortableText components={createPortableComponents()} value={chapter.content} />
       </div>
     </div>

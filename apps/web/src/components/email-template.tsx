@@ -7,7 +7,7 @@ export function EmailTemplate({ name, subject, message }: ContactFormSchema) {
       <Html>
         <Head />
         <Body className="bg-white">
-          <Container className='border border-gray-400 bg-white shadow'>
+          <Container className="border border-gray-400 bg-white shadow">
             <Img src="/assets/logo.png" width="212" height="88" alt="" />
             <Heading className="text-black text-md">Olá, {name} enviou uma mensagem</Heading>
             <Text className="text-black text-md">

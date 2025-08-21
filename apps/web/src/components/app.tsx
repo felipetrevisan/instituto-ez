@@ -32,7 +32,7 @@ function Header({ className, data }: HeaderProps) {
   const [currentScrollY, setCurrentScrollY] = useState(0)
   const containerRef = useRef<HTMLDivElement | null>(null)
   const { height } = useDimensions(containerRef)
-  const { isMenuOpen } = useApp()
+  const { isMenuOpen, isNormalPage } = useApp()
   const { scrollY } = useScroll()
 
   const scrollYRange = [0, 100, 100]
@@ -76,17 +76,18 @@ function Header({ className, data }: HeaderProps) {
   return (
     <motion.header
       className={cn(
-        'fixed top-0 z-90 h-20 w-full bg-transparent backdrop-blur-md transition-colors duration-500',
+        'h-20 w-full bg-transparent backdrop-blur-md transition-colors duration-500',
         {
           'bg-white/90 shadow-md backdrop-blur-3xl': currentScrollY > 80,
           'backdrop-blur-none': currentScrollY < 80,
+          'fixed top-0 z-90': isNormalPage(),
         },
         className,
       )}
       {...(isMenuOpen && { 'data-menu-open': true })}
     >
       <Navbar.Root
-        sticky
+        sticky={isNormalPage()}
         style={{
           paddingTop: paddingHeaderY,
           paddingBottom: paddingHeaderY,
@@ -94,7 +95,9 @@ function Header({ className, data }: HeaderProps) {
       >
         <Fragment>
           <Navbar.Brand>
-            <Logo src={data?.logo && urlForImage(data.logo?.asset).url()} />
+            <Logo
+              src={data?.logo && urlForImage(data.logo?.asset).format('webp').quality(80).url()}
+            />
           </Navbar.Brand>
           <motion.div animate={isMenuOpen ? 'open' : 'closed'} custom={height} ref={containerRef}>
             <Navbar.Toggle />
@@ -104,7 +107,7 @@ function Header({ className, data }: HeaderProps) {
               <DesktopNavigation navigation={data?.primaryNavigation} />
             )}
             <motion.div
-              className='fixed top-0 right-0 z-90 h-screen w-[300px] bg-slate-200/90 backdrop-blur-3xl lg:hidden'
+              className="fixed top-0 right-0 z-90 h-screen w-[300px] bg-slate-200/90 backdrop-blur-3xl lg:hidden"
               variants={sidebarVariants}
               initial="closed"
               animate={isMenuOpen ? 'open' : 'closed'}
@@ -123,16 +126,18 @@ function Header({ className, data }: HeaderProps) {
 }
 
 function Content({ className, children }: React.ComponentProps<'div'>) {
-  const { isMenuOpen } = useApp()
+  const { isMenuOpen, isNormalPage } = useApp()
   const { isContactDialogOpen } = useShared()
 
   return (
     <motion.main
       className={cn(
-        'container relative mt-24 flex h-full flex-col items-center justify-center',
+        'container relative flex h-full flex-col items-center justify-center',
         {
           'before:absolute before:z-50 before:h-full before:w-full before:bg-white/50 before:backdrop-blur-xl':
             isMenuOpen,
+          'mt-24': isNormalPage(),
+          'mt-4': !isNormalPage(),
         },
         className,
       )}
@@ -156,7 +161,7 @@ function Footer({ className }: React.ComponentProps<'div'>) {
     <footer
       className={cn('relative mt-24 flex w-full select-none flex-col items-center p-5', className)}
     >
-      <div className='fixed right-10 bottom-4 z-50 flex flex-row items-center gap-4'>
+      <div className="fixed right-10 bottom-4 z-50 flex flex-row items-center gap-4">
         <IconButton
           icon={MailIcon}
           onClick={() => setIsContactDialogOpen(true)}
@@ -166,10 +171,10 @@ function Footer({ className }: React.ComponentProps<'div'>) {
           transition={{ type: 'spring', stiffness: 400, damping: 10 }}
         />
       </div>
-      <div className='container flex w-full flex-row items-center justify-center gap-4'>
-        <div className='flex flex-col items-center justify-center gap-4'>
+      <div className="container flex w-full flex-row items-center justify-center gap-4">
+        <div className="flex flex-col items-center justify-center gap-4">
           <Logo
-            src={data?.logo && urlForImage(data.logo?.asset).url()}
+            src={data?.logo && urlForImage(data.logo?.asset).format('webp').quality(80).url()}
             showSlogan={false}
             linkable={false}
           />

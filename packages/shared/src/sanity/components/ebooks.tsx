@@ -125,8 +125,8 @@ const EbookGridComponent = ({
             {title && <TitleComponent variant={theme}>{title}</TitleComponent>}
             <div
               className={cn('grid grid-cols-1 place-items-center gap-12 gap-y-12', {
-                'md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2': appareance === 'full',
-                'md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4': appareance === 'small',
+                'md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2': appareance === 'full',
+                'md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-4': appareance === 'small',
               })}
             >
               {ebooks?.map((ebook, _index) => (

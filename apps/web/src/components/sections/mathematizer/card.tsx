@@ -19,37 +19,43 @@ type Props = {
 export function MathematizerCard({ item: { button, background, content, title }, index }: Props) {
   const locale = useLocale()
   const link = getLink(button)
+  const isEven = index % 2 === 0
 
   return (
     <div
       className={cn(
-        'relative flex h-full min-h-[700px] w-full justify-between lg:min-h-[500px] [&:last-child]:mb-10 [&:not(:last-child)]:mb-10',
-        {
-          'flex-row-reverse': index % 2 !== 0,
-        },
+        'relative grid min-h-[500px] w-full [&:not(:last-child)]:mb-10',
+        'lg:grid-cols-12',
       )}
     >
       <Parallax
-        bgImage={urlForImage(background.asset).url()}
-        className="flex h-[362px] w-full justify-center overflow-hidden rounded-r-lg xl:w-2/3"
+        bgImage={urlForImage(background.asset).format('webp').quality(80).url()}
+        className={cn(
+          'h-[360px] w-full overflow-hidden rounded-xl',
+          isEven
+            ? 'lg:col-span-7 lg:col-start-1 lg:row-start-1'
+            : 'lg:col-span-7 lg:col-start-6 lg:row-start-1',
+        )}
       />
       <div
         className={cn(
-          'absolute top-24 z-10 flex w-11/12 justify-center rounded-lg bg-card/90 shadow-lg xl:w-1/2',
-          {
-            'right-1/2 translate-x-1/2 xl:right-80 xl:translate-x-0': index % 2 === 0,
-            '-translate-x-1/2 left-1/2 xl:left-80 xl:translate-x-0': index % 2 !== 0,
-          },
+          '-mt-60 md:-mt-32 z-10 mx-auto w-11/12 rounded-xl bg-card/90 shadow-lg',
+          'lg:mt-0 lg:self-center',
+          isEven
+            ? 'lg:col-span-8 lg:col-start-4 lg:row-start-1' // entra “por cima” da esquerda
+            : 'lg:col-span-8 lg:col-start-1 lg:row-start-1', // entra “por cima” da direita
         )}
       >
         <div className="relative flex h-full w-full flex-col items-start justify-start gap-10 p-10 text-secondary">
-          <h3 className="clamp-[text,xl,4xl] text-center font-bold font-oswald lg:text-left">
-            {title}
-          </h3>
-          <div className='flex min-h-60 flex-col justify-between gap-10 text-justify font-light font-questrial text-md leading-7'>
+          <h3 className="text-center font-bold font-oswald text-2xl lg:text-left">{title}</h3>
+          <div className="flex min-h-60 flex-col justify-between gap-10 font-light font-questrial text-lg leading-7">
             <PortableText value={content} components={createPortableComponents()} />
             {button.visible && link && (
-              <ButtonLink href={getLocalizedLink(locale, link)}  passHref className="flex w-full justify-center">
+              <ButtonLink
+                href={getLocalizedLink(locale, link)}
+                passHref
+                className="flex w-full justify-center"
+              >
                 <Button
                   variant="default"
                   theme="tertiary"

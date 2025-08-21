@@ -1,5 +1,6 @@
 'use client'
 
+import { PageType } from '@ez/shared/types/global'
 import { type Cycle, useCycle } from 'motion/react'
 import { usePathname } from 'next/navigation'
 import {
@@ -20,6 +21,10 @@ type AppContextProps = {
   isHome: boolean
   setActiveMenu: Dispatch<SetStateAction<string>>
   activeMenu: string
+  setPageType: Dispatch<SetStateAction<'page' | 'landing'>>
+  pageType: 'page' | 'landing'
+  isLandingPage: () => boolean
+  isNormalPage: () => boolean
 }
 
 const AppContext = createContext({} as AppContextProps)
@@ -27,6 +32,7 @@ const AppContext = createContext({} as AppContextProps)
 export function AppProvider({ children }: { children: ReactNode }) {
   const currentUrl = usePathname()
   const [isMenuOpen, toggleMenu] = useCycle(false, true)
+  const [pageType, setPageType] = useState<keyof typeof PageType>(PageType.page)
 
   const [activeMenu, setActiveMenu] = useState(currentUrl)
 
@@ -38,6 +44,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
     },
     [currentUrl],
   )
+
+  const isLandingPage = useCallback(() => {
+    return pageType === PageType.landing
+  }, [pageType])
+
+  const isNormalPage = useCallback(() => {
+    return pageType === PageType.page
+  }, [pageType])
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
@@ -53,6 +67,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
         isMenuActive,
         activeMenu,
         setActiveMenu,
+        setPageType,
+        pageType,
+        isLandingPage,
+        isNormalPage,
       }}
     >
       {children}

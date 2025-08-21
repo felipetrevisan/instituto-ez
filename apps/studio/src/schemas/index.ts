@@ -15,6 +15,7 @@ import workshop from './documents/workshops'
 import ebookCatalog from './ebooks/catalog'
 import ebookCollection from './ebooks/collection'
 
+import themeButton from '././objects/ebooks/theme/button'
 // Objects
 import aboutCard from './objects/about-card'
 import button from './objects/button'
@@ -22,9 +23,10 @@ import coverImage from './objects/cover-image'
 import chapter from './objects/ebooks/chapter'
 import chapters from './objects/ebooks/chapters'
 import ebooksIndex from './objects/ebooks/content'
+import download from './objects/ebooks/download'
 import metadata from './objects/ebooks/metadata'
 import ebooksOverview from './objects/ebooks/overview'
-import theme from './objects/ebooks/theme'
+import theme from './objects/ebooks/theme/theme'
 import accordionWidget from './objects/editor/accordion'
 import accordionContentWidget from './objects/editor/accordion-content'
 import alertWidget from './objects/editor/alert'
@@ -75,13 +77,15 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     metadata,
     chapters,
     chapter,
+    download,
     theme,
+    themeButton,
     pageSection,
     aboutCard,
     section,
     ebooksOverview,
     ebooksIndex,
-    
+
     // Editor Widgets
     buttonLinkWidget,
     titleWidget,

@@ -16,7 +16,8 @@ const accordionVariants = cva('relative', {
         '**:data-[slot=accordion-item]:border-secondary **:data-[slot=accordion-content]:text-secondary **:data-[slot=accordion-trigger]:text-secondary **:data-[slot=accordion-trigger]:hover:bg-secondary/10',
       tertiary:
         '**:data-[slot=accordion-item]:border-tertiary **:data-[slot=accordion-content]:text-tertiary **:data-[slot=accordion-trigger]:text-tertiary **:data-[slot=accordion-trigger]:hover:bg-tertiary/10',
-      custom: '**:data-[slot=accordion-item]:white **:data-[slot=accordion-item]:border-[var(--secondary-c)] **:data-[slot=accordion-content]:text-[var(--secondary-c)] **:data-[slot=accordion-trigger]:text-[var(--secondary-c)] **:data-[slot=accordion-trigger]:hover:bg-[var(--secondary-c)]/10',
+      custom:
+        '**:data-[slot=accordion-item]:white **:data-[slot=accordion-item]:border-[var(--secondary-c)] **:data-[slot=accordion-content]:text-[var(--secondary-c)] **:data-[slot=accordion-trigger]:text-[var(--secondary-c)] **:data-[slot=accordion-trigger]:hover:bg-[var(--secondary-c)]/10',
     },
     rounded: {
       none: '**:data-[slot=accordion-item]:rounded-none **:data-[slot=accordion-trigger]:rounded-none',
