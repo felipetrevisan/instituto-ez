@@ -124,7 +124,7 @@ const EbookGridComponent = ({
           <div className="flex flex-wrap gap-10">
             {title && <TitleComponent variant={theme}>{title}</TitleComponent>}
             {ebooks?.map((ebook, _index) => (
-              <div className='w-full flex-none bg-white lg:w-[538px]' key={ebook.id}>
+              <div className="w-full flex-none bg-white lg:w-[48%]" key={ebook.id}>
                 <EbookCard
                   item={ebook}
                   full={appareance === 'full'}
