@@ -61,18 +61,3 @@ export const DesktopNavigation = ({ navigation }: NavigationProps) => {
     </NavigationMenu>
   )
 }
-
-export const DesktopNavigationSkeleton = () => {
-  return (
-    <div className="hidden lg:flex">
-      <div className="flex flex-row gap-4">
-        <Skeleton className="h-10 w-1/3" />
-        <Skeleton className="h-10 w-1/3" />
-        <Skeleton className="h-10 w-1/3" />
-        <Skeleton className="h-10 w-1/3" />
-        <Skeleton className="h-10 w-1/3" />
-        <Skeleton className="h-10 w-1/3" />
-      </div>
-    </div>
-  )
-}

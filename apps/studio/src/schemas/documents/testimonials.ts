@@ -48,11 +48,20 @@ export default defineType({
         }),
       ],
     }),
+    defineField({
+      name: 'ebook_page',
+      title: 'Ebook Page',
+      description: 'Select a ebook page',
+      type: 'reference',
+      to: [{ type: 'ebook' }],
+      hidden: ({ parent }) =>
+        !parent?.categories?.includes('ebook')
+    }),
   ],
   preview: {
     select: {
       title: 'author_name',
-      subtitle: 'type',
+      subtitle: 'categories.0',
     },
     prepare(selection) {
       const { title } = selection

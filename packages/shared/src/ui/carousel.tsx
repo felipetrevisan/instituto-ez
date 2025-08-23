@@ -41,6 +41,8 @@ const carouselVariants = cva(
           '**:data-[slot=carousel-dot]:shadow-secondary **:data-[slot=carousel-dot]:hover:after:shadow-secondary',
         tertiary:
           '**:data-[slot=carousel-dot]:shadow-tertiary **:data-[slot=carousel-dot]:hover:after:shadow-tertiary',
+        custom:
+          '**:data-[slot=carousel-dot]:shadow-[var(--secondary-c)] **:data-[slot=carousel-dot]:hover:after:shadow-[var(--secondary-c)]',
       },
     },
     defaultVariants: {
@@ -305,6 +307,7 @@ function CarouselDots({
               'after:bg-primary': theme === 'default',
               'after:bg-secondary': theme === 'secondary',
               'after:bg-tertiary': theme === 'tertiary',
+              'after:bg-[--var(--primary-c)]': theme === 'custom',
             })}
             // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
             key={index}
@@ -322,6 +325,8 @@ function CarouselDots({
                     theme === 'secondary' && selectedIndex === index,
                   'after:bg-tertiary after:shadow-tertiary':
                     theme === 'tertiary' && selectedIndex === index,
+                  'after:bg-[--var(--primary-c)] after:shadow-[--var(--primary-c)]':
+                    theme === 'custom' && selectedIndex === index,
                 },
                 className,
               )}

@@ -70,7 +70,7 @@ export default async function RootLayoutt({ children, params }: Props) {
       className={`${inter.variable} ${oswald.variable} ${questrial.variable}`}
       suppressHydrationWarning
     >
-      <body className="flex h-full flex-col overflow-x-hidden antialiased">
+      <body className='flex h-full flex-col overflow-x-hidden bg-background text-foreground antialiased'>
         <Providers>
           <NextIntlClientProvider>{children}</NextIntlClientProvider>
         </Providers>

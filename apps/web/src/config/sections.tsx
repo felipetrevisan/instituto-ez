@@ -20,17 +20,17 @@ export function getSections(): SectionKeys[] {
     {
       key: 'about',
       component: <About />,
-      classes: 'section relative flex w-full justify-center bg-white',
+      classes: 'section relative flex w-full justify-center bg-background',
     },
     {
       key: 'service',
       component: <Services />,
-      classes: 'section relative flex flex-col gap-10 w-full justify-center bg-white',
+      classes: 'section relative flex flex-col gap-10 w-full justify-center bg-background',
     },
     {
       key: 'testimonial',
       component: <Testimonials />,
-      classes: 'section relative flex flex-col gap-10 w-full justify-center bg-white',
+      classes: 'section relative flex flex-col gap-10 w-full justify-center bg-background',
     },
     {
       key: 'immersion',
@@ -45,7 +45,7 @@ export function getSections(): SectionKeys[] {
     {
       key: 'workshop',
       component: <Workshops />,
-      classes: 'section relative flex flex-col gap-10 h-full justify-center bg-white w-full',
+      classes: 'section relative flex flex-col gap-10 h-full justify-center bg-background w-full',
     },
     {
       key: 'advanced-mentory',
@@ -60,7 +60,7 @@ export function getSections(): SectionKeys[] {
     {
       key: 'ebooks',
       component: <Ebooks />,
-      classes: 'section relative flex flex-col gap-10 h-full justify-center bg-white',
+      classes: 'section relative flex flex-col gap-10 h-full justify-center bg-background',
     },
   ]
 }

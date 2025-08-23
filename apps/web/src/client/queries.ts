@@ -82,7 +82,22 @@ export const testimonialsQuery = groq`
       "name": author_name,
     },
     testimonial,
-    categories
+    categories,
+    "ebook_page": select(
+      "ebook" in categories[] => ebook_page,
+      null
+    )
+  }
+`
+
+export const testimonialsByEbookQuery = groq`
+  *[ _type == 'testimonial' && $category in categories[] && defined(ebook_page) && ebook_page->slug.current == $slug] | order(orderRank) { 
+    "id": _id,
+    "author": {
+      "name": author_name,
+    },
+    testimonial,
+    categories,
   }
 `
 

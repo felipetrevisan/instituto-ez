@@ -17,6 +17,7 @@ export enum Theme {
   default = 'default',
   secondary = 'secondary',
   tertiary = 'tertiary',
+  custom = 'custom'
 }
 
 export enum Variant {

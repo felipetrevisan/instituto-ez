@@ -9,6 +9,7 @@ import { Index } from './_index'
 import { Metadata } from './_metadata'
 import { Overview } from './_overview'
 import { Question } from './_question'
+import { Testimonial } from './_testimonial'
 
 type CSSVariables = {
   [key: `--${string}`]: string
@@ -46,6 +47,7 @@ export function Content({ data }: { data: Ebook }) {
         <Metadata data={data} />
         <Index data={data} />
         <Overview data={data} />
+        <Testimonial data={data} />
         <Question data={data} />
       </div>
     </div>

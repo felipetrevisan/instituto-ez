@@ -19,7 +19,7 @@ export function Overview({ data }: { data: Ebook }) {
       className={cn(
         'relative mt-10 flex min-h-[500px] w-screen flex-row gap-4 bg-[auto,contain] bg-ebooks bg-gradient-to-b from-slate-100 via-slate-200 to-white px-6',
         {
-          'pt-20': !overview,
+          'pt-30': !overview,
           'pt-52': overview,
         },
       )}
@@ -68,7 +68,7 @@ export function Overview({ data }: { data: Ebook }) {
                 drawShadow
                 usePortrait={isMobile}
                 autoSize={isMobile}
-                className="open-book md:h-[733px] md:w-[550px]"
+                className="open-book"
               >
                 {chapter.cover && (
                   <CoverBook>

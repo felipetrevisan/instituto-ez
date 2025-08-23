@@ -13,6 +13,11 @@
     --bc: var(--color-tertiary-foreground);
     --fc: var(--color-tertiary);
   }
+
+  &[data-theme="custom"] .author {
+    --bc: var(--primary-c);
+    --fc: var(--text-c, #fff)
+  }
 }
 
 [data-variant="outline"] {
@@ -29,6 +34,11 @@
   &[data-theme="tertiary"] .author {
     --bc: var(--color-tertiary);
     --fc: var(--color-tertiary-foreground);
+  }
+
+  &[data-theme="custom"] .author {
+    --bc: var(--primary-c);
+    --fc: var(--text-c, #fff)
   }
 }
 

@@ -12,8 +12,9 @@
     url("/assets/images/bg-ebooks-pattern.png");
 }
 
-@layer base {
-  body {
-    @apply bg-background text-foreground;
+
+@layer components {
+  .bprogress .bar {
+    @apply bg-gradient-to-r from-primary via-secondary to-tertiary;
   }
 }

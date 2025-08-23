@@ -35,7 +35,7 @@ function Root({
       initial={false}
       {...props}
     >
-      <div className="mx-auto flex flex-wrap items-center justify-between lg:container">
+      <div className="container flex flex-wrap items-center justify-between lg:max-w-7xl">
         {children}
       </div>
     </motion.div>

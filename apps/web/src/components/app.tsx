@@ -12,6 +12,7 @@ import { env } from '@ez/web/config/env'
 import { urlForImage } from '@ez/web/config/image'
 import { useApp } from '@ez/web/hooks/use-app'
 import { useDimensions } from '@ez/web/hooks/use-dimension'
+import { useIsMobile } from '@ez/web/hooks/use-mobile'
 import { useSite } from '@ez/web/hooks/use-site'
 import type { Site } from '@ez/web/types/site'
 import { motion, useAnimation, useMotionValueEvent, useScroll, useTransform } from 'motion/react'
@@ -19,7 +20,7 @@ import Link from 'next/link'
 import { Fragment, useEffect, useRef, useState } from 'react'
 import { ContactFormDialog } from './contact-form-dialog'
 import { Logo } from './logo'
-import { DesktopNavigation, DesktopNavigationSkeleton } from './navigation/desktop-navigation'
+import { DesktopNavigation } from './navigation/desktop-navigation'
 import { MobileNavigation } from './navigation/mobile-navigation'
 
 const MotionMobileNavigation = motion(MobileNavigation)
@@ -34,6 +35,7 @@ function Header({ className, data }: HeaderProps) {
   const { height } = useDimensions(containerRef)
   const { isMenuOpen, isNormalPage } = useApp()
   const { scrollY } = useScroll()
+  const isMobile = useIsMobile(640)
 
   const scrollYRange = [0, 100, 100]
 
@@ -100,24 +102,25 @@ function Header({ className, data }: HeaderProps) {
             />
           </Navbar.Brand>
           <motion.div animate={isMenuOpen ? 'open' : 'closed'} custom={height} ref={containerRef}>
-            <Navbar.Toggle />
-            {!data ? (
-              <DesktopNavigationSkeleton />
-            ) : (
-              <DesktopNavigation navigation={data?.primaryNavigation} />
+            {isMobile && (
+              <>
+                <Navbar.Toggle />
+                <motion.div
+                  className="fixed top-0 right-0 z-90 h-screen w-[300px] bg-slate-200/90 backdrop-blur-3xl lg:hidden"
+                  variants={sidebarVariants}
+                  initial="closed"
+                  animate={isMenuOpen ? 'open' : 'closed'}
+                >
+                  <MotionMobileNavigation
+                    navigation={data?.primaryNavigation}
+                    variants={menuListVariants}
+                    animate={isMenuOpen ? 'open' : 'closed'}
+                  />
+                </motion.div>
+              </>
             )}
-            <motion.div
-              className="fixed top-0 right-0 z-90 h-screen w-[300px] bg-slate-200/90 backdrop-blur-3xl lg:hidden"
-              variants={sidebarVariants}
-              initial="closed"
-              animate={isMenuOpen ? 'open' : 'closed'}
-            >
-              <MotionMobileNavigation
-                navigation={data?.primaryNavigation}
-                variants={menuListVariants}
-                animate={isMenuOpen ? 'open' : 'closed'}
-              />
-            </motion.div>
+
+            {!isMobile && <DesktopNavigation navigation={data?.primaryNavigation} />}
           </motion.div>
         </Fragment>
       </Navbar.Root>
@@ -132,7 +135,7 @@ function Content({ className, children }: React.ComponentProps<'div'>) {
   return (
     <motion.main
       className={cn(
-        'container relative flex h-full flex-col items-center justify-center',
+        'container relative flex h-full flex-col items-center justify-center lg:max-w-7xl',
         {
           'before:absolute before:z-50 before:h-full before:w-full before:bg-white/50 before:backdrop-blur-xl':
             isMenuOpen,

@@ -137,7 +137,7 @@ export function EbookCard({
           {image.preview && (
             <CardHeader
               className={cn(
-                'relative aspect-[2/3] h-[40vh] overflow-visible p-0 md:aspect-[1/2] md:h-full lg:aspect-[2/3]',
+                'relative aspect-[2/3] h-[40vh] overflow-visible p-0 md:aspect-[1/2] md:h-full lg:aspect-[2/3] lg:w-[200px] lg:w-full',
                 { 'bg-[#f5f5f5] md:w-full': !description },
               )}
               style={{
@@ -167,18 +167,18 @@ export function EbookCard({
               </motion.div>
             </CardHeader>
           )}
-          <CardContent className="relative flex w-full flex-col gap-4 p-0">
+          <CardContent className="relative flex w-full flex-col gap-4 p-0 md:p-10">
             {description && (
               <ScrollArea className="overflow-auto md:max-h-[315px]">
                 <div className="pointer-events-none absolute bottom-0 z-10 h-6 w-full bg-gradient-to-t from-white/90 to-transparent" />
-                <div className="p-5 text-justify">{description}</div>
+                <div className="p-5">{description}</div>
               </ScrollArea>
             )}
             {button && (
               <>
                 {link && (
                   <LinkComponent href={`/${locale}/ebooks/${slug}`}>
-                    <div className="item-center flex justify-center overflow-hidden">
+                    <div className="item-center lg:-right-[54px] md:-right-[86px] md:-bottom-[24px] flex h-[80px] w-full justify-center overflow-hidden md:absolute">
                       <Button
                         disabled={disabled}
                         theme={theme}
@@ -194,13 +194,13 @@ export function EbookCard({
                   </LinkComponent>
                 )}
                 {!link && (
-                  <div className="item-center flex justify-center overflow-hidden">
+                  <div className="item-center -right-[54px] -bottom-[24px] absolute flex h-[80px] w-full justify-center overflow-hidden">
                     <Button
                       disabled={disabled}
                       theme={theme}
                       fullWidth
                       size="xl"
-                      className="md:-translate-x-1/2 mb-10 w-3/4 md:absolute md:bottom-5 md:left-1/2 md:m-0"
+                      // className="md:-translate-x-1/2 mb-10 w-3/4 md:absolute md:bottom-5 md:left-1/2 md:m-0"
                       rounded="2xl"
                       scaleEffect={false}
                     >

@@ -1,5 +1,4 @@
 import { ChevronLeftIcon, DownloadIcon } from '@ez/shared/icons'
-import { GradientBackground } from '@ez/shared/ui/animated/backgrounds/gradient'
 import { IconButton } from '@ez/shared/ui/animated/button/icon-button'
 import { LiquidButton } from '@ez/shared/ui/animated/button/liquid-button'
 import { WritingText } from '@ez/shared/ui/animated/text/writting'
@@ -25,7 +24,7 @@ export function Header({ data }: { data: Ebook }) {
 
   return (
     <>
-      <GradientBackground className="relative flex w-screen flex-col items-center justify-center overflow-hidden from-[var(--primary-c)] via-[var(--secondary-c)] to-[var(--tertiary-c)]/40 pb-12 text-white md:h-[600px] md:px-6 md:py-12">
+      <header className="relative flex w-screen flex-col items-center justify-center overflow-hidden bg-[auto,cover] bg-ebooks bg-gradient-to-br from-[var(--primary-c)] via-[var(--secondary-c)] to-[var(--tertiary-c)]/40 pb-12 text-white md:h-[600px] md:px-6 md:py-12">
         <Link
           href={getLocalizedLink(locale, '/ebooks')}
           className="container my-8 w-full md:absolute md:top-4 md:left-5 md:my-0"
@@ -50,6 +49,22 @@ export function Header({ data }: { data: Ebook }) {
           )}
         </Link>
         <div className="container mx-auto flex flex-col items-center justify-between gap-10 md:flex-row">
+          {isMobile && (
+            <motion.div
+              className="relative z-10 mt-10 size-[400px] overflow-hidden rounded-xl md:mt-0 md:size-[400px]"
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+              <Image
+                src={urlForImage(image.large.asset).format('webp').quality(80).url()}
+                alt="Book Cover"
+                fill
+                className="object-cover"
+                priority
+              />
+            </motion.div>
+          )}
           <motion.div
             className="relative z-10 flex min-h-[200px] max-w-xl flex-col"
             initial={{ opacity: 0, x: -50 }}
@@ -84,7 +99,7 @@ export function Header({ data }: { data: Ebook }) {
                     variant="outline"
                     theme="custom"
                     size={isMobile ? 'xl' : '2xl'}
-                    rounded={isMobile ? 'xl' : '2xl'}
+                    rounded="full"
                     className="w-full md:w-auto md:max-w-[250px]"
                   >
                     <DownloadIconMotion /> {download.label || 'Baixe Agora'}
@@ -124,7 +139,7 @@ export function Header({ data }: { data: Ebook }) {
             />
           </svg>
         </div>
-      </GradientBackground>
+      </header>
       <StickyHeader {...data} />
     </>
   )

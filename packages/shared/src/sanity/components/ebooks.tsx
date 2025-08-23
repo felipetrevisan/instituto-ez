@@ -121,28 +121,22 @@ const EbookGridComponent = ({
     <div className="flex h-full w-full flex-col space-y-14">
       <div className="flex flex-col justify-center gap-10">
         {ebooks && (
-          <>
+          <div className="flex flex-wrap gap-10">
             {title && <TitleComponent variant={theme}>{title}</TitleComponent>}
-            <div
-              className={cn('grid grid-cols-1 place-items-center gap-12 gap-y-12', {
-                'md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2': appareance === 'full',
-                'md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-4': appareance === 'small',
-              })}
-            >
-              {ebooks?.map((ebook, _index) => (
+            {ebooks?.map((ebook, _index) => (
+              <div className='w-full flex-none bg-white lg:w-[538px]' key={ebook.id}>
                 <EbookCard
                   item={ebook}
                   full={appareance === 'full'}
-                  key={ebook.id}
                   theme={theme}
                   locale={locale}
                   LinkComponent={LinkComponent}
                   ImageComponent={ImageComponent}
                   imageBuilder={imageBuilder}
                 />
-              ))}
-            </div>
-          </>
+              </div>
+            ))}
+          </div>
         )}
       </div>
     </div>
