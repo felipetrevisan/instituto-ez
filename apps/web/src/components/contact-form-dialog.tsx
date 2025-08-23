@@ -15,7 +15,6 @@ export function ContactFormDialog() {
   return (
     <DialogContent
       className="container max-w-3xl"
-      onEscapeKeyDown={closeDialog}
       from="left"
       onClose={closeDialog}
     >

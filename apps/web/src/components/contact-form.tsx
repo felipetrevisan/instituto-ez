@@ -29,7 +29,7 @@ export function ContactForm({
 
   const { data: settings } = useSite()
 
-  if (settings?.contact?.form._ref === undefined) return
+  if (settings?.contact?.form?._ref === undefined) return
 
   const { data: form } = useBaseForm(settings?.contact.form._ref || '')
 

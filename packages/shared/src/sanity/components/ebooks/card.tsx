@@ -200,7 +200,6 @@ export function EbookCard({
                       theme={theme}
                       fullWidth
                       size="xl"
-                      // className="md:-translate-x-1/2 mb-10 w-3/4 md:absolute md:bottom-5 md:left-1/2 md:m-0"
                       rounded="2xl"
                       scaleEffect={false}
                     >

@@ -268,7 +268,6 @@ function TabsList({
   return (
     <MotionHighlight
       controlledItems
-      // className={cn('rounded-sm bg-background shadow-sm', activeClassName)}
       className={cn(tabHighlightVariants({ variant, theme }), activeClassName)}
       value={activeValue}
       transition={transition}
@@ -276,10 +275,6 @@ function TabsList({
       <TabsPrimitive.List
         ref={localRef}
         data-slot="tabs-list"
-        // className={cn(
-        // 	'bg-muted text-muted-foreground inline-flex h-10 w-fit items-center justify-center rounded-lg p-[4px]',
-        // 	className,
-        // )}
         className={cn('mb-10', tabVariants({ variant, rounded, theme, className }))}
         {...props}
       >

@@ -153,6 +153,7 @@ function Content({ className, children }: React.ComponentProps<'div'>) {
 
 function Footer({ className }: React.ComponentProps<'div'>) {
   const { setIsContactDialogOpen } = useShared()
+  const { isLandingPage } = useApp()
   const { data } = useSite()
 
   const { urlForImage } = getImageUrlBuilder({
@@ -164,16 +165,19 @@ function Footer({ className }: React.ComponentProps<'div'>) {
     <footer
       className={cn('relative mt-24 flex w-full select-none flex-col items-center p-5', className)}
     >
-      <div className="fixed right-10 bottom-4 z-50 flex flex-row items-center gap-4">
-        <IconButton
-          icon={MailIcon}
-          onClick={() => setIsContactDialogOpen(true)}
-          size="lg"
-          whileHover={{ scale: 1.4 }}
-          whileTap={{ scale: 1.4 }}
-          transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-        />
-      </div>
+      {!isLandingPage() && (
+        <div className="fixed right-10 bottom-4 z-50 flex flex-row items-center gap-4">
+          <IconButton
+            icon={MailIcon}
+            onClick={() => setIsContactDialogOpen(true)}
+            size="lg"
+            theme="secondary"
+            whileHover={{ scale: 1.4 }}
+            whileTap={{ scale: 1.4 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+          />
+        </div>
+      )}
       <div className="container flex w-full flex-row items-center justify-center gap-4">
         <div className="flex flex-col items-center justify-center gap-4">
           <Logo
