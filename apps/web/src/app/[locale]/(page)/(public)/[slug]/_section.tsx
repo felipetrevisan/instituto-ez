@@ -107,7 +107,7 @@ export function SectionContent({
         </div>
       </div>
       <div
-        className={cn('container flex max-w-7xl flex-col items-center justify-center gap-10', {
+        className={cn('container flex flex-col items-center justify-center gap-10 lg:max-w-7xl', {
           'w-screen xl:w-[65vw]': slug !== 'ebooks',
           'w-screen': slug === 'ebooks',
         })}
