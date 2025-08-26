@@ -68,7 +68,9 @@ export default function StickyHeader({ title, image, download }: Ebook) {
                   />
                 </div>
               )}
-              <h1 className="font-bold font-questrial text-[var(--primary-c)] text-xl">{title}</h1>
+              <h1 className='text-center font-bold font-questrial text-[var(--primary-c)] text-xl'>
+                {title}
+              </h1>
             </div>
             {!download.disabled && (
               <Link href={download.url} target="_blank">

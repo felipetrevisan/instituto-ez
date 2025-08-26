@@ -22,7 +22,6 @@ export function useStickyBar(scrollThreshold = 200, debounceDelay = 100) {
     }, debounceDelay)
 
     window.addEventListener('scroll', handleScroll)
-    // Executa logo que monta o hook para acertar o estado
     handleScroll()
 
     return () => window.removeEventListener('scroll', handleScroll)

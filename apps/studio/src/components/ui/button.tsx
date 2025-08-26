@@ -268,10 +268,8 @@ function Button({
     const isSubmitButton = (props.type ?? 'button') === 'submit'
 
     if (isSubmitButton) {
-      // Deixa o submit rolar normalmente
       onClick?.(event)
     } else {
-      // Se for botão comum, aplica atraso se quiser
       setTimeout(() => onClick?.(event), 600)
     }
   }

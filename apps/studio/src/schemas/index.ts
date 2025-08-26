@@ -14,6 +14,7 @@ import testimonial from './documents/testimonials'
 import workshop from './documents/workshops'
 import ebookCatalog from './ebooks/catalog'
 import ebookCollection from './ebooks/collection'
+import landingPageSettings from './ebooks/settings'
 
 import themeButton from './objects/ebooks/theme/button'
 
@@ -27,6 +28,7 @@ import ebooksIndex from './objects/ebooks/content'
 import download from './objects/ebooks/download'
 import metadata from './objects/ebooks/metadata'
 import ebooksOverview from './objects/ebooks/overview'
+import landingPageSection from './objects/ebooks/section'
 import theme from './objects/ebooks/theme/theme'
 import accordionWidget from './objects/editor/accordion'
 import accordionContentWidget from './objects/editor/accordion-content'
@@ -58,6 +60,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     workshop,
     ebookCatalog,
     ebookCollection,
+    landingPageSettings,
     services,
     immersion,
     advancedMentory,
@@ -80,6 +83,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     chapters,
     chapter,
     download,
+    landingPageSection,
     theme,
     themeButton,
     pageSection,

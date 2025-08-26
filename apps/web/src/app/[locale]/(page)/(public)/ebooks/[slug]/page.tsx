@@ -1,4 +1,5 @@
 import { getEbookBySlug, getEbooks } from '@ez/web/server/get-ebook'
+import { getLandingPageSettings } from '@ez/web/server/get-landing-page-settings'
 import type { Metadata } from 'next'
 import { Content } from './_content'
 
@@ -24,8 +25,10 @@ export default async function Page({ params }: PageProps) {
   const { slug } = await params
 
   const data = await getEbookBySlug(slug)
+  const { sections } = await getLandingPageSettings()
 
-  return <Content data={data} />
+
+  return <Content data={data} sections={sections} />
 }
 
 export async function generateStaticParams() {

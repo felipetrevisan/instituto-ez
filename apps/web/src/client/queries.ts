@@ -581,3 +581,11 @@ export const contactFormQuery = groq`
     submitButtonText
   }[0]
 `
+export const landingPageSettingsQuery = groq`
+  *[ _type == 'landing-page-settings' ][0] {
+    "sections": sections[] {
+      "key": key_section,
+      "show": show_section,
+    },
+  }
+`

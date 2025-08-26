@@ -5,20 +5,26 @@ import { MailIcon } from '@ez/shared/icons'
 import { PageType } from '@ez/shared/types/global'
 import { IconButton } from '@ez/shared/ui/animated/button/icon-button'
 import { useApp } from '@ez/web/hooks/use-app'
+import { useLandingPageSettings } from '@ez/web/hooks/use-landing-page-settings'
 import type { Ebook } from '@ez/web/types/ebook'
-import { useEffect } from 'react'
+import type { Section, SectionKeys } from '@ez/web/types/sections'
+import { Fragment, useEffect } from 'react'
 import { Header } from './_header'
 import { Index } from './_index'
 import { Metadata } from './_metadata'
 import { Overview } from './_overview'
 import { Question } from './_question'
+import { getLandingPageSections } from './_sections'
 import { Testimonial } from './_testimonial'
 
 type CSSVariables = {
   [key: `--${string}`]: string
 }
 
-export function Content({ data }: { data: Ebook }) {
+export function Content({
+  data,
+  sections,
+}: { data: Ebook, sections: Section[] }) {
   const { setPageType, isLandingPage } = useApp()
   const { setIsContactDialogOpen, setContactSubject } = useShared()
   const { theme } = data
@@ -29,6 +35,14 @@ export function Content({ data }: { data: Ebook }) {
 
     setPageType(PageType.landing)
   }, [])
+
+    const avaliableSections = getLandingPageSections(data).reduce(
+      (acc, section) => {
+        acc[section.key] = section
+        return acc
+      },
+      {} as Record<string, SectionKeys>,
+    )
 
   const style: React.CSSProperties & CSSVariables = {
     '--primary-c': `${theme?.primary?.hex ?? 'var(--primary)'}`,
@@ -52,12 +66,13 @@ export function Content({ data }: { data: Ebook }) {
   return (
     <div className="flex w-full flex-col items-center justify-center space-y-14" style={style}>
       <div className="relative flex w-screen flex-col items-center justify-center">
-        <Header data={data} />
-        <Metadata data={data} />
-        <Index data={data} />
-        <Overview data={data} />
-        <Testimonial data={data} />
-        <Question data={data} />
+        {sections?.map(({ key, show }: Section) =>
+        show ? (
+          <Fragment key={key}>
+            {avaliableSections[key]?.component}
+          </Fragment>
+        ) : null,
+      )}
       </div>
       <div className="fixed right-10 bottom-4 z-50 flex flex-row items-center gap-4">
         <IconButton

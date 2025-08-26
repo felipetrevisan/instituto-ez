@@ -9,16 +9,16 @@ const structure = (S: StructureBuilder, context: ConfigContext) =>
     .items([
       // Settings section
       S.listItem()
-        .title('Settings')
+        .title('Configurações')
         .icon(CogIcon)
         .child(
           S.list()
-            .title('Settings')
+            .title('Configurações')
             .items([
               S.listItem()
-                .title('Settings')
+                .title('Configurações')
                 .child(S.document().schemaType('siteConfig').documentId('siteConfig')),
-              S.listItem().title('Navigation').child(S.documentTypeList('navigation')),
+              S.listItem().title('Navegação').child(S.documentTypeList('navigation')),
             ]),
         ),
 
@@ -67,7 +67,7 @@ const structure = (S: StructureBuilder, context: ConfigContext) =>
 
       S.divider(),
 
-      S.listItem().title('Pages').icon(PackageIcon).child(S.documentTypeList('page')),
+      S.listItem().title('Páginas').icon(PackageIcon).child(S.documentTypeList('page')),
 
       S.divider(),
       S.listItem()
@@ -89,6 +89,9 @@ const structure = (S: StructureBuilder, context: ConfigContext) =>
                 S,
                 context,
               }),
+              S.listItem()
+                .title('Configurações')
+                .child(S.document().schemaType('landing-page-settings').documentId('landing-page-settings').title('Configurações')),
             ]),
         ),
 
@@ -113,6 +116,8 @@ const structure = (S: StructureBuilder, context: ConfigContext) =>
             'testimonial',
             'advanced-mentory',
             'formGeneralSettings',
+            'landing-page-settings',
+            'landing-page-section'
           ].includes(listItem.getId() || ''),
       ),
     ])

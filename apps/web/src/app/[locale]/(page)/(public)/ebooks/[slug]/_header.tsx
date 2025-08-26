@@ -25,10 +25,7 @@ export function Header({ data }: { data: Ebook }) {
   return (
     <>
       <header className="relative flex w-screen flex-col items-center justify-center overflow-hidden bg-[auto,cover] bg-ebooks bg-gradient-to-br from-[var(--primary-c)] via-[var(--secondary-c)] to-[var(--tertiary-c)]/40 pb-12 text-white md:h-[600px] md:px-6 md:py-12">
-        <Link
-          href={getLocalizedLink(locale, '/ebooks')}
-          className="container my-8 w-full md:absolute md:top-4 md:left-5 md:my-0"
-        >
+        <Link href={getLocalizedLink(locale, '/ebooks')} className="container my-8 w-full">
           {!isMobile ? (
             <AnimatedButton
               label="Voltar para o Catálogo"
@@ -72,25 +69,25 @@ export function Header({ data }: { data: Ebook }) {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             {isMobile ? (
-              <h1 className="mt-10 mb-6 text-center font-extrabold leading-tight drop-shadow-md [font-size:_clamp(1rem,5vw,1.2rem)] md:mt-20">
+              <h1 className="mt-10 mb-6 text-center font-extrabold text-2xl leading-tight drop-shadow-md">
                 {title}
               </h1>
             ) : (
               <WritingText
                 asChild="h1"
                 text={title as string}
-                className="mt-20 mb-6 font-extrabold leading-tight drop-shadow-md md:[font-size:_clamp(1rem,5vw,1.8rem)]"
+                className="mb-6 font-extrabold text-2xl leading-tight drop-shadow-md"
               />
             )}
             <div className="flex flex-col">
               {isMobile ? (
-                <span className="mb-6 max-w-prose text-justify font-semibold text-white/90 leading-relaxed [font-size:_clamp(1rem,5vw,1.1rem)]">
+                <span className="mb-6 max-w-prose text-justify font-semibold text-lg text-white/90 leading-relaxed">
                   {description}
                 </span>
               ) : (
                 <WritingText
                   text={description as string}
-                  className="mb-6 max-w-prose font-semibold text-white/90 leading-relaxed md:[font-size:_clamp(1rem,5vw,1.02rem)] lg:[font-size:_clamp(1rem,5vw,1.2rem)]"
+                  className='mb-6 max-w-prose font-semibold text-lg text-white/90 leading-relaxed'
                 />
               )}
               {!download.disabled && (
