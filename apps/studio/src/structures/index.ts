@@ -101,6 +101,7 @@ const structure = (S: StructureBuilder, context: ConfigContext) =>
             'page',
             'section',
             'about',
+            'logo',
             'banner',
             'service',
             'workshop',

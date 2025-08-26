@@ -169,7 +169,7 @@ export function EbookCard({
           )}
           <CardContent className="relative flex w-full flex-col gap-4 p-0 md:py-10">
             {description && (
-              <ScrollArea className="overflow-auto md:max-h-[315px]">
+              <ScrollArea className="overflow-auto! md:max-h-[315px]">
                 <div className="pointer-events-none absolute bottom-0 z-10 h-6 w-full bg-gradient-to-t from-white/90 to-transparent" />
                 <div className="p-5">{description}</div>
               </ScrollArea>

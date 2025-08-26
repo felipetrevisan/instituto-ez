@@ -80,6 +80,11 @@ export default defineType({
       group: ['home'],
       of: [
         defineArrayMember({
+          name: 'logo',
+          type: 'logo',
+          title: 'Logo',
+        }),
+        defineArrayMember({
           name: 'about',
           type: 'about',
           title: 'About Us',

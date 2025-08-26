@@ -1,3 +1,4 @@
+import { useIsMobile } from '@ez/shared/hooks/use-mobile'
 import { cn } from '@ez/shared/lib/utils'
 import type { Ebook } from '@ez/shared/types/ebook'
 import type { Theme } from '@ez/shared/types/global'
@@ -117,6 +118,8 @@ const EbookGridComponent = ({
   ImageComponent: React.ComponentType<ImageComponentProps>
   imageBuilder: (assets: SanityImageSource) => ImageUrlBuilder
 }) => {
+  const isMobile = useIsMobile(640)
+  
   return (
     <div className="flex h-full w-full flex-col space-y-14">
       <div className="flex flex-col justify-center gap-10">
@@ -124,7 +127,9 @@ const EbookGridComponent = ({
           <div className="flex flex-wrap gap-10">
             {title && <TitleComponent variant={theme}>{title}</TitleComponent>}
             {ebooks?.map((ebook, _index) => (
-              <div className="w-full flex-none bg-white lg:w-[48%]" key={ebook.id}>
+              <div className={cn("w-full flex-none bg-white", {
+                "w-[48%]": !isMobile
+              })} key={ebook.id}>
                 <EbookCard
                   item={ebook}
                   full={appareance === 'full'}

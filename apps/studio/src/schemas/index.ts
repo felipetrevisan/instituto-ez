@@ -15,7 +15,8 @@ import workshop from './documents/workshops'
 import ebookCatalog from './ebooks/catalog'
 import ebookCollection from './ebooks/collection'
 
-import themeButton from '././objects/ebooks/theme/button'
+import themeButton from './objects/ebooks/theme/button'
+
 // Objects
 import aboutCard from './objects/about-card'
 import button from './objects/button'
@@ -41,6 +42,7 @@ import testimonialWidget from './objects/editor/testimonial'
 import titleWidget from './objects/editor/title'
 import icon from './objects/icon'
 import link from './objects/link'
+import logo from './objects/logo'
 import navigationItem from './objects/navigation-item'
 import navigationSubmenuItem from './objects/navigation-submenu-item'
 import pageSection from './objects/page'
@@ -82,6 +84,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     themeButton,
     pageSection,
     aboutCard,
+    logo,
     section,
     ebooksOverview,
     ebooksIndex,

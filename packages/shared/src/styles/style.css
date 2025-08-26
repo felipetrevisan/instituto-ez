@@ -12,6 +12,7 @@
 @theme {
   --breakpoint-2xl: 1536px;
   --breakpoint-8xl: 90rem;
+  --container-8xl: 90rem;
 
   --default-ring-width: 3px;
   --default-ring-color: var(--color-primary);

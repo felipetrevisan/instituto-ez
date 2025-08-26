@@ -135,7 +135,7 @@ function Content({ className, children }: React.ComponentProps<'div'>) {
   return (
     <motion.main
       className={cn(
-        'container relative flex h-full flex-col items-center justify-center lg:max-w-7xl',
+        'container relative flex h-full max-w-8xl flex-col items-center justify-center',
         {
           'before:absolute before:z-50 before:h-full before:w-full before:bg-white/50 before:backdrop-blur-xl':
             isMenuOpen,
