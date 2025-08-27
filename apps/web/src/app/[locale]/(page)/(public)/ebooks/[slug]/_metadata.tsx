@@ -32,7 +32,7 @@ export function Metadata({ data }: { data: Ebook }) {
   }
 
   return (
-    <>
+    <div className='w-screen'>
       {metadata?.length > 0 && (
         <section className="grid grid-cols-2 gap-x-2 gap-y-10 bg-white py-12 md:container md:gap-10 md:px-6 md:[grid-template-columns:repeat(auto-fit,minmax(200px,1fr))]">
           {metadata?.map((meta, index) => (
@@ -95,6 +95,6 @@ export function Metadata({ data }: { data: Ebook }) {
           ))}
         </section>
       )}
-    </>
+    </div>
   )
 }

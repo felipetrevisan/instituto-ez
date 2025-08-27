@@ -7,11 +7,14 @@ import { Button } from '@ez/shared/ui/button'
 import { ButtonLink } from '@ez/web/components/app'
 import { urlForImage } from '@ez/web/config/image'
 import { useImmersion } from '@ez/web/hooks/use-immersion'
+import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
 import { PortableText } from '@portabletext/react'
+import { useLocale } from 'next-intl'
 import { Parallax } from 'react-parallax'
 
 export function Immersion() {
   const { data, isLoading } = useImmersion()
+  const locale = useLocale()
 
   if (isLoading || !data) return <Skeleton />
 
@@ -67,7 +70,7 @@ export function Immersion() {
         </div>
         {data?.button.visible && link && (
           <ButtonLink
-            href={link}
+            href={getLocalizedLink(locale, link)}
             passHref
             className="flex w-[calc(100vw-20%)] justify-center xl:w-3/5"
           >

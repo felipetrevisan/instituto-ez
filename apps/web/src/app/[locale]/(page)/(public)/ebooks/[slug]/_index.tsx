@@ -14,7 +14,11 @@ export function Index({ data }: { data: Ebook }) {
         >
           {index.title || 'O que você vai encontrar nesse Ebook'}
         </Title>
-        {index?.description && <Subtitle size="lg">{index.description}</Subtitle>}
+        {index?.description && (
+          <Subtitle size="lg" className='font-medium font-questrial text-[var(--secondary-c)]'>
+            {index.description}
+          </Subtitle>
+        )}
         {index.video && (
           <div className="h-[200px] w-[90vw] max-w-full overflow-hidden rounded-2xl shadow md:h-[450px] md:w-[60vw]">
             <ReactPlayer url={index.video} width="100%" height="100%" controls={false} />
