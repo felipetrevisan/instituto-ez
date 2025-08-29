@@ -61,21 +61,21 @@ const buttonVariants = cva(
       {
         effect: 'pulse',
         variant: 'default',
-        className: '--hover: var(--primary-foreground)',
+        class: '--hover: ar(--primary-foreground)',
       },
 
       {
         effect: 'pulse',
         variant: 'default',
         theme: 'secondary',
-        className: '--hover: var(--secondary)',
+        class: '--hover:var(--secondary)',
       },
 
       {
         effect: 'pulse',
         variant: 'default',
         theme: 'tertiary',
-        className: '--hover: var(--tertiary)',
+        class: '--hover:var(--tertiary)',
       },
 
       // Shadow
@@ -83,19 +83,19 @@ const buttonVariants = cva(
       {
         shadow: true,
         variant: 'default',
-        className:
+        class:
           'shadow-primary-foreground/40 transition-shadow duration-500 ease-in-out hover:shadow-primary-foreground',
       },
       {
         shadow: true,
         variant: 'outline',
-        className:
+        class:
           'shadow-primary-foreground/40 transition-shadow duration-500 ease-in-out hover:shadow-primary-foreground',
       },
       {
         shadow: true,
         variant: 'ghost',
-        className:
+        class:
           'shadow-primary-foreground/40 transition-shadow duration-500 ease-in-out hover:shadow-primary-foreground',
       },
       // Secondary
@@ -103,21 +103,21 @@ const buttonVariants = cva(
         shadow: true,
         theme: 'secondary',
         variant: 'default',
-        className:
+        class:
           'shadow-secondary/40 transition-shadow duration-500 ease-in-out hover:shadow-secondary',
       },
       {
         shadow: true,
         theme: 'secondary',
         variant: 'outline',
-        className:
+        class:
           'shadow-secondary/40 transition-shadow duration-500 ease-in-out hover:shadow-secondary',
       },
       {
         shadow: true,
         theme: 'secondary',
         variant: 'ghost',
-        className:
+        class:
           'shadow-secondary/40 transition-shadow duration-500 ease-in-out hover:shadow-secondary',
       },
       // Tertiary
@@ -125,69 +125,69 @@ const buttonVariants = cva(
         shadow: true,
         theme: 'secondary',
         variant: 'default',
-        className:
+        class:
           'shadow-tertiary/40 transition-shadow duration-500 ease-in-out hover:shadow-tertiary',
       },
       {
         shadow: true,
         theme: 'tertiary',
         variant: 'outline',
-        className:
+        class:
           'shadow-tertiary/40 transition-shadow duration-500 ease-in-out hover:shadow-tertiary',
       },
       {
         shadow: true,
         theme: 'tertiary',
         variant: 'ghost',
-        className:
+        class:
           'shadow-tertiary/40 transition-shadow duration-500 ease-in-out hover:shadow-tertiary',
       },
 
       // Outline
       {
         variant: 'outline',
-        className: 'bg-transparent text-primary',
+        class: 'bg-transparent text-primary',
       },
       {
         variant: 'outline',
         theme: 'secondary',
-        className: 'bg-transparent text-secondary',
+        class: 'bg-transparent text-secondary',
       },
       {
         variant: 'outline',
         theme: 'tertiary',
-        className: 'bg-transparent text-tertiary',
+        class: 'bg-transparent text-tertiary',
       },
 
       {
         variant: 'ghost',
-        className: 'bg-transparent text-primary',
+        class: 'bg-transparent text-primary',
       },
       {
         variant: 'ghost',
         theme: 'secondary',
-        className: 'bg-transparent text-secondary',
+        class: 'bg-transparent text-secondary',
       },
       {
         variant: 'ghost',
         theme: 'tertiary',
-        className: 'bg-transparent text-tertiary',
+        class: 'bg-transparent text-tertiary',
       },
 
       {
         variant: 'link',
         theme: 'default',
-        className: '!shadow-none bg-transparent text-primary',
+        class: '!shadow-none bg-transparent text-primary',
       },
       {
         variant: 'link',
         theme: 'secondary',
-        className: '!shadow-none bg-transparent text-secondary',
+        class: '!shadow-none bg-transparent text-secondary',
       },
       {
         variant: 'link',
         theme: 'tertiary',
-        className: '!shadow-none bg-transparent text-tertiary',
+        class: '!shadow-none bg-transparent text-tertiary',
       },
     ],
   },

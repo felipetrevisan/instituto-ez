@@ -1,4 +1,5 @@
 import { ChevronLeftIcon, DownloadIcon } from '@ez/shared/icons'
+import BlobButton from '@ez/shared/ui/animated/button/blob-button'
 import { IconButton } from '@ez/shared/ui/animated/button/icon-button'
 import { LiquidButton } from '@ez/shared/ui/animated/button/liquid-button'
 import { urlForImage } from '@ez/web/config/image'
@@ -75,15 +76,16 @@ export default function StickyHeader({ title, image, download }: Ebook) {
             {!download.disabled && (
               <Link href={download.url} target="_blank">
                 {!isMobile ? (
-                  <LiquidButton
-                    variant="outline"
+                  <BlobButton
+                    variant="default"
                     theme="custom"
                     rounded="2xl"
                     className="w-full max-w-[250px]"
                     sticky
+                    numOfBlobs={4}
                   >
                     <DownloadIconMotion /> {download.label || 'Baixe Agora'}
-                  </LiquidButton>
+                  </BlobButton>
                 ) : (
                   <IconButton
                     icon={DownloadIcon}

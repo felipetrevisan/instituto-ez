@@ -1,6 +1,6 @@
 import { ChevronLeftIcon, DownloadIcon } from '@ez/shared/icons'
+import BlobButton from '@ez/shared/ui/animated/button/blob-button'
 import { IconButton } from '@ez/shared/ui/animated/button/icon-button'
-import { LiquidButton } from '@ez/shared/ui/animated/button/liquid-button'
 import { WritingText } from '@ez/shared/ui/animated/text/writting'
 import { urlForImage } from '@ez/web/config/image'
 import { useIsMobile } from '@ez/web/hooks/use-mobile'
@@ -92,15 +92,14 @@ export function Header({ data }: { data: Ebook }) {
               )}
               {!download.disabled && (
                 <Link href={download.url} target="_blank">
-                  <LiquidButton
-                    variant="outline"
+                  <BlobButton
                     theme="custom"
                     size={isMobile ? 'xl' : '2xl'}
                     rounded="full"
                     className="w-full md:w-auto md:max-w-[250px]"
                   >
                     <DownloadIconMotion /> {download.label || 'Baixe Agora'}
-                  </LiquidButton>
+                  </BlobButton>
                 </Link>
               )}
             </div>

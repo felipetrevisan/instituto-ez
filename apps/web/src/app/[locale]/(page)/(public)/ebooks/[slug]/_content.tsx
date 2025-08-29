@@ -5,17 +5,11 @@ import { MailIcon } from '@ez/shared/icons'
 import { PageType } from '@ez/shared/types/global'
 import { IconButton } from '@ez/shared/ui/animated/button/icon-button'
 import { useApp } from '@ez/web/hooks/use-app'
-import { useLandingPageSettings } from '@ez/web/hooks/use-landing-page-settings'
 import type { Ebook } from '@ez/web/types/ebook'
 import type { Section, SectionKeys } from '@ez/web/types/sections'
 import { Fragment, useEffect } from 'react'
-import { Header } from './_header'
-import { Index } from './_index'
-import { Metadata } from './_metadata'
-import { Overview } from './_overview'
-import { Question } from './_question'
+import GuaranteeSection from './_guarantee'
 import { getLandingPageSections } from './_sections'
-import { Testimonial } from './_testimonial'
 
 type CSSVariables = {
   [key: `--${string}`]: string
@@ -73,6 +67,7 @@ export function Content({
           </Fragment>
         ) : null,
       )}
+      <GuaranteeSection data={data} />
       </div>
       <div className="fixed right-10 bottom-4 z-50 flex flex-row items-center gap-4">
         <IconButton

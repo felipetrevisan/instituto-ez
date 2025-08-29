@@ -7,7 +7,7 @@ import * as React from 'react'
 import { cn } from '@ez/shared/lib/utils'
 
 const buttonVariants = cva(
-  '[&_svg]:pointer-events-none"size-"])]:size-4 relative inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 overflow-hidden whitespace-nowrap rounded-lg font-medium text-sm outline-none [&_svg:not([class*= [background:_linear-gradient(var(--liquid-button-color)_0_0)_no-repeat_calc(200%-var(--liquid-button-fill,0%))_100%/200%_var(--liquid-button-fill,0.2em)] [transition:_background_0.3s_var(--liquid-button-delay,0s),_color_0.3s_var(--liquid-button-delay,0s),_background-position_0.3s_calc(0.3s_-_var(--liquid-button-delay,0s))] focus:outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 hover:[--liquid-button-delay:0.3s] hover:[--liquid-button-fill:100%] [&_svg]:shrink-0',
+  'relative inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 overflow-hidden whitespace-nowrap rounded-lg font-medium text-sm outline-none [background:_linear-gradient(var(--liquid-button-color)_0_0)_no-repeat_calc(200%-var(--liquid-button-fill,0%))_100%/200%_var(--liquid-button-fill,0.2em)] [transition:_background_0.3s_var(--liquid-button-delay,0s),_color_0.3s_var(--liquid-button-delay,0s),_background-position_0.3s_calc(0.3s_-_var(--liquid-button-delay,0s))] focus:outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 hover:[--liquid-button-delay:0.3s] hover:[--liquid-button-fill:100%] [&_svg]:shrink-0',
   {
     variants: {
       variant: {
@@ -57,34 +57,34 @@ const buttonVariants = cva(
       {
         variant: 'outline',
         theme: 'default',
-        className:
+        class:
           '!bg-white border-white text-primary [--liquid-button-color:var(--primary)] hover:text-primary-foreground',
       },
       {
         variant: 'outline',
         theme: 'secondary',
-        className:
+        class:
           '!bg-white border-white text-secondary [--liquid-button-color:var(--secondary)] hover:text-secondary-foreground',
       },
       {
         variant: 'outline',
         theme: 'tertiary',
-        className:
+        class:
           '!bg-white border-white text-tertiary [--liquid-button-color:var(--tertiary)] hover:text-tertiary-foreground',
       },
       {
         variant: 'outline',
         theme: 'custom',
         sticky: false,
-        className:
-          '!bg-[var(--header-button-default-background)] border--[var(--header-button-default-background)] text-[var(--header-button-default-text)] [--liquid-button-color:var(--header-button-hover-background)] hover:text-[var(--header-button-hover-text)]',
+        class:
+          '!bg-[var(--header-button-default-background)] border-[var(--header-button-default-background)] text-[var(--header-button-default-text)] [--liquid-button-color:var(--header-button-hover-background)] hover:text-[var(--header-button-hover-text)]',
       },
       {
         variant: 'outline',
         theme: 'custom',
         sticky: true,
-        className:
-          '!bg-[var(--header-sticky-button-default-background)] border--[var(--header-sticky-button-default-background)] text-[var(--header-sticky-button-default-background)] [--liquid-button-color:var(--header-sticky-button-hover-background)] hover:text-[var(--header-sticky-button-hover-text)]',
+        class:
+          '!bg-[var(--header-sticky-button-default-background)] border-[var(--header-sticky-button-default-background)] text-[var(--header-sticky-button-default-text)] [--liquid-button-color:var(--header-sticky-button-hover-background)] hover:text-[var(--header-sticky-button-hover-text)]',
       },
     ],
   },

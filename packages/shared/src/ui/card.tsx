@@ -34,36 +34,36 @@ const cardVariants = cva('relative', {
   compoundVariants: [
     {
       variant: 'outline',
-      className: 'bg-transparent text-primary hover:bg-transparent hover:text-primary',
+      class: 'bg-transparent text-primary hover:bg-transparent hover:text-primary',
     },
     {
       variant: 'outline',
       theme: 'secondary',
-      className: 'bg-transparent text-secondary hover:bg-transparent hover:text-secondary',
+      class: 'bg-transparent text-secondary hover:bg-transparent hover:text-secondary',
     },
     {
       variant: 'outline',
       theme: 'tertiary',
-      className: 'bg-transparent text-tertiary hover:bg-transparent hover:text-tertiary',
+      class: 'bg-transparent text-tertiary hover:bg-transparent hover:text-tertiary',
     },
     {
       variant: 'outline',
       theme: 'custom',
-      className: 'bg-transparent text-[var(--primary-c)] hover:bg-transparent hover:text-[var(--primary-c)]',
+      class: 'bg-transparent text-[var(--primary-c)] hover:bg-transparent hover:text-[var(--primary-c)]',
     },
     {
       variant: 'ghost',
-      className: 'bg-transparent text-primary hover:bg-transparent hover:text-primary',
+      class: 'bg-transparent text-primary hover:bg-transparent hover:text-primary',
     },
     {
       variant: 'ghost',
       theme: 'secondary',
-      className: 'bg-transparent text-secondary hover:bg-transparent hover:text-secondary',
+      class: 'bg-transparent text-secondary hover:bg-transparent hover:text-secondary',
     },
     {
       variant: 'ghost',
       theme: 'tertiary',
-      className: 'bg-transparent text-tertiary hover:bg-transparent hover:text-tertiary',
+      class: 'bg-transparent text-tertiary hover:bg-transparent hover:text-tertiary',
     },
   ],
 })

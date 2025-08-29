@@ -110,37 +110,37 @@ const tabHighlightVariants = cva('absolute rounded-full', {
     {
       variant: 'outline',
       theme: 'default',
-      className:
+      class:
         'border-primary bg-none bg-white text-primary opacity-1 shadow-primary outline-primary',
     },
     {
       variant: 'outline',
       theme: 'secondary',
-      className:
+      class:
         'border-secondary bg-none bg-white text-secondary opacity-1 shadow-secondary outline-secondary',
     },
     {
       variant: 'outline',
       theme: 'tertiary',
-      className:
+      class:
         'border-tertiary bg-none bg-white text-tertiary opacity-1 shadow-tertiary outline-tertiary',
     },
     {
       variant: 'ghost',
       theme: 'default',
-      className:
+      class:
         'border-primary bg-none bg-white text-primary opacity-1 shadow-primary outline-primary',
     },
     {
       variant: 'ghost',
       theme: 'secondary',
-      className:
+      class:
         'border-secondary bg-none bg-white text-secondary opacity-1 shadow-secondary outline-secondary',
     },
     {
       variant: 'ghost',
       theme: 'tertiary',
-      className:
+      class:
         'border-tertiary bg-none bg-white text-tertiary opacity-1 shadow-tertiary outline-tertiary',
     },
   ],
@@ -170,34 +170,34 @@ const tabsTriggerVariants = cva(
       {
         variant: 'outline',
         theme: 'default',
-        className: 'data-[state=active]:border-primary data-[state=active]:text-primary',
+        class: 'data-[state=active]:border-primary data-[state=active]:text-primary',
       },
       {
         variant: 'outline',
         theme: 'secondary',
-        className: 'data-[state=active]:border-secondary data-[state=active]:text-secondary',
+        class: 'data-[state=active]:border-secondary data-[state=active]:text-secondary',
       },
       {
         variant: 'outline',
         theme: 'tertiary',
-        className: 'data-[state=active]:border-tertiary data-[state=active]:text-tertiary',
+        class: 'data-[state=active]:border-tertiary data-[state=active]:text-tertiary',
       },
       {
         variant: 'ghost',
         theme: 'default',
-        className:
+        class:
           'data-[state=active]:border-primary data-[state=active]:bg-primary/10 data-[state=active]:text-primary',
       },
       {
         variant: 'ghost',
         theme: 'secondary',
-        className:
+        class:
           'data-[state=active]:border-secondary data-[state=active]:bg-secondary/10 data-[state=active]:text-secondary',
       },
       {
         variant: 'ghost',
         theme: 'tertiary',
-        className:
+        class:
           'data-[state=active]:border-tertiary data-[state=active]:bg-tertiary/10 data-[state=active]:text-tertiary',
       },
     ],
