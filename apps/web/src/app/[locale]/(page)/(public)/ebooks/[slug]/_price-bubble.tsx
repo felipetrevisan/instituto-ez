@@ -48,7 +48,7 @@ export default function PriceBubble({ price }: { price: Price }) {
           <motion.polygon
             points="100,5 114,47 148,18 139,61 182,53 153,86 195,100 153,114 182,148 139,139 148,182 114,153 100,195 86,153 52,182 61,139 18,148 47,114 5,100 47,86 18,53 61,61 52,18 86,47"
             fill="url(#starGradient)"
-            stroke={isFree ? '#92ff8a' : '#000'}
+            stroke="#000"
             strokeWidth="3"
             animate={{ rotate: 360 }}
             transition={{ duration: 15, repeat: Number.POSITIVE_INFINITY, ease: 'circInOut' }}
