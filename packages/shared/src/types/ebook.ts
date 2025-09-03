@@ -64,6 +64,7 @@ export type Ebook = {
     background?: SanityAsset
     preview: SanityAsset
     large: SanityAsset
+    footer: SanityAsset
   }
   questions?: Question[]
   disabled: boolean

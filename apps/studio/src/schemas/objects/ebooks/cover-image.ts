@@ -24,5 +24,10 @@ export default defineType({
       title: 'Large Image',
       type: 'image',
     }),
+    defineField({
+      name: 'footer_image',
+      title: 'Footer Image',
+      type: 'image',
+    }),
   ],
 })

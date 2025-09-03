@@ -3,6 +3,7 @@
 import { DownloadIcon } from '@ez/shared/icons'
 import BlobButton from '@ez/shared/ui/animated/button/blob-button'
 import { Subtitle, Title } from '@ez/shared/ui/title'
+import { urlForImage } from '@ez/web/config/image'
 import type { Ebook } from '@ez/web/types/ebook'
 import { motion } from 'motion/react'
 import Image from 'next/image'
@@ -15,7 +16,7 @@ const MotionSubTitle = motion(Subtitle)
 const DownloadIconMotion = motion(DownloadIcon)
 
 export default function BuySection({ data }: { data: Ebook }) {
-  const { download, price } = data
+  const { download, price, image } = data
 
   return (
     <div className="flex flex-col items-center justify-center gap-2">
@@ -40,7 +41,16 @@ export default function BuySection({ data }: { data: Ebook }) {
             </MotionSubTitle>
           </motion.div>
           <div className="relative h-[300px] w-[500px]">
-            <Image src="/assets/images/buy-ebook.png" fill alt="" className="object-contain" />
+            <Image
+              src={
+                image.footer.asset
+                  ? urlForImage(image.footer.asset).format('webp').quality(80).url()
+                  : '/assets/images/buy-ebook.png'
+              }
+              fill
+              alt=""
+              className="object-contain"
+            />
           </div>
           {!download?.disabled && (
             <Link href={download?.url ?? '/'} target="_blank">

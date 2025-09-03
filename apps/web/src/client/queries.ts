@@ -378,6 +378,13 @@ export const ebookQueryBySlug = groq`
           "lqip": asset->metadata.lqip,
           "dimensions": asset->metadata.dimensions
         }
+      },
+      "footer": footer_image {
+        "asset": asset,
+        "metadata": {
+          "lqip": asset->metadata.lqip,
+          "dimensions": asset->metadata.dimensions
+        }
       }
     },
     disabled,
