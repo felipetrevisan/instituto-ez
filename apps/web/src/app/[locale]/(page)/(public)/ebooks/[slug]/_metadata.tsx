@@ -2,8 +2,8 @@
 
 import { FaIcons } from '@ez/shared/icons'
 import { cn } from '@ez/shared/lib/utils'
-import { CountingNumber } from '@ez/shared/ui/animated/counter'
 import { Magnetic } from '@ez/shared/ui/animated/effects/magnetic'
+import { CountingNumber } from '@ez/shared/ui/animated/text/counter'
 import { HighlightText } from '@ez/shared/ui/animated/text/highlight'
 import { Card, CardContent } from '@ez/shared/ui/card'
 import { urlForImage } from '@ez/web/config/image'
@@ -33,7 +33,7 @@ export function Metadata({ data }: { data: Ebook }) {
   }
 
   return (
-    <div className='w-screen'>
+    <div className="w-screen">
       {metadata?.length > 0 && (
         <section className="grid grid-cols-2 gap-x-2 gap-y-10 bg-white py-12 md:container md:gap-10 md:px-6 md:[grid-template-columns:repeat(auto-fit,minmax(200px,1fr))]">
           {metadata?.map((meta, index) => (

@@ -24,7 +24,7 @@ export type Ebook = {
   }
   index: {
     title?: string
-    description?: string
+    description?: PortableTextBlock[]
     video?: string
   }
   metadata: Metadata[]

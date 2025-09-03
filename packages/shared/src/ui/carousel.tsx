@@ -325,13 +325,13 @@ function CarouselDots({
                     theme === 'secondary' && selectedIndex === index,
                   'after:bg-tertiary after:shadow-tertiary':
                     theme === 'tertiary' && selectedIndex === index,
-                  'after:bg-[--var(--primary-c)] after:[--tw-shadow:_var(--primary-c)]':
+                  '[--tw-shadow:_var(--primary-c)] after:bg-[--var(--primary-c)] after:shadow-[0_0_0_0.17rem]':
                     theme === 'custom' && selectedIndex === index,
 
                   'after:shadow-primary/70': theme === 'default' && selectedIndex !== index,
                   'after:shadow-secondary/70': theme === 'secondary' && selectedIndex !== index,
                   'after:shadow-tertiary/70': theme === 'tertiary' && selectedIndex !== index,
-                  'after:[--tw-shadow:_var(--primary-c)]/70':
+                  '[--tw-shadow:_var(--primary-c)] after:shadow-[0_0_0_0.17rem]':
                     theme === 'custom' && selectedIndex !== index,
                 },
                 className,

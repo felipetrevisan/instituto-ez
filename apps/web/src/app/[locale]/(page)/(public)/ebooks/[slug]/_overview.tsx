@@ -47,14 +47,14 @@ export function Overview({ data }: { data: Ebook }) {
             <Subtitle size="lg">{overview.description}</Subtitle>
           </div>
         )}
-        <div className="flex flex-col items-center justify-center gap-8">
-          <Title
-            size="2xl"
-            className="after:-bottom-1 after:-translate-x-1/2 relative text-center font-questrial font-semibold text-[var(--primary-c)] after:absolute after:left-1/2 after:h-[2px] after:w-[40%] after:rounded-xl after:bg-[var(--primary-c)]/60 after:transition-all"
-          >
-            Capítulos
-          </Title>
-          {chapter && chapter.chapters?.length > 0 && (
+        {chapter && chapter.chapters?.length > 0 && (
+          <div className="flex flex-col items-center justify-center gap-8">
+            <Title
+              size="2xl"
+              className="after:-bottom-1 after:-translate-x-1/2 relative text-center font-questrial font-semibold text-[var(--primary-c)] after:absolute after:left-1/2 after:h-[2px] after:w-[40%] after:rounded-xl after:bg-[var(--primary-c)]/60 after:transition-all"
+            >
+              Folheie e conheça o Ebook por dentro
+            </Title>
             <div className="flex w-full justify-center px-4">
               <HTMLFlipBook
                 width={400}
@@ -98,8 +98,8 @@ export function Overview({ data }: { data: Ebook }) {
                 ))}
               </HTMLFlipBook>
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </section>
   )

@@ -1,6 +1,7 @@
 'use client'
 
 import { ChevronLeftIcon, DownloadIcon } from '@ez/shared/icons'
+import { BadgeStarButton } from '@ez/shared/ui/animated/badge-star'
 import BlobButton from '@ez/shared/ui/animated/button/blob-button'
 import { IconButton } from '@ez/shared/ui/animated/button/icon-button'
 import { WritingText } from '@ez/shared/ui/animated/text/writting'
@@ -81,14 +82,15 @@ export function Header({ data }: { data: Ebook }) {
                 className="mb-6 font-extrabold text-2xl leading-tight drop-shadow-md"
               />
             )}
+            <BadgeStarButton numberOfStars={4.9} />
             <div className="flex flex-col">
               {isMobile ? (
-                <span className="mb-6 max-w-prose text-justify font-semibold text-lg text-white/90 leading-relaxed">
+                <span className='mb-6 max-w-prose text-justify font-semibold text-lg text-white/90 leading-relaxed'>
                   {description}
                 </span>
               ) : (
                 <motion.h1
-                  className="mb-6 max-w-prose font-semibold text-lg text-white/90 leading-relaxed"
+                  className='mb-6 max-w-prose font-semibold text-lg text-white/90 leading-relaxed'
                   initial={{ opacity: 0, x: -50 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8, delay: 0.2 }}
@@ -97,7 +99,7 @@ export function Header({ data }: { data: Ebook }) {
                 </motion.h1>
               )}
               {!download?.disabled && (
-                <Link href={download?.url ?? "/"} target="_blank">
+                <Link href={download?.url ?? '/'} target="_blank">
                   <BlobButton
                     theme="custom"
                     size={isMobile ? 'xl' : '2xl'}

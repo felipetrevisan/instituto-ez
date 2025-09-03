@@ -1,7 +1,7 @@
 'use client'
 
 import { cn } from '@ez/shared/lib/utils'
-import { CountingNumber } from '@ez/shared/ui/animated/counter'
+import { CountingNumber } from '@ez/shared/ui/animated/text/counter'
 import type { Price } from '@ez/web/types/ebook'
 import { motion } from 'motion/react'
 

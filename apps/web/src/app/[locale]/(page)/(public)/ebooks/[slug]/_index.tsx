@@ -1,11 +1,18 @@
 'use client'
 
+import { DownloadIcon } from '@ez/shared/icons'
+import BlobButton from '@ez/shared/ui/animated/button/blob-button'
 import { Subtitle, Title } from '@ez/shared/ui/title'
+import { useIsMobile } from '@ez/web/hooks/use-mobile'
 import type { Ebook } from '@ez/web/types/ebook'
+import { PortableText } from 'next-sanity'
+import Link from 'next/link'
 import ReactPlayer from 'react-player'
 
 export function Index({ data }: { data: Ebook }) {
-  const { index } = data
+  const isMobile = useIsMobile(640)
+
+  const { index, download } = data
 
   return (
     <section className="relative flex w-screen flex-row gap-4 px-6 py-12">
@@ -17,14 +24,30 @@ export function Index({ data }: { data: Ebook }) {
           {index?.title || 'O que você vai encontrar nesse Ebook'}
         </Title>
         {index?.description && (
-          <Subtitle size="lg" className='mt-0 font-medium font-questrial text-[var(--secondary-c)]'>
-            {index.description}
-          </Subtitle>
+          <div className="mt-0 font-medium font-questrial text-[var(--secondary-c)]">
+            <PortableText value={index.description} />
+          </div>
         )}
         {index?.video && (
-          <div className="h-[200px] w-[90vw] max-w-full overflow-hidden rounded-2xl shadow md:h-[450px] md:w-[60vw]">
+          <div className="h-[200px] w-[90vw] max-w-full overflow-hidden rounded-2xl shadow-xl md:h-[450px] md:w-[60vw]">
             <ReactPlayer url={index.video} width="100%" height="100%" controls={false} />
           </div>
+        )}
+        {!download?.disabled && (
+          <Link
+            href={download?.url ?? '/'}
+            target="_blank"
+            className="w-full md:w-auto md:max-w-[500px]"
+          >
+            <BlobButton
+              theme="custom"
+              size={isMobile ? 'xl' : '2xl'}
+              rounded="full"
+              className="w-full"
+            >
+              <DownloadIcon /> Quero meu eBook agora
+            </BlobButton>
+          </Link>
         )}
       </div>
     </section>
