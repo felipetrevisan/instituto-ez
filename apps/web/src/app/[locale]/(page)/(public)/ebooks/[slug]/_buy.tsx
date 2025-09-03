@@ -33,12 +33,6 @@ export default function BuySection({ data }: { data: Ebook }) {
             >
               Garanta já seu eBook
             </MotionTitle>
-            <MotionSubTitle
-              className="text-center font-questrial font-semibold text-[var(--primary-c)] uppercase lg:text-left"
-              size="lg"
-            >
-              Plataforma HOTMART
-            </MotionSubTitle>
           </motion.div>
           <div className="relative h-[300px] w-[500px]">
             <Image

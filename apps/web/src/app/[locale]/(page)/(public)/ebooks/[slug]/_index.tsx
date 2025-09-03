@@ -17,7 +17,7 @@ export function Index({ data }: { data: Ebook }) {
           {index?.title || 'O que você vai encontrar nesse Ebook'}
         </Title>
         {index?.description && (
-          <Subtitle size="lg" className='font-medium font-questrial text-[var(--secondary-c)]'>
+          <Subtitle size="lg" className='mt-0 font-medium font-questrial text-[var(--secondary-c)]'>
             {index.description}
           </Subtitle>
         )}
