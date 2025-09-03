@@ -1,3 +1,5 @@
+'use client'
+
 import { ChevronLeftIcon, DownloadIcon } from '@ez/shared/icons'
 import BlobButton from '@ez/shared/ui/animated/button/blob-button'
 import { IconButton } from '@ez/shared/ui/animated/button/icon-button'
@@ -85,20 +87,24 @@ export function Header({ data }: { data: Ebook }) {
                   {description}
                 </span>
               ) : (
-                <WritingText
-                  text={description as string}
-                  className='mb-6 max-w-prose font-semibold text-lg text-white/90 leading-relaxed'
-                />
+                <motion.h1
+                  className="mb-6 max-w-prose font-semibold text-lg text-white/90 leading-relaxed"
+                  initial={{ opacity: 0, x: -50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                >
+                  {description}
+                </motion.h1>
               )}
-              {!download.disabled && (
-                <Link href={download.url} target="_blank">
+              {!download?.disabled && (
+                <Link href={download?.url ?? "/"} target="_blank">
                   <BlobButton
                     theme="custom"
                     size={isMobile ? 'xl' : '2xl'}
                     rounded="full"
                     className="w-full md:w-auto md:max-w-[250px]"
                   >
-                    <DownloadIconMotion /> {download.label || 'Baixe Agora'}
+                    <DownloadIconMotion /> {download?.label || 'Baixe Agora'}
                   </BlobButton>
                 </Link>
               )}

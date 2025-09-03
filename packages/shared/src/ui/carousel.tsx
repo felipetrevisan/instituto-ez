@@ -317,7 +317,7 @@ function CarouselDots({
               variant="outline"
               theme={theme}
               className={cn(
-                'rounded-full px-1 after:flex after:size-2 after:items-center after:rounded-full after:shadow-[0_0_0_0.17rem] hover:bg-transparent',
+                'rounded-full bg-linear-none px-1 after:flex after:size-2 after:items-center after:rounded-full after:shadow-[0_0_0_0.17rem] hover:bg-transparent',
                 {
                   'after:bg-primary after:shadow-primary':
                     theme === 'default' && selectedIndex === index,
@@ -327,6 +327,12 @@ function CarouselDots({
                     theme === 'tertiary' && selectedIndex === index,
                   'after:bg-[--var(--primary-c)] after:shadow-[--var(--primary-c)]':
                     theme === 'custom' && selectedIndex === index,
+
+                  'after:shadow-primary/70': theme === 'default' && selectedIndex !== index,
+                  'after:shadow-secondary/70': theme === 'secondary' && selectedIndex !== index,
+                  'after:shadow-tertiary/70': theme === 'tertiary' && selectedIndex !== index,
+                  'after:shadow-[--var(--primary-c)]/70':
+                    theme === 'custom' && selectedIndex !== index,
                 },
                 className,
               )}

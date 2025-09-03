@@ -42,6 +42,11 @@ export default defineType({
           type: 'landing-page-section',
           title: 'Perguntas Frequentes',
         }),
+        defineArrayMember({
+          name: 'footer',
+          type: 'landing-page-section',
+          title: 'Compra e Garantia',
+        }),
       ],
     }),
   ],

@@ -27,7 +27,7 @@ const TestimonialComponent = ({ value }: { value: TestimonialType }) => {
             {data?.map((testimonial, _index) => (
               <CarouselItem
                 key={testimonial.id}
-                className="basis-full md:basis-full lg:basis-1/2 xl:basis-1/2"
+                className="basis-full md:basis-full lg:basis-full xl:basis-1/2"
               >
                 {type === 'MINIMALIST' ? (
                   <TestimonialMinimalist

@@ -8,17 +8,14 @@ import { useApp } from '@ez/web/hooks/use-app'
 import type { Ebook } from '@ez/web/types/ebook'
 import type { Section, SectionKeys } from '@ez/web/types/sections'
 import { Fragment, useEffect } from 'react'
-import GuaranteeSection from './_guarantee'
+import FooterSection from './_footer'
 import { getLandingPageSections } from './_sections'
 
 type CSSVariables = {
   [key: `--${string}`]: string
 }
 
-export function Content({
-  data,
-  sections,
-}: { data: Ebook, sections: Section[] }) {
+export function Content({ data, sections }: { data: Ebook; sections: Section[] }) {
   const { setPageType, isLandingPage } = useApp()
   const { setIsContactDialogOpen, setContactSubject } = useShared()
   const { theme } = data
@@ -30,13 +27,13 @@ export function Content({
     setPageType(PageType.landing)
   }, [])
 
-    const avaliableSections = getLandingPageSections(data).reduce(
-      (acc, section) => {
-        acc[section.key] = section
-        return acc
-      },
-      {} as Record<string, SectionKeys>,
-    )
+  const avaliableSections = getLandingPageSections(data).reduce(
+    (acc, section) => {
+      acc[section.key] = section
+      return acc
+    },
+    {} as Record<string, SectionKeys>,
+  )
 
   const style: React.CSSProperties & CSSVariables = {
     '--primary-c': `${theme?.primary?.hex ?? 'var(--primary)'}`,
@@ -61,13 +58,8 @@ export function Content({
     <div className="flex w-full flex-col items-center justify-center space-y-14" style={style}>
       <div className="relative flex w-screen flex-col items-center justify-center">
         {sections?.map(({ key, show }: Section) =>
-        show ? (
-          <Fragment key={key}>
-            {avaliableSections[key]?.component}
-          </Fragment>
-        ) : null,
-      )}
-      <GuaranteeSection data={data} />
+          show ? <Fragment key={key}>{avaliableSections[key]?.component}</Fragment> : null,
+        )}
       </div>
       <div className="fixed right-10 bottom-4 z-50 flex flex-row items-center gap-4">
         <IconButton

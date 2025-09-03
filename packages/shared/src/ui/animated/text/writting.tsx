@@ -21,7 +21,7 @@ function WritingText<T extends React.ElementType = 'span'>({
   inViewOnce = true,
   spacing = 5,
   text,
-  transition = { type: 'spring', bounce: 0, duration: .2, delay: 0.2 },
+  transition = { type: 'spring', bounce: 0, duration: .05, delay: 0.2 },
   ...props
 }: WritingTextProps<T>) {
   const localRef = React.useRef<HTMLElement>(null)

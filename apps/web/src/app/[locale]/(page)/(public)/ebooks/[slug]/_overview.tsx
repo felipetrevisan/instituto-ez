@@ -1,3 +1,5 @@
+'use client'
+
 import { cn } from '@ez/shared/lib/utils'
 import { Subtitle, Title } from '@ez/shared/ui/title'
 import { urlForImage } from '@ez/web/config/image'

@@ -1,6 +1,7 @@
 import { getEbookBySlug, getEbooks } from '@ez/web/server/get-ebook'
 import { getLandingPageSettings } from '@ez/web/server/get-landing-page-settings'
 import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 import { Content } from './_content'
 
 interface PageProps {
@@ -25,6 +26,11 @@ export default async function Page({ params }: PageProps) {
   const { slug } = await params
 
   const data = await getEbookBySlug(slug)
+
+  if (!data) {
+    notFound()
+  }
+  
   const { sections } = await getLandingPageSettings()
 
 

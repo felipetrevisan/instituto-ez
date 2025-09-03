@@ -236,6 +236,11 @@ export const ebookQuery = groq`
     "slug": slug.current,
     subtitle,
     description,
+    "price": price {
+      "regular": regular,
+      "hasDiscount": discount,
+      "priceWithDiscount": discount_price
+    },
     "image": images {
       "background": background_image {
         "asset": asset,
@@ -273,12 +278,17 @@ export const ebookQuery = groq`
 `
 
 export const ebookQueryBySlug = groq`
-  *[ _type == 'ebook' && slug.current == $slug] [0] { 
+  *[ _type == 'ebook' && slug.current == $slug] [0] {
     "id": _id,
     title,
     "slug": slug.current,
     subtitle,
     description,
+    "price": price {
+      "regular": regular,
+      "hasDiscount": discount,
+      "priceWithDiscount": discount_price
+    },
     "theme": theme {
       text,
       primary,
@@ -393,6 +403,11 @@ export const ebooksCollectionQuery = groq`
       "slug": slug.current,
       subtitle,
       description,
+      "price": price {
+        "regular": regular,
+        "hasDiscount": discount,
+        "priceWithDiscount": discount_price
+      },
       "image": images {
         "preview": small_image {
           "asset": asset,
@@ -433,6 +448,11 @@ export const ebooksCollectionQueryByCollection = groq`
       "slug": slug.current,
       subtitle,
       description,
+      "price": price {
+        "regular": regular,
+        "hasDiscount": discount,
+        "priceWithDiscount": discount_price
+      },
       "image": images {
         "preview": small_image {
           "asset": asset,

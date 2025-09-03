@@ -119,7 +119,8 @@ const EbookGridComponent = ({
   imageBuilder: (assets: SanityImageSource) => ImageUrlBuilder
 }) => {
   const isMobile = useIsMobile(640)
-  
+  const isTablet = useIsMobile(1179)
+
   return (
     <div className="flex h-full w-full flex-col space-y-14">
       <div className="flex flex-col justify-center gap-10">
@@ -127,9 +128,12 @@ const EbookGridComponent = ({
           <div className="flex flex-wrap gap-10">
             {title && <TitleComponent variant={theme}>{title}</TitleComponent>}
             {ebooks?.map((ebook, _index) => (
-              <div className={cn("w-full flex-none bg-white", {
-                "w-[48%]": !isMobile
-              })} key={ebook.id}>
+              <div
+                className={cn('w-full flex-none bg-white', {
+                  'w-[48%]': !isMobile && !isTablet && appareance === 'full',
+                })}
+                key={ebook.id}
+              >
                 <EbookCard
                   item={ebook}
                   full={appareance === 'full'}

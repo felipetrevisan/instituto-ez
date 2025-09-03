@@ -45,6 +45,10 @@ export default defineType({
       name: 'link',
       title: 'Link',
     },
+    {
+      name: 'price',
+      title: 'Price',
+    },
   ],
   fields: [
     orderRankField({ type: 'ebook' }),
@@ -151,6 +155,13 @@ export default defineType({
       title: 'Button',
       type: 'button',
       group: ['link'],
+      validation: (Rule) => Rule.required().warning('This field must not be empty.'),
+    }),
+    defineField({
+      name: 'price',
+      title: 'Price',
+      type: 'price',
+      group: ['price'],
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),
   ],

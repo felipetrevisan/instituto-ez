@@ -171,14 +171,14 @@ export function EbookCard({
             {description && (
               <ScrollArea className="overflow-auto! md:max-h-[315px]">
                 <div className="pointer-events-none absolute bottom-0 z-10 h-6 w-full bg-gradient-to-t from-white/90 to-transparent" />
-                <div className="p-5">{description}</div>
+                <div className="p-5 text-justify">{description}</div>
               </ScrollArea>
             )}
             {button && (
               <>
                 {link && (
                   <LinkComponent href={`/${locale}/ebooks/${slug}`}>
-                    <div className="item-center lg:-right-[54px] md:-right-[86px] md:-bottom-[24px] flex h-[80px] w-full justify-center overflow-hidden md:absolute">
+                    <div className="item-center lg:-right-[76px] md:-right-[86px] md:-bottom-[24px] flex h-[80px] w-full justify-center overflow-hidden md:absolute">
                       <Button
                         disabled={disabled}
                         theme={theme}
@@ -194,7 +194,7 @@ export function EbookCard({
                   </LinkComponent>
                 )}
                 {!link && (
-                  <div className="item-center -right-[54px] -bottom-[24px] absolute flex h-[80px] w-full justify-center overflow-hidden">
+                  <div className='item-center lg:-right-[76px] md:-right-[86px] md:-bottom-[24px] absolute flex h-[80px] w-full justify-center overflow-hidden'>
                     <Button
                       disabled={disabled}
                       theme={theme}

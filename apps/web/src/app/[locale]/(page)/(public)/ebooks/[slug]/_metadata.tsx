@@ -1,9 +1,10 @@
+'use client'
+
 import { FaIcons } from '@ez/shared/icons'
 import { cn } from '@ez/shared/lib/utils'
 import { CountingNumber } from '@ez/shared/ui/animated/counter'
 import { Magnetic } from '@ez/shared/ui/animated/effects/magnetic'
 import { HighlightText } from '@ez/shared/ui/animated/text/highlight'
-import { RollingText } from '@ez/shared/ui/animated/text/rolling'
 import { Card, CardContent } from '@ez/shared/ui/card'
 import { urlForImage } from '@ez/web/config/image'
 import type { Ebook, Media } from '@ez/web/types/ebook'

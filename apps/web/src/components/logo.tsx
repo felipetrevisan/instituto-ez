@@ -1,5 +1,6 @@
 'use client'
 
+import { useIsMobile } from '@ez/web/hooks/use-mobile'
 import { useSite } from '@ez/web/hooks/use-site'
 import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
 import { type HTMLMotionProps, motion } from 'motion/react'
@@ -22,6 +23,7 @@ export const Logo = ({
 }: LogoProps) => {
   const locale = useLocale()
   const { data } = useSite()
+  const isTablet = useIsMobile(1179)
 
   const logoImage = (
     <>
@@ -34,7 +36,7 @@ export const Logo = ({
         width={57}
         height={57}
       />
-      {showSlogan && (
+      {showSlogan && !isTablet && (
         <span className="flex flex-col justify-center">
           <p className="font-bold font-oswald text-lg text-primary">{data?.title}</p>
           <p className="text-nowrap font-light font-questrial text-primary text-sm">

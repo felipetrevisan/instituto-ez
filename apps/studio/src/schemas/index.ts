@@ -28,6 +28,7 @@ import ebooksIndex from './objects/ebooks/content'
 import download from './objects/ebooks/download'
 import metadata from './objects/ebooks/metadata'
 import ebooksOverview from './objects/ebooks/overview'
+import price from './objects/ebooks/price'
 import landingPageSection from './objects/ebooks/section'
 import theme from './objects/ebooks/theme/theme'
 import accordionWidget from './objects/editor/accordion'
@@ -83,6 +84,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     chapters,
     chapter,
     download,
+    price,
     landingPageSection,
     theme,
     themeButton,

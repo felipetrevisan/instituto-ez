@@ -8,6 +8,7 @@ export type Ebook = {
   subtitle?: string
   slug: string
   description?: string
+  price: Price
   seo: {
     description: string
     keywords: string
@@ -106,4 +107,10 @@ export type Media = {
 export type Question = {
   title: string
   text: string
+}
+
+export type Price = {
+  regular: number
+  hasDiscount: boolean
+  priceWithDiscount?: number
 }

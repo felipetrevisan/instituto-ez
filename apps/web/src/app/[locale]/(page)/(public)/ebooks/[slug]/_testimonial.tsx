@@ -1,3 +1,5 @@
+'use client'
+
 import { TestimonialComponent } from '@ez/shared/sanity/components/testimonial'
 import { Title } from '@ez/shared/ui/title'
 import { useTestimonialsByEbook } from '@ez/web/hooks/use-testimonials'

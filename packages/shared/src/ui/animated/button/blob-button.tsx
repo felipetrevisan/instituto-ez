@@ -6,13 +6,13 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'border border-primary',
+        default: '',
       },
       theme: {
-        default: 'border border-primary',
-        secondary: 'border border-secondary',
-        tertiary: 'border border-tertiary',
-        custom: 'border border-[--header-button-hover-background]',
+        default: '',
+        secondary: '',
+        tertiary: '',
+        custom: '',
       },
       size: {
         default: 'max-w-fit px-4 py-2 [&_svg]:size-4',
@@ -45,20 +45,20 @@ const buttonVariants = cva(
       fullWidth: false,
       sticky: false,
     },
-    compoundVariants: [
-      {
-        variant: 'default',
-        theme: 'custom',
-        sticky: false,
-        class: 'border-[var(--header-button-hover-background)]',
-      },
-      {
-        variant: 'default',
-        theme: 'custom',
-        sticky: true,
-        class: 'border--[var(--header-sticky-button-hover-background)]',
-      },
-    ],
+    // compoundVariants: [
+    //   {
+    //     variant: 'default',
+    //     theme: 'custom',
+    //     sticky: false,
+    //     class: 'border-[var(--header-button-hover-background)]',
+    //   },
+    //   {
+    //     variant: 'default',
+    //     theme: 'custom',
+    //     sticky: true,
+    //     class: 'border--[var(--header-sticky-button-hover-background)]',
+    //   },
+    // ],
   },
 )
 
