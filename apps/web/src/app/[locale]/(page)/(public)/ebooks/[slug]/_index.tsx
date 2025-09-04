@@ -2,11 +2,12 @@
 
 import { DownloadIcon } from '@ez/shared/icons'
 import BlobButton from '@ez/shared/ui/animated/button/blob-button'
-import { Subtitle, Title } from '@ez/shared/ui/title'
+import { Title } from '@ez/shared/ui/title'
 import { useIsMobile } from '@ez/web/hooks/use-mobile'
 import type { Ebook } from '@ez/web/types/ebook'
-import { PortableText } from 'next-sanity'
+import { createPortableComponents } from '@ez/web/utils/create-portable-components'
 import Link from 'next/link'
+import { PortableText } from 'next-sanity'
 import ReactPlayer from 'react-player'
 
 export function Index({ data }: { data: Ebook }) {
@@ -25,7 +26,7 @@ export function Index({ data }: { data: Ebook }) {
         </Title>
         {index?.description && (
           <div className="mt-0 font-medium font-questrial text-[var(--secondary-c)]">
-            <PortableText value={index.description} />
+            <PortableText value={index.description} components={createPortableComponents()} />
           </div>
         )}
         {index?.video?.url && (
