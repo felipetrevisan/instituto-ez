@@ -30,9 +30,8 @@ export default async function Page({ params }: PageProps) {
   if (!data) {
     notFound()
   }
-  
-  const { sections } = await getLandingPageSettings()
 
+  const { sections } = await getLandingPageSettings()
 
   return <Content data={data} sections={sections} />
 }

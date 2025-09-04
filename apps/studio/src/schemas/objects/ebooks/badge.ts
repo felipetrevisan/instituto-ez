@@ -12,13 +12,13 @@ export default defineType({
       title: 'Type',
       type: 'string',
       options: {
-       list: [
+        list: [
           { title: 'Text', value: 'string' },
           { title: 'Number', value: 'number' },
           { title: 'Star', value: 'star' },
         ],
         layout: 'radio',
-    }
+      },
     }),
     defineField({
       name: 'prefix',

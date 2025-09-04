@@ -46,7 +46,7 @@ export default function GuaranteeSection() {
         </MotionTitle>
       </motion.h2>
 
-      <div className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 lg:gap-8'>
+      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 lg:gap-8">
         {seals.map((seal, i) => (
           <motion.div
             key={seal.title}

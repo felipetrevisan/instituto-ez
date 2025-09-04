@@ -38,10 +38,11 @@
   inset-inline: calc(-1 * var(--r));
   text-align: center;
   line-height: 1.8;
-  padding: 0 .5em calc(2 * var(--r));
+  padding: 0 0.5em calc(2 * var(--r));
   border-radius: var(--r);
   color: var(--fc);
-  background: radial-gradient(100% 50% at right, #0005 98%, #0000 101%) 0 var(--g),
+  background:
+    radial-gradient(100% 50% at right, #0005 98%, #0000 101%) 0 var(--g),
     radial-gradient(100% 50% at left, #0005 98%, #0000 101%) 100% var(--g),
     conic-gradient(from 90deg at var(--r) calc(100% - 2 * var(--r)), #0000 25%, var(--bg) 0) 0 0 /
     calc(100% - var(--r)) 100%;

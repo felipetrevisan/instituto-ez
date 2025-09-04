@@ -194,7 +194,7 @@ export function EbookCard({
                   </LinkComponent>
                 )}
                 {!link && (
-                  <div className='item-center lg:-right-[76px] md:-right-[86px] md:-bottom-[24px] absolute flex h-[80px] w-full justify-center overflow-hidden'>
+                  <div className="item-center lg:-right-[76px] md:-right-[86px] md:-bottom-[24px] absolute flex h-[80px] w-full justify-center overflow-hidden">
                     <Button
                       disabled={disabled}
                       theme={theme}

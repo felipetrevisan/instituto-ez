@@ -1,10 +1,7 @@
 import type { SanityImageSource } from '@sanity/asset-utils'
 import createImageUrlBuilder from '@sanity/image-url'
 
-function getImageUrlBuilder(config: {
-  dataset: string
-  projectId: string
-}) {
+function getImageUrlBuilder(config: { dataset: string; projectId: string }) {
   const imageBuilder = createImageUrlBuilder(config)
 
   function urlForImage(source: SanityImageSource) {

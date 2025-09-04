@@ -1,14 +1,14 @@
 import { cn } from '@ez/shared/lib/utils'
 import { Alert, AlertDescription, AlertTitle, type alertVariants } from '@ez/shared/ui/alert'
 import type { VariantProps } from 'class-variance-authority'
-import * as Icons from 'react-icons/fa'
+import { DynamicIcon, type IconName } from 'lucide-react/dynamic'
 
 type AlertVariants = VariantProps<typeof alertVariants>
 
 type AlertType = {
   variant: AlertVariants['variant']
   theme: AlertVariants['theme']
-  icon: { name: keyof typeof Icons }
+  icon?: IconName
   title: string
   message: string
 }
@@ -16,13 +16,13 @@ type AlertType = {
 const AlertComponent = ({ value }: { value: AlertType }) => {
   const { variant, theme, icon, title, message } = value
 
-  const IconComponent = icon?.name ? Icons[icon.name] : null
+  const Icon = icon ? <DynamicIcon name={icon} size={20} /> : null
 
   return (
     <div className={cn('relative flex justify-center')}>
       <Alert variant={variant} theme={theme}>
         <AlertTitle>
-          {IconComponent && <IconComponent size={20} />}
+          {Icon}
           {title}
         </AlertTitle>
         <AlertDescription>{message}</AlertDescription>

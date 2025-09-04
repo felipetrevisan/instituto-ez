@@ -7,5 +7,5 @@ import type { ReactNode } from 'react'
 export default function Wrapper({ children }: { children: ReactNode }) {
   const { isLandingPage } = useApp()
 
-  return <div className={cn({'bg-white': isLandingPage() })}>{children}</div>
+  return <div className={cn({ 'bg-white': isLandingPage() })}>{children}</div>
 }

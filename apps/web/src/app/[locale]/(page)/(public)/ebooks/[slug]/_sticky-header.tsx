@@ -30,7 +30,7 @@ export default function StickyHeader({ title, image, download }: Ebook) {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: -80, opacity: 0 }}
           transition={{ duration: 0.3, type: 'spring', stiffness: 300, damping: 20 }}
-          className='fixed top-[env(safe-area-inset-top,0px)] right-0 left-0 z-50 flex items-center justify-between bg-white/90 p-4 shadow-md backdrop-blur-xl'
+          className="fixed top-[env(safe-area-inset-top,0px)] right-0 left-0 z-50 flex items-center justify-between bg-white/90 p-4 shadow-md backdrop-blur-xl"
         >
           <div className="flex w-full items-center justify-between gap-5 md:container">
             <Link href={getLocalizedLink(locale, '/ebooks')} className="h-full md:w-[10vw]">
@@ -75,7 +75,7 @@ export default function StickyHeader({ title, image, download }: Ebook) {
               </h1>
             </div>
             {!download?.disabled && (
-              <Link href={download?.url ?? "/"} target="_blank">
+              <Link href={download?.url ?? '/'} target="_blank">
                 {!isMobile ? (
                   <BlobButton
                     variant="default"

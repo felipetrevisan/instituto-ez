@@ -11,11 +11,7 @@ import Link from 'next/link'
 import '@ez/web/components/sections/ebooks/styles.css'
 import { useLocale } from 'next-intl'
 
-export const EbooksWrapper = ({
-  value,
-}: {
-  value: Omit<EbooksType, 'ebooks' | 'title'>
-}) => {
+export const EbooksWrapper = ({ value }: { value: Omit<EbooksType, 'ebooks' | 'title'> }) => {
   const locale = useLocale()
   const { appareance, theme, type, collection } = value
   const { data, isLoading } = collection ? useEbookByCollection(collection._ref) : useEbooks()

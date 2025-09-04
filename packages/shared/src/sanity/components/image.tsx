@@ -4,7 +4,10 @@ import type { ImageUrlBuilder } from '@sanity/image-url/lib/types/builder'
 const ImageComponent = ({
   value,
   urlForImage,
-}: { value: SanityImageSource; urlForImage?: (source: SanityImageSource) => ImageUrlBuilder }) => {
+}: {
+  value: SanityImageSource
+  urlForImage?: (source: SanityImageSource) => ImageUrlBuilder
+}) => {
   if (!value || !urlForImage) {
     return null
   }

@@ -77,9 +77,7 @@ function BadgeButton({
   const formattedResult = formatNumber(motionNumberRef.current, formatted)
 
   const renderNumberSegments = (segments: string[], unit: string, isGhost: boolean) => (
-    <span
-      className={cn('flex items-center gap-px', isGhost ? 'invisible' : '')}
-    >
+    <span className={cn('flex items-center gap-px', isGhost ? 'invisible' : '')}>
       {segments.map((segment, index) => (
         // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
         <React.Fragment key={index}>
@@ -113,7 +111,7 @@ function BadgeButton({
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   React.useEffect(() => {
-    if (typeof value === 'number'&& value > 0) motionVal.set(value)
+    if (typeof value === 'number' && value > 0) motionVal.set(value)
   }, [motionVal, value, isComponentInView])
 
   return (
@@ -125,17 +123,15 @@ function BadgeButton({
       )}
       {...props}
     >
-      <div className="relative inline-flex size-[18px] shrink-0">
-        {Icon ?? null}
-      </div>
+      <div className="relative inline-flex size-[18px] shrink-0">{Icon ?? null}</div>
       <span className="relative inline-flex gap-1">
-        {prefix ? (<span>{prefix}</span>) : null}
+        {prefix ? <span>{prefix}</span> : null}
         {/* {typeof value === 'number' &&
           renderNumberSegments(ghostFormattedNumber.number, ghostFormattedNumber.unit, true)} */}
         {typeof value === 'number' &&
           renderNumberSegments(formattedResult.number, formattedResult.unit, false)}
         {typeof value === 'string' && value}
-        {suffix ? (<span>{suffix}</span>) : null}
+        {suffix ? <span>{suffix}</span> : null}
       </span>
     </motion.div>
   )

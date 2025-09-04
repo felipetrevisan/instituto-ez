@@ -1,7 +1,7 @@
 import type { SanityAsset } from '@ez/shared/types/assets'
 import type { Button } from '@ez/shared/types/global'
 import type { PortableTextBlock } from 'next-sanity'
-import type { IconName } from "lucide-react/dynamic"
+import type { IconName } from 'lucide-react/dynamic'
 
 export type Ebook = {
   id: string
@@ -115,7 +115,7 @@ export type Chapter = {
 
 export type Media = {
   type: 'none' | 'icon' | 'image'
-  icon?: { name: string }
+  icon?: IconName
   image?: SanityAsset
 }
 

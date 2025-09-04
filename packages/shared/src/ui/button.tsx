@@ -30,7 +30,7 @@ const buttonVariants = cva(
           'bg-linear-to-r from-secondary via-secondary/80 to-secondary text-secondary-foreground hover:bg-secondary/90',
         tertiary:
           'bg-linear-to-r from-tertiary via-tertiary/80 to-tertiary text-tertiary-foreground hover:bg-tertiary/90',
-        custom: ''
+        custom: '',
       },
       size: {
         sm: 'h-8 px-3 text-xs sm:text-sm',
@@ -76,7 +76,7 @@ const rippleVariants = cva('pointer-events-none absolute size-5 rounded-full', {
       default: 'bg-secondary',
       secondary: 'bg-tertiary',
       tertiary: 'bg-primary',
-      custom: ''
+      custom: '',
     },
   },
   defaultVariants: {

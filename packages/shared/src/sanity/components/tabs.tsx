@@ -12,7 +12,7 @@ import type { SanityImageSource } from '@sanity/asset-utils'
 import type { ImageUrlBuilder } from '@sanity/image-url/lib/types/builder'
 import { motion } from 'motion/react'
 import { useState } from 'react'
-import * as Icons from 'react-icons/fa'
+import { DynamicIcon, type IconName } from 'lucide-react/dynamic'
 
 export type TabsType = {
   tabs: TabItem[]
@@ -25,7 +25,7 @@ type TabItem = {
   id: { current: string }
   content: PortableTextBlock[]
   prefix: 'none' | 'icon' | 'image'
-  icon?: { name: keyof typeof Icons }
+  icon?: IconName
   image?: SanityAsset
 }
 
@@ -46,8 +46,8 @@ const TabsComponent = ({
   const [activeTab, setActiveTab] = useState(tabs[0].id.current)
 
   const getIcon = (tab: TabItem) => {
-    const IconComponent =
-      tab.prefix === 'icon' && tab.icon?.name ? Icons[tab.icon.name as keyof typeof Icons] : null
+    const Icon =
+      tab.prefix === 'icon' && tab.icon ? <DynamicIcon name={tab.icon} size={24} /> : null
 
     const ImageComponent =
       tab.prefix === 'image' && tab.image ? (
@@ -60,7 +60,7 @@ const TabsComponent = ({
         />
       ) : null
 
-    return IconComponent ? <IconComponent /> : ImageComponent
+    return Icon ?? ImageComponent
   }
 
   const icon = (tab: TabItem) => getIcon(tab)

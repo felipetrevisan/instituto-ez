@@ -13,11 +13,7 @@ export function ContactFormDialog() {
   }
 
   return (
-    <DialogContent
-      className="container max-w-3xl"
-      from="left"
-      onClose={closeDialog}
-    >
+    <DialogContent className="container max-w-3xl" from="left" onClose={closeDialog}>
       <DialogHeader>
         <DialogTitle>{t('title')}</DialogTitle>
       </DialogHeader>

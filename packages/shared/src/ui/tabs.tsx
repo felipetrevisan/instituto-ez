@@ -92,14 +92,14 @@ const tabHighlightVariants = cva('absolute rounded-full', {
       default: '',
       outline: 'border-2 outline-2',
       ghost: '',
-      custom: ''
+      custom: '',
     },
     theme: {
       default: 'bg-gradient-to-r from-primary/40 to-primary/80 text-primary opacity-30 blur-sm',
       secondary:
         'bg-gradient-to-r from-secondary/40 to-secondary/80 text-secondary opacity-30 blur-sm',
       tertiary: 'bg-gradient-to-r from-tertiary/40 to-tertiary/80 text-tertiary opacity-30 blur-sm',
-      custom: ''
+      custom: '',
     },
   },
   defaultVariants: {
@@ -154,13 +154,13 @@ const tabsTriggerVariants = cva(
         default: 'data-[state=active]:bg-transparent data-[state=active]:backdrop-blur-md',
         outline: 'data-[state=active]:border-1 data-[state=active]:backdrop-blur-md',
         ghost: 'data-[state=active]:border-1 data-[state=active]:backdrop-blur-md',
-        custom: ''
+        custom: '',
       },
       theme: {
         default: 'text-primary data-[state=active]:text-primary-foreground',
         secondary: 'text-secondary data-[state=active]:text-secondary-foreground',
         tertiary: 'text-tertiary data-[state=active]:text-tertiary-foreground',
-        custom: ''
+        custom: '',
       },
     },
     defaultVariants: {

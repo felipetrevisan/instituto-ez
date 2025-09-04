@@ -4,7 +4,7 @@ import { Button, type buttonVariants } from '@ez/shared/ui/button'
 import { Link } from '@ez/shared/ui/link'
 import type { VariantProps } from 'class-variance-authority'
 import { DynamicIcon } from 'lucide-react/dynamic'
-import type { IconName } from "lucide-react/dynamic"
+import type { IconName } from 'lucide-react/dynamic'
 
 type ButtonVariants = VariantProps<typeof buttonVariants>
 

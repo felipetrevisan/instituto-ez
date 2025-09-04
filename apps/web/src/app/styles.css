@@ -8,10 +8,9 @@
 }
 
 @utility bg-ebooks {
-  background-image: linear-gradient(var(--tw-gradient-stops)),
-    url("/assets/images/bg-ebooks-pattern.png");
+  background-image:
+    linear-gradient(var(--tw-gradient-stops)), url("/assets/images/bg-ebooks-pattern.png");
 }
-
 
 @layer components {
   .bprogress .bar {

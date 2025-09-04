@@ -1,6 +1,5 @@
 'use client'
 
-import { FaIcons } from '@ez/shared/icons'
 import { cn } from '@ez/shared/lib/utils'
 import { Magnetic } from '@ez/shared/ui/animated/effects/magnetic'
 import { CountingNumber } from '@ez/shared/ui/animated/text/counter'
@@ -8,16 +7,15 @@ import { HighlightText } from '@ez/shared/ui/animated/text/highlight'
 import { Card, CardContent } from '@ez/shared/ui/card'
 import { urlForImage } from '@ez/web/config/image'
 import type { Ebook, Media } from '@ez/web/types/ebook'
+import { DynamicIcon } from 'lucide-react/dynamic'
 import Image from 'next/image'
 
 export function Metadata({ data }: { data: Ebook }) {
   const { metadata, id } = data
 
   const getIcon = (media: Media) => {
-    const IconComponent =
-      media.type === 'icon' && media.icon?.name
-        ? FaIcons[media.icon.name as keyof typeof FaIcons]
-        : null
+    const Icon =
+      media.type === 'icon' && media.icon ? <DynamicIcon name={media.icon} size={24} /> : null
 
     const ImageComponent =
       media.type === 'image' && media.image ? (
@@ -29,7 +27,7 @@ export function Metadata({ data }: { data: Ebook }) {
         />
       ) : null
 
-    return IconComponent ? <IconComponent /> : ImageComponent
+    return Icon ?? ImageComponent
   }
 
   return (

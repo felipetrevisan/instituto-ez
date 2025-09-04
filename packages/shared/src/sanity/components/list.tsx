@@ -1,12 +1,12 @@
 import { cn } from '@ez/shared/lib/utils'
 import { createPortableComponents } from '@ez/shared/sanity/portable'
 import { PortableText, type PortableTextBlock } from '@portabletext/react'
-import * as Icons from 'react-icons/fa'
+import { DynamicIcon, type IconName } from 'lucide-react/dynamic'
 
 type ListType = {
   items: ListItemContent[]
   bullet_type: 'none' | 'icon' | 'emoji'
-  icon?: { name: keyof typeof Icons }
+  icon?: IconName
   emoji?: string
   divider: boolean
 }
@@ -20,7 +20,7 @@ const ListComponent = ({ value }: { value: ListType }) => {
 
   if (!items || !items.length) return null
 
-  const IconComponent = bullet_type === 'icon' && icon?.name ? Icons[icon.name] : null
+  const Icon = bullet_type === 'icon' && icon ? <DynamicIcon name={icon} size={24} /> : null
 
   return (
     <ul
@@ -39,7 +39,7 @@ const ListComponent = ({ value }: { value: ListType }) => {
         >
           {bullet_type !== 'none' && (
             <div>
-              {IconComponent && <IconComponent />}
+              {Icon}
               {emoji && <span>{emoji}</span>}
             </div>
           )}

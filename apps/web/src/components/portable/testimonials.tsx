@@ -9,7 +9,9 @@ import { useTestimonials } from '@ez/web/hooks/use-testimonials'
 
 export const TestimonialsWrapper = ({
   value,
-}: { value: Omit<TestimonialType, 'testimonials'> }) => {
+}: {
+  value: Omit<TestimonialType, 'testimonials'>
+}) => {
   const { data, isLoading } = useTestimonials(value.category)
 
   if (isLoading) return <Skeleton />

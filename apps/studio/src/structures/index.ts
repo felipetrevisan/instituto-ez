@@ -55,7 +55,9 @@ const structure = (S: StructureBuilder, context: ConfigContext) =>
                 S,
                 context,
               }),
-              S.listItem().title('Serviços para Empresas').child(S.documentTypeList('mathematizer')),
+              S.listItem()
+                .title('Serviços para Empresas')
+                .child(S.documentTypeList('mathematizer')),
               orderableDocumentListDeskItem({
                 type: 'testimonial',
                 title: 'Depoimentos',
@@ -91,7 +93,12 @@ const structure = (S: StructureBuilder, context: ConfigContext) =>
               }),
               S.listItem()
                 .title('Configurações')
-                .child(S.document().schemaType('landing-page-settings').documentId('landing-page-settings').title('Configurações')),
+                .child(
+                  S.document()
+                    .schemaType('landing-page-settings')
+                    .documentId('landing-page-settings')
+                    .title('Configurações'),
+                ),
             ]),
         ),
 
@@ -117,7 +124,7 @@ const structure = (S: StructureBuilder, context: ConfigContext) =>
             'advanced-mentory',
             'formGeneralSettings',
             'landing-page-settings',
-            'landing-page-section'
+            'landing-page-section',
           ].includes(listItem.getId() || ''),
       ),
     ])

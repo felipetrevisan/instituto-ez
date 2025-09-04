@@ -19,7 +19,5 @@ export {
   MailIcon,
   ChevronLeftIcon,
   StarIcon,
-  ClockIcon
+  ClockIcon,
 } from 'lucide-react'
-
-export * as FaIcons from 'react-icons/fa'

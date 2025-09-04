@@ -16,7 +16,8 @@ const cardVariants = cva('relative', {
         'bg-linear-to-r from-secondary via-secondary/80 to-secondary text-secondary-foreground shadow-secondary/20 outline-secondary/40 hover:border-secondary/40 hover:bg-secondary/30 hover:text-secondary-foreground',
       tertiary:
         'bg-linear-to-r from-tertiary via-tertiary/80 to-tertiary text-tertiary-foreground shadow-tertiary/20 outline-tertiary/40 hover:border-tertiary/40 hover:bg-tertiary/30 hover:text-tertiary-foreground',
-      custom: 'bg-linear-to-r from-[var(--secondary-c)] via-[var(--secondary-c)]/80 to-[var(--secondary-c)] text-[var(--secondary-c)] shadow-[var(--secondary-c)]/20 outline-[var(--secondary-c)]/40 hover:border-[var(--secondary-c)]/40 hover:bg-[var(--secondary-c)]/30 hover:text-[var(--secondary-c)]',
+      custom:
+        'bg-linear-to-r from-[var(--secondary-c)] via-[var(--secondary-c)]/80 to-[var(--secondary-c)] text-[var(--secondary-c)] shadow-[var(--secondary-c)]/20 outline-[var(--secondary-c)]/40 hover:border-[var(--secondary-c)]/40 hover:bg-[var(--secondary-c)]/30 hover:text-[var(--secondary-c)]',
     },
     rounded: {
       none: 'rounded-none **:data-[slot=card-content-action]:rounded-none',
@@ -49,7 +50,8 @@ const cardVariants = cva('relative', {
     {
       variant: 'outline',
       theme: 'custom',
-      class: 'bg-transparent text-[var(--primary-c)] hover:bg-transparent hover:text-[var(--primary-c)]',
+      class:
+        'bg-transparent text-[var(--primary-c)] hover:bg-transparent hover:text-[var(--primary-c)]',
     },
     {
       variant: 'ghost',

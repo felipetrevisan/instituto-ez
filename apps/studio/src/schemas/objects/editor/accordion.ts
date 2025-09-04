@@ -75,7 +75,7 @@ export default defineType({
       return {
         title: `Accordion -> ${title}`,
         subtitle: `Tema: ${theme || 'default'} -> Size: ${size} -> Rounded: ${rounded}`,
-        media: MarkerIcon ,
+        media: MarkerIcon,
       }
     },
   },

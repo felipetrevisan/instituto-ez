@@ -6,7 +6,7 @@ import GuaranteeSection from './_guarantee'
 
 export default function Footer({ data }: { data: Ebook }) {
   return (
-    <section className='relative mt-20 w-full bg-gradient-to-b from-white via-zinc-200 to-white lg:mt-30 lg:py-55'>
+    <section className="relative mt-20 w-full bg-gradient-to-b from-white via-zinc-200 to-white lg:mt-30 lg:py-55">
       <div className="absolute top-0 left-0 hidden w-full md:block">
         {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
         <svg

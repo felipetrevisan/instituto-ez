@@ -2,7 +2,7 @@ import { cn } from '@ez/studio/lib/utils'
 import { createPortableComponents } from '@ez/studio/portable'
 import { PortableText, type PortableTextBlock } from '@portabletext/react'
 import { Card, Stack } from '@sanity/ui'
-import { DynamicIcon } from 'lucide-react/dynamic';
+import { DynamicIcon } from 'lucide-react/dynamic'
 import type { BlockProps, PortableTextObject } from 'sanity'
 
 type ListItemContent = {

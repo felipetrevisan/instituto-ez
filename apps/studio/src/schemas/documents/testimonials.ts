@@ -54,8 +54,7 @@ export default defineType({
       description: 'Select a ebook page',
       type: 'reference',
       to: [{ type: 'ebook' }],
-      hidden: ({ parent }) =>
-        !parent?.categories?.includes('ebook')
+      hidden: ({ parent }) => !parent?.categories?.includes('ebook'),
     }),
   ],
   preview: {
