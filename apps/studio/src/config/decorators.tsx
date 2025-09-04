@@ -1,6 +1,6 @@
 import { HighlightDecorator, TextAlignDecorator } from '@ez/studio/portable/decorators'
 import { BulbOutlineIcon, LinkIcon } from '@sanity/icons'
-import { FaAlignCenter, FaAlignJustify, FaAlignLeft, FaAlignRight } from 'react-icons/fa'
+import { AlignCenterIcon, AlignJustifyIcon, AlignLeftIcon, AlignRightIcon } from 'lucide-react'
 
 const basicDecorators = [
   { title: 'Bold', value: 'strong' },
@@ -29,28 +29,28 @@ const decorators = [
   {
     title: 'Center',
     value: 'center',
-    icon: <FaAlignCenter size={11} />,
+    icon: <AlignCenterIcon size={11} />,
     // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     component: (props: any) => TextAlignDecorator(props, 'center'),
   },
   {
     title: 'Right',
     value: 'right',
-    icon: <FaAlignRight size={11} />,
+    icon: <AlignRightIcon size={11} />,
     // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     component: (props: any) => TextAlignDecorator(props, 'right'),
   },
   {
     title: 'Left',
     value: 'left',
-    icon: <FaAlignLeft size={11} />,
+    icon: <AlignLeftIcon size={11} />,
     // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     component: (props: any) => TextAlignDecorator(props, 'left'),
   },
   {
     title: 'Justify',
     value: 'justify',
-    icon: <FaAlignJustify size={11} />,
+    icon: <AlignJustifyIcon size={11} />,
     // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     component: (props: any) => TextAlignDecorator(props, 'justify'),
   },

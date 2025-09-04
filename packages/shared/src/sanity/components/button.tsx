@@ -3,7 +3,8 @@ import { cn } from '@ez/shared/lib/utils'
 import { Button, type buttonVariants } from '@ez/shared/ui/button'
 import { Link } from '@ez/shared/ui/link'
 import type { VariantProps } from 'class-variance-authority'
-import * as Icons from 'react-icons/fa'
+import { DynamicIcon } from 'lucide-react/dynamic'
+import type { IconName } from "lucide-react/dynamic"
 
 type ButtonVariants = VariantProps<typeof buttonVariants>
 
@@ -17,15 +18,13 @@ type ButtonType = {
   label: string
   action: 'link' | 'dialog'
   subject: ''
-  icon: { name: keyof typeof Icons }
+  icon?: IconName
 }
 
 const ButtonComponent = ({ value }: { value: ButtonType }) => {
   const { setIsContactDialogOpen, setContactSubject } = useShared()
 
   const { label, link, variant, theme, size, rounded, fullWidth, action, icon, subject } = value
-
-  const IconComponent = icon?.name ? Icons[icon.name] : null
 
   const handleClick = () => {
     if (action === 'dialog') {
@@ -46,7 +45,7 @@ const ButtonComponent = ({ value }: { value: ButtonType }) => {
       className="p-5 font-bold"
       onClick={action === 'dialog' ? handleClick : undefined}
     >
-      {IconComponent && <IconComponent />}
+      {icon && <DynamicIcon name={icon} />}
       {label}
     </Button>
   )

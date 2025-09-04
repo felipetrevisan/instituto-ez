@@ -1,5 +1,4 @@
 import { LeaveIcon } from '@sanity/icons'
-import * as Icons from 'react-icons/fa'
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
@@ -25,25 +24,8 @@ export default defineType({
     defineField({
       name: 'icon',
       title: 'Icon',
-      type: 'iconPicker',
+      type: 'lucide-icon',
       hidden: ({ parent }) => parent?.type !== 'icon',
-      options: {
-        provider: '',
-        configurations: [
-          {
-            title: 'Font Awesome',
-            provider: 'fa',
-            // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-            icons: (options: any) =>
-              Object.entries(Icons).map(([name, Component]) => ({
-                name,
-                component: () => <Component width="1.5em" height="1em" />,
-                tags: [name],
-              })),
-          },
-        ],
-        outputFormat: 'react',
-      },
     }),
     defineField({
       name: 'image',

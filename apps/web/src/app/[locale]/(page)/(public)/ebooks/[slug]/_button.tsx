@@ -1,3 +1,5 @@
+'use client'
+
 import { cn } from '@ez/shared/lib/utils'
 import { useIsMobile } from '@ez/web/hooks/use-mobile'
 import { motion } from 'motion/react'
@@ -17,7 +19,7 @@ type AnimatedButtonProps = {
   justify?: 'center' | 'start' | 'end'
   animateMaps: AnimatedValue
   className?: string
-  onClick?: () => void
+  onClickAction?: () => void
 }
 
 export function AnimatedButton({
@@ -27,7 +29,7 @@ export function AnimatedButton({
   justify = 'start',
   animateMaps,
   className,
-  onClick,
+  onClickAction,
 }: AnimatedButtonProps) {
   const [hovered, setHovered] = useState(false)
   const isMobile = useIsMobile(640)
@@ -50,7 +52,7 @@ export function AnimatedButton({
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
-      onClick={onClick}
+      onClick={onClickAction}
     >
       {icon && (
         <motion.div

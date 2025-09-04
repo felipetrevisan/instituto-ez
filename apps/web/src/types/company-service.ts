@@ -2,7 +2,7 @@ import type { SanityAsset } from '@ez/shared/types/assets'
 import type { Button } from '@ez/shared/types/global'
 import type { PortableTextBlock } from 'next-sanity'
 
-export type Mathematizer = {
+export type CompanyService = {
   id: string
   title: string
   content: PortableTextBlock[]

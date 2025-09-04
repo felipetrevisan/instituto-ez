@@ -1,6 +1,5 @@
 import AccordionPreviewComponent from '@ez/studio/preview/accordion'
-import { MenuIcon } from '@sanity/icons'
-import { FaQuestion } from 'react-icons/fa'
+import { MarkerIcon, MenuIcon } from '@sanity/icons'
 import { defineType } from 'sanity'
 
 export default defineType({
@@ -76,7 +75,7 @@ export default defineType({
       return {
         title: `Accordion -> ${title}`,
         subtitle: `Tema: ${theme || 'default'} -> Size: ${size} -> Rounded: ${rounded}`,
-        media: FaQuestion,
+        media: MarkerIcon ,
       }
     },
   },

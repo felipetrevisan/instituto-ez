@@ -49,6 +49,10 @@ export default defineType({
       name: 'price',
       title: 'Price',
     },
+    {
+      name: 'badge',
+      title: 'Badges',
+    },
   ],
   fields: [
     orderRankField({ type: 'ebook' }),
@@ -163,6 +167,13 @@ export default defineType({
       type: 'price',
       group: ['price'],
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
+    }),
+    defineField({
+      name: 'badge',
+      title: 'Badge',
+      type: 'array',
+      of: [{ type: 'badge' }],
+      group: ['badge'],
     }),
   ],
   preview: {

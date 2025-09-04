@@ -1,6 +1,7 @@
 'use client'
 
-import { ChevronLeftIcon, DownloadIcon } from '@ez/shared/icons'
+import { ChevronLeftIcon, ClockIcon, DownloadIcon } from '@ez/shared/icons'
+import { BadgeButton } from '@ez/shared/ui/animated/badge'
 import { BadgeStarButton } from '@ez/shared/ui/animated/badge-star'
 import BlobButton from '@ez/shared/ui/animated/button/blob-button'
 import { IconButton } from '@ez/shared/ui/animated/button/icon-button'
@@ -15,6 +16,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { AnimatedButton } from './_button'
 import StickyHeader from './_sticky-header'
+import Badges from './_badges'
 
 const DownloadIconMotion = motion(DownloadIcon)
 const ChevronLeftIconMotion = motion(ChevronLeftIcon)
@@ -27,7 +29,7 @@ export function Header({ data }: { data: Ebook }) {
 
   return (
     <>
-      <header className="relative flex w-screen flex-col items-center justify-center overflow-hidden bg-[auto,cover] bg-ebooks bg-gradient-to-br from-[var(--primary-c)] via-[var(--secondary-c)] to-[var(--tertiary-c)]/40 pb-12 text-white md:h-[600px] md:px-6 md:py-12">
+      <header className="relative flex w-screen flex-col items-center justify-center overflow-hidden bg-[auto,cover] bg-ebooks bg-gradient-to-br from-[var(--primary-c)] via-[var(--secondary-c)] to-[var(--tertiary-c)]/40 pb-12 text-white md:h-[700px] md:px-6 md:py-12">
         <Link href={getLocalizedLink(locale, '/ebooks')} className="container my-8 w-full">
           {!isMobile ? (
             <AnimatedButton
@@ -72,25 +74,25 @@ export function Header({ data }: { data: Ebook }) {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             {isMobile ? (
-              <h1 className="mt-10 mb-6 text-center font-extrabold text-2xl leading-tight drop-shadow-md">
+              <h1 className="mt-10 text-center font-extrabold text-2xl leading-tight drop-shadow-md">
                 {title}
               </h1>
             ) : (
               <WritingText
                 asChild="h1"
                 text={title as string}
-                className="mb-6 font-extrabold text-2xl leading-tight drop-shadow-md"
+                className="font-extrabold text-2xl leading-tight drop-shadow-md"
               />
             )}
-            <BadgeStarButton numberOfStars={4.9} />
+            <Badges data={data} />
             <div className="flex flex-col">
               {isMobile ? (
-                <span className='mb-6 max-w-prose text-justify font-semibold text-lg text-white/90 leading-relaxed'>
+                <span className="mb-6 max-w-prose text-justify font-semibold text-lg text-white/90 leading-relaxed">
                   {description}
                 </span>
               ) : (
                 <motion.h1
-                  className='mb-6 max-w-prose font-semibold text-lg text-white/90 leading-relaxed'
+                  className="mb-6 max-w-prose text-justify font-semibold text-lg text-white/90 leading-relaxed"
                   initial={{ opacity: 0, x: -50 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8, delay: 0.2 }}
@@ -114,7 +116,7 @@ export function Header({ data }: { data: Ebook }) {
           </motion.div>
           {!isMobile && (
             <motion.div
-              className="relative z-10 mt-10 size-[550px] overflow-hidden rounded-xl md:mt-0 md:size-[400px] lg:size-[550px]"
+              className="relative z-10 mt-10 size-[550px] overflow-hidden rounded-xl md:mt-0 md:size-[400px] lg:size-[600px]"
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.6 }}

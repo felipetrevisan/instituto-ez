@@ -1,6 +1,7 @@
 import type { SanityAsset } from '@ez/shared/types/assets'
 import type { Button } from '@ez/shared/types/global'
 import type { PortableTextBlock } from '@portabletext/react'
+import type { IconName } from "lucide-react/dynamic"
 
 export type Ebook = {
   id: string
@@ -25,9 +26,13 @@ export type Ebook = {
   index: {
     title?: string
     description?: PortableTextBlock[]
-    video?: string
+    video: {
+      title?: string
+      url?: string
+    }
   }
   metadata: Metadata[]
+  badges: Badge[]
   chapter: {
     cover?: SanityAsset
     chapters: Chapter[]
@@ -93,6 +98,15 @@ export type Metadata = {
   prefix?: string
   suffix?: string
   media: Media
+}
+
+export type Badge = {
+  type: 'string' | 'number' | 'star'
+  text?: string
+  value?: number
+  prefix?: string
+  suffix?: string
+  icon?: IconName
 }
 
 export type Chapter = {

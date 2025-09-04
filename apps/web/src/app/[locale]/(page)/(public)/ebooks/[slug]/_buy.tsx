@@ -2,7 +2,7 @@
 
 import { DownloadIcon } from '@ez/shared/icons'
 import BlobButton from '@ez/shared/ui/animated/button/blob-button'
-import { Subtitle, Title } from '@ez/shared/ui/title'
+import { Title } from '@ez/shared/ui/title'
 import { urlForImage } from '@ez/web/config/image'
 import type { Ebook } from '@ez/web/types/ebook'
 import { motion } from 'motion/react'
@@ -11,7 +11,6 @@ import Link from 'next/link'
 import PriceBubble from './_price-bubble'
 
 const MotionTitle = motion(Title)
-const MotionSubTitle = motion(Subtitle)
 
 const DownloadIconMotion = motion(DownloadIcon)
 
@@ -34,7 +33,7 @@ export default function BuySection({ data }: { data: Ebook }) {
               Garanta já seu eBook
             </MotionTitle>
           </motion.div>
-          <div className="relative h-[300px] w-[500px]">
+          <div className="relative h-[300px] w-full md:w-[500px]">
             <Image
               src={
                 image.footer?.asset

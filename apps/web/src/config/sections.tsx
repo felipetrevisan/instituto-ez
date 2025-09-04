@@ -1,10 +1,10 @@
 import { About } from '@ez/web/components/sections/about'
-import { AdvancedMentory } from '@ez/web/components/sections/advancedMentory'
+import { AdvancedMentory } from '@ez/web/components/sections/advanced-mentory'
 import { Banner } from '@ez/web/components/sections/banner'
+import { CompanyService } from '@ez/web/components/sections/company-service'
 import { Ebooks } from '@ez/web/components/sections/ebooks'
 import { Immersion } from '@ez/web/components/sections/immersion'
 import { Lectures } from '@ez/web/components/sections/lectures'
-import { Mathematizer } from '@ez/web/components/sections/mathematizer'
 import { Services } from '@ez/web/components/sections/services'
 import { Testimonials } from '@ez/web/components/sections/testimonials'
 import { Workshops } from '@ez/web/components/sections/workshops'
@@ -53,8 +53,8 @@ export function getSections(): SectionKeys[] {
       classes: 'section relative flex flex-col w-screen h-full justify-center',
     },
     {
-      key: 'mathematizer',
-      component: <Mathematizer />,
+      key: 'company-services',
+      component: <CompanyService />,
       classes: 'section relative flex flex-col gap-10 w-screen h-full justify-center',
     },
     {

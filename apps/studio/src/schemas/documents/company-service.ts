@@ -4,7 +4,7 @@ import { defineField, defineType } from 'sanity'
 
 export default defineType({
   name: 'mathematizer',
-  title: 'Matematizador',
+  title: 'Serviços para Empresas',
   icon: BlockContentIcon,
   type: 'document',
   fields: [

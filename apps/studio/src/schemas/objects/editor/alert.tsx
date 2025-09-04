@@ -1,6 +1,5 @@
 import AlertPreviewComponent from '@ez/studio/preview/alert'
 import { WarningFilledIcon } from '@sanity/icons'
-import * as Icons from 'react-icons/fa'
 import { defineType } from 'sanity'
 
 export default defineType({
@@ -53,24 +52,7 @@ export default defineType({
     {
       title: 'Icon',
       name: 'icon',
-      type: 'iconPicker',
-      options: {
-        provider: 'fa',
-        configurations: [
-          {
-            title: 'Font Awesome',
-            provider: 'fa',
-            // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-            icons: (options: any) =>
-              Object.entries(Icons).map(([name, Component]) => ({
-                name,
-                component: () => <Component width="1.5em" height="1em" />,
-                tags: [name],
-              })),
-          },
-        ],
-        outputFormat: 'react',
-      },
+      type: 'lucide-icon',
     },
   ],
   preview: {

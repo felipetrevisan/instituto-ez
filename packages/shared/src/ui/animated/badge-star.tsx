@@ -38,7 +38,6 @@ function formatNumber(num: number, formatted: boolean): FormatNumberResult {
 
 type BadgeStarButtonProps = HTMLMotionProps<'div'> & {
   numberOfStars?: number
-  addPlusSignal?: boolean
   transition?: SpringOptions
   formatted?: boolean
   inView?: boolean
@@ -50,7 +49,6 @@ function BadgeStarButton({
   ref,
   transition = { stiffness: 90, damping: 50 },
   numberOfStars = 0,
-  addPlusSignal = false,
   formatted = false,
   inView = false,
   inViewOnce = true,
@@ -131,11 +129,8 @@ function BadgeStarButton({
   return (
     <motion.div
       ref={localRef}
-      rel="noopener noreferrer"
-      whileTap={{ scale: 0.95 }}
-      whileHover={{ scale: 1.05 }}
       className={cn(
-        "flex h-10 w-[150px] shrink-0 cursor-pointer items-center gap-2 whitespace-nowrap rounded-full bg-primary px-4 py-2 font-medium text-primary-foreground text-sm outline-none transition-colors focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 has-[>svg]:px-3 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&_svg:not([class*='size-'])]:size-[18px] [&_svg]:pointer-events-none [&_svg]:shrink-0",
+        "flex h-10 w-[150px] shrink-0 cursor-pointer items-center gap-2 whitespace-nowrap rounded-full bg-zinc-800/20 px-4 py-2 font-medium text-primary-foreground text-sm outline-none transition-colors focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 has-[>svg]:px-3 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&_svg:not([class*='size-'])]:size-[18px] [&_svg]:pointer-events-none [&_svg]:shrink-0",
         className,
       )}
       {...props}

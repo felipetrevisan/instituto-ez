@@ -3,9 +3,9 @@ import type { SchemaTypeDefinition } from 'sanity'
 // Documents
 import advancedMentory from './documents/advanced-mentory'
 import banner from './documents/banner'
+import companyService from './documents/company-service'
 import immersion from './documents/immersion'
 import lecture from './documents/lecture'
-import mathematizer from './documents/mathematizer'
 import navigation from './documents/navigation'
 import page from './documents/page'
 import services from './documents/services'
@@ -17,8 +17,7 @@ import ebookCollection from './ebooks/collection'
 import landingPageSettings from './ebooks/settings'
 
 // Objects
-import aboutCard from './objects/about-card'
-import button from './objects/button'
+import badge from './objects/ebooks/badge'
 import chapter from './objects/ebooks/chapter'
 import chapters from './objects/ebooks/chapters'
 import ebooksIndex from './objects/ebooks/content'
@@ -29,7 +28,8 @@ import ebooksOverview from './objects/ebooks/overview'
 import price from './objects/ebooks/price'
 import landingPageSection from './objects/ebooks/section'
 import themeButton from './objects/ebooks/theme/button'
-import theme from './objects/ebooks/theme/theme'
+import themeSchema from './objects/ebooks/theme/theme'
+
 import accordionWidget from './objects/editor/accordion'
 import accordionContentWidget from './objects/editor/accordion-content'
 import alertWidget from './objects/editor/alert'
@@ -42,6 +42,9 @@ import richText from './objects/editor/rich-text'
 import tabsWidget from './objects/editor/tabs'
 import testimonialWidget from './objects/editor/testimonial'
 import titleWidget from './objects/editor/title'
+
+import aboutCard from './objects/about-card'
+import button from './objects/button'
 import icon from './objects/icon'
 import link from './objects/link'
 import logo from './objects/logo'
@@ -64,7 +67,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     services,
     immersion,
     advancedMentory,
-    mathematizer,
+    companyService,
     lecture,
     banner,
     page,
@@ -77,15 +80,17 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     link,
     button,
     ribbon,
-    coverImage,
     icon,
+
+    coverImage,
     metadata,
     chapters,
     chapter,
     download,
     price,
+    badge,
     landingPageSection,
-    theme,
+    themeSchema,
     themeButton,
     pageSection,
     aboutCard,

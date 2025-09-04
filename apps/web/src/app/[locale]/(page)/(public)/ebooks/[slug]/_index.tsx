@@ -28,10 +28,20 @@ export function Index({ data }: { data: Ebook }) {
             <PortableText value={index.description} />
           </div>
         )}
-        {index?.video && (
-          <div className="h-[200px] w-[90vw] max-w-full overflow-hidden rounded-2xl shadow-xl md:h-[450px] md:w-[60vw]">
-            <ReactPlayer url={index.video} width="100%" height="100%" controls={false} />
-          </div>
+        {index?.video?.url && (
+          <>
+            {index?.video.title && (
+              <Title
+                size="2xl"
+                className="after:-bottom-1 after:-translate-x-1/2 relative text-center font-questrial font-semibold text-[var(--primary-c)] after:absolute after:left-1/2 after:h-[2px] after:w-[40%] after:rounded-xl after:bg-[var(--primary-c)]/60 after:transition-all"
+              >
+                {index.video.title}
+              </Title>
+            )}
+            <div className="h-[200px] w-[90vw] max-w-full overflow-hidden rounded-2xl shadow-xl md:h-[450px] md:w-[60vw]">
+              <ReactPlayer url={index.video.url} width="100%" height="100%" controls={false} />
+            </div>
+          </>
         )}
         {!download?.disabled && (
           <Link
@@ -41,7 +51,7 @@ export function Index({ data }: { data: Ebook }) {
           >
             <BlobButton
               theme="custom"
-              size={isMobile ? 'xl' : '2xl'}
+              size={isMobile ? 'xl' : '3xl'}
               rounded="full"
               className="w-full"
             >

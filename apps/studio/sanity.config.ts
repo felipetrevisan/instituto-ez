@@ -8,7 +8,7 @@ import { languageFilter } from '@sanity/language-filter'
 import { visionTool } from '@sanity/vision'
 import { type PluginOptions, defineConfig } from 'sanity'
 import { unsplashImageAsset } from 'sanity-plugin-asset-source-unsplash'
-import { iconPicker } from 'sanity-plugin-icon-picker'
+import { lucideIconPicker } from 'sanity-plugin-lucide-icon-picker';
 
 import { structureTool } from 'sanity/structure'
 
@@ -49,7 +49,7 @@ export default defineConfig({
     }),
     // Add an image asset source for Unsplash
     unsplashImageAsset(),
-    iconPicker(),
+    lucideIconPicker(),
     colorInput(),
     contactFormPlugin(),
     languageFilter({

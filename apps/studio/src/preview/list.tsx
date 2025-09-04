@@ -2,7 +2,7 @@ import { cn } from '@ez/studio/lib/utils'
 import { createPortableComponents } from '@ez/studio/portable'
 import { PortableText, type PortableTextBlock } from '@portabletext/react'
 import { Card, Stack } from '@sanity/ui'
-import * as Icons from 'react-icons/fa'
+import { DynamicIcon } from 'lucide-react/dynamic';
 import type { BlockProps, PortableTextObject } from 'sanity'
 
 type ListItemContent = {
@@ -15,11 +15,9 @@ const ListPreviewComponent = (props: BlockProps) => {
   const valueRaw = value as PortableTextObject
   const items = (valueRaw.items as ListItemContent[]) || []
   const bullet_type = (valueRaw.bullet_type as 'none' | 'icon' | 'emoji') || 'none'
-  const icon = (valueRaw.icon as { name: keyof typeof Icons }) || null
+  // const icon = (valueRaw.icon as string )|| null
   const emoji = (valueRaw.emoji as string) || ''
   const divider = valueRaw.divider as boolean
-
-  const IconComponent = bullet_type === 'icon' && icon?.name ? Icons[icon.name] : null
 
   return (
     <Card tone="primary" scheme="dark" padding={[2, 2, 3]}>
@@ -38,12 +36,12 @@ const ListPreviewComponent = (props: BlockProps) => {
                   // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
                   key={index}
                   className={cn({
-                    'flex flex-row gap-2 items-center': bullet_type !== 'none',
+                    'flex flex-row items-center gap-2': bullet_type !== 'none',
                   })}
                 >
                   {bullet_type !== 'none' && (
                     <div>
-                      {IconComponent && <IconComponent />}
+                      {/* {bullet_type === 'icon' && icon && <DynamicIcon name={icon} size={24} />} */}
                       {emoji && <span>{emoji}</span>}
                     </div>
                   )}

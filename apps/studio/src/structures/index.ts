@@ -55,7 +55,7 @@ const structure = (S: StructureBuilder, context: ConfigContext) =>
                 S,
                 context,
               }),
-              S.listItem().title('Matematizador').child(S.documentTypeList('mathematizer')),
+              S.listItem().title('Serviços para Empresas').child(S.documentTypeList('mathematizer')),
               orderableDocumentListDeskItem({
                 type: 'testimonial',
                 title: 'Depoimentos',

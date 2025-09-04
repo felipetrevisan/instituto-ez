@@ -205,7 +205,7 @@ export const advancedMentoryQuery = groq`
   }
 `
 
-export const mathematizerQuery = groq`
+export const companyServiceQuery = groq`
   *[ _type == 'mathematizer' ] | order(orderRank) { 
     "id": _id,
     title,
@@ -289,6 +289,14 @@ export const ebookQueryBySlug = groq`
       "hasDiscount": discount,
       "priceWithDiscount": discount_price
     },
+    "badges": badge[] {
+      type,
+      prefix,
+      suffix,
+      text,
+      value,
+      icon
+    },
     "theme": theme {
       text,
       primary,
@@ -333,7 +341,10 @@ export const ebookQueryBySlug = groq`
     "index": index {
       title,
       description,
-      video
+      "video": {
+        "title": video_title,
+        "url": video
+      }
     },
     "questions": questions[] {
       title,

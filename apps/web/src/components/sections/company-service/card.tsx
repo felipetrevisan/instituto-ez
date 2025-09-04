@@ -5,7 +5,7 @@ import { createPortableComponents } from '@ez/shared/sanity/portable'
 import { Button } from '@ez/shared/ui/button'
 import { ButtonLink } from '@ez/web/components/app'
 import { urlForImage } from '@ez/web/config/image'
-import type { Mathematizer } from '@ez/web/types/mathematizer'
+import type { CompanyService } from '@ez/web/types/company-service'
 import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
 import { PortableText } from '@portabletext/react'
 import { useLocale } from 'next-intl'
@@ -13,10 +13,10 @@ import { Parallax } from 'react-parallax'
 
 type Props = {
   index: number
-  item: Mathematizer
+  item: CompanyService
 }
 
-export function MathematizerCard({ item: { button, background, content, title }, index }: Props) {
+export function CompanyServiceCard({ item: { button, background, content, title }, index }: Props) {
   const locale = useLocale()
   const link = getLink(button)
   const isEven = index % 2 === 0
@@ -39,11 +39,11 @@ export function MathematizerCard({ item: { button, background, content, title },
       />
       <div
         className={cn(
-          '-mt-60 md:-mt-32 z-10 mx-auto w-11/12 rounded-xl bg-card/90 shadow-lg',
+          '-mt-60 md:-mt-32 z-10 mx-auto w-11/12 rounded-xl bg-card/50 shadow-lg backdrop-blur-lg',
           'lg:mt-0 lg:self-center',
           isEven
-            ? 'lg:col-span-8 lg:col-start-4 lg:row-start-1' // entra “por cima” da esquerda
-            : 'lg:col-span-8 lg:col-start-1 lg:row-start-1', // entra “por cima” da direita
+            ? 'lg:col-span-8 lg:col-start-4 lg:row-start-1'
+            : 'lg:col-span-8 lg:col-start-1 lg:row-start-1',
         )}
       >
         <div className="relative flex h-full w-full flex-col items-start justify-start gap-10 p-10 text-secondary">

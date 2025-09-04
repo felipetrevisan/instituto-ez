@@ -1,11 +1,11 @@
 'use client'
 
-import { useMathematizer } from '@ez/web/hooks/use-mathematizer'
-import { MathematizerCard as Card } from './card'
+import { useCompanyService } from '@ez/web/hooks/use-company-service'
+import { CompanyServiceCard as Card } from './card'
 import { Skeleton } from './skeleton'
 
-export function Mathematizer() {
-  const { data, isLoading } = useMathematizer()
+export function CompanyService() {
+  const { data, isLoading } = useCompanyService()
 
   return (
     <div className="flex flex-col">
