@@ -7,6 +7,7 @@ import { EbooksWrapper } from '@ez/web/components/portable/ebooks'
 import { ImageWrapper } from '@ez/web/components/portable/image'
 import { TabsWrapper } from '@ez/web/components/portable/tabs'
 import { TestimonialsWrapper } from '@ez/web/components/portable/testimonials'
+import { ListWrapper } from '../components/portable/list'
 
 export const createPortableComponents = () => {
   const types = {
@@ -16,6 +17,7 @@ export const createPortableComponents = () => {
     ebooksWidget: EbooksWrapper,
     tabsWidget: TabsWrapper,
     cardsWidget: CardsWrapper,
+    list: ListWrapper
   }
 
   return {
