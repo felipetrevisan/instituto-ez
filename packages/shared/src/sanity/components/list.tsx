@@ -1,9 +1,13 @@
 import { cn } from '@ez/shared/lib/utils'
 import { createPortableComponents } from '@ez/shared/sanity/portable'
-import { PortableText, type PortableTextBlock } from '@portabletext/react'
+import {
+  PortableText,
+  type PortableTextBlock,
+  type PortableTextComponents,
+} from '@portabletext/react'
 import { DynamicIcon, type IconName } from 'lucide-react/dynamic'
 
-type ListType = {
+export type ListType = {
   items: ListItemContent[]
   bullet_type: 'none' | 'icon' | 'emoji'
   icon?: IconName
@@ -15,7 +19,12 @@ export type ListItemContent = {
   content: PortableTextBlock[]
 }
 
-const ListComponent = ({ value }: { value: ListType }) => {
+type ListComponentProps = {
+  value: ListType
+  portableComponentsOverrides?: Partial<PortableTextComponents>
+}
+
+const ListComponent = ({ value, portableComponentsOverrides }: ListComponentProps) => {
   const { items, bullet_type, icon, emoji, divider } = value
 
   if (!items || !items.length) return null
@@ -34,7 +43,7 @@ const ListComponent = ({ value }: { value: ListType }) => {
           // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
           key={index}
           className={cn({
-            'flex flex-row gap-2 items-center': bullet_type !== 'none',
+            'flex flex-row items-center gap-2': bullet_type !== 'none',
           })}
         >
           {bullet_type !== 'none' && (
@@ -44,7 +53,7 @@ const ListComponent = ({ value }: { value: ListType }) => {
             </div>
           )}
           <div>
-            <PortableText value={item.content} components={createPortableComponents()} />
+            <PortableText value={item.content} components={portableComponentsOverrides} />
           </div>
         </li>
       ))}
