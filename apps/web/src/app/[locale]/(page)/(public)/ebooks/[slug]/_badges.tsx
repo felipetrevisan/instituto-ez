@@ -51,7 +51,7 @@ export default function Badges({ data }: { data: Ebook }) {
   }
 
   return (
-    <div className="mt-4 mb-6 flex flex-row gap-4">
+    <div className="mt-4 mb-6 flex flex-row flex-wrap justify-center gap-4">
       {badges.map((badge, i) => (
         <BadgeChip {...badge} index={i} key={i} />
       ))}

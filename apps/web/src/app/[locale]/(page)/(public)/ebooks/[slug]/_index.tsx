@@ -16,7 +16,7 @@ export function Index({ data }: { data: Ebook }) {
   const { index, download } = data
 
   return (
-    <section className="relative flex w-screen flex-row gap-4 px-6 py-12">
+    <section className="relative flex w-screen flex-row gap-4 px-6 pt-12">
       <div className="flex flex-col items-center justify-center gap-8 md:container">
         <Title
           size="2xl"
@@ -25,7 +25,7 @@ export function Index({ data }: { data: Ebook }) {
           {index?.title || 'O que você vai encontrar nesse Ebook'}
         </Title>
         {index?.description && (
-          <div className="mt-0 font-medium font-questrial text-[var(--secondary-c)]">
+          <div className='mt-0 w-[90vw] font-medium font-questrial text-[var(--secondary-c)] md:w-[802px]'>
             <PortableText value={index.description} components={createPortableComponents()} />
           </div>
         )}
@@ -39,7 +39,7 @@ export function Index({ data }: { data: Ebook }) {
                 {index.video.title}
               </Title>
             )}
-            <div className="h-[200px] w-[90vw] max-w-full overflow-hidden rounded-2xl shadow-xl md:h-[450px] md:w-[60vw]">
+            <div className='h-[200px] w-[90vw] max-w-full overflow-hidden rounded-2xl shadow-xl md:h-[450px] md:w-[802px]'>
               <ReactPlayer url={index.video.url} width="100%" height="100%" controls={false} />
             </div>
           </>
