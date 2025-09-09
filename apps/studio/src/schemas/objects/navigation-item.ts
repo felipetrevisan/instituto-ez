@@ -1,5 +1,6 @@
 import { MenuIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
+import { i18n } from './locale/locales'
 
 export default defineType({
   name: 'navigationItem',
@@ -10,7 +11,7 @@ export default defineType({
     defineField({
       name: 'navigation_label',
       title: 'Navigation Label',
-      type: 'string',
+      type: 'localizedString',
       validation: (Rule) => Rule.required().warning(),
     }),
     defineField({
@@ -60,4 +61,14 @@ export default defineType({
         ).warning(),
     }),
   ],
+  preview: {
+    select: {
+      title: `navigation_label.${i18n.base}`,
+    },
+    prepare({ title }) {
+      return {
+        title,
+      }
+    },
+  },
 })

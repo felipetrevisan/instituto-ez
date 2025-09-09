@@ -16,10 +16,10 @@ export function useEbooks() {
   return { data, isLoading, isPending }
 }
 
-export function useEbook(slug: string) {
+export function useEbook(slug: string, locale: string) {
   const { data, isLoading, isPending } = useQuery<Ebook>({
-    queryKey: ['ebooks', slug],
-    queryFn: () => getEbookBySlug(slug),
+    queryKey: ['ebooks', locale, slug],
+    queryFn: () => getEbookBySlug(slug, locale),
   })
 
   return { data, isLoading, isPending }

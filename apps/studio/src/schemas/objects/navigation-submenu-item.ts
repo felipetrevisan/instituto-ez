@@ -10,7 +10,7 @@ export default defineType({
     defineField({
       name: 'navigation_label',
       title: 'Navigation Label',
-      type: 'string',
+      type: 'localizedString',
       validation: (Rule) => Rule.required().warning(),
     }),
     defineField({

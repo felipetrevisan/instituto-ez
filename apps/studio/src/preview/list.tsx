@@ -2,7 +2,7 @@ import { cn } from '@ez/studio/lib/utils'
 import { createPortableComponents } from '@ez/studio/portable'
 import { PortableText, type PortableTextBlock } from '@portabletext/react'
 import { Card, Stack } from '@sanity/ui'
-import { DynamicIcon } from 'lucide-react/dynamic'
+import { useId } from 'react'
 import type { BlockProps, PortableTextObject } from 'sanity'
 
 type ListItemContent = {
@@ -15,12 +15,13 @@ const ListPreviewComponent = (props: BlockProps) => {
   const valueRaw = value as PortableTextObject
   const items = (valueRaw.items as ListItemContent[]) || []
   const bullet_type = (valueRaw.bullet_type as 'none' | 'icon' | 'emoji') || 'none'
-  // const icon = (valueRaw.icon as string )|| null
   const emoji = (valueRaw.emoji as string) || ''
   const divider = valueRaw.divider as boolean
 
+  const id = useId()
+
   return (
-    <Card tone="primary" scheme="dark" padding={[2, 2, 3]}>
+    <Card padding={[2, 2, 3]} scheme="dark" tone="primary">
       <Stack space={4}>
         {renderDefault({ ...props })}
         <Card padding={[4, 5, 6]}>
@@ -31,22 +32,16 @@ const ListPreviewComponent = (props: BlockProps) => {
                 'list-disc': bullet_type === 'none',
               })}
             >
-              {items?.map((item, index: number) => (
+              {items?.map((item) => (
                 <li
-                  // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-                  key={index}
                   className={cn({
                     'flex flex-row items-center gap-2': bullet_type !== 'none',
                   })}
+                  key={id}
                 >
-                  {bullet_type !== 'none' && (
-                    <div>
-                      {/* {bullet_type === 'icon' && icon && <DynamicIcon name={icon} size={24} />} */}
-                      {emoji && <span>{emoji}</span>}
-                    </div>
-                  )}
+                  {bullet_type !== 'none' && <div>{emoji && <span>{emoji}</span>}</div>}
                   <div>
-                    <PortableText value={item.content} components={createPortableComponents()} />
+                    <PortableText components={createPortableComponents()} value={item.content} />
                   </div>
                 </li>
               ))}

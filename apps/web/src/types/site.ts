@@ -4,10 +4,18 @@ import type { Section } from './sections'
 
 export type Site = {
   id: string
-  title: string
-  slogan: string
-  description?: string
-  keywords?: string
+  title: {
+    [key: string]: string
+  }
+  slogan: {
+    [key: string]: string
+  }
+  description?: {
+    [key: string]: string
+  }
+  keywords?: {
+    [key: string]: string
+  }
   contact: {
     form: { _ref: string }
     email: string
@@ -35,7 +43,9 @@ export type SocialNetwork = {
 
 export type NavigationItem = {
   id: string
-  label: string
+  label: {
+    [key: string]: string
+  }
   url: NavigationItemURL
   hasSubmenu: boolean
   columns?: number
@@ -51,13 +61,21 @@ export type SocialNetworkItem = {
 
 export type NavigationItemURL = {
   type: LinkType
-  link: string
+  link: {
+    [key: string]: {
+      current: string
+    }
+  }
   isHome: boolean
   externalUrl?: string
 }
 
 export type Hero = {
   background: SanityAsset
-  title: string
-  description: string
+  title: {
+    [key: string]: string
+  }
+  description: {
+    [key: string]: string
+  }
 }

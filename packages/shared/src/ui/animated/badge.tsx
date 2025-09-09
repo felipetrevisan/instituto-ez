@@ -1,17 +1,17 @@
 'use client'
 
+import { cn } from '@ez/shared/lib/utils'
 import {
   type HTMLMotionProps,
+  motion,
   type SpringOptions,
   type UseInViewOptions,
-  motion,
   useInView,
   useMotionValue,
   useSpring,
 } from 'motion/react'
 import * as React from 'react'
-
-import { cn } from '@ez/shared/lib/utils'
+import { useId } from 'react'
 import { SlidingNumber } from './text/sliding-number'
 
 type FormatNumberResult = { number: string[]; unit: string }
@@ -67,6 +67,9 @@ function BadgeButton({
   const localRef = React.useRef<HTMLDivElement>(null)
   React.useImperativeHandle(ref, () => localRef.current as HTMLDivElement)
 
+  const segmentId = useId()
+  const digitId = useId()
+
   const inViewResult = useInView(localRef, {
     once: inViewOnce,
     margin: inViewMargin,
@@ -78,17 +81,10 @@ function BadgeButton({
 
   const renderNumberSegments = (segments: string[], unit: string, isGhost: boolean) => (
     <span className={cn('flex items-center gap-px', isGhost ? 'invisible' : '')}>
-      {segments.map((segment, index) => (
-        // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-        <React.Fragment key={index}>
-          {Array.from(segment).map((digit, digitIndex) => (
-            <SlidingNumber
-              key={`${index}-${
-                // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-                digitIndex
-              }`}
-              number={+digit}
-            />
+      {segments.map((segment) => (
+        <React.Fragment key={segmentId}>
+          {Array.from(segment).map((digit) => (
+            <SlidingNumber key={`${segmentId}-${digitId}`} number={+digit} />
           ))}
         </React.Fragment>
       ))}

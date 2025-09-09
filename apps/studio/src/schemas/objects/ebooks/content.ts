@@ -1,4 +1,3 @@
-import config from '@ez/studio/config/editor'
 import { BlockContentIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
@@ -11,24 +10,23 @@ export default defineType({
     defineField({
       name: 'title',
       title: 'Title',
-      type: 'string',
+      type: 'localizedString',
     }),
     defineField({
       name: 'description',
       title: 'Description',
-      type: 'array',
-      of: config,
+      type: 'localizedArray',
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),
     defineField({
       name: 'video_title',
       title: 'Video Title',
-      type: 'string',
+      type: 'localizedString',
     }),
     defineField({
       name: 'video',
       title: 'Video URL',
-      type: 'url',
+      type: 'localizedUrl',
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),
   ],

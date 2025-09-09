@@ -30,12 +30,13 @@ export function EbookCard({
   className,
 }: Props) {
   const locale = useLocale()
-  const backgroundClass = image.preview
-    ? `url('${urlForImage(image.preview.asset)}') no-repeat center center / cover`
+  const backgroundClass = image?.[locale].preview
+    ? `url('${urlForImage(image?.[locale].preview.asset)}') no-repeat center center / cover`
     : 'transparent'
 
-  const link = !disabled && button ? getLink(button) : false
+  const link = button ? getLink(button, locale) : false
 
+  // biome-ignore lint/correctness/noNestedComponentDefinitions: <explanation>
   const CardRender = () => (
     <div className="relative w-fit">
       {disabled && (
@@ -72,9 +73,10 @@ export function EbookCard({
     </div>
   )
 
+  // biome-ignore lint/correctness/noNestedComponentDefinitions: <explanation>
   const CardFullRender = () => {
-    const backgroundClass = image.background
-      ? `url('${urlForImage(image.background.asset)}') repeat`
+    const backgroundClass = image?.[locale].background
+      ? `url('${urlForImage(image?.[locale].background.asset)}') repeat`
       : 'transparent'
 
     return (
@@ -89,7 +91,7 @@ export function EbookCard({
             },
           )}
         >
-          {title}
+          {title?.[locale]}
         </div>
         <MotionCard
           variant="ghost"
@@ -105,11 +107,11 @@ export function EbookCard({
             className,
           )}
         >
-          {image.preview && (
+          {image?.[locale].preview && (
             <CardHeader
               className={cn(
                 'relative aspect-[2/3] h-[40vh] overflow-visible p-0 md:aspect-[1/2] md:h-full lg:aspect-[2/3]',
-                { 'bg-[#f5f5f5] md:w-full': !description },
+                { 'bg-[#f5f5f5] md:w-full': !description?.[locale] },
               )}
               style={{
                 background: backgroundClass,
@@ -118,7 +120,7 @@ export function EbookCard({
             >
               <motion.div
                 className={cn('absolute inset-0 overflow-visible md:h-full md:w-full', {
-                  'md:w-full': !description,
+                  'md:w-full': !description?.[locale],
                 })}
                 variants={{
                   hover: { scale: 1.2 },
@@ -127,11 +129,11 @@ export function EbookCard({
                 transition={{ duration: 0.4, ease: 'easeInOut' }}
               >
                 <Image
-                  src={urlForImage(image.preview.asset).format('webp').quality(80).url()}
+                  src={urlForImage(image?.[locale].preview.asset).format('webp').quality(80).url()}
                   alt=""
                   fill
                   placeholder="blur"
-                  blurDataURL={image.preview.metadata.lqip}
+                  blurDataURL={image?.[locale].preview.metadata.lqip}
                   priority
                   className={cn('h-max rounded-xl object-cover md:object-contain')}
                 />
@@ -139,17 +141,20 @@ export function EbookCard({
             </CardHeader>
           )}
           <CardContent className="relative flex w-full flex-col gap-4 p-0">
-            {description && (
+            {description?.[locale] && (
               <ScrollArea className="overflow-auto md:max-h-[315px]">
                 <div className="pointer-events-none absolute bottom-0 z-10 h-6 w-full bg-gradient-to-t from-white/90 to-transparent" />
-                <div className="p-5 text-justify">{description}</div>
+                <div className="p-5 text-justify">{description?.[locale]}</div>
               </ScrollArea>
             )}
 
             {button && (
               <>
                 {link && (
-                  <ButtonLink href={getLocalizedLink(locale, `/ebooks/${slug}`)} passHref>
+                  <ButtonLink
+                    href={getLocalizedLink(locale, `/ebooks/${slug?.[locale]?.current}`)}
+                    passHref
+                  >
                     <div className="item-center flex justify-center overflow-hidden">
                       <Button
                         disabled={disabled}
@@ -160,7 +165,7 @@ export function EbookCard({
                         rounded="2xl"
                         scaleEffect={false}
                       >
-                        {!disabled ? button.label : 'Em breve'}
+                        {!disabled ? button.label?.[locale] : 'Em breve'}
                       </Button>
                     </div>
                   </ButtonLink>
@@ -176,7 +181,7 @@ export function EbookCard({
                       rounded="2xl"
                       scaleEffect={false}
                     >
-                      {!disabled ? button.label : 'Em breve'}
+                      {!disabled ? button.label?.[locale] : 'Em breve'}
                     </Button>
                   </div>
                 )}
@@ -191,11 +196,13 @@ export function EbookCard({
   return (
     <>
       {link && !full ? (
-        <ButtonLink href={getLocalizedLink(locale, `/ebooks/${slug}`)} passHref>
+        <ButtonLink href={getLocalizedLink(locale, `/ebooks/${slug?.[locale]?.current}`)} passHref>
           <CardRender />
         </ButtonLink>
+      ) : full ? (
+        <CardFullRender />
       ) : (
-        <>{full ? <CardFullRender /> : <CardRender />}</>
+        <CardRender />
       )}
     </>
   )

@@ -10,7 +10,18 @@ declare const messages: {
   },
   "Ebooks": {
     "backButton": "Voltar para o Catálogo",
-    "downloadButton": "Baixar Agora!"
+    "reserveYourEbook": "Garanta já seu eBook",
+    "guaranteeSeals": "Selos de Garantia",
+    "virtualEbook": "Folheie e conheça o Ebook por dentro",
+    "frequentlyQuestions": "Perguntas Frequentes",
+    "onlyText": "Apenas",
+    "testimonial": "Depoimentos"
+  },
+  "Languages": {
+    "placeholder": "Idioma",
+    "pt": "Português",
+    "en": "Inglês",
+    "es": "Espanhol"
   }
 };
 export default messages;

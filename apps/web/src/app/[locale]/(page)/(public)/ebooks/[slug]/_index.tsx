@@ -6,12 +6,16 @@ import { Title } from '@ez/shared/ui/title'
 import { useIsMobile } from '@ez/web/hooks/use-mobile'
 import type { Ebook } from '@ez/web/types/ebook'
 import { createPortableComponents } from '@ez/web/utils/create-portable-components'
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
+import { useLocale } from 'next-intl'
 import { PortableText } from 'next-sanity'
-import ReactPlayer from 'react-player'
+
+const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false })
 
 export function Index({ data }: { data: Ebook }) {
   const isMobile = useIsMobile(640)
+  const locale = useLocale()
 
   const { index, download } = data
 
@@ -22,31 +26,39 @@ export function Index({ data }: { data: Ebook }) {
           size="2xl"
           className="after:-bottom-1 after:-translate-x-1/2 relative text-center font-questrial font-semibold text-[var(--primary-c)] after:absolute after:left-1/2 after:h-[2px] after:w-[40%] after:rounded-xl after:bg-[var(--primary-c)]/60 after:transition-all"
         >
-          {index?.title || 'O que você vai encontrar nesse Ebook'}
+          {index?.title?.[locale] || 'O que você vai encontrar nesse Ebook'}
         </Title>
         {index?.description && (
-          <div className='mt-0 w-[90vw] font-medium font-questrial text-[var(--secondary-c)] md:w-[802px]'>
-            <PortableText value={index.description} components={createPortableComponents()} />
+          <div className="mt-0 w-[90vw] font-medium font-questrial text-[var(--secondary-c)] md:w-[802px]">
+            <PortableText
+              value={index.description?.[locale]}
+              components={createPortableComponents()}
+            />
           </div>
         )}
-        {index?.video?.url && (
+        {index?.video?.url?.[locale] && (
           <>
-            {index?.video.title && (
+            {index?.video.title?.[locale] && (
               <Title
                 size="2xl"
                 className="after:-bottom-1 after:-translate-x-1/2 relative text-center font-questrial font-semibold text-[var(--primary-c)] after:absolute after:left-1/2 after:h-[2px] after:w-[40%] after:rounded-xl after:bg-[var(--primary-c)]/60 after:transition-all"
               >
-                {index.video.title}
+                {index.video.title?.[locale]}
               </Title>
             )}
-            <div className='h-[200px] w-[90vw] max-w-full overflow-hidden rounded-2xl shadow-xl md:h-[450px] md:w-[802px]'>
-              <ReactPlayer url={index.video.url} width="100%" height="100%" controls={false} />
+            <div className="h-[200px] w-[90vw] max-w-full overflow-hidden rounded-2xl shadow-xl md:h-[450px] md:w-[802px]">
+              <ReactPlayer
+                url={index.video.url?.[locale]}
+                width="100%"
+                height="100%"
+                controls={false}
+              />
             </div>
           </>
         )}
         {!download?.disabled && (
           <Link
-            href={download?.url ?? '/'}
+            href={download?.url?.[locale] ?? '/'}
             target="_blank"
             className="w-full md:w-auto md:max-w-[500px]"
           >
@@ -56,7 +68,7 @@ export function Index({ data }: { data: Ebook }) {
               rounded="full"
               className="w-full"
             >
-              <DownloadIcon /> Quero meu eBook agora
+              <DownloadIcon /> {download?.label?.[locale]}
             </BlobButton>
           </Link>
         )}

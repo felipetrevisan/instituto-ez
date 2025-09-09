@@ -10,24 +10,24 @@ export default defineType({
     defineField({
       name: 'background_image',
       title: 'Background Image',
-      type: 'image',
+      type: 'localizedImage',
       description:
         'This image will be used as a background for the card image. Only in Ebooks Catalog. You can leave blank to use background transparent',
     }),
     defineField({
       name: 'small_image',
       title: 'Small Image',
-      type: 'image',
+      type: 'localizedImage',
     }),
     defineField({
       name: 'large_image',
       title: 'Large Image',
-      type: 'image',
+      type: 'localizedImage',
     }),
     defineField({
       name: 'footer_image',
       title: 'Footer Image',
-      type: 'image',
+      type: 'localizedImage',
     }),
   ],
 })

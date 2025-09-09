@@ -18,7 +18,7 @@ type Props = {
 
 export function LectureCard({ item: { button, background, content, title }, index }: Props) {
   const locale = useLocale()
-  const link = getLink(button)
+  const link = getLink(button, locale)
 
   return (
     <div
@@ -41,7 +41,7 @@ export function LectureCard({ item: { button, background, content, title }, inde
       >
         <div className="relative flex h-full w-full flex-col items-start justify-start gap-10 p-10 text-secondary">
           <h3 className="clamp-[text,xl,4xl] text-center font-bold font-oswald lg:text-left">
-            {title}
+            {title?.[locale]}
           </h3>
           <div className="flex min-h-40 flex-col gap-10 text-justify font-light font-questrial text-md leading-7">
             <PortableText value={content} components={createPortableComponents()} />
@@ -60,7 +60,7 @@ export function LectureCard({ item: { button, background, content, title }, inde
                   className="w-full font-bold uppercase"
                   disabled={button.disabled}
                 >
-                  {button.label}
+                  {button.label?.[locale]}
                 </Button>
               </ButtonLink>
             )}

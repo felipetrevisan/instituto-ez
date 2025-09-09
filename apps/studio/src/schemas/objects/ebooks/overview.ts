@@ -10,12 +10,12 @@ export default defineType({
     defineField({
       name: 'title',
       title: 'Title',
-      type: 'string',
+      type: 'localizedString',
     }),
     defineField({
       name: 'description',
       title: 'Description',
-      type: 'text',
+      type: 'localizedText',
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),
   ],

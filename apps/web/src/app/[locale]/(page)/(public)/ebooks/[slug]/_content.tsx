@@ -7,8 +7,8 @@ import { IconButton } from '@ez/shared/ui/animated/button/icon-button'
 import { useApp } from '@ez/web/hooks/use-app'
 import type { Ebook } from '@ez/web/types/ebook'
 import type { Section, SectionKeys } from '@ez/web/types/sections'
+import { useLocale } from 'next-intl'
 import { Fragment, useEffect } from 'react'
-import FooterSection from './_footer'
 import { getLandingPageSections } from './_sections'
 
 type CSSVariables = {
@@ -18,6 +18,7 @@ type CSSVariables = {
 export function Content({ data, sections }: { data: Ebook; sections: Section[] }) {
   const { setPageType, isLandingPage } = useApp()
   const { setIsContactDialogOpen, setContactSubject } = useShared()
+  const locale = useLocale()
   const { theme } = data
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
@@ -50,7 +51,7 @@ export function Content({ data, sections }: { data: Ebook; sections: Section[] }
   }
 
   function askAboutEbook() {
-    setContactSubject(data.title)
+    setContactSubject(data.title?.[locale])
     setIsContactDialogOpen(true)
   }
 
@@ -67,9 +68,9 @@ export function Content({ data, sections }: { data: Ebook; sections: Section[] }
           onClick={askAboutEbook}
           size="lg"
           theme="custom"
+          transition={{ type: 'spring', stiffness: 400, damping: 10 }}
           whileHover={{ scale: 1.4 }}
           whileTap={{ scale: 1.4 }}
-          transition={{ type: 'spring', stiffness: 400, damping: 10 }}
         />
       </div>
     </div>

@@ -1,5 +1,6 @@
 import { MenuIcon } from '@sanity/icons'
 import { defineType } from 'sanity'
+import { i18n } from '../locale/locales'
 
 export default defineType({
   name: 'accordion-content',
@@ -10,19 +11,19 @@ export default defineType({
     {
       name: 'title',
       title: 'Title',
-      type: 'string',
+      type: 'localizedString',
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     },
     {
       name: 'content',
       title: 'Content',
-      type: 'text',
+      type: 'localizedText',
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     },
   ],
   preview: {
     select: {
-      title: 'title',
+      title: `title.${i18n.base}`,
     },
     prepare({ title }) {
       return {

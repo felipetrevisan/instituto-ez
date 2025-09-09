@@ -11,10 +11,14 @@ import { PageBook } from './_chapters/chapter'
 import { CoverBook } from './_chapters/cover'
 
 import './styles.css'
+import { useLocale, useTranslations } from 'next-intl'
 
 export function Overview({ data }: { data: Ebook }) {
   const isMobile = useIsMobile(640)
   const { overview, chapter, id } = data
+  const locale = useLocale()
+
+  const t = useTranslations('Ebooks')
 
   return (
     <section
@@ -27,35 +31,35 @@ export function Overview({ data }: { data: Ebook }) {
       )}
     >
       <div className="absolute top-0 left-0 w-full rotate-180 overflow-hidden">
-        {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <svg preserveAspectRatio="none" viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg">
+          <title>Pattern</title>
           <path
-            d="M602.45,3.86h0S572.9,116.24,281.94,120H923C632,116.24,602.45,3.86,602.45,3.86Z"
             className="fill-white"
+            d="M602.45,3.86h0S572.9,116.24,281.94,120H923C632,116.24,602.45,3.86,602.45,3.86Z"
           />
         </svg>
       </div>
       <div className="container flex flex-col items-center justify-center gap-20">
-        {overview?.description && (
+        {overview?.description?.[locale] && (
           <div className="flex flex-col items-center justify-center gap-2">
             <Title
-              size="2xl"
               className="after:-bottom-1 after:-translate-x-1/2 relative text-center font-questrial font-semibold text-[var(--primary-c)] after:absolute after:left-1/2 after:h-[2px] after:w-[40%] after:rounded-xl after:bg-[var(--primary-c)]/60 after:transition-all"
+              size="2xl"
             >
-              {overview?.title ?? 'Visão Geral'}
+              {overview?.title?.[locale]}
             </Title>
-            <Subtitle size="lg">{overview.description}</Subtitle>
+            <Subtitle size="lg">{overview.description?.[locale]}</Subtitle>
           </div>
         )}
         {chapter && chapter.chapters?.length > 0 && (
           <div className="flex flex-col items-center justify-center gap-8">
             <Title
-              size="2xl"
               className="after:-bottom-1 after:-translate-x-1/2 relative text-center font-questrial font-semibold text-[var(--primary-c)] after:absolute after:left-1/2 after:h-[2px] after:w-[40%] after:rounded-xl after:bg-[var(--primary-c)]/60 after:transition-all"
+              size="2xl"
             >
-              Folheie e conheça o Ebook por dentro
+              {t('virtualEbook')}
             </Title>
-            <div className="flex w-full justify-center px-4">
+            {/* <div className="flex w-full justify-center px-4">
               <HTMLFlipBook
                 width={400}
                 height={540}
@@ -97,7 +101,7 @@ export function Overview({ data }: { data: Ebook }) {
                   />
                 ))}
               </HTMLFlipBook>
-            </div>
+            </div> */}
           </div>
         )}
       </div>

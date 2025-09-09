@@ -25,11 +25,13 @@ export function ServiceCard({ item: { image, title, button, disabled }, classNam
     ? `url('${urlForImage(image.asset).format('webp').quality(80)}')`
     : 'transparent'
 
-  const link = !disabled ? getLink(button) : false
+  const link = !disabled ? getLink(button, locale) : false
 
   const CardRender = () => (
     <MotionCard
-      variant="ghost"
+      animate={{
+        transition: { duration: 0.4, ease: 'easeInOut' },
+      }}
       className={cn(
         'relative flex h-[400px] w-[70vw] shrink items-end justify-center rounded-xl bg-card bg-cover! shadow-2xl md:w-160 md:shrink-0',
         {
@@ -40,12 +42,10 @@ export function ServiceCard({ item: { image, title, button, disabled }, classNam
       style={{
         background: backgroundClass,
       }}
+      transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+      variant="ghost"
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
-      transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-      animate={{
-        transition: { duration: 0.4, ease: 'easeInOut' },
-      }}
     >
       <CardFooter className="flex h-20 w-full flex-col justify-center gap-4 rounded-2xl bg-black/50 p-4 font-oswald backdrop-blur-2xl">
         <Carousel
@@ -55,22 +55,22 @@ export function ServiceCard({ item: { image, title, button, disabled }, classNam
           <CarouselContent>
             <CarouselItem className="flex basis-full items-center justify-center">
               <span className="text-center font-semibold text-orange-400 [font-size:_clamp(1rem,5vw,1.2rem)]">
-                {title}
+                {title?.[locale]}
               </span>
             </CarouselItem>
             {button.visible && (
               <CarouselItem className="flex basis-full items-center justify-center">
                 <Button
-                  variant="default"
-                  theme="tertiary"
-                  rounded="xl"
-                  size="2xl"
                   className="w-full font-bold uppercase"
                   disabled={button.disabled}
                   effect="none"
+                  rounded="xl"
                   scaleEffect={false}
+                  size="2xl"
+                  theme="tertiary"
+                  variant="default"
                 >
-                  {button.label}
+                  {button.label?.[locale]}
                 </Button>
               </CarouselItem>
             )}

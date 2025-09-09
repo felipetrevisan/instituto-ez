@@ -4,8 +4,12 @@ import type { PortableTextBlock } from 'next-sanity'
 
 export type CompanyService = {
   id: string
-  title: string
-  content: PortableTextBlock[]
+  title: {
+    [key: string]: string
+  }
+  content: {
+    [key: string]: PortableTextBlock[]
+  }
   background: SanityAsset
   button: Button
 }

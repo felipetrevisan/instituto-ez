@@ -18,7 +18,7 @@ type Props = {
 
 export function CompanyServiceCard({ item: { button, background, content, title }, index }: Props) {
   const locale = useLocale()
-  const link = getLink(button)
+  const link = getLink(button, locale)
   const isEven = index % 2 === 0
 
   return (
@@ -47,9 +47,11 @@ export function CompanyServiceCard({ item: { button, background, content, title 
         )}
       >
         <div className="relative flex h-full w-full flex-col items-start justify-start gap-10 p-10 text-secondary">
-          <h3 className="text-center font-bold font-oswald text-2xl lg:text-left">{title}</h3>
+          <h3 className="text-center font-bold font-oswald text-2xl lg:text-left">
+            {title?.[locale]}
+          </h3>
           <div className="flex min-h-60 flex-col justify-between gap-10 font-light font-questrial text-lg leading-7">
-            <PortableText value={content} components={createPortableComponents()} />
+            <PortableText value={content?.[locale]} components={createPortableComponents()} />
             {button.visible && link && (
               <ButtonLink
                 href={getLocalizedLink(locale, link)}
@@ -64,7 +66,7 @@ export function CompanyServiceCard({ item: { button, background, content, title 
                   className="w-full font-bold uppercase"
                   disabled={button.disabled}
                 >
-                  {button.label}
+                  {button.label?.[locale]}
                 </Button>
               </ButtonLink>
             )}

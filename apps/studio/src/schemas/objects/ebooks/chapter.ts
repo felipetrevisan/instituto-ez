@@ -10,7 +10,7 @@ export default defineType({
     defineField({
       name: 'cover',
       title: 'Chapter Cover',
-      type: 'image',
+      type: 'localizedImage',
     }),
     defineField({
       name: 'chapters',

@@ -3,8 +3,12 @@ import type { Button } from '@ez/shared/types/global'
 
 export type Workshop = {
   id: string
-  title: string
-  subtitle?: string
+  title: {
+    [key: string]: string
+  }
+  subtitle?: {
+    [key: string]: string
+  }
   background: SanityAsset
   disabled: boolean
   button: Button

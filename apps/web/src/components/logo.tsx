@@ -4,9 +4,8 @@ import { useIsMobile } from '@ez/web/hooks/use-mobile'
 import { useSite } from '@ez/web/hooks/use-site'
 import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
 import { type HTMLMotionProps, motion } from 'motion/react'
-import { useLocale } from 'next-intl'
 import Image from 'next/image'
-import * as React from 'react'
+import { useLocale } from 'next-intl'
 
 type LogoProps = {
   src?: string
@@ -29,7 +28,7 @@ export const Logo = ({
     <>
       <Image
         src={src ?? '/assets/logo.png'}
-        alt="Instituto Ez - Desenvolvimento Humano"
+        alt={`${data?.title[locale]} - ${data?.slogan[locale]}`}
         className="h-full"
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         priority
@@ -38,9 +37,9 @@ export const Logo = ({
       />
       {showSlogan && !isTablet && (
         <span className="flex flex-col justify-center">
-          <p className="font-bold font-oswald text-lg text-primary">{data?.title}</p>
+          <p className="font-bold font-oswald text-lg text-primary">{data?.title[locale]}</p>
           <p className="text-nowrap font-light font-questrial text-primary text-sm">
-            {data?.slogan}
+            {data?.slogan[locale]}
           </p>
         </span>
       )}

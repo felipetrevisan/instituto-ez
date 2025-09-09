@@ -3,9 +3,11 @@ import * as App from '@ez/web/components/app'
 import { getSections } from '@ez/web/config/sections'
 import { getSiteConfig } from '@ez/web/server/get-site-config'
 import type { Section, SectionKeys } from '@ez/web/types/sections'
+import type { Locale } from 'next-intl'
 
-export default async function Page() {
+export default async function Page({ params }: { params: Promise<{ locale: Locale }> }) {
   const { sections } = await getSiteConfig()
+  const locale = (await params).locale
 
   const avaliableSections = getSections().reduce(
     (acc, section) => {
@@ -20,12 +22,12 @@ export default async function Page() {
       {sections?.map(({ key, show, title, subtitle }: Section) =>
         show ? (
           <section className={avaliableSections[key]?.classes || ''} key={key}>
-            {title && (
+            {title?.[locale] && (
               <App.PageHeader>
                 <Title size="2xl" className="text-center">
-                  {title}
+                  {title?.[locale]}
                 </Title>
-                {subtitle && <Subtitle size="xl">{subtitle}</Subtitle>}
+                {subtitle && <Subtitle size="xl">{subtitle?.[locale]}</Subtitle>}
               </App.PageHeader>
             )}
             {avaliableSections[key]?.component}

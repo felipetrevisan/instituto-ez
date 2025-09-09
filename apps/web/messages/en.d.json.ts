@@ -10,7 +10,18 @@ declare const messages: {
   },
   "Ebooks": {
     "backButton": "Back to Catalog",
-    "downloadButton": "Download Now!"
+    "reserveYourEbook": "Get your eBook now",
+    "guaranteeSeals": "Guarantee Seals",
+    "virtualEbook": "Browse through and discover the Ebook inside",
+    "frequentlyQuestions": "Frequently Asked Questions",
+    "onlyText": "Only",
+    "testimonial": "Testimonials"
+  },
+  "Languages": {
+    "placeholder": "Language",
+    "pt": "Portuguese",
+    "en": "English",
+    "es": "Spanish"
   }
 };
 export default messages;

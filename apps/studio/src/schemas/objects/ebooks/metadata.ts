@@ -1,5 +1,6 @@
 import { PackageIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
+import { i18n } from '../locale/locales'
 
 export default defineType({
   name: 'metadata',
@@ -10,7 +11,7 @@ export default defineType({
     defineField({
       name: 'title',
       title: 'Title',
-      type: 'string',
+      type: 'localizedString',
     }),
     defineField({
       name: 'type',
@@ -28,17 +29,17 @@ export default defineType({
     defineField({
       name: 'prefix',
       title: 'Text Prefix',
-      type: 'string',
+      type: 'localizedString',
     }),
     defineField({
       name: 'suffix',
       title: 'Text Suffix',
-      type: 'string',
+      type: 'localizedString',
     }),
     defineField({
       name: 'text',
       title: 'Text',
-      type: 'string',
+      type: 'localizedString',
       hidden: ({ parent }) => parent?.type !== 'string',
     }),
     defineField({
@@ -53,4 +54,14 @@ export default defineType({
       type: 'media',
     }),
   ],
+  preview: {
+    select: {
+      title: `title.${i18n.base}`,
+    },
+    prepare({ title }) {
+      return {
+        title,
+      }
+    },
+  },
 })

@@ -16,12 +16,12 @@ export default defineType({
     defineField({
       name: 'section_title',
       title: 'Section Title',
-      type: 'string',
+      type: 'localizedString',
     }),
     defineField({
       name: 'section_subtitle',
       title: 'Section Subtitle',
-      type: 'string',
+      type: 'localizedString',
     }),
     defineField({
       name: 'show_section',

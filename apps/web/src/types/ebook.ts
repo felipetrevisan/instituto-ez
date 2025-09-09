@@ -1,40 +1,72 @@
 import type { SanityAsset } from '@ez/shared/types/assets'
 import type { Button } from '@ez/shared/types/global'
-import type { PortableTextBlock } from 'next-sanity'
 import type { IconName } from 'lucide-react/dynamic'
+import type { PortableTextBlock } from 'next-sanity'
 
 export type Ebook = {
   id: string
-  title: string
-  subtitle?: string
-  slug: string
-  description?: string
+  title: {
+    [key: string]: string
+  }
+  subtitle?: {
+    [key: string]: string
+  }
+  slug: {
+    [key: string]: {
+      current: string
+    }
+  }
+  description?: {
+    [key: string]: string
+  }
   price: Price
   seo: {
-    description: string
-    keywords: string
+    description: {
+      [key: string]: string
+    }
+    keywords: {
+      [key: string]: string
+    }
   }
   download: {
     disabled: boolean
-    label: string
-    url: string
+    label: {
+      [key: string]: string
+    }
+    url: {
+      [key: string]: string
+    }
   }
   overview: {
-    title?: string
-    description?: string
+    title?: {
+      [key: string]: string
+    }
+    description?: {
+      [key: string]: string
+    }
   }
   index: {
-    title?: string
-    description?: PortableTextBlock[]
+    title?: {
+      [key: string]: string
+    }
+    description?: {
+      [key: string]: PortableTextBlock[]
+    }
     video: {
-      title?: string
-      url?: string
+      title?: {
+        [key: string]: string
+      }
+      url?: {
+        [key: string]: string
+      }
     }
   }
   badges: Badge[]
   metadata: Metadata[]
   chapter: {
-    cover?: SanityAsset
+    cover?: {
+      [key: string]: SanityAsset
+    }
     chapters: Chapter[]
   }
   theme: {
@@ -66,10 +98,12 @@ export type Ebook = {
     }
   }
   image: {
-    background?: SanityAsset
-    preview: SanityAsset
-    large: SanityAsset
-    footer: SanityAsset
+    [key: string]: {
+      background?: SanityAsset
+      preview: SanityAsset
+      large: SanityAsset
+      footer: SanityAsset
+    }
   }
   questions?: Question[]
   disabled: boolean
@@ -91,26 +125,42 @@ export type EbookCollection = {
 }
 
 export type Metadata = {
-  title: string
+  title: {
+    [key: string]: string
+  }
   type: 'string' | 'number'
-  text?: string
+  text?: {
+    [key: string]: string
+  }
   value?: number
-  prefix?: string
-  suffix?: string
+  prefix?: {
+    [key: string]: string
+  }
+  suffix?: {
+    [key: string]: string
+  }
   media: Media
 }
 
 export type Badge = {
   type: 'string' | 'number' | 'star'
-  text?: string
+  text?: {
+    [key: string]: string
+  }
   value?: number
-  prefix?: string
-  suffix?: string
+  prefix?: {
+    [key: string]: string
+  }
+  suffix?: {
+    [key: string]: string
+  }
   icon?: IconName
 }
 
 export type Chapter = {
-  content: PortableTextBlock[]
+  content: {
+    [key: string]: PortableTextBlock[]
+  }
 }
 
 export type Media = {
@@ -120,12 +170,48 @@ export type Media = {
 }
 
 export type Question = {
-  title: string
-  text: string
+  title: {
+    [key: string]: string
+  }
+  content: {
+    [key: string]: string
+  }
 }
 
 export type Price = {
-  regular: number
+  regular: {
+    price: number
+    text?: {
+      [key: string]: string
+    }
+  }
+  priceOffText: {
+    [key: string]: string
+  }
+  priceByText: {
+    [key: string]: string
+  }
   hasDiscount: boolean
-  priceWithDiscount?: number
+  discount?: {
+    price: number
+    text?: {
+      [key: string]: string
+    }
+  }
+  theme: {
+    regular: PriceTheme
+    free: PriceTheme
+  }
+}
+
+export type PriceTheme = {
+  background: {
+    primary: Color
+    secondary: Color
+  }
+  border: Color
+  text: {
+    stroke: Color
+    fill: Color
+  }
 }

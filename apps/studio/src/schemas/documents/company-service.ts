@@ -1,6 +1,7 @@
 import config from '@ez/studio/config/editor'
 import { BlockContentIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
+import { i18n } from '../objects/locale/locales'
 
 export default defineType({
   name: 'mathematizer',
@@ -11,14 +12,13 @@ export default defineType({
     defineField({
       name: 'title',
       title: 'Title',
-      type: 'string',
+      type: 'localizedString',
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),
     defineField({
       name: 'content',
       title: 'Content',
-      type: 'array',
-      of: config,
+      type: 'localizedArray',
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),
     defineField({
@@ -34,4 +34,14 @@ export default defineType({
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),
   ],
+  preview: {
+    select: {
+      title: `title.${i18n.base}`,
+    },
+    prepare({ title }) {
+      return {
+        title,
+      }
+    },
+  },
 })

@@ -1,6 +1,7 @@
 import { BlockContentIcon } from '@sanity/icons'
 import { orderRankField, orderRankOrdering } from '@sanity/orderable-document-list'
 import { defineField, defineType } from 'sanity'
+import { i18n } from '../objects/locale/locales'
 
 export default defineType({
   name: 'ebook',
@@ -59,13 +60,13 @@ export default defineType({
     defineField({
       name: 'title',
       title: 'Title',
-      type: 'string',
+      type: 'localizedString',
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),
     defineField({
       name: 'slug',
       title: 'Slug',
-      type: 'slug',
+      type: 'localizedSlug',
       options: {
         source: 'title',
         maxLength: 96,
@@ -82,24 +83,25 @@ export default defineType({
     defineField({
       name: 'seoKeywords',
       title: 'Keywords',
-      type: 'string',
+      type: 'localizedString',
       group: ['seo'],
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),
     defineField({
       name: 'subtitle',
       title: 'Subtitle',
-      type: 'string',
+      type: 'localizedString',
     }),
     defineField({
       name: 'description',
       title: 'Description',
-      type: 'text',
+      type: 'localizedText',
     }),
     defineField({
       name: 'download',
       title: 'Download',
       type: 'download_link',
+      options: { collapsible: true, collapsed: false },
       group: ['link'],
     }),
     defineField({
@@ -107,12 +109,14 @@ export default defineType({
       title: 'Overview',
       type: 'ebooksOverview',
       group: ['overview'],
+      options: { collapsible: true, collapsed: false },
     }),
     defineField({
       name: 'index',
       title: 'Index',
       type: 'ebooksIndex',
       group: ['index'],
+      options: { collapsible: true, collapsed: false },
     }),
     defineField({
       name: 'data',
@@ -126,6 +130,7 @@ export default defineType({
       title: 'Chapters',
       type: 'chapter',
       group: ['chapters'],
+      options: { collapsible: true, collapsed: false },
     }),
     defineField({
       name: 'images',
@@ -133,12 +138,14 @@ export default defineType({
       type: 'cover-image',
       group: ['cover'],
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
+      options: { collapsible: true, collapsed: false },
     }),
     defineField({
       name: 'theme',
       title: 'Theme',
       type: 'theme',
       group: ['theme'],
+      options: { collapsible: true, collapsed: false },
     }),
     defineField({
       name: 'questions',
@@ -166,6 +173,7 @@ export default defineType({
       title: 'Price',
       type: 'price',
       group: ['price'],
+      options: { collapsible: true, collapsed: false },
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),
     defineField({
@@ -179,7 +187,7 @@ export default defineType({
   preview: {
     select: {
       image: 'images.small_image',
-      title: 'title',
+      title: `title.${i18n.base}`,
     },
     prepare({ image, title }) {
       return {

@@ -1,0 +1,23 @@
+{
+  "Manifest": {
+    "name": "Instituto EZ"
+  },
+  "DialogContact": {
+    "title": "¿Cómo podemos ayudarle?"
+  },
+  "Ebooks": {
+    "backButton": "Volver al catálogo",
+    "reserveYourEbook": "Consigue tu eBook ahora",
+    "guaranteeSeals": "Sellos de garantía",
+    "virtualEbook": "Navega y descubre el Ebook que hay dentro",
+    "frequentlyQuestions": "Preguntas Frecuentes",
+    "onlyText": "Apenas",
+    "testimonial": "Testimonios"
+  },
+  "Languages": {
+    "placeholder": "Idioma",
+    "pt": "Portugués",
+    "en": "Inglés",
+    "es": "Español"
+  }
+}

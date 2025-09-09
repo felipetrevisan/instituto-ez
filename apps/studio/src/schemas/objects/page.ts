@@ -9,7 +9,7 @@ export default defineType({
     defineField({
       name: 'hash',
       title: 'Hash',
-      type: 'string',
+      type: 'localizedString',
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),
     defineField({
@@ -21,7 +21,7 @@ export default defineType({
     defineField({
       name: 'background_title',
       title: 'Background Title',
-      type: 'string',
+      type: 'localizedString',
     }),
     defineField({
       name: 'background_type',
@@ -67,13 +67,12 @@ export default defineType({
     defineField({
       name: 'title',
       title: 'Title',
-      type: 'string',
+      type: 'localizedString',
     }),
     defineField({
       name: 'content',
       title: 'Content',
-      type: 'array',
-      of: config,
+      type: 'localizedArray',
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),
   ],

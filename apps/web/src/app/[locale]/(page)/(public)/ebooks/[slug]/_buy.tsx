@@ -8,14 +8,17 @@ import type { Ebook } from '@ez/web/types/ebook'
 import { motion } from 'motion/react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useLocale, useTranslations } from 'next-intl'
 import PriceBubble from './_price-bubble'
 
 const MotionTitle = motion(Title)
-
 const DownloadIconMotion = motion(DownloadIcon)
 
 export default function BuySection({ data }: { data: Ebook }) {
   const { download, price, image } = data
+  const locale = useLocale()
+
+  const t = useTranslations('Ebooks')
 
   return (
     <div className="flex flex-col items-center justify-center gap-2">
@@ -23,40 +26,40 @@ export default function BuySection({ data }: { data: Ebook }) {
         <div className="flex h-full w-full flex-col lg:col-span-2">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
+            whileInView={{ opacity: 1, y: 0 }}
           >
             <MotionTitle
-              size="2xl"
               className="relative text-center font-bold font-questrial text-[var(--primary-c)] lg:text-left"
+              size="2xl"
             >
-              Garanta já seu eBook
+              {t('reserveYourEbook')}
             </MotionTitle>
           </motion.div>
           <div className="relative h-[300px] w-full md:w-[500px]">
             <Image
-              src={
-                image.footer?.asset
-                  ? urlForImage(image.footer.asset).format('webp').quality(80).url()
-                  : '/assets/images/buy-ebook.png'
-              }
-              fill
               alt=""
               className="object-contain"
+              fill
+              src={
+                image?.[locale].footer?.asset
+                  ? urlForImage(image?.[locale].footer.asset).format('webp').quality(80).url()
+                  : '/assets/images/buy-ebook.png'
+              }
             />
           </div>
-          {!download?.disabled && (
-            <Link href={download?.url ?? '/'} target="_blank">
+          {!download?.disabled && download?.url?.[locale] && (
+            <Link href={download?.url?.[locale] ?? '/'} target="_blank">
               <BlobButton
-                numOfBlobs={8}
-                size="3xl"
-                variant="default"
-                theme="custom"
-                rounded="full"
                 fullWidth
+                numOfBlobs={8}
+                rounded="full"
+                size="3xl"
                 sticky
+                theme="custom"
+                variant="default"
               >
-                <DownloadIconMotion /> {download?.label || 'Baixe Agora'}
+                <DownloadIconMotion /> {download?.label?.[locale]}
               </BlobButton>
             </Link>
           )}

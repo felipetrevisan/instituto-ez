@@ -9,9 +9,14 @@ import { urlForImage } from '@ez/web/config/image'
 import type { Ebook, Media } from '@ez/web/types/ebook'
 import { DynamicIcon } from 'lucide-react/dynamic'
 import Image from 'next/image'
+import { useLocale } from 'next-intl'
+import { useId } from 'react'
 
 export function Metadata({ data }: { data: Ebook }) {
   const { metadata, id } = data
+  const locale = useLocale()
+
+  const randomId = useId()
 
   const getIcon = (media: Media) => {
     const Icon =
@@ -20,10 +25,10 @@ export function Metadata({ data }: { data: Ebook }) {
     const ImageComponent =
       media.type === 'image' && media.image ? (
         <Image
-          src={urlForImage(media.image.asset).width(24).height(24).format('webp').quality(80).url()}
           alt=""
-          width={24}
           height={24}
+          src={urlForImage(media.image.asset).width(24).height(24).format('webp').quality(80).url()}
+          width={24}
         />
       ) : null
 
@@ -34,21 +39,15 @@ export function Metadata({ data }: { data: Ebook }) {
     <div className="w-screen">
       {metadata?.length > 0 && (
         <section className="grid grid-cols-2 gap-x-2 gap-y-10 bg-white py-12 md:container md:gap-10 md:px-6 md:[grid-template-columns:repeat(auto-fit,minmax(200px,1fr))]">
-          {metadata?.map((meta, index) => (
-            <Magnetic
-              key={`metadata_${id}_${
-                // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-                index
-              }`}
-              strength={0.25}
-            >
+          {metadata?.map((meta) => (
+            <Magnetic key={`metadata_${id}_${randomId}`} strength={0.25}>
               <Card
-                variant="custom"
-                theme="custom"
                 className={cn(
                   'hover:-translate-y-1 h-[180px] w-[200px] bg-gradient-to-br from-[var(--primary-c)]/40 to-[var(--secondary-c)]/40 p-0.5 shadow-[var(--primary-c)]/50 shadow-sm outline-none backdrop-blur-md transition-all duration-300 hover:shadow-xl',
                 )}
                 rounded="2xl"
+                theme="custom"
+                variant="custom"
               >
                 <CardContent className="relative flex h-full items-center justify-center rounded-3xl bg-white px-6 py-0">
                   <div className="flex flex-col items-center justify-center">
@@ -61,30 +60,30 @@ export function Metadata({ data }: { data: Ebook }) {
                     )}
                     <div className="flex flex-col">
                       <dt className="mb-2 flex min-h-[72px] flex-col items-center justify-center gap-2">
-                        {meta.prefix && (
+                        {meta.prefix?.[locale] && (
                           <span className="font-medium text-[var(--primary-c)] text-sm opacity-70">
-                            {meta.prefix}
+                            {meta.prefix?.[locale]}
                           </span>
                         )}
                         {meta.type === 'string' && (
                           <HighlightText
-                            className="from-[var(--primary-c)] to-[var(--secondary-c)] font-bold text-3xl text-white"
-                            text={meta.text || '-'}
+                            className='from-[var(--primary-c)] to-[var(--secondary-c)] text-center font-bold text-3xl text-white'
+                            text={meta.text?.[locale] || '-'}
                           />
                         )}
                         {meta.type === 'number' && Number(meta.value) > 0 && (
                           <span className="font-bold text-3xl text-[var(--primary-c)]">
-                            <CountingNumber number={meta.value ?? 0} decimalSeparator="," inView />
+                            <CountingNumber decimalSeparator="," inView number={meta.value ?? 0} />
                           </span>
                         )}
-                        {meta.suffix && (
+                        {meta.suffix?.[locale] && (
                           <span className="font-medium text-[var(--primary-c)] text-sm opacity-70">
-                            {meta.suffix}
+                            {meta.suffix?.[locale]}
                           </span>
                         )}
                       </dt>
                       <dd className="text-center font-bold text-[var(--primary-c)]">
-                        {meta.title}
+                        {meta.title?.[locale]}
                       </dd>
                     </div>
                   </div>

@@ -3,12 +3,18 @@ import type { PortableTextBlock } from 'next-sanity'
 
 export type AdvancedMentory = {
   id: string
-  title: string
-  content: PortableTextBlock[]
+  title: {
+    [key: string]: string
+  }
+  content: {
+    [key: string]: PortableTextBlock[]
+  }
   background: SanityAsset
   button: Button
   ribbon: {
     show: boolean
-    text: string
+    text: {
+      [key: string]: string
+    }
   }
 }

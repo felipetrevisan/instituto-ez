@@ -23,19 +23,19 @@ export default defineType({
     defineField({
       name: 'prefix',
       title: 'Badge Prefix',
-      type: 'string',
+      type: 'localizedString',
       hidden: ({ parent }) => parent?.type === 'star',
     }),
     defineField({
       name: 'suffix',
       title: 'Badge Suffix',
-      type: 'string',
+      type: 'localizedString',
       hidden: ({ parent }) => parent?.type === 'star',
     }),
     defineField({
       name: 'text',
       title: 'Text',
-      type: 'string',
+      type: 'localizedString',
       hidden: ({ parent }) => parent?.type !== 'string',
     }),
     defineField({

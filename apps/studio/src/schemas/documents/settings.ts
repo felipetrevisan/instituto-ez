@@ -1,5 +1,6 @@
 import { CogIcon } from '@sanity/icons'
 import { defineArrayMember, defineField, defineType } from 'sanity'
+import { i18n } from '../objects/locale/locales'
 
 export default defineType({
   name: 'siteConfig',
@@ -36,28 +37,28 @@ export default defineType({
     defineField({
       name: 'title',
       title: 'Site Title',
-      type: 'string',
+      type: 'localizedString',
       group: ['site', 'seo'],
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),
     defineField({
       name: 'description',
       title: 'Site Description',
-      type: 'string',
+      type: 'localizedString',
       group: ['site', 'seo'],
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),
     defineField({
       name: 'keywords',
       title: 'Keywords',
-      type: 'string',
+      type: 'localizedString',
       group: ['seo'],
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),
     defineField({
       name: 'slogan',
       title: 'Site Slogan',
-      type: 'string',
+      type: 'localizedString',
       group: ['site'],
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),
@@ -256,4 +257,14 @@ export default defineType({
       description: 'Select a contact form to display.',
     }),
   ],
+  preview: {
+    select: {
+      title: `title.${i18n.base}`,
+    },
+    prepare({ title }) {
+      return {
+        title,
+      }
+    },
+  },
 })

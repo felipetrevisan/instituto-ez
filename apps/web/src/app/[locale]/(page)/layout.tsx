@@ -1,15 +1,14 @@
+import { routing } from '@ez/web/i18n/routing'
 import { getSiteConfig } from '@ez/web/server/get-site-config'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Metadata } from 'next'
 import { Inter, Oswald, Questrial } from 'next/font/google'
-import Providers from './providers'
-
-import { routing } from '@ez/web/i18n/routing'
-import { type Locale, NextIntlClientProvider, hasLocale } from 'next-intl'
-import { setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
+import { hasLocale, type Locale, NextIntlClientProvider, useLocale } from 'next-intl'
+import { setRequestLocale } from 'next-intl/server'
 import type { ReactNode } from 'react'
+import Providers from './providers'
 import '../../styles.css'
 
 const inter = Inter({
@@ -30,11 +29,17 @@ const questrial = Questrial({
   variable: '--font-questrial',
 })
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>
+}): Promise<Metadata> {
   const settings = await getSiteConfig()
-  const title = settings?.title || 'Instituto Enzo'
-  const description = settings?.description || ''
-  const keywords = settings?.keywords || ''
+  const { locale } = await params
+
+  const title = settings?.title[locale] || 'Instituto Enzo'
+  const description = settings?.description?.[locale] || ''
+  const keywords = settings?.keywords?.[locale] || ''
 
   return {
     title: {
@@ -57,6 +62,7 @@ export function generateStaticParams() {
 
 export default async function RootLayoutt({ children, params }: Props) {
   const { locale } = await params
+
   if (!hasLocale(routing.locales, locale)) {
     notFound()
   }

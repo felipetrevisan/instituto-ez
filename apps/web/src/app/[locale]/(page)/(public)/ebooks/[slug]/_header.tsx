@@ -1,8 +1,6 @@
 'use client'
 
-import { ChevronLeftIcon, ClockIcon, DownloadIcon } from '@ez/shared/icons'
-import { BadgeButton } from '@ez/shared/ui/animated/badge'
-import { BadgeStarButton } from '@ez/shared/ui/animated/badge-star'
+import { ChevronLeftIcon, DownloadIcon } from '@ez/shared/icons'
 import BlobButton from '@ez/shared/ui/animated/button/blob-button'
 import { IconButton } from '@ez/shared/ui/animated/button/icon-button'
 import { WritingText } from '@ez/shared/ui/animated/text/writting'
@@ -11,12 +9,12 @@ import { useIsMobile } from '@ez/web/hooks/use-mobile'
 import type { Ebook } from '@ez/web/types/ebook'
 import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
 import { motion } from 'motion/react'
-import { useLocale } from 'next-intl'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useLocale, useTranslations } from 'next-intl'
+import Badges from './_badges'
 import { AnimatedButton } from './_button'
 import StickyHeader from './_sticky-header'
-import Badges from './_badges'
 
 const DownloadIconMotion = motion(DownloadIcon)
 const ChevronLeftIconMotion = motion(ChevronLeftIcon)
@@ -24,6 +22,8 @@ const ChevronLeftIconMotion = motion(ChevronLeftIcon)
 export function Header({ data }: { data: Ebook }) {
   const locale = useLocale()
   const isMobile = useIsMobile(640)
+
+  const t = useTranslations('Ebooks')
 
   const { title, description, image, download } = data
 
@@ -33,7 +33,7 @@ export function Header({ data }: { data: Ebook }) {
         <Link href={getLocalizedLink(locale, '/ebooks')} className="container my-8 w-full">
           {!isMobile ? (
             <AnimatedButton
-              label="Voltar para o Catálogo"
+              label={t('backButton')}
               icon={<ChevronLeftIconMotion />}
               animateMaps={{
                 width: { initial: 48, hovered: 260 },
@@ -51,7 +51,7 @@ export function Header({ data }: { data: Ebook }) {
           )}
         </Link>
         <div className="container mx-auto flex flex-col items-center justify-between gap-10 md:flex-row">
-          {isMobile && (
+          {isMobile && image?.[locale].large && (
             <motion.div
               className="relative z-10 mt-10 size-[400px] overflow-hidden rounded-xl md:mt-0 md:size-[400px]"
               initial={{ scale: 0.9, opacity: 0 }}
@@ -59,7 +59,7 @@ export function Header({ data }: { data: Ebook }) {
               transition={{ duration: 0.8, delay: 0.6 }}
             >
               <Image
-                src={urlForImage(image.large.asset).format('webp').quality(80).url()}
+                src={urlForImage(image?.[locale].large.asset).format('webp').quality(80).url()}
                 alt="Book Cover"
                 fill
                 className="object-cover"
@@ -75,12 +75,12 @@ export function Header({ data }: { data: Ebook }) {
           >
             {isMobile ? (
               <h1 className="mt-10 text-center font-extrabold text-2xl leading-tight drop-shadow-md">
-                {title}
+                {title?.[locale]}
               </h1>
             ) : (
               <WritingText
                 asChild="h1"
-                text={title as string}
+                text={title?.[locale] as string}
                 className="font-extrabold text-2xl leading-tight drop-shadow-md"
               />
             )}
@@ -88,7 +88,7 @@ export function Header({ data }: { data: Ebook }) {
             <div className="flex flex-col">
               {isMobile ? (
                 <span className="mb-6 max-w-prose text-justify font-semibold text-lg text-white/90 leading-relaxed">
-                  {description}
+                  {description?.[locale]}
                 </span>
               ) : (
                 <motion.h1
@@ -97,7 +97,7 @@ export function Header({ data }: { data: Ebook }) {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8, delay: 0.2 }}
                 >
-                  {description}
+                  {description?.[locale]}
                 </motion.h1>
               )}
               {!download?.disabled && (
@@ -106,15 +106,15 @@ export function Header({ data }: { data: Ebook }) {
                     theme="custom"
                     size={isMobile ? 'xl' : '2xl'}
                     rounded="full"
-                    className="w-full md:w-auto md:max-w-[250px]"
+                    className="w-full md:w-max"
                   >
-                    <DownloadIconMotion /> {download?.label || 'Baixe Agora'}
+                    <DownloadIconMotion /> {download?.label?.[locale]}
                   </BlobButton>
                 </Link>
               )}
             </div>
           </motion.div>
-          {!isMobile && (
+          {!isMobile && image?.[locale].large && (
             <motion.div
               className="relative z-10 mt-10 size-[550px] overflow-hidden rounded-xl md:mt-0 md:size-[400px] lg:size-[600px]"
               initial={{ scale: 0.9, opacity: 0 }}
@@ -122,7 +122,7 @@ export function Header({ data }: { data: Ebook }) {
               transition={{ duration: 0.8, delay: 0.6 }}
             >
               <Image
-                src={urlForImage(image.large.asset).format('webp').quality(80).url()}
+                src={urlForImage(image?.[locale].large.asset).format('webp').quality(80).url()}
                 alt="Book Cover"
                 fill
                 className="object-cover"

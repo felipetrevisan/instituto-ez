@@ -4,14 +4,15 @@ import { ChevronLeftIcon, DownloadIcon } from '@ez/shared/icons'
 import BlobButton from '@ez/shared/ui/animated/button/blob-button'
 import { IconButton } from '@ez/shared/ui/animated/button/icon-button'
 import { urlForImage } from '@ez/web/config/image'
+import { locales } from '@ez/web/config/locale'
 import { useIsMobile } from '@ez/web/hooks/use-mobile'
 import { useStickyBar } from '@ez/web/hooks/use-sticky-bar'
 import type { Ebook } from '@ez/web/types/ebook'
 import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
 import { AnimatePresence, motion } from 'motion/react'
-import { useLocale } from 'next-intl'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useLocale, useTranslations } from 'next-intl'
 import { AnimatedButton } from './_button'
 
 const DownloadIconMotion = motion(DownloadIcon)
@@ -21,6 +22,8 @@ export default function StickyHeader({ title, image, download }: Ebook) {
   const locale = useLocale()
   const isMobile = useIsMobile(640)
   const showSticky = useStickyBar(500, 100)
+
+  const t = useTranslations('Ebooks')
 
   return (
     <AnimatePresence>
@@ -36,7 +39,7 @@ export default function StickyHeader({ title, image, download }: Ebook) {
             <Link href={getLocalizedLink(locale, '/ebooks')} className="h-full md:w-[10vw]">
               {!isMobile ? (
                 <AnimatedButton
-                  label="Voltar para o Catálogo"
+                  label={t('backButton')}
                   icon={<ChevronLeftIconMotion />}
                   animateMaps={{
                     width: { initial: 48, hovered: 260 },
@@ -54,10 +57,10 @@ export default function StickyHeader({ title, image, download }: Ebook) {
               )}
             </Link>
             <div className="flex items-center justify-center md:max-w-[70vw]">
-              {!isMobile && (
+              {!isMobile && image?.[locale].large && (
                 <div className="relative size-10">
                   <Image
-                    src={urlForImage(image.large.asset)
+                    src={urlForImage(image?.[locale].large.asset)
                       .width(64)
                       .height(64)
                       .format('webp')
@@ -71,11 +74,11 @@ export default function StickyHeader({ title, image, download }: Ebook) {
                 </div>
               )}
               <h1 className="text-center font-bold font-questrial text-[var(--primary-c)] text-xl">
-                {title}
+                {title?.[locale]}
               </h1>
             </div>
             {!download?.disabled && (
-              <Link href={download?.url ?? '/'} target="_blank">
+              <Link href={download?.url?.[locale] ?? '/'} target="_blank">
                 {!isMobile ? (
                   <BlobButton
                     variant="default"
@@ -85,7 +88,7 @@ export default function StickyHeader({ title, image, download }: Ebook) {
                     sticky
                     numOfBlobs={4}
                   >
-                    <DownloadIconMotion /> {download?.label || 'Baixe Agora'}
+                    <DownloadIconMotion /> {download?.label?.[locale]}
                   </BlobButton>
                 ) : (
                   <IconButton

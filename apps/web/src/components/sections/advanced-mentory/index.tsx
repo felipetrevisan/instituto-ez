@@ -18,7 +18,7 @@ export function AdvancedMentory() {
 
   if (isLoading || !data) return <Skeleton />
 
-  const link = getLink(data?.button)
+  const link = getLink(data?.button, locale)
 
   return (
     <>
@@ -56,22 +56,25 @@ export function AdvancedMentory() {
           <div className="relative flex w-full flex-col items-center justify-start gap-10 overflow-hidden p-10 text-secondary">
             {data?.ribbon.show && (
               <div className="-rotate-45 absolute top-[32px] left-[-35px] w-[170px] transform animate-pulse bg-red-800 py-1 text-center font-semibold text-white uppercase">
-                {data?.ribbon.text}
+                {data?.ribbon.text?.[locale]}
               </div>
             )}
             <div className="flex flex-col items-start justify-start">
               <h3 className="text-center font-bold font-oswald text-2xl md:text-3xl lg:text-left">
-                {data?.title}
+                {data?.title?.[locale]}
               </h3>
             </div>
             <div className="text-justify font-light font-questrial text-md leading-7 md:text-lg">
-              <PortableText value={data?.content} components={createPortableComponents()} />
+              <PortableText
+                value={data?.content?.[locale]}
+                components={createPortableComponents()}
+              />
             </div>
           </div>
         </div>
-        {data?.button.visible && (
+        {data?.button.visible && link && (
           <ButtonLink
-            href={getLocalizedLink(locale, link as string)}
+            href={getLocalizedLink(locale, link)}
             disabled={data?.button.disabled}
             className="flex w-[calc(100vw-20%)] justify-center xl:w-3/5"
           >
@@ -83,7 +86,7 @@ export function AdvancedMentory() {
               className="w-full font-bold uppercase"
               disabled={data?.button.disabled}
             >
-              {data?.button.label}
+              {data?.button.label?.[locale]}
             </Button>
           </ButtonLink>
         )}

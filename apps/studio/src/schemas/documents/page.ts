@@ -1,5 +1,6 @@
 import { PackageIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
+import { i18n } from '../objects/locale/locales'
 
 export default defineType({
   name: 'page',
@@ -10,13 +11,13 @@ export default defineType({
     defineField({
       name: 'title',
       title: 'Page Title',
-      type: 'string',
+      type: 'localizedString',
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),
     defineField({
       name: 'slug',
       title: 'Slug',
-      type: 'slug',
+      type: 'localizedSlug',
       options: {
         source: 'title',
         maxLength: 96,
@@ -26,7 +27,13 @@ export default defineType({
     defineField({
       name: 'description',
       title: 'Page Description',
-      type: 'string',
+      type: 'localizedString',
+      validation: (Rule) => Rule.required().warning('This field must not be empty.'),
+    }),
+    defineField({
+      name: 'keywords',
+      title: 'Keywords',
+      type: 'localizedString',
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),
     defineField({
@@ -37,4 +44,14 @@ export default defineType({
       validation: (Rule) => Rule.required().warning('Must have at least one section.'),
     }),
   ],
+  preview: {
+    select: {
+      title: `title.${i18n.base}`,
+    },
+    prepare({ title }) {
+      return {
+        title,
+      }
+    },
+  },
 })

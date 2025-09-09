@@ -17,7 +17,7 @@ import { useSite } from '@ez/web/hooks/use-site'
 import type { Site } from '@ez/web/types/site'
 import { motion, useAnimation, useMotionValueEvent, useScroll, useTransform } from 'motion/react'
 import Link from 'next/link'
-import { Fragment, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ContactFormDialog } from './contact-form-dialog'
 import { Logo } from './logo'
 import { DesktopNavigation } from './navigation/desktop-navigation'
@@ -95,34 +95,32 @@ function Header({ className, data }: HeaderProps) {
           paddingBottom: paddingHeaderY,
         }}
       >
-        <Fragment>
-          <Navbar.Brand>
-            <Logo
-              src={data?.logo && urlForImage(data.logo?.asset).format('webp').quality(80).url()}
-            />
-          </Navbar.Brand>
-          <motion.div animate={isMenuOpen ? 'open' : 'closed'} custom={height} ref={containerRef}>
-            {isMobile && (
-              <>
-                <Navbar.Toggle />
-                <motion.div
-                  className="fixed top-0 right-0 z-90 h-screen w-[300px] bg-slate-200/90 backdrop-blur-3xl lg:hidden"
-                  variants={sidebarVariants}
-                  initial="closed"
+        <Navbar.Brand>
+          <Logo
+            src={data?.logo && urlForImage(data.logo?.asset).format('webp').quality(80).url()}
+          />
+        </Navbar.Brand>
+        <motion.div animate={isMenuOpen ? 'open' : 'closed'} custom={height} ref={containerRef}>
+          {isMobile && (
+            <>
+              <Navbar.Toggle />
+              <motion.div
+                className="fixed top-0 right-0 z-90 h-screen w-[300px] bg-slate-200/90 backdrop-blur-3xl lg:hidden"
+                variants={sidebarVariants}
+                initial="closed"
+                animate={isMenuOpen ? 'open' : 'closed'}
+              >
+                <MotionMobileNavigation
+                  navigation={data?.primaryNavigation}
+                  variants={menuListVariants}
                   animate={isMenuOpen ? 'open' : 'closed'}
-                >
-                  <MotionMobileNavigation
-                    navigation={data?.primaryNavigation}
-                    variants={menuListVariants}
-                    animate={isMenuOpen ? 'open' : 'closed'}
-                  />
-                </motion.div>
-              </>
-            )}
+                />
+              </motion.div>
+            </>
+          )}
 
-            {!isMobile && <DesktopNavigation navigation={data?.primaryNavigation} />}
-          </motion.div>
-        </Fragment>
+          {!isMobile && <DesktopNavigation navigation={data?.primaryNavigation} />}
+        </motion.div>
       </Navbar.Root>
     </motion.header>
   )

@@ -29,8 +29,6 @@ export function ContactForm({
 
   const { data: settings } = useSite()
 
-  if (settings?.contact?.form?._ref === undefined) return
-
   const { data: form } = useBaseForm(settings?.contact.form._ref || '')
 
   const {
@@ -78,7 +76,7 @@ export function ContactForm({
   }
 
   return (
-    <form onSubmit={handleSubmit(handleSendForm)} className="w-full">
+    <form className="w-full" onSubmit={handleSubmit(handleSendForm)}>
       <div className="grid gap-4 py-4">
         <div className="grid grid-cols-1 items-baseline gap-8 md:grid-cols-2">
           {form?.fields.map(({ name, label, type, isRequired }) => {
@@ -88,19 +86,12 @@ export function ContactForm({
 
             return (
               <motion.div
-                key={name}
                 animate={hasError ? { x: [0, -5, 5, -5, 0] } : { x: 0 }}
-                transition={{ duration: 0.4 }}
                 className={cn('relative col-span-2')}
+                key={name}
+                transition={{ duration: 0.4 }}
               >
                 <motion.label
-                  className={cn(
-                    'pointer-events-none absolute left-5 origin-left font-oswald font-semibold text-secondary',
-                    {
-                      'text-red-500': hasError,
-                      'text-tertiary': isFocused,
-                    },
-                  )}
                   animate={
                     isFocused
                       ? {
@@ -112,8 +103,15 @@ export function ContactForm({
                         }
                       : { y: 10, scale: 1, opacity: 0.5 }
                   }
-                  transition={{ duration: 0.25 }}
+                  className={cn(
+                    'pointer-events-none absolute left-5 origin-left font-oswald font-semibold text-secondary',
+                    {
+                      'text-red-500': hasError,
+                      'text-tertiary': isFocused,
+                    },
+                  )}
                   htmlFor={name}
+                  transition={{ duration: 0.25 }}
                 >
                   {label}
                 </motion.label>
@@ -123,18 +121,18 @@ export function ContactForm({
                       name as keyof ContactFormSchema,
                       isRequired ? { required: `${label} é obrigatório` } : {},
                     )}
-                    onFocus={() => setFocusedField(name)}
-                    onBlur={() => setFocusedField(null)}
-                    className={cn('transition-colors', {
-                      'border-red-500': hasError,
-                    })}
-                    rows={20}
-                    style={{ resize: 'none' }}
                     animate={{
                       borderRadius: isFocused ? '1rem' : '1.25rem',
                       height: isFocused ? 250 : 100,
                     }}
+                    className={cn('transition-colors', {
+                      'border-red-500': hasError,
+                    })}
                     initial={{ height: 200 }}
+                    onBlur={() => setFocusedField(null)}
+                    onFocus={() => setFocusedField(name)}
+                    rows={20}
+                    style={{ resize: 'none' }}
                   />
                 ) : (
                   <Input
@@ -143,24 +141,24 @@ export function ContactForm({
                       name as keyof ContactFormSchema,
                       isRequired ? { required: `${label} é obrigatório` } : {},
                     )}
-                    onFocus={() => setFocusedField(name)}
-                    onBlur={() => setFocusedField(null)}
-                    className={cn('transition-colors', {
-                      'border-red-500': hasError,
-                    })}
                     animate={{
                       borderRadius: isFocused ? '1rem' : '1.25rem',
                     }}
+                    className={cn('transition-colors', {
+                      'border-red-500': hasError,
+                    })}
+                    onBlur={() => setFocusedField(null)}
+                    onFocus={() => setFocusedField(name)}
                     readOnly={name === 'subject' && subject !== ''}
                   />
                 )}
                 <AnimatePresence>
                   {hasError && (
                     <motion.p
-                      className="mt-1 text-red-500 text-sm"
-                      initial={{ opacity: 0, y: -5 }}
                       animate={{ opacity: 1, y: 0 }}
+                      className="mt-1 text-red-500 text-sm"
                       exit={{ opacity: 0, y: -5 }}
+                      initial={{ opacity: 0, y: -5 }}
                     >
                       {errors[name as keyof ContactFormSchema]?.message}
                     </motion.p>
@@ -175,25 +173,25 @@ export function ContactForm({
         <DialogFooter className="justify-center gap-5">
           <DialogTrigger asChild>
             <Button
-              type="button"
-              variant="outline"
-              theme="tertiary"
-              size="xl"
-              rounded="2xl"
               className="w-40"
               onClick={onCloseAction}
+              rounded="2xl"
+              size="xl"
+              theme="tertiary"
+              type="button"
+              variant="outline"
             >
               Cancelar
             </Button>
           </DialogTrigger>
           <Button
-            variant="default"
-            theme="default"
-            size="xl"
-            type="submit"
-            rounded="2xl"
-            disabled={isSubmitting || !isValid}
             className="w-40"
+            disabled={isSubmitting || !isValid}
+            rounded="2xl"
+            size="xl"
+            theme="default"
+            type="submit"
+            variant="default"
           >
             {isSubmitting ? <Loader2Icon className="mr-2 h-4 w-4 animate-spin" /> : 'Enviar'}
           </Button>
@@ -202,13 +200,13 @@ export function ContactForm({
       {!isDialog && (
         <div className="flex flex-row md:justify-end">
           <Button
-            variant="default"
+            className="w-full md:w-[200px]"
+            disabled={isSubmitting || !isValid}
+            rounded="full"
+            shadow
             size="xl"
             type="submit"
-            rounded="full"
-            disabled={isSubmitting || !isValid}
-            shadow
-            className="w-full md:w-[200px]"
+            variant="default"
           >
             {isSubmitting ? (
               <Loader2Icon className="mr-2 h-4 w-4 animate-spin" />

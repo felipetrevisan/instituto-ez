@@ -17,7 +17,7 @@ export default defineType({
     defineField({
       name: 'ribbon_text',
       title: 'Ribbon Label',
-      type: 'string',
+      type: 'localizedString',
       hidden: ({ parent }) => !parent?.show_ribbon,
       validation: (Rule) =>
         Rule.custom((field, context) => {

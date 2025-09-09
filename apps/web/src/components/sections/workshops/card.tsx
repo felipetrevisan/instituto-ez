@@ -24,11 +24,13 @@ export function WorkshopCard({
     ? `url('${urlForImage(background.asset).format('webp').quality(80)}')`
     : 'transparent'
 
-  const link = !disabled ? getLink(button) : false
+  const link = !disabled ? getLink(button, locale) : false
 
   const CardRender = () => (
     <MotionCard
-      variant="ghost"
+      animate={{
+        transition: { duration: 0.4, ease: 'easeInOut' },
+      }}
       className={cn(
         'relative flex h-96 shrink-0 items-end justify-center rounded-xl bg-card bg-cover! shadow-2xl',
         {
@@ -39,16 +41,16 @@ export function WorkshopCard({
       style={{
         background: backgroundClass,
       }}
+      transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+      variant="ghost"
       whileHover={{ scale: disabled ? 1 : 1.1 }}
       whileTap={{ scale: disabled ? 1 : 0.9 }}
-      transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-      animate={{
-        transition: { duration: 0.4, ease: 'easeInOut' },
-      }}
     >
       <CardFooter className="flex h-28 w-[calc(100%-10px)] flex-col items-center justify-center gap-4 rounded-2xl border border-white/40 bg-black/80 p-4 font-oswald backdrop-blur-xl">
-        <span className="text-center font-bold text-orange-400 text-xl">{title}</span>
-        {subtitle && <span className="font-bold text-lg text-white">{subtitle}</span>}
+        <span className="text-center font-bold text-orange-400 text-xl">{title?.[locale]}</span>
+        {subtitle?.[locale] && (
+          <span className="font-bold text-lg text-white">{subtitle?.[locale]}</span>
+        )}
       </CardFooter>
     </MotionCard>
   )

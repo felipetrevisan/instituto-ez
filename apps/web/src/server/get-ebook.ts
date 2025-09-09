@@ -6,15 +6,15 @@ import {
   ebookQueryBySlug,
   ebooksCollectionQuery,
   ebooksCollectionQueryByCollection,
-} from '@ez/web/client/queries'
+} from '@ez/web/client/queries/ebooks'
 import type { Ebook, EbookCollection } from '@ez/web/types/ebook'
 
 export async function getEbooks() {
   return sanityFetch<Ebook[]>({ query: ebookQuery })
 }
 
-export async function getEbookBySlug(slug: string) {
-  return sanityFetch<Ebook>({ query: ebookQueryBySlug, params: { slug } })
+export async function getEbookBySlug(slug: string, locale: string) {
+  return sanityFetch<Ebook>({ query: ebookQueryBySlug, params: { slug, locale } })
 }
 
 export async function getEbooksCollection() {

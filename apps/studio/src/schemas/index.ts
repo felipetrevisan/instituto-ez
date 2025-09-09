@@ -1,6 +1,5 @@
 import type { SchemaTypeDefinition } from 'sanity'
 
-// Documents
 import advancedMentory from './documents/advanced-mentory'
 import banner from './documents/banner'
 import companyService from './documents/company-service'
@@ -15,8 +14,8 @@ import workshop from './documents/workshops'
 import ebookCatalog from './ebooks/catalog'
 import ebookCollection from './ebooks/collection'
 import landingPageSettings from './ebooks/settings'
-
-// Objects
+import aboutCard from './objects/about-card'
+import button from './objects/button'
 import badge from './objects/ebooks/badge'
 import chapter from './objects/ebooks/chapter'
 import chapters from './objects/ebooks/chapters'
@@ -28,8 +27,8 @@ import ebooksOverview from './objects/ebooks/overview'
 import price from './objects/ebooks/price'
 import landingPageSection from './objects/ebooks/section'
 import themeButton from './objects/ebooks/theme/button'
+import priceColor from './objects/ebooks/theme/price-badge'
 import themeSchema from './objects/ebooks/theme/theme'
-
 import accordionWidget from './objects/editor/accordion'
 import accordionContentWidget from './objects/editor/accordion-content'
 import alertWidget from './objects/editor/alert'
@@ -42,11 +41,14 @@ import richText from './objects/editor/rich-text'
 import tabsWidget from './objects/editor/tabs'
 import testimonialWidget from './objects/editor/testimonial'
 import titleWidget from './objects/editor/title'
-
-import aboutCard from './objects/about-card'
-import button from './objects/button'
 import icon from './objects/icon'
 import link from './objects/link'
+import localizedArrayPortableText from './objects/locale/localizedArrayPortableText'
+import localizedImage from './objects/locale/localizedImage'
+import localizedSlug from './objects/locale/localizedSlug'
+import localizedString from './objects/locale/localizedString'
+import localizedText from './objects/locale/localizedText'
+import localizedUrl from './objects/locale/localizedUrl'
 import logo from './objects/logo'
 import navigationItem from './objects/navigation-item'
 import navigationSubmenuItem from './objects/navigation-submenu-item'
@@ -74,6 +76,12 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     navigation,
 
     // Objects
+    localizedSlug,
+    localizedString,
+    localizedText,
+    localizedUrl,
+    localizedImage,
+    localizedArrayPortableText,
     navigationItem,
     navigationSubmenuItem,
     socialNetworksItem,
@@ -92,6 +100,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     landingPageSection,
     themeSchema,
     themeButton,
+    priceColor,
     pageSection,
     aboutCard,
     logo,

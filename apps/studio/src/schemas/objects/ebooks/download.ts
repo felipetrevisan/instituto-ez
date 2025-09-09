@@ -23,20 +23,13 @@ export default defineType({
     defineField({
       name: 'label',
       title: 'Button Label',
-      type: 'string',
+      type: 'localizedString',
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),
     defineField({
       name: 'url',
       title: 'Button URL',
-      type: 'url',
-      validation: (Rule) =>
-        Rule.required()
-          .warning('This field must not be empty.')
-          .uri({
-            scheme: ['http', 'https'],
-          })
-          .warning('This field must be a valid url.'),
+      type: 'localizedUrl',
     }),
   ],
 })

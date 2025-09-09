@@ -31,7 +31,7 @@ export default defineType({
     defineField({
       name: 'button_label',
       title: 'Button Label',
-      type: 'string',
+      type: 'localizedString',
       hidden: ({ parent }) => !parent?.show_button,
       validation: (Rule) =>
         Rule.custom((field, context) => {

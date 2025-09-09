@@ -1,7 +1,7 @@
 'use server'
 
 import { sanityFetch } from '@ez/web/client/fetch'
-import { landingPageSettingsQuery } from '@ez/web/client/queries'
+import { landingPageSettingsQuery } from '@ez/web/client/queries/landing-page'
 import type { Site } from '@ez/web/types/site'
 
 export async function getLandingPageSettings() {

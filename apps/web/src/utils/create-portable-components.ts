@@ -17,7 +17,7 @@ export const createPortableComponents = () => {
     ebooksWidget: EbooksWrapper,
     tabsWidget: TabsWrapper,
     cardsWidget: CardsWrapper,
-    list: ListWrapper
+    list: ListWrapper,
   }
 
   return {

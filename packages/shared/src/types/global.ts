@@ -1,9 +1,15 @@
 export type Button = {
   visible: boolean
   disabled: boolean
-  label: string
+  label: {
+    [key: string]: string
+  }
   type: LinkType
-  link: string
+  link: {
+    [key: string]: {
+      current: string
+    }
+  }
   params?: string
   externalUrl?: string
 }

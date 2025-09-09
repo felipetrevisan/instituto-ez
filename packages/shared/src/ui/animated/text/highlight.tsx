@@ -1,15 +1,14 @@
 'use client'
 
+import { cn } from '@ez/shared/lib/utils'
 import {
   type HTMLMotionProps,
+  motion,
   type Transition,
   type UseInViewOptions,
-  motion,
   useInView,
 } from 'motion/react'
 import * as React from 'react'
-
-import { cn } from '@ez/shared/lib/utils'
 
 type HighlightTextProps = HTMLMotionProps<'span'> & {
   text: string
@@ -39,22 +38,22 @@ function HighlightText({
 
   return (
     <motion.span
-      ref={localRef}
+      animate={isInView ? { backgroundSize: '100% 100%' } : undefined}
+      className={cn(
+        'relative inline-block rounded-lg bg-gradient-to-r from-primary to-secondary px-2 py-1',
+        className,
+      )}
       data-slot="highlight-text"
       initial={{
         backgroundSize: '0% 100%',
       }}
-      animate={isInView ? { backgroundSize: '100% 100%' } : undefined}
-      transition={transition}
+      ref={localRef}
       style={{
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'left center',
         display: 'inline',
       }}
-      className={cn(
-        'relative inline-block rounded-lg bg-gradient-to-r from-primary to-secondary px-2 py-1',
-        className,
-      )}
+      transition={transition}
       {...props}
     >
       {text}
