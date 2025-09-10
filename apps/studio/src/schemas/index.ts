@@ -25,6 +25,7 @@ import download from './objects/ebooks/download'
 import metadata from './objects/ebooks/metadata'
 import ebooksOverview from './objects/ebooks/overview'
 import price from './objects/ebooks/price'
+import seal from './objects/ebooks/seal'
 import landingPageSection from './objects/ebooks/section'
 import themeButton from './objects/ebooks/theme/button'
 import priceColor from './objects/ebooks/theme/price-badge'
@@ -92,6 +93,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 
     coverImage,
     metadata,
+    seal,
     chapters,
     chapter,
     download,

@@ -1,62 +1,52 @@
 'use client'
 
 import { Title } from '@ez/shared/ui/title'
+import { urlForImage } from '@ez/web/config/image'
+import { useLandingPageSettings } from '@ez/web/hooks/use-landing-page-settings'
 import { motion } from 'motion/react'
 import Image from 'next/image'
-
-const seals = [
-  {
-    image: 'seals/guarantee.png',
-    title: 'Garantia de 7 dias',
-    description: 'Se não gostar do conteúdo, devolvemos seu dinheiro.',
-  },
-  {
-    image: 'seals/safe-buy.png',
-    title: 'Compra 100% Segura',
-    description: 'Seus dados estão protegidos com criptografia avançada.',
-  },
-  {
-    image: 'seals/quality.png',
-    title: 'Qualidade Comprovada',
-    description: 'Conteúdo criado por especialistas com resultados reais.',
-  },
-  {
-    image: 'seals/refund.png',
-    title: 'Reembolso Garantido',
-    description: 'Você pode solicitar o reembolso sem burocracia.',
-  },
-]
+import { useLocale, useTranslations } from 'next-intl'
 
 const MotionTitle = motion(Title)
 
 export default function GuaranteeSection() {
+  const { data } = useLandingPageSettings()
+  const locale = useLocale()
+
+  const t = useTranslations('Ebooks')
+
   return (
     <div className="flex h-full w-full flex-col items-center justify-center gap-2 lg:container">
       <motion.h2
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
         className="font-bold text-3xl text-gray-900 tracking-tight md:text-4xl"
+        initial={{ opacity: 0, y: 20 }}
+        transition={{ duration: 0.6 }}
+        whileInView={{ opacity: 1, y: 0 }}
       >
         <MotionTitle
-          size="2xl"
           className="after:-bottom-1 after:-translate-x-1/2 relative text-center font-questrial font-semibold text-[var(--primary-c)] after:absolute after:left-1/2 after:h-[2px] after:w-[40%] after:rounded-xl after:bg-[var(--primary-c)]/60 after:transition-all"
+          size="2xl"
         >
-          Selos de Garantia
+          {t('guaranteeSeals')}
         </MotionTitle>
       </motion.h2>
 
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 lg:gap-8">
-        {seals.map((seal, i) => (
+        {data?.seals?.[locale].map((seal, i) => (
           <motion.div
-            key={seal.title}
+            className="relative flex size-40 flex-col items-center lg:size-64 lg:p-8"
             initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            // biome-ignore lint/suspicious/noArrayIndexKey: using index as key is acceptable here
+            key={i}
             transition={{ delay: i * 0.2, type: 'spring', stiffness: 400, damping: 10 }}
             whileHover={{ scale: 1.1 }}
-            className="relative flex size-40 flex-col items-center lg:size-64 lg:p-8"
+            whileInView={{ opacity: 1, y: 0 }}
           >
-            <Image src={`/assets/images/${seal.image}`} alt={seal.title} fill />
+            <Image
+              alt=""
+              fill
+              src={urlForImage(seal.seal.image.asset).format('webp').quality(80).url()}
+            />
           </motion.div>
         ))}
       </div>

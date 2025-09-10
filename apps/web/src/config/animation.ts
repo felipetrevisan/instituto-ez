@@ -98,7 +98,7 @@ export const sidebarVariants = {
     },
   }),
   closed: {
-    clipPath: 'circle(30px at 85% 45px)',
+    clipPath: 'circle(25px at 85% 45px)',
     transition: {
       delay: 0.5,
       type: 'spring' as const,

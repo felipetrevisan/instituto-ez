@@ -18,7 +18,8 @@ const nextConfig = {
 
 const withNextIntl = createNextIntlPlugin({
   experimental: {
-    createMessagesDeclaration: ['./messages/pt.json', './messages/en.json', './messages/es.json']
+    createMessagesDeclaration: ['./messages/pt.json', './messages/en.json', './messages/es.json'],
+    serverComponentsExternalPackages: ['prettier'],
   }
 });
 

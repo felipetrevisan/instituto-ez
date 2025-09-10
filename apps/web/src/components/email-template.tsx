@@ -8,11 +8,10 @@ export function EmailTemplate({ name, subject, message }: ContactFormSchema) {
         <Head />
         <Body className="bg-white">
           <Container className="border border-gray-400 bg-white shadow">
-            <Img src="/assets/logo.png" width="212" height="88" alt="" />
+            <Img alt="" height="88" src="/assets/logo.png" width="212" />
             <Heading className="text-black text-md">Olá, {name} enviou uma mensagem</Heading>
             <Text className="text-black text-md">
               {subject}
-
               {message}
             </Text>
           </Container>

@@ -10,13 +10,10 @@ import type { Ebook, Media } from '@ez/web/types/ebook'
 import { DynamicIcon } from 'lucide-react/dynamic'
 import Image from 'next/image'
 import { useLocale } from 'next-intl'
-import { useId } from 'react'
 
 export function Metadata({ data }: { data: Ebook }) {
-  const { metadata, id } = data
+  const { metadata } = data
   const locale = useLocale()
-
-  const randomId = useId()
 
   const getIcon = (media: Media) => {
     const Icon =
@@ -40,7 +37,7 @@ export function Metadata({ data }: { data: Ebook }) {
       {metadata?.length > 0 && (
         <section className="grid grid-cols-2 gap-x-2 gap-y-10 bg-white py-12 md:container md:gap-10 md:px-6 md:[grid-template-columns:repeat(auto-fit,minmax(200px,1fr))]">
           {metadata?.map((meta) => (
-            <Magnetic key={`metadata_${id}_${randomId}`} strength={0.25}>
+            <Magnetic key={`metadata_${meta._key}`} strength={0.25}>
               <Card
                 className={cn(
                   'hover:-translate-y-1 h-[180px] w-[200px] bg-gradient-to-br from-[var(--primary-c)]/40 to-[var(--secondary-c)]/40 p-0.5 shadow-[var(--primary-c)]/50 shadow-sm outline-none backdrop-blur-md transition-all duration-300 hover:shadow-xl',
@@ -67,7 +64,7 @@ export function Metadata({ data }: { data: Ebook }) {
                         )}
                         {meta.type === 'string' && (
                           <HighlightText
-                            className='from-[var(--primary-c)] to-[var(--secondary-c)] text-center font-bold text-3xl text-white'
+                            className="from-[var(--primary-c)] to-[var(--secondary-c)] text-center font-bold text-3xl text-white"
                             text={meta.text?.[locale] || '-'}
                           />
                         )}

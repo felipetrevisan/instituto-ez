@@ -136,6 +136,7 @@ const buttonField = `
 
 const badgeField = `
   "badges": badge[] {
+    _key,
     type,
     prefix,
     suffix,
@@ -143,16 +144,6 @@ const badgeField = `
     value,
     icon
   },
-`
-
-export const ebookQuery = groq`
-  *[ _type == 'ebook' ] | order(orderRank) { 
-    ${fields}
-    ${priceField}
-    ${imageField}
-    disabled,
-    ${buttonField}
-  }
 `
 
 const themeField = `
@@ -221,6 +212,7 @@ const indexField = `
 
 const questionField = `
   "questions": questions[] {
+    _key,
     title,
     content
   },
@@ -228,12 +220,34 @@ const questionField = `
 
 const chapterField = `
   "chapter": chapter {
-    "cover": cover {
-      "asset": asset,
-      "metadata": {
-        "lqip": asset->metadata.lqip,
-        "dimensions": asset->metadata.dimensions
-      }
+    "cover": {
+     "en": {
+        "cover": cover.en {
+        "asset": asset,
+          "metadata": {
+            "lqip": asset->metadata.lqip,
+            "dimensions": asset->metadata.dimensions
+          }
+        }
+      },
+      "es": {
+        "cover": cover.es {
+        "asset": asset,
+          "metadata": {
+            "lqip": asset->metadata.lqip,
+            "dimensions": asset->metadata.dimensions
+          }
+        }
+      },
+      "pt": {
+        "cover": cover.pt {
+        "asset": asset,
+          "metadata": {
+            "lqip": asset->metadata.lqip,
+            "dimensions": asset->metadata.dimensions
+          }
+        }
+      },
     },
     "chapters": chapters[] {
       content
@@ -243,6 +257,7 @@ const chapterField = `
 
 const metadataField = `
   "metadata": data[] {
+    _key,
     "media": media {
       type,
       icon,
@@ -255,6 +270,15 @@ const metadataField = `
     text,
     type
   },
+`
+export const ebookQuery = groq`
+  *[ _type == 'ebook' ] | order(orderRank) { 
+    ${fields}
+    ${priceField}
+    ${imageField}
+    disabled,
+    ${buttonField}
+  }
 `
 
 export const ebookQueryBySlug = groq`

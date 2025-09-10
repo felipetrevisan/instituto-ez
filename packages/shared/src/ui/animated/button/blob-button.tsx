@@ -1,6 +1,5 @@
 import { cn } from '@ez/shared/lib/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
-import { useId } from 'react'
 
 const buttonVariants = cva(
   'group relative cursor-pointer overflow-hidden px-12 py-4 font-bold uppercase shadow-2xl [&_svg]:shrink-0',
@@ -46,20 +45,6 @@ const buttonVariants = cva(
       fullWidth: false,
       sticky: false,
     },
-    // compoundVariants: [
-    //   {
-    //     variant: 'default',
-    //     theme: 'custom',
-    //     sticky: false,
-    //     class: 'border-[var(--header-button-hover-background)]',
-    //   },
-    //   {
-    //     variant: 'default',
-    //     theme: 'custom',
-    //     sticky: true,
-    //     class: 'border--[var(--header-sticky-button-hover-background)]',
-    //   },
-    // ],
   },
 )
 
@@ -198,8 +183,6 @@ export default function BlobButton({
   fullWidth,
   ...props
 }: BlobButtonProps) {
-  const id = useId()
-
   return (
     <button
       className={cn(
@@ -223,7 +206,8 @@ export default function BlobButton({
             <span
               className={cn(buttonBlobVariants({ theme, sticky }))}
               data-slot="button-blob"
-              key={id}
+              // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+              key={i}
               style={{
                 left: `${i * 25}%`,
                 transitionDelay: `${i * 120}ms`,

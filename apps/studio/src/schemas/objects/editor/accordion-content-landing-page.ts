@@ -3,7 +3,7 @@ import { defineType } from 'sanity'
 import { i18n } from '../locale/locales'
 
 export default defineType({
-  name: 'accordion-content',
+  name: 'accordion-content-landing-page',
   type: 'object',
   title: 'Content',
   icon: MenuIcon,
@@ -11,13 +11,13 @@ export default defineType({
     {
       name: 'title',
       title: 'Title',
-      type: 'string',
+      type: 'localizedString',
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     },
     {
       name: 'content',
       title: 'Content',
-      type: 'text',
+      type: 'localizedText',
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     },
   ],

@@ -178,8 +178,6 @@ function MotionHighlight<T extends string>({ ref, ...props }: MotionHighlightPro
     else if (defaultValue !== undefined) setActiveValue(defaultValue)
   }, [value, defaultValue])
 
-  const uniqueId = React.useId()
-
   React.useEffect(() => {
     if (mode !== 'parent') return
     const container = localRef.current
@@ -274,8 +272,9 @@ function MotionHighlight<T extends string>({ ref, ...props }: MotionHighlightPro
         ? controlledItems
           ? render(children)
           : render(
-              React.Children.map(children, (child) => (
-                <MotionHighlightItem className={props?.itemsClassName} key={uniqueId}>
+              React.Children.map(children, (child, i) => (
+                // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+                <MotionHighlightItem className={props?.itemsClassName} key={i}>
                   {child}
                 </MotionHighlightItem>
               )),

@@ -1,102 +1,40 @@
 'use client'
 
 import {
-  MotionHighlight,
-  MotionHighlightItem,
-} from '@ez/shared/ui/animated/effects/motion-highlight'
-import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
 } from '@ez/shared/ui/navigation-menu'
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@ez/shared/ui/select'
 import { useApp } from '@ez/web/hooks/use-app'
 import type { Navigation } from '@ez/web/types/site'
 import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
-import { motion } from 'motion/react'
-import Image from 'next/image'
-import { redirect } from 'next/navigation'
-import { useLocale, useTranslations } from 'next-intl'
+import { AnimatePresence, motion } from 'motion/react'
+import { useLocale } from 'next-intl'
 
 type NavigationProps = {
   navigation?: Navigation
 }
 
-const MenuItemMotion = motion(NavigationMenuItem)
-
 export const MobileNavigation = ({ navigation }: NavigationProps) => {
   const locale = useLocale()
   const { isMenuActive } = useApp()
 
-  const t = useTranslations('Languages')
-
-  const handleChange = (lang: string) => {
-    redirect(`/${lang}`)
-  }
-
   return (
-    <NavigationMenu className="mx-auto flex w-full lg:hidden lg:items-start" orientation="vertical">
-      <NavigationMenuList>
-        <NavigationMenuItem>
-          <Select defaultValue={locale} onValueChange={handleChange}>
-            <SelectTrigger className="max-w-max p-2">
-              <SelectValue placeholder={t('placeholder')} />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectItem value="pt">
-                  <Image
-                    alt=""
-                    className="size-8"
-                    height={32}
-                    src="/assets/images/flags/brazil.png"
-                    width={32}
-                  />
-                </SelectItem>
-                <SelectItem value="en">
-                  <Image
-                    alt=""
-                    className="size-8"
-                    height={32}
-                    src="/assets/images/flags/usa.png"
-                    width={32}
-                  />
-                </SelectItem>
-                <SelectItem value="es">
-                  <Image
-                    alt=""
-                    className="size-8"
-                    height={32}
-                    src="/assets/images/flags/euro.png"
-                    width={32}
-                  />
-                </SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-        </NavigationMenuItem>
-      </NavigationMenuList>
-      <NavigationMenuList className="items-end">
-        <MotionHighlight
-          className="flex flex-col border-b-2 border-b-primary bg-transparent text-primary"
-          containerClassName="flex flex-col justify-center items-center"
-          controlledItems
-          hover
-          mode="parent"
-        >
+    <NavigationMenu className="mx-auto flex w-full flex-col lg:hidden" orientation="vertical">
+      <NavigationMenuList className="flex flex-col">
+        <AnimatePresence>
           {navigation?.items?.map(({ id, label, url }) => (
-            <MenuItemMotion data-value={id} key={id}>
-              <MotionHighlightItem activeClassName="border-b-primary text-primary p-4">
+            <motion.div
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              initial={{ opacity: 0, y: -10 }}
+              key={id}
+              transition={{ duration: 0.2 }}
+            >
+              <NavigationMenuItem>
                 <NavigationMenuLink
-                  className="hover:after:animation-pulse after:-bottom-1 after:-translate-x-1/2 relative after:absolute after:left-1/2 after:h-[2px] after:w-0 after:rounded-xl after:bg-primary-foreground after:transition-all hover:after:w-full hover:after:shadow-xl"
+                  className="block px-4 py-4 font-medium text-lg text-primary transition-colors hover:text-primary/80"
                   data-active={isMenuActive(url.link?.[locale].current)}
                   href={getLocalizedLink(
                     locale,
@@ -109,10 +47,10 @@ export const MobileNavigation = ({ navigation }: NavigationProps) => {
                 >
                   {label?.[locale]}
                 </NavigationMenuLink>
-              </MotionHighlightItem>
-            </MenuItemMotion>
+              </NavigationMenuItem>
+            </motion.div>
           ))}
-        </MotionHighlight>
+        </AnimatePresence>
       </NavigationMenuList>
     </NavigationMenu>
   )

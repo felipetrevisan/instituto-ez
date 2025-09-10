@@ -2,8 +2,8 @@
 
 import { sanityFetch } from '@ez/web/client/fetch'
 import { landingPageSettingsQuery } from '@ez/web/client/queries/landing-page'
-import type { Site } from '@ez/web/types/site'
+import type { LandingPageSetting } from '../types/landing-page-setting'
 
 export async function getLandingPageSettings() {
-  return sanityFetch<Site>({ query: landingPageSettingsQuery })
+  return sanityFetch<LandingPageSetting>({ query: landingPageSettingsQuery })
 }

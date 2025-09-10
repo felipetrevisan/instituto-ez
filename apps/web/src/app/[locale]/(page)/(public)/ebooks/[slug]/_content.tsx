@@ -5,7 +5,9 @@ import { MailIcon } from '@ez/shared/icons'
 import { PageType } from '@ez/shared/types/global'
 import { IconButton } from '@ez/shared/ui/animated/button/icon-button'
 import { useApp } from '@ez/web/hooks/use-app'
+import { useEbook } from '@ez/web/hooks/use-ebook'
 import type { Ebook } from '@ez/web/types/ebook'
+import type { LandingPageSetting } from '@ez/web/types/landing-page-setting'
 import type { Section, SectionKeys } from '@ez/web/types/sections'
 import { useLocale } from 'next-intl'
 import { Fragment, useEffect } from 'react'
@@ -15,13 +17,13 @@ type CSSVariables = {
   [key: `--${string}`]: string
 }
 
-export function Content({ data, sections }: { data: Ebook; sections: Section[] }) {
+export function Content({ data, settings }: { data: Ebook; settings: LandingPageSetting }) {
   const { setPageType, isLandingPage } = useApp()
   const { setIsContactDialogOpen, setContactSubject } = useShared()
   const locale = useLocale()
   const { theme } = data
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  // biome-ignore lint/correctness/useExhaustiveDependencies: intentional non-exhaustive deps
   useEffect(() => {
     if (isLandingPage()) return
 
@@ -58,7 +60,7 @@ export function Content({ data, sections }: { data: Ebook; sections: Section[] }
   return (
     <div className="flex w-full flex-col items-center justify-center space-y-14" style={style}>
       <div className="relative flex w-screen flex-col items-center justify-center">
-        {sections?.map(({ key, show }: Section) =>
+        {settings.sections?.map(({ key, show }: Section) =>
           show ? <Fragment key={key}>{avaliableSections[key]?.component}</Fragment> : null,
         )}
       </div>

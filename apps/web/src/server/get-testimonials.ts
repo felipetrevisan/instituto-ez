@@ -11,9 +11,9 @@ export async function getTestimonials(category: string) {
   })
 }
 
-export async function getTestimonialsByEbook(category: string, ebookSlug: string) {
+export async function getTestimonialsByEbook(locale: string, category: string, ebookSlug: string) {
   return sanityFetch<Testimonial[]>({
     query: testimonialsByEbookQuery,
-    params: { category, slug: ebookSlug },
+    params: { locale, category, slug: ebookSlug },
   })
 }

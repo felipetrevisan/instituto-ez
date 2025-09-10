@@ -1,18 +1,17 @@
 'use client'
 
+import { cn } from '@ez/shared/lib/utils'
 import {
   type MotionValue,
+  motion,
   type SpringOptions,
   type UseInViewOptions,
-  motion,
   useInView,
   useSpring,
   useTransform,
 } from 'motion/react'
 import * as React from 'react'
 import useMeasure from 'react-use-measure'
-
-import { cn } from '@ez/shared/lib/utils'
 
 type SlidingNumberRollerProps = {
   prevValue: number
@@ -34,18 +33,18 @@ function SlidingNumberRoller({ prevValue, value, place, transition }: SlidingNum
 
   return (
     <span
-      ref={measureRef}
-      data-slot="sliding-number-roller"
       className="relative inline-block w-[1ch] overflow-y-clip overflow-x-visible tabular-nums leading-none"
+      data-slot="sliding-number-roller"
+      ref={measureRef}
     >
       <span className="invisible">0</span>
       {Array.from({ length: 10 }, (_, i) => (
         <SlidingNumberDisplay
+          height={height}
           // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
           key={i}
           motionValue={animatedValue}
           number={i}
-          height={height}
           transition={transition}
         />
       ))}
@@ -81,9 +80,9 @@ function SlidingNumberDisplay({
 
   return (
     <motion.span
+      className="absolute inset-0 flex items-center justify-center"
       data-slot="sliding-number-display"
       style={{ y }}
-      className="absolute inset-0 flex items-center justify-center"
       transition={{ ...transition, type: 'spring' }}
     >
       {number}
@@ -185,9 +184,9 @@ function SlidingNumber({
 
   return (
     <span
-      ref={localRef}
-      data-slot="sliding-number"
       className={cn('flex items-center', className)}
+      data-slot="sliding-number"
+      ref={localRef}
       {...props}
     >
       {isInView && Number(number) < 0 && <span className="mr-1">-</span>}
@@ -195,10 +194,10 @@ function SlidingNumber({
       {intPlaces.map((place) => (
         <SlidingNumberRoller
           key={`int-${place}`}
-          prevValue={Number.parseInt(adjustedPrevInt, 10)}
-          value={Number.parseInt(newIntStr ?? '0', 10)}
           place={place}
+          prevValue={Number.parseInt(adjustedPrevInt, 10)}
           transition={transition}
+          value={Number.parseInt(newIntStr ?? '0', 10)}
         />
       ))}
 
@@ -208,10 +207,10 @@ function SlidingNumber({
           {decPlaces.map((place) => (
             <SlidingNumberRoller
               key={`dec-${place}`}
-              prevValue={prevDecValue}
-              value={newDecValue}
               place={place}
+              prevValue={prevDecValue}
               transition={transition}
+              value={newDecValue}
             />
           ))}
         </>

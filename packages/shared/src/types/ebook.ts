@@ -65,7 +65,9 @@ export type Ebook = {
   metadata: Metadata[]
   chapter: {
     cover?: {
-      [key: string]: SanityAsset
+      [key: string]: {
+        cover: SanityAsset
+      }
     }
     chapters: Chapter[]
   }
@@ -125,6 +127,7 @@ export type EbookCollection = {
 }
 
 export type Metadata = {
+  _key: string
   title: {
     [key: string]: string
   }
@@ -143,6 +146,7 @@ export type Metadata = {
 }
 
 export type Badge = {
+  _key: string
   type: 'string' | 'number' | 'star'
   text?: {
     [key: string]: string
@@ -170,6 +174,7 @@ export type Media = {
 }
 
 export type Question = {
+  _key: string
   title: {
     [key: string]: string
   }

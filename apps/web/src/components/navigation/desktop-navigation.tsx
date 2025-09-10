@@ -9,22 +9,12 @@ import {
   NavigationMenuItem,
   NavigationMenuList,
 } from '@ez/shared/ui/navigation-menu'
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@ez/shared/ui/select'
 import { useApp } from '@ez/web/hooks/use-app'
 import type { Navigation } from '@ez/web/types/site'
 import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
 import { motion } from 'motion/react'
-import Image from 'next/image'
 import Link from 'next/link'
-import { redirect } from 'next/navigation'
-import { useLocale, useTranslations } from 'next-intl'
+import { useLocale } from 'next-intl'
 
 type NavigationProps = {
   navigation?: Navigation
@@ -35,12 +25,6 @@ const MenuItemMotion = motion(NavigationMenuItem)
 export const DesktopNavigation = ({ navigation }: NavigationProps) => {
   const locale = useLocale()
   const { isMenuActive } = useApp()
-
-  const t = useTranslations('Languages')
-
-  const handleChange = (lang: string) => {
-    redirect(`/${lang}`)
-  }
 
   return (
     <NavigationMenu className="hidden lg:flex">
@@ -74,46 +58,6 @@ export const DesktopNavigation = ({ navigation }: NavigationProps) => {
             </MenuItemMotion>
           ))}
         </MotionHighlight>
-      </NavigationMenuList>
-      <NavigationMenuList>
-        <NavigationMenuItem>
-          <Select defaultValue={locale} onValueChange={handleChange}>
-            <SelectTrigger className="max-w-max p-2">
-              <SelectValue placeholder={t('placeholder')} />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectItem value="pt">
-                  <Image
-                    alt=""
-                    className="size-8"
-                    height={32}
-                    src="/assets/images/flags/brazil.png"
-                    width={32}
-                  />
-                </SelectItem>
-                <SelectItem value="en">
-                  <Image
-                    alt=""
-                    className="size-8"
-                    height={32}
-                    src="/assets/images/flags/usa.png"
-                    width={32}
-                  />
-                </SelectItem>
-                <SelectItem value="es">
-                  <Image
-                    alt=""
-                    className="size-8"
-                    height={32}
-                    src="/assets/images/flags/euro.png"
-                    width={32}
-                  />
-                </SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-        </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
   )

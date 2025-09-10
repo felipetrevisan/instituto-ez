@@ -1,7 +1,7 @@
 import { cn } from '@ez/shared/lib/utils'
 import { useApp } from '@ez/web/hooks/use-app'
 import { Slot } from '@radix-ui/react-slot'
-import { type VariantProps, cva } from 'class-variance-authority'
+import { cva, type VariantProps } from 'class-variance-authority'
 import { type HTMLMotionProps, type MotionValue, motion } from 'motion/react'
 import type React from 'react'
 
@@ -54,28 +54,27 @@ function Brand({
 
 const Path = (props: React.ComponentProps<typeof motion.path>) => (
   <motion.path
-    strokeWidth="3"
     fill="currentColor"
     stroke="currentColor"
     strokeLinecap="round"
+    strokeWidth="3"
     {...props}
   />
 )
 
 function Toggle({ className, ...props }: React.ComponentProps<'button'>) {
-  const { toggleMenu, isNormalPage } = useApp()
+  const { toggleMenu } = useApp()
 
   return (
     <button
       className={cn(
-        'absolute top-6 right-5 z-100 flex size-12 cursor-pointer items-center justify-center rounded-full text-sm lg:hidden',
+        'absolute top-[35px] right-[30px] z-100 flex size-7 cursor-pointer items-center justify-center rounded-full text-sm lg:hidden',
         className,
       )}
       {...props}
       onClick={() => toggleMenu()}
     >
-      {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
-      <svg width="23" height="23" viewBox="0 0 23 23">
+      <svg height="23" viewBox="0 0 23 23" width="23">
         <Path
           variants={{
             closed: { d: 'M 2 2.5 L 20 2.5' },
@@ -84,11 +83,11 @@ function Toggle({ className, ...props }: React.ComponentProps<'button'>) {
         />
         <Path
           d="M 2 9.423 L 20 9.423"
+          transition={{ duration: 0.1 }}
           variants={{
             closed: { opacity: 1 },
             open: { opacity: 0 },
           }}
-          transition={{ duration: 0.1 }}
         />
         <Path
           variants={{

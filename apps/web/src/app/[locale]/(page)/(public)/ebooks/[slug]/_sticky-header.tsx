@@ -29,30 +29,30 @@ export default function StickyHeader({ title, image, download }: Ebook) {
     <AnimatePresence>
       {showSticky && (
         <motion.div
-          initial={{ y: -80, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          exit={{ y: -80, opacity: 0 }}
-          transition={{ duration: 0.3, type: 'spring', stiffness: 300, damping: 20 }}
           className="fixed top-[env(safe-area-inset-top,0px)] right-0 left-0 z-50 flex items-center justify-between bg-white/90 p-4 shadow-md backdrop-blur-xl"
+          exit={{ y: -80, opacity: 0 }}
+          initial={{ y: -80, opacity: 0 }}
+          transition={{ duration: 0.3, type: 'spring', stiffness: 300, damping: 20 }}
         >
           <div className="flex w-full items-center justify-between gap-5 md:container">
-            <Link href={getLocalizedLink(locale, '/ebooks')} className="h-full md:w-[10vw]">
+            <Link className="h-full md:w-[10vw]" href={getLocalizedLink(locale, '/ebooks')}>
               {!isMobile ? (
                 <AnimatedButton
-                  label={t('backButton')}
-                  icon={<ChevronLeftIconMotion />}
                   animateMaps={{
                     width: { initial: 48, hovered: 260 },
                     paddingLeft: { initial: 20, hovered: 16 },
                     scale: { initial: 1, hovered: 1.1 },
                   }}
                   className="fill-[var(--primary-c)] text-[var(--primary-c)]"
+                  icon={<ChevronLeftIconMotion />}
+                  label={t('backButton')}
                 />
               ) : (
                 <IconButton
+                  className="bg-white fill-[var(--primary-c)] text-[var(--primary-c)]"
                   icon={ChevronLeftIcon}
                   theme="custom"
-                  className="bg-white fill-[var(--primary-c)] text-[var(--primary-c)]"
                 />
               )}
             </Link>
@@ -60,16 +60,16 @@ export default function StickyHeader({ title, image, download }: Ebook) {
               {!isMobile && image?.[locale].large && (
                 <div className="relative size-10">
                   <Image
+                    alt="Book Cover"
+                    className="object-cover"
+                    fill
+                    priority
                     src={urlForImage(image?.[locale].large.asset)
                       .width(64)
                       .height(64)
                       .format('webp')
                       .quality(80)
                       .url()}
-                    alt="Book Cover"
-                    fill
-                    className="object-cover"
-                    priority
                   />
                 </div>
               )}
@@ -81,20 +81,20 @@ export default function StickyHeader({ title, image, download }: Ebook) {
               <Link href={download?.url?.[locale] ?? '/'} target="_blank">
                 {!isMobile ? (
                   <BlobButton
-                    variant="default"
-                    theme="custom"
-                    rounded="2xl"
                     className="w-full max-w-[250px]"
-                    sticky
                     numOfBlobs={4}
+                    rounded="2xl"
+                    sticky
+                    theme="custom"
+                    variant="default"
                   >
                     <DownloadIconMotion /> {download?.label?.[locale]}
                   </BlobButton>
                 ) : (
                   <IconButton
+                    className="bg-white fill-[var(--primary-c)] text-[var(--primary-c)]"
                     icon={DownloadIcon}
                     theme="custom"
-                    className="bg-white fill-[var(--primary-c)] text-[var(--primary-c)]"
                   />
                 )}
               </Link>

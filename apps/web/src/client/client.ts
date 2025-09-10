@@ -2,7 +2,7 @@ import { env } from '@ez/web/config/env'
 import { createClient } from 'next-sanity'
 
 export const client = createClient({
-  apiVersion: '2024-03-17',
+  apiVersion: '2025-07-25',
   dataset: env.NEXT_PUBLIC_SANITY_DATASET,
   projectId: env.NEXT_PUBLIC_SANITY_PROJECT_ID,
   useCdn: true,

@@ -6,6 +6,14 @@ import { cn } from '@ez/shared/lib/utils'
 import { getImageUrlBuilder } from '@ez/shared/sanity/image'
 import { IconButton } from '@ez/shared/ui/animated/button/icon-button'
 import { Dialog } from '@ez/shared/ui/dialog'
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@ez/shared/ui/select'
 import * as Navbar from '@ez/web/components/ui/navbar'
 import { menuListVariants, sidebarVariants } from '@ez/web/config/animation'
 import { env } from '@ez/web/config/env'
@@ -16,7 +24,10 @@ import { useIsMobile } from '@ez/web/hooks/use-mobile'
 import { useSite } from '@ez/web/hooks/use-site'
 import type { Site } from '@ez/web/types/site'
 import { motion, useAnimation, useMotionValueEvent, useScroll, useTransform } from 'motion/react'
+import Image from 'next/image'
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
+import { useLocale, useTranslations } from 'next-intl'
 import { useEffect, useRef, useState } from 'react'
 import { ContactFormDialog } from './contact-form-dialog'
 import { Logo } from './logo'
@@ -30,12 +41,19 @@ type HeaderProps = {
 } & React.ComponentProps<'div'>
 
 function Header({ className, data }: HeaderProps) {
+  const locale = useLocale()
   const [currentScrollY, setCurrentScrollY] = useState(0)
   const containerRef = useRef<HTMLDivElement | null>(null)
   const { height } = useDimensions(containerRef)
   const { isMenuOpen, isNormalPage } = useApp()
   const { scrollY } = useScroll()
   const isMobile = useIsMobile(640)
+
+  const t = useTranslations('Languages')
+
+  const handleChange = (lang: string) => {
+    redirect(`/${lang}`)
+  }
 
   const scrollYRange = [0, 100, 100]
 
@@ -105,15 +123,15 @@ function Header({ className, data }: HeaderProps) {
             <>
               <Navbar.Toggle />
               <motion.div
-                className="fixed top-0 right-0 z-90 h-screen w-[300px] bg-slate-200/90 backdrop-blur-3xl lg:hidden"
-                variants={sidebarVariants}
-                initial="closed"
                 animate={isMenuOpen ? 'open' : 'closed'}
+                className="fixed top-0 right-0 z-90 h-screen w-[300px] bg-slate-200/90 backdrop-blur-3xl lg:hidden"
+                initial="closed"
+                variants={sidebarVariants}
               >
                 <MotionMobileNavigation
+                  animate={isMenuOpen ? 'open' : 'closed'}
                   navigation={data?.primaryNavigation}
                   variants={menuListVariants}
-                  animate={isMenuOpen ? 'open' : 'closed'}
                 />
               </motion.div>
             </>
@@ -121,6 +139,53 @@ function Header({ className, data }: HeaderProps) {
 
           {!isMobile && <DesktopNavigation navigation={data?.primaryNavigation} />}
         </motion.div>
+        <Select defaultValue={locale} onValueChange={handleChange}>
+          <SelectTrigger className="max-w-max p-3">
+            <SelectValue placeholder={t('placeholder')} />
+          </SelectTrigger>
+          <SelectContent className="relative z-150" side={isMobile ? 'left' : 'bottom'}>
+            <SelectGroup>
+              <SelectItem value="pt">
+                <div className="flex items-center gap-2">
+                  <Image
+                    alt=""
+                    className="size-8"
+                    height={32}
+                    src="/assets/images/flags/brazil.png"
+                    width={32}
+                  />
+                  <span className="font-bold text-oswald text-primary text-sm">PT</span>
+                </div>
+              </SelectItem>
+              <SelectItem value="en">
+                <div className="flex items-center gap-2">
+                  <Image
+                    alt=""
+                    className="size-8"
+                    height={32}
+                    priority
+                    src="/assets/images/flags/usa.png"
+                    width={32}
+                  />
+                  <span className="font-bold text-oswald text-primary text-sm">EN</span>
+                </div>
+              </SelectItem>
+              <SelectItem value="es">
+                <div className="flex items-center gap-2">
+                  <Image
+                    alt=""
+                    className="size-8"
+                    height={32}
+                    priority
+                    src="/assets/images/flags/euro.png"
+                    width={32}
+                  />
+                  <span className="font-bold text-oswald text-primary text-sm">ES</span>
+                </div>
+              </SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
       </Navbar.Root>
     </motion.header>
   )
@@ -170,18 +235,18 @@ function Footer({ className }: React.ComponentProps<'div'>) {
             onClick={() => setIsContactDialogOpen(true)}
             size="lg"
             theme="secondary"
+            transition={{ type: 'spring', stiffness: 400, damping: 10 }}
             whileHover={{ scale: 1.4 }}
             whileTap={{ scale: 1.4 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 10 }}
           />
         </div>
       )}
       <div className="container flex w-full flex-row items-center justify-center gap-4">
         <div className="flex flex-col items-center justify-center gap-4">
           <Logo
-            src={data?.logo && urlForImage(data.logo?.asset).format('webp').quality(80).url()}
-            showSlogan={false}
             linkable={false}
+            showSlogan={false}
+            src={data?.logo && urlForImage(data.logo?.asset).format('webp').quality(80).url()}
           />
           <p className="text-center text-primary text-opacity-75">
             © {new Date().getFullYear()} - Todos os direitos reservados
@@ -221,7 +286,7 @@ function ButtonLink({
   return (
     <>
       {href && (
-        <Link href={href} passHref aria-disabled={disabled} className={className} {...props}>
+        <Link aria-disabled={disabled} className={className} href={href} passHref {...props}>
           {children}
         </Link>
       )}

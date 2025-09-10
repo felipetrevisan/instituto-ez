@@ -58,7 +58,6 @@ function Title({
           width="26"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <title>Separator</title>
           <path
             className={cn({
               'fill-primary': variant === 'default',

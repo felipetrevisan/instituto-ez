@@ -13,7 +13,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <App.Content>{children}</App.Content>
       <App.Footer />
       <svg className="hidden" version="1.1" xmlns="http://www.w3.org/2000/svg">
-        <title>Goo Filter</title>
         <defs>
           <filter id="goo">
             <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10" />

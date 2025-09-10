@@ -20,7 +20,7 @@ export const testimonialsQuery = groq`
 `
 
 export const testimonialsByEbookQuery = groq`
-  *[ _type == 'testimonial' && $category in categories[] && defined(ebook_page) && ebook_page->slug.current == $slug] | order(orderRank) { 
+  *[ _type == 'testimonial' && $category in categories[] && defined(ebook_page) && ebook_page->slug[$locale].current == $slug] | order(orderRank) { 
     ${fields}
   }
 `

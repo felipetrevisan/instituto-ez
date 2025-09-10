@@ -7,12 +7,10 @@ import type { Ebook } from '@ez/web/types/ebook'
 import { DynamicIcon } from 'lucide-react/dynamic'
 import { motion } from 'motion/react'
 import { useLocale } from 'next-intl'
-import { useId } from 'react'
 
 export default function Badges({ data }: { data: Ebook }) {
   const { badges } = data
   const locale = useLocale()
-  const id = useId()
 
   const BadgeChip = ({
     type,
@@ -56,7 +54,7 @@ export default function Badges({ data }: { data: Ebook }) {
   return (
     <div className="mt-4 mb-6 flex flex-row flex-wrap justify-center gap-4 md:justify-start">
       {badges.map((badge, i) => (
-        <BadgeChip {...badge} index={i} key={i + id} />
+        <BadgeChip {...badge} index={i} key={badge._key} />
       ))}
     </div>
   )

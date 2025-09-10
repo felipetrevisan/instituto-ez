@@ -67,9 +67,6 @@ function BadgeButton({
   const localRef = React.useRef<HTMLDivElement>(null)
   React.useImperativeHandle(ref, () => localRef.current as HTMLDivElement)
 
-  const segmentId = useId()
-  const digitId = useId()
-
   const inViewResult = useInView(localRef, {
     once: inViewOnce,
     margin: inViewMargin,
@@ -81,10 +78,17 @@ function BadgeButton({
 
   const renderNumberSegments = (segments: string[], unit: string, isGhost: boolean) => (
     <span className={cn('flex items-center gap-px', isGhost ? 'invisible' : '')}>
-      {segments.map((segment) => (
-        <React.Fragment key={segmentId}>
-          {Array.from(segment).map((digit) => (
-            <SlidingNumber key={`${segmentId}-${digitId}`} number={+digit} />
+      {segments.map((segment, index) => (
+        // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+        <React.Fragment key={index}>
+          {Array.from(segment).map((digit, digitId) => (
+            <SlidingNumber
+              key={`${index}-${
+                // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+                digitId
+              }`}
+              number={+digit}
+            />
           ))}
         </React.Fragment>
       ))}
@@ -112,11 +116,11 @@ function BadgeButton({
 
   return (
     <motion.div
-      ref={localRef}
       className={cn(
         "flex h-10 w-max shrink-0 cursor-pointer items-center gap-2 whitespace-nowrap rounded-full bg-zinc-800/20 px-4 py-2 font-medium text-primary-foreground text-sm outline-none transition-colors focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 has-[>svg]:px-3 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&_svg:not([class*='size-'])]:size-[18px] [&_svg]:pointer-events-none [&_svg]:shrink-0",
         className,
       )}
+      ref={localRef}
       {...props}
     >
       <div className="relative inline-flex size-[18px] shrink-0">{Icon ?? null}</div>

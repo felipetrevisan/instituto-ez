@@ -18,6 +18,8 @@ export function Overview({ data }: { data: Ebook }) {
   const { overview, chapter, id } = data
   const locale = useLocale()
 
+  console.log(chapter)
+
   const t = useTranslations('Ebooks')
 
   return (
@@ -32,7 +34,6 @@ export function Overview({ data }: { data: Ebook }) {
     >
       <div className="absolute top-0 left-0 w-full rotate-180 overflow-hidden">
         <svg preserveAspectRatio="none" viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg">
-          <title>Pattern</title>
           <path
             className="fill-white"
             d="M602.45,3.86h0S572.9,116.24,281.94,120H923C632,116.24,602.45,3.86,602.45,3.86Z"
@@ -51,7 +52,7 @@ export function Overview({ data }: { data: Ebook }) {
             <Subtitle size="lg">{overview.description?.[locale]}</Subtitle>
           </div>
         )}
-        {chapter && chapter.chapters?.length > 0 && (
+        {chapter && chapter?.chapters?.length > 0 && (
           <div className="flex flex-col items-center justify-center gap-8">
             <Title
               className="after:-bottom-1 after:-translate-x-1/2 relative text-center font-questrial font-semibold text-[var(--primary-c)] after:absolute after:left-1/2 after:h-[2px] after:w-[40%] after:rounded-xl after:bg-[var(--primary-c)]/60 after:transition-all"
@@ -59,49 +60,40 @@ export function Overview({ data }: { data: Ebook }) {
             >
               {t('virtualEbook')}
             </Title>
-            {/* <div className="flex w-full justify-center px-4">
-              <HTMLFlipBook
-                width={400}
-                height={540}
-                size={isMobile ? 'stretch' : 'fixed'}
-                minWidth={315}
-                maxWidth={1000}
-                minHeight={400}
-                maxHeight={1533}
-                maxShadowOpacity={0.5}
-                showCover
-                mobileScrollSupport
-                drawShadow
-                usePortrait={isMobile}
-                autoSize={isMobile}
-                className="open-book"
-              >
-                {chapter.cover && (
-                  <CoverBook>
-                    <Image
-                      src={urlForImage(chapter.cover.asset).format('webp').quality(80).url()}
-                      alt="Book Cover"
-                      fill
-                      className="object-cover"
-                      priority
+            {chapter.chapters?.length && (
+              <div className="flex w-full justify-center px-4">
+                <HTMLFlipBook
+                  autoSize={isMobile}
+                  className="open-book"
+                  drawShadow
+                  height={540}
+                  maxHeight={1533}
+                  maxShadowOpacity={0.5}
+                  maxWidth={1000}
+                  minHeight={400}
+                  minWidth={315}
+                  mobileScrollSupport
+                  showCover
+                  size={isMobile ? 'stretch' : 'fixed'}
+                  usePortrait={isMobile}
+                  width={400}
+                >
+                  <CoverBook cover={chapter.cover} locale={locale} />
+                  {chapter.chapters?.map((chapter, index) => (
+                    <PageBook
+                      chapter={chapter}
+                      className={cn('--hard --left', {
+                        '--left': index % 2 === 0,
+                        '--right': index % 2 !== 0,
+                      })}
+                      index={index}
+                      key={`${id}-${index}`}
                     />
-                  </CoverBook>
-                )}
-                {chapter.chapters?.map((chapter, index) => (
-                  <PageBook
-                    key={`${id}-${
-                      // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-                      index
-                    }`}
-                    className={cn('--hard --left', {
-                      '--left': index % 2 === 0,
-                      '--right': index % 2 !== 0,
-                    })}
-                    chapter={chapter}
-                  />
-                ))}
-              </HTMLFlipBook>
-            </div> */}
+                  ))}
+                  <CoverBook cover={chapter.cover} locale={locale} />
+                </HTMLFlipBook>
+              </div>
+            )}
           </div>
         )}
       </div>

@@ -48,7 +48,6 @@ export default function PriceBubble({ price }: { price: Price }) {
           width="256"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <title>Gradient Star</title>
           <defs>
             <linearGradient id="starGradient" x1="0%" x2="100%" y1="0%" y2="100%">
               {isFree ? (

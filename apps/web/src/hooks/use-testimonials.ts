@@ -11,10 +11,10 @@ export function useTestimonials(category: string) {
   return { data, isLoading, isPending }
 }
 
-export function useTestimonialsByEbook(category: string, ebookSlug: string) {
+export function useTestimonialsByEbook(category: string, ebookSlug: string, locale: string) {
   const { data, isLoading, isPending } = useQuery<Testimonial[]>({
-    queryKey: ['testimonials', category, ebookSlug],
-    queryFn: () => getTestimonialsByEbook(category, ebookSlug),
+    queryKey: ['testimonials', locale, category, ebookSlug],
+    queryFn: () => getTestimonialsByEbook(locale, category, ebookSlug),
   })
 
   return { data, isLoading, isPending }

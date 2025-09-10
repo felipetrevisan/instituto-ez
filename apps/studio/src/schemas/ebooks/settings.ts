@@ -49,5 +49,11 @@ export default defineType({
         }),
       ],
     }),
+    defineField({
+      name: 'seals_image',
+      title: 'Seals Image',
+      type: 'array',
+      of: [{ type: 'seal' }],
+    }),
   ],
 })

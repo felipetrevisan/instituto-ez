@@ -6,5 +6,49 @@ export const landingPageSettingsQuery = groq`
       "key": key_section,
       "show": show_section,
     },
+    "seals": {
+      "pt": coalesce(
+        seals_image[] {
+          "seal": {
+            "image": seals.pt {
+              "asset": asset,
+              "metadata": {
+                "lqip": asset->metadata.lqip,
+                "dimensions": asset->metadata.dimensions
+              }
+            }
+          }
+        },
+        []
+      ),
+      "en": coalesce(
+        seals_image[] {
+          "seal": {
+            "image": seals.en {
+              "asset": asset,
+              "metadata": {
+                "lqip": asset->metadata.lqip,
+                "dimensions": asset->metadata.dimensions
+              }
+            }
+          }
+        },
+        []
+      ),
+      "es": coalesce(
+        seals_image[] {
+          "seal": {
+            "image": seals.es { 
+              "asset": asset,
+              "metadata": {
+                "lqip": asset->metadata.lqip,
+                "dimensions": asset->metadata.dimensions
+              }
+            }
+          }
+        },
+        []
+      ),
+    }
   }
 `

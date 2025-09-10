@@ -7,7 +7,7 @@ import { Header } from './_header'
 import { Index } from './_index'
 import { Metadata } from './_metadata'
 import { Overview } from './_overview'
-import { Question } from './_question'
+import { Questions } from './_questions'
 import { Testimonial } from './_testimonial'
 
 export function getLandingPageSections(data: Ebook): SectionKeys[] {
@@ -34,7 +34,7 @@ export function getLandingPageSections(data: Ebook): SectionKeys[] {
     },
     {
       key: 'question',
-      component: <Question data={data} />,
+      component: <Questions data={data} />,
     },
     {
       key: 'footer',

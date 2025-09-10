@@ -24,7 +24,7 @@ export default async function Page({ params }: { params: Promise<{ locale: Local
           <section className={avaliableSections[key]?.classes || ''} key={key}>
             {title?.[locale] && (
               <App.PageHeader>
-                <Title size="2xl" className="text-center">
+                <Title className="text-center" size="2xl">
                   {title?.[locale]}
                 </Title>
                 {subtitle && <Subtitle size="xl">{subtitle?.[locale]}</Subtitle>}

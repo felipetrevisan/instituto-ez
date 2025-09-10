@@ -36,9 +36,9 @@ export default async function Page({
     notFound()
   }
 
-  const { sections } = await getLandingPageSettings()
+  const settings = await getLandingPageSettings()
 
-  return <Content data={data} sections={sections} />
+  return <Content data={data} settings={settings} />
 }
 
 export async function generateStaticParams() {
