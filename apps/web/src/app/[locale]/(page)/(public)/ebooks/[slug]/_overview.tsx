@@ -86,7 +86,6 @@ export function Overview({ data }: { data: Ebook }) {
                         '--left': index % 2 === 0,
                         '--right': index % 2 !== 0,
                       })}
-                      index={index}
                       key={`${id}-${index}`}
                     />
                   ))}

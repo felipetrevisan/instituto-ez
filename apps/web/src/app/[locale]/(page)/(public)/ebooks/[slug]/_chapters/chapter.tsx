@@ -6,11 +6,10 @@ import { PortableText } from 'next-sanity'
 
 type PageBookProps = React.ComponentProps<'div'> & {
   chapter: Chapter
-  index: number
   ref?: React.RefObject<HTMLDivElement>
 }
 
-export const PageBook = ({ chapter, index, className, ref }: PageBookProps) => {
+export const PageBook = ({ chapter, className, ref }: PageBookProps) => {
   const locale = useLocale()
 
   return (
@@ -20,7 +19,6 @@ export const PageBook = ({ chapter, index, className, ref }: PageBookProps) => {
       ref={ref}
     >
       <div className="flex flex-col justify-center">
-        {index}{' '}
         <PortableText components={createPortableComponents()} value={chapter.content?.[locale]} />
       </div>
     </div>
