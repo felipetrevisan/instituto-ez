@@ -17,7 +17,7 @@ export function Banner() {
   if (!isLoading && !data) return null
 
   return (
-    <motion.div layout className="relative flex h-[200px] w-full flex-col lg:h-[350px]">
+    <motion.div className="relative flex h-[200px] w-full flex-col lg:h-[350px]" layout>
       {isLoading && <Skeleton />}
       {!isLoading && (
         <Carousel
@@ -26,16 +26,16 @@ export function Banner() {
         >
           <CarouselContent>
             {data?.map(({ id, title, subtitle, image }) => (
-              <CarouselItem key={id} className="basis-full">
+              <CarouselItem className="basis-full" key={id}>
                 <Parallax
                   bgImage={urlForImage(image.asset).format('webp').quality(80).url()}
                   className="h-full w-full overflow-hidden lg:rounded-lg"
                 >
                   <motion.div
-                    className="flex h-[200px] lg:h-[350px]"
-                    variants={textVariants}
                     animate="show"
+                    className="flex h-[200px] lg:h-[350px]"
                     initial="hide"
+                    variants={textVariants}
                   >
                     <div className="flex w-full flex-col items-center justify-center p-5 font-bold font-oswald text-white md:p-5 lg:p-5 xl:p-0">
                       <motion.h3 className="text-4xl italic lg:text-6xl">

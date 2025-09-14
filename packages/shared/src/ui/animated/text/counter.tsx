@@ -87,7 +87,7 @@ function CountingNumber({
     : `0${decimals > 0 ? decimalSeparator + '0'.repeat(decimals) : ''}`
 
   return (
-    <span ref={localRef} data-slot="counting-number" className={className} {...props}>
+    <span className={className} data-slot="counting-number" ref={localRef} {...props}>
       {initialText}
     </span>
   )

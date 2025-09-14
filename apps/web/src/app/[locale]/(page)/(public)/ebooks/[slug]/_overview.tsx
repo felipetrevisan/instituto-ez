@@ -82,7 +82,10 @@ export function Overview({ data }: { data: Ebook }) {
                         '--left': index % 2 === 0,
                         '--right': index % 2 !== 0,
                       })}
-                      key={`${id}-${index}`}
+                      key={`${id}-${
+                        // biome-ignore lint/suspicious/noArrayIndexKey: is safe use index here
+                        index
+                      }`}
                     />
                   ))}
                   <CoverBook cover={chapter.cover} locale={locale} />

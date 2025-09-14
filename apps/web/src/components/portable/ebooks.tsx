@@ -14,7 +14,7 @@ import { useLocale } from 'next-intl'
 export const EbooksWrapper = ({ value }: { value: Omit<EbooksType, 'ebooks' | 'title'> }) => {
   const locale = useLocale()
   const { appareance, theme, type, collection } = value
-  // biome-ignore lint/correctness/useHookAtTopLevel: <explanation>
+  // biome-ignore lint/correctness/useHookAtTopLevel: hook used conditionally
   const { data, isLoading } = collection ? useEbookByCollection(collection._ref) : useEbooks()
 
   if (isLoading) return <Skeleton />

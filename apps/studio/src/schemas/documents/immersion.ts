@@ -1,4 +1,3 @@
-import config from '@ez/studio/config/editor'
 import { BlockContentIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 import { i18n } from '../objects/locale/locales'

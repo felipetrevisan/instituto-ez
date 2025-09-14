@@ -206,7 +206,7 @@ export default function BlobButton({
             <span
               className={cn(buttonBlobVariants({ theme, sticky }))}
               data-slot="button-blob"
-              // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+              // biome-ignore lint/suspicious/noArrayIndexKey: using index as key is acceptable here
               key={i}
               style={{
                 left: `${i * 25}%`,

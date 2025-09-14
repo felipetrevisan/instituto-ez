@@ -1,5 +1,4 @@
 import { cn } from '@ez/shared/lib/utils'
-import { createPortableComponents } from '@ez/shared/sanity/portable'
 import {
   PortableText,
   type PortableTextBlock,
@@ -40,11 +39,11 @@ const ListComponent = ({ value, portableComponentsOverrides }: ListComponentProp
     >
       {items?.map((item, index: number) => (
         <li
-          // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-          key={index}
           className={cn({
             'flex flex-row items-center gap-2': bullet_type !== 'none',
           })}
+          // biome-ignore lint/suspicious/noArrayIndexKey: using index as key is safe here
+          key={index}
         >
           {bullet_type !== 'none' && (
             <div>
@@ -53,7 +52,7 @@ const ListComponent = ({ value, portableComponentsOverrides }: ListComponentProp
             </div>
           )}
           <div>
-            <PortableText value={item.content} components={portableComponentsOverrides} />
+            <PortableText components={portableComponentsOverrides} value={item.content} />
           </div>
         </li>
       ))}

@@ -1,6 +1,6 @@
 'use client'
 
-// biome-ignore lint/suspicious/noShadowRestrictedNames: <explanation>
+// biome-ignore lint/suspicious/noShadowRestrictedNames: next error object
 import Error from 'next/error'
 
 // This page renders when a route like `/unknown.txt` is requested.

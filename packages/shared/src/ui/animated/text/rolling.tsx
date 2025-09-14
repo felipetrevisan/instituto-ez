@@ -1,6 +1,6 @@
 'use client'
 
-import { type Transition, type UseInViewOptions, motion, useInView } from 'motion/react'
+import { motion, type Transition, type UseInViewOptions, useInView } from 'motion/react'
 import * as React from 'react'
 
 const ENTRY_ANIMATION = {
@@ -33,7 +33,7 @@ function RollingText({
   ...props
 }: RollingTextProps) {
   const localRef = React.useRef<HTMLSpanElement>(null)
-  // biome-ignore lint/style/noNonNullAssertion: <explanation>
+  // biome-ignore lint/style/noNonNullAssertion: localRef.current is always set
   React.useImperativeHandle(ref, () => localRef.current!)
 
   const inViewResult = useInView(localRef, {
@@ -48,17 +48,17 @@ function RollingText({
     <span data-slot="rolling-text" {...props} ref={ref}>
       {characters.map((char, idx) => (
         <span
+          aria-hidden="true"
+          className="perspective-[9999999px] transform-3d relative inline-block w-auto"
           key={`char-${
-            // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+            // biome-ignore lint/suspicious/noArrayIndexKey: using index as key is acceptable here
             idx
           }`}
-          className="perspective-[9999999px] transform-3d relative inline-block w-auto"
-          aria-hidden="true"
         >
           <motion.span
+            animate={isInView ? ENTRY_ANIMATION.animate : undefined}
             className="backface-hidden absolute inline-block origin-[50%_25%]"
             initial={ENTRY_ANIMATION.initial}
-            animate={isInView ? ENTRY_ANIMATION.animate : undefined}
             transition={{
               ...transition,
               delay: idx * (transition?.delay ?? 0),
@@ -67,9 +67,9 @@ function RollingText({
             {formatCharacter(char)}
           </motion.span>
           <motion.span
+            animate={isInView ? EXIT_ANIMATION.animate : undefined}
             className="backface-hidden absolute inline-block origin-[50%_100%]"
             initial={EXIT_ANIMATION.initial}
-            animate={isInView ? EXIT_ANIMATION.animate : undefined}
             transition={{
               ...transition,
               delay: idx * (transition?.delay ?? 0) + 0.3,

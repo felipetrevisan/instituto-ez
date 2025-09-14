@@ -1,4 +1,4 @@
-import { type SanityImageSource, getImageDimensions } from '@sanity/asset-utils'
+import { getImageDimensions, type SanityImageSource } from '@sanity/asset-utils'
 import type { ImageUrlBuilder } from '@sanity/image-url/lib/types/builder'
 
 const ImageComponent = ({
@@ -15,18 +15,17 @@ const ImageComponent = ({
   const { width, height } = getImageDimensions(value)
 
   return (
-    <img
-      src={urlForImage(value).url()}
-      alt=""
-      loading="lazy"
-      sizes="(max-width: 800px) 100vw, 800px"
-      width={width}
-      height={height}
+    <div
+      className="overflow-hidden rounded-2xl"
+      role="img"
       style={{
-        // Avoid jumping around with aspect-ratio CSS property
+        backgroundImage: `url(${urlForImage(value).url()})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        width: width,
+        height: height,
         aspectRatio: width / height,
       }}
-      className="overflow-hidden rounded-2xl"
     />
   )
 }

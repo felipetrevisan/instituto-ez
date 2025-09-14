@@ -1,4 +1,4 @@
-/** biome-ignore-all lint/suspicious/noExplicitAny: <explanation> */
+/** biome-ignore-all lint/suspicious/noExplicitAny:using any for decorator props */
 import type { PortableTextComponents } from '@portabletext/react'
 
 export const portableBlocks: PortableTextComponents['block'] = {

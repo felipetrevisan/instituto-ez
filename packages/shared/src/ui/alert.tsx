@@ -1,5 +1,5 @@
 import { cn } from '@ez/shared/lib/utils'
-import { type VariantProps, cva } from 'class-variance-authority'
+import { cva, type VariantProps } from 'class-variance-authority'
 
 const alertVariants = cva(
   'relative grid w-full grid-cols-[0_1fr] items-start gap-y-0.5 rounded-2xl border px-4 py-3 has-[>svg]:grid-cols-[calc(var(--spacing)*4)_1fr] has-[>svg]:gap-x-3 [&>svg]:size-4 [&>svg]:translate-y-0.5 [&>svg]:text-current',
@@ -34,9 +34,9 @@ function Alert({
 }: React.ComponentProps<'div'> & VariantProps<typeof alertVariants>) {
   return (
     <div
+      className={cn(alertVariants({ variant, theme }), className)}
       data-slot="alert"
       role="alert"
-      className={cn(alertVariants({ variant, theme }), className)}
       {...props}
     />
   )
@@ -45,11 +45,11 @@ function Alert({
 function AlertTitle({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
-      data-slot="alert-title"
       className={cn(
         'col-start-2 mb-4 line-clamp-1 flex min-h-4 items-center gap-2 font-medium tracking-tight',
         className,
       )}
+      data-slot="alert-title"
       {...props}
     />
   )
@@ -58,11 +58,11 @@ function AlertTitle({ className, ...props }: React.ComponentProps<'div'>) {
 function AlertDescription({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
-      data-slot="alert-description"
       className={cn(
         'col-start-2 grid justify-items-start gap-1 text-md text-muted-foreground [&_p]:leading-relaxed',
         className,
       )}
+      data-slot="alert-description"
       {...props}
     />
   )

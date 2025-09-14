@@ -4,7 +4,7 @@ import { z } from 'zod'
 const nodeEnv = z.enum(['development', 'production', 'test'])
 
 function requiredOnEnv(env: z.infer<typeof nodeEnv>) {
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  // biome-ignore lint/suspicious/noExplicitAny: usage required for dynamic value validation
   return (value: any): boolean => {
     if (env === process.env.NODE_ENV && !value) {
       return false

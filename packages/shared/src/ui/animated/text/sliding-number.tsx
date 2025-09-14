@@ -41,7 +41,7 @@ function SlidingNumberRoller({ prevValue, value, place, transition }: SlidingNum
       {Array.from({ length: 10 }, (_, i) => (
         <SlidingNumberDisplay
           height={height}
-          // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+          // biome-ignore lint/suspicious/noArrayIndexKey: using index as key is acceptable here
           key={i}
           motionValue={animatedValue}
           number={i}
@@ -119,7 +119,7 @@ function SlidingNumber({
   ...props
 }: SlidingNumberProps) {
   const localRef = React.useRef<HTMLSpanElement>(null)
-  // biome-ignore lint/style/noNonNullAssertion: <explanation>
+  // biome-ignore lint/style/noNonNullAssertion: ref forwarding requires non-null assertion here
   React.useImperativeHandle(ref, () => localRef.current!)
 
   const inViewResult = useInView(localRef, {
@@ -146,8 +146,7 @@ function SlidingNumber({
 
   const prevFormatted = formatNumber(prevNumberRef.current)
   const [prevIntStrRaw = '', prevDecStrRaw = ''] = prevFormatted.split('.')
-  // biome-ignore lint/style/useTemplate: <explanation>
-  const prevIntStr = padStart && prevIntStrRaw.length === 1 ? '0' + prevIntStrRaw : prevIntStrRaw
+  const prevIntStr = padStart && prevIntStrRaw.length === 1 ? `0${prevIntStrRaw}` : prevIntStrRaw
 
   const adjustedPrevInt = React.useMemo(() => {
     return prevIntStr.length > (newIntStr?.length ?? 0)

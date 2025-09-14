@@ -6,10 +6,10 @@ import Image from 'next/image'
 export const CardsWrapper = ({ value }: { value: CardsType }) => {
   return (
     <CardsComponent
-      value={value}
-      imageBuilder={urlForImage}
       ImageComponent={Image}
+      imageBuilder={urlForImage}
       portableComponentsOverrides={createPortableComponents()}
+      value={value}
     />
   )
 }

@@ -4,10 +4,10 @@ import { PageType } from '@ez/shared/types/global'
 import { type Cycle, useCycle } from 'motion/react'
 import { usePathname } from 'next/navigation'
 import {
+  createContext,
   type Dispatch,
   type ReactNode,
   type SetStateAction,
-  createContext,
   useCallback,
   useContext,
   useEffect,
@@ -53,7 +53,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     return pageType === PageType.page
   }, [pageType])
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
   useEffect(() => {
     setActiveMenu(currentUrl)
   }, [])

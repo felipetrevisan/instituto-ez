@@ -1,7 +1,7 @@
 import { cn } from '@ez/studio/lib/utils'
 import { Slot } from '@radix-ui/react-slot'
-import { type VariantProps, cva } from 'class-variance-authority'
-import { type HTMLMotionProps, type Transition, motion } from 'motion/react'
+import { cva, type VariantProps } from 'class-variance-authority'
+import { type HTMLMotionProps, motion, type Transition } from 'motion/react'
 import React from 'react'
 
 const buttonVariants = cva(
@@ -276,11 +276,6 @@ function Button({
 
   return (
     <CompMotion
-      ref={ref}
-      data-slot="button"
-      whileHover={{ scale: scaleEffect ? 1.1 : 1 }}
-      whileTap={{ scale: scaleEffect ? 0.9 : 1 }}
-      transition={{ type: 'spring', stiffness: 400, damping: 10 }}
       animate={{ transition: { duration: 0.4, ease: 'easeInOut' } }}
       className={cn(
         buttonVariants({
@@ -294,18 +289,23 @@ function Button({
         }),
         className,
       )}
+      data-slot="button"
       onClick={handleClick}
+      ref={ref}
+      transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+      whileHover={{ scale: scaleEffect ? 1.1 : 1 }}
+      whileTap={{ scale: scaleEffect ? 0.9 : 1 }}
       {...props}
     >
       {children}
       {ripples.map((r) => (
         <motion.span
-          key={r.id}
-          initial={{ scale: 0, opacity: 0.5 }}
           animate={{ scale, opacity: 0 }}
-          transition={transition}
           className={cn(rippleVariants({ variant, theme }), rippleClassName)}
+          initial={{ scale: 0, opacity: 0.5 }}
+          key={r.id}
           style={{ top: r.y - 10, left: r.x - 10 }}
+          transition={transition}
         />
       ))}
     </CompMotion>

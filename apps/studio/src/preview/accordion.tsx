@@ -26,25 +26,25 @@ const AccordionPreviewComponent = (props: BlockProps) => {
   const content = valueRaw.content as AccordionContentType[]
 
   return (
-    <Card tone="primary" scheme="dark" padding={[2, 2, 3]}>
+    <Card padding={[2, 2, 3]} scheme="dark" tone="primary">
       <Stack space={4}>
         {renderDefault({ ...props })}
         <Card padding={[4, 5, 6]}>
           <Stack space={4}>
             <Accordion
-              type="single"
-              collapsible
               className="flex flex-col"
-              theme={theme}
+              collapsible
               rounded={rounded}
               size="default"
+              theme={theme}
+              type="single"
             >
               {content.map(({ _key, title, content }) => (
                 <AccordionItem key={_key} value={_key}>
                   <AccordionTrigger>
                     <span>{title}</span>
                   </AccordionTrigger>
-                  <AccordionContent className="relative px-4 pb-8 pt-0">{content}</AccordionContent>
+                  <AccordionContent className="relative px-4 pt-0 pb-8">{content}</AccordionContent>
                 </AccordionItem>
               ))}
             </Accordion>

@@ -32,7 +32,7 @@ type MotionHighlightContextType<T extends string> = {
 }
 
 const MotionHighlightContext = React.createContext<
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  // biome-ignore lint/suspicious/noExplicitAny: context type is generic and needs to allow any
   MotionHighlightContextType<any> | undefined
 >(undefined)
 
@@ -165,7 +165,7 @@ function MotionHighlight<T extends string>({ ref, ...props }: MotionHighlightPro
         return newBounds
       })
     },
-    // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+    // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
     [props],
   )
 
@@ -195,7 +195,7 @@ function MotionHighlight<T extends string>({ ref, ...props }: MotionHighlightPro
     return () => container.removeEventListener('scroll', onScroll)
   }, [mode, activeValue, safeSetBounds])
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
   const render = React.useCallback(
     (children: React.ReactNode) => {
       if (mode === 'parent') {
@@ -273,7 +273,7 @@ function MotionHighlight<T extends string>({ ref, ...props }: MotionHighlightPro
           ? render(children)
           : render(
               React.Children.map(children, (child, i) => (
-                // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+                // biome-ignore lint/suspicious/noArrayIndexKey: using index as key is acceptable here
                 <MotionHighlightItem className={props?.itemsClassName} key={i}>
                   {child}
                 </MotionHighlightItem>

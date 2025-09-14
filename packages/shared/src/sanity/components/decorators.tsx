@@ -1,11 +1,11 @@
 import { AlignCenterIcon, AlignJustifyIcon, AlignLeftIcon, AlignRightIcon } from '@ez/shared/icons'
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+// biome-ignore lint/suspicious/noExplicitAny: using any for Sanity props
 export const HighlightDecorator = (props: any) => {
   return <span className="bg-tertiary text-tertiary-foreground">{props.children}</span>
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+// biome-ignore lint/suspicious/noExplicitAny: using any for Sanity props
 export const TextAlignDecorator = (props: any, align: string) => {
   const alignMap = {
     center: 'text-center',

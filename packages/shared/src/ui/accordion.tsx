@@ -2,9 +2,9 @@
 
 import { cn } from '@ez/shared/lib/utils'
 import * as AccordionPrimitive from '@radix-ui/react-accordion'
-import { type VariantProps, cva } from 'class-variance-authority'
+import { cva, type VariantProps } from 'class-variance-authority'
 import { ChevronDownIcon } from 'lucide-react'
-import { AnimatePresence, type HTMLMotionProps, type Transition, motion } from 'motion/react'
+import { AnimatePresence, type HTMLMotionProps, motion, type Transition } from 'motion/react'
 import * as React from 'react'
 
 const accordionVariants = cva('relative', {
@@ -79,8 +79,8 @@ function AccordionItem({ children, className, ...props }: AccordionItemProps) {
   return (
     <AccordionItemContext.Provider value={{ isOpen, setIsOpen }}>
       <AccordionPrimitive.Item
-        data-slot="accordion-item"
         className={cn('relative mb-3 border shadow-xl backdrop-blur-md', className)}
+        data-slot="accordion-item"
         {...props}
       >
         {children}
@@ -112,7 +112,6 @@ function AccordionTrigger({
     if (!node) return
 
     const observer = new MutationObserver((mutationsList) => {
-      // biome-ignore lint/complexity/noForEach: <explanation>
       mutationsList.forEach((mutation) => {
         if (mutation.attributeName === 'data-state') {
           const currentState = node.getAttribute('data-state')
@@ -132,22 +131,22 @@ function AccordionTrigger({
   }, [setIsOpen])
 
   return (
-    <AccordionPrimitive.Header data-slot="accordion-header" className="flex">
+    <AccordionPrimitive.Header className="flex" data-slot="accordion-header">
       <AccordionPrimitive.Trigger
-        ref={triggerRef}
-        data-slot="accordion-trigger"
         className={cn(
           'flex flex-1 items-start justify-between gap-4 px-4 py-5 text-left font-semibold text-md outline-none transition-all focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 [&[data-state=open]>svg]:rotate-180',
           className,
         )}
+        data-slot="accordion-trigger"
+        ref={triggerRef}
         {...props}
       >
         {children}
 
         {chevron && (
           <motion.div
-            data-slot="accordion-trigger-chevron"
             animate={{ rotate: isOpen ? 180 : 0 }}
+            data-slot="accordion-trigger-chevron"
             transition={transition}
           >
             <ChevronDownIcon className="size-5 shrink-0" />
@@ -176,18 +175,18 @@ function AccordionContent({
       {isOpen && (
         <AccordionPrimitive.Content forceMount {...props}>
           <motion.div
-            key="accordion-content"
-            data-slot="accordion-content"
-            initial={{ height: 0, opacity: 0, '--mask-stop': '0%' }}
             animate={{ height: 'auto', opacity: 1, '--mask-stop': '100%' }}
+            className="overflow-hidden"
+            data-slot="accordion-content"
             exit={{ height: 0, opacity: 0, '--mask-stop': '0%' }}
-            transition={transition}
+            initial={{ height: 0, opacity: 0, '--mask-stop': '0%' }}
+            key="accordion-content"
             style={{
               maskImage: 'linear-gradient(black var(--mask-stop), transparent var(--mask-stop))',
               WebkitMaskImage:
                 'linear-gradient(black var(--mask-stop), transparent var(--mask-stop))',
             }}
-            className="overflow-hidden"
+            transition={transition}
             {...props}
           >
             <div className={cn('pt-0 pb-4', className)}>{children}</div>

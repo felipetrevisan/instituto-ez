@@ -3,5 +3,5 @@ import type { Image } from '@ez/shared/types/assets'
 import { urlForImage } from '@ez/web/config/image'
 
 export const ImageWrapper = ({ value }: Image) => {
-  return <ImageComponent value={value} urlForImage={urlForImage} />
+  return <ImageComponent urlForImage={urlForImage} value={value} />
 }

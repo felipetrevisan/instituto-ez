@@ -21,12 +21,12 @@ const AlertPreviewComponent = (props: BlockProps) => {
   const message = valueRaw.message as string
 
   return (
-    <Card tone="primary" scheme="dark" padding={[2, 2, 3]}>
+    <Card padding={[2, 2, 3]} scheme="dark" tone="primary">
       <Stack space={4}>
         {renderDefault({ ...props })}
         <Card padding={[4, 5, 6]}>
           <Stack space={4}>
-            <Alert variant={variant} theme={theme}>
+            <Alert theme={theme} variant={variant}>
               <AlertTitle>{title}</AlertTitle>
               <AlertDescription>{message}</AlertDescription>
             </Alert>

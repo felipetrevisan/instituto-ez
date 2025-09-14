@@ -15,11 +15,11 @@ const TitleComponent = ({ value }: { value: TitleType }) => {
 
   return (
     <div className="flex w-full flex-col items-start justify-start">
-      <Title variant={variant} size={size} separator>
+      <Title separator size={size} variant={variant}>
         {title}
       </Title>
       {subtitle && (
-        <Subtitle variant={variant} size={size} className="mt-0">
+        <Subtitle className="mt-0" size={size} variant={variant}>
           {subtitle}
         </Subtitle>
       )}

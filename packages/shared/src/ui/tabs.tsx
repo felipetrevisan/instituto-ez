@@ -1,15 +1,14 @@
 'use client'
 
-import * as TabsPrimitive from '@radix-ui/react-tabs'
-import { type HTMLMotionProps, type Transition, motion } from 'motion/react'
-import * as React from 'react'
-
 import { cn } from '@ez/shared/lib/utils'
 import {
   MotionHighlight,
   MotionHighlightItem,
 } from '@ez/shared/ui/animated/effects/motion-highlight'
-import { type VariantProps, cva } from 'class-variance-authority'
+import * as TabsPrimitive from '@radix-ui/react-tabs'
+import { cva, type VariantProps } from 'class-variance-authority'
+import { type HTMLMotionProps, motion, type Transition } from 'motion/react'
+import * as React from 'react'
 
 type TabsProps = React.ComponentProps<typeof TabsPrimitive.Root>
 
@@ -207,8 +206,8 @@ const tabsTriggerVariants = cva(
 function Tabs({ className, ...props }: TabsProps) {
   return (
     <TabsPrimitive.Root
-      data-slot="tabs"
       className={cn('flex flex-col gap-2', className)}
+      data-slot="tabs"
       {...props}
     />
   )
@@ -267,15 +266,15 @@ function TabsList({
 
   return (
     <MotionHighlight
-      controlledItems
       className={cn(tabHighlightVariants({ variant, theme }), activeClassName)}
-      value={activeValue}
+      controlledItems
       transition={transition}
+      value={activeValue}
     >
       <TabsPrimitive.List
-        ref={localRef}
-        data-slot="tabs-list"
         className={cn('mb-10', tabVariants({ variant, rounded, theme, className }))}
+        data-slot="tabs-list"
+        ref={localRef}
         {...props}
       >
         {children}
@@ -299,13 +298,13 @@ function TabsTrigger({
 }: TabsTriggerProps) {
   return (
     <MotionHighlightItem
-      value={value}
       className={cn('size-full', rootClassName)}
       transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+      value={value}
     >
       <TabsPrimitive.Trigger
-        data-slot="tabs-trigger"
         className={cn(tabsTriggerVariants({ theme, variant, className }))}
+        data-slot="tabs-trigger"
         value={value}
         {...props}
       />
@@ -330,12 +329,12 @@ function TabsContent({
   return (
     <TabsPrimitive.Content asChild {...props}>
       <motion.div
-        data-slot="tabs-content"
-        className={cn('flex-1 outline-none', className)}
-        layout
-        initial={{ opacity: 0, y: -10, filter: 'blur(4px)' }}
         animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+        className={cn('flex-1 outline-none', className)}
+        data-slot="tabs-content"
         exit={{ opacity: 0, y: 10, filter: 'blur(4px)' }}
+        initial={{ opacity: 0, y: -10, filter: 'blur(4px)' }}
+        layout
         transition={transition}
         {...props}
       >
@@ -361,7 +360,7 @@ function TabsContents({
 
   const [height, setHeight] = React.useState(0)
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
   React.useEffect(() => {
     if (!containerRef.current) return
 
@@ -380,7 +379,7 @@ function TabsContents({
     }
   }, [children])
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
   React.useLayoutEffect(() => {
     if (containerRef.current) {
       const initialHeight = containerRef.current.getBoundingClientRect().height
@@ -390,11 +389,11 @@ function TabsContents({
 
   return (
     <motion.div
+      animate={{ height: height }}
+      className={className}
       data-slot="tabs-contents"
       layout
-      animate={{ height: height }}
       transition={transition}
-      className={className}
       {...props}
     >
       <div ref={containerRef}>{children}</div>

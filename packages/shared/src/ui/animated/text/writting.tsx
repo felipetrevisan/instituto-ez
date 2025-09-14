@@ -1,6 +1,6 @@
 'use client'
 
-import { type Transition, type UseInViewOptions, motion, useInView } from 'motion/react'
+import { motion, type Transition, type UseInViewOptions, useInView } from 'motion/react'
 import * as React from 'react'
 
 type WritingTextProps<T extends React.ElementType = 'span'> = {
@@ -38,15 +38,15 @@ function WritingText<T extends React.ElementType = 'span'>({
   const Component = asChild || 'span'
 
   return (
-    <Component ref={localRef} data-slot="writing-text" {...props}>
+    <Component data-slot="writing-text" ref={localRef} {...props}>
       {words.map((word, index) => (
         <motion.span
-          // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-          key={index}
-          className="inline-block will-change-opacity will-change-transform"
-          style={{ marginRight: spacing }}
-          initial={{ opacity: 0, y: 10 }}
           animate={isInView ? { opacity: 1, y: 0 } : undefined}
+          className="inline-block will-change-opacity will-change-transform"
+          initial={{ opacity: 0, y: 10 }}
+          // biome-ignore lint/suspicious/noArrayIndexKey: using index as key is acceptable here
+          key={index}
+          style={{ marginRight: spacing }}
           transition={{
             ...transition,
             delay: index * (transition?.delay ?? 0),

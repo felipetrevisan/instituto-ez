@@ -42,13 +42,6 @@ const CardsComponent = ({
     <div className="flex flex-col gap-8">
       {cards.map((card, index) => (
         <motion.div
-          // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-          key={`card-${index}`}
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: index * 0.1 }}
-          whileHover={{ scale: 1.05, transition: { duration: 0.3, ease: 'circInOut' } }}
           className={cn(
             'group relative w-full rounded-3xl bg-gradient-to-r p-[3px] shadow-lg transition-shadow',
             {
@@ -60,15 +53,22 @@ const CardsComponent = ({
                 theme === 'tertiary',
             },
           )}
+          initial={{ opacity: 0, y: 40 }}
+          // biome-ignore lint/suspicious/noArrayIndexKey: is safe use index here
+          key={`card-${index}`}
+          transition={{ duration: 0.6, delay: index * 0.1 }}
+          viewport={{ once: true }}
+          whileHover={{ scale: 1.05, transition: { duration: 0.3, ease: 'circInOut' } }}
+          whileInView={{ opacity: 1, y: 0 }}
         >
           <div className="flex min-h-[200px] flex-col items-stretch overflow-hidden rounded-[calc(1.5rem-3px)] bg-white md:flex-row">
             <div className="relative h-auto w-full md:h-auto md:w-1/3">
               <ImageComponent
-                src={imageBuilder(card.image.asset).url()}
                 alt=""
-                fill
                 className="object-cover"
+                fill
                 priority
+                src={imageBuilder(card.image.asset).url()}
               />
             </div>
             <div className="flex w-full flex-col justify-between p-6 md:w-2/3">
@@ -82,7 +82,7 @@ const CardsComponent = ({
                 {card.title}
               </h3>
               <div className="flex flex-col gap-4">
-                <PortableText value={card.content} components={portableComponentsOverrides} />
+                <PortableText components={portableComponentsOverrides} value={card.content} />
               </div>
             </div>
           </div>

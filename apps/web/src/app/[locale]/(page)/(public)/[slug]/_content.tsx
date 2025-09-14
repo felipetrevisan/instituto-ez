@@ -11,7 +11,7 @@ export function Content({ data, slug }: { data: Page; slug: string }) {
   const { setPageType, isNormalPage } = useApp()
   const locale = useLocale()
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
   useEffect(() => {
     if (isNormalPage()) return
 

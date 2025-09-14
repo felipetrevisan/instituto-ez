@@ -20,7 +20,7 @@ const AlertComponent = ({ value }: { value: AlertType }) => {
 
   return (
     <div className={cn('relative flex justify-center')}>
-      <Alert variant={variant} theme={theme}>
+      <Alert theme={theme} variant={variant}>
         <AlertTitle>
           {Icon}
           {title}

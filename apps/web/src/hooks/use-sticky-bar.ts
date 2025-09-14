@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+// biome-ignore lint/suspicious/noExplicitAny: generic debounce utility needs any
 function debounce<T extends (...args: any[]) => void>(fn: T, delay: number) {
   let timeoutId: ReturnType<typeof setTimeout>
   return (...args: Parameters<T>) => {

@@ -27,7 +27,7 @@ type IconButtonProps = Omit<HTMLMotionProps<'button'>, 'color'> & {
   icon: React.ElementType
   active?: boolean
   className?: string
-  animate?: boolean
+  animated?: boolean
   size?: keyof typeof sizes
   theme?: keyof typeof themes
   color?: [number, number, number]
@@ -38,7 +38,7 @@ function IconButton({
   icon: Icon,
   className,
   active = false,
-  animate = true,
+  animated = true,
   size = 'default',
   theme = 'default',
   color = [59, 130, 246],
@@ -88,7 +88,7 @@ function IconButton({
       </AnimatePresence>
 
       <AnimatePresence>
-        {animate && active && (
+        {animated && active && (
           <>
             <motion.div
               animate={{ scale: [1.2, 1.8, 1.2], opacity: [0, 0.3, 0] }}

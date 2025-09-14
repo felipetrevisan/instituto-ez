@@ -7,7 +7,7 @@ import { useTranslations } from 'next-intl'
 import { QuestionItem } from './_question'
 
 export function Questions({ data }: { data: Ebook }) {
-  const { questions, id } = data
+  const { questions } = data
 
   const t = useTranslations('Ebooks')
 

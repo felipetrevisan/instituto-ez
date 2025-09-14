@@ -1,13 +1,14 @@
 'use client'
 
-import { type UseInViewOptions, motion, useInView } from 'motion/react'
-import * as React from 'react'
-
 import { cn } from '@ez/shared/lib/utils'
+import { motion, type UseInViewOptions, useInView } from 'motion/react'
+import * as React from 'react'
 
 function CursorBlinker({ className }: { className?: string }) {
   return (
     <motion.span
+      animate="blinking"
+      className={cn('inline-block h-5 w-[1px] translate-y-1 bg-black dark:bg-white', className)}
       data-slot="cursor-blinker"
       variants={{
         blinking: {
@@ -21,8 +22,6 @@ function CursorBlinker({ className }: { className?: string }) {
           },
         },
       }}
-      animate="blinking"
-      className={cn('inline-block h-5 w-[1px] translate-y-1 bg-black dark:bg-white', className)}
     />
   )
 }
@@ -70,7 +69,7 @@ function TypingText<T extends React.ElementType = 'span'>({
   const [started, setStarted] = React.useState(false)
   const [displayedText, setDisplayedText] = React.useState<string>('')
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
   React.useEffect(() => {
     // Reset animation when text changes (if animateOnChange is true)
     if (animateOnChange) {
@@ -151,7 +150,7 @@ function TypingText<T extends React.ElementType = 'span'>({
   const Component = asChild || 'span'
 
   return (
-    <Component ref={localRef} data-slot="typing-text" {...props}>
+    <Component data-slot="typing-text" ref={localRef} {...props}>
       <motion.span>{displayedText}</motion.span>
       {cursor && <CursorBlinker className={cursorClassName} />}
     </Component>

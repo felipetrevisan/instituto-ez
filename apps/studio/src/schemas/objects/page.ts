@@ -1,4 +1,3 @@
-import config from '@ez/studio/config/editor'
 import { defineField, defineType } from 'sanity'
 
 export default defineType({

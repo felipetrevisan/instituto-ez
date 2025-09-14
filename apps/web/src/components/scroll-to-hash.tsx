@@ -8,7 +8,7 @@ export function ScrollToHash() {
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
   useEffect(() => {
     const hash = window.location.hash
     if (!hash) return

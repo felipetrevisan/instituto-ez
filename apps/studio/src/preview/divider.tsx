@@ -12,7 +12,7 @@ const DividerPreviewComponent = (props: BlockProps) => {
   const theme = (valueRaw.theme as DividerVariants['theme']) || 'default'
 
   return (
-    <Card tone="primary" scheme="dark" padding={[2, 2, 3]}>
+    <Card padding={[2, 2, 3]} scheme="dark" tone="primary">
       <Stack space={4}>
         {renderDefault({ ...props })}
         <Card padding={[4, 5, 6]}>

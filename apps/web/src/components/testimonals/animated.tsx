@@ -56,7 +56,7 @@ export function TestimonialAnimated({
     >
       <CardContent className="flex h-full w-ful items-center justify-center p-0">
         <div className="relative flex h-full w-full flex-col items-center justify-evenly border-0 px-8 py-0">
-          <ScrollArea className="relative mx-auto mb-4 h-3/4 w-full max-w-2xl text-justify lg:mb-8">
+          <ScrollArea className="-top-[30px] relative mx-auto mb-4 h-3/4 w-full max-w-2xl text-justify md:top-0 lg:mb-8">
             <PortableText value={item.testimonial} />
           </ScrollArea>
           <div className="author font-bold" data-slot="card-content-action">

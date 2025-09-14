@@ -1,5 +1,6 @@
 'use client'
 
+import { useMediaQuery } from '@ez/shared/hooks/use-media-query'
 import { cn } from '@ez/shared/lib/utils'
 import { createPortableComponents } from '@ez/shared/sanity/portable'
 import { urlForImage } from '@ez/web/config/image'
@@ -16,10 +17,13 @@ type Props = {
 
 export function AuthorCard({ author: { photo, name, content }, index }: Props) {
   const locale = useLocale()
+  const isMobile = useMediaQuery()
   const isEven = index % 2 === 0
 
   const flipPhoto = (flip: boolean) => {
     const image = photo?.asset ? urlForImage(photo?.asset).format('webp').quality(80) : null
+
+    if (isMobile) return image
 
     return image ? (flip ? image.flipHorizontal() : image) : null
   }
@@ -28,9 +32,9 @@ export function AuthorCard({ author: { photo, name, content }, index }: Props) {
 
   return (
     <section
-      className={cn('relative mt-80 flex w-full flex-col justify-start md:mt-20 md:flex-row', {
-        'md:flex-row-reverse': !isEven,
-      })}
+      className={cn(
+        'relative mt-80 flex w-full flex-col justify-start p-1 md:mt-20 md:flex-row md:p-0',
+      )}
     >
       <div className="relative flex max-w-4xl items-center gap-6 rounded-3xl border border-[var(--tertiary-c)] bg-white p-6 shadow-[5px_5px_0_0_color-mix(in_srgb,_var(--tertiary-c)_50%,_transparent)]">
         <div
@@ -46,11 +50,7 @@ export function AuthorCard({ author: { photo, name, content }, index }: Props) {
             <motion.div
               animate={{ y: 0, scale: 1 }}
               className={cn(
-                '-top-[100px] -left-10 md:-top-[168px] absolute bottom-0 h-120 overflow-hidden md:w-120',
-                {
-                  'md:right-0 md:left-[4px]': isEven,
-                  'md:right-[4px] md:left-0': !isEven,
-                },
+                '-left-[10%] md:-top-[168px] -bottom-3 absolute h-120 translate-x-[7%] overflow-hidden md:w-120',
               )}
               initial={{ y: 20, scale: 0.9 }}
               transition={{ type: 'spring', stiffness: 100, damping: 10 }}

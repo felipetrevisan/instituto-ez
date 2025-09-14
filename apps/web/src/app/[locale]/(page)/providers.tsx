@@ -27,7 +27,7 @@ export default function Providers({ children }: { children: ReactNode }) {
   )
 
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+    <ThemeProvider attribute="class" defaultTheme="system" disableTransitionOnChange enableSystem>
       <ProgressProvider height="6px" options={{ showSpinner: true }} shallowRouting>
         <QueryClientProvider client={queryClient}>
           <SharedProvider>

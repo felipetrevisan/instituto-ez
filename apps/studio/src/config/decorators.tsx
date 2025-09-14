@@ -30,28 +30,28 @@ const decorators = [
     title: 'Center',
     value: 'center',
     icon: <AlignCenterIcon size={11} />,
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    // biome-ignore lint/suspicious/noExplicitAny: using any for decorator props
     component: (props: any) => TextAlignDecorator(props, 'center'),
   },
   {
     title: 'Right',
     value: 'right',
     icon: <AlignRightIcon size={11} />,
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    // biome-ignore lint/suspicious/noExplicitAny: using any for decorator props
     component: (props: any) => TextAlignDecorator(props, 'right'),
   },
   {
     title: 'Left',
     value: 'left',
     icon: <AlignLeftIcon size={11} />,
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    // biome-ignore lint/suspicious/noExplicitAny: using any for decorator props
     component: (props: any) => TextAlignDecorator(props, 'left'),
   },
   {
     title: 'Justify',
     value: 'justify',
     icon: <AlignJustifyIcon size={11} />,
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    // biome-ignore lint/suspicious/noExplicitAny: using any for decorator props
     component: (props: any) => TextAlignDecorator(props, 'justify'),
   },
 ]

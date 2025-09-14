@@ -31,21 +31,21 @@ export function Testimonials() {
       <div className="flex flex-col justify-center">
         {isLoading && <Skeleton />}
         {!isLoading && (
-          <Carousel plugins={[ClassNames()]} className="md:overflow-visible" theme={theme}>
+          <Carousel className="md:overflow-visible" plugins={[ClassNames()]} theme={theme}>
             <CarouselContent rootClassName="md:overflow-visible!">
               {data?.map((testimonial, _index) => (
                 <CarouselItem
-                  key={testimonial.id}
                   className="basis-full md:basis-1/2 lg:basis-1/2 xl:basis-1/2"
+                  key={testimonial.id}
                 >
                   <TestimonialRender
-                    key={`testimonial_${testimonial.id}`}
-                    item={testimonial}
                     hoveredIndex={hoveredIndex}
+                    item={testimonial}
+                    key={`testimonial_${testimonial.id}`}
+                    rounded={rounded}
                     setHoveredIndexAction={setHoveredIndex}
                     theme={theme}
                     variant={variant}
-                    rounded={rounded}
                   />
                 </CarouselItem>
               ))}

@@ -132,7 +132,6 @@ export function Header({ data }: { data: Ebook }) {
           )}
         </div>
         <div className="absolute bottom-0 left-0 hidden w-full rotate-180 md:block">
-          {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
           <svg
             className="relative block h-77 w-[calc(157%+1.3px)]"
             preserveAspectRatio="none"

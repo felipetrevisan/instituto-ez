@@ -44,21 +44,21 @@ export function LectureCard({ item: { button, background, content, title }, inde
             {title?.[locale]}
           </h3>
           <div className="flex min-h-40 flex-col gap-10 text-justify font-light font-questrial text-md leading-7">
-            <PortableText value={content} components={createPortableComponents()} />
+            <PortableText components={createPortableComponents()} value={content} />
             {button.visible && link && (
               <ButtonLink
+                className="flex w-full justify-center"
                 href={getLocalizedLink(locale, link)}
                 passHref
-                className="flex w-full justify-center"
               >
                 <Button
-                  variant="default"
-                  theme="tertiary"
-                  rounded="xl"
-                  size="2xl"
-                  effect="pulse"
                   className="w-full font-bold uppercase"
                   disabled={button.disabled}
+                  effect="pulse"
+                  rounded="xl"
+                  size="2xl"
+                  theme="tertiary"
+                  variant="default"
                 >
                   {button.label?.[locale]}
                 </Button>

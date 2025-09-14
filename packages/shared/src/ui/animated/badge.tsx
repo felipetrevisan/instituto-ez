@@ -11,7 +11,6 @@ import {
   useSpring,
 } from 'motion/react'
 import * as React from 'react'
-import { useId } from 'react'
 import { SlidingNumber } from './text/sliding-number'
 
 type FormatNumberResult = { number: string[]; unit: string }
@@ -79,12 +78,12 @@ function BadgeButton({
   const renderNumberSegments = (segments: string[], unit: string, isGhost: boolean) => (
     <span className={cn('flex items-center gap-px', isGhost ? 'invisible' : '')}>
       {segments.map((segment, index) => (
-        // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+        // biome-ignore lint/suspicious/noArrayIndexKey: using index as key is acceptable here due to static segment order
         <React.Fragment key={index}>
           {Array.from(segment).map((digit, digitId) => (
             <SlidingNumber
               key={`${index}-${
-                // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+                // biome-ignore lint/suspicious/noArrayIndexKey: using index as key is acceptable here due to static segment order
                 digitId
               }`}
               number={+digit}
@@ -97,7 +96,7 @@ function BadgeButton({
     </span>
   )
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
   React.useEffect(() => {
     const unsubscribe = springVal.on('change', (latest: number) => {
       const newValue = Math.round(latest)
@@ -109,7 +108,7 @@ function BadgeButton({
     return () => unsubscribe()
   }, [springVal, value])
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
   React.useEffect(() => {
     if (typeof value === 'number' && value > 0) motionVal.set(value)
   }, [motionVal, value, isComponentInView])

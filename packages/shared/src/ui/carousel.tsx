@@ -164,6 +164,7 @@ function Carousel({
         goToSlide,
       }}
     >
+      {/* biome-ignore lint/a11y/useSemanticElements: false positive */}
       <div
         aria-roledescription="carousel"
         className={className}
@@ -203,17 +204,20 @@ function CarouselItem({ className, ...props }: React.ComponentProps<'div'>) {
   const { orientation } = useCarousel()
 
   return (
-    <div
-      aria-roledescription="slide"
-      className={cn(
-        'min-w-0 shrink-0 grow-0 basis-full',
-        orientation === 'horizontal' ? 'pl-4' : 'pt-4',
-        className,
-      )}
-      data-slot="carousel-item"
-      role="group"
-      {...props}
-    />
+    <>
+      {/* biome-ignore lint/a11y/useSemanticElements: false positive */}
+      <div
+        aria-roledescription="slide"
+        className={cn(
+          'min-w-0 shrink-0 grow-0 basis-full',
+          orientation === 'horizontal' ? 'pl-4' : 'pt-4',
+          className,
+        )}
+        data-slot="carousel-item"
+        role="group"
+        {...props}
+      />
+    </>
   )
 }
 
@@ -308,7 +312,7 @@ function CarouselDots({
               'after:bg-tertiary': theme === 'tertiary',
               'after:bg-[var(--primary-c)]': theme === 'custom',
             })}
-            // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+            // biome-ignore lint/suspicious/noArrayIndexKey: using index as key is acceptable here
             key={index}
           >
             <Button

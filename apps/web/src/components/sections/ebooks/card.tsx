@@ -36,7 +36,6 @@ export function EbookCard({
 
   const link = button ? getLink(button, locale) : false
 
-  // biome-ignore lint/correctness/noNestedComponentDefinitions: <explanation>
   const CardRender = () => (
     <div className="relative w-fit">
       {disabled && (
@@ -51,8 +50,9 @@ export function EbookCard({
         </div>
       )}
       <MotionCard
-        variant="ghost"
-        theme={theme}
+        animate={{
+          transition: { duration: 0.4, ease: 'easeInOut' },
+        }}
         className={cn(
           'relative flex h-96 w-[70vw] shrink flex-col items-end justify-center bg-card shadow-2xl md:w-80 md:shrink-0 md:flex-row lg:w-80',
           {
@@ -63,17 +63,15 @@ export function EbookCard({
         style={{
           background: backgroundClass,
         }}
+        theme={theme}
+        transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+        variant="ghost"
         whileHover={{ scale: disabled ? 1 : 1.1 }}
         whileTap={{ scale: disabled ? 1 : 0.9 }}
-        transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-        animate={{
-          transition: { duration: 0.4, ease: 'easeInOut' },
-        }}
       />
     </div>
   )
 
-  // biome-ignore lint/correctness/noNestedComponentDefinitions: <explanation>
   const CardFullRender = () => {
     const backgroundClass = image?.[locale].background
       ? `url('${urlForImage(image?.[locale].background.asset)}') repeat`
@@ -94,8 +92,6 @@ export function EbookCard({
           {title?.[locale]}
         </div>
         <MotionCard
-          variant="ghost"
-          theme={theme}
           className={cn(
             'relative flex h-full w-full shrink flex-col justify-center overflow-hidden border-primary/50 shadow-xl md:h-[400px] md:max-h-[400px]border-1! md:min-h-[400px] md:shrink-0 md:flex-row',
             {
@@ -106,6 +102,8 @@ export function EbookCard({
             },
             className,
           )}
+          theme={theme}
+          variant="ghost"
         >
           {image?.[locale].preview && (
             <CardHeader
@@ -122,20 +120,20 @@ export function EbookCard({
                 className={cn('absolute inset-0 overflow-visible md:h-full md:w-full', {
                   'md:w-full': !description?.[locale],
                 })}
+                transition={{ duration: 0.4, ease: 'easeInOut' }}
                 variants={{
                   hover: { scale: 1.2 },
                   initial: { scale: 1 },
                 }}
-                transition={{ duration: 0.4, ease: 'easeInOut' }}
               >
                 <Image
-                  src={urlForImage(image?.[locale].preview.asset).format('webp').quality(80).url()}
                   alt=""
+                  blurDataURL={image?.[locale].preview.metadata.lqip}
+                  className={cn('h-max rounded-xl object-cover md:object-contain')}
                   fill
                   placeholder="blur"
-                  blurDataURL={image?.[locale].preview.metadata.lqip}
                   priority
-                  className={cn('h-max rounded-xl object-cover md:object-contain')}
+                  src={urlForImage(image?.[locale].preview.asset).format('webp').quality(80).url()}
                 />
               </motion.div>
             </CardHeader>
@@ -157,13 +155,13 @@ export function EbookCard({
                   >
                     <div className="item-center flex justify-center overflow-hidden">
                       <Button
-                        disabled={disabled}
-                        theme={theme}
-                        fullWidth
-                        size="xl"
                         className="md:-translate-x-1/2 mb-10 w-3/4 md:absolute md:bottom-5 md:left-1/2 md:m-0"
+                        disabled={disabled}
+                        fullWidth
                         rounded="2xl"
                         scaleEffect={false}
+                        size="xl"
+                        theme={theme}
                       >
                         {!disabled ? button.label?.[locale] : 'Em breve'}
                       </Button>
@@ -173,13 +171,13 @@ export function EbookCard({
                 {!link && (
                   <div className="item-center flex justify-center overflow-hidden">
                     <Button
-                      disabled={disabled}
-                      theme={theme}
-                      fullWidth
-                      size="xl"
                       className="md:-translate-x-1/2 mb-10 w-3/4 md:absolute md:bottom-5 md:left-1/2 md:m-0"
+                      disabled={disabled}
+                      fullWidth
                       rounded="2xl"
                       scaleEffect={false}
+                      size="xl"
+                      theme={theme}
                     >
                       {!disabled ? button.label?.[locale] : 'Em breve'}
                     </Button>

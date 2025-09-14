@@ -1,9 +1,7 @@
 'use client'
 
-import { type HTMLMotionProps, type Transition, motion } from 'motion/react'
-import * as React from 'react'
-
 import { cn } from '@ez/shared/lib/utils'
+import { type HTMLMotionProps, motion, type Transition } from 'motion/react'
 
 type GradientBackgroundProps = HTMLMotionProps<'div'> & {
   transition?: Transition
@@ -16,14 +14,14 @@ function GradientBackground({
 }: GradientBackgroundProps) {
   return (
     <motion.div
-      data-slot="gradient-background"
+      animate={{
+        backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+      }}
       className={cn(
         'size-full bg-[length:400%_400%] bg-gradient-to-br from-primary via-secondary to-tertiary',
         className,
       )}
-      animate={{
-        backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-      }}
+      data-slot="gradient-background"
       transition={transition}
       {...props}
     />

@@ -26,12 +26,12 @@ type AccordionContentType = {
 const AccordionComponent = ({ value }: { value: AccordionType }) => {
   return (
     <Accordion
-      type="single"
-      collapsible
       className="flex flex-col"
-      theme={value.theme}
+      collapsible
       rounded={value.rounded}
       size={value.size}
+      theme={value.theme}
+      type="single"
     >
       {value.content.map(({ _key, title, content }) => (
         <AccordionItem key={_key} value={_key}>

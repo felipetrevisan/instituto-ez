@@ -51,20 +51,20 @@ export function CompanyServiceCard({ item: { button, background, content, title 
             {title?.[locale]}
           </h3>
           <div className="flex min-h-60 flex-col justify-between gap-10 font-light font-questrial text-lg leading-7">
-            <PortableText value={content?.[locale]} components={createPortableComponents()} />
+            <PortableText components={createPortableComponents()} value={content?.[locale]} />
             {button.visible && link && (
               <ButtonLink
+                className="flex w-full justify-center"
                 href={getLocalizedLink(locale, link)}
                 passHref
-                className="flex w-full justify-center"
               >
                 <Button
-                  variant="default"
-                  theme="tertiary"
-                  rounded="xl"
-                  size="2xl"
                   className="w-full font-bold uppercase"
                   disabled={button.disabled}
+                  rounded="xl"
+                  size="2xl"
+                  theme="tertiary"
+                  variant="default"
                 >
                   {button.label?.[locale]}
                 </Button>

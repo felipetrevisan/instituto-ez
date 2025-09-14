@@ -3,8 +3,8 @@ import { cn } from '@ez/shared/lib/utils'
 import { Button, type buttonVariants } from '@ez/shared/ui/button'
 import { Link } from '@ez/shared/ui/link'
 import type { VariantProps } from 'class-variance-authority'
-import { DynamicIcon } from 'lucide-react/dynamic'
 import type { IconName } from 'lucide-react/dynamic'
+import { DynamicIcon } from 'lucide-react/dynamic'
 
 type ButtonVariants = VariantProps<typeof buttonVariants>
 
@@ -37,13 +37,13 @@ const ButtonComponent = ({ value }: { value: ButtonType }) => {
 
   const button = (
     <Button
-      variant={variant}
-      theme={theme}
-      size={size}
-      rounded={rounded}
-      fullWidth={fullWidth}
       className="p-5 font-bold"
+      fullWidth={fullWidth}
       onClick={action === 'dialog' ? handleClick : undefined}
+      rounded={rounded}
+      size={size}
+      theme={theme}
+      variant={variant}
     >
       {icon && <DynamicIcon name={icon} />}
       {label}
@@ -53,7 +53,7 @@ const ButtonComponent = ({ value }: { value: ButtonType }) => {
   return (
     <div className={cn('flex justify-center p-4', { 'w-full': fullWidth })}>
       {action === 'link' ? (
-        <Link href={path} className={cn({ 'w-full': fullWidth })}>
+        <Link className={cn({ 'w-full': fullWidth })} href={path}>
           {button}
         </Link>
       ) : (

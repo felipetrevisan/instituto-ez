@@ -2,8 +2,8 @@
 
 import {
   type HTMLMotionProps,
-  type SpringOptions,
   motion,
+  type SpringOptions,
   useMotionValue,
   useSpring,
 } from 'motion/react'
@@ -78,8 +78,6 @@ function Magnetic({
 
   return (
     <motion.div
-      ref={localRef}
-      style={{ display: 'inline-block', ...style, x, y }}
       onMouseEnter={(e) => {
         if (onlyOnHover) setActive(true)
         onMouseEnter?.(e)
@@ -94,6 +92,8 @@ function Magnetic({
         if (onlyOnHover) compute(e)
         onMouseMove?.(e)
       }}
+      ref={localRef}
+      style={{ display: 'inline-block', ...style, x, y }}
       {...props}
     >
       {children}

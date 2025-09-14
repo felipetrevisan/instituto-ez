@@ -3,7 +3,7 @@
 import { cn } from '@ez/shared/lib/utils'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { XIcon } from 'lucide-react'
-import { AnimatePresence, type HTMLMotionProps, type Transition, motion } from 'motion/react'
+import { AnimatePresence, type HTMLMotionProps, motion, type Transition } from 'motion/react'
 import { createContext, useCallback, useContext, useEffect, useState } from 'react'
 
 type DialogContextType = {
@@ -32,7 +32,7 @@ function Dialog({ children, ...props }: React.ComponentProps<typeof DialogPrimit
       setIsOpen(open)
       props.onOpenChange?.(open)
     },
-    // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+    // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
     [props],
   )
 
@@ -63,11 +63,11 @@ function DialogOverlay({
 }: React.ComponentProps<typeof DialogPrimitive.Overlay>) {
   return (
     <DialogPrimitive.Overlay
-      data-slot="dialog-overlay"
       className={cn(
         'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-100 bg-linear-to-r from-primary/80 via-secondary/80 to-tertiary/80 backdrop-blur-xl data-[state=closed]:animate-out data-[state=open]:animate-in',
         className,
       )}
+      data-slot="dialog-overlay"
       {...props}
     />
   )
@@ -102,37 +102,37 @@ function DialogContent({
         <DialogPortal data-slot="dialog-portal">
           <DialogOverlay asChild>
             <motion.div
-              key="dialog-overlay"
-              initial={{ opacity: 0, filter: 'blur(4px)' }}
               animate={{ opacity: 1, filter: 'blur(0px)' }}
               exit={{ opacity: 0, filter: 'blur(4px)' }}
+              initial={{ opacity: 0, filter: 'blur(4px)' }}
+              key="dialog-overlay"
               transition={{ duration: 0.2, ease: 'easeInOut' }}
             />
           </DialogOverlay>
           <DialogPrimitive.Content asChild forceMount {...props}>
             <motion.div
-              key="dialog-content"
-              data-slot="dialog-content"
-              initial={{
-                opacity: 0,
-                filter: 'blur(4px)',
-                transform: `perspective(500px) ${rotateAxis}(${initialRotation}) scale(0.8)`,
-              }}
               animate={{
                 opacity: 1,
                 filter: 'blur(0px)',
                 transform: `perspective(500px) ${rotateAxis}(0deg) scale(1)`,
               }}
+              className={cn(
+                'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-100 grid w-full max-w-4xl translate-x-[-50%] translate-y-[-50%] gap-4 rounded-3xl border-4 border-secondary bg-background p-6 shadow-lg duration-200 data-[state=closed]:animate-out data-[state=open]:animate-in sm:max-w-lg',
+                className,
+              )}
+              data-slot="dialog-content"
               exit={{
                 opacity: 0,
                 filter: 'blur(4px)',
                 transform: `perspective(500px) ${rotateAxis}(${initialRotation}) scale(0.8)`,
               }}
+              initial={{
+                opacity: 0,
+                filter: 'blur(4px)',
+                transform: `perspective(500px) ${rotateAxis}(${initialRotation}) scale(0.8)`,
+              }}
+              key="dialog-content"
               transition={transition}
-              className={cn(
-                'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-100 grid w-full max-w-4xl translate-x-[-50%] translate-y-[-50%] gap-4 rounded-3xl border-4 border-secondary bg-background p-6 shadow-lg duration-200 data-[state=closed]:animate-out data-[state=open]:animate-in sm:max-w-lg',
-                className,
-              )}
               {...props}
             >
               {children}
@@ -153,11 +153,11 @@ function DialogContent({
 function DialogHeader({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
-      data-slot="dialog-header"
       className={cn(
-        'flex flex-col gap-2 rounded-t border-background/30 border-b py-4 text-center sm:text-left md:py-5 ',
+        'flex flex-col gap-2 rounded-t border-background/30 border-b py-4 text-center sm:text-left md:py-5',
         className,
       )}
+      data-slot="dialog-header"
       {...props}
     />
   )
@@ -166,8 +166,8 @@ function DialogHeader({ className, ...props }: React.ComponentProps<'div'>) {
 function DialogFooter({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
-      data-slot="dialog-footer"
       className={cn('flex gap-2 py-6 sm:flex-row sm:justify-end', className)}
+      data-slot="dialog-footer"
       {...props}
     />
   )
@@ -176,8 +176,8 @@ function DialogFooter({ className, ...props }: React.ComponentProps<'div'>) {
 function DialogTitle({ className, ...props }: React.ComponentProps<typeof DialogPrimitive.Title>) {
   return (
     <DialogPrimitive.Title
-      data-slot="dialog-title"
       className={cn('font-semibold text-primary text-xl leading-none', className)}
+      data-slot="dialog-title"
       {...props}
     />
   )
@@ -189,8 +189,8 @@ function DialogDescription({
 }: React.ComponentProps<typeof DialogPrimitive.Description>) {
   return (
     <DialogPrimitive.Description
-      data-slot="dialog-description"
       className={cn('text-muted-foreground text-sm', className)}
+      data-slot="dialog-description"
       {...props}
     />
   )

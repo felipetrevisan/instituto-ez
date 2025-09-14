@@ -11,7 +11,7 @@ function Link({ ref, className, onClick, asChild = false, children, ...props }: 
   const Comp = asChild ? Slot : 'a'
 
   return (
-    <Comp ref={ref} data-slot="link" {...props}>
+    <Comp data-slot="link" ref={ref} {...props}>
       {children}
     </Comp>
   )
