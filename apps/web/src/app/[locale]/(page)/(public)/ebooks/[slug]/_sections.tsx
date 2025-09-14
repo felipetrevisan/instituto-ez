@@ -2,6 +2,7 @@
 
 import type { Ebook } from '@ez/web/types/ebook'
 import type { SectionKeys } from '@ez/web/types/sections'
+import { Authors } from './_authors'
 import Footer from './_footer'
 import { Header } from './_header'
 import { Index } from './_index'
@@ -35,6 +36,10 @@ export function getLandingPageSections(data: Ebook): SectionKeys[] {
     {
       key: 'question',
       component: <Questions data={data} />,
+    },
+    {
+      key: 'author',
+      component: <Authors data={data} />,
     },
     {
       key: 'footer',

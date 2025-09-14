@@ -1,11 +1,11 @@
 'use client'
 
+import { useMediaQuery } from '@ez/shared/hooks/use-media-query'
 import { ChevronLeftIcon, DownloadIcon } from '@ez/shared/icons'
 import BlobButton from '@ez/shared/ui/animated/button/blob-button'
 import { IconButton } from '@ez/shared/ui/animated/button/icon-button'
 import { WritingText } from '@ez/shared/ui/animated/text/writting'
 import { urlForImage } from '@ez/web/config/image'
-import { useIsMobile } from '@ez/web/hooks/use-mobile'
 import type { Ebook } from '@ez/web/types/ebook'
 import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
 import { motion } from 'motion/react'
@@ -21,7 +21,7 @@ const ChevronLeftIconMotion = motion(ChevronLeftIcon)
 
 export function Header({ data }: { data: Ebook }) {
   const locale = useLocale()
-  const isMobile = useIsMobile(640)
+  const isMobile = useMediaQuery()
 
   const t = useTranslations('Ebooks')
 

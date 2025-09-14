@@ -22,30 +22,31 @@ const TestimonialComponent = ({ value }: { value: TestimonialType }) => {
   return (
     <div className="flex h-full w-full flex-col space-y-14 md:w-[80vw]! lg:w-[80vw]! xl:w-full">
       <div className="flex flex-col justify-center">
-        <Carousel plugins={[ClassNames()]} className="overflow-visible" theme={theme}>
+        <Carousel className="overflow-visible" plugins={[ClassNames()]} theme={theme}>
           <CarouselContent rootClassName="p-5">
             {data?.map((testimonial, _index) => (
               <CarouselItem
-                key={testimonial.id}
                 className="basis-full md:basis-full lg:basis-full xl:basis-1/2"
+                key={testimonial.id}
               >
                 {type === 'MINIMALIST' ? (
                   <TestimonialMinimalist
-                    key={`testimonial_${category}_${testimonial.id}`}
+                    className="shadow-sm"
                     item={testimonial}
+                    key={`testimonial_${category}_${testimonial.id}`}
+                    rounded={rounded}
                     theme={theme}
                     variant={variant}
-                    rounded={rounded}
                   />
                 ) : (
                   <TestimonialAnimated
-                    key={`testimonial_${category}_${testimonial.id}`}
-                    item={testimonial}
                     hoveredIndex={hoveredIndex}
+                    item={testimonial}
+                    key={`testimonial_${category}_${testimonial.id}`}
+                    rounded={rounded}
                     setHoveredIndexAction={setHoveredIndex}
                     theme={theme}
                     variant={variant}
-                    rounded={rounded}
                   />
                 )}
               </CarouselItem>

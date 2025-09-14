@@ -27,6 +27,10 @@ export default defineType({
       title: 'Chapters',
     },
     {
+      name: 'authors',
+      title: 'Authors',
+    },
+    {
       name: 'overview',
       title: 'Overview',
     },
@@ -130,6 +134,13 @@ export default defineType({
       title: 'Chapters',
       type: 'chapter',
       group: ['chapters'],
+      options: { collapsible: true, collapsed: false },
+    }),
+    defineField({
+      name: 'author',
+      title: 'Authors',
+      type: 'authors',
+      group: ['authors'],
       options: { collapsible: true, collapsed: false },
     }),
     defineField({

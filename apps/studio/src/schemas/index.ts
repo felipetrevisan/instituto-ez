@@ -16,6 +16,8 @@ import ebookCollection from './ebooks/collection'
 import landingPageSettings from './ebooks/settings'
 import aboutCard from './objects/about-card'
 import button from './objects/button'
+import author from './objects/ebooks/author'
+import authors from './objects/ebooks/authors'
 import badge from './objects/ebooks/badge'
 import chapter from './objects/ebooks/chapter'
 import chapters from './objects/ebooks/chapters'
@@ -96,6 +98,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     seal,
     chapters,
     chapter,
+    authors,
+    author,
     download,
     price,
     badge,

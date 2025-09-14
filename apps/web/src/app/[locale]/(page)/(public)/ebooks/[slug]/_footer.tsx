@@ -6,7 +6,7 @@ import GuaranteeSection from './_guarantee'
 
 export default function Footer({ data }: { data: Ebook }) {
   return (
-    <section className="relative w-full bg-gradient-to-t from-slate-100 via-slate-200 to-white lg:pb-55">
+    <section className="relative w-full bg-gradient-to-t from-slate-100 via-slate-200 to-white pb-30 lg:pb-55">
       <div className="container flex h-full flex-col gap-20 lg:gap-40">
         <BuySection data={data} />
         <GuaranteeSection />

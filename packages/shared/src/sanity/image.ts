@@ -5,7 +5,6 @@ function getImageUrlBuilder(config: { dataset: string; projectId: string }) {
   const imageBuilder = createImageUrlBuilder(config)
 
   function urlForImage(source: SanityImageSource) {
-    console.log(source)
     return imageBuilder?.image(source).auto('format').fit('max')
   }
 

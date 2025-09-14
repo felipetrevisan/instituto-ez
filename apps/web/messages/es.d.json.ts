@@ -13,6 +13,8 @@ declare const messages: {
     "reserveYourEbook": "Consigue tu eBook ahora",
     "guaranteeSeals": "Sellos de garantía",
     "virtualEbook": "Navega y descubre el Ebook que hay dentro",
+    "aboutAuthor": "Acerca del Autor",
+    "aboutAuthors": "Acerca del Autores",
     "frequentlyQuestions": "Preguntas Frecuentes",
     "onlyText": "Apenas",
     "testimonial": "Testimonios"

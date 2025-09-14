@@ -1,11 +1,10 @@
 'use client'
 
+import { useMediaQuery } from '@ez/shared/hooks/use-media-query'
 import { ChevronLeftIcon, DownloadIcon } from '@ez/shared/icons'
 import BlobButton from '@ez/shared/ui/animated/button/blob-button'
 import { IconButton } from '@ez/shared/ui/animated/button/icon-button'
 import { urlForImage } from '@ez/web/config/image'
-import { locales } from '@ez/web/config/locale'
-import { useIsMobile } from '@ez/web/hooks/use-mobile'
 import { useStickyBar } from '@ez/web/hooks/use-sticky-bar'
 import type { Ebook } from '@ez/web/types/ebook'
 import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
@@ -20,7 +19,7 @@ const ChevronLeftIconMotion = motion(ChevronLeftIcon)
 
 export default function StickyHeader({ title, image, download }: Ebook) {
   const locale = useLocale()
-  const isMobile = useIsMobile(640)
+  const isMobile = useMediaQuery()
   const showSticky = useStickyBar(500, 100)
 
   const t = useTranslations('Ebooks')

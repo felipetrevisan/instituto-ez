@@ -16,7 +16,7 @@ export default function PriceBubble({ price }: { price: Price }) {
 
   const isFree =
     typeof price?.regular.price === 'number' &&
-    (price?.regular.price === 0 || price?.discount?.price === 0)
+    (price?.regular.price === 0 || (price.hasDiscount && price?.discount?.price === 0))
 
   const theme = price.theme
 
@@ -129,7 +129,7 @@ export default function PriceBubble({ price }: { price: Price }) {
                         ease: 'easeInOut',
                       }}
                     >
-                      {price.discount?.text?.[locale]}
+                      {price.discount?.text?.[locale]}wewqe
                     </motion.span>
                   ) : (
                     <>
@@ -158,7 +158,7 @@ export default function PriceBubble({ price }: { price: Price }) {
                 >
                   {isFree ? (
                     <motion.span className="text-4xl uppercase">
-                      {price.regular.text?.[locale]}
+                      {price.regular.text?.[locale]}sadsadsa
                     </motion.span>
                   ) : (
                     <>

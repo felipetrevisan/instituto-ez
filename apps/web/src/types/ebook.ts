@@ -71,6 +71,7 @@ export type Ebook = {
     }
     chapters: Chapter[]
   }
+  authors: Author[]
   theme: {
     text: string
     primary: Color
@@ -162,6 +163,16 @@ export type Badge = {
 }
 
 export type Chapter = {
+  content: {
+    [key: string]: PortableTextBlock[]
+  }
+}
+
+export type Author = {
+  _key: string
+  name: string
+  background?: SanityAsset
+  photo?: SanityAsset
   content: {
     [key: string]: PortableTextBlock[]
   }

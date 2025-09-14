@@ -2,23 +2,19 @@
 
 import { cn } from '@ez/shared/lib/utils'
 import { Subtitle, Title } from '@ez/shared/ui/title'
-import { urlForImage } from '@ez/web/config/image'
-import { useIsMobile } from '@ez/web/hooks/use-mobile'
 import type { Ebook } from '@ez/web/types/ebook'
-import Image from 'next/image'
 import HTMLFlipBook from 'react-pageflip'
 import { PageBook } from './_chapters/chapter'
 import { CoverBook } from './_chapters/cover'
 
 import './styles.css'
+import { useMediaQuery } from '@ez/shared/hooks/use-media-query'
 import { useLocale, useTranslations } from 'next-intl'
 
 export function Overview({ data }: { data: Ebook }) {
-  const isMobile = useIsMobile(640)
+  const isMobile = useMediaQuery()
   const { overview, chapter, id } = data
   const locale = useLocale()
-
-  console.log(chapter)
 
   const t = useTranslations('Ebooks')
 
@@ -27,7 +23,7 @@ export function Overview({ data }: { data: Ebook }) {
       className={cn(
         'relative mt-10 flex min-h-[500px] w-screen flex-row gap-4 bg-[auto,contain] bg-ebooks bg-gradient-to-b from-slate-100 via-slate-200 to-white px-6',
         {
-          'pt-58': !overview,
+          'pt-20 md:pt-58': !overview,
           'pt-52': overview,
         },
       )}

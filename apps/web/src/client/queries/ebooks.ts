@@ -255,6 +255,28 @@ const chapterField = `
   },
 `
 
+const authorField = `
+  "authors": author.authors[] {
+    _key,
+    name,
+    "background": background {
+      "asset": asset,
+      "metadata": {
+        "lqip": asset->metadata.lqip,
+        "dimensions": asset->metadata.dimensions
+      }
+    },
+    "photo": photo {
+      "asset": asset,
+      "metadata": {
+        "lqip": asset->metadata.lqip,
+        "dimensions": asset->metadata.dimensions
+      }
+    },
+    content
+  },
+`
+
 const metadataField = `
   "metadata": data[] {
     _key,
@@ -295,6 +317,7 @@ export const ebookQueryBySlug = groq`
     ${chapterField}
     ${metadataField}
     ${imageField}
+    ${authorField}
     disabled,
     ${buttonField}
   }

@@ -9,7 +9,7 @@ export function Workshops() {
   const { data, isLoading } = useWorkshop()
 
   return (
-    <motion.div layout className="flex flex-col">
+    <motion.div className="flex flex-col" layout>
       <div className="flex flex-wrap justify-center gap-8">
         {isLoading && <Skeleton />}
         {data?.map((item) => (

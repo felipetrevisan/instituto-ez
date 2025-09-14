@@ -16,7 +16,7 @@ export function CompanyService() {
         </>
       )}
       {data?.map((item, index) => (
-        <Card key={item.id} item={item} index={index} />
+        <Card index={index} item={item} key={item.id} />
       ))}
     </div>
   )

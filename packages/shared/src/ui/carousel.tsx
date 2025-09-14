@@ -5,7 +5,7 @@ import {
   MotionHighlight,
   MotionHighlightItem,
 } from '@ez/shared/ui/animated/effects/motion-highlight'
-import { type VariantProps, cva } from 'class-variance-authority'
+import { cva, type VariantProps } from 'class-variance-authority'
 import useEmblaCarousel, { type UseEmblaCarouselType } from 'embla-carousel-react'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import React from 'react'
@@ -165,12 +165,11 @@ function Carousel({
       }}
     >
       <div
-        onKeyDownCapture={handleKeyDown}
-        className={className}
-        // biome-ignore lint/a11y/useSemanticElements: <explanation>
-        role="region"
         aria-roledescription="carousel"
+        className={className}
         data-slot="carousel"
+        onKeyDownCapture={handleKeyDown}
+        role="region"
         {...props}
       >
         {children}
@@ -188,9 +187,9 @@ function CarouselContent({
 
   return (
     <div
-      ref={carouselRef}
       className={cn('overflow-hidden', rootClassName)}
       data-slot="carousel-content"
+      ref={carouselRef}
     >
       <div
         className={cn('flex', orientation === 'horizontal' ? '-ml-4' : '-mt-4 flex-col', className)}
@@ -205,14 +204,14 @@ function CarouselItem({ className, ...props }: React.ComponentProps<'div'>) {
 
   return (
     <div
-      role="group"
       aria-roledescription="slide"
-      data-slot="carousel-item"
       className={cn(
         'min-w-0 shrink-0 grow-0 basis-full',
         orientation === 'horizontal' ? 'pl-4' : 'pt-4',
         className,
       )}
+      data-slot="carousel-item"
+      role="group"
       {...props}
     />
   )
@@ -227,8 +226,6 @@ function CarouselPrevious({
 
   return (
     <Button
-      data-slot="carousel-previous"
-      variant={variant}
       className={cn(
         'absolute size-8 rounded-full',
         orientation === 'horizontal'
@@ -236,8 +233,10 @@ function CarouselPrevious({
           : '-top-12 -translate-x-1/2 left-1/2 rotate-90',
         className,
       )}
+      data-slot="carousel-previous"
       disabled={!canScrollPrev}
       onClick={scrollPrev}
+      variant={variant}
       {...props}
     >
       <ArrowLeft />
@@ -255,8 +254,6 @@ function CarouselNext({
 
   return (
     <Button
-      data-slot="carousel-next"
-      variant={variant}
       className={cn(
         'absolute size-8 rounded-full',
         orientation === 'horizontal'
@@ -264,8 +261,10 @@ function CarouselNext({
           : '-bottom-12 -translate-x-1/2 left-1/2 rotate-90',
         className,
       )}
+      data-slot="carousel-next"
       disabled={!canScrollNext}
       onClick={scrollNext}
+      variant={variant}
       {...props}
     >
       <ArrowRight />
@@ -296,9 +295,9 @@ function CarouselDots({
       {...props}
     >
       <MotionHighlight
+        className="flex flex-row bg-transparent"
         controlledItems
         hover
-        className="flex flex-row bg-transparent"
         mode="children"
       >
         {scrollSnaps.map((_, index) => (
@@ -307,15 +306,12 @@ function CarouselDots({
               'after:bg-primary': theme === 'default',
               'after:bg-secondary': theme === 'secondary',
               'after:bg-tertiary': theme === 'tertiary',
-              'after:bg-[--var(--primary-c)]': theme === 'custom',
+              'after:bg-[var(--primary-c)]': theme === 'custom',
             })}
             // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
             key={index}
           >
             <Button
-              data-slot="carousel-dot"
-              variant="outline"
-              theme={theme}
               className={cn(
                 'rounded-full bg-linear-none px-1 after:flex after:size-2 after:items-center after:rounded-full after:shadow-[0_0_0_0.17rem] hover:bg-transparent',
                 {
@@ -325,18 +321,21 @@ function CarouselDots({
                     theme === 'secondary' && selectedIndex === index,
                   'after:bg-tertiary after:shadow-tertiary':
                     theme === 'tertiary' && selectedIndex === index,
-                  '[--tw-shadow:_var(--primary-c)] after:bg-[--var(--primary-c)] after:shadow-[0_0_0_0.17rem]':
+                  '[--tw-shadow:_var(--primary-c)] after:bg-[var(--primary-c)] after:shadow-[0_0_0_0.17rem_var(--primary-c)]':
                     theme === 'custom' && selectedIndex === index,
 
                   'after:shadow-primary/70': theme === 'default' && selectedIndex !== index,
                   'after:shadow-secondary/70': theme === 'secondary' && selectedIndex !== index,
                   'after:shadow-tertiary/70': theme === 'tertiary' && selectedIndex !== index,
-                  '[--tw-shadow:_var(--primary-c)] after:shadow-[0_0_0_0.17rem]':
+                  '[--tw-shadow:_var(--primary-c)] after:shadow-[0_0_0_0.17rem_var(--primary-c)]':
                     theme === 'custom' && selectedIndex !== index,
                 },
                 className,
               )}
+              data-slot="carousel-dot"
               onClick={() => goToSlide(index)}
+              theme={theme}
+              variant="outline"
             >
               <span className="sr-only">Dot</span>
             </Button>

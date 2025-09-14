@@ -1,4 +1,4 @@
-import { useIsMobile } from '@ez/shared/hooks/use-mobile'
+import { useMediaQuery } from '@ez/shared/hooks/use-media-query'
 import { cn } from '@ez/shared/lib/utils'
 import type { Ebook } from '@ez/shared/types/ebook'
 import type { Theme } from '@ez/shared/types/global'
@@ -68,15 +68,15 @@ const EbooksComponent = ({ value }: { value: EbooksType }) => {
   if (type === 'grid') {
     return (
       <EbookGridComponent
-        ebooks={ebooks}
-        theme={theme}
         appareance={appareance}
-        locale={locale}
-        title={title}
-        LinkComponent={LinkComponent}
+        ebooks={ebooks}
         ImageComponent={ImageComponent}
         imageBuilder={imageBuilder}
+        LinkComponent={LinkComponent}
+        locale={locale}
         TitleComponent={Title}
+        theme={theme}
+        title={title}
       />
     )
   }
@@ -84,14 +84,14 @@ const EbooksComponent = ({ value }: { value: EbooksType }) => {
   if (type === 'carousel') {
     return (
       <EbookCarouselComponent
-        ebooks={ebooks}
-        theme={value.theme}
         appareance={value.appareance}
-        locale={locale}
-        title={title}
-        LinkComponent={LinkComponent}
+        ebooks={ebooks}
         ImageComponent={ImageComponent}
         imageBuilder={imageBuilder}
+        LinkComponent={LinkComponent}
+        locale={locale}
+        theme={value.theme}
+        title={title}
       />
     )
   }
@@ -118,8 +118,8 @@ const EbookGridComponent = ({
   ImageComponent: React.ComponentType<ImageComponentProps>
   imageBuilder: (assets: SanityImageSource) => ImageUrlBuilder
 }) => {
-  const isMobile = useIsMobile(640)
-  const isTablet = useIsMobile(1179)
+  const isMobile = useMediaQuery()
+  const isTablet = useMediaQuery(1179)
 
   return (
     <div className="flex h-full w-full flex-col space-y-14">
@@ -135,13 +135,13 @@ const EbookGridComponent = ({
                 key={ebook.id}
               >
                 <EbookCard
-                  item={ebook}
                   full={appareance === 'full'}
-                  theme={theme}
-                  locale={locale}
-                  LinkComponent={LinkComponent}
                   ImageComponent={ImageComponent}
                   imageBuilder={imageBuilder}
+                  item={ebook}
+                  LinkComponent={LinkComponent}
+                  locale={locale}
+                  theme={theme}
                 />
               </div>
             ))}
@@ -177,26 +177,26 @@ const EbookCarouselComponent = ({
     <div className="flex h-full w-full flex-col space-y-14">
       <div className="flex flex-col gap-10">
         {title && <TitleComponent variant={theme}>{title}</TitleComponent>}
-        <Carousel plugins={[ClassNames()]} className="overflow-visible">
+        <Carousel className="overflow-visible" plugins={[ClassNames()]}>
           <CarouselContent className="gap-4" rootClassName="overflow-visible">
             {ebooks?.map((ebook) => (
               <CarouselItem
-                key={ebook.id}
                 className="basis-full md:basis-1/2 lg:basis-1/2 xl:basis-1/2"
+                key={ebook.id}
               >
                 <EbookCard
-                  item={ebook}
                   full={appareance === 'full'}
-                  theme={theme}
-                  locale={locale}
-                  LinkComponent={LinkComponent}
                   ImageComponent={ImageComponent}
                   imageBuilder={imageBuilder}
+                  item={ebook}
+                  LinkComponent={LinkComponent}
+                  locale={locale}
+                  theme={theme}
                 />
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselDots theme={theme} className="mt-4" />
+          <CarouselDots className="mt-4" theme={theme} />
         </Carousel>
       </div>
     </div>

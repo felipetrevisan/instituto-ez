@@ -5,7 +5,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Metadata } from 'next'
 import { Inter, Oswald, Questrial } from 'next/font/google'
 import { notFound } from 'next/navigation'
-import { hasLocale, type Locale, NextIntlClientProvider, useLocale } from 'next-intl'
+import { hasLocale, type Locale, NextIntlClientProvider } from 'next-intl'
 import { setRequestLocale } from 'next-intl/server'
 import type { ReactNode } from 'react'
 import Providers from './providers'
@@ -72,8 +72,8 @@ export default async function RootLayoutt({ children, params }: Props) {
 
   return (
     <html
-      lang={locale}
       className={`${inter.variable} ${oswald.variable} ${questrial.variable}`}
+      lang={locale}
       suppressHydrationWarning
     >
       <body className="flex h-full flex-col overflow-x-hidden bg-background text-foreground antialiased">

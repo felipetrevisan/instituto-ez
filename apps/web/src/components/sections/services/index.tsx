@@ -9,11 +9,11 @@ export function Services() {
   const { data, isLoading } = useServices()
 
   return (
-    <motion.div layout className="flex flex-col gap-10 space-y-12">
+    <motion.div className="flex flex-col gap-10 space-y-12" layout>
       <div className="flex h-full flex-col flex-wrap items-center justify-center gap-16 md:flex-row">
         {isLoading && <Skeleton />}
         {data?.map((item) => (
-          <Card key={item.id} item={item} />
+          <Card item={item} key={item.id} />
         ))}
       </div>
     </motion.div>

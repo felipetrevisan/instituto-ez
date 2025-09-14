@@ -30,7 +30,6 @@ export default function GuaranteeSection() {
           {t('guaranteeSeals')}
         </MotionTitle>
       </motion.h2>
-
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 lg:gap-8">
         {data?.seals?.[locale].map((seal, i) => (
           <motion.div

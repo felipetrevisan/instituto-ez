@@ -1,9 +1,9 @@
 'use client'
 
+import { useMediaQuery } from '@ez/shared/hooks/use-media-query'
 import { DownloadIcon } from '@ez/shared/icons'
 import BlobButton from '@ez/shared/ui/animated/button/blob-button'
 import { Title } from '@ez/shared/ui/title'
-import { useIsMobile } from '@ez/web/hooks/use-mobile'
 import type { Ebook } from '@ez/web/types/ebook'
 import { createPortableComponents } from '@ez/web/utils/create-portable-components'
 import dynamic from 'next/dynamic'
@@ -14,7 +14,7 @@ import { PortableText } from 'next-sanity'
 const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false })
 
 export function Index({ data }: { data: Ebook }) {
-  const isMobile = useIsMobile(640)
+  const isMobile = useMediaQuery()
   const locale = useLocale()
 
   const { index, download } = data

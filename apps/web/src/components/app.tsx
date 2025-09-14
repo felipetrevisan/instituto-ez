@@ -1,5 +1,6 @@
 'use client'
 
+import { useMediaQuery } from '@ez/shared/hooks/use-media-query'
 import { useShared } from '@ez/shared/hooks/use-shared'
 import { MailIcon } from '@ez/shared/icons'
 import { cn } from '@ez/shared/lib/utils'
@@ -20,7 +21,6 @@ import { env } from '@ez/web/config/env'
 import { urlForImage } from '@ez/web/config/image'
 import { useApp } from '@ez/web/hooks/use-app'
 import { useDimensions } from '@ez/web/hooks/use-dimension'
-import { useIsMobile } from '@ez/web/hooks/use-mobile'
 import { useSite } from '@ez/web/hooks/use-site'
 import type { Site } from '@ez/web/types/site'
 import { motion, useAnimation, useMotionValueEvent, useScroll, useTransform } from 'motion/react'
@@ -47,7 +47,7 @@ function Header({ className, data }: HeaderProps) {
   const { height } = useDimensions(containerRef)
   const { isMenuOpen, isNormalPage } = useApp()
   const { scrollY } = useScroll()
-  const isMobile = useIsMobile(640)
+  const isMobile = useMediaQuery()
 
   const t = useTranslations('Languages')
 

@@ -13,6 +13,8 @@ declare const messages: {
     "reserveYourEbook": "Get your eBook now",
     "guaranteeSeals": "Guarantee Seals",
     "virtualEbook": "Browse through and discover the Ebook inside",
+    "aboutAuthor": "About the Author",
+    "aboutAuthors": "About the Authors",
     "frequentlyQuestions": "Frequently Asked Questions",
     "onlyText": "Only",
     "testimonial": "Testimonials"

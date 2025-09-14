@@ -43,6 +43,11 @@ export default defineType({
           title: 'Perguntas Frequentes',
         }),
         defineArrayMember({
+          name: 'author',
+          type: 'landing-page-section',
+          title: 'Autores',
+        }),
+        defineArrayMember({
           name: 'footer',
           type: 'landing-page-section',
           title: 'Compra e Garantia',

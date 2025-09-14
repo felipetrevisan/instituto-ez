@@ -1,6 +1,6 @@
 'use client'
 
-import { useIsMobile } from '@ez/web/hooks/use-mobile'
+import { useMediaQuery } from '@ez/shared/hooks/use-media-query'
 import { useSite } from '@ez/web/hooks/use-site'
 import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
 import { type HTMLMotionProps, motion } from 'motion/react'
@@ -22,18 +22,18 @@ export const Logo = ({
 }: LogoProps) => {
   const locale = useLocale()
   const { data } = useSite()
-  const isTablet = useIsMobile(1179)
+  const isTablet = useMediaQuery(1179)
 
   const logoImage = (
     <>
       <Image
-        src={src ?? '/assets/logo.png'}
         alt={`${data?.title[locale]} - ${data?.slogan[locale]}`}
         className="h-full"
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        priority
-        width={57}
         height={57}
+        priority
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        src={src ?? '/assets/logo.png'}
+        width={57}
       />
       {showSlogan && !isTablet && (
         <span className="flex flex-col justify-center">

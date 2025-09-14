@@ -1,7 +1,7 @@
 'use client'
 
+import { useMediaQuery } from '@ez/shared/hooks/use-media-query'
 import { cn } from '@ez/shared/lib/utils'
-import { useIsMobile } from '@ez/web/hooks/use-mobile'
 import { motion } from 'motion/react'
 import { useState } from 'react'
 
@@ -32,7 +32,7 @@ export function AnimatedButton({
   onClickAction,
 }: AnimatedButtonProps) {
   const [hovered, setHovered] = useState(false)
-  const isMobile = useIsMobile(640)
+  const isMobile = useMediaQuery()
 
   function getAnimationState(map: AnimatedValue, hovered: boolean) {
     return Object.fromEntries(
@@ -42,17 +42,17 @@ export function AnimatedButton({
 
   return (
     <motion.button
+      animate={getAnimationState(animateMaps, hovered)}
       className={cn(
         'flex w-full cursor-pointer items-center overflow-hidden rounded-full border-primary bg-white py-3 font-bold text-primary shadow-lg sm:w-auto',
         className,
       )}
-      style={{ justifyContent: isMobile ? 'center' : justify, width }}
       initial={{ width: isMobile ? '100%' : 48, paddingLeft: isMobile ? 0 : 20, scale: 1 }}
-      animate={getAnimationState(animateMaps, hovered)}
-      transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-      onHoverStart={() => setHovered(true)}
-      onHoverEnd={() => setHovered(false)}
       onClick={onClickAction}
+      onHoverEnd={() => setHovered(false)}
+      onHoverStart={() => setHovered(true)}
+      style={{ justifyContent: isMobile ? 'center' : justify, width }}
+      transition={{ type: 'spring', stiffness: 300, damping: 20 }}
     >
       {icon && (
         <motion.div
@@ -69,11 +69,11 @@ export function AnimatedButton({
         </motion.div>
       )}
       <motion.span
-        className="ml-2 overflow-hidden whitespace-nowrap"
         animate={{
           opacity: hovered || isMobile ? 1 : 0,
           x: hovered ? 0 : -10,
         }}
+        className="ml-2 overflow-hidden whitespace-nowrap"
         transition={{
           type: 'spring',
           stiffness: 500,

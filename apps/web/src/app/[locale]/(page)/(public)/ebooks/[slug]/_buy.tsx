@@ -64,7 +64,7 @@ export default function BuySection({ data }: { data: Ebook }) {
             </Link>
           )}
         </div>
-        <div className="flex h-full w-full justify-end gap-4 lg:col-span-2">
+        <div className="flex h-full w-full justify-center gap-4 md:justify-end lg:col-span-2">
           <PriceBubble price={price} />
         </div>
       </div>

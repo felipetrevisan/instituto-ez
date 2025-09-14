@@ -35,24 +35,24 @@ export function TestimonialAnimated({
 
   return (
     <MotionCard
-      className={cn(
-        'group relative h-[400px] max-h-[400px] cursor-pointer select-none overflow-visible p-1 transition-all xl:h-[300px] xl:max-h-[300px]',
-      )}
-      variant={variant}
-      theme={theme}
-      rounded={rounded}
-      data-theme={theme}
-      data-variant={variant}
-      whileHover={{ scale: 1.04 }}
-      whileTap={{ scale: 0.9 }}
-      transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-      onHoverStart={() => setHoveredIndexAction(item.id)}
-      onHoverEnd={() => setHoveredIndexAction(null)}
       animate={{
         filter: isBlurred ? 'blur(10px)' : 'blur(0px)',
         opacity: isBlurred ? 0.5 : 1,
         transition: { duration: 0.4, ease: 'easeInOut' },
       }}
+      className={cn(
+        'group relative h-[400px] max-h-[400px] cursor-pointer select-none overflow-visible p-1 transition-all xl:h-[300px] xl:max-h-[300px]',
+      )}
+      data-theme={theme}
+      data-variant={variant}
+      onHoverEnd={() => setHoveredIndexAction(null)}
+      onHoverStart={() => setHoveredIndexAction(item.id)}
+      rounded={rounded}
+      theme={theme}
+      transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+      variant={variant}
+      whileHover={{ scale: 1.04 }}
+      whileTap={{ scale: 0.9 }}
     >
       <CardContent className="flex h-full w-ful items-center justify-center p-0">
         <div className="relative flex h-full w-full flex-col items-center justify-evenly border-0 px-8 py-0">
