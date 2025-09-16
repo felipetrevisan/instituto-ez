@@ -22,8 +22,8 @@ const ImageComponent = ({
         backgroundImage: `url(${urlForImage(value).url()})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        width: width,
-        height: height,
+        width: '100%',
+        height: '100%',
         aspectRatio: width / height,
       }}
     />

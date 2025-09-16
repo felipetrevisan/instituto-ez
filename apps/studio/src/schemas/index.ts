@@ -34,6 +34,7 @@ import priceColor from './objects/ebooks/theme/price-badge'
 import themeSchema from './objects/ebooks/theme/theme'
 import accordionWidget from './objects/editor/accordion'
 import accordionContentWidget from './objects/editor/accordion-content'
+import accordionContentLandingPage from './objects/editor/accordion-content-landing-page'
 import alertWidget from './objects/editor/alert'
 import buttonLinkWidget from './objects/editor/button'
 import cardsWidget from './objects/editor/cards'
@@ -104,6 +105,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     price,
     badge,
     landingPageSection,
+    accordionContentLandingPage,
     themeSchema,
     themeButton,
     priceColor,

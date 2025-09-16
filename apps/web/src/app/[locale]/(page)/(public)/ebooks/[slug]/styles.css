@@ -39,6 +39,7 @@
   display: none;
   position: absolute;
   transform-style: preserve-3d;
+  top: 0 !important;
 }
 
 .stf__outerShadow {
@@ -71,6 +72,7 @@
   max-width: min(420px, calc(100vw - 2rem)) !important;
   margin-left: auto !important;
   margin-right: auto !important;
+  overflow: hidden;
 }
 
 @media (min-width: 768px) {

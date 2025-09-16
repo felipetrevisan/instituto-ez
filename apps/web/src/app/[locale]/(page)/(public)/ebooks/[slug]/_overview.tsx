@@ -12,7 +12,7 @@ import { useMediaQuery } from '@ez/shared/hooks/use-media-query'
 import { useLocale, useTranslations } from 'next-intl'
 
 export function Overview({ data }: { data: Ebook }) {
-  const isMobile = useMediaQuery()
+  const isMobile = useMediaQuery(640)
   const { overview, chapter, id } = data
   const locale = useLocale()
 
@@ -88,7 +88,7 @@ export function Overview({ data }: { data: Ebook }) {
                       }`}
                     />
                   ))}
-                  <CoverBook cover={chapter.cover} locale={locale} />
+                  {/* <CoverBook cover={chapter.cover} locale={locale} /> */}
                 </HTMLFlipBook>
               </div>
             )}

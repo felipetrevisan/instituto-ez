@@ -163,7 +163,7 @@ export default defineType({
       title: 'Questions',
       type: 'array',
       group: ['questions'],
-      of: [{ type: 'accordion-content' }],
+      of: [{ type: 'accordion-content-landing-page' }],
       validation: (Rule) => Rule.required().warning('Must have at least one content.'),
     }),
     defineField({
