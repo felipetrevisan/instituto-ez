@@ -8,4 +8,5 @@ export const portableBlocks: PortableTextComponents['block'] = {
   h4: ({ children }: any) => <h4 className="my-3 font-medium text-xl">{children}</h4>,
   h5: ({ children }: any) => <h5 className="my-2 font-medium text-lg">{children}</h5>,
   normal: ({ children }: any) => <p className="my-2 text-base">{children}</p>,
+  justify: ({ children }) => <p className="my-2 text-justify text-base">{children}</p>,
 }

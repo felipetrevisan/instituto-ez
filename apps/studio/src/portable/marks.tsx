@@ -24,6 +24,8 @@ export const portableMarks: PortableTextComponents['marks'] = {
   left: (props: any) => TextAlignDecorator(props, 'left'),
   // biome-ignore lint/suspicious/noExplicitAny: required for PortableTextComponent typing
   right: (props: any) => TextAlignDecorator(props, 'right'),
+  strong: ({ children }) => <span className="inline font-bold">{children}</span>,
+  italic: ({ children }) => <span className="inline font-italic">{children}</span>,
   internalLink: ({ value, children }) => {
     const { slug = {} } = value as InternalLinkValue
     const href = `/${slug.current}`

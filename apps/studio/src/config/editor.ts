@@ -1,8 +1,9 @@
-import { annotations, decorators } from '@ez/studio/config/decorators'
+import { annotations, decorators, styles } from '@ez/studio/config/decorators'
 
 const config = [
   {
     type: 'block',
+    styles,
     marks: {
       decorators,
       annotations,

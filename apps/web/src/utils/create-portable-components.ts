@@ -5,9 +5,9 @@ import { portableTypes } from '@ez/shared/sanity/portable/type'
 import { CardsWrapper } from '@ez/web/components/portable/cards'
 import { EbooksWrapper } from '@ez/web/components/portable/ebooks'
 import { ImageWrapper } from '@ez/web/components/portable/image'
+import { ListWrapper } from '@ez/web/components/portable/list'
 import { TabsWrapper } from '@ez/web/components/portable/tabs'
 import { TestimonialsWrapper } from '@ez/web/components/portable/testimonials'
-import { ListWrapper } from '../components/portable/list'
 
 export const createPortableComponents = () => {
   const types = {
