@@ -6,10 +6,10 @@ export const HighlightDecorator = (props: any) => {
 // biome-ignore lint/suspicious/noExplicitAny: using any for decorator props
 export const TextAlignDecorator = (props: any, align: string) => {
   const alignMap = {
-    center: 'text-center',
-    right: 'text-right',
-    left: 'text-left',
-    justify: 'text-justify inline',
+    center: 'block text-center',
+    right: 'blocktext-right',
+    left: 'block text-left',
+    justify: 'block text-justify inline',
   } as const
 
   const classes = alignMap[align as keyof typeof alignMap]
