@@ -9,7 +9,7 @@ export const TextAlignDecorator = (props: any, align: string) => {
     center: 'block text-center',
     right: 'blocktext-right',
     left: 'block text-left',
-    justify: 'block text-justify inline',
+    justify: 'block text-justify',
   } as const
 
   const classes = alignMap[align as keyof typeof alignMap]
