@@ -9,6 +9,7 @@ import { PortableText } from '@portabletext/react'
 import Image from 'next/image'
 import { useLocale } from 'next-intl'
 import { Parallax } from 'react-parallax'
+import ReactPlayer from 'react-player'
 
 export function SectionContent({
   title,
@@ -69,15 +70,20 @@ export function SectionContent({
             <div className="relative flex h-full">
               <div className="flex w-full flex-col items-center justify-center gap-10 font-bold font-oswald text-white">
                 <div className="h-[300px] w-[90vw] max-w-full overflow-hidden rounded-2xl shadow md:w-screen lg:h-[650px]">
-                  {/* <ReactPlayer
-										url={media.video?.url}
-										width="100%"
-										height="100%"
-										controls={false}
-										config={{
-											playerVars: { playsinline: 1, fs: 0 },
-										}}
-									/> */}
+                  <ReactPlayer
+                    config={{
+                      youtube: {
+                        playerVars: {
+                          playsinline: 1,
+                          fs: 0,
+                        },
+                      },
+                    }}
+                    controls={false}
+                    height="100%"
+                    url={media.video?.url}
+                    width="100%"
+                  />
                 </div>
               </div>
             </div>
