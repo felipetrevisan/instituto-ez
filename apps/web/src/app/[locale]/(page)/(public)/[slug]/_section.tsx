@@ -69,7 +69,7 @@ export function SectionContent({
           ) : (
             <div className="relative flex h-full">
               <div className="flex w-full flex-col items-center justify-center gap-10 font-bold font-oswald text-white">
-                <div className="h-[300px] w-[90vw] max-w-full overflow-hidden rounded-2xl shadow md:w-screen lg:h-[650px]">
+                <div className="h-[300px] w-[90vw] max-w-full overflow-hidden rounded-2xl shadow md:h-[440px] md:w-[70vw] lg:m-[100px] lg:h-[480px] lg:w-[50vw]">
                   <ReactPlayer
                     config={{
                       youtube: {
