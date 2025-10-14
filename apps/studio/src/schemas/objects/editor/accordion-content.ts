@@ -23,7 +23,7 @@ export default defineType({
   ],
   preview: {
     select: {
-      title: `title.${i18n.base}`,
+      title: 'title',
     },
     prepare({ title }) {
       return {
