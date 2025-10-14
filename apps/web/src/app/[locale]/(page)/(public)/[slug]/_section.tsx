@@ -79,7 +79,7 @@ export function SectionContent({
                         },
                       },
                     }}
-                    controls={false}
+                    controls={true}
                     height="100%"
                     url={media.video?.url}
                     width="100%"
