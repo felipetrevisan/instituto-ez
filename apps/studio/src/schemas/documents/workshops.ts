@@ -18,6 +18,16 @@ export default defineType({
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),
     defineField({
+      name: 'slug',
+      title: 'Slug',
+      type: 'localizedSlug',
+      options: {
+        source: 'title',
+        maxLength: 96,
+      },
+      validation: (Rule) => Rule.required().warning('This field must not be empty.'),
+    }),
+    defineField({
       name: 'subtitle',
       title: 'Subtitle',
       type: 'localizedString',

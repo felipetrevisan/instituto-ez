@@ -1,4 +1,3 @@
-import AlertPreviewComponent from '@ez/studio/preview/alert'
 import { WarningFilledIcon } from '@sanity/icons'
 import { defineType } from 'sanity'
 
@@ -7,9 +6,6 @@ export default defineType({
   type: 'object',
   title: 'Alert',
   icon: WarningFilledIcon,
-  components: {
-    block: AlertPreviewComponent,
-  },
   fields: [
     {
       name: 'title',

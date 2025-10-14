@@ -4,6 +4,7 @@ export const workshopQuery = groq`
   *[ _type == 'workshop' ] | order(orderRank) { 
     "id": _id,
     title,
+    slug,
     subtitle,
     disabled,
     "background": image {

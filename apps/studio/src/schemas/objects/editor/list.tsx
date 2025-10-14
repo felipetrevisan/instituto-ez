@@ -1,4 +1,3 @@
-import ListPreviewComponent from '@ez/studio/preview/list'
 import { ListIcon } from '@sanity/icons'
 import { defineType } from 'sanity'
 
@@ -7,9 +6,6 @@ export default defineType({
   type: 'object',
   title: 'List',
   icon: ListIcon,
-  components: {
-    block: ListPreviewComponent,
-  },
   fields: [
     {
       name: 'items',

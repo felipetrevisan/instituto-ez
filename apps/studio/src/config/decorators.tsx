@@ -1,6 +1,5 @@
-import { HighlightDecorator, TextAlignDecorator } from '@ez/studio/portable/decorators'
+import { HighlightDecorator } from '@ez/studio/portable/decorators'
 import { BulbOutlineIcon, LinkIcon } from '@sanity/icons'
-import { AlignCenterIcon, AlignJustifyIcon, AlignLeftIcon, AlignRightIcon } from 'lucide-react'
 
 const basicDecorators = [
   { title: 'Bold', value: 'strong' },

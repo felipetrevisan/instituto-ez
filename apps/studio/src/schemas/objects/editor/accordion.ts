@@ -1,4 +1,3 @@
-import AccordionPreviewComponent from '@ez/studio/preview/accordion'
 import { MarkerIcon, MenuIcon } from '@sanity/icons'
 import { defineType } from 'sanity'
 
@@ -7,9 +6,6 @@ export default defineType({
   type: 'object',
   title: 'Accordion',
   icon: MenuIcon,
-  components: {
-    block: AccordionPreviewComponent,
-  },
   fields: [
     {
       name: 'theme',

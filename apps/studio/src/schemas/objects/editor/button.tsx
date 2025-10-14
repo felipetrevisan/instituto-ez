@@ -1,4 +1,3 @@
-import ButtonPreviewComponent from '@ez/studio/preview/button'
 import { PackageIcon } from '@sanity/icons'
 import { defineType } from 'sanity'
 
@@ -7,9 +6,6 @@ export default defineType({
   type: 'object',
   title: 'Button',
   icon: PackageIcon,
-  components: {
-    block: ButtonPreviewComponent,
-  },
   fields: [
     {
       name: 'variant',

@@ -6,6 +6,11 @@ export type Workshop = {
   title: {
     [key: string]: string
   }
+  slug: {
+    [key: string]: {
+      current: string
+    }
+  }
   subtitle?: {
     [key: string]: string
   }
