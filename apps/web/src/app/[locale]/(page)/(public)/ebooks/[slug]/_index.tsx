@@ -28,14 +28,6 @@ export function Index({ data }: { data: Ebook }) {
         >
           {index?.title?.[locale] || 'O que você vai encontrar nesse Ebook'}
         </Title>
-        {index?.description && (
-          <div className='mt-0 flex w-[90vw] flex-col gap-4 font-medium font-questrial text-[var(--secondary-c)] md:w-[802px]'>
-            <PortableText
-              components={createPortableComponents()}
-              value={index.description?.[locale]}
-            />
-          </div>
-        )}
         {index?.video?.url?.[locale] && (
           <>
             {index?.video.title?.[locale] && (
@@ -55,6 +47,14 @@ export function Index({ data }: { data: Ebook }) {
               />
             </div>
           </>
+        )}
+        {index?.description && (
+          <div className="mt-0 flex w-[90vw] flex-col gap-4 font-medium font-questrial text-[var(--secondary-c)] md:w-[802px]">
+            <PortableText
+              components={createPortableComponents()}
+              value={index.description?.[locale]}
+            />
+          </div>
         )}
         {!download?.disabled && (
           <Link

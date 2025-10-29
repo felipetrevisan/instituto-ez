@@ -84,8 +84,6 @@ const rippleVariants = cva('pointer-events-none absolute size-5 rounded-full', {
   },
 })
 
-type Ripple = { id: number; x: number; y: number }
-
 type ButtonProps = HTMLMotionProps<'button'> &
   VariantProps<typeof buttonVariants> & {
     children: React.ReactNode
@@ -100,7 +98,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       className,
-      onClick,
       rippleClassName,
       variant,
       theme,
@@ -120,25 +117,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ) => {
     const Comp = asChild ? Slot : 'button'
     const CompMotion = motion(Comp)
-    const [ripples, setRipples] = React.useState<Ripple[]>([])
 
     const localRef = React.useRef<HTMLButtonElement>(null)
     React.useImperativeHandle(ref, () => localRef.current as HTMLButtonElement)
-
-    const createRipple = React.useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
-      const rect = localRef.current?.getBoundingClientRect()
-      if (!rect) return
-      const x = event.clientX - rect.left
-      const y = event.clientY - rect.top
-      const id = Date.now()
-      setRipples((prev) => [...prev, { id, x, y }])
-      setTimeout(() => setRipples((prev) => prev.filter((r) => r.id !== id)), 600)
-    }, [])
-
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-      createRipple(event)
-      onClick?.(event)
-    }
 
     return (
       <CompMotion
@@ -148,7 +129,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         )}
         data-size={Size[size as keyof typeof Size] || Size.full}
         data-slot="button"
-        onClick={handleClick}
         ref={localRef}
         transition={{ type: 'spring', stiffness: 250, damping: 15 }}
         whileHover={{ scale: scaleEffect ? 1.05 : 1 }}
@@ -156,16 +136,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       >
         {children}
-        {ripples.map((r) => (
-          <motion.span
-            animate={{ scale, opacity: 0 }}
-            className={cn(rippleVariants({ theme }), rippleClassName)}
-            initial={{ scale: 0, opacity: 0.5 }}
-            key={r.id}
-            style={{ top: r.y - 10, left: r.x - 10 }}
-            transition={transition}
-          />
-        ))}
       </CompMotion>
     )
   },

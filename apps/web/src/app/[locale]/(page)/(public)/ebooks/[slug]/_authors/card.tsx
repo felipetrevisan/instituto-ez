@@ -65,7 +65,7 @@ export function AuthorCard({ author: { photo, name, content }, index }: Props) {
             </motion.div>
           )}
         </div>
-        <div className="flex-1 text-[var(--tertiary-c)] text-sm leading-snug">
+        <div className='flex-1 text-justify text-[var(--tertiary-c)] text-sm leading-snug'>
           <div
             className={cn('mt-[120px] md:mt-0', {
               'md:ml-[220px]': isEven,

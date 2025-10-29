@@ -6,7 +6,14 @@ declare const messages: {
     "name": "Instituto EZ"
   },
   "DialogContact": {
-    "title": "Como podemos te ajudar?"
+    "title": "Como podemos te ajudar?",
+    "emailNotConfigured": "Email de destino não está configurado.",
+    "sendEmailError": "Não foi possível enviar a mensagem",
+    "sendEmailSuccess": "Mensagem enviada com sucesso",
+    "isRequired": "é obrigatório",
+    "cancelButton": "Fechar",
+    "sendButton": "Enviar Mensagem",
+    "loadingButton": "Enviando mensagem..."
   },
   "Ebooks": {
     "backButton": "Voltar para o Catálogo",

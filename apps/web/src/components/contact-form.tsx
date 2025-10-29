@@ -2,7 +2,7 @@
 
 import { Loader2Icon } from '@ez/shared/icons'
 import { cn } from '@ez/shared/lib/utils'
-import { toast } from '@ez/shared/ui'
+import { Skeleton } from '@ez/shared/ui'
 import { Button } from '@ez/shared/ui/button'
 import { DialogFooter, DialogTrigger } from '@ez/shared/ui/dialog'
 import { Input } from '@ez/shared/ui/input'
@@ -12,8 +12,10 @@ import { useSite } from '@ez/web/hooks/use-site'
 import { type ContactFormSchema, contactFormSchema } from '@ez/web/types/contact'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { AnimatePresence, motion } from 'motion/react'
+import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import { sendEmail } from '../server/send-email'
 
 export function ContactForm({
@@ -29,7 +31,9 @@ export function ContactForm({
 
   const { data: settings } = useSite()
 
-  const { data: form } = useBaseForm(settings?.contact.form._ref || '')
+  const { data: form, isPending } = useBaseForm(settings?.contact.form._ref || '')
+
+  const t = useTranslations('DialogContact')
 
   const {
     register,
@@ -53,30 +57,34 @@ export function ContactForm({
 
   async function handleSendForm(formData: ContactFormSchema) {
     if (!settings?.contact?.email) {
-      toast.warning('Email de destino não está configurado.')
+      toast.warning(t('emailNotConfigured'))
       return false
     }
 
-    const { data: emailData, error } = await sendEmail(formData, settings.contact.email)
+    const { data: emailData, error } = await sendEmail(
+      formData,
+      settings.contact.email,
+      settings?.logo,
+    )
 
     if (error) {
-      toast.warning('Não foi possível enviar a mensagem')
+      toast.warning(t('sendEmailError'))
       return false
     }
 
     if (emailData?.id) {
-      toast.success('Mensagem enviada com sucesso')
+      toast.success(t('sendEmailSuccess'))
       reset()
       onCloseAction()
       return true
     }
 
-    toast.warning('Não foi possível enviar a mensagem')
+    toast.warning(t('sendEmailError'))
     return false
   }
 
   return (
-    <form className="w-full" onSubmit={handleSubmit(handleSendForm)}>
+    <form className="w-full">
       <div className="grid gap-4 py-4">
         <div className="grid grid-cols-1 items-baseline gap-8 md:grid-cols-2">
           {form?.fields.map(({ name, label, type, isRequired }) => {
@@ -87,7 +95,7 @@ export function ContactForm({
             return (
               <motion.div
                 animate={hasError ? { x: [0, -5, 5, -5, 0] } : { x: 0 }}
-                className={cn('relative col-span-2')}
+                className="relative col-span-2"
                 key={name}
                 transition={{ duration: 0.4 }}
               >
@@ -119,7 +127,7 @@ export function ContactForm({
                   <Textarea
                     {...register(
                       name as keyof ContactFormSchema,
-                      isRequired ? { required: `${label} é obrigatório` } : {},
+                      isRequired ? { required: `${label} ${t('isRequired')}` } : {},
                     )}
                     animate={{
                       borderRadius: isFocused ? '1rem' : '1.25rem',
@@ -139,7 +147,7 @@ export function ContactForm({
                     type={type}
                     {...register(
                       name as keyof ContactFormSchema,
-                      isRequired ? { required: `${label} é obrigatório` } : {},
+                      isRequired ? { required: `${label} ${t('isRequired')}` } : {},
                     )}
                     animate={{
                       borderRadius: isFocused ? '1rem' : '1.25rem',
@@ -169,11 +177,10 @@ export function ContactForm({
           })}
         </div>
       </div>
-      {isDialog && (
+      {isDialog && !isPending && (
         <DialogFooter className="justify-center gap-5">
           <DialogTrigger asChild>
             <Button
-              className="w-40"
               onClick={onCloseAction}
               rounded="2xl"
               size="xl"
@@ -181,23 +188,29 @@ export function ContactForm({
               type="button"
               variant="outline"
             >
-              Cancelar
+              {t('cancelButton')}
             </Button>
           </DialogTrigger>
           <Button
-            className="w-40"
             disabled={isSubmitting || !isValid}
+            onClick={handleSubmit(handleSendForm)}
             rounded="2xl"
             size="xl"
             theme="default"
             type="submit"
             variant="default"
           >
-            {isSubmitting ? <Loader2Icon className="mr-2 h-4 w-4 animate-spin" /> : 'Enviar'}
+            {isSubmitting ? (
+              <>
+                <Loader2Icon className="mr-2 h-4 w-4 animate-spin" /> {t('loadingButton')}
+              </>
+            ) : (
+              t('sendButton')
+            )}
           </Button>
         </DialogFooter>
       )}
-      {!isDialog && (
+      {!isDialog && !isPending && (
         <div className="flex flex-row md:justify-end">
           <Button
             className="w-full md:w-[200px]"
@@ -209,9 +222,11 @@ export function ContactForm({
             variant="default"
           >
             {isSubmitting ? (
-              <Loader2Icon className="mr-2 h-4 w-4 animate-spin" />
+              <>
+                <Loader2Icon className="mr-2 h-4 w-4 animate-spin" /> {t('loadingButton')}
+              </>
             ) : (
-              form?.submitButtonText
+              t('sendButton')
             )}
           </Button>
         </div>
