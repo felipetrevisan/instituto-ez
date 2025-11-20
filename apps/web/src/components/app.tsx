@@ -343,7 +343,7 @@ function ThemeToggle() {
   return (
     <IconButton
       aria-label="Toggle theme"
-      className="flex items-center justify-center bg-transparent p-2 text-foreground"
+      className="flex items-center justify-center bg-transparent p-2 text-foreground hover:text-foreground"
       icon={icon}
       onClick={() => setTheme(nextTheme)}
     />
