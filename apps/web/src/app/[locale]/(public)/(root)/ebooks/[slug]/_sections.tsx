@@ -1,7 +1,7 @@
 'use client'
 
 import type { Ebook } from '@ez/web/types/ebook'
-import type { SectionKeys } from '@ez/web/types/sections'
+import type { SectionKey } from '@ez/web/types/sections'
 import { Authors } from './_authors'
 import Footer from './_footer'
 import { Header } from './_header'
@@ -11,7 +11,7 @@ import { Overview } from './_overview'
 import { Questions } from './_questions'
 import { Testimonial } from './_testimonial'
 
-export function getLandingPageSections(data: Ebook): SectionKeys[] {
+export function getLandingPageSections(data: Ebook): SectionKey[] {
   return [
     {
       key: 'header',
