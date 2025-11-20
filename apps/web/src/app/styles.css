@@ -2,6 +2,20 @@
 @import "@ez/shared/style.css";
 @source "../**/*.{ts,tsx}";
 
+html {
+  scroll-behavior: smooth;
+}
+
+.force-light {
+  color-scheme: light;
+}
+
+.force-light.dark & {
+  /* Cancela o dark */
+  --tw-bg-opacity: 1 !important;
+  --tw-text-opacity: 1 !important;
+}
+
 @utility container {
   margin-inline: auto;
   padding-inline: 2rem;

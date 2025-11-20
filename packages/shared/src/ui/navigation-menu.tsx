@@ -1,6 +1,6 @@
 import { cn } from '@ez/shared/lib/utils'
 import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu'
-import { cva } from 'class-variance-authority'
+import { cva, type VariantProps } from 'class-variance-authority'
 import { ChevronDownIcon, icons } from 'lucide-react'
 
 type NavigationMenuProps = React.ComponentProps<typeof NavigationMenuPrimitive.Root> & {
@@ -54,17 +54,31 @@ function NavigationMenuItem({
 }
 
 const navigationMenuTriggerStyle = cva(
-  'group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 font-medium text-3xl outline-none transition-[color,box-shadow] hover:bg-primary hover:text-primary focus:bg-primary focus:text-primary focus-visible:outline-1 focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 data-[state=open]:bg-primary/50 data-[state=open]:text-primary data-[state=open]:focus:bg-primary data-[state=open]:hover:bg-primary lg:text-sm!',
+  'group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 font-medium text-3xl outline-none transition-[color,box-shadow] focus:bg-primary focus:text-primary focus-visible:outline-1 focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 lg:text-sm!',
+  {
+    variants: {
+      theme: {
+        default:
+          'hover:bg-primary hover:text-primary data-[state=open]:bg-primary/50 data-[state=open]:text-primary data-[state=open]:focus:bg-primary data-[state=open]:hover:bg-primary',
+        landing: 'data-[state=open]:text-accent',
+      },
+    },
+    defaultVariants: {
+      theme: 'default',
+    },
+  },
 )
 
 function NavigationMenuTrigger({
   className,
   children,
+  theme,
   ...props
-}: React.ComponentProps<typeof NavigationMenuPrimitive.Trigger>) {
+}: React.ComponentProps<typeof NavigationMenuPrimitive.Trigger> &
+  VariantProps<typeof navigationMenuTriggerStyle>) {
   return (
     <NavigationMenuPrimitive.Trigger
-      className={cn(navigationMenuTriggerStyle(), 'group', className)}
+      className={cn(navigationMenuTriggerStyle({ theme }), 'group', className)}
       data-slot="navigation-menu-trigger"
       {...props}
     >
@@ -112,16 +126,32 @@ function NavigationMenuViewport({
   )
 }
 
+const navigationMenuLinkVariant = cva(
+  "flex flex-col rounded-xl bg-transparent p-4 outline-none transition-all focus:bg-transparent focus-visible:outline-1 focus-visible:ring-[3px] focus-visible:ring-ring/50 lg:gap-1 lg:text-sm! [&_svg:not([class*='size-'])]:size-4",
+  {
+    variants: {
+      theme: {
+        default:
+          'text-primary text-xl hover:text-primary focus:text-primary data-[active=true]:border-b-primary data-[active=true]:p-4 data-[active=true]:text-primary',
+        landing:
+          'text-accent text-xl hover:text-accent focus:text-accent data-[active=true]:border-b-accent data-[active=true]:p-4 data-[active=true]:text-accent',
+      },
+    },
+    defaultVariants: {
+      theme: 'default',
+    },
+  },
+)
+
 function NavigationMenuLink({
   className,
+  theme,
   ...props
-}: React.ComponentProps<typeof NavigationMenuPrimitive.Link>) {
+}: React.ComponentProps<typeof NavigationMenuPrimitive.Link> &
+  VariantProps<typeof navigationMenuLinkVariant>) {
   return (
     <NavigationMenuPrimitive.Link
-      className={cn(
-        "flex flex-col rounded-xl bg-transparent p-4 text-primary text-xl outline-none transition-all hover:text-primary focus:bg-transparent focus:text-primary focus-visible:outline-1 focus-visible:ring-[3px] focus-visible:ring-ring/50 data-[active=true]:border-b-primary data-[active=true]:p-4 data-[active=true]:text-primary lg:gap-1 lg:text-sm! [&_svg:not([class*='size-'])]:size-4",
-        className,
-      )}
+      className={cn(navigationMenuLinkVariant({ theme }), className)}
       data-slot="navigation-menu-link"
       {...props}
     />

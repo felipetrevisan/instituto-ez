@@ -14,31 +14,40 @@ enum Size {
 }
 
 const buttonVariants = cva(
-  'relative z-1 inline-flex cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-md font-medium outline-none transition-all disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0',
+  // Base
+  'relative z-1 inline-flex cursor-pointer items-center justify-center gap-2 font-semibold',
   {
     variants: {
-      variant: {
-        default: 'shadow-sm outline-none',
-        outline: 'shadow-sm outline outline-2',
-        ghost: 'border-none shadow-none outline-none',
-        link: 'border-none bg-none shadow-none',
+      base: {
+        default: '',
+        mathematizer: 'glow-accent hover-lift whitespace-nowrap',
+        'for-business': 'whitespace-nowrap',
       },
+
+      variant: {
+        default: '',
+        outline: 'border bg-transparent outline',
+        ghost: 'border-none bg-transparent shadow-none',
+        link: 'border-none bg-transparent underline-offset-4 shadow-none hover:underline',
+      },
+
       theme: {
-        default:
-          'bg-linear-to-r from-primary via-primary/80 to-primary text-primary-foreground hover:bg-primary/90',
-        secondary:
-          'bg-linear-to-r from-secondary via-secondary/80 to-secondary text-secondary-foreground hover:bg-secondary/90',
-        tertiary:
-          'bg-linear-to-r from-tertiary via-tertiary/80 to-tertiary text-tertiary-foreground hover:bg-tertiary/90',
+        default: 'bg-primary text-primary-foreground',
+        secondary: 'bg-secondary text-secondary-foreground',
+        tertiary: 'bg-tertiary text-tertiary-foreground',
+        accent: 'bg-accent text-accent-foreground',
+        background: 'bg-foreground text-background',
         custom: '',
       },
+
       size: {
-        sm: 'h-8 px-3 text-xs sm:text-sm',
-        default: 'h-9 px-4 text-sm sm:text-base',
-        lg: 'h-11 px-6 text-base sm:text-lg',
-        xl: 'h-14 px-8 text-lg sm:text-xl md:text-base',
+        sm: 'h-9 px-3 text-xs sm:text-sm',
+        default: 'h-11 px-4 text-sm sm:text-base',
+        lg: 'h-12 px-6 text-base sm:text-lg',
+        xl: 'h-14 px-8 text-lg sm:text-xl',
         '2xl': 'h-16 px-10 text-lg sm:text-2xl',
       },
+
       rounded: {
         none: 'rounded-none',
         full: 'rounded-full',
@@ -46,43 +55,73 @@ const buttonVariants = cva(
         xl: 'rounded-2xl',
         '2xl': 'rounded-3xl',
       },
+
       shadow: {
-        true: 'shadow-[0_4px_15px_0]',
-        false: 'shadow-none',
+        true: 'shadow-[0_4px_15px_0] shadow-primary/20',
+        false: '',
       },
+
       effect: {
+        none: '',
         pulse: 'transition-all duration-75 hover:bg-position-[100%_0]',
-        none: 'transition-none',
+        gradient: 'bg-transparent',
       },
+
       fullWidth: {
         true: 'w-full',
       },
     },
+
     defaultVariants: {
+      base: 'default',
       variant: 'default',
       theme: 'default',
       size: 'default',
-      rounded: 'none',
       effect: 'none',
+      rounded: 'none',
       shadow: false,
       fullWidth: false,
     },
+
+    compoundVariants: [
+      // GRADIENT AUTOMÁTICO por tema
+      {
+        effect: 'gradient',
+        theme: 'default',
+        className: 'bg-gradient-to-r from-primary to-primary/70',
+      },
+      {
+        effect: 'gradient',
+        theme: 'secondary',
+        className: 'bg-gradient-to-r from-secondary to-secondary/70',
+      },
+      {
+        effect: 'gradient',
+        theme: 'tertiary',
+        className: 'bg-gradient-to-r from-tertiary to-tertiary/70',
+      },
+      {
+        effect: 'gradient',
+        theme: 'accent',
+        className: 'bg-gradient-to-r from-accent to-accent/70',
+      },
+
+      // OUTLINE + theme
+      {
+        variant: 'outline',
+        theme: 'background',
+        className: 'text-foreground outline-foreground hover:bg-background/90',
+      },
+
+      // Marca específica
+      {
+        base: 'mathematizer',
+        theme: 'accent',
+        className: 'hover-lift',
+      },
+    ],
   },
 )
-
-const rippleVariants = cva('pointer-events-none absolute size-5 rounded-full', {
-  variants: {
-    theme: {
-      default: 'bg-secondary',
-      secondary: 'bg-tertiary',
-      tertiary: 'bg-primary',
-      custom: '',
-    },
-  },
-  defaultVariants: {
-    theme: 'default',
-  },
-})
 
 type ButtonProps = HTMLMotionProps<'button'> &
   VariantProps<typeof buttonVariants> & {

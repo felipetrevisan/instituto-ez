@@ -1,13 +1,19 @@
 import { cn } from '@ez/shared/lib/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
 
-const cardVariants = cva('relative', {
+const cardVariants = cva('relative transition-all duration-300', {
   variants: {
+    base: {
+      default: '',
+      mathematizer: '',
+      'for-business': 'bg-card outline-none',
+    },
     variant: {
       default: 'shadow-[0_0_15px_3px] outline outline-2',
       outline: 'shadow-[0_0_15px_3px] outline outline-2',
       ghost: 'border-none shadow-none outline-none',
       custom: 'shadow-[0_0_15px_3px] outline outline-2',
+      landing: 'border border-border shadow-sm',
     },
     theme: {
       default:
@@ -16,6 +22,7 @@ const cardVariants = cva('relative', {
         'bg-linear-to-r from-secondary via-secondary/80 to-secondary text-secondary-foreground shadow-secondary/20 outline-secondary/40 hover:border-secondary/40 hover:bg-secondary/30 hover:text-secondary-foreground',
       tertiary:
         'bg-linear-to-r from-tertiary via-tertiary/80 to-tertiary text-tertiary-foreground shadow-tertiary/20 outline-tertiary/40 hover:border-tertiary/40 hover:bg-tertiary/30 hover:text-tertiary-foreground',
+      accent: '',
       custom:
         'bg-linear-to-r from-[var(--secondary-c)] via-[var(--secondary-c)]/80 to-[var(--secondary-c)] text-[var(--secondary-c)] shadow-[var(--secondary-c)]/20 outline-[var(--secondary-c)]/40 hover:border-[var(--secondary-c)]/40 hover:bg-[var(--secondary-c)]/30 hover:text-[var(--secondary-c)]',
     },
@@ -28,6 +35,7 @@ const cardVariants = cva('relative', {
     },
   },
   defaultVariants: {
+    base: 'default',
     variant: 'default',
     theme: 'default',
     rounded: 'xl',
