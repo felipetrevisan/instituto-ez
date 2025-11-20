@@ -37,5 +37,9 @@ export function SharedProvider({ children }: { children: ReactNode }) {
 }
 
 export function useShared(): SharedContextProps {
-  return useContext(SharedContext)
+  const context = useContext(SharedContext)
+  if (!context) {
+    throw new Error('useShared must be used within a SharedProvider')
+  }
+  return context
 }
