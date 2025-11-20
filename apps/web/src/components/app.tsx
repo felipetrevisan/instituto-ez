@@ -15,37 +15,63 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@ez/shared/ui/select'
+import { HeaderNavigation } from '@ez/web/components/navigation/header'
 import * as Navbar from '@ez/web/components/ui/navbar'
 import { menuListVariants, sidebarVariants } from '@ez/web/config/animation'
 import { env } from '@ez/web/config/env'
 import { urlForImage } from '@ez/web/config/image'
+import { getAvailableLandingPages } from '@ez/web/config/landing-page'
 import { useApp } from '@ez/web/hooks/use-app'
 import { useDimensions } from '@ez/web/hooks/use-dimension'
 import { useSite } from '@ez/web/hooks/use-site'
-import type { Site } from '@ez/web/types/site'
-import { motion, useAnimation, useMotionValueEvent, useScroll, useTransform } from 'motion/react'
+import type { Navigation, Site } from '@ez/web/types/site'
+import { Monitor, Moon, Sun } from 'lucide-react'
+import {
+  type HTMLMotionProps,
+  motion,
+  useAnimation,
+  useMotionValueEvent,
+  useScroll,
+  useTransform,
+} from 'motion/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { useLocale, useTranslations } from 'next-intl'
-import { useEffect, useRef, useState } from 'react'
+import { useTheme } from 'next-themes'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import { ContactFormDialog } from './contact-form-dialog'
 import { Logo } from './logo'
-import { DesktopNavigation } from './navigation/desktop-navigation'
-import { MobileNavigation } from './navigation/mobile-navigation'
-
-const MotionMobileNavigation = motion(MobileNavigation)
+import { MainDesktopNavigation } from './navigation/desktop-navigation'
+import { MainMobileNavigation } from './navigation/mobile-navigation'
 
 type HeaderProps = {
   data: Site
+  theme: 'default' | 'landing'
+  pageKey?: string
+  DesktopNavComponent?: React.ComponentType<{ navigation?: Navigation }>
+  MobileNavComponent?: React.ComponentType<{ navigation?: Navigation }>
+  HeaderComponent?: React.ComponentType<
+    HTMLMotionProps<'header'> & { theme: 'default' | 'landing'; currentScrollY?: number }
+  >
+  customNavigation?: Navigation
 } & React.ComponentProps<'div'>
 
-function Header({ className, data }: HeaderProps) {
+function Header({
+  className,
+  data,
+  theme,
+  pageKey,
+  customNavigation,
+  DesktopNavComponent = MainDesktopNavigation,
+  MobileNavComponent = MainMobileNavigation,
+  HeaderComponent = HeaderNavigation,
+}: HeaderProps) {
   const locale = useLocale()
+  const { isNormalPage, isLandingPage, isMenuOpen } = useApp()
   const [currentScrollY, setCurrentScrollY] = useState(0)
   const containerRef = useRef<HTMLDivElement | null>(null)
   const { height } = useDimensions(containerRef)
-  const { isMenuOpen, isNormalPage } = useApp()
   const { scrollY } = useScroll()
   const isMobile = useMediaQuery()
 
@@ -93,115 +119,114 @@ function Header({ className, data }: HeaderProps) {
     }
   }, [isMenuOpen])
 
-  return (
-    <motion.header
-      className={cn(
-        'h-20 w-full bg-transparent backdrop-blur-md transition-colors duration-500',
-        {
-          'bg-white/90 shadow-md backdrop-blur-3xl': currentScrollY > 80,
-          'backdrop-blur-none': currentScrollY < 80,
-          'fixed top-0 z-90': isNormalPage(),
-        },
-        className,
-      )}
-      {...(isMenuOpen && { 'data-menu-open': true })}
-    >
-      <Navbar.Root
-        sticky={isNormalPage()}
-        style={{
-          paddingTop: paddingHeaderY,
-          paddingBottom: paddingHeaderY,
-        }}
-      >
-        <Navbar.Brand>
-          <Logo
-            src={data?.logo && urlForImage(data.logo?.asset).format('webp').quality(80).url()}
-          />
-        </Navbar.Brand>
-        <motion.div animate={isMenuOpen ? 'open' : 'closed'} custom={height} ref={containerRef}>
-          {isMobile && (
-            <>
-              <Navbar.Toggle />
-              <motion.div
-                animate={isMenuOpen ? 'open' : 'closed'}
-                className="fixed top-0 right-0 z-90 h-screen w-[300px] bg-slate-200/90 backdrop-blur-3xl lg:hidden"
-                initial="closed"
-                variants={sidebarVariants}
-              >
-                <MotionMobileNavigation
-                  animate={isMenuOpen ? 'open' : 'closed'}
-                  navigation={data?.primaryNavigation}
-                  variants={menuListVariants}
-                />
-              </motion.div>
-            </>
-          )}
+  const [currentLandingPage] = getAvailableLandingPages().filter((page) => page.key === pageKey)
 
-          {!isMobile && <DesktopNavigation navigation={data?.primaryNavigation} />}
-        </motion.div>
-        <Select defaultValue={locale} onValueChange={handleChange}>
-          <SelectTrigger className="max-w-max p-3">
-            <SelectValue placeholder={t('placeholder')} />
-          </SelectTrigger>
-          <SelectContent className="relative z-150" side={isMobile ? 'left' : 'bottom'}>
-            <SelectGroup>
-              <SelectItem value="pt">
-                <div className="flex items-center gap-2">
-                  <Image
-                    alt=""
-                    className="size-8"
-                    height={32}
-                    src="/assets/images/flags/brazil.png"
-                    width={32}
-                  />
-                  <span className="font-bold text-oswald text-primary text-sm">PT</span>
-                </div>
-              </SelectItem>
-              <SelectItem value="en">
-                <div className="flex items-center gap-2">
-                  <Image
-                    alt=""
-                    className="size-8"
-                    height={32}
-                    priority
-                    src="/assets/images/flags/usa.png"
-                    width={32}
-                  />
-                  <span className="font-bold text-oswald text-primary text-sm">EN</span>
-                </div>
-              </SelectItem>
-              <SelectItem value="es">
-                <div className="flex items-center gap-2">
-                  <Image
-                    alt=""
-                    className="size-8"
-                    height={32}
-                    priority
-                    src="/assets/images/flags/euro.png"
-                    width={32}
-                  />
-                  <span className="font-bold text-oswald text-primary text-sm">ES</span>
-                </div>
-              </SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      </Navbar.Root>
-    </motion.header>
+  const DesktopNavigation = currentLandingPage?.navigation?.desktop ?? DesktopNavComponent
+  const MobileNavigation = currentLandingPage?.navigation?.mobile ?? MobileNavComponent
+  const MotionMobileNavigation = motion(MobileNavigation)
+
+  return (
+    <Fragment>
+      <HeaderComponent className={className} currentScrollY={currentScrollY} theme={theme}>
+        <Navbar.Root
+          sticky={isNormalPage()}
+          style={{
+            paddingTop: paddingHeaderY,
+            paddingBottom: paddingHeaderY,
+          }}
+          theme={theme}
+        >
+          <Navbar.Brand theme={theme}>
+            <Logo
+              src={data?.logo && urlForImage(data.logo?.asset).format('webp').quality(80).url()}
+            />
+          </Navbar.Brand>
+          {!isMobile && (
+            <DesktopNavigation navigation={customNavigation ?? data?.primaryNavigation} />
+          )}
+          <div className="flex flex-row items-center justify-center gap-2">
+            {(isNormalPage() || isLandingPage()) && <ThemeToggle />}
+            <Navbar.Toggle />
+            <Select defaultValue={locale} onValueChange={handleChange}>
+              <SelectTrigger className="max-w-max cursor-pointer p-3">
+                <SelectValue placeholder={t('placeholder')} />
+              </SelectTrigger>
+              <SelectContent className="relative z-150" side={isMobile ? 'left' : 'bottom'}>
+                <SelectGroup>
+                  <SelectItem className="group" value="pt">
+                    <div className="flex items-center gap-2">
+                      <Image
+                        alt=""
+                        className="size-8"
+                        height={32}
+                        src="/assets/images/flags/brazil.png"
+                        width={32}
+                      />
+                      <span className="group-hover:text-primary">PT</span>
+                    </div>
+                  </SelectItem>
+                  <SelectItem className="group" value="en">
+                    <div className="flex items-center gap-2">
+                      <Image
+                        alt=""
+                        className="size-8"
+                        height={32}
+                        priority
+                        src="/assets/images/flags/usa.png"
+                        width={32}
+                      />
+                      <span className="group-hover:text-primary">EN</span>
+                    </div>
+                  </SelectItem>
+                  <SelectItem className="group" value="es">
+                    <div className="flex items-center gap-2">
+                      <Image
+                        alt=""
+                        className="size-8"
+                        height={32}
+                        priority
+                        src="/assets/images/flags/euro.png"
+                        width={32}
+                      />
+                      <span className="group-hover:text-primary">ES</span>
+                    </div>
+                  </SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
+        </Navbar.Root>
+      </HeaderComponent>
+      <motion.div
+        animate={isMenuOpen ? 'open' : 'closed'}
+        className="flex gap-10"
+        custom={height}
+        ref={containerRef}
+        variants={sidebarVariants}
+      >
+        {isMobile && (
+          <MotionMobileNavigation
+            animate={isMenuOpen ? 'open' : 'closed'}
+            navigation={customNavigation ?? data?.primaryNavigation}
+            variants={menuListVariants}
+          />
+        )}
+      </motion.div>
+    </Fragment>
   )
 }
 
 function Content({ className, children }: React.ComponentProps<'div'>) {
-  const { isMenuOpen, isNormalPage } = useApp()
+  const { isNormalPage } = useApp()
   const { isContactDialogOpen } = useShared()
+  const { data } = useSite()
+  const t = useTranslations('DialogContact')
 
   return (
     <motion.main
       className={cn(
         'container relative flex h-full max-w-8xl flex-col items-center justify-center',
         {
-          'before:absolute before:z-50 before:h-full before:w-full before:bg-white/50 before:backdrop-blur-xl':
-            isMenuOpen,
           'mt-24': isNormalPage(),
           'mt-4': !isNormalPage(),
         },
@@ -209,7 +234,15 @@ function Content({ className, children }: React.ComponentProps<'div'>) {
       )}
     >
       {children}
-      <Dialog open={isContactDialogOpen}>{isContactDialogOpen && <ContactFormDialog />}</Dialog>
+      {data && (
+        <Dialog open={isContactDialogOpen}>
+          <ContactFormDialog
+            formRef={data.contact.form._ref}
+            sendButtonLabel={t('sendButton')}
+            title={t('title')}
+          />
+        </Dialog>
+      )}
     </motion.main>
   )
 }
@@ -295,4 +328,26 @@ function ButtonLink({
   )
 }
 
-export { Header, Content, Footer, PageHeader, ButtonLink }
+function ThemeToggle() {
+  const { theme, setTheme, systemTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => setMounted(true), [])
+
+  if (!mounted) return null
+
+  const current = theme === 'system' ? systemTheme : theme
+  const nextTheme = theme === 'light' ? 'dark' : theme === 'dark' ? 'system' : 'light'
+  const icon = theme === 'system' ? Monitor : current === 'light' ? Sun : Moon
+
+  return (
+    <IconButton
+      aria-label="Toggle theme"
+      className="flex items-center justify-center bg-transparent p-2 text-foreground"
+      icon={icon}
+      onClick={() => setTheme(nextTheme)}
+    />
+  )
+}
+
+export { Header, Content, Footer, PageHeader, ButtonLink, ThemeToggle }

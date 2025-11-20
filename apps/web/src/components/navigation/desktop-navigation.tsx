@@ -10,8 +10,9 @@ import {
   NavigationMenuList,
 } from '@ez/shared/ui/navigation-menu'
 import { useApp } from '@ez/web/hooks/use-app'
-import type { Navigation } from '@ez/web/types/site'
+import type { Navigation, NavigationItemURL } from '@ez/web/types/site'
 import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
+import { scrollToId } from '@ez/web/utils/scroll-to-id'
 import { motion } from 'motion/react'
 import Link from 'next/link'
 import { useLocale } from 'next-intl'
@@ -22,9 +23,17 @@ type NavigationProps = {
 
 const MenuItemMotion = motion(NavigationMenuItem)
 
-export const DesktopNavigation = ({ navigation }: NavigationProps) => {
+export const MainDesktopNavigation = ({ navigation }: NavigationProps) => {
   const locale = useLocale()
   const { isMenuActive } = useApp()
+
+  const navigateToHash = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+    url: NavigationItemURL,
+  ) => {
+    e.preventDefault()
+    scrollToId(url.link.toString().replace('#', ''))
+  }
 
   return (
     <NavigationMenu className="hidden lg:flex">
@@ -45,12 +54,12 @@ export const DesktopNavigation = ({ navigation }: NavigationProps) => {
                   data-slot="navigation-menu-link"
                   href={getLocalizedLink(
                     locale,
-                    url.isHome || !url.link?.[locale]?.current
-                      ? '/'
-                      : (url.link?.[locale]?.current ?? url.externalUrl),
+                    url.link?.[locale]?.current ?? url.link,
                     url.type === 'EXTERNAL',
+                    url.type === 'HASH',
                   )}
-                  target={!url.link?.[locale]?.current && url.externalUrl ? '_blank' : undefined}
+                  onClick={url.type === 'HASH' ? (e) => navigateToHash(e, url) : undefined}
+                  target={url.isExternal ? '_blank' : undefined}
                 >
                   {label?.[locale]}
                 </Link>
