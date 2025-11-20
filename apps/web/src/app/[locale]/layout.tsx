@@ -9,7 +9,7 @@ import { hasLocale, type Locale, NextIntlClientProvider } from 'next-intl'
 import { setRequestLocale } from 'next-intl/server'
 import type { ReactNode } from 'react'
 import Providers from './providers'
-import '../../styles.css'
+import '../styles.css'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -60,7 +60,7 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }))
 }
 
-export default async function RootLayoutt({ children, params }: Props) {
+export default async function RootLayout({ children, params }: Props) {
   const { locale } = await params
 
   if (!hasLocale(routing.locales, locale)) {

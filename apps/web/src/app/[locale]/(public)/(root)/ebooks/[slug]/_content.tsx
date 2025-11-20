@@ -7,7 +7,7 @@ import { IconButton } from '@ez/shared/ui/animated/button/icon-button'
 import { useApp } from '@ez/web/hooks/use-app'
 import type { Ebook } from '@ez/web/types/ebook'
 import type { LandingPageSetting } from '@ez/web/types/landing-page-setting'
-import type { Section, SectionKeys } from '@ez/web/types/sections'
+import type { Section, SectionKey } from '@ez/web/types/sections'
 import { ChevronUpIcon } from 'lucide-react'
 import { useMotionValueEvent, useScroll } from 'motion/react'
 import { useLocale } from 'next-intl'
@@ -19,7 +19,7 @@ type CSSVariables = {
 }
 
 export function Content({ data, settings }: { data: Ebook; settings: LandingPageSetting }) {
-  const { setPageType, isLandingPage } = useApp()
+  const { setPageType, isEbookPage } = useApp()
   const { setIsContactDialogOpen, setContactSubject } = useShared()
   const locale = useLocale()
 
@@ -38,9 +38,18 @@ export function Content({ data, settings }: { data: Ebook; settings: LandingPage
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: intentional non-exhaustive deps
   useEffect(() => {
-    if (isLandingPage()) return
+    if (isEbookPage()) return
 
-    setPageType(PageType.landing)
+    setPageType(PageType.ebook)
+  }, [])
+
+  useEffect(() => {
+    document.documentElement.classList.add('force-light')
+    document.documentElement.classList.remove('dark')
+    return () => {
+      document.documentElement.classList.remove('force-light')
+      document.documentElement.classList.add('dark')
+    }
   }, [])
 
   const avaliableSections = getLandingPageSections(data).reduce(
@@ -48,7 +57,7 @@ export function Content({ data, settings }: { data: Ebook; settings: LandingPage
       acc[section.key] = section
       return acc
     },
-    {} as Record<string, SectionKeys>,
+    {} as Record<string, SectionKey>,
   )
 
   const style: React.CSSProperties & CSSVariables = {

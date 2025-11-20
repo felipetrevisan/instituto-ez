@@ -27,12 +27,12 @@ export default function Providers({ children }: { children: ReactNode }) {
   )
 
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" disableTransitionOnChange enableSystem>
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <ProgressProvider height="6px" options={{ showSpinner: true }} shallowRouting>
         <QueryClientProvider client={queryClient}>
           <SharedProvider>
             <AppProvider>
-              <Bar />
+              <Bar color="var(--primary)" />
               <Wrapper>{children}</Wrapper>
             </AppProvider>
           </SharedProvider>

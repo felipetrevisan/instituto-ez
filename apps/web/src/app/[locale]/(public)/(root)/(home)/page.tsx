@@ -2,7 +2,7 @@ import { Subtitle, Title } from '@ez/shared/ui/title'
 import * as App from '@ez/web/components/app'
 import { getSections } from '@ez/web/config/sections'
 import { getSiteConfig } from '@ez/web/server/get-site-config'
-import type { Section, SectionKeys } from '@ez/web/types/sections'
+import type { Section, SectionKey } from '@ez/web/types/sections'
 import type { Locale } from 'next-intl'
 
 export default async function Page({ params }: { params: Promise<{ locale: Locale }> }) {
@@ -14,7 +14,7 @@ export default async function Page({ params }: { params: Promise<{ locale: Local
       acc[section.key] = section
       return acc
     },
-    {} as Record<string, SectionKeys>,
+    {} as Record<string, SectionKey>,
   )
 
   return (
