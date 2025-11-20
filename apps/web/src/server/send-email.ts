@@ -14,7 +14,7 @@ export async function sendEmail(formData: ContactFormSchema, email: string, logo
     to: [email],
     replyTo: formData.email,
     subject: formData.subject,
-    react: EmailTemplate({...formData, logo }),
+    react: EmailTemplate({ ...formData, logo }),
   })
 
   return { data, error }

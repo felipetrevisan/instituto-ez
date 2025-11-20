@@ -11,10 +11,9 @@ export const contactFormSchema = z.object({
       required_error: 'O e-mail é obrigatório',
     })
     .email({ message: 'Digite um e-mail válido' }),
-  phone: z
-    .string({
-      required_error: 'O telefone é obrigatório',
-    }),
+  phone: z.string({
+    required_error: 'O telefone é obrigatório',
+  }),
   subject: z
     .string({
       required_error: 'O assunto é obrigatório',
