@@ -88,22 +88,23 @@ export const headerLogoVariants: Variants = {
   },
 }
 
-export const sidebarVariants = {
-  open: (height = 1000) => ({
-    clipPath: `circle(${height * 2 + 200}px at 85% 45px)`,
+export const sidebarVariants: Variants = {
+  open: {
+    opacity: 1,
+    y: 0,
     transition: {
-      type: 'spring' as const,
-      stiffness: 20,
-      restDelta: 2,
+      type: 'spring',
+      stiffness: 260,
+      damping: 25,
     },
-  }),
+  },
   closed: {
-    clipPath: 'circle(25px at 85% 45px)',
+    opacity: 0,
+    y: -20,
     transition: {
-      delay: 0.5,
-      type: 'spring' as const,
-      stiffness: 400,
-      damping: 40,
+      type: 'spring',
+      stiffness: 300,
+      damping: 30,
     },
   },
 }
