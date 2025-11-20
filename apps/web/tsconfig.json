@@ -10,6 +10,7 @@
     "baseUrl": "./src",
     "paths": {
       "@ez/web/*": ["*"],
+      "@ez/assets/*": ["../public/assets/*"],
       "@ez/shared/*": ["../../../packages/shared/src/*"]
     }
   },
