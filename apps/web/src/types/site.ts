@@ -67,7 +67,7 @@ export type NavigationItemURL = {
     }
   }
   isHome: boolean
-  externalUrl?: string
+  isExternal?: boolean
 }
 
 export type Hero = {

@@ -69,7 +69,14 @@ const structure = (S: StructureBuilder, context: ConfigContext) =>
 
       S.divider(),
 
-      S.listItem().title('Páginas').icon(PackageIcon).child(S.documentTypeList('page')),
+      S.listItem()
+        .title('Páginas')
+        .icon(PackageIcon)
+        .child(S.documentTypeList('page').filter('_type == "page" && type == "page"')),
+      S.listItem()
+        .title('Landing Pages')
+        .icon(PackageIcon)
+        .child(S.documentTypeList('page').filter('_type == "page" && type == "landing"')),
 
       S.divider(),
       S.listItem()

@@ -1,5 +1,7 @@
 import type { SanityAsset } from '@ez/shared/types/assets'
+import type { Navigation } from '@ez/web/types/site'
 import type { PortableTextBlock } from 'next-sanity'
+import type { ReactNode } from 'react'
 
 export type Page = {
   id: string
@@ -17,7 +19,11 @@ export type Page = {
   keywords?: {
     [key: string]: string
   }
-  sections: Section[]
+  type: 'page' | 'landing'
+  sections?: Section[]
+  key?: string
+  navigation?: Navigation
+  form?: { _ref: string }
 }
 
 export type Section = {
@@ -41,4 +47,14 @@ export type Section = {
     image: SanityAsset
     title?: string
   }
+}
+
+export type LandingPageKey = {
+  key: string
+  component: ReactNode
+  navigation: {
+    desktop?: React.ComponentType<{ navigation?: Navigation }>
+    mobile?: React.ComponentType<{ navigation?: Navigation }>
+  }
+  classes?: string
 }

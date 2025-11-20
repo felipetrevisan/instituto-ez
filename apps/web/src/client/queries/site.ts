@@ -40,20 +40,44 @@ export const siteConfigQuery = groq`
         "hasSubmenu": has_submenu,
         "label": navigation_label,
         "columns": submenu_columns,
-        "submenu": navigation_submenu_items[] {
-          "label": navigation_label,
-          "url": navigation_item_url {
-            "isHome": is_home,
-            "type": link_type,
-            "link": internal_link->slug,
-            "externalUrl": external_url,
+        has_submenu => {
+          "submenu": navigation_submenu_items[] {
+            "label": navigation_label,
+            "url": navigation_item_url {
+              "isHome": is_home,
+              "type": link_type,
+              is_home == true => {
+                "link": "/"
+              },
+              link_type == "INTERNAL" || link_type == "LANDING" => {
+                "link": internal_link->slug
+              },
+              link_type == "EXTERNAL" => {
+                "link": external_url,
+                "isExternal": true
+              },
+              link_type == "HASH" => {
+                "link": hash_id
+              },
+            }
           }
         },
         "url": navigation_item_url {
           "isHome": is_home,
           "type": link_type,
-          "link": internal_link->slug,
-          "externalUrl": external_url
+          is_home == true => {
+            "link": "/"
+          },
+          link_type == "INTERNAL" || link_type == "LANDING" => {
+            "link": internal_link->slug
+          },
+          link_type == "EXTERNAL" => {
+            "link": external_url,
+            "isExternal": true
+          },
+          link_type == "HASH" => {
+            "link": hash_id
+          },
         }
       }
     },

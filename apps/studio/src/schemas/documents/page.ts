@@ -37,11 +37,59 @@ export default defineType({
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),
     defineField({
+      name: 'type',
+      title: 'Tipo',
+      type: 'string',
+      initialValue: 'page',
+      options: {
+        list: [
+          { title: 'Page', value: 'page' },
+          { title: 'Landing Page', value: 'landing' },
+        ],
+        layout: 'radio',
+      },
+      validation: (Rule) => Rule.required().warning('This field must not be empty.'),
+    }),
+    defineField({
       name: 'section',
       title: 'Sections',
       type: 'array',
       of: [{ type: 'pageSection' }],
+      hidden: ({ parent }) => parent?.type !== 'page',
       validation: (Rule) => Rule.required().warning('Must have at least one section.'),
+    }),
+    defineField({
+      name: 'key',
+      title: 'Landing Page Key',
+      type: 'string',
+      hidden: ({ parent }) => parent?.type !== 'landing',
+      validation: (Rule) => Rule.required().warning('This field must not be empty.'),
+    }),
+    defineField({
+      name: 'form',
+      title: 'Form',
+      description: 'Select a form',
+      type: 'reference',
+      to: { type: 'contactForm' },
+      hidden: ({ parent }) => parent?.type !== 'landing',
+    }),
+    defineField({
+      name: 'navigation',
+      title: 'Navigation',
+      description: 'Select a main navigation that is used in header',
+      type: 'reference',
+      to: { type: 'navigation' },
+      hidden: ({ parent }) => parent?.type !== 'landing',
+      validation: (Rule) =>
+        Rule.custom((_field, context) =>
+          !context?.document?.navigation ? 'Main navigation must be configured.' : true,
+        ).warning(),
+    }),
+    defineField({
+      name: 'enabled',
+      title: 'Enabled?',
+      type: 'boolean',
+      initialValue: true,
     }),
   ],
   preview: {

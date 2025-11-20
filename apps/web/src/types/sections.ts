@@ -11,7 +11,7 @@ export type Section = {
   }
 }
 
-export type SectionKeys = {
+export type SectionKey = {
   key: string
   component: ReactNode
   classes?: string

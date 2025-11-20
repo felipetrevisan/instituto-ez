@@ -1,6 +1,5 @@
 import { MenuIcon } from '@sanity/icons'
 import { defineType } from 'sanity'
-import { i18n } from '../locale/locales'
 
 export default defineType({
   name: 'accordion-content',

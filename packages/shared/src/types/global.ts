@@ -17,6 +17,7 @@ export type Button = {
 export enum LinkType {
   EXTERNAL = 'EXTERNAL',
   INTERNAL = 'INTERNAL',
+  HASH = 'HASH',
 }
 
 export enum Theme {
@@ -43,4 +44,5 @@ export enum BorderRounded {
 export enum PageType {
   page = 'page',
   landing = 'landing',
+  ebook = 'ebook',
 }

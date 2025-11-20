@@ -1,6 +1,5 @@
 import { MenuIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
-import { i18n } from '../objects/locale/locales'
 
 export default defineType({
   name: 'navigation',
@@ -11,13 +10,13 @@ export default defineType({
     defineField({
       name: 'title',
       title: 'Title',
-      type: 'localizedString',
+      type: 'string',
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),
     defineField({
       name: 'slug',
       title: 'Slug',
-      type: 'localizedSlug',
+      type: 'slug',
       options: {
         source: 'title',
         maxLength: 96,
@@ -64,10 +63,9 @@ export default defineType({
   ],
   preview: {
     select: {
-      title: `title.${i18n.base}`,
+      title: 'title',
     },
-    prepare(selection) {
-      const { title } = selection
+    prepare({ title }) {
       return {
         title: title ?? 'Navegação sem título',
       }

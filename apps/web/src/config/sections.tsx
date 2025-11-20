@@ -8,9 +8,9 @@ import { Lectures } from '@ez/web/components/sections/lectures'
 import { Services } from '@ez/web/components/sections/services'
 import { Testimonials } from '@ez/web/components/sections/testimonials'
 import { Workshops } from '@ez/web/components/sections/workshops'
-import type { SectionKeys } from '@ez/web/types/sections'
+import type { SectionKey } from '@ez/web/types/sections'
 
-export function getSections(): SectionKeys[] {
+export function getSections(): SectionKey[] {
   return [
     {
       key: 'banner',
