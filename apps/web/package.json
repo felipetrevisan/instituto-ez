@@ -32,6 +32,7 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-hook-form": "^7.56.3",
+    "react-loader-spinner": "8.0.0",
     "react-pageflip": "2.0.3",
     "react-parallax": "^3.5.1",
     "react-player": "^2.16.1",

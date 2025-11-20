@@ -1,17 +1,6 @@
 import type { SanityAsset } from '@ez/shared/types'
-import { urlForImage } from '@ez/web/config/image'
 import type { ContactFormSchema } from '@ez/web/types/contact'
-import {
-  Body,
-  Container,
-  Head,
-  Hr,
-  Html,
-  Img,
-  Preview,
-  Section,
-  Text,
-} from '@react-email/components'
+import { Body, Container, Head, Hr, Html, Preview, Section, Text } from '@react-email/components'
 
 const base = {
   fontFamily:
@@ -25,7 +14,6 @@ export function EmailTemplate({
   phone,
   subject,
   message,
-  logo
 }: ContactFormSchema & { logo?: SanityAsset }) {
   return (
     <Html>

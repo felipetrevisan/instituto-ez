@@ -2,7 +2,6 @@
 
 import { Loader2Icon } from '@ez/shared/icons'
 import { cn } from '@ez/shared/lib/utils'
-import { Skeleton } from '@ez/shared/ui'
 import { Button } from '@ez/shared/ui/button'
 import { DialogFooter, DialogTrigger } from '@ez/shared/ui/dialog'
 import { Input } from '@ez/shared/ui/input'
@@ -15,24 +14,26 @@ import { AnimatePresence, motion } from 'motion/react'
 import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { Comment } from 'react-loader-spinner'
 import { toast } from 'sonner'
 import { sendEmail } from '../server/send-email'
 
 export function ContactForm({
   isDialog = false,
   subject = '',
+  formRef,
   onCloseAction,
+  sendButtonLabel,
 }: {
   isDialog: boolean
   subject: string
+  formRef: string
+  sendButtonLabel: string
   onCloseAction: () => void
 }) {
   const [focusedField, setFocusedField] = useState<string | null>('name')
-
   const { data: settings } = useSite()
-
-  const { data: form, isPending } = useBaseForm(settings?.contact.form._ref || '')
-
+  const { data: form, isPending } = useBaseForm(formRef)
   const t = useTranslations('DialogContact')
 
   const {
@@ -44,6 +45,7 @@ export function ContactForm({
     setValue,
   } = useForm<ContactFormSchema>({
     resolver: zodResolver(contactFormSchema),
+    mode: 'all',
   })
 
   useEffect(() => {
@@ -85,7 +87,22 @@ export function ContactForm({
 
   return (
     <form className="w-full">
-      <div className="grid gap-4 py-4">
+      <div
+        className={cn('grid gap-4 py-4', {
+          'justify-center': isPending,
+        })}
+      >
+        {isPending && (
+          <Comment
+            ariaLabel="form-loading"
+            backgroundColor="var(--tertiary)"
+            color="#fff"
+            height="80"
+            visible={true}
+            width="80"
+            wrapperStyle={{}}
+          />
+        )}
         <div className="grid grid-cols-1 items-baseline gap-8 md:grid-cols-2">
           {form?.fields.map(({ name, label, type, isRequired }) => {
             const value = watch(name as keyof ContactFormSchema)
@@ -112,7 +129,7 @@ export function ContactForm({
                       : { y: 10, scale: 1, opacity: 0.5 }
                   }
                   className={cn(
-                    'pointer-events-none absolute left-5 origin-left font-oswald font-semibold text-secondary',
+                    'pointer-events-none absolute left-5 origin-left font-inter font-semibold text-foreground',
                     {
                       'text-red-500': hasError,
                       'text-tertiary': isFocused,
@@ -139,6 +156,7 @@ export function ContactForm({
                     initial={{ height: 200 }}
                     onBlur={() => setFocusedField(null)}
                     onFocus={() => setFocusedField(name)}
+                    required={isRequired}
                     rows={20}
                     style={{ resize: 'none' }}
                   />
@@ -158,13 +176,14 @@ export function ContactForm({
                     onBlur={() => setFocusedField(null)}
                     onFocus={() => setFocusedField(name)}
                     readOnly={name === 'subject' && subject !== ''}
+                    required={isRequired}
                   />
                 )}
                 <AnimatePresence>
                   {hasError && (
                     <motion.p
                       animate={{ opacity: 1, y: 0 }}
-                      className="mt-1 text-red-500 text-sm"
+                      className="mt-1 font-semibold text-red-500 text-sm"
                       exit={{ opacity: 0, y: -5 }}
                       initial={{ opacity: 0, y: -5 }}
                     >
@@ -180,32 +199,24 @@ export function ContactForm({
       {isDialog && !isPending && (
         <DialogFooter className="justify-center gap-5">
           <DialogTrigger asChild>
-            <Button
-              onClick={onCloseAction}
-              rounded="2xl"
-              size="xl"
-              theme="tertiary"
-              type="button"
-              variant="outline"
-            >
+            <Button onClick={onCloseAction} rounded="lg" size="lg" theme="tertiary" type="button">
               {t('cancelButton')}
             </Button>
           </DialogTrigger>
           <Button
             disabled={isSubmitting || !isValid}
             onClick={handleSubmit(handleSendForm)}
-            rounded="2xl"
-            size="xl"
+            rounded="lg"
+            size="lg"
             theme="default"
             type="submit"
-            variant="default"
           >
             {isSubmitting ? (
               <>
                 <Loader2Icon className="mr-2 h-4 w-4 animate-spin" /> {t('loadingButton')}
               </>
             ) : (
-              t('sendButton')
+              sendButtonLabel
             )}
           </Button>
         </DialogFooter>
@@ -215,9 +226,9 @@ export function ContactForm({
           <Button
             className="w-full md:w-[200px]"
             disabled={isSubmitting || !isValid}
-            rounded="full"
+            rounded="lg"
             shadow
-            size="xl"
+            size="lg"
             type="submit"
             variant="default"
           >

@@ -1,12 +1,17 @@
 import { useShared } from '@ez/shared/hooks/use-shared'
 import { DialogContent, DialogHeader, DialogTitle } from '@ez/shared/ui/dialog'
-import { useTranslations } from 'next-intl'
 import { ContactForm } from './contact-form'
 
-export function ContactFormDialog() {
+export function ContactFormDialog({
+  title,
+  sendButtonLabel,
+  formRef,
+}: {
+  title?: string
+  sendButtonLabel: string
+  formRef: string
+}) {
   const { setIsContactDialogOpen, contactSubject } = useShared()
-
-  const t = useTranslations('DialogContact')
 
   const closeDialog = () => {
     setIsContactDialogOpen(false)
@@ -14,11 +19,19 @@ export function ContactFormDialog() {
 
   return (
     <DialogContent className="container max-w-3xl" from="left" onClose={closeDialog}>
-      <DialogHeader>
-        <DialogTitle>{t('title')}</DialogTitle>
-      </DialogHeader>
+      {title && (
+        <DialogHeader>
+          <DialogTitle>{title}</DialogTitle>
+        </DialogHeader>
+      )}
 
-      <ContactForm isDialog onCloseAction={closeDialog} subject={contactSubject} />
+      <ContactForm
+        formRef={formRef}
+        isDialog
+        onCloseAction={closeDialog}
+        sendButtonLabel={sendButtonLabel}
+        subject={contactSubject}
+      />
     </DialogContent>
   )
 }
