@@ -21,10 +21,11 @@ type AppContextProps = {
   isHome: boolean
   setActiveMenu: Dispatch<SetStateAction<string>>
   activeMenu: string
-  setPageType: Dispatch<SetStateAction<'page' | 'landing'>>
-  pageType: 'page' | 'landing'
+  setPageType: Dispatch<SetStateAction<keyof typeof PageType>>
+  pageType: keyof typeof PageType
   isLandingPage: () => boolean
   isNormalPage: () => boolean
+  isEbookPage: () => boolean
 }
 
 const AppContext = createContext({} as AppContextProps)
@@ -53,6 +54,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
     return pageType === PageType.page
   }, [pageType])
 
+  const isEbookPage = useCallback(() => {
+    return pageType === PageType.ebook
+  }, [pageType])
+
   // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
   useEffect(() => {
     setActiveMenu(currentUrl)
@@ -71,6 +76,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         pageType,
         isLandingPage,
         isNormalPage,
+        isEbookPage,
       }}
     >
       {children}
@@ -79,5 +85,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
 }
 
 export function useApp(): AppContextProps {
-  return useContext(AppContext)
+  const context = useContext(AppContext)
+  if (!context) {
+    throw new Error('useApp must be used within a App')
+  }
+  return context
 }
