@@ -15,6 +15,11 @@ declare const messages: {
     "sendButton": "Enviar Mensagem",
     "loadingButton": "Enviando mensagem..."
   },
+  "LandingPageMathematizer": {
+    "title": "Solicitar Diagnóstico",
+    "sendButton": "Solicitar",
+    "loadingButton": "Solicitando diagnóstico..."
+  },
   "Ebooks": {
     "backButton": "Voltar para o Catálogo",
     "reserveYourEbook": "Garanta já seu eBook",
