@@ -59,8 +59,9 @@ export function CompanyServiceCard({ item: { button, background, content, title 
                 passHref
               >
                 <Button
-                  className="w-full font-bold uppercase"
+                  className="whitespace-normal font-bold uppercase"
                   disabled={button.disabled}
+                  fullWidth
                   rounded="xl"
                   size="2xl"
                   theme="tertiary"

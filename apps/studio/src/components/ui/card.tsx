@@ -4,8 +4,8 @@ import { cva, type VariantProps } from 'class-variance-authority'
 const cardVariants = cva('relative', {
   variants: {
     variant: {
-      default: 'shadow-[0_0_15px_3px] outline outline-2',
-      outline: 'shadow-[0_0_15px_3px] outline outline-2',
+      default: 'shadow-[0_0_15px_3px] outline-2',
+      outline: 'shadow-[0_0_15px_3px] outline-2',
       ghost: 'border-none shadow-none outline-none',
     },
     theme: {

@@ -6,6 +6,7 @@ import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
 import { type HTMLMotionProps, motion } from 'motion/react'
 import Image from 'next/image'
 import { useLocale } from 'next-intl'
+import { Fragment } from 'react'
 
 type LogoProps = {
   src?: string
@@ -25,7 +26,7 @@ export const Logo = ({
   const isTablet = useMediaQuery(1179)
 
   const logoImage = (
-    <>
+    <Fragment>
       <Image
         alt={`${data?.title[locale]} - ${data?.slogan[locale]}`}
         className="h-full"
@@ -36,18 +37,18 @@ export const Logo = ({
         width={57}
       />
       {showSlogan && !isTablet && (
-        <span className="flex flex-col justify-center">
+        <span className="flex flex-col justify-center" data-slot="logo">
           <p className="font-bold font-oswald text-lg text-primary">{data?.title[locale]}</p>
           <p className="text-nowrap font-light font-questrial text-primary text-sm">
             {data?.slogan[locale]}
           </p>
         </span>
       )}
-    </>
+    </Fragment>
   )
 
   return (
-    <>
+    <Fragment>
       {linkable ? (
         <motion.a
           className="relative flex h-[3.56rem] w-56 space-x-2 md:w-auto"
@@ -59,6 +60,6 @@ export const Logo = ({
       ) : (
         logoImage
       )}
-    </>
+    </Fragment>
   )
 }

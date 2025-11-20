@@ -109,7 +109,7 @@ export function EbookCard({
             <CardHeader
               className={cn(
                 'relative aspect-[2/3] h-[40vh] overflow-visible p-0 md:aspect-[1/2] md:h-full lg:aspect-[2/3]',
-                { 'bg-[#f5f5f5] md:w-full': !description?.[locale] },
+                { 'bg-[#f5f5f5] md:w-full dark:bg-accent': !description?.[locale] },
               )}
               style={{
                 background: backgroundClass,

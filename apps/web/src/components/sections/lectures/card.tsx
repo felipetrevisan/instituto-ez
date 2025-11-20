@@ -52,9 +52,10 @@ export function LectureCard({ item: { button, background, content, title }, inde
                 passHref
               >
                 <Button
-                  className="w-full font-bold uppercase"
+                  className="whitespace-normal font-bold uppercase"
                   disabled={button.disabled}
                   effect="pulse"
+                  fullWidth
                   rounded="xl"
                   size="2xl"
                   theme="tertiary"

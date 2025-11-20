@@ -13,12 +13,12 @@ import * as React from 'react'
 type TabsProps = React.ComponentProps<typeof TabsPrimitive.Root>
 
 const tabVariants = cva(
-  'relative flex flex-col items-center overflow-hidden rounded-full bg-neutral-100 text-center text-white shadow-lg md:flex-row',
+  'relative flex flex-col items-center overflow-hidden rounded-full border-neutral-200 text-center text-white shadow-lg md:flex-row dark:border-accent',
   {
     variants: {
       variant: {
-        default: 'border border-neutral-200 shadow-sm',
-        outline: 'border border-1 border-neutral-200 outline outline-2',
+        default: 'border border-neutral-200 shadow-sm dark:border-accent',
+        outline: 'border border-1 border-neutral-200 outline outline-2 dark:border-accent',
         ghost: 'border-none bg-transparent shadow-none',
         custom: '',
       },
@@ -110,37 +110,37 @@ const tabHighlightVariants = cva('absolute rounded-full', {
       variant: 'outline',
       theme: 'default',
       class:
-        'border-primary bg-none bg-white text-primary opacity-1 shadow-primary outline-primary',
+        'border-primary bg-none bg-white text-primary opacity-1 shadow-primary outline-primary dark:bg-accent',
     },
     {
       variant: 'outline',
       theme: 'secondary',
       class:
-        'border-secondary bg-none bg-white text-secondary opacity-1 shadow-secondary outline-secondary',
+        'border-secondary bg-none bg-white text-secondary opacity-1 shadow-secondary outline-secondary dark:bg-accent',
     },
     {
       variant: 'outline',
       theme: 'tertiary',
       class:
-        'border-tertiary bg-none bg-white text-tertiary opacity-1 shadow-tertiary outline-tertiary',
+        'border-tertiary bg-none bg-white text-tertiary opacity-1 shadow-tertiary outline-tertiary dark:bg-accent',
     },
     {
       variant: 'ghost',
       theme: 'default',
       class:
-        'border-primary bg-none bg-white text-primary opacity-1 shadow-primary outline-primary',
+        'border-primary bg-none bg-white text-primary opacity-1 shadow-primary outline-primary dark:bg-accent',
     },
     {
       variant: 'ghost',
       theme: 'secondary',
       class:
-        'border-secondary bg-none bg-white text-secondary opacity-1 shadow-secondary outline-secondary',
+        'border-secondary bg-none bg-white opacity-1 shadow-secondary outline-secondary dark:bg-accenttext-secondary',
     },
     {
       variant: 'ghost',
       theme: 'tertiary',
       class:
-        'border-tertiary bg-none bg-white text-tertiary opacity-1 shadow-tertiary outline-tertiary',
+        'border-tertiary bg-none bg-white text-tertiary opacity-1 shadow-tertiary outline-tertiary dark:bg-accent',
     },
   ],
 })

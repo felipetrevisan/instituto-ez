@@ -50,7 +50,7 @@ export function Immersion() {
           bgImage={urlForImage(data?.background.asset).format('webp').quality(80).url()}
           className="flex h-[300px] max-h-[300px] w-[calc(100vw-10%)] justify-center overflow-hidden rounded-lg xl:h-[400px] xl:max-h-[400px] xl:w-3/4"
         />
-        <div className="-m-40 z-10 mb-4 flex h-full w-[calc(100vw-20%)] justify-center rounded-lg bg-white/90 backdrop-blur-lg xl:w-3/5">
+        <div className="-m-40 z-10 mb-4 flex h-full w-[calc(100vw-20%)] justify-center rounded-lg bg-white/90 backdrop-blur-lg xl:w-3/5 dark:bg-accent/90">
           <div className="relative flex w-full flex-col items-center justify-start gap-10 overflow-hidden p-10 text-secondary">
             {data?.ribbon.show && (
               <div className="-rotate-45 absolute top-[32px] left-[-35px] w-[170px] transform animate-pulse bg-red-800 py-1 text-center font-semibold text-white uppercase">
@@ -77,8 +77,9 @@ export function Immersion() {
             passHref
           >
             <Button
-              className="w-full font-bold uppercase"
+              className="whitespace-normal font-bold uppercase"
               disabled={data?.button.disabled}
+              fullWidth
               rounded="xl"
               size="2xl"
               theme="tertiary"

@@ -129,7 +129,7 @@ const EbookGridComponent = ({
             {title && <TitleComponent variant={theme}>{title}</TitleComponent>}
             {ebooks?.map((ebook, _index) => (
               <div
-                className={cn('w-full flex-none bg-white', {
+                className={cn('w-full flex-none bg-white dark:bg-accent', {
                   'w-[48%]': !isMobile && !isTablet && appareance === 'full',
                 })}
                 key={ebook.id}

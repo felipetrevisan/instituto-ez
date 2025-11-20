@@ -83,7 +83,7 @@ export function EbookCard({
           transition: { duration: 0.4, ease: 'easeInOut' },
         }}
         className={cn(
-          'relative flex h-96 w-[70vw] shrink flex-col items-end justify-center bg-card shadow-2xl md:w-80 md:shrink-0 md:flex-row lg:w-80',
+          'relative flex h-96 w-[70vw] shrink flex-col items-end justify-center bg-card shadow-2xl md:w-80 md:shrink-0 md:flex-row lg:w-80 dark:shadow-none',
           {
             'pointer-events-none select-none opacity-80 grayscale-100': disabled,
           },
@@ -122,7 +122,7 @@ export function EbookCard({
         </div>
         <MotionCard
           className={cn(
-            'relative flex h-full w-full shrink flex-col justify-center overflow-hidden border-primary/50 shadow-xl md:h-[400px] md:max-h-[400px]border-1! md:min-h-[400px] md:shrink-0 md:flex-row',
+            'relative flex h-full w-full shrink flex-col justify-center overflow-hidden border-primary/50 shadow-xl md:h-[400px] md:max-h-[400px]border-1! md:min-h-[400px] md:shrink-0 md:flex-row dark:shadow-none',
             {
               'pointer-events-none select-none opacity-80 grayscale-[85%]': disabled,
               'md:flex-col': !description?.[locale],
@@ -138,7 +138,7 @@ export function EbookCard({
             <CardHeader
               className={cn(
                 'relative aspect-[2/3] h-[40vh] overflow-visible p-0 md:aspect-[1/2] md:h-full lg:aspect-[2/3] lg:w-[200px] lg:w-full',
-                { 'bg-[#f5f5f5] md:w-full': !description?.[locale] },
+                { 'bg-[#f5f5f5] md:w-full dark:bg-accent dark:bg-accent': !description?.[locale] },
               )}
               style={{
                 background: backgroundClass,
@@ -170,7 +170,7 @@ export function EbookCard({
           <CardContent className="relative flex w-full flex-col gap-4 p-0 md:py-10">
             {description?.[locale] && (
               <ScrollArea className="overflow-auto! md:max-h-[315px]">
-                <div className="pointer-events-none absolute bottom-0 z-10 h-6 w-full bg-gradient-to-t from-white/90 to-transparent" />
+                <div className="pointer-events-none absolute bottom-0 z-10 h-6 w-full bg-gradient-to-t from-white/90 to-transparent dark:from-accent/90" />
                 <div className="p-5 text-justify">{description?.[locale]}</div>
               </ScrollArea>
             )}

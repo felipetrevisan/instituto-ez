@@ -61,9 +61,10 @@ export function ServiceCard({ item: { image, title, button, disabled }, classNam
             {button.visible && (
               <CarouselItem className="flex basis-full items-center justify-center">
                 <Button
-                  className="w-full font-bold uppercase"
+                  className="whitespace-normal font-bold uppercase"
                   disabled={button.disabled}
                   effect="none"
+                  fullWidth
                   rounded="xl"
                   scaleEffect={false}
                   size="2xl"
