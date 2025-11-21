@@ -50,7 +50,7 @@ export const Mathematizer = () => {
               const Icon = item.icon
               return (
                 // biome-ignore lint/suspicious/noArrayIndexKey: false positive
-                <Card base="mathematizer" className="hover-lift" key={index} variant="landing">
+                <Card base="mathematizer" className="hover-lift" key={index} variant="outline">
                   <CardContent className="space-y-6 p-8">
                     <div className="flex size-16 items-center justify-center rounded-lg bg-accent/10">
                       <Icon className="size-8 text-accent" />

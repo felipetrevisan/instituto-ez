@@ -110,7 +110,7 @@ const buttonVariants = cva(
       {
         variant: 'outline',
         theme: 'background',
-        className: 'text-foreground outline-foreground hover:bg-background/90',
+        className: 'bg-transparent text-foreground outline-foreground hover:bg-background/90',
       },
 
       // Marca específica

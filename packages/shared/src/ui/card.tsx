@@ -5,7 +5,7 @@ const cardVariants = cva('relative transition-all duration-300', {
   variants: {
     base: {
       default: '',
-      mathematizer: '',
+      mathematizer: 'bg-card outline-none',
       'for-business': 'bg-card outline-none',
     },
     variant: {
