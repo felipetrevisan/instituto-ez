@@ -1,36 +1,259 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# EZ Site
 
-## Getting Started
+Sistema de gerenciamento de conteúdo e site institucional construído com Next.js, Sanity CMS e TypeScript.
 
-First, run the development server:
+## 📋 Descrição
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Este projeto é uma aplicação web moderna que combina um site institucional com um sistema de gerenciamento de conteúdo (CMS) headless. O projeto utiliza uma arquitetura de monorepo para organizar o código em aplicações e pacotes compartilhados.
+
+### Principais Funcionalidades
+
+- 🌐 **Site Institucional Multilíngue** (PT, EN, ES)
+- 📝 **CMS Headless** com Sanity Studio
+- 🎨 **Landing Pages Customizáveis** com componentes reutilizáveis
+- 📧 **Sistema de Formulários de Contato** com envio de emails
+- 📚 **Gerenciamento de E-books** com visualização interativa
+- 🎯 **SEO Otimizado** com metadados dinâmicos
+- 🌓 **Tema Claro/Escuro** com suporte a sistema
+- 📱 **Design Responsivo** com mobile-first
+
+## 🏗️ Arquitetura
+
+O projeto utiliza uma arquitetura de **monorepo** com os seguintes workspaces:
+
+```
+ez-site/
+├── apps/
+│   ├── web/          # Aplicação Next.js (frontend)
+│   └── studio/       # Sanity Studio (CMS)
+├── packages/
+│   └── shared/       # Componentes e utilitários compartilhados
+└── package.json      # Configuração do workspace
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Tecnologias
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Core
+- **Next.js 15.1.6** - Framework React com App Router
+- **React 19.1.0** - Biblioteca UI
+- **TypeScript 5.8** - Tipagem estática
+- **Node.js 22.x** - Runtime JavaScript
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### CMS & Content
+- **Sanity 3.99.0** - CMS Headless
+- **next-sanity 10.0.4** - Integração Next.js + Sanity
+- **@portabletext/react** - Renderização de conteúdo rich text
 
-## Learn More
+### Estilização
+- **Tailwind CSS 4.1.7** - Framework CSS utility-first
+- **Motion (Framer Motion) 12.15.0** - Animações
+- **Sass 1.71.1** - Pré-processador CSS
 
-To learn more about Next.js, take a look at the following resources:
+### Internacionalização
+- **next-intl 4.3.4** - Internacionalização para Next.js
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Formulários & Validação
+- **react-hook-form 7.56.3** - Gerenciamento de formulários
+- **zod 3.24.4** - Validação de schemas
+- **@hookform/resolvers** - Integração Zod + React Hook Form
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### UI Components
+- **Radix UI** - Componentes acessíveis e não estilizados
+  - Dialog, Select, Navigation Menu, Tabs, etc.
+- **Lucide React** - Ícones
+- **Sonner** - Notificações toast
 
-## Deploy on Vercel
+### Carrosséis & Animações
+- **Embla Carousel** - Carrossel performático
+- **react-parallax** - Efeitos parallax
+- **react-pageflip** - Visualização de e-books estilo livro
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Email
+- **Resend 4.5.1** - Serviço de envio de emails
+- **@react-email/components** - Templates de email
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Data Fetching
+- **@tanstack/react-query 5.24.8** - Gerenciamento de estado servidor
+- **React Query Devtools** - Ferramentas de desenvolvimento
+
+### Build & Dev Tools
+- **Turborepo** - Build system para monorepos
+- **Biome** - Linter e formatter
+- **pnpm 10.4.1** - Gerenciador de pacotes
+
+### Analytics & Performance
+- **@vercel/analytics** - Analytics da Vercel
+- **@vercel/speed-insights** - Métricas de performance
+- **@bprogress/next** - Barra de progresso de navegação
+
+### Outras
+- **next-themes** - Gerenciamento de temas
+- **class-variance-authority** - Variantes de componentes
+- **tailwind-merge** - Merge de classes Tailwind
+
+## 📦 Estrutura do Projeto
+
+### Apps
+
+#### `apps/web`
+Aplicação Next.js principal que serve o site institucional.
+
+**Estrutura:**
+```
+apps/web/
+├── src/
+│   ├── app/              # App Router do Next.js
+│   ├── components/       # Componentes React
+│   ├── hooks/           # Custom hooks
+│   ├── server/          # Server actions e funções
+│   ├── client/          # Cliente Sanity e queries
+│   ├── config/          # Configurações
+│   ├── types/           # Tipos TypeScript
+│   └── utils/           # Funções utilitárias
+├── messages/            # Arquivos de tradução
+└── public/              # Assets estáticos
+```
+
+#### `apps/studio`
+Sanity Studio para gerenciamento de conteúdo.
+
+**Estrutura:**
+```
+apps/studio/
+├── src/
+│   ├── schemas/         # Schemas do Sanity
+│   ├── components/      # Componentes do Studio
+│   ├── structures/      # Estrutura de navegação
+│   └── preview/         # Previews customizados
+└── static/              # Assets estáticos
+```
+
+### Packages
+
+#### `packages/shared`
+Pacote compartilhado com componentes UI, hooks e utilitários reutilizáveis.
+
+**Estrutura:**
+```
+packages/shared/
+├── src/
+│   ├── ui/              # Componentes UI base
+│   ├── hooks/           # Hooks compartilhados
+│   ├── icons/           # Ícones
+│   ├── lib/             # Utilitários
+│   ├── sanity/          # Helpers do Sanity
+│   └── types/           # Tipos compartilhados
+```
+
+## 🚀 Como Começar
+
+### Pré-requisitos
+
+- Node.js 22.x
+- pnpm 10.4.1
+
+### Instalação
+
+```bash
+# Instalar dependências
+pnpm install
+
+# Configurar variáveis de ambiente
+# Copie .env.example para .env e preencha as variáveis necessárias
+```
+
+### Desenvolvimento
+
+```bash
+# Iniciar aplicação web
+pnpm dev:web
+
+# Iniciar Sanity Studio
+pnpm dev:studio
+
+# Executar linter
+pnpm lint:apps:check
+
+# Formatar código
+pnpm lint:apps:format
+```
+
+### Build
+
+```bash
+# Build de todos os workspaces
+pnpm build
+```
+
+## 🔧 Configuração
+
+### Variáveis de Ambiente
+
+O projeto utiliza validação de variáveis de ambiente com `@t3-oss/env-core` e `zod`.
+
+**Variáveis necessárias:**
+
+```env
+# Sanity
+NEXT_PUBLIC_SANITY_PROJECT_ID=seu_project_id
+NEXT_PUBLIC_SANITY_DATASET=production
+SANITY_API_READ_TOKEN=seu_token
+
+# Resend (Email)
+RESEND_API_KEY=seu_api_key
+
+# Vercel
+NEXT_PUBLIC_VERCEL_URL=https://seu-dominio.com
+VERCEL_ENV=production
+```
+
+Consulte `apps/web/src/config/env.ts` para a lista completa de variáveis.
+
+## 📝 Scripts Disponíveis
+
+### Root
+- `pnpm build` - Build de todos os workspaces
+- `pnpm dev:web` - Inicia o servidor de desenvolvimento do web
+- `pnpm dev:studio` - Inicia o Sanity Studio
+- `pnpm lint:apps:check` - Verifica linting nos apps
+- `pnpm lint:apps:format` - Formata código dos apps
+- `pnpm lint:packages:check` - Verifica linting nos packages
+- `pnpm lint:packages:format` - Formata código dos packages
+
+### Web App
+- `pnpm --filter web dev` - Desenvolvimento
+- `pnpm --filter web build` - Build de produção
+- `pnpm --filter web start` - Inicia servidor de produção
+
+### Studio
+- `pnpm --filter studio dev` - Desenvolvimento
+- `pnpm --filter studio build` - Build
+- `pnpm --filter studio deploy` - Deploy do studio
+
+## 🌍 Internacionalização
+
+O projeto suporta três idiomas:
+- **pt** - Português (padrão)
+- **en** - Inglês
+- **es** - Espanhol
+
+As traduções estão em `apps/web/messages/` e são gerenciadas pelo `next-intl`.
+
+## 🎨 Sistema de Design
+
+O projeto utiliza:
+- **Tailwind CSS** para estilização
+- **Radix UI** para componentes base acessíveis
+- **Motion** para animações
+- **CSS Variables** para temas
+
+## 🤝 Contribuindo
+
+1. Siga os padrões de código documentados
+2. Execute o linter antes de commitar
+3. Mantenha os testes atualizados
+4. Documente mudanças significativas
+
+## 📄 Licença
+
+Este projeto é privado e proprietário.
