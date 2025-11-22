@@ -1,7 +1,6 @@
 'use client'
 
 import { PageType } from '@ez/shared/types/global'
-import { type Cycle, useCycle } from 'motion/react'
 import { usePathname } from 'next/navigation'
 import {
   createContext,
@@ -16,7 +15,8 @@ import {
 
 type AppContextProps = {
   isMenuOpen: boolean
-  toggleMenu: Cycle
+  toggleMenu: () => void
+  setIsMenuOpen: Dispatch<SetStateAction<boolean>>
   isMenuActive: (menu: string) => boolean
   isHome: boolean
   setActiveMenu: Dispatch<SetStateAction<string>>
@@ -32,10 +32,14 @@ const AppContext = createContext({} as AppContextProps)
 
 export function AppProvider({ children }: { children: ReactNode }) {
   const currentUrl = usePathname()
-  const [isMenuOpen, toggleMenu] = useCycle(false, true)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [pageType, setPageType] = useState<keyof typeof PageType>(PageType.page)
 
   const [activeMenu, setActiveMenu] = useState(currentUrl)
+
+  const toggleMenu = useCallback(() => {
+    setIsMenuOpen((prev) => !prev)
+  }, [])
 
   const isHome = activeMenu === '/'
 
@@ -58,16 +62,18 @@ export function AppProvider({ children }: { children: ReactNode }) {
     return pageType === PageType.ebook
   }, [pageType])
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
+  // Fechar o menu quando a rota mudar
   useEffect(() => {
+    setIsMenuOpen(false)
     setActiveMenu(currentUrl)
-  }, [])
+  }, [currentUrl])
 
   return (
     <AppContext.Provider
       value={{
         toggleMenu,
         isMenuOpen,
+        setIsMenuOpen,
         isHome,
         isMenuActive,
         activeMenu,
