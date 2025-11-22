@@ -1,6 +1,8 @@
 'use client'
 
 import { useMediaQuery } from '@ez/shared/hooks/use-media-query'
+import { cn } from '@ez/shared/lib/utils'
+import { useApp } from '@ez/web/hooks/use-app'
 import { useSite } from '@ez/web/hooks/use-site'
 import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
 import { type HTMLMotionProps, motion } from 'motion/react'
@@ -23,6 +25,7 @@ export const Logo = ({
 }: LogoProps) => {
   const locale = useLocale()
   const { data } = useSite()
+  const { isLandingPage } = useApp()
   const isTablet = useMediaQuery(1179)
 
   const logoImage = (
@@ -38,8 +41,8 @@ export const Logo = ({
       />
       {showSlogan && !isTablet && (
         <span className="flex flex-col justify-center" data-slot="logo">
-          <p className="font-bold font-oswald text-lg text-primary">{data?.title[locale]}</p>
-          <p className="text-nowrap font-light font-questrial text-primary text-sm">
+          <p className={cn('font-bold font-oswald text-lg text-primary')}>{data?.title[locale]}</p>
+          <p className={cn('text-nowrap font-light font-questrial text-primary text-sm')}>
             {data?.slogan[locale]}
           </p>
         </span>

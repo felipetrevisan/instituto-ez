@@ -1,3 +1,4 @@
+import type { NavigationItemURL } from '@ez/web/types/site'
 import { animate } from 'motion/react'
 
 export function scrollToId(id: string) {
@@ -10,4 +11,12 @@ export function scrollToId(id: string) {
     duration: 0.8,
     onUpdate: (latest) => window.scrollTo(0, latest),
   })
+}
+
+export const navigateToHash = (
+  e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+  url: NavigationItemURL,
+) => {
+  e.preventDefault()
+  scrollToId(url.link.toString().replace('#', ''))
 }

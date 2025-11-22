@@ -22,6 +22,7 @@ import { env } from '@ez/web/config/env'
 import { urlForImage } from '@ez/web/config/image'
 import { getAvailableLandingPages } from '@ez/web/config/landing-page'
 import { useApp } from '@ez/web/hooks/use-app'
+import { useBodyOverflow } from '@ez/web/hooks/use-body-overflow'
 import { useDimensions } from '@ez/web/hooks/use-dimension'
 import { useSite } from '@ez/web/hooks/use-site'
 import type { Navigation, Site } from '@ez/web/types/site'
@@ -36,7 +37,7 @@ import {
 } from 'motion/react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { redirect } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { useLocale, useTranslations } from 'next-intl'
 import { useTheme } from 'next-themes'
 import { Fragment, useEffect, useRef, useState } from 'react'
@@ -69,16 +70,19 @@ function Header({
 }: HeaderProps) {
   const locale = useLocale()
   const { isNormalPage, isLandingPage, isMenuOpen } = useApp()
+  const router = useRouter()
   const [currentScrollY, setCurrentScrollY] = useState(0)
   const containerRef = useRef<HTMLDivElement | null>(null)
   const { height } = useDimensions(containerRef)
   const { scrollY } = useScroll()
   const isMobile = useMediaQuery()
+  const isTablet = useMediaQuery(1179)
+  useBodyOverflow(isMenuOpen)
 
   const t = useTranslations('Languages')
 
   const handleChange = (lang: string) => {
-    redirect(`/${lang}`)
+    router.push(`/${lang}`)
   }
 
   const scrollYRange = [0, 100, 100]
@@ -108,17 +112,6 @@ function Header({
     setCurrentScrollY(val)
   })
 
-  useEffect(() => {
-    if (isMenuOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
-    return () => {
-      document.body.style.overflow = ''
-    }
-  }, [isMenuOpen])
-
   const [currentLandingPage] = getAvailableLandingPages().filter((page) => page.key === pageKey)
 
   const DesktopNavigation = currentLandingPage?.navigation?.desktop ?? DesktopNavComponent
@@ -141,7 +134,7 @@ function Header({
               src={data?.logo && urlForImage(data.logo?.asset).format('webp').quality(80).url()}
             />
           </Navbar.Brand>
-          {!isMobile && (
+          {!isMobile && !isTablet && (
             <DesktopNavigation navigation={customNavigation ?? data?.primaryNavigation} />
           )}
           <div className="flex flex-row items-center justify-center gap-2">
@@ -201,12 +194,14 @@ function Header({
         animate={isMenuOpen ? 'open' : 'closed'}
         className="flex gap-10"
         custom={height}
+        initial="closed"
         ref={containerRef}
         variants={sidebarVariants}
       >
-        {isMobile && (
+        {(isMobile || isTablet) && (
           <MotionMobileNavigation
             animate={isMenuOpen ? 'open' : 'closed'}
+            initial="closed"
             navigation={customNavigation ?? data?.primaryNavigation}
             variants={menuListVariants}
           />
@@ -343,7 +338,7 @@ function ThemeToggle() {
   return (
     <IconButton
       aria-label="Toggle theme"
-      className="flex items-center justify-center bg-transparent p-2 text-foreground hover:text-foreground"
+      className="flex items-center justify-center bg-transparent p-2 text-foreground hover:bg-background hover:text-foreground"
       icon={icon}
       onClick={() => setTheme(nextTheme)}
     />

@@ -41,7 +41,7 @@ export default async function LandingLayout({
       lang={locale}
       suppressHydrationWarning
     >
-      <body data-theme={pageKey}>
+      <body data-page="landing" data-theme={pageKey}>
         <App.Header
           customNavigation={navigation}
           data={data}

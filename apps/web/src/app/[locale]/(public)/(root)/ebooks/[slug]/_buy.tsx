@@ -49,7 +49,7 @@ export default function BuySection({ data }: { data: Ebook }) {
             />
           </div>
           {!download?.disabled && download?.url?.[locale] && (
-            <Link href={download?.url?.[locale] ?? '/'} target="_blank">
+            <Link href={download?.url?.[locale] ?? '/'} rel="noopener noreferrer" target="_blank">
               <BlobButton
                 fullWidth
                 numOfBlobs={8}

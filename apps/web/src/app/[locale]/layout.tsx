@@ -76,7 +76,7 @@ export default async function RootLayout({ children, params }: Props) {
       lang={locale}
       suppressHydrationWarning
     >
-      <body className="flex h-full flex-col overflow-x-hidden bg-background text-foreground antialiased">
+      <body className="flex h-full flex-col overflow-x-hidden bg-background text-foreground antialiased" data-page="main">
         <Providers>
           <NextIntlClientProvider>{children}</NextIntlClientProvider>
         </Providers>

@@ -9,7 +9,7 @@ export const Hero = () => {
   const { setIsContactDialogOpen } = useShared()
 
   return (
-    <StickySection id="index">
+    <StickySection id="hero">
       <div className="relative flex min-h-screen items-center justify-center overflow-hidden pt-16">
         <div
           className="absolute inset-0 bg-center bg-cover opacity-20"
