@@ -2,7 +2,6 @@
 
 import { useMediaQuery } from '@ez/shared/hooks/use-media-query'
 import { cn } from '@ez/shared/lib/utils'
-import { useApp } from '@ez/web/hooks/use-app'
 import { useSite } from '@ez/web/hooks/use-site'
 import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
 import { type HTMLMotionProps, motion } from 'motion/react'
@@ -25,7 +24,6 @@ export const Logo = ({
 }: LogoProps) => {
   const locale = useLocale()
   const { data } = useSite()
-  const { isLandingPage } = useApp()
   const isTablet = useMediaQuery(1179)
 
   const logoImage = (
@@ -54,7 +52,7 @@ export const Logo = ({
     <Fragment>
       {linkable ? (
         <motion.a
-          className="relative flex h-[3.56rem] w-56 space-x-2 md:w-auto"
+          className="relative flex h-[3.56rem] space-x-2 md:w-auto"
           {...props}
           href={getLocalizedLink(locale, '/')}
         >
