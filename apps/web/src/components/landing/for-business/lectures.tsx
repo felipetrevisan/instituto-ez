@@ -1,11 +1,14 @@
 'use client'
 
+import { useShared } from '@ez/shared/hooks/use-shared'
 import { Button } from '@ez/shared/ui/button'
 import { Card } from '@ez/shared/ui/card'
 import { StickySection } from '@ez/web/components/ui/sticky-section'
 import { ArrowRight, Brain, HeartPulse } from 'lucide-react'
 
 export const LecturesSection = () => {
+  const { setIsContactDialogOpen } = useShared()
+
   return (
     <StickySection id="lectures">
       <div className="bg-card py-20">
@@ -15,6 +18,12 @@ export const LecturesSection = () => {
               <h2 className="font-bold text-3xl text-foreground md:text-4xl">
                 Aprendizado que inspira mudança
               </h2>
+              <p className="mx-auto max-w-2xl text-lg text-muted-foreground leading-relaxed">
+                Nossas palestras cuidam da saúde do ser humano de forma integral, unindo mente e
+                corpo para promover equilíbrio e bem-estar no cotidiano. Com uma abordagem leve e
+                acolhedora, apresentam caminhos simples para fortalecer a saúde emocional, cultivar
+                autocuidado e construir uma rotina mais saudável e harmoniosa.
+              </p>
             </div>
 
             <div className="grid gap-8 md:grid-cols-2">
@@ -33,19 +42,26 @@ export const LecturesSection = () => {
                     <div className="inline-block rounded-full bg-primary/10 px-3 py-1 font-semibold text-primary text-xs">
                       NR-1 e NR-12
                     </div>
+                    <p className="font-medium text-secondary text-sm">
+                      Depressão, Ansiedade e Burnout
+                    </p>
                   </div>
                 </div>
 
                 <p className="text-muted-foreground leading-relaxed">
-                  Capacitação atualizada conforme as normas NR-1 e NR-12. Aborda segurança em
-                  máquinas e equipamentos e prevenção de riscos psicossociais, promovendo ambientes
-                  de trabalho mais saudáveis, conscientes e produtivos.
+                  Fundamentada em neurociência, esta palestra explica de forma clara como
+                  identificar e entender sinais de depressão, ansiedade e burnout. O conteúdo aborda
+                  seus impactos no desempenho, os principais comportamentos de risco e medidas
+                  práticas para prevenção e redução de danos. O objetivo é oferecer consciência,
+                  orientação e responsabilidade emocional para empresas que buscam atuar dentro das
+                  normas e construir um ambiente mais seguro e saudável.
                 </p>
 
                 <Button
                   base="for-business"
                   className="group"
                   fullWidth
+                  onClick={() => setIsContactDialogOpen(true)}
                   rounded="lg"
                   scaleEffect={false}
                   theme="secondary"
@@ -66,21 +82,29 @@ export const LecturesSection = () => {
                     <HeartPulse className="size-6 text-secondary" />
                   </div>
                   <div className="space-y-2">
-                    <h3 className="font-bold text-foreground text-xl">Saúde da Mulher</h3>
-                    <p className="font-medium text-secondary text-sm">Corpo e Mente no Trabalho</p>
+                    <h3 className="font-bold text-foreground text-xl">Saúde e Bem-estar</h3>
+                    <p className="font-medium text-secondary text-sm">
+                      Autocuidado, Bem-Estar e Equilíbrio Feminino
+                    </p>
                   </div>
                 </div>
 
                 <p className="text-muted-foreground leading-relaxed">
-                  Conteúdo voltado à valorização da saúde feminina dentro das empresas. Une
-                  neurociência e bem-estar para abordar temas como autocuidado, equilíbrio hormonal,
-                  saúde emocional e produtividade sustentável.
+                  Esta palestra destaca a importância de cultivar uma rotina que fortaleça corpo,
+                  mente e identidade feminina. De forma clara e inspiradora, o conteúdo apresenta
+                  práticas de autocuidado, organização interna e escolhas que aumentam vitalidade,
+                  clareza e bem-estar diário. São compartilhadas orientações para aprimorar a
+                  relação com o próprio corpo, desenvolver consciência emocional e construir uma
+                  rotina mais equilibrada e leve. A neurociência complementa esse processo ao
+                  mostrar como hábitos positivos e estados mentais saudáveis impactam energia,
+                  confiança e qualidade de vida.
                 </p>
 
                 <Button
                   base="for-business"
                   className="group"
                   fullWidth
+                  onClick={() => setIsContactDialogOpen(true)}
                   rounded="lg"
                   scaleEffect={false}
                   theme="secondary"

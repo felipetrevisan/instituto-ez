@@ -1,8 +1,10 @@
 'use client'
 
+import { useShared } from '@ez/shared/hooks/use-shared'
+import { Button } from '@ez/shared/ui'
 import { Card, CardContent } from '@ez/shared/ui/card'
 import { StickySection } from '@ez/web/components/ui/sticky-section'
-import { Building2, LineChart, User, Workflow } from 'lucide-react'
+import { BarChart3, Building2, LineChart, User, Workflow } from 'lucide-react'
 
 const matematizadores = [
   {
@@ -17,7 +19,7 @@ const matematizadores = [
     icon: Workflow,
     title: 'Matematizador de Processos',
     problems: 'Retrabalho, gargalos e burocracia',
-    action: 'Mapeia fluxos, integra setores e quantifica a eficiência operacional',
+    action: 'Mede os processos, integra setores e quantifica a eficiência operacional',
     result: 'Operação fluida e previsível, com redução de desperdícios',
   },
   {
@@ -37,6 +39,8 @@ const matematizadores = [
 ]
 
 export const Mathematizer = () => {
+  const { setIsContactDialogOpen } = useShared()
+
   return (
     <StickySection id="mathematizers">
       <div className="py-20 md:py-32">
@@ -80,6 +84,19 @@ export const Mathematizer = () => {
                 </Card>
               )
             })}
+          </div>
+          <div className="mt-12 text-center">
+            <Button
+              base="mathematizer"
+              className="group px-8 py-6 font-semibold"
+              onClick={() => setIsContactDialogOpen(true)}
+              rounded="lg"
+              size="lg"
+              theme="accent"
+            >
+              <BarChart3 className="mr-2 h-5 w-5" />
+              Quero quantificar o desempenho da minha empresa
+            </Button>
           </div>
         </div>
       </div>

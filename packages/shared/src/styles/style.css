@@ -126,7 +126,7 @@
   --popover-foreground: oklch(0.35 0.12 250);
   --primary: oklch(0.56 0.15 250);
   --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.72 0.12 190);
+  --secondary: oklch(.97 .005 250);
   --secondary-foreground: oklch(1 0 0);
   --tertiary: oklch(0.65 0.15 280);
   --tertiary-foreground: oklch(1 0 0);
@@ -139,7 +139,7 @@
   --border: oklch(0.91 0.01 250);
   --input: oklch(0.91 0.01 250);
   --ring: oklch(0.56 0.15 250);
-  --surface-dark: oklch(0.45 0.08 180);
+  --surface-dark: oklch(.97 .005 250);
   --radius: 0.75rem;
   --gradient-primary: linear-gradient(135deg, oklch(0.56 0.15 250), oklch(0.60 0.15 250));
   --gradient-secondary: linear-gradient(135deg, oklch(0.72 0.12 190), oklch(0.76 0.12 190));
@@ -232,37 +232,4 @@
   --shadow-card-hover: 0 8px 30px -4px oklch(0.56 0.15 250 / 0.15);
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --header: oklch(0.25 0.10 250);
-}
-
-
-@layer base {
-  [data-theme="mathematizer"] {
-    * {
-      @apply border-border;
-    }
-
-    body {
-      @apply bg-background text-foreground font-sans antialiased;
-    }
-    
-    h1, h2, h3, h4, h5, h6 {
-      @apply font-semibold;
-    }
-  }
-}
-
-@layer utilities {
-  [data-theme="mathematizer"] {
-    .text-gradient {
-      @apply bg-gradient-to-r from-accent to-cyan-400 bg-clip-text text-transparent;
-    }
-    
-    .hover-lift {
-      @apply transition-transform duration-300 hover:-translate-y-1;
-    }
-    
-    .glow-accent {
-      box-shadow: var(--shadow-glow);
-    }
-  }
 }

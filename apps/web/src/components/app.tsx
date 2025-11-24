@@ -139,7 +139,7 @@ function Header({
           )}
           <div className="flex flex-row items-center justify-center gap-2">
             {(isNormalPage() || isLandingPage()) && <ThemeToggle />}
-            <Navbar.Toggle />
+            {(isMobile || isTablet) && <Navbar.Toggle />}
             <Select defaultValue={locale} onValueChange={handleChange}>
               <SelectTrigger className="max-w-max cursor-pointer p-3">
                 <SelectValue placeholder={t('placeholder')} />

@@ -24,17 +24,17 @@ export const Hero = () => {
             </h1>
 
             <p className="mx-auto max-w-3xl text-muted-foreground text-xl leading-relaxed md:text-2xl">
-              Descubra com dados onde sua empresa está perdendo energia — e como multiplicar
-              resultados em 2026.
+              Use dados matemáticos para descobrir onde sua empresa está perdendo energia e como
+              multiplicar seus resultados.
             </p>
 
             <p className="mx-auto max-w-2xl text-foreground/80 text-lg">
-              O{' '}
+              Os <span className="font-semibold text-accent">Matematizadores</span> são sistemas
+              neuroanalíticos que traduzem o comportamento e os processos da sua empresa em métricas
+              reais. Clareza, direção e estratégia em números. O{' '}
               <span className="font-semibold text-accent">
                 Matematizador de Eficiência Empresarial
               </span>{' '}
-              é um sistema neuroanalítico que traduz o comportamento e os processos da sua empresa
-              em métricas reais. Clareza, direção e estratégia em números — sem achismos.
             </p>
 
             <div className="pt-8">

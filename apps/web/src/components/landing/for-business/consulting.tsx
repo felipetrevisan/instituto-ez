@@ -1,11 +1,14 @@
 'use client'
 
+import { useShared } from '@ez/shared/hooks/use-shared'
 import { Button } from '@ez/shared/ui/button'
 import { Card } from '@ez/shared/ui/card'
 import { StickySection } from '@ez/web/components/ui/sticky-section'
 import { Calendar, Target, TrendingUp, Users } from 'lucide-react'
 
 export const ConsultingSection = () => {
+  const { setIsContactDialogOpen } = useShared()
+
   return (
     <StickySection id="consulting">
       <div className="bg-gradient-to-br from-muted/30 to-background py-20">
@@ -31,7 +34,7 @@ export const ConsultingSection = () => {
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                   <div className="space-y-2 rounded-lg bg-primary/5 p-5 text-center transition-colors hover:bg-primary/10">
                     <Users className="mx-auto size-8 text-primary" />
-                    <h4 className="font-semibold text-foreground">Desenvolvimento de líderes</h4>
+                    <h4 className="font-semibold text-foreground">Desenvolvimento empresarial</h4>
                   </div>
 
                   <div className="space-y-2 rounded-lg bg-secondary/5 p-5 text-center transition-colors hover:bg-secondary/10">
@@ -62,11 +65,12 @@ export const ConsultingSection = () => {
                     base="for-business"
                     className="group"
                     effect="gradient"
+                    onClick={() => setIsContactDialogOpen(true)}
                     rounded="xl"
                     size="lg"
                     theme="accent"
                   >
-                    Agendar uma conversa estratégica
+                    Clique aqui para saber mais
                   </Button>
                 </div>
               </div>

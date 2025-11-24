@@ -7,6 +7,8 @@ import { Mathematizer } from '@ez/web/components/landing/mathematizer/mathematiz
 import { WhatIs } from '@ez/web/components/landing/mathematizer/what-is'
 import { WhyCompaniesNeed } from '@ez/web/components/landing/mathematizer/why-companies-need'
 
+import './style.css'
+
 export function LandingPageMathematizer() {
   return (
     <div className="min-h-screen">

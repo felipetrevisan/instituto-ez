@@ -1,10 +1,13 @@
 'use client'
 
+import { useShared } from '@ez/shared/hooks/use-shared'
 import { Button } from '@ez/shared/ui'
 import { StickySection } from '@ez/web/components/ui/sticky-section'
 import { ArrowRight, Building2 } from 'lucide-react'
 
 export const Hero = () => {
+  const { setIsContactDialogOpen } = useShared()
+
   return (
     <StickySection id="hero">
       <div className="relative flex min-h-[90vh] items-center justify-center overflow-hidden bg-gradient-to-br from-background via-background to-muted/30">
@@ -26,8 +29,8 @@ export const Hero = () => {
             </h1>
 
             <p className="mx-auto max-w-3xl text-lg text-muted-foreground leading-relaxed md:text-xl">
-              Aplicamos ciência do comportamento, gestão e estratégia para transformar comunicação,
-              planejamento e saúde organizacional em resultados concretos.
+              Unimos ciência do comportamento, saúde mental e autoconsciência para promover
+              equilíbrio, bem-estar e relações mais saudáveis no ambiente de trabalho.
             </p>
 
             <div className="flex flex-col items-center justify-center gap-4 pt-4 sm:flex-row">
@@ -35,6 +38,7 @@ export const Hero = () => {
                 base="for-business"
                 className="group"
                 effect="gradient"
+                onClick={() => setIsContactDialogOpen(true)}
                 rounded="xl"
                 size="lg"
                 theme="accent"
@@ -42,7 +46,13 @@ export const Hero = () => {
                 Solicitar proposta
                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
               </Button>
-              <Button base="for-business" rounded="xl" size="lg" theme="tertiary">
+              <Button
+                base="for-business"
+                onClick={() => setIsContactDialogOpen(true)}
+                rounded="xl"
+                size="lg"
+                theme="tertiary"
+              >
                 Falar com o Instituto
               </Button>
             </div>

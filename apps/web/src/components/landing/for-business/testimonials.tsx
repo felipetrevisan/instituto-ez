@@ -1,11 +1,14 @@
 'use client'
 
+import { useShared } from '@ez/shared/hooks/use-shared'
 import { Button } from '@ez/shared/ui/button'
 import { Card } from '@ez/shared/ui/card'
 import { StickySection } from '@ez/web/components/ui/sticky-section'
 import { ArrowRight, Heart, TrendingDown, TrendingUp } from 'lucide-react'
 
 export const TestimonialsSection = () => {
+  const { setIsContactDialogOpen } = useShared()
+
   return (
     <StickySection id="testimonials">
       <div className="bg-card py-20">
@@ -46,7 +49,7 @@ export const TestimonialsSection = () => {
                 <div className="space-y-2">
                   <p className="font-bold text-4xl text-secondary">40%</p>
                   <p className="font-semibold text-foreground">Mais produtividade</p>
-                  <p className="text-muted-foreground text-sm">Após novo modelo de planejamento</p>
+                  <p className="text-muted-foreground text-sm">Após as palestras de saúde</p>
                 </div>
               </Card>
 
@@ -72,6 +75,7 @@ export const TestimonialsSection = () => {
                 base="for-business"
                 className="group"
                 effect="gradient"
+                onClick={() => setIsContactDialogOpen(true)}
                 rounded="xl"
                 size="lg"
                 theme="accent"
