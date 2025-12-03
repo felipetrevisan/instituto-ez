@@ -1,17 +1,9 @@
 import { cn } from '@ez/shared/lib/utils'
+import { Size } from '@ez/shared/types'
 import { Slot } from '@radix-ui/react-slot'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { type HTMLMotionProps, motion, type Transition } from 'motion/react'
 import React from 'react'
-
-enum Size {
-  default = 'default',
-  sm = 'sm',
-  lg = 'lg',
-  xl = 'xl',
-  '2xl' = 'xxl',
-  full = 'full',
-}
 
 const buttonVariants = cva(
   // Base
@@ -22,6 +14,8 @@ const buttonVariants = cva(
         default: '',
         mathematizer: 'glow-accent hover-lift whitespace-nowrap',
         'for-business': 'whitespace-nowrap',
+        mentory: '',
+        about: ''
       },
 
       variant: {
@@ -166,7 +160,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           buttonVariants({ variant, theme, size, rounded, effect, shadow, fullWidth }),
           className,
         )}
-        data-size={Size[size as keyof typeof Size] || Size.full}
+        data-size={size ?? 'default'}
         data-slot="button"
         ref={localRef}
         transition={{ type: 'spring', stiffness: 250, damping: 15 }}

@@ -51,6 +51,7 @@
 	},
 	"exports": {
 		"./style.css": "./src/styles/style.css",
+		"./styles/*": "./src/styles/*",
 		"./postcss.config": "./postcss.config.mjs",
 		"./icons/*": "./src/icons/*.ts",
 		"./lib/*": "./src/lib/*.ts",

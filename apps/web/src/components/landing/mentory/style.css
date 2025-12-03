@@ -1,0 +1,31 @@
+@layer base {
+  [data-theme="mathematizer"] {
+    * {
+      @apply border-border;
+    }
+
+    body {
+      @apply bg-yellow-400 text-foreground font-sans antialiased border-4;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      @apply font-semibold;
+    }
+  }
+}
+
+@layer utilities {
+  [data-theme="mathematizer"] {
+    .text-gradient {
+      @apply bg-gradient-to-r from-accent to-cyan-400 bg-clip-text text-transparent;
+    }
+    
+    .hover-lift {
+      @apply transition-transform duration-300 hover:-translate-y-1;
+    }
+    
+    .glow-accent {
+      box-shadow: var(--shadow-glow);
+    }
+  }
+}

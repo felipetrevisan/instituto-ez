@@ -29,6 +29,7 @@ const tabVariants = cva(
           'text-secondary-foreground shadow-secondary/20 outline-secondary/40 hover:border-secondary/40',
         tertiary:
           'text-tertiary-foreground shadow-tertiary/20 outline-tertiary/40 hover:border-tertiary/40',
+        accent: 'text-accent-foreground shadow-accent/20 outline-accent/40 hover:border-accent/40',
         custom: '',
       },
       rounded: {
@@ -98,6 +99,7 @@ const tabHighlightVariants = cva('absolute rounded-full', {
       secondary:
         'bg-gradient-to-r from-secondary/40 to-secondary/80 text-secondary opacity-30 blur-sm',
       tertiary: 'bg-gradient-to-r from-tertiary/40 to-tertiary/80 text-tertiary opacity-30 blur-sm',
+      accent: 'bg-gradient-to-r from-accent/40 to-accent/80 text-accent opacity-30 blur-sm',
       custom: '',
     },
   },
@@ -159,6 +161,7 @@ const tabsTriggerVariants = cva(
         default: 'text-primary data-[state=active]:text-primary-foreground',
         secondary: 'text-secondary data-[state=active]:text-secondary-foreground',
         tertiary: 'text-tertiary data-[state=active]:text-tertiary-foreground',
+        accent: 'text-accent data-[state=active]:text-accent-foreground',
         custom: '',
       },
     },

@@ -1,0 +1,30 @@
+import { PackageIcon } from '@sanity/icons'
+import { defineField, defineType } from 'sanity'
+
+export default defineType({
+  name: 'mathematizer.mathematizer.items',
+  title: 'Mathematizer — Items - Mathematizer',
+  icon: PackageIcon,
+  type: 'object',
+  fields: [
+    defineField({ name: 'title', type: 'localizedString' }),
+    defineField({ name: 'problems', type: 'localizedString' }),
+    defineField({ name: 'action', type: 'localizedString' }),
+    defineField({ name: 'result', type: 'localizedString' }),
+    defineField({
+      name: 'icon',
+      title: 'Icon',
+      type: 'lucide-icon',
+    }),
+  ],
+  preview: {
+    select: {
+      title: 'title.pt',
+    },
+    prepare({ title }) {
+      return {
+        title,
+      }
+    },
+  },
+})

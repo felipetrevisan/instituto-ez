@@ -1,4 +1,4 @@
-import { useMediaQuery } from '@ez/shared/hooks/use-media-query'
+import { useDeviceType } from '@ez/shared/hooks/use-media-query'
 import { cn } from '@ez/shared/lib/utils'
 import type { Ebook } from '@ez/shared/types/ebook'
 import type { Theme } from '@ez/shared/types/global'
@@ -118,8 +118,7 @@ const EbookGridComponent = ({
   ImageComponent: React.ComponentType<ImageComponentProps>
   imageBuilder: (assets: SanityImageSource) => ImageUrlBuilder
 }) => {
-  const isMobile = useMediaQuery()
-  const isTablet = useMediaQuery(1179)
+  const { isTablet, isMobile } = useDeviceType()
 
   return (
     <div className="flex h-full w-full flex-col space-y-14">

@@ -1,16 +1,17 @@
 'use client'
 
-import { useMediaQuery } from '@ez/shared/hooks/use-media-query'
+import { useDeviceType } from '@ez/shared/hooks/use-media-query'
 import { cn } from '@ez/shared/lib/utils'
 import { motion } from 'motion/react'
 import { useState } from 'react'
 
-type AnimatedValue = {
-  [key: string]: {
+type AnimatedValue = Record<
+  string,
+  {
     initial: number | string
     hovered: number | string
   }
-}
+>
 
 type AnimatedButtonProps = {
   label?: string
@@ -32,7 +33,7 @@ export function AnimatedButton({
   onClickAction,
 }: AnimatedButtonProps) {
   const [hovered, setHovered] = useState(false)
-  const isMobile = useMediaQuery()
+  const { isMobile } = useDeviceType()
 
   function getAnimationState(map: AnimatedValue, hovered: boolean) {
     return Object.fromEntries(

@@ -1,80 +1,124 @@
 'use client'
 
 import { useShared } from '@ez/shared/hooks/use-shared'
+import { cn } from '@ez/shared/lib/utils'
 import { Button } from '@ez/shared/ui/button'
 import { Card } from '@ez/shared/ui/card'
+import { Icon } from '@ez/web/components/ui/icon'
 import { StickySection } from '@ez/web/components/ui/sticky-section'
-import { Calendar, Target, TrendingUp, Users } from 'lucide-react'
+import type { SectionForBusinessConsulting } from '@ez/web/types/landing/for-business'
+import { motion } from 'motion/react'
 
-export const ConsultingSection = () => {
+export const Consulting = ({
+  data,
+  locale,
+}: {
+  data: SectionForBusinessConsulting
+  locale: string
+}) => {
+  const colors = ['primary', 'secondary', 'accent']
+
   const { setIsContactDialogOpen } = useShared()
 
   return (
     <StickySection id="consulting">
-      <div className="bg-gradient-to-br from-muted/30 to-background py-20">
+      <div className="bg-gradient-to-br from-muted/30 to-background py-16 sm:py-20">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-5xl">
-            <Card
-              base="for-business"
-              className="p-8 shadow-[var(--shadow-card)] transition-shadow hover:shadow-[var(--shadow-card-hover)] md:p-12"
-              theme="accent"
-              variant="landing"
+            <motion.div
+              initial={{ opacity: 0, y: 60 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true, margin: '-100px' }}
+              whileInView={{ opacity: 1, y: 0 }}
             >
-              <div className="space-y-8">
-                <div className="space-y-4 text-center">
-                  <h2 className="font-bold text-3xl text-foreground md:text-4xl">
-                    Para empresas que buscam evolução contínua
-                  </h2>
-                  <p className="mx-auto max-w-2xl text-lg text-muted-foreground leading-relaxed">
-                    Quando a transformação precisa ser mais profunda, o Instituto EZ oferece
-                    consultorias personalizadas com mentoria estratégica.
-                  </p>
+              <Card
+                className="p-8 shadow-[var(--shadow-card)] transition-shadow duration-300 hover:shadow-[var(--shadow-card-hover)] md:p-12"
+                theme="landing"
+                variant="landing"
+              >
+                <div className="space-y-8">
+                  <div className="space-y-4 text-center">
+                    <h2 className="font-bold text-3xl text-foreground md:text-4xl">
+                      {data.heading[locale]}
+                    </h2>
+                    <p className="mx-auto max-w-2xl text-lg text-muted-foreground leading-relaxed">
+                      {data.subheading[locale]}
+                    </p>
+                  </div>
+
+                  {data.items && (
+                    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                      {data.items.map((item, index) => {
+                        const color = colors[index % colors.length]
+
+                        return (
+                          <motion.div
+                            className={cn(
+                              'space-y-2 rounded-lg p-5 text-center transition-colors',
+                              {
+                                'bg-primary/5 hover:bg-primary/10': color === 'primary',
+                                'bg-secondary/5 hover:bg-secondary/10': color === 'secondary',
+                                'bg-accent/5 hover:bg-accent/10': color === 'accent',
+                              },
+                            )}
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            // biome-ignore lint/suspicious/noArrayIndexKey: false positive
+                            key={`forbusiness-consulting-${index}`}
+                            transition={{ delay: 0.1, duration: 0.4 }}
+                            viewport={{ once: true }}
+                            whileHover={{ scale: 1.05 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                          >
+                            {item.icon && (
+                              <Icon
+                                className={cn('mx-auto size-8', {
+                                  'text-primary': color === 'primary',
+                                  'text-secondary': color === 'secondary',
+                                  'text-accent': color === 'accent',
+                                })}
+                                name={item.icon}
+                              />
+                            )}
+                            <h4 className="font-semibold text-foreground">{item.title[locale]}</h4>
+                          </motion.div>
+                        )
+                      })}
+                    </div>
+                  )}
+                  <div className="space-y-4 pt-4 text-center">
+                    <p className="text-muted-foreground leading-relaxed">
+                      O resultado é uma{' '}
+                      <strong className="text-foreground">
+                        cultura organizacional mais coerente, humana e eficiente
+                      </strong>
+                      .
+                    </p>
+                    {data.cta && (
+                      <Button
+                        base="for-business"
+                        className="group"
+                        effect={data.cta.theme.effect}
+                        onClick={() => setIsContactDialogOpen(true)}
+                        rounded={data.cta.theme.rounded}
+                        size={data.cta.theme.size}
+                        theme={data.cta.theme.theme}
+                      >
+                        {data.cta.iconPrefix && (
+                          <Icon className="size-4" name={data.cta.iconPrefix} />
+                        )}
+                        {data.cta.label?.[locale]}
+                        {data.cta.iconSuffix && (
+                          <Icon
+                            className="size-4 transition-transform group-hover:translate-x-1"
+                            name={data.cta.iconSuffix}
+                          />
+                        )}
+                      </Button>
+                    )}
+                  </div>
                 </div>
-
-                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                  <div className="space-y-2 rounded-lg bg-primary/5 p-5 text-center transition-colors hover:bg-primary/10">
-                    <Users className="mx-auto size-8 text-primary" />
-                    <h4 className="font-semibold text-foreground">Desenvolvimento empresarial</h4>
-                  </div>
-
-                  <div className="space-y-2 rounded-lg bg-secondary/5 p-5 text-center transition-colors hover:bg-secondary/10">
-                    <Target className="mx-auto size-8 text-secondary" />
-                    <h4 className="font-semibold text-foreground">Alinhamento de processos</h4>
-                  </div>
-
-                  <div className="space-y-2 rounded-lg bg-accent/5 p-5 text-center transition-colors hover:bg-accent/10">
-                    <TrendingUp className="mx-auto size-8 text-accent" />
-                    <h4 className="font-semibold text-foreground">Indicadores de desempenho</h4>
-                  </div>
-
-                  <div className="space-y-2 rounded-lg bg-primary/5 p-5 text-center transition-colors hover:bg-primary/10">
-                    <Calendar className="mx-auto size-8 text-primary" />
-                    <h4 className="font-semibold text-foreground">Acompanhamento contínuo</h4>
-                  </div>
-                </div>
-
-                <div className="space-y-4 pt-4 text-center">
-                  <p className="text-muted-foreground leading-relaxed">
-                    O resultado é uma{' '}
-                    <strong className="text-foreground">
-                      cultura organizacional mais coerente, humana e eficiente
-                    </strong>
-                    .
-                  </p>
-                  <Button
-                    base="for-business"
-                    className="group"
-                    effect="gradient"
-                    onClick={() => setIsContactDialogOpen(true)}
-                    rounded="xl"
-                    size="lg"
-                    theme="accent"
-                  >
-                    Clique aqui para saber mais
-                  </Button>
-                </div>
-              </div>
-            </Card>
+              </Card>
+            </motion.div>
           </div>
         </div>
       </div>

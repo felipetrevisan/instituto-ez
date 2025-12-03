@@ -1,52 +1,78 @@
 import LandingPage from '@ez/web/app/[locale]/(public)/(root)/[slug]/_landing-page'
 import NormalPage from '@ez/web/app/[locale]/(public)/(root)/[slug]/_normal-page'
+import { getAvailableLandingPages } from '@ez/web/config/landing-page'
 import { locales } from '@ez/web/config/locale'
+import { getLandingPage } from '@ez/web/server/get-landing'
 import { getPageBySlug, getPages } from '@ez/web/server/get-page'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 import Loading from './_loading'
 
+function resolveLanding(slug: string) {
+  return getAvailableLandingPages().find((landing) =>
+    landing.slug.includes(slug)
+  )
+}
+
 export async function generateMetadata({
-  params,
+  params
 }: {
   params: Promise<{ slug: string; locale: string }>
 }): Promise<Metadata> {
   const { slug, locale } = await params
 
-  const data = await getPageBySlug(slug, locale)
+  // primeiro verifica se é landing
+  const landing = resolveLanding(slug)
+  if (landing) {
+    const data = await getLandingPage(slug, locale)
+    if (!data) return { title: '404' }
 
-  if (!data) {
+    const { title, description, keywords } = data.settings
     return {
-      title: '404',
+      title: title?.[locale] ?? '',
+      description: description?.[locale] ?? '',
+      keywords: keywords?.[locale] ?? ''
     }
   }
 
-  const { title, description, keywords } = data
+  // página normal
+  const data = await getPageBySlug(slug, locale)
+  if (!data) return { title: '404' }
 
   return {
-    title: title?.[locale] || '',
-    description: description?.[locale] || '',
-    keywords: keywords?.[locale] || '',
+    title: data.title?.[locale] ?? '',
+    description: data.description?.[locale] ?? '',
+    keywords: data.keywords?.[locale] ?? ''
   }
 }
 
 export default async function Page({
-  params,
+  params
 }: {
   params: Promise<{ slug: string; locale: string }>
 }) {
   const { slug, locale } = await params
 
-  const data = await getPageBySlug(slug, locale)
+  const landing = resolveLanding(slug)
 
-  if (!data) {
-    notFound()
+  if (landing) {
+    const data = await getLandingPage(slug, locale)
+    if (!data) notFound()
+
+    return (
+      <Suspense fallback={<Loading />}>
+        <LandingPage data={data} />
+      </Suspense>
+    )
   }
+
+  const data = await getPageBySlug(slug, locale)
+  if (!data) notFound()
 
   return (
     <Suspense fallback={<Loading />}>
-      {data.type === 'page' ? <NormalPage data={data} slug={slug} /> : <LandingPage data={data} />}
+      <NormalPage data={data} slug={slug} />
     </Suspense>
   )
 }
@@ -58,12 +84,10 @@ export async function generateStaticParams() {
     locales
       .map((locale) => {
         const currentSlug = page.slug?.[locale]?.current
-        if (!currentSlug) return null
-        return {
-          slug: currentSlug,
-          locale,
-        }
+        return currentSlug
+          ? { slug: currentSlug, locale }
+          : null
       })
-      .filter(Boolean),
+      .filter(Boolean)
   )
 }

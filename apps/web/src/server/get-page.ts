@@ -17,6 +17,7 @@ export async function getPages() {
   return sanityFetch<Page[]>({ query: pageQuery })
 }
 
+// To be removed
 export async function getLandingPageSettingsBySlug(slug: string, locale: string) {
   return sanityFetch<{ type: string; key: string; navigation?: Navigation }>({
     query: pageSettingsQueryWithSlug,

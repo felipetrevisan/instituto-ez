@@ -3,101 +3,112 @@
 import { useShared } from '@ez/shared/hooks/use-shared'
 import { Button } from '@ez/shared/ui'
 import { Card, CardContent } from '@ez/shared/ui/card'
+import { Icon } from '@ez/web/components/ui/icon'
 import { StickySection } from '@ez/web/components/ui/sticky-section'
-import { BarChart3, Building2, LineChart, User, Workflow } from 'lucide-react'
+import type { SectionMathematizerMathematizer } from '@ez/web/types/landing/mathematizer'
+import { createPortableComponents } from '@ez/web/utils/create-portable-components'
+import { PortableText } from '@portabletext/react'
+import { DynamicIcon } from 'lucide-react/dynamic'
+import { motion } from 'motion/react'
 
-const matematizadores = [
-  {
-    icon: Building2,
-    title: 'Matematizador Empresarial',
-    problems: 'Desconexão entre áreas, falhas de comunicação e liderança sem clareza',
-    action:
-      'Mede engajamento, estresse, propósito e sinergia entre setores, convertendo o clima em indicadores concretos',
-    result: 'Decisões rápidas, embasadas e estratégicas',
-  },
-  {
-    icon: Workflow,
-    title: 'Matematizador de Processos',
-    problems: 'Retrabalho, gargalos e burocracia',
-    action: 'Mede os processos, integra setores e quantifica a eficiência operacional',
-    result: 'Operação fluida e previsível, com redução de desperdícios',
-  },
-  {
-    icon: LineChart,
-    title: 'Matematização Administrativa',
-    problems: 'Decisões imprecisas, falta de coerência e ruídos na liderança',
-    action: 'Avalia gestão, finanças e coerência entre estratégia e execução',
-    result: 'Direção sólida e lógica, com domínio sobre o futuro da empresa',
-  },
-  {
-    icon: User,
-    title: 'Matematização Pessoal',
-    problems: 'Colaboradores desmotivados, estresse e desconexão',
-    action: 'Mede saúde emocional e propósito individual, correlacionando com desempenho coletivo',
-    result: 'Equipes equilibradas, produtivas e alinhadas à cultura da empresa',
-  },
-]
-
-export const Mathematizer = () => {
+export const Mathematizer = ({
+  data,
+  locale,
+}: {
+  data: SectionMathematizerMathematizer
+  locale: string
+}) => {
   const { setIsContactDialogOpen } = useShared()
 
   return (
     <StickySection id="mathematizers">
       <div className="py-20 md:py-32">
         <div className="container mx-auto px-4">
-          <h2 className="mb-16 text-center font-bold text-3xl md:text-5xl">
-            Os 4 <span className="text-primary">Matematizadores</span>
-          </h2>
+          <motion.h2
+            className="mb-16 text-center font-bold text-3xl md:text-5xl"
+            initial={{ opacity: 0, y: 30 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            viewport={{ once: true, amount: 0.3 }}
+            whileInView={{ opacity: 1, y: 0 }}
+          >
+            <PortableText components={createPortableComponents()} value={data.heading[locale]} />
+          </motion.h2>
 
           <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-2">
-            {matematizadores.map((item, index) => {
-              const Icon = item.icon
+            {data.items.map((item, index) => {
               return (
-                // biome-ignore lint/suspicious/noArrayIndexKey: false positive
-                <Card base="mathematizer" className="hover-lift" key={index} variant="outline">
-                  <CardContent className="space-y-6 p-8">
-                    <div className="flex size-16 items-center justify-center rounded-lg bg-accent/10">
-                      <Icon className="size-8 text-accent" />
-                    </div>
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  // biome-ignore lint/suspicious/noArrayIndexKey: false positive
+                  key={`mathematizer-mathematizer-${index}`}
+                  transition={{ duration: 0.6, delay: index * 0.1, ease: 'easeOut' }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                >
+                  <Card
+                    className="hover-lift h-full border-border transition-all duration-300 hover:border-accent/50"
+                    theme="landing"
+                    variant="landing"
+                  >
+                    <CardContent className="space-y-6 p-8">
+                      {item.icon && (
+                        <div className="flex size-16 items-center justify-center rounded-full bg-accent/10">
+                          <Icon className="size-8 text-accent" name={item.icon} />
+                        </div>
+                      )}
 
-                    <h3 className="font-bold text-2xl">{item.title}</h3>
+                      <h3 className="font-bold text-2xl">{item.title[locale]}</h3>
 
-                    <div className="space-y-4 text-foreground/80">
-                      <div>
-                        <p className="mb-2 font-semibold text-accent text-sm">
-                          Problemas que resolve:
-                        </p>
-                        <p>{item.problems}</p>
+                      <div className="space-y-4 text-foreground/80">
+                        <div>
+                          <p className="mb-2 font-semibold text-accent text-sm">
+                            Problemas que resolve:
+                          </p>
+                          <p>{item.problems[locale]}</p>
+                        </div>
+
+                        <div>
+                          <p className="mb-2 font-semibold text-accent text-sm">Como atua:</p>
+                          <p>{item.action[locale]}</p>
+                        </div>
+
+                        <div>
+                          <p className="mb-2 font-semibold text-accent text-sm">Resultado:</p>
+                          <p className="font-medium text-foreground">{item.result[locale]}</p>
+                        </div>
                       </div>
-
-                      <div>
-                        <p className="mb-2 font-semibold text-accent text-sm">Como atua:</p>
-                        <p>{item.action}</p>
-                      </div>
-
-                      <div>
-                        <p className="mb-2 font-semibold text-accent text-sm">Resultado:</p>
-                        <p className="font-medium text-foreground">{item.result}</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                    </CardContent>
+                  </Card>
+                </motion.div>
               )
             })}
           </div>
-          <div className="mt-12 text-center">
-            <Button
-              base="mathematizer"
-              className="group px-8 py-6 font-semibold"
-              onClick={() => setIsContactDialogOpen(true)}
-              rounded="lg"
-              size="lg"
-              theme="accent"
+          {data.cta && (
+            <motion.div
+              className="mt-12 text-center"
+              initial={{ opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.4, ease: 'easeOut' }}
+              viewport={{ once: true, amount: 0.3 }}
+              whileInView={{ opacity: 1, y: 0 }}
             >
-              <BarChart3 className="mr-2 h-5 w-5" />
-              Quero quantificar o desempenho da minha empresa
-            </Button>
-          </div>
+              <Button
+                base="mathematizer"
+                className="group px-8 py-6 font-semibold"
+                rounded={data.cta.theme.rounded}
+                size={data.cta.theme.size}
+                theme={data.cta.theme.theme}
+              >
+                {data.cta.iconPrefix && <Icon className="mr-2 size-5" name={data.cta.iconPrefix} />}
+                {data.cta.label[locale]}
+                {data.cta.iconSuffix && (
+                  <Icon
+                    className="ml-2 size-5 transition-transform group-hover:translate-x-1"
+                    name={data.cta.iconSuffix}
+                  />
+                )}
+              </Button>
+            </motion.div>
+          )}
         </div>
       </div>
     </StickySection>

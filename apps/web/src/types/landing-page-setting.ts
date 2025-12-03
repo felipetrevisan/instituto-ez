@@ -3,9 +3,7 @@ import type { Section } from './sections'
 
 export type LandingPageSetting = {
   sections: Section[]
-  seals: {
-    [key: string]: SealItem[]
-  }
+  seals: Record<string, SealItem[]>
 }
 
 export type SealItem = {

@@ -5,70 +5,36 @@ import type { PortableTextBlock } from 'next-sanity'
 
 export type Ebook = {
   id: string
-  title: {
-    [key: string]: string
-  }
-  subtitle?: {
-    [key: string]: string
-  }
-  slug: {
-    [key: string]: {
-      current: string
-    }
-  }
-  description?: {
-    [key: string]: string
-  }
+  title: Record<string, string>
+  subtitle?: Record<string, string>
+  slug: Record<string, { current: string }>
+  description?: Record<string, string>
   price: Price
   seo: {
-    description: {
-      [key: string]: string
-    }
-    keywords: {
-      [key: string]: string
-    }
+    description: Record<string, string>
+    keywords: Record<string, string>
   }
   download: {
     disabled: boolean
-    label: {
-      [key: string]: string
-    }
-    url: {
-      [key: string]: string
-    }
+    label: Record<string, string>
+    url: Record<string, string>
   }
   overview: {
-    title?: {
-      [key: string]: string
-    }
-    description?: {
-      [key: string]: string
-    }
+    title?: Record<string, string>
+    description?: Record<string, string>
   }
   index: {
-    title?: {
-      [key: string]: string
-    }
-    description?: {
-      [key: string]: PortableTextBlock[]
-    }
+    title?: Record<string, string>
+    description?: Record<string, PortableTextBlock[]>
     video: {
-      title?: {
-        [key: string]: string
-      }
-      url?: {
-        [key: string]: string
-      }
+      title?: Record<string, string>
+      url?: Record<string, string>
     }
   }
   badges: Badge[]
   metadata: Metadata[]
   chapter: {
-    cover?: {
-      [key: string]: {
-        cover: SanityAsset
-      }
-    }
+    cover?: Record<string, { cover: SanityAsset }>
     chapters: Chapter[]
   }
   authors: Author[]
@@ -100,14 +66,15 @@ export type Ebook = {
       }
     }
   }
-  image: {
-    [key: string]: {
+  image: Record<
+    string,
+    {
       background?: SanityAsset
       preview: SanityAsset
       large: SanityAsset
       footer: SanityAsset
     }
-  }
+  >
   questions?: Question[]
   disabled: boolean
   button?: Button
@@ -129,43 +96,27 @@ export type EbookCollection = {
 
 export type Metadata = {
   _key: string
-  title: {
-    [key: string]: string
-  }
+  title: Record<string, string>
   type: 'string' | 'number'
-  text?: {
-    [key: string]: string
-  }
+  text?: Record<string, string>
   value?: number
-  prefix?: {
-    [key: string]: string
-  }
-  suffix?: {
-    [key: string]: string
-  }
+  prefix?: Record<string, string>
+  suffix?: Record<string, string>
   media: Media
 }
 
 export type Badge = {
   _key: string
   type: 'string' | 'number' | 'star'
-  text?: {
-    [key: string]: string
-  }
+  text?: Record<string, string>
   value?: number
-  prefix?: {
-    [key: string]: string
-  }
-  suffix?: {
-    [key: string]: string
-  }
+  prefix?: Record<string, string>
+  suffix?: Record<string, string>
   icon?: IconName
 }
 
 export type Chapter = {
-  content: {
-    [key: string]: PortableTextBlock[]
-  }
+  content: Record<string, PortableTextBlock[]>
 }
 
 export type Author = {
@@ -173,9 +124,7 @@ export type Author = {
   name: string
   background?: SanityAsset
   photo?: SanityAsset
-  content: {
-    [key: string]: PortableTextBlock[]
-  }
+  content: Record<string, PortableTextBlock[]>
 }
 
 export type Media = {
@@ -186,33 +135,21 @@ export type Media = {
 
 export type Question = {
   _key: string
-  title: {
-    [key: string]: string
-  }
-  content: {
-    [key: string]: string
-  }
+  title: Record<string, string>
+  content: Record<string, string>
 }
 
 export type Price = {
   regular: {
     price: number
-    text?: {
-      [key: string]: string
-    }
+    text?: Record<string, string>
   }
-  priceOffText: {
-    [key: string]: string
-  }
-  priceByText: {
-    [key: string]: string
-  }
+  priceOffText: Record<string, string>
+  priceByText: Record<string, string>
   hasDiscount: boolean
   discount?: {
     price: number
-    text?: {
-      [key: string]: string
-    }
+    text?: Record<string, string>
   }
   theme: {
     regular: PriceTheme

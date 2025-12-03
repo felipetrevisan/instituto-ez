@@ -4,18 +4,12 @@ import type { PortableTextBlock } from 'next-sanity'
 
 export type Immersion = {
   id: string
-  title: {
-    [key: string]: string
-  }
-  content: {
-    [key: string]: PortableTextBlock[]
-  }
+  title: Record<string, string>
+  content: Record<string, PortableTextBlock[]>
   background: SanityAsset
   button: Button
   ribbon: {
     show: boolean
-    text: {
-      [key: string]: string
-    }
+    text: Record<string, string>
   }
 }

@@ -1,18 +1,18 @@
 'use client'
 
+import { useDeviceType } from '@ez/shared/hooks/use-media-query'
 import { cn } from '@ez/shared/lib/utils'
 import { Subtitle, Title } from '@ez/shared/ui/title'
 import type { Ebook } from '@ez/web/types/ebook'
+import { useLocale, useTranslations } from 'next-intl'
 import HTMLFlipBook from 'react-pageflip'
 import { PageBook } from './_chapters/chapter'
 import { CoverBook } from './_chapters/cover'
 
 import './styles.css'
-import { useMediaQuery } from '@ez/shared/hooks/use-media-query'
-import { useLocale, useTranslations } from 'next-intl'
 
 export function Overview({ data }: { data: Ebook }) {
-  const isMobile = useMediaQuery(640)
+  const { isMobile } = useDeviceType()
   const { overview, chapter, id } = data
   const locale = useLocale()
 

@@ -4,9 +4,7 @@ import type { PortableTextBlock } from 'next-sanity'
 
 export type Lecture = {
   id: string
-  title: {
-    [key: string]: string
-  }
+  title: Record<string, string>
   content: PortableTextBlock[]
   background: SanityAsset
   button: Button

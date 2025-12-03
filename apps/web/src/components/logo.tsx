@@ -1,6 +1,6 @@
 'use client'
 
-import { useMediaQuery } from '@ez/shared/hooks/use-media-query'
+import { useDeviceType } from '@ez/shared/hooks/use-media-query'
 import { cn } from '@ez/shared/lib/utils'
 import { useSite } from '@ez/web/hooks/use-site'
 import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
@@ -24,7 +24,7 @@ export const Logo = ({
 }: LogoProps) => {
   const locale = useLocale()
   const { data } = useSite()
-  const isTablet = useMediaQuery(1179)
+  const { isTablet, isMobile } = useDeviceType()
 
   const logoImage = (
     <Fragment>
@@ -37,7 +37,7 @@ export const Logo = ({
         src={src ?? '/assets/logo.png'}
         width={57}
       />
-      {showSlogan && !isTablet && (
+      {showSlogan && (!isTablet && !isMobile) && (
         <span className="flex flex-col justify-center" data-slot="logo">
           <p className={cn('font-bold font-oswald text-lg text-primary')}>{data?.title[locale]}</p>
           <p className={cn('text-nowrap font-light font-questrial text-primary text-sm')}>

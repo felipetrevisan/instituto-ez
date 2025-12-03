@@ -55,9 +55,6 @@ const structure = (S: StructureBuilder, context: ConfigContext) =>
                 S,
                 context,
               }),
-              S.listItem()
-                .title('Serviços para Empresas')
-                .child(S.documentTypeList('mathematizer')),
               orderableDocumentListDeskItem({
                 type: 'testimonial',
                 title: 'Depoimentos',
@@ -73,10 +70,11 @@ const structure = (S: StructureBuilder, context: ConfigContext) =>
         .title('Páginas')
         .icon(PackageIcon)
         .child(S.documentTypeList('page').filter('_type == "page" && type == "page"')),
+
       S.listItem()
         .title('Landing Pages')
         .icon(PackageIcon)
-        .child(S.documentTypeList('page').filter('_type == "page" && type == "landing"')),
+        .child(S.documentTypeList('landingPage')),
 
       S.divider(),
       S.listItem()

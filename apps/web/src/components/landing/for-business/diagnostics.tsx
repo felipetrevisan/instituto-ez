@@ -1,60 +1,95 @@
 'use client'
 
+import { cn } from '@ez/shared/lib/utils'
 import { Card } from '@ez/shared/ui/card'
+import { Icon } from '@ez/web/components/ui/icon'
 import { StickySection } from '@ez/web/components/ui/sticky-section'
-import { Brain, Heart, Target, TrendingUp } from 'lucide-react'
+import type { SectionForBusinessDiagnostic } from '@ez/web/types/landing/for-business'
+import { motion } from 'motion/react'
 
-export const DiagnosticSection = () => {
+export const Diagnostic = ({
+  data,
+  locale,
+}: {
+  data: SectionForBusinessDiagnostic
+  locale: string
+}) => {
+  const colors = ['primary', 'secondary', 'tertiary', 'accent']
+
   return (
     <StickySection id="diagnostics">
-      <div className="bg-card py-20">
+      <div className="bg-card py-16 sm:py-20">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-5xl">
-            <Card
-              base="for-business"
-              className="p-8 shadow-[var(--shadow-card)] transition-shadow hover:shadow-[var(--shadow-card-hover)] md:p-12"
-              theme="accent"
-              variant="landing"
+            <motion.div
+              initial={{ opacity: 0, y: 60 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true, margin: '-100px' }}
+              whileInView={{ opacity: 1, y: 0 }}
             >
-              <div className="grid items-center gap-8 md:grid-cols-2">
-                <div className="space-y-6">
-                  <div className="inline-flex items-center gap-2 rounded-full bg-secondary/10 px-4 py-2 font-medium text-secondary text-sm">
-                    <Target className="h-4 w-4" />
-                    <span>Diagnóstico inicial</span>
+              <Card
+                className="p-8 shadow-[var(--shadow-card)] transition-shadow duration-300 hover:shadow-[var(--shadow-card-hover)] md:p-12"
+                theme="landing"
+                variant="landing"
+              >
+                <div className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
+                  <div className="space-y-6">
+                    <h2 className="font-bold text-3xl text-foreground leading-tight md:text-4xl">
+                      {data.heading[locale]}
+                    </h2>
+
+                    <p className="text-lg text-muted-foreground leading-relaxed">
+                      {data.subheading[locale]}
+                    </p>
                   </div>
 
-                  <h2 className="font-bold text-3xl text-foreground leading-tight md:text-4xl">
-                    Transformação começa de dentro, onde corpo e mente se alinham.
-                  </h2>
+                  {data.items && (
+                    <div className="space-y-4">
+                      {data.items.map((item, index) => {
+                        const color = colors[index % colors.length]
 
-                  <p className="text-lg text-muted-foreground leading-relaxed">
-                    Compreender nossos processos internos fortalece organização mental, estabilidade
-                    emocional e capacidade de adaptação. Quando cuidamos da saúde física e
-                    emocional, criamos espaço para decisões mais claras, menos sobrecarga e uma
-                    sensação maior de presença e bem-estar ao longo do dia. Esse olhar interno,
-                    guiado por conhecimento científico, favorece um ritmo mais equilibrado e
-                    sustentável de evolução.
-                  </p>
+                        return (
+                          <motion.div
+                            className={cn(
+                              'flex items-start gap-4 rounded-lg p-6 transition-colors',
+                              {
+                                'bg-primary/5 hover:bg-primary/10': color === 'primary',
+                                'bg-secondary/5 hover:bg-secondary/10': color === 'secondary',
+                                'bg-tertiary/5 hover:bg-tertiary/10': color === 'tertiary',
+                                'bg-accent/5 hover:bg-accent/10': color === 'accent',
+                              },
+                            )}
+                            initial={{ opacity: 0, x: 40 }}
+                            // biome-ignore lint/suspicious/noArrayIndexKey: false positive
+                            key={`forbusiness-diagnostic-${index}`}
+                            transition={{ delay: 0.2 * (index + 1), duration: 0.5 }}
+                            viewport={{ once: true }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                          >
+                            {item.icon && (
+                              <Icon
+                                className={cn('flex-shrink-0', {
+                                  'text-primary': color === 'primary',
+                                  'text-secondary': color === 'secondary',
+                                  'text-tertiary': color === 'tertiary',
+                                  'text-accent': color === 'accent',
+                                })}
+                                name={item.icon}
+                              />
+                            )}
+                            <div>
+                              <h3 className="font-semibold text-foreground">
+                                {item.title[locale]}
+                              </h3>
+                            </div>
+                          </motion.div>
+                        )
+                      })}
+                    </div>
+                  )}
                 </div>
-
-                <div className="grid grid-cols-1 gap-4">
-                  <div className="flex items-start gap-2 space-y-2 rounded-lg bg-primary/5 p-6 transition-colors hover:bg-primary/10">
-                    <TrendingUp className="size-8 text-primary" />
-                    <h3 className="font-semibold text-foreground">Desenvolvimento Contínuo</h3>
-                  </div>
-
-                  <div className="flex items-start gap-2 space-y-2 rounded-lg bg-secondary/5 p-6 transition-colors hover:bg-secondary/10">
-                    <Heart className="size-8 text-secondary" />
-                    <h3 className="font-semibold text-foreground">Saúde Integral</h3>
-                  </div>
-
-                  <div className="flex items-start gap-2 space-y-2 rounded-lg bg-accent/5 p-6 transition-colors hover:bg-accent/10">
-                    <Brain className="size-8 text-accent" />
-                    <h3 className="font-semibold text-foreground">Neurociência</h3>
-                  </div>
-                </div>
-              </div>
-            </Card>
+              </Card>
+            </motion.div>
           </div>
         </div>
       </div>

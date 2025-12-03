@@ -4,6 +4,7 @@ import { useShared } from '@ez/shared/hooks/use-shared'
 import { Button } from '@ez/shared/ui'
 import { BaseDesktopNavigation } from '@ez/web/components/navigation/base/base-desktop-navigation'
 import type { Navigation } from '@ez/web/types/site'
+import { Phone } from 'lucide-react'
 
 type NavigationProps = {
   navigation?: Navigation
@@ -20,10 +21,11 @@ export const LandingPageForBusinessDesktopNavigation = ({ navigation }: Navigati
           base="for-business"
           className="mt-2"
           onClick={() => setIsContactDialogOpen(true)}
-          rounded="lg"
+          rounded="full"
           theme="background"
         >
           Falar com o Instituto
+          <Phone className="size-4 transition-transform group-hover:rotate-12" />
         </Button>
       }
       highlightClassName="flex flex-row bg-transparent text-accent"

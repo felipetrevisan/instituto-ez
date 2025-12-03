@@ -1,133 +1,233 @@
+import {
+  authorObject,
+  authorsObject,
+  badgeObject,
+  buttonObject as buttonThemeObject,
+  catalogDocument,
+  chapterObject,
+  chaptersObject,
+  collectionDocument,
+  contentObject,
+  coverImageObject,
+  downloadObject,
+  metadataObject,
+  overviewObject,
+  priceBadgeObject,
+  priceObject,
+  sealObjectObject,
+  sectionObject as sectionEbookObject,
+  settingsDocument as settingsEbookDocument,
+  themeObject,
+} from '@ez/studio/schemas/documents/ebooks'
+import {
+  introObject as introAboutObject,
+  introItemObject as introItemAboutObject,
+  servicesItemObject,
+  servicesObject,
+  whyChooseObject,
+} from '@ez/studio/schemas/documents/landing/about'
+import {
+  consultingItemObject,
+  consultingObject,
+  coursesItemObject,
+  coursesObject,
+  ctaObject,
+  diagnosticItemObject,
+  diagnosticObject,
+  lecturesItemObject,
+  lecturesObject,
+  testimonialItemObject,
+  testimonialObject,
+} from '@ez/studio/schemas/documents/landing/for-business'
+import landingPageDocument from '@ez/studio/schemas/documents/landing/landing'
+import {
+  benefitsItemObject,
+  benefitsObject,
+  finalCtaObject as finalCtaMathematizerObject,
+  mathematizerItemObject,
+  mathematizerObject,
+  whatIsObject,
+  whyCompanyNeedObject,
+} from '@ez/studio/schemas/documents/landing/mathematizer'
+import {
+  expectedResultsItemObject,
+  expectedResultsObject,
+  finalCtaItemObject as finalCtaItemMentoringObject,
+  finalCtaObject as finalCtaMentoringObject,
+  introObject as introMentoringObject,
+  methodsStepItemObject,
+  methodsStepObject,
+  targetAudienceObject,
+} from '@ez/studio/schemas/documents/landing/mentoring'
+import heroObject from '@ez/studio/schemas/documents/landing/objects/hero'
+import {
+  linkObject,
+  navigationDocument,
+  navigationItemObject,
+  navigationSubmenuItemObject,
+} from '@ez/studio/schemas/documents/navigation'
+import {
+  aboutCardDocument,
+  advancedMentoryDocument,
+  bannerDocument,
+  immersionDocument,
+  lectureDocument,
+  pageDocument,
+  servicesDocument,
+  settingsDocument,
+  testimonialsDocument,
+  workshopsDocument,
+} from '@ez/studio/schemas/documents/site'
+import {
+  accordionContentLandingPageObject,
+  accordionContentObject,
+  accordionObject,
+  alertObject,
+  buttonObject as buttonEditorObject,
+  cardsObject,
+  dividerObject,
+  ebooksObject,
+  listObject,
+  richTextObject,
+  tabsObject,
+  testimonialObject as testimonialEditorObject,
+  titleObject,
+} from '@ez/studio/schemas/objects/editor'
+import {
+  buttonObject,
+  iconObject,
+  logoObject,
+  pageObject,
+  ribbonObject,
+  sectionObject,
+  socialNetworksItemObject,
+} from '@ez/studio/schemas/objects/global'
+import {
+  localizedArrayPortableTextObject,
+  localizedImageObject,
+  localizedSlugObject,
+  localizedStringObject,
+  localizedTextObject,
+  localizedUrlObject,
+} from '@ez/studio/schemas/objects/locale'
+import seoObject from '@ez/studio/schemas/objects/seo/seo'
 import type { SchemaTypeDefinition } from 'sanity'
-
-import advancedMentory from './documents/advanced-mentory'
-import banner from './documents/banner'
-import companyService from './documents/company-service'
-import immersion from './documents/immersion'
-import lecture from './documents/lecture'
-import navigation from './documents/navigation'
-import page from './documents/page'
-import services from './documents/services'
-import settings from './documents/settings'
-import testimonial from './documents/testimonials'
-import workshop from './documents/workshops'
-import ebookCatalog from './ebooks/catalog'
-import ebookCollection from './ebooks/collection'
-import landingPageSettings from './ebooks/settings'
-import aboutCard from './objects/about-card'
-import button from './objects/button'
-import author from './objects/ebooks/author'
-import authors from './objects/ebooks/authors'
-import badge from './objects/ebooks/badge'
-import chapter from './objects/ebooks/chapter'
-import chapters from './objects/ebooks/chapters'
-import ebooksIndex from './objects/ebooks/content'
-import coverImage from './objects/ebooks/cover-image'
-import download from './objects/ebooks/download'
-import metadata from './objects/ebooks/metadata'
-import ebooksOverview from './objects/ebooks/overview'
-import price from './objects/ebooks/price'
-import seal from './objects/ebooks/seal'
-import landingPageSection from './objects/ebooks/section'
-import themeButton from './objects/ebooks/theme/button'
-import priceColor from './objects/ebooks/theme/price-badge'
-import themeSchema from './objects/ebooks/theme/theme'
-import accordionWidget from './objects/editor/accordion'
-import accordionContentWidget from './objects/editor/accordion-content'
-import accordionContentLandingPage from './objects/editor/accordion-content-landing-page'
-import alertWidget from './objects/editor/alert'
-import buttonLinkWidget from './objects/editor/button'
-import cardsWidget from './objects/editor/cards'
-import dividerWidget from './objects/editor/divider'
-import ebooksWidget from './objects/editor/ebooks'
-import listWidget from './objects/editor/list'
-import richText from './objects/editor/rich-text'
-import tabsWidget from './objects/editor/tabs'
-import testimonialWidget from './objects/editor/testimonial'
-import titleWidget from './objects/editor/title'
-import icon from './objects/icon'
-import link from './objects/link'
-import localizedArrayPortableText from './objects/locale/localizedArrayPortableText'
-import localizedImage from './objects/locale/localizedImage'
-import localizedSlug from './objects/locale/localizedSlug'
-import localizedString from './objects/locale/localizedString'
-import localizedText from './objects/locale/localizedText'
-import localizedUrl from './objects/locale/localizedUrl'
-import logo from './objects/logo'
-import navigationItem from './objects/navigation-item'
-import navigationSubmenuItem from './objects/navigation-submenu-item'
-import pageSection from './objects/page'
-import ribbon from './objects/ribbon'
-import section from './objects/section'
-import socialNetworksItem from './objects/social-networks-item'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
-    // Documents
-    settings,
-    testimonial,
-    workshop,
-    ebookCatalog,
-    ebookCollection,
-    landingPageSettings,
-    services,
-    immersion,
-    advancedMentory,
-    companyService,
-    lecture,
-    banner,
-    page,
-    navigation,
+    // Localization
+    localizedSlugObject,
+    localizedStringObject,
+    localizedTextObject,
+    localizedUrlObject,
+    localizedImageObject,
+    localizedArrayPortableTextObject,
 
-    // Objects
-    localizedSlug,
-    localizedString,
-    localizedText,
-    localizedUrl,
-    localizedImage,
-    localizedArrayPortableText,
-    navigationItem,
-    navigationSubmenuItem,
-    socialNetworksItem,
-    link,
-    button,
-    ribbon,
-    icon,
+    // New
+    landingPageDocument,
+    seoObject,
+    heroObject,
 
-    coverImage,
-    metadata,
-    seal,
-    chapters,
-    chapter,
-    authors,
-    author,
-    download,
-    price,
-    badge,
-    landingPageSection,
-    accordionContentLandingPage,
-    themeSchema,
-    themeButton,
-    priceColor,
-    pageSection,
-    aboutCard,
-    logo,
-    section,
-    ebooksOverview,
-    ebooksIndex,
+    // For Business
+    consultingObject,
+    consultingItemObject,
+    coursesObject,
+    coursesItemObject,
+    ctaObject,
+    diagnosticObject,
+    diagnosticItemObject,
+    lecturesObject,
+    lecturesItemObject,
+    testimonialObject,
+    testimonialItemObject,
+
+    // Mathematizer
+    benefitsObject,
+    benefitsItemObject,
+    mathematizerObject,
+    mathematizerItemObject,
+    whatIsObject,
+    whyCompanyNeedObject,
+    finalCtaMathematizerObject,
+
+    // Mentoring
+    expectedResultsObject,
+    expectedResultsItemObject,
+    methodsStepObject,
+    methodsStepItemObject,
+    introMentoringObject,
+    targetAudienceObject,
+    finalCtaMentoringObject,
+    finalCtaItemMentoringObject,
+
+    // About
+    servicesObject,
+    servicesItemObject,
+    whyChooseObject,
+    introAboutObject,
+    introItemAboutObject,
+
+    // Site
+    settingsDocument,
+    testimonialsDocument,
+    workshopsDocument, // To be removed
+    servicesDocument, // To be removed
+    immersionDocument, // To be removed
+    advancedMentoryDocument, // To be removed
+    lectureDocument, // To be removed
+    bannerDocument,
+    pageDocument,
+    aboutCardDocument, // To be removed
+
+    // Navigation
+    navigationDocument,
+    navigationItemObject,
+    navigationSubmenuItemObject,
+    socialNetworksItemObject,
+    linkObject,
+
+    // Global
+    buttonObject,
+    ribbonObject,
+    iconObject,
+    logoObject,
+    pageObject,
+    sectionObject,
+
+    // Ebook
+    coverImageObject,
+    metadataObject,
+    sealObjectObject,
+    chaptersObject,
+    chapterObject,
+    authorsObject,
+    authorObject,
+    downloadObject,
+    priceObject,
+    badgeObject,
+    priceBadgeObject,
+    overviewObject,
+    contentObject,
+    themeObject,
+    buttonThemeObject,
+    sectionEbookObject,
+    catalogDocument,
+    collectionDocument,
+    settingsEbookDocument,
 
     // Editor Widgets
-    buttonLinkWidget,
-    titleWidget,
-    accordionWidget,
-    accordionContentWidget,
-    alertWidget,
-    dividerWidget,
-    testimonialWidget,
-    ebooksWidget,
-    listWidget,
-    richText,
-    tabsWidget,
-    cardsWidget,
+    buttonEditorObject,
+    titleObject,
+    accordionObject,
+    accordionContentObject,
+    accordionContentLandingPageObject,
+    alertObject,
+    dividerObject,
+    testimonialEditorObject,
+    ebooksObject,
+    listObject,
+    richTextObject,
+    tabsObject,
+    cardsObject,
   ],
 }

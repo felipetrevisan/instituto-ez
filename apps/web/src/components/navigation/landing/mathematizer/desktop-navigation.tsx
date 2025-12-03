@@ -20,7 +20,7 @@ export const LandingPageMathematizerDesktopNavigation = ({ navigation }: Navigat
           base="mathematizer"
           className="mt-2"
           onClick={() => setIsContactDialogOpen(true)}
-          rounded="lg"
+          rounded="full"
           theme="background"
         >
           Solicitar Diagnóstico

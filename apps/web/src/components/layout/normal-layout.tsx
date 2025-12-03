@@ -2,6 +2,7 @@ import * as App from '@ez/web/components/app'
 import { MainDesktopNavigation } from '@ez/web/components/navigation/desktop-navigation'
 import { getSiteConfig } from '@ez/web/server/get-site-config'
 import { Fragment } from 'react'
+import '@ez/shared/styles/themes/root.css'
 
 export default async function NormalLayout({ children }: { children: React.ReactNode }) {
   const data = await getSiteConfig()

@@ -6,11 +6,11 @@ import { Dialog } from '@ez/shared/ui'
 import { ContactFormDialog } from '@ez/web/components/contact-form-dialog'
 import { getAvailableLandingPages } from '@ez/web/config/landing-page'
 import { useApp } from '@ez/web/hooks/use-app'
-import type { LandingPageKey, Page } from '@ez/web/types/page'
+import type { Landing } from '@ez/web/types/landing'
 import { useTranslations } from 'next-intl'
 import { Fragment, useEffect } from 'react'
 
-export default function LandingPage({ data }: { data: Page }) {
+export default function LandingPage({ data }: { data: Landing }) {
   const { isContactDialogOpen } = useShared()
   const { setPageType, isLandingPage } = useApp()
   const t = useTranslations('LandingPageMathematizer')
@@ -22,21 +22,20 @@ export default function LandingPage({ data }: { data: Page }) {
     setPageType(PageType.landing)
   }, [])
 
-  const avaliableLandingPages = getAvailableLandingPages().reduce(
-    (acc, page) => {
-      acc[page.key] = page
-      return acc
-    },
-    {} as Record<string, LandingPageKey>,
-  )
+  const available = getAvailableLandingPages()
+  const landing = available.find((p) => p.key === data.key)
+
+  if (!landing) return null
+
+  const Component = landing.component
 
   return (
     <Fragment>
-      {avaliableLandingPages[data.key as string]?.component}
-      {data.form && (
+      <Component data={data} />
+      {data.settings.form && (
         <Dialog open={isContactDialogOpen}>
           <ContactFormDialog
-            formRef={data.form._ref}
+            formRef={data.settings.form._ref}
             sendButtonLabel={t('sendButton')}
             title={t('title')}
           />

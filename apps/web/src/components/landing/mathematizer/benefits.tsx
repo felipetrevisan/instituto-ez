@@ -1,58 +1,52 @@
 'use client'
 
+import { Icon } from '@ez/web/components/ui/icon'
 import { StickySection } from '@ez/web/components/ui/sticky-section'
-import { BarChart3, CheckCircle, Clock, FileText, Shield, TrendingUp } from 'lucide-react'
+import type { SectionMathematizerBenefits } from '@ez/web/types/landing/mathematizer'
+import { createPortableComponents } from '@ez/web/utils/create-portable-components'
+import { PortableText } from '@portabletext/react'
+import { motion } from 'motion/react'
 
-const benefits = [
-  {
-    icon: Clock,
-    title: 'Diagnóstico completo em até 3 semanas',
-  },
-  {
-    icon: Shield,
-    title: 'Respostas anônimas para garantir sinceridade nas análises',
-  },
-  {
-    icon: BarChart3,
-    title: 'Gráficos e indicadores matemáticos claros',
-  },
-  {
-    icon: TrendingUp,
-    title: 'Plano de ação estratégico incluído',
-  },
-  {
-    icon: FileText,
-    title: 'Relatório executivo com interpretação neuroanalítica',
-  },
-  {
-    icon: CheckCircle,
-    title: 'Metodologia validada e resultados mensuráveis',
-  },
-]
-
-export const Benefits = () => {
+export const Benefits = ({
+  data,
+  locale,
+}: {
+  data: SectionMathematizerBenefits
+  locale: string
+}) => {
   return (
     <StickySection id="benefits">
       <div className="py-20 md:py-32">
         <div className="container mx-auto px-4">
-          <h2 className="mb-16 text-center font-bold text-3xl md:text-5xl">
-            Benefícios e <span className="text-primary">Diferenciais</span>
-          </h2>
+          <motion.h2
+            className="mb-16 text-center font-bold text-3xl md:text-5xl"
+            initial={{ opacity: 0, y: 30 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            viewport={{ once: true, amount: 0.3 }}
+            whileInView={{ opacity: 1, y: 0 }}
+          >
+            <PortableText components={createPortableComponents()} value={data.heading[locale]} />
+          </motion.h2>
 
           <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {benefits.map((benefit, index) => {
-              const Icon = benefit.icon
+            {data.items.map((benefit, index) => {
               return (
-                <div
+                <motion.div
                   className="hover-lift flex items-start gap-4 rounded-lg border border-border bg-card/50 p-6 transition-all duration-300 hover:border-accent/50"
+                  initial={{ opacity: 0, y: 30 }}
                   // biome-ignore lint/suspicious/noArrayIndexKey: false positive
-                  key={index}
+                  key={`mathematizer-benefits-${index}`}
+                  transition={{ duration: 0.6, delay: index * 0.1, ease: 'easeOut' }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                 >
-                  <div className="flex size-12 flex-shrink-0 items-center justify-center rounded-lg bg-accent/10">
-                    <Icon className="ize-6 text-accent" />
-                  </div>
-                  <p className="font-medium text-lg">{benefit.title}</p>
-                </div>
+                  {benefit.icon && (
+                    <div className="flex size-12 flex-shrink-0 items-center justify-center rounded-lg bg-accent/10">
+                      <Icon className="size-6 text-accent" name={benefit.icon} />
+                    </div>
+                  )}
+                  <p className="font-medium text-lg">{benefit.title[locale]}</p>
+                </motion.div>
               )
             })}
           </div>

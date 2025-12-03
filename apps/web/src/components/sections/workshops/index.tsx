@@ -13,7 +13,7 @@ export function Workshops() {
       <div className="flex flex-wrap justify-center gap-8">
         {isLoading && <Skeleton />}
         {data?.map((item) => (
-          <div className="w-[300px] flex-none" key={item.id}>
+          <div className="w-[300px] flex-none md:w-[298px] xl:w-[300px]" key={item.id}>
             <Card item={item} />
           </div>
         ))}

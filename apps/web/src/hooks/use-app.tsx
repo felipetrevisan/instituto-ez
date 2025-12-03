@@ -62,7 +62,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
     return pageType === PageType.ebook
   }, [pageType])
 
-  // Fechar o menu quando a rota mudar
   useEffect(() => {
     setIsMenuOpen(false)
     setActiveMenu(currentUrl)

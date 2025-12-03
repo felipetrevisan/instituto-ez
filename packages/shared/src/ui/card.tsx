@@ -5,8 +5,8 @@ const cardVariants = cva('relative transition-all duration-300', {
   variants: {
     base: {
       default: '',
-      mathematizer: 'bg-card outline-none',
-      'for-business': 'bg-card outline-none',
+      mathematizer: 'outline-none',
+      'for-business': 'outline-none',
     },
     variant: {
       default: 'shadow-[0_0_15px_3px] outline outline-2',
@@ -23,6 +23,7 @@ const cardVariants = cva('relative transition-all duration-300', {
       tertiary:
         'bg-linear-to-r from-tertiary via-tertiary/80 to-tertiary text-tertiary-foreground shadow-tertiary/20 outline-tertiary/40 hover:border-tertiary/40 hover:bg-tertiary/30 hover:text-tertiary-foreground',
       accent: '',
+      landing: 'bg-card text-card-foreground',
       custom:
         'bg-linear-to-r from-[var(--secondary-c)] via-[var(--secondary-c)]/80 to-[var(--secondary-c)] text-[var(--secondary-c)] shadow-[var(--secondary-c)]/20 outline-[var(--secondary-c)]/40 hover:border-[var(--secondary-c)]/40 hover:bg-[var(--secondary-c)]/30 hover:text-[var(--secondary-c)]',
     },

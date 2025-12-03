@@ -8,6 +8,7 @@ const fields = `
   slug,
   type,
 `
+
 export const pageQueryWithSlug = groq`*[ _type == 'page' && slug[$locale].current == $slug && enabled == true] [0] {
   ${fields}
   ...select(

@@ -1,6 +1,6 @@
 'use client'
 
-import { useMediaQuery } from '@ez/shared/hooks/use-media-query'
+import { useDeviceType } from '@ez/shared/hooks/use-media-query'
 import { cn } from '@ez/shared/lib/utils'
 import { createPortableComponents } from '@ez/shared/sanity/portable'
 import { urlForImage } from '@ez/web/config/image'
@@ -17,7 +17,7 @@ type Props = {
 
 export function AuthorCard({ author: { photo, name, content }, index }: Props) {
   const locale = useLocale()
-  const isMobile = useMediaQuery()
+  const { isMobile } = useDeviceType()
   const isEven = index % 2 === 0
 
   const flipPhoto = (flip: boolean) => {

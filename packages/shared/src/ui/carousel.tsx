@@ -41,6 +41,8 @@ const carouselVariants = cva(
           '**:data-[slot=carousel-dot]:shadow-secondary **:data-[slot=carousel-dot]:hover:after:shadow-secondary',
         tertiary:
           '**:data-[slot=carousel-dot]:shadow-tertiary **:data-[slot=carousel-dot]:hover:after:shadow-tertiary',
+        accent:
+          '**:data-[slot=carousel-dot]:shadow-accent **:data-[slot=carousel-dot]:hover:after:shadow-accent',
         custom:
           '**:data-[slot=carousel-dot]:shadow-[var(--secondary-c)] **:data-[slot=carousel-dot]:hover:after:shadow-[var(--secondary-c)]',
       },
@@ -310,6 +312,7 @@ function CarouselDots({
               'after:bg-primary': theme === 'default',
               'after:bg-secondary': theme === 'secondary',
               'after:bg-tertiary': theme === 'tertiary',
+              'after:bg-accent': theme === 'accent',
               'after:bg-[var(--primary-c)]': theme === 'custom',
             })}
             // biome-ignore lint/suspicious/noArrayIndexKey: using index as key is acceptable here
@@ -325,12 +328,15 @@ function CarouselDots({
                     theme === 'secondary' && selectedIndex === index,
                   'after:bg-tertiary after:shadow-tertiary':
                     theme === 'tertiary' && selectedIndex === index,
+                  'after:bg-accent after:shadow-accent':
+                    theme === 'accent' && selectedIndex === index,
                   '[--tw-shadow:_var(--primary-c)] after:bg-[var(--primary-c)] after:shadow-[0_0_0_0.17rem_var(--primary-c)]':
                     theme === 'custom' && selectedIndex === index,
 
                   'after:shadow-primary/70': theme === 'default' && selectedIndex !== index,
                   'after:shadow-secondary/70': theme === 'secondary' && selectedIndex !== index,
                   'after:shadow-tertiary/70': theme === 'tertiary' && selectedIndex !== index,
+                  'after:shadow-accent/70': theme === 'accent' && selectedIndex !== index,
                   '[--tw-shadow:_var(--primary-c)] after:shadow-[0_0_0_0.17rem_var(--primary-c)]':
                     theme === 'custom' && selectedIndex !== index,
                 },

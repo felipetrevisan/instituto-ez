@@ -31,8 +31,8 @@ export function Testimonials() {
       <div className="flex flex-col justify-center">
         {isLoading && <Skeleton />}
         {!isLoading && (
-          <Carousel className="md:overflow-visible" plugins={[ClassNames()]} theme={theme}>
-            <CarouselContent rootClassName="md:overflow-visible!">
+          <Carousel className="xl:overflow-visible" plugins={[ClassNames()]} theme={theme}>
+            <CarouselContent rootClassName="xl:overflow-visible!">
               {data?.map((testimonial, _index) => (
                 <CarouselItem
                   className="basis-full md:basis-1/2 lg:basis-1/2 xl:basis-1/2"

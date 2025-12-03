@@ -16,6 +16,7 @@ export const titleVariants = cva('font-bold font-oswald', {
       default: 'text-primary',
       secondary: 'text-secondary',
       tertiary: 'text-tertiary',
+      accent: 'text-accent',
       white: 'text-white',
       custom: '',
     },

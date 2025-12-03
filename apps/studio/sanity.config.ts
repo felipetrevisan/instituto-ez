@@ -6,11 +6,10 @@ import { contactFormPlugin } from '@multidots/sanity-plugin-contact-form'
 import { colorInput } from '@sanity/color-input'
 import { languageFilter } from '@sanity/language-filter'
 import { visionTool } from '@sanity/vision'
-import { type PluginOptions, defineConfig } from 'sanity'
-import { unsplashImageAsset } from 'sanity-plugin-asset-source-unsplash'
-import { lucideIconPicker } from 'sanity-plugin-lucide-icon-picker';
-
+import { defineConfig, type PluginOptions } from 'sanity'
 import { structureTool } from 'sanity/structure'
+import { unsplashImageAsset } from 'sanity-plugin-asset-source-unsplash'
+import { lucideIconPicker } from 'sanity-plugin-lucide-icon-picker'
 
 import './styles/globals.css'
 
@@ -47,7 +46,6 @@ export default defineConfig({
     structureTool({
       structure,
     }),
-    // Add an image asset source for Unsplash
     unsplashImageAsset(),
     lucideIconPicker(),
     colorInput(),

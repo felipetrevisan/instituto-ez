@@ -1,6 +1,6 @@
 'use client'
 
-import { useMediaQuery } from '@ez/shared/hooks/use-media-query'
+import { useDeviceType } from '@ez/shared/hooks/use-media-query'
 import { useShared } from '@ez/shared/hooks/use-shared'
 import { MailIcon } from '@ez/shared/icons'
 import { cn } from '@ez/shared/lib/utils'
@@ -75,8 +75,7 @@ function Header({
   const containerRef = useRef<HTMLDivElement | null>(null)
   const { height } = useDimensions(containerRef)
   const { scrollY } = useScroll()
-  const isMobile = useMediaQuery()
-  const isTablet = useMediaQuery(1179)
+  const { isMobile, isDesktop } = useDeviceType()
   useBodyOverflow(isMenuOpen)
 
   const t = useTranslations('Languages')
@@ -134,12 +133,12 @@ function Header({
               src={data?.logo && urlForImage(data.logo?.asset).format('webp').quality(80).url()}
             />
           </Navbar.Brand>
-          {!isMobile && !isTablet && (
+          {isDesktop && (
             <DesktopNavigation navigation={customNavigation ?? data?.primaryNavigation} />
           )}
           <div className="flex flex-row items-center justify-center gap-2">
             {(isNormalPage() || isLandingPage()) && <ThemeToggle />}
-            {(isMobile || isTablet) && <Navbar.Toggle />}
+            {!isDesktop && <Navbar.Toggle />}
             <Select defaultValue={locale} onValueChange={handleChange}>
               <SelectTrigger className="max-w-max cursor-pointer p-3">
                 <SelectValue placeholder={t('placeholder')} />
@@ -198,7 +197,7 @@ function Header({
         ref={containerRef}
         variants={sidebarVariants}
       >
-        {(isMobile || isTablet) && (
+        {!isDesktop && (
           <MotionMobileNavigation
             animate={isMenuOpen ? 'open' : 'closed'}
             initial="closed"

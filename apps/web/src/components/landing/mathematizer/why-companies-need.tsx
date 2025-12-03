@@ -2,44 +2,81 @@
 
 import { useShared } from '@ez/shared/hooks/use-shared'
 import { Button } from '@ez/shared/ui'
+import { Icon } from '@ez/web/components/ui/icon'
 import { StickySection } from '@ez/web/components/ui/sticky-section'
-import { ArrowRight } from 'lucide-react'
+import type { SectionMathematizerWhyCompanyNeed } from '@ez/web/types/landing/mathematizer'
+import { createPortableComponents } from '@ez/web/utils/create-portable-components'
+import { PortableText } from '@portabletext/react'
+import { motion } from 'motion/react'
 
-export const WhyCompaniesNeed = () => {
+export const WhyCompaniesNeed = ({
+  data,
+  locale,
+}: {
+  data: SectionMathematizerWhyCompanyNeed
+  locale: string
+}) => {
   const { setIsContactDialogOpen } = useShared()
 
   return (
     <StickySection id="why-i-need">
-      <div className="bg-secondary/30 py-20 md:py-32">
+      <div className="bg-secondary/30 py-16 sm:py-20 md:py-32">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-4xl space-y-8 text-center">
-            <h2 className="font-bold text-3xl md:text-5xl">
-              Toda estratégia precisa de um <span className="text-accent">mapa</span>.
-              <br />O seu começa com dados reais.
-            </h2>
+            <motion.h2
+              className="font-bold text-3xl md:text-5xl"
+              initial={{ opacity: 0, y: 30 }}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
+              viewport={{ once: true, amount: 0.3 }}
+              whileInView={{ opacity: 1, y: 0 }}
+            >
+              <PortableText components={createPortableComponents()} value={data.heading[locale]} />
+            </motion.h2>
 
-            <p className="mx-auto max-w-3xl text-foreground/90 text-xl leading-relaxed">
-              As empresas não falham por falta de vontade —{' '}
-              <span className="font-semibold text-accent">falham por falta de clareza</span>.
-              Enquanto muitas decidem no escuro, o Matematizador oferece uma leitura neuroanalítica
-              e matemática do sistema empresarial, mostrando onde estão as falhas invisíveis, as
-              oportunidades de ganho e o real potencial de crescimento.
-            </p>
+            <motion.p
+              className="mx-auto max-w-3xl text-foreground/90 text-xl leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
+              viewport={{ once: true, amount: 0.3 }}
+              whileInView={{ opacity: 1, y: 0 }}
+            >
+              <PortableText
+                components={createPortableComponents()}
+                value={data.subheading[locale]}
+              />
+            </motion.p>
 
-            <div className="pt-8">
-              <Button
-                base="mathematizer"
-                className="group px-8 py-6 dark:hover:bg-accent dark:hover:outline-accent"
-                onClick={() => setIsContactDialogOpen(true)}
-                rounded="lg"
-                size="lg"
-                theme="background"
-                variant="outline"
+            {data.cta && (
+              <motion.div
+                className="pt-8"
+                initial={{ opacity: 0, y: 20 }}
+                transition={{ duration: 0.6, delay: 0.4, ease: 'easeOut' }}
+                viewport={{ once: true, amount: 0.3 }}
+                whileInView={{ opacity: 1, y: 0 }}
               >
-                Quero clareza sobre meu negócio
-                <ArrowRight className="ml-2 size-5 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </div>
+                <Button
+                  base="mathematizer"
+                  className="group px-8 py-6 dark:hover:bg-accent dark:hover:outline-accent"
+                  rounded={data.cta.theme.rounded}
+                  size={data.cta.theme.size}
+                  theme={data.cta.theme.theme}
+                >
+                  {data.cta.iconPrefix && (
+                    <Icon
+                      className="mr-2 size-5"
+                      name={data.cta.iconPrefix}
+                    />
+                  )}
+                  {data.cta.label[locale]}
+                  {data.cta.iconSuffix && (
+                    <Icon
+                      className="ml-2 size-5 transition-transform group-hover:translate-x-1"
+                      name={data.cta.iconSuffix}
+                    />
+                  )}
+                </Button>
+              </motion.div>
+            )}
           </div>
         </div>
       </div>

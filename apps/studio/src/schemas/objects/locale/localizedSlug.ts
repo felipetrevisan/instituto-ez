@@ -19,7 +19,10 @@ export default defineType({
       type: 'slug',
       fieldset: lang.isDefault ? undefined : 'translations',
       options: {
-        source: `title.${lang.id}`,
+        // biome-ignore lint/suspicious/noExplicitAny: false positive
+        source: (doc: any) => {
+          return doc?.page.title?.[lang.id]
+        }
       },
     }),
   ),

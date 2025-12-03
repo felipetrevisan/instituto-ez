@@ -1,10 +1,9 @@
 import { HighlightDecorator } from '@ez/studio/portable/decorators'
-import { BulbOutlineIcon, LinkIcon } from '@sanity/icons'
+import { BoldIcon, BulbOutlineIcon, ColorWheelIcon, LinkIcon } from '@sanity/icons'
 
 const basicDecorators = [
   { title: 'Bold', value: 'strong' },
   { title: 'Emphasis', value: 'em' },
-  { title: 'Code', value: 'code' },
   { title: 'Underline', value: 'underline' },
   {
     title: 'Highlight',
@@ -49,8 +48,10 @@ const styles = [
 
 const decorators = [
   { title: 'Bold', value: 'strong' },
+  { title: 'Medium Bold', value: 'medium', icon: BoldIcon },
+  { title: 'Semi Bold', value: 'semibold', icon: BoldIcon },
+  { title: 'Extra Bold', value: 'extrabold', icon: BoldIcon },
   { title: 'Emphasis', value: 'em' },
-  { title: 'Code', value: 'code' },
   { title: 'Underline', value: 'underline' },
   {
     title: 'Highlight',
@@ -58,34 +59,15 @@ const decorators = [
     icon: BulbOutlineIcon,
     component: HighlightDecorator,
   },
-  // {
-  //   title: 'Center',
-  //   value: 'center',
-  //   icon: <AlignCenterIcon size={11} />,
-  //   // biome-ignore lint/suspicious/noExplicitAny: using any for decorator props
-  //   component: (props: any) => TextAlignDecorator(props, 'center'),
-  // },
-  // {
-  //   title: 'Right',
-  //   value: 'right',
-  //   icon: <AlignRightIcon size={11} />,
-  //   // biome-ignore lint/suspicious/noExplicitAny: using any for decorator props
-  //   component: (props: any) => TextAlignDecorator(props, 'right'),
-  // },
-  // {
-  //   title: 'Left',
-  //   value: 'left',
-  //   icon: <AlignLeftIcon size={11} />,
-  //   // biome-ignore lint/suspicious/noExplicitAny: using any for decorator props
-  //   component: (props: any) => TextAlignDecorator(props, 'left'),
-  // },
-  // {
-  //   title: 'Justify',
-  //   value: 'justify',
-  //   icon: <AlignJustifyIcon size={11} />,
-  //   // biome-ignore lint/suspicious/noExplicitAny: using any for decorator props
-  //   component: (props: any) => TextAlignDecorator(props, 'justify'),
-  // },
+  { title: 'Primary Color', value: 'primary', icon: ColorWheelIcon },
+  { title: 'Secondary Color', value: 'secondary', icon: ColorWheelIcon },
+  { title: 'Tertiary Color', value: 'tertiary', icon: ColorWheelIcon },
+  { title: 'Accent Color', value: 'accent', icon: ColorWheelIcon },
+  { title: 'Navy Color', value: 'navy', icon: ColorWheelIcon },
+  { title: 'Cyan Color', value: 'cyan', icon: ColorWheelIcon },
+  { title: 'Coral Color', value: 'coral', icon: ColorWheelIcon },
+  { title: 'White Color', value: 'white', icon: ColorWheelIcon },
+  { title: 'Gradient Primary Color', value: 'gradient-primary', icon: ColorWheelIcon },
 ]
 
 const annotations = [
