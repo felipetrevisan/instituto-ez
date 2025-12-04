@@ -1,9 +1,12 @@
 import { groq } from 'next-sanity'
 
-const fields = `
-  title,
-  description,
-  keywords,
+// const seoFields = `
+//   title,
+//   description,
+//   keywords,
+// `
+
+const pageFields = `
   slug,
 `
 
@@ -77,7 +80,7 @@ const navigationFields = `
         is_home == true => {
           "link": "/"
         },
-        link_type == "INTERNAL" || link_type == "LANDING" => {
+        link_type == "INTERNAL" => {
           "link": internal_link->slug
         },
         link_type == "EXTERNAL" => {
@@ -92,11 +95,12 @@ const navigationFields = `
   },
 `
 
-export const landingPageQuery = groq`*[ _type == 'landingPage' && page.slug[$locale].current == $slug] [0] {
+export const landingPageQuery = groq`*[ _type == 'landingPage' && slug[$locale].current == $slug] [0] {
   "id": _id,
   key,
-  "settings": page {
-    ${fields}
+  "settings": {
+    ...page,
+    ${pageFields}
     ${navigationFields}
     form,
   },

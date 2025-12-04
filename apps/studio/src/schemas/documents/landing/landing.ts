@@ -30,14 +30,37 @@ export default defineType({
         layout: 'radio',
       },
     }),
-
     defineField({
       name: 'page',
       title: 'Page',
       type: 'seo',
       group: 'seo',
     }),
-
+    defineField({
+      name: 'slug',
+      title: 'Page Slug',
+      type: 'localizedSlug',
+      options: {
+        source: 'title',
+        maxLength: 96,
+      },
+      validation: (Rule) => Rule.required().warning('This field must not be empty.'),
+    }),
+    defineField({
+      name: 'form',
+      title: 'Form',
+      description: 'Select a form',
+      type: 'reference',
+      to: { type: 'contactForm' },
+    }),
+    defineField({
+      name: 'navigation',
+      title: 'Navigation',
+      description: 'Select a main navigation that is used in header',
+      type: 'reference',
+      to: { type: 'navigation' },
+      validation: (Rule) => Rule.required().warning('This field must not be empty.'),
+    }),
     defineField({
       name: 'sections',
       title: 'Sections',
@@ -68,14 +91,13 @@ export default defineType({
         { type: 'mentoring.targetaudience' },
         { type: 'mentoring.cta' },
 
-         // ABOUT
-         { type: 'about.intro' },
-         { type: 'about.services' },
-         { type: 'about.whychoose' },
+        // ABOUT
+        { type: 'about.intro' },
+        { type: 'about.services' },
+        { type: 'about.whychoose' },
       ],
     }),
   ],
-
   preview: {
     select: {
       title: `page.title.${i18n.base}`,

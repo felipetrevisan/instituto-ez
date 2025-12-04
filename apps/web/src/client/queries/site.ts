@@ -72,7 +72,7 @@ export const siteConfigQuery = groq`
             "link": internal_link->slug
           },
           link_type == "LANDING" => {
-            "link": internal_link->seo->slug
+            "link": internal_link->slug
           },
           link_type == "EXTERNAL" => {
             "link": external_url,

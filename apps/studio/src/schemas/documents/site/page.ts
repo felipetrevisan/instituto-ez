@@ -56,13 +56,6 @@ export default defineType({
       validation: (Rule) => Rule.required().warning('Must have at least one section.'),
     }),
     defineField({
-      name: 'key',
-      title: 'Landing Page Key',
-      type: 'string',
-      hidden: ({ parent }) => parent?.type !== 'landing',
-      validation: (Rule) => Rule.required().warning('This field must not be empty.'),
-    }),
-    defineField({
       name: 'form',
       title: 'Form',
       description: 'Select a form',

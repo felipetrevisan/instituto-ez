@@ -10,19 +10,16 @@ import { Suspense } from 'react'
 import Loading from './_loading'
 
 function resolveLanding(slug: string) {
-  return getAvailableLandingPages().find((landing) =>
-    landing.slug.includes(slug)
-  )
+  return getAvailableLandingPages().find((landing) => landing.slug.includes(slug))
 }
 
 export async function generateMetadata({
-  params
+  params,
 }: {
   params: Promise<{ slug: string; locale: string }>
 }): Promise<Metadata> {
   const { slug, locale } = await params
 
-  // primeiro verifica se é landing
   const landing = resolveLanding(slug)
   if (landing) {
     const data = await getLandingPage(slug, locale)
@@ -32,23 +29,22 @@ export async function generateMetadata({
     return {
       title: title?.[locale] ?? '',
       description: description?.[locale] ?? '',
-      keywords: keywords?.[locale] ?? ''
+      keywords: keywords?.[locale] ?? '',
     }
   }
 
-  // página normal
   const data = await getPageBySlug(slug, locale)
   if (!data) return { title: '404' }
 
   return {
     title: data.title?.[locale] ?? '',
     description: data.description?.[locale] ?? '',
-    keywords: data.keywords?.[locale] ?? ''
+    keywords: data.keywords?.[locale] ?? '',
   }
 }
 
 export default async function Page({
-  params
+  params,
 }: {
   params: Promise<{ slug: string; locale: string }>
 }) {
@@ -84,10 +80,8 @@ export async function generateStaticParams() {
     locales
       .map((locale) => {
         const currentSlug = page.slug?.[locale]?.current
-        return currentSlug
-          ? { slug: currentSlug, locale }
-          : null
+        return currentSlug ? { slug: currentSlug, locale } : null
       })
-      .filter(Boolean)
+      .filter(Boolean),
   )
 }
