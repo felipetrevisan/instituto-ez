@@ -1,8 +1,8 @@
 @layer base {
   [data-theme="mathematizer"] {
-    * {
+    /* * {
       @apply border-border;
-    }
+    } */
 
     body {
       @apply bg-yellow-400 text-foreground font-sans antialiased border-4;
