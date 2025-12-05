@@ -2,11 +2,14 @@
 
 import { useShared } from '@ez/shared/hooks/use-shared'
 import { cn } from '@ez/shared/lib/utils'
+import { LinkType } from '@ez/shared/types'
 import { Button } from '@ez/shared/ui/button'
 import { Card } from '@ez/shared/ui/card'
+import { CallAction } from '@ez/web/components/ui/call-action-button'
 import { Icon } from '@ez/web/components/ui/icon'
 import { StickySection } from '@ez/web/components/ui/sticky-section'
 import type { SectionForBusinessConsulting } from '@ez/web/types/landing/for-business'
+import type { IconName } from 'lucide-react/dynamic'
 import { motion } from 'motion/react'
 
 export const Consulting = ({
@@ -94,26 +97,28 @@ export const Consulting = ({
                       .
                     </p>
                     {data.cta && (
-                      <Button
+                      <CallAction
+                        action={data.cta.type === LinkType.DIALOG ? 'button' : 'link'}
                         base="for-business"
                         className="group"
                         effect={data.cta.theme.effect}
+                        icon={{
+                          prefix: {
+                            className: 'mr-2 size-5',
+                            name: data.cta.iconPrefix as IconName,
+                          },
+                          suffix: {
+                            className: 'ml-2 size-5 transition-transform group-hover:translate-x-1',
+                            name: data.cta.iconSuffix as IconName,
+                          },
+                        }}
+                        key={data.cta._key}
+                        label={data.cta.label[locale]}
                         onClick={() => setIsContactDialogOpen(true)}
                         rounded={data.cta.theme.rounded}
                         size={data.cta.theme.size}
                         theme={data.cta.theme.theme}
-                      >
-                        {data.cta.iconPrefix && (
-                          <Icon className="size-4" name={data.cta.iconPrefix} />
-                        )}
-                        {data.cta.label?.[locale]}
-                        {data.cta.iconSuffix && (
-                          <Icon
-                            className="size-4 transition-transform group-hover:translate-x-1"
-                            name={data.cta.iconSuffix}
-                          />
-                        )}
-                      </Button>
+                      />
                     )}
                   </div>
                 </div>

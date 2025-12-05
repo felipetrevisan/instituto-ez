@@ -1,4 +1,4 @@
-export type * from './assets'
-export type * from './ebook'
-export type * from './global'
-export type * from './testimonial'
+export * from './assets'
+export * from './ebook'
+export * from './global'
+export * from './testimonial'

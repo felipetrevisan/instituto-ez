@@ -1,12 +1,13 @@
 'use client'
 
 import { useShared } from '@ez/shared/hooks/use-shared'
-import { Button } from '@ez/shared/ui'
-import { Icon } from '@ez/web/components/ui/icon'
+import { LinkType } from '@ez/shared/types'
+import { CallAction } from '@ez/web/components/ui/call-action-button'
 import { StickySection } from '@ez/web/components/ui/sticky-section'
 import type { SectionHero } from '@ez/web/types/landing'
 import { createPortableComponents } from '@ez/web/utils/create-portable-components'
 import { PortableText } from '@portabletext/react'
+import type { IconName } from 'lucide-react/dynamic'
 import { motion } from 'motion/react'
 
 export const Hero = ({ data, locale }: { data: SectionHero; locale: string }) => {
@@ -70,34 +71,32 @@ export const Hero = ({ data, locale }: { data: SectionHero; locale: string }) =>
                 initial={{ opacity: 0, y: 20 }}
                 transition={{ duration: 0.8, delay: 0.8, ease: 'easeOut' }}
               >
-                {data.cta.map(
-                  (button) => {
-                    return (
-                      <Button
-                        base="mathematizer"
-                        className="group px-8 py-6 font-semibold"
-                        key={button._key}
-                        rounded={button.theme.rounded}
-                        size={button.theme.size}
-                        theme={button.theme.theme}
-                      >
-                        {button.iconPrefix && (
-                          <Icon
-                            className="mr-2 size-5"
-                            name={button.iconPrefix}
-                          />
-                        )}
-                        {button.label[locale]}
-                        {button.iconSuffix && (
-                          <Icon
-                            className="ml-2 size-5 transition-transform group-hover:translate-x-1"
-                            name={button.iconSuffix}
-                          />
-                        )}
-                      </Button>
-                    )
-                  },
-                )}
+                {data.cta.map((button) => {
+                  return (
+                    <CallAction
+                      action={button.type === LinkType.DIALOG ? 'button' : 'link'}
+                      base="mathematizer"
+                      className="group px-8 py-6 font-semibold"
+                      effect={button.theme.effect}
+                      icon={{
+                        prefix: {
+                          className: 'mr-2 size-5',
+                          name: button.iconPrefix as IconName,
+                        },
+                        suffix: {
+                          className: 'ml-2 size-5 transition-transform group-hover:translate-x-1',
+                          name: button.iconSuffix as IconName,
+                        },
+                      }}
+                      key={button._key}
+                      label={button.label[locale]}
+                      onClick={() => setIsContactDialogOpen(true)}
+                      rounded={button.theme.rounded}
+                      size={button.theme.size}
+                      theme={button.theme.theme}
+                    />
+                  )
+                })}
               </motion.div>
             )}
           </motion.div>

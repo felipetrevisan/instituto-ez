@@ -2,11 +2,14 @@
 
 import { useShared } from '@ez/shared/hooks/use-shared'
 import { cn } from '@ez/shared/lib/utils'
+import { LinkType } from '@ez/shared/types'
 import { Button } from '@ez/shared/ui/button'
 import { Card } from '@ez/shared/ui/card'
+import { CallAction } from '@ez/web/components/ui/call-action-button'
 import { Icon } from '@ez/web/components/ui/icon'
 import { StickySection } from '@ez/web/components/ui/sticky-section'
 import type { Category, SectionForBusinessCourses } from '@ez/web/types/landing/for-business'
+import type { IconName } from 'lucide-react/dynamic'
 import { motion } from 'motion/react'
 
 export const Courses = ({ data, locale }: { data: SectionForBusinessCourses; locale: string }) => {
@@ -110,28 +113,29 @@ export const Courses = ({ data, locale }: { data: SectionForBusinessCourses; loc
                         </div>
 
                         {item.cta && (
-                          <Button
+                          <CallAction
+                            action={item.cta.type === LinkType.DIALOG ? 'button' : 'link'}
                             base="for-business"
                             className="group"
                             effect={item.cta.theme.effect}
-                            fullWidth
+                            icon={{
+                              prefix: {
+                                className: 'mr-2 size-5',
+                                name: item.cta.iconPrefix as IconName,
+                              },
+                              suffix: {
+                                className:
+                                  'ml-2 size-5 transition-transform group-hover:translate-x-1',
+                                name: item.cta.iconSuffix as IconName,
+                              },
+                            }}
+                            key={item.cta._key}
+                            label={item.cta.label[locale]}
                             onClick={() => setIsContactDialogOpen(true)}
                             rounded={item.cta.theme.rounded}
-                            scaleEffect={false}
                             size={item.cta.theme.size}
                             theme={item.cta.theme.theme}
-                          >
-                            {item.cta.iconPrefix && (
-                              <Icon className="size-4" name={item.cta.iconPrefix} />
-                            )}
-                            {item.cta.label?.[locale]}
-                            {item.cta.iconSuffix && (
-                              <Icon
-                                className="size-4 transition-transform group-hover:translate-x-1"
-                                name={item.cta.iconSuffix}
-                              />
-                            )}
-                          </Button>
+                          />
                         )}
                       </Card>
                     </motion.div>

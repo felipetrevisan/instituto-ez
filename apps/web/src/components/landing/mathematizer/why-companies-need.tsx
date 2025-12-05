@@ -1,12 +1,15 @@
 'use client'
 
 import { useShared } from '@ez/shared/hooks/use-shared'
+import { LinkType } from '@ez/shared/types'
 import { Button } from '@ez/shared/ui'
+import { CallAction } from '@ez/web/components/ui/call-action-button'
 import { Icon } from '@ez/web/components/ui/icon'
 import { StickySection } from '@ez/web/components/ui/sticky-section'
 import type { SectionMathematizerWhyCompanyNeed } from '@ez/web/types/landing/mathematizer'
 import { createPortableComponents } from '@ez/web/utils/create-portable-components'
 import { PortableText } from '@portabletext/react'
+import type { IconName } from 'lucide-react/dynamic'
 import { motion } from 'motion/react'
 
 export const WhyCompaniesNeed = ({
@@ -54,27 +57,28 @@ export const WhyCompaniesNeed = ({
                 viewport={{ once: true, amount: 0.3 }}
                 whileInView={{ opacity: 1, y: 0 }}
               >
-                <Button
+                <CallAction
+                  action={data.cta.type === LinkType.DIALOG ? 'button' : 'link'}
                   base="mathematizer"
                   className="group px-8 py-6 dark:hover:bg-accent dark:hover:outline-accent"
+                  effect={data.cta.theme.effect}
+                  icon={{
+                    prefix: {
+                      className: 'mr-2 size-5',
+                      name: data.cta.iconPrefix as IconName,
+                    },
+                    suffix: {
+                      className: 'ml-2 size-5 transition-transform group-hover:translate-x-1',
+                      name: data.cta.iconSuffix as IconName,
+                    },
+                  }}
+                  key={data.cta._key}
+                  label={data.cta.label[locale]}
+                  onClick={() => setIsContactDialogOpen(true)}
                   rounded={data.cta.theme.rounded}
                   size={data.cta.theme.size}
                   theme={data.cta.theme.theme}
-                >
-                  {data.cta.iconPrefix && (
-                    <Icon
-                      className="mr-2 size-5"
-                      name={data.cta.iconPrefix}
-                    />
-                  )}
-                  {data.cta.label[locale]}
-                  {data.cta.iconSuffix && (
-                    <Icon
-                      className="ml-2 size-5 transition-transform group-hover:translate-x-1"
-                      name={data.cta.iconSuffix}
-                    />
-                  )}
-                </Button>
+                />
               </motion.div>
             )}
           </div>

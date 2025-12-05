@@ -23,6 +23,7 @@ export type Button = {
 export enum LinkType {
   EXTERNAL = 'EXTERNAL',
   INTERNAL = 'INTERNAL',
+  DIALOG = 'DIALOG',
   HASH = 'HASH',
 }
 

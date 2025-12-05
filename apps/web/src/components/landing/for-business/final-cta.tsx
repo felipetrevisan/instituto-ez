@@ -1,12 +1,15 @@
 'use client'
 
 import { useShared } from '@ez/shared/hooks/use-shared'
+import { LinkType } from '@ez/shared/types'
 import { Button } from '@ez/shared/ui'
+import { CallAction } from '@ez/web/components/ui/call-action-button'
 import { Icon } from '@ez/web/components/ui/icon'
 import { StickySection } from '@ez/web/components/ui/sticky-section'
 import type { SectionForBusinessCTA } from '@ez/web/types/landing/for-business'
 import { createPortableComponents } from '@ez/web/utils/create-portable-components'
 import { PortableText } from '@portabletext/react'
+import type { IconName } from 'lucide-react/dynamic'
 import { motion } from 'motion/react'
 
 export const FinalCTA = ({ data, locale }: { data: SectionForBusinessCTA; locale: string }) => {
@@ -41,26 +44,28 @@ export const FinalCTA = ({ data, locale }: { data: SectionForBusinessCTA; locale
               >
                 {data.cta.map((button) => {
                   return (
-                    <Button
+                    <CallAction
+                      action={button.type === LinkType.DIALOG ? 'button' : 'link'}
                       base="for-business"
                       className="group px-8 py-6 font-semibold"
                       effect={button.theme.effect}
+                      icon={{
+                        prefix: {
+                          className: 'mr-2 size-5',
+                          name: button.iconPrefix as IconName,
+                        },
+                        suffix: {
+                          className: 'ml-2 size-5 transition-transform group-hover:translate-x-1',
+                          name: button.iconSuffix as IconName,
+                        },
+                      }}
                       key={button._key}
+                      label={button.label[locale]}
+                      onClick={() => setIsContactDialogOpen(true)}
                       rounded={button.theme.rounded}
                       size={button.theme.size}
                       theme={button.theme.theme}
-                    >
-                      {button.iconPrefix && (
-                        <Icon className="mr-2 size-5" name={button.iconPrefix} />
-                      )}
-                      {button.label[locale]}
-                      {button.iconSuffix && (
-                        <Icon
-                          className="ml-2 size-5 transition-transform group-hover:translate-x-1"
-                          name={button.iconSuffix}
-                        />
-                      )}
-                    </Button>
+                    />
                   )
                 })}
               </motion.div>
