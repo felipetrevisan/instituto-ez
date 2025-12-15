@@ -26,6 +26,7 @@ export default defineType({
           { title: 'For Business', value: 'for-business' },
           { title: 'Mentoring', value: 'mentoring' },
           { title: 'About', value: 'about' },
+          { title: 'Services', value: 'services' },
         ],
         layout: 'radio',
       },
@@ -95,6 +96,13 @@ export default defineType({
         { type: 'about.intro' },
         { type: 'about.services' },
         { type: 'about.whychoose' },
+
+        // ABOUT
+        { type: 'services.assessment' },
+        { type: 'services.benefits' },
+        { type: 'services.methodsessions' },
+        { type: 'services.whoisitfor' },
+        { type: 'services.cta' },
       ],
     }),
   ],

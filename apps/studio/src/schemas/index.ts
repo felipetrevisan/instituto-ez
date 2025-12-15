@@ -41,8 +41,8 @@ import {
 } from '@ez/studio/schemas/documents/landing/for-business'
 import landingPageDocument from '@ez/studio/schemas/documents/landing/landing'
 import {
-  benefitsItemObject,
-  benefitsObject,
+  benefitsItemObject as benefitsItemMathematizerObject,
+  benefitsObject as benefitsMathematizerObject,
   finalCtaObject as finalCtaMathematizerObject,
   mathematizerItemObject,
   mathematizerObject,
@@ -60,6 +60,15 @@ import {
   targetAudienceObject,
 } from '@ez/studio/schemas/documents/landing/mentoring'
 import heroObject from '@ez/studio/schemas/documents/landing/objects/hero'
+import {
+  assessmentObject,
+  benefitsItemObject as benefitsItemServicesObject,
+  benefitsObject as benefitsServicesObject,
+  finalCtaObject as finalCtaServicesObject,
+  methodSessionsItemObject,
+  methodSessionsObject,
+  whoIsItForObject,
+} from '@ez/studio/schemas/documents/landing/services'
 import {
   linkObject,
   navigationDocument,
@@ -142,8 +151,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     testimonialItemObject,
 
     // Mathematizer
-    benefitsObject,
-    benefitsItemObject,
+    benefitsMathematizerObject,
+    benefitsItemMathematizerObject,
     mathematizerObject,
     mathematizerItemObject,
     whatIsObject,
@@ -166,6 +175,15 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     whyChooseObject,
     introAboutObject,
     introItemAboutObject,
+
+    // Services
+    assessmentObject,
+    benefitsServicesObject,
+    benefitsItemServicesObject,
+    methodSessionsObject,
+    methodSessionsItemObject,
+    whoIsItForObject,
+    finalCtaServicesObject,
 
     // Site
     settingsDocument,

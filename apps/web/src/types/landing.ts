@@ -80,6 +80,13 @@ export type LandingSectionsMap = {
     | SectionMentoringCTA
 
   about: SectionHero | SectionAboutIntro | SectionAboutServices | SectionAboutWhyChoose
+  services:
+    | SectionHero
+    // | SectionServicestAssessment
+    // | SectionServicesBenefits
+    // | SectionServicesMethodSessions
+    // | SectionServicesWhoIsItFor
+    // | SectionServicesCTA
 }
 
 export type LandingPageKey = {

@@ -2,6 +2,7 @@ import { LandingPageAbout } from '@ez/web/components/landing/about'
 import { LandingPageForBusiness } from '@ez/web/components/landing/for-business'
 import { LandingPageMathematizer } from '@ez/web/components/landing/mathematizer'
 import { LandingPageMentory } from '@ez/web/components/landing/mentory'
+import { LandingPageServices } from '@ez/web/components/landing/services'
 import { LandingPageAboutDesktopNavigation } from '@ez/web/components/navigation/landing/about/desktop-navigation'
 import { LandingPageAboutMobileNavigation } from '@ez/web/components/navigation/landing/about/mobile-navigation'
 import { LandingPageForBusinessDesktopNavigation } from '@ez/web/components/navigation/landing/for-business/desktop-navigation'
@@ -10,6 +11,8 @@ import { LandingPageMathematizerDesktopNavigation } from '@ez/web/components/nav
 import { LandingPageMathematizerMobileNavigation } from '@ez/web/components/navigation/landing/mathematizer/mobile-navigation'
 import { LandingPageMentoryDesktopNavigation } from '@ez/web/components/navigation/landing/mentory/desktop-navigation'
 import { LandingPageMentoryMobileNavigation } from '@ez/web/components/navigation/landing/mentory/mobile-navigation'
+import { LandingPageServicesDesktopNavigation } from '@ez/web/components/navigation/landing/services/desktop-navigation'
+import { LandingPageServicesMobileNavigation } from '@ez/web/components/navigation/landing/services/mobile-navigation'
 import type { LandingPageKey } from '@ez/web/types/landing'
 
 export function getAvailableLandingPages(): LandingPageKey[] {
@@ -51,6 +54,16 @@ export function getAvailableLandingPages(): LandingPageKey[] {
       navigation: {
         desktop: LandingPageAboutDesktopNavigation,
         mobile: LandingPageAboutMobileNavigation,
+      },
+      classes: '',
+    },
+    {
+      key: 'services',
+      slug: ['atendimento', 'services', 'servicios'],
+      component: LandingPageServices,
+      navigation: {
+        desktop: LandingPageServicesDesktopNavigation,
+        mobile: LandingPageServicesMobileNavigation,
       },
       classes: '',
     },
