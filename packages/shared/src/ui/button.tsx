@@ -15,7 +15,8 @@ const buttonVariants = cva(
         mathematizer: 'glow-accent hover-lift whitespace-nowrap',
         'for-business': 'whitespace-nowrap',
         mentory: '',
-        about: ''
+        about: '',
+        services: '',
       },
 
       variant: {

@@ -2,9 +2,7 @@
 
 import { useShared } from '@ez/shared/hooks/use-shared'
 import { LinkType } from '@ez/shared/types'
-import { Button } from '@ez/shared/ui'
 import { CallAction } from '@ez/web/components/ui/call-action-button'
-import { Icon } from '@ez/web/components/ui/icon'
 import { StickySection } from '@ez/web/components/ui/sticky-section'
 import type { SectionAboutWhyChoose } from '@ez/web/types/landing/about'
 import { createPortableComponents } from '@ez/web/utils/create-portable-components'
@@ -30,20 +28,22 @@ export const WhyChoose = ({ data, locale }: { data: SectionAboutWhyChoose; local
               <PortableText components={createPortableComponents()} value={data.heading[locale]} />
             </motion.h2>
 
-            <motion.div
-              className="mb-12 space-y-6"
-              initial={{ opacity: 0, y: 30 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-              whileInView={{ opacity: 1, y: 0 }}
-            >
-              <p className="text-gray-warm text-lg leading-relaxed md:text-xl">
-                <PortableText
-                  components={createPortableComponents()}
-                  value={data.description[locale]}
-                />
-              </p>
-            </motion.div>
+            {data.description && (
+              <motion.div
+                className="mb-12 space-y-6"
+                initial={{ opacity: 0, y: 30 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+                whileInView={{ opacity: 1, y: 0 }}
+              >
+                <p className="text-gray-warm text-lg leading-relaxed md:text-xl">
+                  <PortableText
+                    components={createPortableComponents()}
+                    value={data.description[locale]}
+                  />
+                </p>
+              </motion.div>
+            )}
 
             {data.cta && (
               <motion.div

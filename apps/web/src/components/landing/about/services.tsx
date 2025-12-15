@@ -23,20 +23,23 @@ export const Services = ({ data, locale }: { data: SectionAboutServices; locale:
             >
               <PortableText components={createPortableComponents()} value={data.heading[locale]} />
             </motion.h2>
-            <motion.p
-              className="mx-auto mb-16 max-w-3xl text-center text-gray-warm text-lg"
-              initial={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              viewport={{ once: true }}
-              whileInView={{ opacity: 1, y: 0 }}
-            >
-              <PortableText
-                components={createPortableComponents()}
-                value={data.subheading[locale]}
-              />
-            </motion.p>
 
-            {data.items && (
+            {data.subheading && (
+              <motion.p
+                className="mx-auto mb-16 max-w-3xl text-center text-gray-warm text-lg"
+                initial={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                viewport={{ once: true }}
+                whileInView={{ opacity: 1, y: 0 }}
+              >
+                <PortableText
+                  components={createPortableComponents()}
+                  value={data.subheading[locale]}
+                />
+              </motion.p>
+            )}
+
+            {data.items.length > 0 && (
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {data.items.map((service, index) => {
                   return (

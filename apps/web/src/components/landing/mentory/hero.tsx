@@ -42,17 +42,19 @@ export const Hero = ({ data, locale }: { data: SectionHero; locale: string }) =>
               <PortableText components={createPortableComponents()} value={data.heading[locale]} />
             </motion.h1>
 
-            <motion.p
-              animate={{ opacity: 1, y: 0 }}
-              className="mx-auto mb-12 max-w-4xl text-gray-warm text-lg leading-relaxed md:text-xl lg:text-2xl"
-              initial={{ opacity: 0, y: 20 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <PortableText
-                components={createPortableComponents()}
-                value={data.subheading[locale]}
-              />
-            </motion.p>
+            {data.subheading && (
+              <motion.p
+                animate={{ opacity: 1, y: 0 }}
+                className="mx-auto mb-12 max-w-4xl text-gray-warm text-lg leading-relaxed md:text-xl lg:text-2xl"
+                initial={{ opacity: 0, y: 20 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
+                <PortableText
+                  components={createPortableComponents()}
+                  value={data.subheading[locale]}
+                />
+              </motion.p>
+            )}
 
             {data.cta && data.cta.length > 0 && (
               <motion.div

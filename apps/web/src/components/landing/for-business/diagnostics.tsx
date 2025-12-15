@@ -38,12 +38,14 @@ export const Diagnostic = ({
                       {data.heading[locale]}
                     </h2>
 
-                    <p className="text-lg text-muted-foreground leading-relaxed">
-                      {data.subheading[locale]}
-                    </p>
+                    {data.subheading && (
+                      <p className="text-lg text-muted-foreground leading-relaxed">
+                        {data.subheading[locale]}
+                      </p>
+                    )}
                   </div>
 
-                  {data.items && (
+                  {data.items.length > 0 && (
                     <div className="space-y-4">
                       {data.items.map((item, index) => {
                         const color = colors[index % colors.length]

@@ -2,9 +2,7 @@
 
 import { useShared } from '@ez/shared/hooks/use-shared'
 import { LinkType } from '@ez/shared/types'
-import { Button } from '@ez/shared/ui'
 import { CallAction } from '@ez/web/components/ui/call-action-button'
-import { Icon } from '@ez/web/components/ui/icon'
 import { StickySection } from '@ez/web/components/ui/sticky-section'
 import type { SectionMathematizerWhyCompanyNeed } from '@ez/web/types/landing/mathematizer'
 import { createPortableComponents } from '@ez/web/utils/create-portable-components'

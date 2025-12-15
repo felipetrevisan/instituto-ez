@@ -2,7 +2,6 @@
 
 import { useShared } from '@ez/shared/hooks/use-shared'
 import { LinkType } from '@ez/shared/types'
-import { Button } from '@ez/shared/ui'
 import { CallAction } from '@ez/web/components/ui/call-action-button'
 import { Icon } from '@ez/web/components/ui/icon'
 import { StickySection } from '@ez/web/components/ui/sticky-section'
@@ -99,15 +98,18 @@ export const FinalCTA = ({ data, locale }: { data: SectionMentoringCTA; locale: 
                   value={data.heading[locale]}
                 />
               </motion.h2>
-              <motion.p
-                className="mx-auto mb-10 max-w-2xl text-gray-warm text-lg leading-relaxed md:text-xl"
-                initial={{ opacity: 0, y: 20 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                viewport={{ once: true }}
-                whileInView={{ opacity: 1, y: 0 }}
-              >
-                <PortableText components={createPortableComponents()} value={data.text[locale]} />
-              </motion.p>
+
+              {data.text && (
+                <motion.p
+                  className="mx-auto mb-10 max-w-2xl text-gray-warm text-lg leading-relaxed md:text-xl"
+                  initial={{ opacity: 0, y: 20 }}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                  viewport={{ once: true }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                >
+                  <PortableText components={createPortableComponents()} value={data.text[locale]} />
+                </motion.p>
+              )}
 
               {data.cta && data.cta.length > 0 && (
                 <motion.div

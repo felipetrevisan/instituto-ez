@@ -3,7 +3,6 @@
 import { useShared } from '@ez/shared/hooks/use-shared'
 import { cn } from '@ez/shared/lib/utils'
 import { LinkType } from '@ez/shared/types'
-import { Button } from '@ez/shared/ui/button'
 import { Card } from '@ez/shared/ui/card'
 import { CallAction } from '@ez/web/components/ui/call-action-button'
 import { Icon } from '@ez/web/components/ui/icon'
@@ -44,12 +43,15 @@ export const Consulting = ({
                     <h2 className="font-bold text-3xl text-foreground md:text-4xl">
                       {data.heading[locale]}
                     </h2>
-                    <p className="mx-auto max-w-2xl text-lg text-muted-foreground leading-relaxed">
-                      {data.subheading[locale]}
-                    </p>
+
+                    {data.subheading && (
+                      <p className="mx-auto max-w-2xl text-lg text-muted-foreground leading-relaxed">
+                        {data.subheading[locale]}
+                      </p>
+                    )}
                   </div>
 
-                  {data.items && (
+                  {data.items.length > 0 && (
                     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                       {data.items.map((item, index) => {
                         const color = colors[index % colors.length]

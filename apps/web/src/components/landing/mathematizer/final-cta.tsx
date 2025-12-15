@@ -2,9 +2,7 @@
 
 import { useShared } from '@ez/shared/hooks/use-shared'
 import { LinkType } from '@ez/shared/types'
-import { Button } from '@ez/shared/ui'
 import { CallAction } from '@ez/web/components/ui/call-action-button'
-import { Icon } from '@ez/web/components/ui/icon'
 import { StickySection } from '@ez/web/components/ui/sticky-section'
 import type { SectionMathematizerCTA } from '@ez/web/types/landing/mathematizer'
 import { createPortableComponents } from '@ez/web/utils/create-portable-components'
@@ -30,18 +28,20 @@ export const FinalCTA = ({ data, locale }: { data: SectionMathematizerCTA; local
               <PortableText components={createPortableComponents()} value={data.heading[locale]} />
             </motion.h2>
 
-            <motion.div
-              className="space-y-6 text-foreground/90 text-lg leading-relaxed"
-              initial={{ opacity: 0, y: 20 }}
-              transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
-              viewport={{ once: true, amount: 0.3 }}
-              whileInView={{ opacity: 1, y: 0 }}
-            >
-              <PortableText components={createPortableComponents()} value={data.text[locale]} />
-              <p className="pt-4 font-bold text-accent text-xl">
-                Pare de gerir no escuro. Comece a decidir com base em verdade matemática.
-              </p>
-            </motion.div>
+            {data.text && (
+              <motion.div
+                className="space-y-6 text-foreground/90 text-lg leading-relaxed"
+                initial={{ opacity: 0, y: 20 }}
+                transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
+                viewport={{ once: true, amount: 0.3 }}
+                whileInView={{ opacity: 1, y: 0 }}
+              >
+                <PortableText components={createPortableComponents()} value={data.text[locale]} />
+                <p className="pt-4 font-bold text-accent text-xl">
+                  Pare de gerir no escuro. Comece a decidir com base em verdade matemática.
+                </p>
+              </motion.div>
+            )}
 
             {data.cta && data.cta.length > 0 && (
               <motion.div

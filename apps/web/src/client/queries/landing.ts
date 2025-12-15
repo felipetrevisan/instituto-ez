@@ -36,7 +36,8 @@ const ctaField = `
     _type == "mathematizer.cta" || 
     _type == "forbusiness.cta" || 
     _type == "mentoring.cta" ||
-    _type == "about.cta" => cta[] {
+    _type == "about.cta" ||
+    _type == "services.cta" => cta[] {
       ...,
      ${buttonFields}
     },

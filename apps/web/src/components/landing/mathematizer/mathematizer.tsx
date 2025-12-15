@@ -2,7 +2,6 @@
 
 import { useShared } from '@ez/shared/hooks/use-shared'
 import { LinkType } from '@ez/shared/types'
-import { Button } from '@ez/shared/ui'
 import { Card, CardContent } from '@ez/shared/ui/card'
 import { CallAction } from '@ez/web/components/ui/call-action-button'
 import { Icon } from '@ez/web/components/ui/icon'
@@ -10,7 +9,7 @@ import { StickySection } from '@ez/web/components/ui/sticky-section'
 import type { SectionMathematizerMathematizer } from '@ez/web/types/landing/mathematizer'
 import { createPortableComponents } from '@ez/web/utils/create-portable-components'
 import { PortableText } from '@portabletext/react'
-import { DynamicIcon, type IconName } from 'lucide-react/dynamic'
+import type { IconName } from 'lucide-react/dynamic'
 import { motion } from 'motion/react'
 
 export const Mathematizer = ({
@@ -36,55 +35,58 @@ export const Mathematizer = ({
             <PortableText components={createPortableComponents()} value={data.heading[locale]} />
           </motion.h2>
 
-          <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-2">
-            {data.items.map((item, index) => {
-              return (
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  // biome-ignore lint/suspicious/noArrayIndexKey: false positive
-                  key={`mathematizer-mathematizer-${index}`}
-                  transition={{ duration: 0.6, delay: index * 0.1, ease: 'easeOut' }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                >
-                  <Card
-                    className="hover-lift h-full border-border transition-all duration-300 hover:border-accent/50"
-                    theme="landing"
-                    variant="landing"
+          {data.items.length > 0 && (
+            <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-2">
+              {data.items.map((item, index) => {
+                return (
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    // biome-ignore lint/suspicious/noArrayIndexKey: false positive
+                    key={`mathematizer-mathematizer-${index}`}
+                    transition={{ duration: 0.6, delay: index * 0.1, ease: 'easeOut' }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                   >
-                    <CardContent className="space-y-6 p-8">
-                      {item.icon && (
-                        <div className="flex size-16 items-center justify-center rounded-full bg-accent/10">
-                          <Icon className="size-8 text-accent" name={item.icon} />
-                        </div>
-                      )}
+                    <Card
+                      className="hover-lift h-full border-border transition-all duration-300 hover:border-accent/50"
+                      theme="landing"
+                      variant="landing"
+                    >
+                      <CardContent className="space-y-6 p-8">
+                        {item.icon && (
+                          <div className="flex size-16 items-center justify-center rounded-full bg-accent/10">
+                            <Icon className="size-8 text-accent" name={item.icon} />
+                          </div>
+                        )}
 
-                      <h3 className="font-bold text-2xl">{item.title[locale]}</h3>
+                        <h3 className="font-bold text-2xl">{item.title[locale]}</h3>
 
-                      <div className="space-y-4 text-foreground/80">
-                        <div>
-                          <p className="mb-2 font-semibold text-accent text-sm">
-                            Problemas que resolve:
-                          </p>
-                          <p>{item.problems[locale]}</p>
-                        </div>
+                        <div className="space-y-4 text-foreground/80">
+                          <div>
+                            <p className="mb-2 font-semibold text-accent text-sm">
+                              Problemas que resolve:
+                            </p>
+                            <p>{item.problems[locale]}</p>
+                          </div>
 
-                        <div>
-                          <p className="mb-2 font-semibold text-accent text-sm">Como atua:</p>
-                          <p>{item.action[locale]}</p>
-                        </div>
+                          <div>
+                            <p className="mb-2 font-semibold text-accent text-sm">Como atua:</p>
+                            <p>{item.action[locale]}</p>
+                          </div>
 
-                        <div>
-                          <p className="mb-2 font-semibold text-accent text-sm">Resultado:</p>
-                          <p className="font-medium text-foreground">{item.result[locale]}</p>
+                          <div>
+                            <p className="mb-2 font-semibold text-accent text-sm">Resultado:</p>
+                            <p className="font-medium text-foreground">{item.result[locale]}</p>
+                          </div>
                         </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              )
-            })}
-          </div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                )
+              })}
+            </div>
+          )}
+
           {data.cta && (
             <motion.div
               className="mt-12 text-center"

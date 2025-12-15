@@ -22,20 +22,22 @@ export const WhatIs = ({ data, locale }: { data: SectionMathematizerWhatIs; loca
               <PortableText components={createPortableComponents()} value={data.heading[locale]} />
             </motion.h2>
 
-            <motion.div
-              className="space-y-6 text-foreground/90 text-lg leading-relaxed"
-              initial={{ opacity: 0, y: 30 }}
-              transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
-              viewport={{ once: true, amount: 0.3 }}
-              whileInView={{ opacity: 1, y: 0 }}
-            >
-              <PortableText components={createPortableComponents()} value={data.text[locale]} />
-              <p className="pt-4 text-justify font-semibold text-accent text-xl">
-                Ser neuroanalítico é unir a precisão da matemática à leitura do comportamento
-                humano, transformando sensações em números e oferecendo clareza profunda para a
-                tomada de decisão.
-              </p>
-            </motion.div>
+            {data.text && (
+              <motion.div
+                className="space-y-6 text-foreground/90 text-lg leading-relaxed"
+                initial={{ opacity: 0, y: 30 }}
+                transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
+                viewport={{ once: true, amount: 0.3 }}
+                whileInView={{ opacity: 1, y: 0 }}
+              >
+                <PortableText components={createPortableComponents()} value={data.text[locale]} />
+                <p className="pt-4 text-justify font-semibold text-accent text-xl">
+                  Ser neuroanalítico é unir a precisão da matemática à leitura do comportamento
+                  humano, transformando sensações em números e oferecendo clareza profunda para a
+                  tomada de decisão.
+                </p>
+              </motion.div>
+            )}
           </div>
         </div>
       </div>

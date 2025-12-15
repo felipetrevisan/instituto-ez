@@ -3,7 +3,6 @@
 import { useShared } from '@ez/shared/hooks/use-shared'
 import { cn } from '@ez/shared/lib/utils'
 import { LinkType } from '@ez/shared/types'
-import { Button } from '@ez/shared/ui/button'
 import { Card } from '@ez/shared/ui/card'
 import { CallAction } from '@ez/web/components/ui/call-action-button'
 import { Icon } from '@ez/web/components/ui/icon'
@@ -40,7 +39,7 @@ export const Testimonials = ({
               </h2>
             </motion.div>
 
-            {data.items && (
+            {data.items.length > 0 && (
               <div className="grid gap-6 md:grid-cols-3">
                 {data.items.map((item, index) => {
                   const color = colors[index % colors.length]

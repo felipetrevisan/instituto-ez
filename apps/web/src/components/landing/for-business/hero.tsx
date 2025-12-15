@@ -2,9 +2,7 @@
 
 import { useShared } from '@ez/shared/hooks/use-shared'
 import { LinkType } from '@ez/shared/types'
-import { Button } from '@ez/shared/ui'
 import { CallAction } from '@ez/web/components/ui/call-action-button'
-import { Icon } from '@ez/web/components/ui/icon'
 import { StickySection } from '@ez/web/components/ui/sticky-section'
 import type { SectionHero } from '@ez/web/types/landing'
 import { createPortableComponents } from '@ez/web/utils/create-portable-components'
@@ -56,17 +54,19 @@ export const Hero = ({ data, locale }: { data: SectionHero; locale: string }) =>
               <PortableText components={createPortableComponents()} value={data.heading[locale]} />
             </motion.h1>
 
-            <motion.p
-              animate={{ opacity: 1, y: 0 }}
-              className="mx-auto max-w-3xl text-lg text-muted-foreground leading-relaxed md:text-xl"
-              initial={{ opacity: 0, y: 20 }}
-              transition={{ delay: 0.6, duration: 0.6 }}
-            >
-              <PortableText
-                components={createPortableComponents()}
-                value={data.subheading[locale]}
-              />
-            </motion.p>
+            {data.subheading && (
+              <motion.p
+                animate={{ opacity: 1, y: 0 }}
+                className="mx-auto max-w-3xl text-lg text-muted-foreground leading-relaxed md:text-xl"
+                initial={{ opacity: 0, y: 20 }}
+                transition={{ delay: 0.6, duration: 0.6 }}
+              >
+                <PortableText
+                  components={createPortableComponents()}
+                  value={data.subheading[locale]}
+                />
+              </motion.p>
+            )}
 
             {data.cta && data.cta.length > 0 && (
               <motion.div

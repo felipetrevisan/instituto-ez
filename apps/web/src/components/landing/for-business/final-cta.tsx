@@ -2,9 +2,7 @@
 
 import { useShared } from '@ez/shared/hooks/use-shared'
 import { LinkType } from '@ez/shared/types'
-import { Button } from '@ez/shared/ui'
 import { CallAction } from '@ez/web/components/ui/call-action-button'
-import { Icon } from '@ez/web/components/ui/icon'
 import { StickySection } from '@ez/web/components/ui/sticky-section'
 import type { SectionForBusinessCTA } from '@ez/web/types/landing/for-business'
 import { createPortableComponents } from '@ez/web/utils/create-portable-components'
@@ -30,9 +28,11 @@ export const FinalCTA = ({ data, locale }: { data: SectionForBusinessCTA; locale
               <PortableText components={createPortableComponents()} value={data.heading[locale]} />
             </h2>
 
-            <p className="mx-auto max-w-2xl text-lg text-muted-foreground leading-relaxed md:text-xl">
-              <PortableText components={createPortableComponents()} value={data.text[locale]} />
-            </p>
+            {data.text && (
+              <p className="mx-auto max-w-2xl text-lg text-muted-foreground leading-relaxed md:text-xl">
+                <PortableText components={createPortableComponents()} value={data.text[locale]} />
+              </p>
+            )}
 
             {data.cta && data.cta.length > 0 && (
               <motion.div

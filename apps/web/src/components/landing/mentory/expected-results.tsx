@@ -27,18 +27,21 @@ export const ExpectedResults = ({
             >
               <PortableText components={createPortableComponents()} value={data.heading[locale]} />
             </motion.h2>
-            <motion.p
-              className="mx-auto mb-12 max-w-3xl text-center text-lg text-white/80"
-              initial={{ opacity: 0, y: 20 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              viewport={{ once: true }}
-              whileInView={{ opacity: 1, y: 0 }}
-            >
-              <PortableText
-                components={createPortableComponents()}
-                value={data.subheading[locale]}
-              />
-            </motion.p>
+            
+            {data.subheading && (
+              <motion.p
+                className="mx-auto mb-12 max-w-3xl text-center text-lg text-white/80"
+                initial={{ opacity: 0, y: 20 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                viewport={{ once: true }}
+                whileInView={{ opacity: 1, y: 0 }}
+              >
+                <PortableText
+                  components={createPortableComponents()}
+                  value={data.subheading[locale]}
+                />
+              </motion.p>
+            )}
 
             <div className="grid gap-6 md:grid-cols-2">
               {data.items.map((result, index) => (

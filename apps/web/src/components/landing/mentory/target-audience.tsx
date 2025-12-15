@@ -27,15 +27,18 @@ export const TargetAudience = ({
             >
               <PortableText components={createPortableComponents()} value={data.heading[locale]} />
             </motion.h2>
-            <motion.div
-              className="space-y-6 text-gray-warm text-lg leading-relaxed md:text-xl"
-              initial={{ opacity: 0, y: 30 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              viewport={{ once: true }}
-              whileInView={{ opacity: 1, y: 0 }}
-            >
-              <PortableText components={createPortableComponents()} value={data.text[locale]} />
-            </motion.div>
+
+            {data.text && (
+              <motion.div
+                className="space-y-6 text-gray-warm text-lg leading-relaxed md:text-xl"
+                initial={{ opacity: 0, y: 30 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                viewport={{ once: true }}
+                whileInView={{ opacity: 1, y: 0 }}
+              >
+                <PortableText components={createPortableComponents()} value={data.text[locale]} />
+              </motion.div>
+            )}
           </div>
         </div>
       </div>

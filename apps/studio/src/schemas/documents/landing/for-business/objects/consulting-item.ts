@@ -1,3 +1,4 @@
+import { i18n } from '@ez/studio/schemas/objects/locale/locales'
 import { PackageIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
@@ -21,7 +22,7 @@ export default defineType({
   ],
   preview: {
     select: {
-      title: 'title.pt',
+      title: `title.${i18n.base}`,
     },
     prepare({ title }) {
       return {

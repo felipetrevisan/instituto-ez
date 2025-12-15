@@ -30,7 +30,7 @@ export const Intro = ({ data, locale }: { data: SectionAboutIntro; locale: strin
             <Logo showSlogan={false} />
           </motion.div>
 
-          {data.items && (
+          {data.items.length > 0 && (
             <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 md:grid-cols-3">
               {data.items.map((item, index) => {
                 const color = colors[index % colors.length]

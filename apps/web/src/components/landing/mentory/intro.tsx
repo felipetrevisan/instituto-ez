@@ -22,20 +22,25 @@ export const Intro = ({ data, locale }: { data: SectionMentoringIntro; locale: s
               <PortableText components={createPortableComponents()} value={data.heading[locale]} />
             </motion.h2>
 
-            <motion.div
-              className="space-y-6"
-              initial={{ opacity: 0, y: 30 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              viewport={{ once: true }}
-              whileInView={{ opacity: 1, y: 0 }}
-            >
-              {data.text?.map((text, index) => (
-                // biome-ignore lint/suspicious/noArrayIndexKey: false positive
-                <p className="text-gray-warm text-lg leading-relaxed md:text-xl" key={`mentory-${index}`}>
-                  <PortableText components={createPortableComponents()} value={text[locale]} />
-                </p>
-              ))}
-            </motion.div>
+            {data.text.length > 0 && (
+              <motion.div
+                className="space-y-6"
+                initial={{ opacity: 0, y: 30 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                viewport={{ once: true }}
+                whileInView={{ opacity: 1, y: 0 }}
+              >
+                {data.text?.map((text, index) => (
+                  <p
+                  className="text-gray-warm text-lg leading-relaxed md:text-xl"
+                  // biome-ignore lint/suspicious/noArrayIndexKey: false positive
+                    key={`mentory-${index}`}
+                  >
+                    <PortableText components={createPortableComponents()} value={text[locale]} />
+                  </p>
+                ))}
+              </motion.div>
+            )}
           </div>
         </div>
       </div>
