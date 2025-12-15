@@ -50,10 +50,5 @@
     "tailwindcss": "^4.1.7",
     "tsx": "4.20.3",
     "vite": "7.0.4"
-  },
-  "pnpm": {
-    "overrides": {
-      "lucide-react": "^0.474.0"
-    }
   }
 }
