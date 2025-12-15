@@ -5,7 +5,7 @@
     } */
 
     body {
-      @apply bg-yellow-400 text-foreground font-sans antialiased border-4;
+      @apply text-foreground font-sans antialiased border-4;
     }
     
     h1, h2, h3, h4, h5, h6 {
