@@ -189,7 +189,7 @@ export default defineType({
       description: 'Select a page',
       type: 'reference',
       group: 'link',
-      to: [{ type: 'page' }],
+      to: [{ type: 'landingPage' }],
       hidden: ({ parent }) =>
         !parent?.show_button ||
         (parent?.show_button && parent?.button_link_type !== 'INTERNAL') ||

@@ -162,16 +162,26 @@ export default defineType({
     }),
     defineField({
       name: 'main_nav',
-      title: 'Main Navigation',
-      description: 'Select a main navigation that is used in header',
+      title: 'Header Navigation',
+      description: 'Select a header navigation that is used in header',
       type: 'reference',
       group: ['navigation'],
       to: { type: 'navigation' },
       validation: (Rule) =>
         Rule.custom((_field, context) =>
-          !context?.document?.main_nav && !context?.document?.social_nav
-            ? 'Main navigation must be configured.'
-            : true,
+          !context?.document?.main_nav ? 'Main navigation must be configured.' : true,
+        ).warning(),
+    }),
+    defineField({
+      name: 'footer_nav',
+      title: 'Footer Navigation',
+      description: 'Select a main navigation that is used in footer',
+      type: 'reference',
+      group: ['navigation'],
+      to: { type: 'navigation' },
+      validation: (Rule) =>
+        Rule.custom((_field, context) =>
+          !context?.document?.footer_nav ? 'Footer navigation must be configured.' : true,
         ).warning(),
     }),
     defineField({
@@ -183,9 +193,7 @@ export default defineType({
       to: { type: 'navigation' },
       validation: (Rule) =>
         Rule.custom((_field, context) =>
-          !context?.document?.main_nav && !context?.document?.social_nav
-            ? 'Social networks links must be configured'
-            : true,
+          !context?.document?.social_nav ? 'Social networks links must be configured' : true,
         ).warning(),
     }),
     defineField({

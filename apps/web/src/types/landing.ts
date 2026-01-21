@@ -1,4 +1,4 @@
-import type { Button } from '@ez/shared/types'
+import type { Button, SanityAsset } from '@ez/shared/types'
 import type {
   SectionAboutIntro,
   SectionAboutServices,
@@ -12,6 +12,14 @@ import type {
   SectionForBusinessLectures,
   SectionForBusinessTestimonial,
 } from '@ez/web/types/landing/for-business'
+import type {
+  SectionHomeDevelopment,
+  SectionHomeDigitalProducts,
+  SectionHomeImmersion,
+  SectionHomeMathematizer,
+  SectionHomeMentorShip,
+  SectionHomeServices,
+} from '@ez/web/types/landing/home'
 import type {
   SectionMathematizerBenefits,
   SectionMathematizerCTA,
@@ -49,11 +57,21 @@ export type SectionHero = {
   heading: Record<string, PortableTextBlock[]>
   subheading: Record<string, PortableTextBlock[]>
   description: Record<string, PortableTextBlock[]>
+  image: SanityAsset
   cta: Button[]
   _type: string
 }
 
 export type LandingSectionsMap = {
+  home:
+    | SectionHero
+    | SectionHomeServices
+    | SectionHomeMentorShip
+    | SectionHomeMathematizer
+    | SectionHomeDevelopment
+    | SectionHomeDigitalProducts
+    | SectionHomeImmersion
+
   mathematizer:
     | SectionHero
     | SectionMathematizerBenefits
@@ -80,22 +98,50 @@ export type LandingSectionsMap = {
     | SectionMentoringCTA
 
   about: SectionHero | SectionAboutIntro | SectionAboutServices | SectionAboutWhyChoose
-  services:
-    | SectionHero
-    // | SectionServicestAssessment
-    // | SectionServicesBenefits
-    // | SectionServicesMethodSessions
-    // | SectionServicesWhoIsItFor
-    // | SectionServicesCTA
+  services: SectionHero
+  // | SectionServicestAssessment
+  // | SectionServicesBenefits
+  // | SectionServicesMethodSessions
+  // | SectionServicesWhoIsItFor
+  // | SectionServicesCTA
 }
 
-export type LandingPageKey = {
+// export type LandingPageKey = {
+//   key: string
+//   slug: string[]
+//   component: React.ComponentType<{ data: Landing }>
+//   navigation: {
+//     header?: {
+//       desktop?: React.ComponentType<{ navigation?: Navigation }>
+//       mobile?: React.ComponentType<{ navigation?: Navigation }>
+//     }
+//     footer?: {
+//       desktop?: React.ComponentType<{ navigation?: Navigation }>
+//     }
+//   }
+//   classes?: string
+// }
+
+export type LandingNavigationSlot = {
+  desktop?: React.ComponentType<{ navigation?: Navigation }>
+  mobile?: React.ComponentType<{ navigation?: Navigation }>
+}
+
+export type LandingNavigationConfig = {
+  header?: LandingNavigationSlot
+  footer?: {
+    desktop?: React.ComponentType<{ navigation?: Navigation }>
+  }
+}
+
+export type LandingPageConfig = {
   key: string
   slug: string[]
-  component: React.ComponentType<{ data: Landing }>
-  navigation: {
-    desktop?: React.ComponentType<{ navigation?: Navigation }>
-    mobile?: React.ComponentType<{ navigation?: Navigation }>
-  }
   classes?: string
+  component: React.ComponentType<{ data: Landing }>
+  navigation?: LandingNavigationConfig
+  layout?: {
+    hideFooter?: boolean
+    hideHeader?: boolean
+  }
 }

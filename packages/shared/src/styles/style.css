@@ -21,15 +21,15 @@
   --font-questrial: var(--font-questrial);
   --font-inter: var(--font-inter);
 
-  --text-sm: clamp(0.875rem, 3.5vw, 1rem); /* 14 → 16px */
+  --text-sm: clamp(0.875rem, 3.5vw, .80rem); /* 14 → 16px */
   --text-base: clamp(1rem, 3vw, 1.125rem); /* 16 → 18px */
-  --text-lg: clamp(1.125rem, 3vw, 1.20rem); /* 18 → 20px */
-  --text-xl: clamp(1.25rem, 4vw, 1.40rem); /* 20 → 24px */
-  --text-2xl: clamp(1.5rem, 5vw, 2rem); /* 24 → 32px */
-  --text-3xl: clamp(1.875rem, 6vw, 2.25rem); /* 30 → 36px */
-  --text-4xl: clamp(2.25rem, 7vw, 3rem); /* 36 → 48px */
-  --text-5xl: clamp(3rem, 8vw, 3.75rem); /* 48 → 60px */
-  --text-6xl: clamp(3.75rem, 9vw, 4.5rem); /* 60 → 72px */
+  --text-lg: clamp(1.125rem, 3vw, .20rem); /* 18 → 20px */
+  --text-xl: clamp(1.25rem, 4vw, .40rem); /* 20 → 24px */
+  --text-2xl: clamp(1.5rem, 5vw, 1rem); /* 24 → 32px */
+  --text-3xl: clamp(1.875rem, 6vw, 1.25rem); /* 30 → 36px */
+  --text-4xl: clamp(2.25rem, 7vw, 2rem); /* 36 → 48px */
+  --text-5xl: clamp(3rem, 8vw, 2.75rem); /* 48 → 60px */
+  --text-6xl: clamp(3.75rem, 9vw, 3.5rem); /* 60 → 72px */
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -64,6 +64,8 @@
   --color-purple: var(--purple);
   --color-gray-warm: var(--gray-warm);
   --color-gray-light: var(--gray-light);
+  --color-footer: var(--footer);
+  --color-footer-foreground: var(--footer-foreground);
   --animate-pulse-effect: pulse-effect 1s;
 
   @keyframes pulse-effect {

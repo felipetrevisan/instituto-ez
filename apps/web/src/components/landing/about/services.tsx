@@ -10,7 +10,7 @@ import { motion } from 'motion/react'
 
 export const Services = ({ data, locale }: { data: SectionAboutServices; locale: string }) => {
   return (
-    <StickySection id="services">
+    <StickySection className="w-screen" id="services">
       <div className="bg-muted py-20 md:py-28">
         <div className="container mx-auto px-6 md:px-8">
           <div className="mx-auto max-w-6xl">

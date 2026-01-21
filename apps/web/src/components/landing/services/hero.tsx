@@ -2,14 +2,11 @@
 
 import { useShared } from '@ez/shared/hooks/use-shared'
 import { LinkType } from '@ez/shared/types'
-import { Button } from '@ez/shared/ui'
 import { CallAction } from '@ez/web/components/ui/call-action-button'
-import { Icon } from '@ez/web/components/ui/icon'
 import { StickySection } from '@ez/web/components/ui/sticky-section'
 import type { SectionHero } from '@ez/web/types/landing'
 import { createPortableComponents } from '@ez/web/utils/create-portable-components'
 import { PortableText } from '@portabletext/react'
-import { Phone } from 'lucide-react'
 import type { IconName } from 'lucide-react/dynamic'
 import { motion } from 'motion/react'
 
@@ -70,10 +67,16 @@ export const Hero = ({ data, locale }: { data: SectionHero; locale: string }) =>
                       }}
                       key={button._key}
                       label={button.label[locale]}
-                      onClick={() => setIsContactDialogOpen(true)}
+                      link={button.type === LinkType.DIALOG ? undefined : button.link[locale]}
+                      onClick={
+                        button.type === LinkType.DIALOG
+                          ? () => setIsContactDialogOpen(true)
+                          : undefined
+                      }
                       rounded={button.theme.rounded}
                       size={button.theme.size}
                       theme={button.theme.theme}
+                      variant={button.theme.variant}
                     />
                   )
                 })}

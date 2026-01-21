@@ -22,47 +22,47 @@ const structure = (S: StructureBuilder, context: ConfigContext) =>
             ]),
         ),
 
-      S.listItem()
-        .title('Home')
-        .icon(CogIcon)
-        .child(
-          S.list()
-            .title('Home')
-            .items([
-              S.listItem().title('Banner').child(S.documentTypeList('banner')),
-              S.divider(),
-              orderableDocumentListDeskItem({
-                type: 'service',
-                title: 'Atendimentos',
-                S,
-                context,
-              }),
-              orderableDocumentListDeskItem({
-                type: 'workshop',
-                title: 'Workshops',
-                S,
-                context,
-              }),
-              S.listItem()
-                .title('Imersão')
-                .child(S.document().schemaType('immersion').documentId('immersion')),
-              S.listItem()
-                .title('Mentoria Avançanda')
-                .child(S.document().schemaType('advanced-mentory').documentId('advanced-mentory')),
-              orderableDocumentListDeskItem({
-                type: 'lecture',
-                title: 'Palestras',
-                S,
-                context,
-              }),
-              orderableDocumentListDeskItem({
-                type: 'testimonial',
-                title: 'Depoimentos',
-                S,
-                context,
-              }),
-            ]),
-        ),
+      // S.listItem()
+      //   .title('Home')
+      //   .icon(CogIcon)
+      //   .child(
+      //     S.list()
+      //       .title('Home')
+      //       .items([
+      //         S.listItem().title('Banner').child(S.documentTypeList('banner')),
+      //         S.divider(),
+      //         orderableDocumentListDeskItem({
+      //           type: 'service',
+      //           title: 'Atendimentos',
+      //           S,
+      //           context,
+      //         }),
+      //         orderableDocumentListDeskItem({
+      //           type: 'workshop',
+      //           title: 'Workshops',
+      //           S,
+      //           context,
+      //         }),
+      //         S.listItem()
+      //           .title('Imersão')
+      //           .child(S.document().schemaType('immersion').documentId('immersion')),
+      //         S.listItem()
+      //           .title('Mentoria Avançanda')
+      //           .child(S.document().schemaType('advanced-mentory').documentId('advanced-mentory')),
+      //         orderableDocumentListDeskItem({
+      //           type: 'lecture',
+      //           title: 'Palestras',
+      //           S,
+      //           context,
+      //         }),
+      //         orderableDocumentListDeskItem({
+      //           type: 'testimonial',
+      //           title: 'Depoimentos',
+      //           S,
+      //           context,
+      //         }),
+      //       ]),
+      //   ),
 
       S.divider(),
 

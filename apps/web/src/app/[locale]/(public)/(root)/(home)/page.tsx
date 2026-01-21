@@ -1,39 +1,83 @@
-import { Subtitle, Title } from '@ez/shared/ui/title'
-import * as App from '@ez/web/components/app'
-import { getSections } from '@ez/web/config/sections'
-import { getSiteConfig } from '@ez/web/server/get-site-config'
-import type { Section, SectionKey } from '@ez/web/types/sections'
-import type { Locale } from 'next-intl'
+import LandingPage from '@ez/web/app/[locale]/(public)/(root)/_landing-page'
+import NormalPage from '@ez/web/app/[locale]/(public)/(root)/_normal-page'
+import { getAvailableLandingPages } from '@ez/web/config/landing-page'
+import { locales } from '@ez/web/config/locale'
+import { getLandingPage } from '@ez/web/server/get-landing'
+import { getPageBySlug, getPages } from '@ez/web/server/get-page'
+import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
+import { Suspense } from 'react'
+import Loading from '../_loading'
 
-export default async function Page({ params }: { params: Promise<{ locale: Locale }> }) {
-  const { sections } = await getSiteConfig()
-  const locale = (await params).locale
+function resolveLanding(slug: string) {
+  return getAvailableLandingPages().find((landing) => landing.slug.includes(slug))
+}
 
-  const avaliableSections = getSections().reduce(
-    (acc, section) => {
-      acc[section.key] = section
-      return acc
-    },
-    {} as Record<string, SectionKey>,
-  )
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale } = await params
+
+  const landing = resolveLanding('home')
+  if (landing) {
+    const data = await getLandingPage('home', locale)
+    if (!data) return { title: '404' }
+
+    const { title, description, keywords } = data.settings
+    return {
+      title: title?.[locale] ?? '',
+      description: description?.[locale] ?? '',
+      keywords: keywords?.[locale] ?? '',
+    }
+  }
+
+  const data = await getPageBySlug('home', locale)
+  if (!data) return { title: '404' }
+
+  return {
+    title: data.title?.[locale] ?? '',
+    description: data.description?.[locale] ?? '',
+    keywords: data.keywords?.[locale] ?? '',
+  }
+}
+
+export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+
+  const landing = resolveLanding('home')
+
+  if (landing) {
+    const data = await getLandingPage('home', locale)
+    if (!data) notFound()
+
+    return (
+      <Suspense fallback={<Loading />}>
+        <LandingPage data={data} />
+      </Suspense>
+    )
+  }
+
+  const data = await getPageBySlug('home', locale)
+  if (!data) notFound()
 
   return (
-    <div className="flex w-full flex-col items-center justify-center gap-20">
-      {sections?.map(({ key, show, title, subtitle }: Section) =>
-        show ? (
-          <section className={avaliableSections[key]?.classes || ''} key={key}>
-            {title?.[locale] && (
-              <App.PageHeader>
-                <Title className="text-center" size="2xl">
-                  {title?.[locale]}
-                </Title>
-                {subtitle && <Subtitle size="xl">{subtitle?.[locale]}</Subtitle>}
-              </App.PageHeader>
-            )}
-            {avaliableSections[key]?.component}
-          </section>
-        ) : null,
-      )}
-    </div>
+    <Suspense fallback={<Loading />}>
+      <NormalPage data={data} slug="home" />
+    </Suspense>
+  )
+}
+
+export async function generateStaticParams() {
+  const pages = await getPages()
+
+  return pages.flatMap((page) =>
+    locales
+      .map((locale) => {
+        const currentSlug = page.slug?.[locale]?.current
+        return currentSlug ? { slug: currentSlug, locale } : null
+      })
+      .filter(Boolean),
   )
 }

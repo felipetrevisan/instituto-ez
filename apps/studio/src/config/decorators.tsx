@@ -1,4 +1,8 @@
-import { HighlightDecorator } from '@ez/studio/portable/decorators'
+import {
+  FontColorDecorator,
+  FontWeightDecorator,
+  HighlightDecorator,
+} from '@ez/studio/portable/decorators'
 import { BoldIcon, BulbOutlineIcon, ColorWheelIcon, LinkIcon } from '@sanity/icons'
 
 const basicDecorators = [
@@ -47,10 +51,33 @@ const styles = [
 ]
 
 const decorators = [
-  { title: 'Bold', value: 'strong' },
-  { title: 'Medium Bold', value: 'medium', icon: BoldIcon },
-  { title: 'Semi Bold', value: 'semibold', icon: BoldIcon },
-  { title: 'Extra Bold', value: 'extrabold', icon: BoldIcon },
+  {
+    title: 'Bold',
+    value: 'strong',
+    // biome-ignore lint/suspicious/noExplicitAny: false positive
+    component: (props: any) => FontWeightDecorator(props, 'bold'),
+  },
+  {
+    title: 'Medium Bold',
+    value: 'medium',
+    icon: BoldIcon,
+    // biome-ignore lint/suspicious/noExplicitAny: false positive
+    component: (props: any) => FontWeightDecorator(props, 'medium'),
+  },
+  {
+    title: 'Semi Bold',
+    value: 'semibold',
+    icon: BoldIcon,
+    // biome-ignore lint/suspicious/noExplicitAny: false positive
+    component: (props: any) => FontWeightDecorator(props, 'semibold'),
+  },
+  {
+    title: 'Extra Bold',
+    value: 'extrabold',
+    icon: BoldIcon,
+    // biome-ignore lint/suspicious/noExplicitAny: false positive
+    component: (props: any) => FontWeightDecorator(props, 'extrabold'),
+  },
   { title: 'Emphasis', value: 'em' },
   { title: 'Underline', value: 'underline' },
   {
@@ -59,15 +86,68 @@ const decorators = [
     icon: BulbOutlineIcon,
     component: HighlightDecorator,
   },
-  { title: 'Primary Color', value: 'primary', icon: ColorWheelIcon },
-  { title: 'Secondary Color', value: 'secondary', icon: ColorWheelIcon },
-  { title: 'Tertiary Color', value: 'tertiary', icon: ColorWheelIcon },
-  { title: 'Accent Color', value: 'accent', icon: ColorWheelIcon },
-  { title: 'Navy Color', value: 'navy', icon: ColorWheelIcon },
-  { title: 'Cyan Color', value: 'cyan', icon: ColorWheelIcon },
-  { title: 'Coral Color', value: 'coral', icon: ColorWheelIcon },
-  { title: 'White Color', value: 'white', icon: ColorWheelIcon },
-  { title: 'Gradient Primary Color', value: 'gradient-primary', icon: ColorWheelIcon },
+  {
+    title: 'Primary Color',
+    value: 'primary',
+    icon: ColorWheelIcon, // biome-ignore lint/suspicious/noExplicitAny: false positive
+    component: (props: any) => FontColorDecorator(props, 'primary'),
+  },
+  {
+    title: 'Secondary Color',
+    value: 'secondary',
+    icon: ColorWheelIcon,
+    // biome-ignore lint/suspicious/noExplicitAny: false positive
+    component: (props: any) => FontColorDecorator(props, 'secondary'),
+  },
+  {
+    title: 'Tertiary Color',
+    value: 'tertiary',
+    icon: ColorWheelIcon,
+    // biome-ignore lint/suspicious/noExplicitAny: false positive
+    component: (props: any) => FontColorDecorator(props, 'tertiary'),
+  },
+  {
+    title: 'Accent Color',
+    value: 'accent',
+    icon: ColorWheelIcon,
+    // biome-ignore lint/suspicious/noExplicitAny: false positive
+    component: (props: any) => FontColorDecorator(props, 'accent'),
+  },
+  {
+    title: 'Navy Color',
+    value: 'navy',
+    icon: ColorWheelIcon,
+    // biome-ignore lint/suspicious/noExplicitAny: false positive
+    component: (props: any) => FontColorDecorator(props, 'navy'),
+  },
+  {
+    title: 'Cyan Color',
+    value: 'cyan',
+    icon: ColorWheelIcon,
+    // biome-ignore lint/suspicious/noExplicitAny: false positive
+    component: (props: any) => FontColorDecorator(props, 'cyan'),
+  },
+  {
+    title: 'Coral Color',
+    value: 'coral',
+    icon: ColorWheelIcon,
+    // biome-ignore lint/suspicious/noExplicitAny: false positive
+    component: (props: any) => FontColorDecorator(props, 'coral'),
+  },
+  {
+    title: 'White Color',
+    value: 'white',
+    icon: ColorWheelIcon,
+    // biome-ignore lint/suspicious/noExplicitAny: false positive
+    component: (props: any) => FontColorDecorator(props, 'white'),
+  },
+  {
+    title: 'Gradient Primary Color',
+    value: 'gradient-primary',
+    icon: ColorWheelIcon,
+    // biome-ignore lint/suspicious/noExplicitAny: false positive
+    component: (props: any) => FontColorDecorator(props, 'gradient-primary'),
+  },
 ]
 
 const annotations = [

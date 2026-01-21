@@ -15,8 +15,11 @@ export type Site = {
   hero: Hero[]
   sections: Section[]
   logo?: SanityAsset
-  primaryNavigation?: Navigation
-  socialNavigation?: SocialNetwork
+  navigation?: {
+    header?: Navigation
+    footer?: Navigation
+    social?: SocialNetwork
+  }
   testimonialsConfig: {
     type: 'ANIMATED' | 'MINIMALIST'
     theme: keyof typeof Theme

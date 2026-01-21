@@ -22,7 +22,7 @@ export default defineType({
         // biome-ignore lint/suspicious/noExplicitAny: false positive
         source: (doc: any) => {
           return doc?.page.title?.[lang.id]
-        }
+        },
       },
     }),
   ),

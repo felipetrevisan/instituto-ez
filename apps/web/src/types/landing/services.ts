@@ -15,7 +15,7 @@ export type SectionServicesBenefits = {
   _type: string
 }
 
-export type  SectionServicesBenefitsItem = {
+export type SectionServicesBenefitsItem = {
   title: Record<string, string>
   icon?: IconName
   _type: string
@@ -36,7 +36,7 @@ export type SectionServicesMethodSessions = {
   _type: string
 }
 
-export type  SectionServicesMethodSessionsItem = {
+export type SectionServicesMethodSessionsItem = {
   title: Record<string, string>
   description: Record<string, string>
   icon?: IconName

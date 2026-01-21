@@ -20,6 +20,8 @@
   --border: oklch(0.91 0.01 250);
   --input: oklch(0.91 0.01 250);
   --ring: oklch(0.56 0.15 250);
+  --footer: oklch(.45 .18 250);
+  --footer-foreground: oklch(0.98 0 0);
 }
 
 .dark [data-theme="for-business"] {
@@ -46,4 +48,6 @@
   --ring: oklch(0.64 0.15 250);  
   --shadow-card: 0 4px 20px -2px oklch(0.56 0.15 250 / 0.08);
   --shadow-card-hover: 0 8px 30px -4px oklch(0.56 0.15 250 / 0.15);
+  --footer: oklch(0.35 0.08 250);
+  --footer-foreground: oklch(0.98 0 0);
 }

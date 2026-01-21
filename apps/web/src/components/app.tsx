@@ -7,26 +7,21 @@ import { cn } from '@ez/shared/lib/utils'
 import { getImageUrlBuilder } from '@ez/shared/sanity/image'
 import { IconButton } from '@ez/shared/ui/animated/button/icon-button'
 import { Dialog } from '@ez/shared/ui/dialog'
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@ez/shared/ui/select'
-import { HeaderNavigation } from '@ez/web/components/navigation/header'
+
+import { FooterNavigation } from '@ez/web/components/navigation/footer/footer'
+import { HeaderNavigation } from '@ez/web/components/navigation/header/header'
+import { NavigationRenderer } from '@ez/web/components/navigation/navigation-renderer'
 import * as Navbar from '@ez/web/components/ui/navbar'
 import { menuListVariants, sidebarVariants } from '@ez/web/config/animation'
 import { env } from '@ez/web/config/env'
 import { urlForImage } from '@ez/web/config/image'
-import { getAvailableLandingPages } from '@ez/web/config/landing-page'
 import { useApp } from '@ez/web/hooks/use-app'
 import { useBodyOverflow } from '@ez/web/hooks/use-body-overflow'
 import { useDimensions } from '@ez/web/hooks/use-dimension'
+import { useLandingConfig } from '@ez/web/hooks/use-landing-config'
 import { useSite } from '@ez/web/hooks/use-site'
 import type { Navigation, Site } from '@ez/web/types/site'
-import { Monitor, Moon, Sun } from 'lucide-react'
+import { Mail, MapPin, Monitor, Moon, Phone, Sun } from 'lucide-react'
 import {
   type HTMLMotionProps,
   motion,
@@ -35,7 +30,6 @@ import {
   useScroll,
   useTransform,
 } from 'motion/react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useLocale, useTranslations } from 'next-intl'
@@ -43,11 +37,11 @@ import { useTheme } from 'next-themes'
 import { Fragment, useEffect, useRef, useState } from 'react'
 import { ContactFormDialog } from './contact-form-dialog'
 import { Logo } from './logo'
-import { MainDesktopNavigation } from './navigation/desktop-navigation'
-import { MainMobileNavigation } from './navigation/mobile-navigation'
+import { MainDesktopNavigation as HeaderDesktopNavigation } from './navigation/header/desktop-navigation'
+import { MainMobileNavigation as HeaderMobileNavigation } from './navigation/header/mobile-navigation'
 
 type HeaderProps = {
-  data: Site
+  data?: Site
   theme: 'default' | 'landing'
   pageKey?: string
   DesktopNavComponent?: React.ComponentType<{ navigation?: Navigation }>
@@ -64,21 +58,20 @@ function Header({
   theme,
   pageKey,
   customNavigation,
-  DesktopNavComponent = MainDesktopNavigation,
-  MobileNavComponent = MainMobileNavigation,
+  DesktopNavComponent = HeaderDesktopNavigation,
+  MobileNavComponent = HeaderMobileNavigation,
   HeaderComponent = HeaderNavigation,
 }: HeaderProps) {
-  const locale = useLocale()
   const { isNormalPage, isLandingPage, isMenuOpen } = useApp()
   const router = useRouter()
   const [currentScrollY, setCurrentScrollY] = useState(0)
   const containerRef = useRef<HTMLDivElement | null>(null)
   const { height } = useDimensions(containerRef)
   const { scrollY } = useScroll()
-  const { isMobile, isDesktop } = useDeviceType()
-  useBodyOverflow(isMenuOpen)
+  const { isDesktop } = useDeviceType()
+  const landing = useLandingConfig(pageKey)
 
-  const t = useTranslations('Languages')
+  useBodyOverflow(isMenuOpen)
 
   const handleChange = (lang: string) => {
     router.push(`/${lang}`)
@@ -111,10 +104,10 @@ function Header({
     setCurrentScrollY(val)
   })
 
-  const [currentLandingPage] = getAvailableLandingPages().filter((page) => page.key === pageKey)
+  if (landing?.layout?.hideHeader) return null
 
-  const DesktopNavigation = currentLandingPage?.navigation?.desktop ?? DesktopNavComponent
-  const MobileNavigation = currentLandingPage?.navigation?.mobile ?? MobileNavComponent
+  const DesktopNavigation = landing?.navigation?.header?.desktop ?? DesktopNavComponent
+  const MobileNavigation = landing?.navigation?.header?.mobile ?? MobileNavComponent
   const MotionMobileNavigation = motion(MobileNavigation)
 
   return (
@@ -133,59 +126,16 @@ function Header({
               src={data?.logo && urlForImage(data.logo?.asset).format('webp').quality(80).url()}
             />
           </Navbar.Brand>
-          {isDesktop && (
-            <DesktopNavigation navigation={customNavigation ?? data?.primaryNavigation} />
+          {isDesktop && data?.navigation?.header && (
+            <NavigationRenderer
+              Component={DesktopNavigation}
+              navigation={customNavigation ?? data?.navigation.header}
+            />
           )}
           <div className="flex flex-row items-center justify-center gap-2">
             {(isNormalPage() || isLandingPage()) && <ThemeToggle />}
             {!isDesktop && <Navbar.Toggle />}
-            <Select defaultValue={locale} onValueChange={handleChange}>
-              <SelectTrigger className="max-w-max cursor-pointer p-3">
-                <SelectValue placeholder={t('placeholder')} />
-              </SelectTrigger>
-              <SelectContent className="relative z-150" side={isMobile ? 'left' : 'bottom'}>
-                <SelectGroup>
-                  <SelectItem className="group" value="pt">
-                    <div className="flex items-center gap-2">
-                      <Image
-                        alt=""
-                        className="size-8"
-                        height={32}
-                        src="/assets/images/flags/brazil.png"
-                        width={32}
-                      />
-                      <span className="group-hover:text-primary">PT</span>
-                    </div>
-                  </SelectItem>
-                  <SelectItem className="group" value="en">
-                    <div className="flex items-center gap-2">
-                      <Image
-                        alt=""
-                        className="size-8"
-                        height={32}
-                        priority
-                        src="/assets/images/flags/usa.png"
-                        width={32}
-                      />
-                      <span className="group-hover:text-primary">EN</span>
-                    </div>
-                  </SelectItem>
-                  <SelectItem className="group" value="es">
-                    <div className="flex items-center gap-2">
-                      <Image
-                        alt=""
-                        className="size-8"
-                        height={32}
-                        priority
-                        src="/assets/images/flags/euro.png"
-                        width={32}
-                      />
-                      <span className="group-hover:text-primary">ES</span>
-                    </div>
-                  </SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
+            <Navbar.SelectLocale onChange={handleChange} />
           </div>
         </Navbar.Root>
       </HeaderComponent>
@@ -201,7 +151,7 @@ function Header({
           <MotionMobileNavigation
             animate={isMenuOpen ? 'open' : 'closed'}
             initial="closed"
-            navigation={customNavigation ?? data?.primaryNavigation}
+            navigation={customNavigation ?? data?.navigation?.header}
             variants={menuListVariants}
           />
         )}
@@ -222,7 +172,7 @@ function Content({ className, children }: React.ComponentProps<'div'>) {
         'container relative flex h-full max-w-8xl flex-col items-center justify-center',
         {
           'mt-24': isNormalPage(),
-          'mt-4': !isNormalPage(),
+          //'mt-4': !isNormalPage(),
         },
         className,
       )}
@@ -241,46 +191,116 @@ function Content({ className, children }: React.ComponentProps<'div'>) {
   )
 }
 
-function Footer({ className }: React.ComponentProps<'div'>) {
+type FooterNavProps = {
+  navigation?: Navigation
+}
+
+type FooterProps = {
+  theme: 'default' | 'landing'
+  pageKey?: string
+  data: Site
+  DesktopNavComponent?: React.ComponentType<FooterNavProps>
+  FooterComponent?: React.ComponentType<
+    HTMLMotionProps<'footer'> & { theme: 'default' | 'landing' }
+  >
+
+  customNavigation?: Navigation
+} & React.ComponentProps<'footer'>
+
+function Footer({
+  theme,
+  pageKey,
+  data,
+  customNavigation,
+  DesktopNavComponent,
+  FooterComponent = FooterNavigation,
+}: FooterProps) {
   const { setIsContactDialogOpen } = useShared()
-  const { isLandingPage } = useApp()
-  const { data } = useSite()
+  const { isDesktop } = useDeviceType()
+  const locale = useLocale()
+
+  const landing = useLandingConfig(pageKey)
+
+  if (landing?.layout?.hideFooter) return null
 
   const { urlForImage } = getImageUrlBuilder({
     projectId: env.NEXT_PUBLIC_SANITY_PROJECT_ID,
     dataset: env.NEXT_PUBLIC_SANITY_DATASET,
   })
 
+  const DesktopNavigation = landing?.navigation?.footer?.desktop ?? DesktopNavComponent
+
   return (
-    <footer
-      className={cn('relative mt-24 flex w-full select-none flex-col items-center p-5', className)}
-    >
-      {!isLandingPage() && (
-        <div className="fixed right-10 bottom-4 z-50 flex flex-row items-center gap-4">
-          <IconButton
-            icon={MailIcon}
-            onClick={() => setIsContactDialogOpen(true)}
-            size="lg"
-            theme="secondary"
-            transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-            whileHover={{ scale: 1.4 }}
-            whileTap={{ scale: 1.4 }}
-          />
+    <FooterComponent theme={theme}>
+      <div className="fixed right-10 bottom-4 z-50 flex flex-row items-center gap-4">
+        <IconButton
+          icon={MailIcon}
+          onClick={() => setIsContactDialogOpen(true)}
+          size="lg"
+          theme="secondary"
+          transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+          whileHover={{ scale: 1.4 }}
+          whileTap={{ scale: 1.4 }}
+        />
+      </div>
+      <div className="container">
+        <div className="grid justify-center gap-12 md:grid-cols-3">
+          <div className="flex flex-col items-center gap-4">
+            <Logo
+              fill
+              linkable={false}
+              showSlogan={false}
+              src={data?.logo && urlForImage(data.logo?.asset).format('webp').quality(80).url()}
+            />
+            <h3 className="mb-4 font-bold text-2xl">{data?.title[locale]}</h3>
+            <p className="text-primary-foreground/80 text-sm leading-relaxed">
+              {data?.description?.[locale]}
+            </p>
+          </div>
+
+          <div className="flex flex-col items-center justify-center md:items-start">
+            <h4 className="mb-4 font-semibold text-lg">Serviços</h4>
+            {isDesktop && data?.navigation?.footer && (
+              <NavigationRenderer
+                Component={DesktopNavigation}
+                navigation={customNavigation ?? data?.navigation.footer}
+              />
+            )}
+          </div>
+
+          <div className="flex flex-col items-center justify-center md:items-start">
+            <h4 className="mb-4 font-semibold text-lg">Contato</h4>
+            <ul className="space-y-3 text-primary-foreground/80 text-sm">
+              <li className="flex items-center gap-2">
+                <Mail className="size-4 flex-shrink-0" />
+                <a
+                  className="transition-colors hover:text-accent"
+                  href="mailto:contato@institutoez.com.br"
+                >
+                  {data?.contact.email}
+                </a>
+              </li>
+              <li className="flex items-center gap-2">
+                <Phone className="size-4 flex-shrink-0" />
+                <a className="transition-colors hover:text-accent" href="tel:+5511999999999">
+                  (11) 99999-9999
+                </a>
+              </li>
+              <li className="flex items-start gap-2">
+                <MapPin className="mt-0.5 size-4 flex-shrink-0" />
+                <span>São Paulo, SP</span>
+              </li>
+            </ul>
+          </div>
         </div>
-      )}
-      <div className="container flex w-full flex-row items-center justify-center gap-4">
-        <div className="flex flex-col items-center justify-center gap-4">
-          <Logo
-            linkable={false}
-            showSlogan={false}
-            src={data?.logo && urlForImage(data.logo?.asset).format('webp').quality(80).url()}
-          />
-          <p className="text-center text-primary text-opacity-75">
-            © {new Date().getFullYear()} - Todos os direitos reservados
+
+        <div className="mt-12 border-primary-foreground/20 border-t pt-8 text-center text-primary-foreground/60 text-sm">
+          <p>
+            &copy; {new Date().getFullYear()} {data?.title[locale]}. Todos os direitos reservados.
           </p>
         </div>
       </div>
-    </footer>
+    </FooterComponent>
   )
 }
 

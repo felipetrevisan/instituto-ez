@@ -7,9 +7,7 @@ export default defineType({
   title: 'Expected Results — Items - Mentoring',
   icon: PackageIcon,
   type: 'object',
-  fields: [
-    defineField({ name: 'title', type: 'localizedString' }),
-  ],
+  fields: [defineField({ name: 'title', type: 'localizedString' })],
   preview: {
     select: {
       title: `title.${i18n.base}`,

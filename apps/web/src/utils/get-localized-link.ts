@@ -9,7 +9,7 @@ export function getLocalizedLink(
   }
 
   // Hash links (#section)
-  if (isHash || link.startsWith('#')) {
+  if (isHash || link?.startsWith('#')) {
     return link
   }
 
@@ -19,7 +19,7 @@ export function getLocalizedLink(
   }
 
   // Normalize to avoid double slashes later
-  const cleanLink = link.replace(/^\/+/, '')
+  const cleanLink = link?.replace(/^\/+/, '')
 
   // Build localized internal path
   return `/${locale}/${cleanLink}`

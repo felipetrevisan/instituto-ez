@@ -132,10 +132,16 @@ export const Testimonials = ({
                   }}
                   key={data.cta._key}
                   label={data.cta.label[locale]}
-                  onClick={() => setIsContactDialogOpen(true)}
+                  link={data.cta.type === LinkType.DIALOG ? undefined : data.cta.link[locale]}
+                  onClick={
+                    data.cta.type === LinkType.DIALOG
+                      ? () => setIsContactDialogOpen(true)
+                      : undefined
+                  }
                   rounded={data.cta.theme.rounded}
                   size={data.cta.theme.size}
                   theme={data.cta.theme.theme}
+                  variant={data.cta.theme.variant}
                 />
               </div>
             )}

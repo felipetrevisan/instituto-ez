@@ -15,6 +15,17 @@ declare const messages: {
     "sendButton": "Enviar mensaje",
     "loadingButton": "Enviando mensaje..."
   },
+  "LandingPage": {
+    "title": "Solicitar Diagnóstico",
+    "sendButton": "Solicitar",
+    "loadingButton": "Solicitando diagnóstico..."
+  },
+  "LandingPageHome": {
+    "expOfYears": "Anos de Experiência",
+    "scienceBased": "Baseado em Ciência",
+    "metricsPrecision": "Precisão nas Métricas",
+    "safeDecision": "Tomada de Decisão Segura"
+  },
   "Ebooks": {
     "backButton": "Volver al catálogo",
     "reserveYourEbook": "Consigue tu eBook ahora",

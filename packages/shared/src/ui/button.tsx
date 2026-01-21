@@ -1,5 +1,4 @@
 import { cn } from '@ez/shared/lib/utils'
-import { Size } from '@ez/shared/types'
 import { Slot } from '@radix-ui/react-slot'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { type HTMLMotionProps, motion, type Transition } from 'motion/react'
@@ -79,7 +78,6 @@ const buttonVariants = cva(
     },
 
     compoundVariants: [
-      // GRADIENT AUTOMÁTICO por tema
       {
         effect: 'gradient',
         theme: 'default',
@@ -106,6 +104,12 @@ const buttonVariants = cva(
         variant: 'outline',
         theme: 'background',
         className: 'bg-transparent text-foreground outline-foreground hover:bg-background/90',
+      },
+
+      {
+        variant: 'outline',
+        theme: 'accent',
+        className: 'bg-transparent text-accent hover:bg-accent/80 hover:text-accent-foreground',
       },
 
       // Marca específica
@@ -163,6 +167,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         )}
         data-size={size ?? 'default'}
         data-slot="button"
+        data-theme={theme ?? 'default'}
+        data-variant={variant ?? 'default'}
         ref={localRef}
         transition={{ type: 'spring', stiffness: 250, damping: 15 }}
         whileHover={{ scale: scaleEffect ? 1.05 : 1 }}

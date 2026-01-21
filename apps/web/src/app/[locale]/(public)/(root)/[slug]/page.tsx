@@ -1,5 +1,5 @@
-import LandingPage from '@ez/web/app/[locale]/(public)/(root)/[slug]/_landing-page'
-import NormalPage from '@ez/web/app/[locale]/(public)/(root)/[slug]/_normal-page'
+import LandingPage from '@ez/web/app/[locale]/(public)/(root)/_landing-page'
+import NormalPage from '@ez/web/app/[locale]/(public)/(root)/_normal-page'
 import { getAvailableLandingPages } from '@ez/web/config/landing-page'
 import { locales } from '@ez/web/config/locale'
 import { getLandingPage } from '@ez/web/server/get-landing'
@@ -7,7 +7,7 @@ import { getPageBySlug, getPages } from '@ez/web/server/get-page'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
-import Loading from './_loading'
+import Loading from '../_loading'
 
 function resolveLanding(slug: string) {
   return getAvailableLandingPages().find((landing) => landing.slug.includes(slug))

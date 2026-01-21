@@ -23,7 +23,7 @@ export const FinalCTA = ({ data, locale }: { data: SectionMentoringCTA; locale: 
         <div className="container mx-auto px-6 md:px-8">
           <div className="relative mx-auto max-w-6xl">
             {left.length > 0 && (
-              <div className="-left-12 absolute top-1/4 hidden animate-fade-in lg:block">
+              <div className="-left-12 absolute top-1/4 hidden lg:block">
                 <div className="flex flex-col gap-4">
                   {left?.map((item, index) => {
                     return (
@@ -55,7 +55,7 @@ export const FinalCTA = ({ data, locale }: { data: SectionMentoringCTA; locale: 
             )}
 
             {right.length > 0 && (
-              <div className="-right-12 absolute top-1/4 hidden animate-fade-in lg:block">
+              <div className="-right-12 absolute top-1/4 hidden lg:block">
                 <div className="flex flex-col gap-4">
                   {right?.map((item, index) => {
                     return (
@@ -138,34 +138,21 @@ export const FinalCTA = ({ data, locale }: { data: SectionMentoringCTA; locale: 
                         }}
                         key={button._key}
                         label={button.label[locale]}
-                        onClick={() => setIsContactDialogOpen(true)}
+                        link={button.type === LinkType.DIALOG ? undefined : button.link[locale]}
+                        onClick={
+                          button.type === LinkType.DIALOG
+                            ? () => setIsContactDialogOpen(true)
+                            : undefined
+                        }
                         rounded={button.theme.rounded}
                         size={button.theme.size}
                         theme={button.theme.theme}
+                        variant={button.theme.variant}
                       />
                     )
                   })}
                 </motion.div>
               )}
-              {/* <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                viewport={{ once: true }}
-                whileInView={{ opacity: 1, y: 0 }}
-              >
-                <Button
-                  base="mentory"
-                  className="group"
-                  effect="gradient"
-                  onClick={() => setIsContactDialogOpen(true)}
-                  rounded="xl"
-                  size="lg"
-                  theme="accent"
-                >
-                  Começar Agora
-                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-                </Button>
-              </motion.div> */}
             </div>
           </div>
         </div>

@@ -1,11 +1,5 @@
 import { groq } from 'next-sanity'
 
-// const seoFields = `
-//   title,
-//   description,
-//   keywords,
-// `
-
 const pageFields = `
   slug,
 `
@@ -37,7 +31,13 @@ const ctaField = `
     _type == "forbusiness.cta" || 
     _type == "mentoring.cta" ||
     _type == "about.cta" ||
-    _type == "services.cta" => cta[] {
+    _type == "services.cta" ||
+    _type == "home.cta" ||
+    _type == "home.services" ||
+    _type == "home.mentorship" ||
+    _type == "home.development" ||
+    _type == "home.mathematizer" ||
+    _type == "home.digitalproducts" => cta[] {
       ...,
      ${buttonFields}
     },

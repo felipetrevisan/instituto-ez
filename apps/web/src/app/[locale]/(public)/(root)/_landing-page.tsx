@@ -13,7 +13,7 @@ import { Fragment, useEffect } from 'react'
 export default function LandingPage({ data }: { data: Landing }) {
   const { isContactDialogOpen } = useShared()
   const { setPageType, isLandingPage } = useApp()
-  const t = useTranslations('LandingPageMathematizer')
+  const t = useTranslations('LandingPage')
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: intentional non-exhaustive deps
   useEffect(() => {

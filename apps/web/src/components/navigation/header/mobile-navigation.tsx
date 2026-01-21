@@ -1,6 +1,6 @@
 'use client'
 
-import { BaseMobileNavigation } from '@ez/web/components/navigation/base/base-mobile-navigation'
+import { BaseMobileNavigation } from '@ez/web/components/navigation/base/header/base-mobile-navigation'
 import type { Navigation } from '@ez/web/types/site'
 
 type NavigationProps = {

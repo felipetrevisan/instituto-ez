@@ -7,7 +7,13 @@ import { Mathematizer } from '@ez/web/components/landing/mathematizer/mathematiz
 import { WhatIs } from '@ez/web/components/landing/mathematizer/what-is'
 import { WhyCompaniesNeed } from '@ez/web/components/landing/mathematizer/why-companies-need'
 import type { Landing, SectionHero } from '@ez/web/types/landing'
-import type { SectionMathematizerBenefits, SectionMathematizerCTA, SectionMathematizerMathematizer, SectionMathematizerWhatIs, SectionMathematizerWhyCompanyNeed } from '@ez/web/types/landing/mathematizer'
+import type {
+  SectionMathematizerBenefits,
+  SectionMathematizerCTA,
+  SectionMathematizerMathematizer,
+  SectionMathematizerWhatIs,
+  SectionMathematizerWhyCompanyNeed,
+} from '@ez/web/types/landing/mathematizer'
 import { useLocale } from 'next-intl'
 
 import './style.css'

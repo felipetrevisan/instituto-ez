@@ -4,8 +4,7 @@ import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Metadata } from 'next'
 import { Inter, Oswald, Questrial } from 'next/font/google'
-import { notFound } from 'next/navigation'
-import { hasLocale, type Locale, NextIntlClientProvider } from 'next-intl'
+import { type Locale, NextIntlClientProvider } from 'next-intl'
 import { setRequestLocale } from 'next-intl/server'
 import type { ReactNode } from 'react'
 import Providers from './providers'
@@ -63,10 +62,6 @@ export function generateStaticParams() {
 export default async function RootLayout({ children, params }: Props) {
   const { locale } = await params
 
-  // if (!hasLocale(routing.locales, locale)) {
-  //   notFound()
-  // }
-
   // Enable static rendering
   setRequestLocale(locale)
 
@@ -76,7 +71,10 @@ export default async function RootLayout({ children, params }: Props) {
       lang={locale}
       suppressHydrationWarning
     >
-      <body className="flex h-full flex-col overflow-x-hidden bg-background text-foreground antialiased" data-page="main">
+      <body
+        className="flex h-full flex-col overflow-x-hidden bg-background text-foreground antialiased"
+        data-page="main"
+      >
         <Providers>
           <NextIntlClientProvider>{children}</NextIntlClientProvider>
         </Providers>

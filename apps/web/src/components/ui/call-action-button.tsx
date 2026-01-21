@@ -3,13 +3,14 @@ import { Icon } from '@ez/web/components/ui/icon'
 import type { VariantProps } from 'class-variance-authority'
 import type { IconName } from 'lucide-react/dynamic'
 import Link from 'next/link'
+import { useLocale } from 'next-intl'
 
 type ButtonVariants = VariantProps<typeof buttonVariants>
 
 export type CallActionProps = {
   className?: string
   base: ButtonVariants['base']
-  link?: { slug?: { current?: string } }
+  link?: { current?: string }
   variant?: ButtonVariants['variant']
   theme?: ButtonVariants['theme']
   size?: ButtonVariants['size']
@@ -38,13 +39,15 @@ export const CallAction = ({
   action,
   icon,
   rounded,
+  variant,
   size,
   theme,
   effect,
   base,
   onClick,
 }: CallActionProps) => {
-  const path = link?.slug?.current ? `/${link.slug.current}` : '/'
+  const locale = useLocale()
+  const path = link?.current ? `/${locale}/${link.current}` : `/${locale}`
 
   const ButtonContent = (
     <Button
@@ -55,18 +58,17 @@ export const CallAction = ({
       rounded={rounded}
       size={size}
       theme={theme}
+      variant={variant}
     >
       {icon?.prefix?.name && <Icon className={icon.prefix.className} name={icon.prefix.name} />}
-
       {label}
-
       {icon?.suffix?.name && <Icon className={icon.suffix.className} name={icon.suffix.name} />}
     </Button>
   )
 
   if (action === 'link') {
     return (
-      <Link className="inline-block" href={path}>
+      <Link className="inline-block w-full md:w-auto" href={path}>
         {ButtonContent}
       </Link>
     )

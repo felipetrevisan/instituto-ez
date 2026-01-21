@@ -22,7 +22,7 @@ export const Mathematizer = ({
   const { setIsContactDialogOpen } = useShared()
 
   return (
-    <StickySection id="mathematizers">
+    <StickySection className="w-screen" id="mathematizers">
       <div className="py-20 md:py-32">
         <div className="container mx-auto px-4">
           <motion.h2
@@ -112,10 +112,14 @@ export const Mathematizer = ({
                 }}
                 key={data.cta._key}
                 label={data.cta.label[locale]}
-                onClick={() => setIsContactDialogOpen(true)}
+                link={data.cta.type === LinkType.DIALOG ? undefined : data.cta.link[locale]}
+                onClick={
+                  data.cta.type === LinkType.DIALOG ? () => setIsContactDialogOpen(true) : undefined
+                }
                 rounded={data.cta.theme.rounded}
                 size={data.cta.theme.size}
                 theme={data.cta.theme.theme}
+                variant={data.cta.theme.variant}
               />
             </motion.div>
           )}

@@ -2,7 +2,7 @@
 
 import { useShared } from '@ez/shared/hooks/use-shared'
 import { Button } from '@ez/shared/ui'
-import { BaseDesktopNavigation } from '@ez/web/components/navigation/base/base-desktop-navigation'
+import { BaseDesktopNavigation } from '@ez/web/components/navigation/base/header/base-desktop-navigation'
 import type { Navigation } from '@ez/web/types/site'
 import { Phone } from 'lucide-react'
 

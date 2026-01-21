@@ -67,10 +67,16 @@ export const Hero = ({ data, locale }: { data: SectionHero; locale: string }) =>
                       }}
                       key={button._key}
                       label={button.label[locale]}
-                      onClick={() => setIsContactDialogOpen(true)}
+                      link={button.type === LinkType.DIALOG ? undefined : button.link[locale]}
+                      onClick={
+                        button.type === LinkType.DIALOG
+                          ? () => setIsContactDialogOpen(true)
+                          : undefined
+                      }
                       rounded={button.theme.rounded}
                       size={button.theme.size}
                       theme={button.theme.theme}
+                      variant={button.theme.variant}
                     />
                   )
                 })}

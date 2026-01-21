@@ -14,8 +14,8 @@ export const ExpectedResults = ({
   locale: string
 }) => {
   return (
-    <StickySection id="results">
-      <div className="bg-navy py-16 sm:py-20 md:py-28 dark:bg-navy/90">
+    <StickySection className="w-screen" id="results">
+      <div className="bg-navy py-16 sm:py-20 md:py-28 dark:bg-gray-900">
         <div className="container mx-auto px-6 md:px-8">
           <div className="mx-auto max-w-4xl">
             <motion.h2
@@ -27,7 +27,7 @@ export const ExpectedResults = ({
             >
               <PortableText components={createPortableComponents()} value={data.heading[locale]} />
             </motion.h2>
-            
+
             {data.subheading && (
               <motion.p
                 className="mx-auto mb-12 max-w-3xl text-center text-lg text-white/80"

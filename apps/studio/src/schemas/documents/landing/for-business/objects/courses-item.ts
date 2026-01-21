@@ -32,7 +32,7 @@ export default defineType({
       name: 'categories',
       title: 'Categories',
       type: 'array',
-      of: [{ type: 'localizedString' }]
+      of: [{ type: 'localizedString' }],
     }),
     defineField({
       name: 'icon',

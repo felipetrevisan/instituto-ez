@@ -142,10 +142,18 @@ export const Lectures = ({
                             }}
                             key={item.cta._key}
                             label={item.cta.label[locale]}
-                            onClick={() => setIsContactDialogOpen(true)}
+                            link={
+                              item.cta.type === LinkType.DIALOG ? undefined : item.cta.link[locale]
+                            }
+                            onClick={
+                              item.cta.type === LinkType.DIALOG
+                                ? () => setIsContactDialogOpen(true)
+                                : undefined
+                            }
                             rounded={item.cta.theme.rounded}
                             size={item.cta.theme.size}
                             theme={item.cta.theme.theme}
+                            variant={item.cta.theme.variant}
                           />
                         )}
                       </Card>

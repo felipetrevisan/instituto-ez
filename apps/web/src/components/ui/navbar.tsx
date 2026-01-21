@@ -1,9 +1,20 @@
+import { useDeviceType } from '@ez/shared/hooks/use-media-query'
 import { cn } from '@ez/shared/lib/utils'
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@ez/shared/ui/select'
 import { useApp } from '@ez/web/hooks/use-app'
 import { Slot } from '@radix-ui/react-slot'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { Menu, X } from 'lucide-react'
 import { type HTMLMotionProps, motion } from 'motion/react'
+import Image from 'next/image'
+import { useLocale, useTranslations } from 'next-intl'
 import type React from 'react'
 
 const navbarVariants = cva('h-auto w-full p-2', {
@@ -90,4 +101,60 @@ function Toggle({ className, ...props }: React.ComponentProps<'button'>) {
   )
 }
 
-export { Root, Brand, Toggle }
+function SelectLocale({ onChange }: { onChange: (value: string) => void }) {
+  const locale = useLocale()
+  const { isMobile } = useDeviceType()
+  const t = useTranslations('Languages')
+
+  return (
+    <Select defaultValue={locale} onValueChange={onChange}>
+      <SelectTrigger className="max-w-max cursor-pointer p-3">
+        <SelectValue placeholder={t('placeholder')} />
+      </SelectTrigger>
+      <SelectContent className="relative z-150" side={isMobile ? 'left' : 'bottom'}>
+        <SelectGroup>
+          <SelectItem className="group" value="pt">
+            <div className="flex items-center gap-2">
+              <Image
+                alt=""
+                className="size-8"
+                height={32}
+                src="/assets/images/flags/brazil.png"
+                width={32}
+              />
+              <span className="group-hover:text-primary">PT</span>
+            </div>
+          </SelectItem>
+          <SelectItem className="group" value="en">
+            <div className="flex items-center gap-2">
+              <Image
+                alt=""
+                className="size-8"
+                height={32}
+                priority
+                src="/assets/images/flags/usa.png"
+                width={32}
+              />
+              <span className="group-hover:text-primary">EN</span>
+            </div>
+          </SelectItem>
+          <SelectItem className="group" value="es">
+            <div className="flex items-center gap-2">
+              <Image
+                alt=""
+                className="size-8"
+                height={32}
+                priority
+                src="/assets/images/flags/euro.png"
+                width={32}
+              />
+              <span className="group-hover:text-primary">ES</span>
+            </div>
+          </SelectItem>
+        </SelectGroup>
+      </SelectContent>
+    </Select>
+  )
+}
+
+export { Root, Brand, Toggle, SelectLocale }

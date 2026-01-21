@@ -22,8 +22,8 @@ import {
 import {
   introObject as introAboutObject,
   introItemObject as introItemAboutObject,
-  servicesItemObject,
-  servicesObject,
+  servicesObject as servicesAboutObject,
+  servicesItemObject as servicesItemAboutObject,
   whyChooseObject,
 } from '@ez/studio/schemas/documents/landing/about'
 import {
@@ -39,6 +39,18 @@ import {
   testimonialItemObject,
   testimonialObject,
 } from '@ez/studio/schemas/documents/landing/for-business'
+import {
+  developmentItemObject,
+  developmentObject,
+  digitalProductsObject,
+  immersionObject,
+  mathematizerObject as mathematizerHomeObject,
+  mathematizerItemObject as mathematizerItemHomeObject,
+  mentorShipItemObject,
+  mentorShipObject,
+  servicesObject as servicesHomeObject,
+  servicesItemObject as servicesItemHomeObject,
+} from '@ez/studio/schemas/documents/landing/home'
 import landingPageDocument from '@ez/studio/schemas/documents/landing/landing'
 import {
   benefitsItemObject as benefitsItemMathematizerObject,
@@ -77,15 +89,9 @@ import {
 } from '@ez/studio/schemas/documents/navigation'
 import {
   aboutCardDocument,
-  advancedMentoryDocument,
-  bannerDocument,
-  immersionDocument,
-  lectureDocument,
   pageDocument,
-  servicesDocument,
   settingsDocument,
   testimonialsDocument,
-  workshopsDocument,
 } from '@ez/studio/schemas/documents/site'
 import {
   accordionContentLandingPageObject,
@@ -170,8 +176,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     finalCtaItemMentoringObject,
 
     // About
-    servicesObject,
-    servicesItemObject,
+    servicesAboutObject,
+    servicesItemAboutObject,
     whyChooseObject,
     introAboutObject,
     introItemAboutObject,
@@ -185,15 +191,21 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     whoIsItForObject,
     finalCtaServicesObject,
 
+    // Home
+    servicesHomeObject,
+    servicesItemHomeObject,
+    mathematizerHomeObject,
+    mathematizerItemHomeObject,
+    mentorShipObject,
+    mentorShipItemObject,
+    developmentObject,
+    developmentItemObject,
+    digitalProductsObject,
+    immersionObject,
+
     // Site
     settingsDocument,
     testimonialsDocument,
-    workshopsDocument, // To be removed
-    servicesDocument, // To be removed
-    immersionDocument, // To be removed
-    advancedMentoryDocument, // To be removed
-    lectureDocument, // To be removed
-    bannerDocument,
     pageDocument,
     aboutCardDocument, // To be removed
 

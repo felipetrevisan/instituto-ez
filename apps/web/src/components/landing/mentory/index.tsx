@@ -65,11 +65,7 @@ export function LandingPageMentory({ data }: { data: Landing<'mentoring'> }) {
 
         if (section._type === 'mentoring.cta') {
           return (
-            <FinalCTA
-              data={section as SectionMentoringCTA}
-              key={section._type}
-              locale={locale}
-            />
+            <FinalCTA data={section as SectionMentoringCTA} key={section._type} locale={locale} />
           )
         }
 

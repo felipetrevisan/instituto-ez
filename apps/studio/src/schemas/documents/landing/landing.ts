@@ -22,6 +22,7 @@ export default defineType({
       validation: (Rule) => Rule.required(),
       options: {
         list: [
+          { title: 'Home', value: 'home' },
           { title: 'Mathematizer', value: 'mathematizer' },
           { title: 'For Business', value: 'for-business' },
           { title: 'Mentoring', value: 'mentoring' },
@@ -97,12 +98,20 @@ export default defineType({
         { type: 'about.services' },
         { type: 'about.whychoose' },
 
-        // ABOUT
+        // SERVICES
         { type: 'services.assessment' },
         { type: 'services.benefits' },
         { type: 'services.methodsessions' },
         { type: 'services.whoisitfor' },
         { type: 'services.cta' },
+
+        // HOME
+        { type: 'home.services' },
+        { type: 'home.mentorship' },
+        { type: 'home.mathematizer' },
+        { type: 'home.development' },
+        { type: 'home.digitalproducts' },
+        { type: 'home.immersion' },
       ],
     }),
   ],

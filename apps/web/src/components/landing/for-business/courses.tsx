@@ -24,7 +24,7 @@ export const Courses = ({ data, locale }: { data: SectionForBusinessCourses; loc
     }, '')
 
   return (
-    <StickySection id="courses">
+    <StickySection className="w-screen" id="courses">
       <div className="bg-muted/30 py-16 sm:py-20">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-6xl space-y-12">
@@ -132,10 +132,18 @@ export const Courses = ({ data, locale }: { data: SectionForBusinessCourses; loc
                             }}
                             key={item.cta._key}
                             label={item.cta.label[locale]}
-                            onClick={() => setIsContactDialogOpen(true)}
+                            link={
+                              item.cta.type === LinkType.DIALOG ? undefined : item.cta.link[locale]
+                            }
+                            onClick={
+                              item.cta.type === LinkType.DIALOG
+                                ? () => setIsContactDialogOpen(true)
+                                : undefined
+                            }
                             rounded={item.cta.theme.rounded}
                             size={item.cta.theme.size}
                             theme={item.cta.theme.theme}
+                            variant={item.cta.theme.variant}
                           />
                         )}
                       </Card>

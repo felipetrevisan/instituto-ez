@@ -20,6 +20,8 @@
   --border: oklch(0.91 0.01 250);
   --input: oklch(0.91 0.01 250);
   --ring: oklch(0.56 0.15 250);
+  --footer: oklch(.45 .18 250);
+  --footer-foreground: oklch(0.98 0 0);
   --radius: 0.75rem;
   --shadow-glow: 0 0 40px oklch(0.70 0.18 40 / 0.15);
 }
@@ -46,4 +48,6 @@
   --border: oklch(0.35 0.08 250);
   --input: oklch(0.35 0.08 250);
   --ring: oklch(0.64 0.15 250);
+  --footer: oklch(0.35 0.08 250);
+  --footer-foreground: oklch(0.98 0 0);
 }
