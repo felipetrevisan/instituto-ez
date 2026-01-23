@@ -37,7 +37,8 @@ const ctaField = `
     _type == "home.mentorship" ||
     _type == "home.development" ||
     _type == "home.mathematizer" ||
-    _type == "home.digitalproducts" => cta[] {
+    _type == "home.digitalproducts" ||
+    _type == "home.immersion" => cta[] {
       ...,
      ${buttonFields}
     },
