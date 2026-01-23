@@ -30,7 +30,7 @@ export const Mathematizers = ({
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(var(--brand-accent-rgb),0.03),transparent_50%)]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-16 grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className="mb-16 grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div className="flex flex-col items-center">
             <motion.h2
               animate={{ opacity: 1, y: 0 }}

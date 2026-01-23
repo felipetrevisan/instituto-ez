@@ -22,7 +22,7 @@ export const Services = ({ data, locale }: { data: SectionHomeServices; locale: 
   return (
     <StickySection className="relative bg-background py-20 md:py-32" id="services">
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-16 grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className="mb-16 grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div className="flex flex-col items-center">
             <motion.h2
               animate={{ opacity: 1, y: 0 }}
