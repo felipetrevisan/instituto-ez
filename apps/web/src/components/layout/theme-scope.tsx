@@ -1,10 +1,10 @@
 'use client'
 
-import { mapThemeToCSSVars, type Theme } from '@ez/web/types/ebook'
+import { mapThemeToCSSVars, type ThemeEbook } from '@ez/web/types/ebook'
 import type { ReactNode } from 'react'
 
 type ThemeScopeProps = {
-  theme?: Theme
+  theme?: ThemeEbook
   children: ReactNode
 }
 

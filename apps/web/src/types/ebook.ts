@@ -38,7 +38,7 @@ export type Ebook = {
     chapters: Chapter[]
   }
   authors: Author[]
-  theme: Theme
+  theme: ThemeEbook
   image: Record<
     string,
     {
@@ -142,7 +142,7 @@ export type PriceTheme = {
   }
 }
 
-export type Theme = {
+export type ThemeEbook = {
   text: Color
   primary: Color
   secondary: Color
@@ -175,7 +175,7 @@ export type Theme = {
   }
 }
 
-export function mapThemeToCSSVars(theme?: Theme) {
+export function mapThemeToCSSVars(theme?: ThemeEbook) {
   if (!theme) return {}
 
   return {

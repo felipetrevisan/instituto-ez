@@ -1,9 +1,8 @@
 import LandingPage from '@ez/web/app/[locale]/(public)/(root)/_landing-page'
-import NormalPage from '@ez/web/app/[locale]/(public)/(root)/_normal-page'
+// import NormalPage from '@ez/web/app/[locale]/(public)/(root)/_normal-page'
 import { getAvailableLandingPages } from '@ez/web/config/landing-page'
 import { locales } from '@ez/web/config/locale'
 import { getLandingPage } from '@ez/web/server/get-landing'
-import { getPageBySlug, getPages } from '@ez/web/server/get-page'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
@@ -33,14 +32,16 @@ export async function generateMetadata({
     }
   }
 
-  const data = await getPageBySlug(slug, locale)
-  if (!data) return { title: '404' }
+  // const data = await getPageBySlug(slug, locale)
+  // if (!data) return { title: '404' }
 
-  return {
-    title: data.title?.[locale] ?? '',
-    description: data.description?.[locale] ?? '',
-    keywords: data.keywords?.[locale] ?? '',
-  }
+  // return {
+  //   title: data.title?.[locale] ?? '',
+  //   description: data.description?.[locale] ?? '',
+  //   keywords: data.keywords?.[locale] ?? '',
+  // }
+
+  return { title: '404' }
 }
 
 export default async function Page({
@@ -63,25 +64,14 @@ export default async function Page({
     )
   }
 
-  const data = await getPageBySlug(slug, locale)
-  if (!data) notFound()
+  return null
 
-  return (
-    <Suspense fallback={<Loading />}>
-      <NormalPage data={data} slug={slug} />
-    </Suspense>
-  )
-}
+  // const data = await getPageBySlug(slug, locale)
+  // if (!data) notFound()
 
-export async function generateStaticParams() {
-  const pages = await getPages()
-
-  return pages.flatMap((page) =>
-    locales
-      .map((locale) => {
-        const currentSlug = page.slug?.[locale]?.current
-        return currentSlug ? { slug: currentSlug, locale } : null
-      })
-      .filter(Boolean),
-  )
+  // return (
+  //   <Suspense fallback={<Loading />}>
+  //     <NormalPage data={data} slug={slug} />
+  //   </Suspense>
+  // )
 }

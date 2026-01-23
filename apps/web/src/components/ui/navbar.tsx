@@ -65,7 +65,7 @@ const navbarBrandVariants = cva('flex items-center', {
   variants: {
     theme: {
       default: '[&_p]:text-primary',
-      landing: '[&_p]:text-accent',
+      landing: '[&_p]:text-primary dark:[&_p]:text-accent',
     },
   },
   defaultVariants: {

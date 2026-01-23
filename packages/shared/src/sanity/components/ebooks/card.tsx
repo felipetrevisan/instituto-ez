@@ -187,7 +187,7 @@ export function EbookCard({
                         fullWidth
                         rounded="full"
                         scaleEffect={false}
-                        size="xl"
+                        size="lg"
                         theme={theme}
                       >
                         {!disabled ? button.label?.[locale] : 'Em breve'}

@@ -37,34 +37,7 @@ export type Ebook = {
     cover?: Record<string, { cover: SanityAsset }>
     chapters: Chapter[]
   }
-  theme: {
-    text: string
-    primary: Color
-    secondary: Color
-    tertiary: Color
-    button: {
-      header: {
-        default: {
-          text: Color
-          background: Color
-        }
-        hover: {
-          text: Color
-          background: Color
-        }
-      }
-      stickyHeader: {
-        default: {
-          text: Color
-          background: Color
-        }
-        hover: {
-          text: Color
-          background: Color
-        }
-      }
-    }
-  }
+  theme: ThemeEbook
   image: Record<
     string,
     {
@@ -157,5 +130,38 @@ export type PriceTheme = {
   text: {
     stroke: Color
     fill: Color
+  }
+}
+
+export type ThemeEbook = {
+  text: Color
+  primary: Color
+  secondary: Color
+  tertiary: Color
+  footer: {
+    background: Color
+    text: Color
+  }
+  button: {
+    header: {
+      default: {
+        text: Color
+        background: Color
+      }
+      hover: {
+        text: Color
+        background: Color
+      }
+    }
+    stickyHeader: {
+      default: {
+        text: Color
+        background: Color
+      }
+      hover: {
+        text: Color
+        background: Color
+      }
+    }
   }
 }

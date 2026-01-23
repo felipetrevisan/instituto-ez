@@ -58,7 +58,7 @@ export const Services = ({ data, locale }: { data: SectionAboutServices; locale:
                       >
                         <CardHeader className="space-y-1.5 p-6">
                           {service.icon && (
-                            <div className="mb-4 flex size-14 items-center justify-center rounded-xl bg-gradient-to-br from-navy to-cyan transition-transform group-hover:scale-110">
+                            <div className="mb-4 flex size-14 items-center justify-center rounded-xl bg-gradient-to-br from-navy to-cyan transition-transform group-hover:scale-110 dark:from-navy-light">
                               <Icon
                                 className="size-7 text-white"
                                 name={service.icon}
@@ -66,7 +66,7 @@ export const Services = ({ data, locale }: { data: SectionAboutServices; locale:
                               />
                             </div>
                           )}
-                          <CardTitle className="mb-2 text-navy text-xl">
+                          <CardTitle className="mb-2 text-navy text-xl dark:text-navy-light">
                             {service.title[locale]}
                           </CardTitle>
                           <CardDescription className="text-gray-warm leading-relaxed">
