@@ -182,7 +182,7 @@ export function EbookCard({
                   <LinkComponent href={`/${locale}/ebooks/${slug?.[locale].current}`}>
                     <div className="item-center lg:-right-[76px] md:-right-[86px] md:-bottom-[24px] flex h-[80px] w-full justify-center overflow-hidden md:absolute">
                       <Button
-                        className='md:-translate-x-1/2 mb-10 md:absolute md:bottom-5 md:left-1/2 md:m-0 lg:w-3/4'
+                        className="md:-translate-x-1/2 mb-10 md:absolute md:bottom-5 md:left-1/2 md:m-0 lg:w-3/4"
                         disabled={disabled}
                         fullWidth
                         rounded="full"
