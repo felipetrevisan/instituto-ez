@@ -98,8 +98,8 @@
       to right,
       transparent 0%,
       rgba(255, 255, 255, 0.2) 46%,
-      var(--primary-c) 49%,
-      var(--secondary-c) 50%,
+      var(--primary) 49%,
+      var(--secondary) 50%,
       rgba(255, 255, 255, 0.5) 51%,
       rgba(255, 255, 255, 0.2) 52%,
       transparent 100%

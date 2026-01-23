@@ -13,12 +13,12 @@ import * as React from 'react'
 type TabsProps = React.ComponentProps<typeof TabsPrimitive.Root>
 
 const tabVariants = cva(
-  'relative flex flex-col items-center overflow-hidden rounded-full border-neutral-200 text-center text-white shadow-lg md:flex-row dark:border-accent',
+  'relative flex flex-col items-center overflow-hidden rounded-full border-neutral-200 text-center text-white shadow-lg md:flex-row dark:border-accent/30',
   {
     variants: {
       variant: {
-        default: 'border border-neutral-200 shadow-sm dark:border-accent',
-        outline: 'border border-1 border-neutral-200 outline outline-2 dark:border-accent',
+        default: 'border border-neutral-200 shadow-sm dark:border-accent/30',
+        outline: 'border border-1 border-neutral-200 outline outline-2 dark:border-accent/30',
         ghost: 'border-none bg-transparent shadow-none',
         custom: '',
       },
@@ -158,10 +158,14 @@ const tabsTriggerVariants = cva(
         custom: '',
       },
       theme: {
-        default: 'text-primary data-[state=active]:text-primary-foreground',
-        secondary: 'text-secondary data-[state=active]:text-secondary-foreground',
-        tertiary: 'text-tertiary data-[state=active]:text-tertiary-foreground',
-        accent: 'text-accent data-[state=active]:text-accent-foreground',
+        default:
+          'text-primary data-[state=active]:text-primary-foreground dark:text-primary-foreground',
+        secondary:
+          'text-secondary data-[state=active]:text-secondary-foreground dark:text-secondary-foreground',
+        tertiary:
+          'text-tertiary data-[state=active]:text-tertiary-foreground dark:text-tertiary-foreground',
+        accent:
+          'text-accent data-[state=active]:text-accent-foreground dark:text-accent-foreground',
         custom: '',
       },
     },

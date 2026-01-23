@@ -37,5 +37,10 @@ export default defineType({
       title: 'Sticky Header Button',
       type: 'theme_button_color',
     }),
+    defineField({
+      name: 'footer',
+      title: 'Footer',
+      type: 'theme_footer_color',
+    }),
   ],
 })

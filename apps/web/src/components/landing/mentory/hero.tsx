@@ -16,7 +16,7 @@ export const Hero = ({ data, locale }: { data: SectionHero; locale: string }) =>
   return (
     <StickySection id="hero">
       <div className="relative overflow-hidden bg-gradient-hero py-24 md:py-32 lg:py-40">
-        <div className="container relative z-10 mx-auto px-6 md:px-8">
+        <div className="container relative z-10 mx-auto mt-10 px-6 md:px-8">
           <div className="mx-auto max-w-5xl text-center">
             <motion.div
               animate={{ opacity: 1, y: 0 }}
@@ -43,7 +43,7 @@ export const Hero = ({ data, locale }: { data: SectionHero; locale: string }) =>
             {data.subheading && (
               <motion.p
                 animate={{ opacity: 1, y: 0 }}
-                className="mx-auto mb-12 max-w-4xl text-gray-warm text-lg leading-relaxed md:text-xl lg:text-2xl"
+                className="mx-auto mb-12 max-w-4xl text-justify text-gray-warm text-lg leading-relaxed md:text-center md:text-xl lg:text-2xl"
                 initial={{ opacity: 0, y: 20 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >

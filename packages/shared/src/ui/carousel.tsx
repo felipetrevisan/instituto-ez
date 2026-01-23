@@ -44,7 +44,7 @@ const carouselVariants = cva(
         accent:
           '**:data-[slot=carousel-dot]:shadow-accent **:data-[slot=carousel-dot]:hover:after:shadow-accent',
         custom:
-          '**:data-[slot=carousel-dot]:shadow-[var(--secondary-c)] **:data-[slot=carousel-dot]:hover:after:shadow-[var(--secondary-c)]',
+          '**:data-[slot=carousel-dot]:shadow-[var(--secondary)] **:data-[slot=carousel-dot]:hover:after:shadow-[var(--secondary)]',
       },
     },
     defaultVariants: {
@@ -313,14 +313,14 @@ function CarouselDots({
               'after:bg-secondary': theme === 'secondary',
               'after:bg-tertiary': theme === 'tertiary',
               'after:bg-accent': theme === 'accent',
-              'after:bg-[var(--primary-c)]': theme === 'custom',
+              'after:bg-[var(--primary)]': theme === 'custom',
             })}
             // biome-ignore lint/suspicious/noArrayIndexKey: using index as key is acceptable here
             key={index}
           >
             <Button
               className={cn(
-                'rounded-full bg-linear-none px-1 after:flex after:size-2 after:items-center after:rounded-full after:shadow-[0_0_0_0.17rem] hover:bg-transparent',
+                'rounded-full border-none bg-linear-none px-1 after:flex after:size-2 after:items-center after:rounded-full after:shadow-[0_0_0_0.17rem] hover:bg-transparent',
                 {
                   'after:bg-primary after:shadow-primary':
                     theme === 'default' && selectedIndex === index,
@@ -330,14 +330,14 @@ function CarouselDots({
                     theme === 'tertiary' && selectedIndex === index,
                   'after:bg-accent after:shadow-accent':
                     theme === 'accent' && selectedIndex === index,
-                  '[--tw-shadow:_var(--primary-c)] after:bg-[var(--primary-c)] after:shadow-[0_0_0_0.17rem_var(--primary-c)]':
+                  '[--tw-shadow:_var(--primary)] after:bg-[var(--primary)] after:shadow-[0_0_0_0.17rem_var(--primary)]':
                     theme === 'custom' && selectedIndex === index,
 
                   'after:shadow-primary/70': theme === 'default' && selectedIndex !== index,
                   'after:shadow-secondary/70': theme === 'secondary' && selectedIndex !== index,
                   'after:shadow-tertiary/70': theme === 'tertiary' && selectedIndex !== index,
                   'after:shadow-accent/70': theme === 'accent' && selectedIndex !== index,
-                  '[--tw-shadow:_var(--primary-c)] after:shadow-[0_0_0_0.17rem_var(--primary-c)]':
+                  '[--tw-shadow:_var(--primary)] after:shadow-[0_0_0_0.17rem_var(--primary)]':
                     theme === 'custom' && selectedIndex !== index,
                 },
                 className,

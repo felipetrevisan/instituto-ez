@@ -6,7 +6,7 @@ import React from 'react'
 
 const buttonVariants = cva(
   // Base
-  'relative z-1 inline-flex cursor-pointer items-center justify-center gap-2 font-semibold',
+  'relative z-1 inline-flex w-full cursor-pointer items-center justify-center gap-2 font-semibold md:w-auto',
   {
     variants: {
       base: {

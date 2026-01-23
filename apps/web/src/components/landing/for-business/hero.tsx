@@ -71,7 +71,7 @@ export const Hero = ({ data, locale }: { data: SectionHero; locale: string }) =>
             {data.cta && data.cta.length > 0 && (
               <motion.div
                 animate={{ opacity: 1, y: 0 }}
-                className="flex flex-col items-center justify-center gap-4 pt-4 sm:flex-row"
+                className="flex flex-col items-center justify-center gap-4 pt-4 md:flex-row"
                 initial={{ opacity: 0, y: 20 }}
                 transition={{ delay: 0.8, duration: 0.6 }}
               >

@@ -40,7 +40,7 @@ export function Metadata({ data }: { data: Ebook }) {
             <Magnetic key={`metadata_${meta._key}`} strength={0.25}>
               <Card
                 className={cn(
-                  'hover:-translate-y-1 h-[180px] w-[200px] bg-gradient-to-br from-[var(--primary-c)]/40 to-[var(--secondary-c)]/40 p-0.5 shadow-[var(--primary-c)]/50 shadow-sm outline-none backdrop-blur-md transition-all duration-300 hover:shadow-xl',
+                  'hover:-translate-y-1 h-[180px] w-[200px] bg-gradient-to-br from-[var(--primary)]/40 to-[var(--secondary)]/40 p-0.5 shadow-[var(--primary)]/50 shadow-sm outline-none backdrop-blur-md transition-all duration-300 hover:shadow-xl',
                 )}
                 rounded="2xl"
                 theme="custom"
@@ -50,7 +50,7 @@ export function Metadata({ data }: { data: Ebook }) {
                   <div className="flex flex-col items-center justify-center">
                     {meta.media.type !== 'none' && (
                       <div className="-top-7 absolute order-1 size-14 rounded-full bg-white shadow-md [&_svg]:size-8">
-                        <div className="-translate-x-1/2 -translate-y-1/2 absolute top-1/2 left-1/2 stroke-[1.5] text-[var(--primary-c)]">
+                        <div className="-translate-x-1/2 -translate-y-1/2 absolute top-1/2 left-1/2 stroke-[1.5] text-[var(--primary)]">
                           {getIcon(meta.media)}
                         </div>
                       </div>
@@ -58,28 +58,28 @@ export function Metadata({ data }: { data: Ebook }) {
                     <div className="flex flex-col">
                       <dt className="mb-2 flex min-h-[72px] flex-col items-center justify-center gap-2">
                         {meta.prefix?.[locale] && (
-                          <span className="font-medium text-[var(--primary-c)] text-sm opacity-70">
+                          <span className="font-medium text-[var(--primary)] text-sm opacity-70">
                             {meta.prefix?.[locale]}
                           </span>
                         )}
                         {meta.type === 'string' && (
                           <HighlightText
-                            className="from-[var(--primary-c)] to-[var(--secondary-c)] text-center font-bold text-3xl text-white"
+                            className="from-[var(--primary)] to-[var(--secondary)] text-center font-bold text-3xl text-white"
                             text={meta.text?.[locale] || '-'}
                           />
                         )}
                         {meta.type === 'number' && Number(meta.value) > 0 && (
-                          <span className="font-bold text-3xl text-[var(--primary-c)]">
+                          <span className="font-bold text-3xl text-[var(--primary)]">
                             <CountingNumber decimalSeparator="," inView number={meta.value ?? 0} />
                           </span>
                         )}
                         {meta.suffix?.[locale] && (
-                          <span className="font-medium text-[var(--primary-c)] text-sm opacity-70">
+                          <span className="font-medium text-[var(--primary)] text-sm opacity-70">
                             {meta.suffix?.[locale]}
                           </span>
                         )}
                       </dt>
-                      <dd className="text-center font-bold text-[var(--primary-c)]">
+                      <dd className="text-center font-bold text-[var(--primary)]">
                         {meta.title?.[locale]}
                       </dd>
                     </div>

@@ -29,7 +29,7 @@ export function Header({ data }: { data: Ebook }) {
 
   return (
     <>
-      <header className="relative flex w-screen flex-col items-center justify-center overflow-hidden bg-[auto,cover] bg-ebooks bg-gradient-to-br from-[var(--primary-c)] via-[var(--secondary-c)] to-[var(--tertiary-c)]/40 pb-12 text-white md:h-[700px] md:px-6 md:py-12">
+      <div className="relative m-24 flex w-screen flex-col items-center justify-center overflow-hidden bg-[auto,cover] bg-ebooks bg-gradient-to-br from-[var(--primary)] via-[var(--secondary)] to-[var(--tertiary)]/40 pb-12 text-white md:h-[700px] md:px-6 md:py-12">
         <Link className="container my-8 w-full" href={getLocalizedLink(locale, '/ebooks')}>
           {!isMobile ? (
             <AnimatedButton
@@ -38,13 +38,13 @@ export function Header({ data }: { data: Ebook }) {
                 paddingLeft: { initial: 20, hovered: 16 },
                 scale: { initial: 1, hovered: 1.1 },
               }}
-              className="mb-10 fill-[var(--primary-c)] text-[var(--primary-c)] after:absolute after:inset-0 after:animate-pulse after:rounded-xl after:bg-white/20 after:blur md:absolute md:mb-0"
+              className="mb-10 fill-[var(--primary)] text-[var(--primary)] after:absolute after:inset-0 after:animate-pulse after:rounded-xl after:bg-white/20 after:blur md:absolute md:mb-0"
               icon={<ChevronLeftIconMotion />}
               label={t('backButton')}
             />
           ) : (
             <IconButton
-              className="bg-white fill-[var(--primary-c)] text-[var(--primary-c)]"
+              className="bg-white fill-[var(--primary)] text-[var(--primary)]"
               icon={ChevronLeftIcon}
               theme="custom"
             />
@@ -144,7 +144,7 @@ export function Header({ data }: { data: Ebook }) {
             />
           </svg>
         </div>
-      </header>
+      </div>
       <StickyHeader {...data} />
     </>
   )

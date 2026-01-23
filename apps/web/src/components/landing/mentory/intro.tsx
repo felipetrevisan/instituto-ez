@@ -32,7 +32,7 @@ export const Intro = ({ data, locale }: { data: SectionMentoringIntro; locale: s
               >
                 {data.text?.map((text, index) => (
                   <p
-                    className="text-gray-warm text-lg leading-relaxed md:text-xl"
+                    className="text-justify text-gray-warm text-lg leading-relaxed md:text-left md:text-xl"
                     // biome-ignore lint/suspicious/noArrayIndexKey: false positive
                     key={`mentory-${index}`}
                   >

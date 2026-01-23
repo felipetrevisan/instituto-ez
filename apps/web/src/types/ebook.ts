@@ -38,34 +38,7 @@ export type Ebook = {
     chapters: Chapter[]
   }
   authors: Author[]
-  theme: {
-    text: string
-    primary: Color
-    secondary: Color
-    tertiary: Color
-    button: {
-      header: {
-        default: {
-          text: Color
-          background: Color
-        }
-        hover: {
-          text: Color
-          background: Color
-        }
-      }
-      stickyHeader: {
-        default: {
-          text: Color
-          background: Color
-        }
-        hover: {
-          text: Color
-          background: Color
-        }
-      }
-    }
-  }
+  theme: Theme
   image: Record<
     string,
     {
@@ -166,5 +139,64 @@ export type PriceTheme = {
   text: {
     stroke: Color
     fill: Color
+  }
+}
+
+export type Theme = {
+  text: Color
+  primary: Color
+  secondary: Color
+  tertiary: Color
+  footer: {
+    background: Color
+    text: Color
+  }
+  button: {
+    header: {
+      default: {
+        text: Color
+        background: Color
+      }
+      hover: {
+        text: Color
+        background: Color
+      }
+    }
+    stickyHeader: {
+      default: {
+        text: Color
+        background: Color
+      }
+      hover: {
+        text: Color
+        background: Color
+      }
+    }
+  }
+}
+
+export function mapThemeToCSSVars(theme?: Theme) {
+  if (!theme) return {}
+
+  return {
+    '--primary': theme.primary?.hex,
+    '--secondary': theme.secondary?.hex,
+    '--tertiary': theme.tertiary?.hex,
+
+    '--footer': theme.footer.background?.hex,
+    '--footer-foreground': theme.footer.text?.hex,
+
+    '--header-button-default-text': theme.button?.header?.default?.text?.hex,
+    '--header-button-default-background': theme.button?.header?.default?.background?.hex,
+
+    '--header-button-hover-text': theme.button?.header?.hover?.text?.hex,
+    '--header-button-hover-background': theme.button?.header?.hover?.background?.hex,
+
+    '--header-sticky-button-default-text': theme.button?.stickyHeader?.default?.text?.hex,
+    '--header-sticky-button-default-background':
+      theme.button?.stickyHeader?.default?.background?.hex,
+
+    '--header-sticky-button-hover-text': theme.button?.stickyHeader?.hover?.text?.hex,
+    '--header-sticky-button-hover-background': theme.button?.stickyHeader?.hover?.background?.hex,
   }
 }

@@ -1,5 +1,5 @@
 import { CogIcon } from '@sanity/icons'
-import { defineArrayMember, defineField, defineType } from 'sanity'
+import { defineField, defineType } from 'sanity'
 import { i18n } from '../../objects/locale/locales'
 
 export default defineType({
@@ -75,90 +75,16 @@ export default defineType({
       group: ['site', 'contact'],
     }),
     defineField({
-      name: 'hero',
-      title: 'About',
-      type: 'array',
-      group: ['home'],
-      of: [
-        defineArrayMember({
-          name: 'logo',
-          type: 'logo',
-          title: 'Logo',
-        }),
-        defineArrayMember({
-          name: 'about',
-          type: 'about',
-          title: 'About Us',
-        }),
-        defineArrayMember({
-          name: 'our-mission',
-          type: 'about',
-          title: 'Our Mission',
-        }),
-        defineArrayMember({
-          name: 'products',
-          type: 'about',
-          title: 'Services & Products',
-        }),
-      ],
+      name: 'phone',
+      title: 'Phone',
+      type: 'string',
+      group: ['site', 'contact'],
     }),
     defineField({
-      name: 'sections_home',
-      title: 'Home Sections',
-      type: 'array',
-      group: ['home'],
-      of: [
-        defineArrayMember({
-          name: 'banner',
-          type: 'section',
-          title: 'Banner',
-        }),
-        defineArrayMember({
-          name: 'about',
-          type: 'section',
-          title: 'Sobre',
-        }),
-        defineArrayMember({
-          name: 'immersion',
-          type: 'section',
-          title: 'Imersão',
-        }),
-        defineArrayMember({
-          name: 'lecture',
-          type: 'section',
-          title: 'Palestras',
-        }),
-        defineArrayMember({
-          name: 'service',
-          type: 'section',
-          title: 'Atendimentos',
-        }),
-        defineArrayMember({
-          name: 'mathematizer',
-          type: 'section',
-          title: 'Matematizador',
-        }),
-        defineArrayMember({
-          name: 'testimonial',
-          type: 'section',
-          title: 'Depoimentos',
-        }),
-        defineArrayMember({
-          name: 'ebook',
-          type: 'section',
-          title: 'Ebooks',
-        }),
-        defineArrayMember({
-          name: 'workshop',
-          type: 'section',
-          title: 'Workshops',
-        }),
-        defineArrayMember({
-          name: 'advanced-mentory',
-          type: 'section',
-          title: 'Mentoria Avançada',
-        }),
-      ],
+      name: 'location',
+      title: 'Location',
+      type: 'string',
+      group: ['site', 'contact'],
     }),
     defineField({
       name: 'main_nav',

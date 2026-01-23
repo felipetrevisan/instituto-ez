@@ -78,47 +78,47 @@ export const MentorShip = ({ data, locale }: { data: SectionHomeMentorShip; loca
             </div>
           )}
         </div>
+        {data.cta && data.cta.length > 0 && (
+          <motion.div
+            animate={{ opacity: 1, y: 0 }}
+            className="mt-10 flex flex-col justify-center gap-4 sm:flex-row"
+            initial={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.8, delay: 0.8, ease: 'easeOut' }}
+          >
+            {data.cta.map((button) => {
+              return (
+                <CallAction
+                  action={button.type === LinkType.DIALOG ? 'button' : 'link'}
+                  base="default"
+                  className="group px-8 py-6 font-semibold"
+                  effect={button.theme.effect}
+                  icon={{
+                    prefix: {
+                      className: 'size-5',
+                      name: button.iconPrefix as IconName,
+                    },
+                    suffix: {
+                      className:
+                        'ml-2 size-5 transition-transform group-hover:translate-x-1 hidden md:flex',
+                      name: button.iconSuffix as IconName,
+                    },
+                  }}
+                  key={button._key}
+                  label={button.label[locale]}
+                  link={button.type === LinkType.DIALOG ? undefined : button.link[locale]}
+                  onClick={
+                    button.type === LinkType.DIALOG ? () => setIsContactDialogOpen(true) : undefined
+                  }
+                  rounded={button.theme.rounded}
+                  size={button.theme.size}
+                  theme={button.theme.theme}
+                  variant={button.theme.variant}
+                />
+              )
+            })}
+          </motion.div>
+        )}
       </div>
-
-      {data.cta && data.cta.length > 0 && (
-        <motion.div
-          animate={{ opacity: 1, y: 0 }}
-          className="mt-10 flex flex-col justify-center gap-4 sm:flex-row"
-          initial={{ opacity: 0, y: 20 }}
-          transition={{ duration: 0.8, delay: 0.8, ease: 'easeOut' }}
-        >
-          {data.cta.map((button) => {
-            return (
-              <CallAction
-                action={button.type === LinkType.DIALOG ? 'button' : 'link'}
-                base="default"
-                className="group px-8 py-6 font-semibold"
-                effect={button.theme.effect}
-                icon={{
-                  prefix: {
-                    className: 'size-5',
-                    name: button.iconPrefix as IconName,
-                  },
-                  suffix: {
-                    className: 'ml-2 size-5 transition-transform group-hover:translate-x-1',
-                    name: button.iconSuffix as IconName,
-                  },
-                }}
-                key={button._key}
-                label={button.label[locale]}
-                link={button.type === LinkType.DIALOG ? undefined : button.link[locale]}
-                onClick={
-                  button.type === LinkType.DIALOG ? () => setIsContactDialogOpen(true) : undefined
-                }
-                rounded={button.theme.rounded}
-                size={button.theme.size}
-                theme={button.theme.theme}
-                variant={button.theme.variant}
-              />
-            )
-          })}
-        </motion.div>
-      )}
     </StickySection>
   )
 }

@@ -16,7 +16,7 @@ export const Hero = ({ data, locale }: { data: SectionHero; locale: string }) =>
   return (
     <StickySection id="hero">
       <div className="relative overflow-hidden bg-gradient-hero py-24 md:py-32 lg:py-40">
-        <div className="container relative z-10 mx-auto px-6 md:px-8">
+        <div className="container relative z-10 mx-auto mt-10 px-6 md:px-8">
           <div className="mx-auto max-w-5xl text-center">
             <motion.h1
               animate={{ opacity: 1, y: 0 }}

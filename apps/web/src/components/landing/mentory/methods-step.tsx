@@ -37,7 +37,7 @@ export const MethodsStep = ({
 
             {data.subheading && (
               <motion.p
-                className="mx-auto mb-16 max-w-3xl text-center text-gray-warm text-lg"
+                className="mx-auto mb-16 max-w-3xl text-justify text-gray-warm text-lg md:text-center"
                 initial={{ opacity: 0, y: 20 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
                 viewport={{ once: true }}
@@ -81,7 +81,7 @@ export const MethodsStep = ({
                         <h3 className="mb-4 font-semibold text-navy text-xl">
                           {step.title[locale]}
                         </h3>
-                        <p className="text-base text-gray-warm leading-relaxed">
+                        <p className="text-justify text-base text-gray-warm leading-relaxed md:text-left">
                           {step.description[locale]}
                         </p>
                       </div>

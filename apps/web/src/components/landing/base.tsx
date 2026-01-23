@@ -7,10 +7,9 @@ import { FooterLandingNavigation } from '@ez/web/components/navigation/landing/f
 import { HeaderLandingNavigation } from '@ez/web/components/navigation/landing/header'
 import { useSite } from '@ez/web/hooks/use-site'
 import type { Landing } from '@ez/web/types/landing'
-import type { Site } from '@ez/web/types/site'
 import { Fragment, useEffect } from 'react'
 
-export default function BaseLanding({
+export function BaseLanding({
   theme,
   settings,
   children,
@@ -18,7 +17,6 @@ export default function BaseLanding({
   children: React.ReactNode
   theme: string
   settings?: Landing
-  site: Site
 }) {
   useEffect(() => {
     import(`@ez/shared/styles/themes/${theme}.css`)
@@ -36,12 +34,6 @@ export default function BaseLanding({
 
   return (
     <Fragment>
-      {/* <App.Header
-        customNavigation={settings?.settings.navigation}
-        HeaderComponent={HeaderLandingNavigation}
-        pageKey={theme}
-        theme="landing"
-      /> */}
       <HeaderFactory
         data={data}
         HeaderComponent={HeaderLandingNavigation}
@@ -49,7 +41,6 @@ export default function BaseLanding({
         pageKey={theme}
         theme="landing"
       />
-      {/* <App.Header DesktopNavComponent={MainDesktopNavigation} data={data} theme="default" /> */}
       <App.Content>{children}</App.Content>
       <FooterFactory
         data={data}
@@ -58,12 +49,42 @@ export default function BaseLanding({
         pageKey={theme}
         theme="landing"
       />
-      {/* <App.Footer
-        customNavigation={settings?.settings.navigation}
-        FooterComponent={FooterLandingNavigation}
+    </Fragment>
+  )
+}
+
+export function BaseNormal({ theme, children }: { children: React.ReactNode; theme: string }) {
+  useEffect(() => {
+    import(`@ez/shared/styles/themes/${theme}.css`)
+
+    document.body.dataset.theme = theme
+
+    return () => {
+      delete document.body.dataset.theme
+    }
+  }, [theme])
+
+  const { data } = useSite()
+
+  if (!data) return
+
+  return (
+    <Fragment>
+      <HeaderFactory
+        data={data}
+        HeaderComponent={HeaderLandingNavigation}
+        navigation={data?.navigation?.header}
         pageKey={theme}
-        theme="landing"
-      /> */}
+        theme="default"
+      />
+      <App.Content>{children}</App.Content>
+      <FooterFactory
+        data={data}
+        FooterComponent={FooterLandingNavigation}
+        navigation={data?.navigation?.header}
+        pageKey={theme}
+        theme="default"
+      />
     </Fragment>
   )
 }

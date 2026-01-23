@@ -1,6 +1,5 @@
 import type { SanityAsset } from '@ez/shared/types/assets'
 import type { BorderRounded, LinkType, Theme, Variant } from '@ez/shared/types/global'
-import type { Section } from './sections'
 
 export type Site = {
   id: string
@@ -11,9 +10,9 @@ export type Site = {
   contact: {
     form: { _ref: string }
     email: string
+    phone?: string
+    location?: string
   }
-  hero: Hero[]
-  sections: Section[]
   logo?: SanityAsset
   navigation?: {
     header?: Navigation
@@ -57,10 +56,4 @@ export type NavigationItemURL = {
   link: Record<string, { current: string }>
   isHome: boolean
   isExternal?: boolean
-}
-
-export type Hero = {
-  background: SanityAsset
-  title: Record<string, string>
-  description: Record<string, string>
 }

@@ -10,6 +10,7 @@ import {
   contentObject,
   coverImageObject,
   downloadObject,
+  footerObject as footerThemeObject,
   metadataObject,
   overviewObject,
   priceBadgeObject,
@@ -26,6 +27,10 @@ import {
   servicesItemObject as servicesItemAboutObject,
   whyChooseObject,
 } from '@ez/studio/schemas/documents/landing/about'
+import {
+  catalogObject,
+  heroObject as heroEbooksObject,
+} from '@ez/studio/schemas/documents/landing/ebooks'
 import {
   consultingItemObject,
   consultingObject,
@@ -88,7 +93,6 @@ import {
   navigationSubmenuItemObject,
 } from '@ez/studio/schemas/documents/navigation'
 import {
-  aboutCardDocument,
   pageDocument,
   settingsDocument,
   testimonialsDocument,
@@ -203,11 +207,14 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     digitalProductsObject,
     immersionObject,
 
+    // Ebooks
+    catalogObject,
+    heroEbooksObject,
+
     // Site
     settingsDocument,
     testimonialsDocument,
     pageDocument,
-    aboutCardDocument, // To be removed
 
     // Navigation
     navigationDocument,
@@ -240,6 +247,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     contentObject,
     themeObject,
     buttonThemeObject,
+    footerThemeObject,
     sectionEbookObject,
     catalogDocument,
     collectionDocument,

@@ -152,6 +152,10 @@ const themeField = `
     primary,
     secondary,
     tertiary,
+    "footer": footer {
+      "text": text,
+      "background": background
+    },
     "button": {
       "header": header_button {
         "default": {

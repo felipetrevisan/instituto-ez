@@ -1,5 +1,4 @@
-import BaseLanding from '@ez/web/components/landing/base'
-import { getSiteConfig } from '@ez/web/server/get-site-config'
+import { BaseLanding } from '@ez/web/components/landing/base'
 import type { Landing } from '@ez/web/types/landing'
 
 export default async function LandingLayout({
@@ -12,10 +11,10 @@ export default async function LandingLayout({
   settings?: Landing
   locale: string
 }) {
-  const data = await getSiteConfig()
+  // const data = await getSiteConfig()
 
   return (
-    <BaseLanding settings={settings} site={data} theme={pageKey}>
+    <BaseLanding settings={settings} theme={pageKey}>
       {children}
     </BaseLanding>
   )

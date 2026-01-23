@@ -30,7 +30,7 @@ export default function BuySection({ data }: { data: Ebook }) {
             whileInView={{ opacity: 1, y: 0 }}
           >
             <MotionTitle
-              className="relative text-center font-bold font-questrial text-[var(--primary-c)] lg:text-left"
+              className="relative text-center font-bold font-questrial text-[var(--primary)] lg:text-left"
               size="2xl"
             >
               {t('reserveYourEbook')}

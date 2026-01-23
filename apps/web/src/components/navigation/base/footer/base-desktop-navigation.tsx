@@ -43,7 +43,7 @@ const MenuItemMotion = motion(NavigationMenuItem)
 export function BaseDesktopNavigation({
   navigation,
   highlightClassName = 'flex flex-col border-b-2 border-b-primary-foreground bg-transparent text-primary-foreground',
-  linkClassName = 'hover:after:animation-pulse after:-bottom-1 after:-translate-x-1/2 relative flex flex-col rounded-xl bg-transparent p-4 text-primary-foreground text-xl outline-none transition-all after:absolute after:left-1/2 after:h-[2px] after:w-0 after:rounded-xl after:bg-transparent after:transition-all hover:text-primary-foreground hover:after:w-full hover:after:shadow-xl focus:bg-transparent focus:text-primary-foreground focus-visible:outline-1 focus-visible:ring-[3px] focus-visible:ring-ring/50 data-[active=true]:border-b-primary-foreground data-[active=true]:p-4 data-[active=true]:text-primary-foreground lg:gap-1 lg:text-sm! [&_svg:not([class*="size-"])]:size-4',
+  linkClassName = 'text-center md:text-left hover:after:animation-pulse after:-bottom-1 after:-translate-x-1/2 relative flex flex-col rounded-xl bg-transparent p-4 text-footer-foreground outline-none transition-all after:absolute after:left-1/2 after:h-[2px] after:w-0 after:rounded-xl after:bg-transparent after:transition-all hover:text-primary-foreground hover:after:w-full hover:after:shadow-xl focus:bg-transparent focus:text-primary-foreground focus-visible:outline-1 focus-visible:ring-[3px] focus-visible:ring-ring/50 data-[active=true]:border-b-primary-foreground data-[active=true]:p-4 data-[active=true]:text-primary-foreground lg:gap-1 lg:text-sm! [&_svg:not([class*="size-"])]:size-4',
   activeClassName = 'border-b-primary-foreground text-primary-foreground p-4',
   additionalContent,
 }: BaseDesktopNavigationProps) {
@@ -56,7 +56,7 @@ export function BaseDesktopNavigation({
         <NavigationMenuList>
           <MotionHighlight
             className={highlightClassName}
-            containerClassName="grid grid-cols-1 md:grid-cols-2 justify-center items-start -ml-4"
+            containerClassName="grid grid-cols-1 lg:grid-cols-2 justify-center items-start lg:-ml-4"
             controlledItems
             hover
             mode="parent"

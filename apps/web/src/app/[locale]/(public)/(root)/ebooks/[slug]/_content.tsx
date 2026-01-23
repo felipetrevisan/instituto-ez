@@ -14,16 +14,10 @@ import { useLocale } from 'next-intl'
 import { Fragment, useEffect, useState } from 'react'
 import { getLandingPageSections } from './_sections'
 
-type CSSVariables = {
-  [key: `--${string}`]: string
-}
-
 export function Content({ data, settings }: { data: Ebook; settings: LandingPageSetting }) {
   const { setPageType, isEbookPage } = useApp()
   const { setIsContactDialogOpen, setContactSubject } = useShared()
   const locale = useLocale()
-
-  const { theme } = data
 
   const { scrollY } = useScroll()
   const [visible, setVisible] = useState(false)
@@ -60,27 +54,13 @@ export function Content({ data, settings }: { data: Ebook; settings: LandingPage
     {} as Record<string, SectionKey>,
   )
 
-  const style: React.CSSProperties & CSSVariables = {
-    '--primary-c': `${theme?.primary?.hex ?? 'var(--primary)'}`,
-    '--secondary-c': `${theme?.secondary?.hex ?? 'var(--secondary)'}`,
-    '--tertiary-c': `${theme?.tertiary?.hex ?? 'var(--tertiary)'}`,
-    '--header-button-default-text': `${theme?.button?.header?.default?.text?.hex ?? 'var(--primary-foreground)'}`,
-    '--header-button-default-background': `${theme?.button?.header?.default?.background?.hex ?? 'var(--primary)'}`,
-    '--header-button-hover-text': `${theme?.button?.header?.hover?.text?.hex ?? 'var(--primary)'}`,
-    '--header-button-hover-background': `${theme?.button?.header?.hover?.background?.hex ?? 'var(--primary-foreground)'}`,
-    '--header-sticky-button-default-text': `${theme?.button?.stickyHeader?.default?.text?.hex ?? 'var(--primary-foreground)'}`,
-    '--header-sticky-button-default-background': `${theme?.button?.stickyHeader?.default?.background?.hex ?? 'var(--primary)'}`,
-    '--header-sticky-button-hover-text': `${theme?.button?.stickyHeader?.hover?.text?.hex ?? 'var(--primary)'}`,
-    '--header-sticky-button-hover-background': `${theme?.button?.stickyHeader?.hover?.background?.hex ?? 'var(--primary-foreground)'}`,
-  }
-
   function askAboutEbook() {
     setContactSubject(data.title?.[locale])
     setIsContactDialogOpen(true)
   }
 
   return (
-    <div className="flex w-full flex-col items-center justify-center space-y-14" style={style}>
+    <div className="flex w-full flex-col items-center justify-center space-y-14">
       <div className="relative flex w-screen flex-col items-center justify-center">
         {settings.sections?.map(({ key, show }: Section) =>
           show ? <Fragment key={key}>{avaliableSections[key]?.component}</Fragment> : null,

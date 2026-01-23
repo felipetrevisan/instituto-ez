@@ -74,3 +74,11 @@
     }
   }
 }
+
+@utility bg-gradient-hero {
+  background-image: var(--gradient-hero)
+}
+
+@utility bg-gradient-subtle {
+  background-image: var(--gradient-subtle)
+}

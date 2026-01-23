@@ -5,7 +5,7 @@ import { type HTMLMotionProps, motion } from 'motion/react'
 
 export const FooterNavigation = ({ className, children }: HTMLMotionProps<'footer'>) => {
   return (
-    <motion.footer className={cn('bg-primary py-16 text-primary-foreground', className)}>
+    <motion.footer className={cn('bg-footer py-16 text-footer-foreground', className)}>
       {children}
     </motion.footer>
   )

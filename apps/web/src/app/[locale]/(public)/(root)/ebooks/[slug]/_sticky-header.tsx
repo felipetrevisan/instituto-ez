@@ -43,13 +43,13 @@ export default function StickyHeader({ title, image, download }: Ebook) {
                     paddingLeft: { initial: 20, hovered: 16 },
                     scale: { initial: 1, hovered: 1.1 },
                   }}
-                  className="fill-[var(--primary-c)] text-[var(--primary-c)]"
+                  className="fill-[var(--primary)] text-[var(--primary)]"
                   icon={<ChevronLeftIconMotion />}
                   label={t('backButton')}
                 />
               ) : (
                 <IconButton
-                  className="bg-white fill-[var(--primary-c)] text-[var(--primary-c)]"
+                  className="bg-white fill-[var(--primary)] text-[var(--primary)]"
                   icon={ChevronLeftIcon}
                   theme="custom"
                 />
@@ -72,7 +72,7 @@ export default function StickyHeader({ title, image, download }: Ebook) {
                   />
                 </div>
               )}
-              <h1 className="text-center font-bold font-questrial text-[var(--primary-c)] text-xl">
+              <h1 className="text-center font-bold font-questrial text-[var(--primary)] text-xl">
                 {title?.[locale]}
               </h1>
             </div>
@@ -91,7 +91,7 @@ export default function StickyHeader({ title, image, download }: Ebook) {
                   </BlobButton>
                 ) : (
                   <IconButton
-                    className="bg-white fill-[var(--primary-c)] text-[var(--primary-c)]"
+                    className="bg-white fill-[var(--primary)] text-[var(--primary)]"
                     icon={DownloadIcon}
                     theme="custom"
                   />

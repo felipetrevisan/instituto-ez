@@ -15,7 +15,7 @@
   }
 
   &[data-theme="custom"] .author {
-    --bc: var(--primary-c);
+    --bc: var(--primary);
     --fc: var(--text-c, #fff);
   }
 }
@@ -37,7 +37,7 @@
   }
 
   &[data-theme="custom"] .author {
-    --bc: var(--primary-c);
+    --bc: var(--primary);
     --fc: var(--text-c, #fff);
   }
 }

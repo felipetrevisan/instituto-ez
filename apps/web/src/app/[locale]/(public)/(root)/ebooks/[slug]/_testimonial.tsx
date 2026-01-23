@@ -21,7 +21,7 @@ export function Testimonial({ data }: { data: Ebook }) {
   return (
     <section className="mt-20 flex w-screen flex-col items-center justify-center gap-8">
       <Title
-        className="after:-bottom-1 after:-translate-x-1/2 relative text-center font-questrial font-semibold text-[var(--primary-c)] after:absolute after:left-1/2 after:h-[2px] after:w-[40%] after:rounded-xl after:bg-[var(--primary-c)]/60 after:transition-all"
+        className="after:-bottom-1 after:-translate-x-1/2 relative text-center font-questrial font-semibold text-[var(--primary)] after:absolute after:left-1/2 after:h-[2px] after:w-[40%] after:rounded-xl after:bg-[var(--primary)]/60 after:transition-all"
         size="2xl"
       >
         {t('testimonial')}

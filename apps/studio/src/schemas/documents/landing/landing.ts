@@ -28,6 +28,7 @@ export default defineType({
           { title: 'Mentoring', value: 'mentoring' },
           { title: 'About', value: 'about' },
           { title: 'Services', value: 'services' },
+          { title: 'Ebooks', value: 'ebooks' },
         ],
         layout: 'radio',
       },
@@ -112,6 +113,10 @@ export default defineType({
         { type: 'home.development' },
         { type: 'home.digitalproducts' },
         { type: 'home.immersion' },
+
+        // EBOOKS
+        { type: 'ebooks.hero' },
+        { type: 'ebooks.catalog' },
       ],
     }),
   ],

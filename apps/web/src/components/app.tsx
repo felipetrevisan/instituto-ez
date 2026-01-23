@@ -68,7 +68,7 @@ function Header({
   const containerRef = useRef<HTMLDivElement | null>(null)
   const { height } = useDimensions(containerRef)
   const { scrollY } = useScroll()
-  const { isDesktop } = useDeviceType()
+  const { isDesktop, isTablet, isMobile } = useDeviceType()
   const landing = useLandingConfig(pageKey)
 
   useBodyOverflow(isMenuOpen)
@@ -134,7 +134,7 @@ function Header({
           )}
           <div className="flex flex-row items-center justify-center gap-2">
             {(isNormalPage() || isLandingPage()) && <ThemeToggle />}
-            {!isDesktop && <Navbar.Toggle />}
+            {!isDesktop && (isTablet || isMobile) && <Navbar.Toggle />}
             <Navbar.SelectLocale onChange={handleChange} />
           </div>
         </Navbar.Root>
@@ -147,7 +147,7 @@ function Header({
         ref={containerRef}
         variants={sidebarVariants}
       >
-        {!isDesktop && (
+        {!isDesktop && (isTablet || isMobile) && (
           <MotionMobileNavigation
             animate={isMenuOpen ? 'open' : 'closed'}
             initial="closed"
@@ -216,8 +216,8 @@ function Footer({
   FooterComponent = FooterNavigation,
 }: FooterProps) {
   const { setIsContactDialogOpen } = useShared()
-  const { isDesktop } = useDeviceType()
   const locale = useLocale()
+  const t = useTranslations('Global')
 
   const landing = useLandingConfig(pageKey)
 
@@ -253,14 +253,14 @@ function Footer({
               src={data?.logo && urlForImage(data.logo?.asset).format('webp').quality(80).url()}
             />
             <h3 className="mb-4 font-bold text-2xl">{data?.title[locale]}</h3>
-            <p className="text-primary-foreground/80 text-sm leading-relaxed">
+            <p className="text-footer-foreground/80 text-sm leading-relaxed">
               {data?.description?.[locale]}
             </p>
           </div>
 
           <div className="flex flex-col items-center justify-center md:items-start">
             <h4 className="mb-4 font-semibold text-lg">Serviços</h4>
-            {isDesktop && data?.navigation?.footer && (
+            {data?.navigation?.footer && (
               <NavigationRenderer
                 Component={DesktopNavigation}
                 navigation={customNavigation ?? data?.navigation.footer}
@@ -270,7 +270,7 @@ function Footer({
 
           <div className="flex flex-col items-center justify-center md:items-start">
             <h4 className="mb-4 font-semibold text-lg">Contato</h4>
-            <ul className="space-y-3 text-primary-foreground/80 text-sm">
+            <ul className="space-y-3 text-footer-foreground/80 text-sm">
               <li className="flex items-center gap-2">
                 <Mail className="size-4 flex-shrink-0" />
                 <a
@@ -280,23 +280,25 @@ function Footer({
                   {data?.contact.email}
                 </a>
               </li>
-              <li className="flex items-center gap-2">
-                <Phone className="size-4 flex-shrink-0" />
-                <a className="transition-colors hover:text-accent" href="tel:+5511999999999">
-                  (11) 99999-9999
-                </a>
-              </li>
-              <li className="flex items-start gap-2">
-                <MapPin className="mt-0.5 size-4 flex-shrink-0" />
-                <span>São Paulo, SP</span>
-              </li>
+              {data.contact.phone && (
+                <li className="flex items-center gap-2">
+                  <Phone className="size-4 flex-shrink-0" />
+                  <span>{data.contact.phone}</span>
+                </li>
+              )}
+              {data.contact.location && (
+                <li className="flex items-start gap-2">
+                  <MapPin className="mt-0.5 size-4 flex-shrink-0" />
+                  <span>{data.contact.location}</span>
+                </li>
+              )}
             </ul>
           </div>
         </div>
 
-        <div className="mt-12 border-primary-foreground/20 border-t pt-8 text-center text-primary-foreground/60 text-sm">
+        <div className="mt-12 border-primary-foreground/20 border-t pt-8 text-center text-footer-foreground/60 text-sm">
           <p>
-            &copy; {new Date().getFullYear()} {data?.title[locale]}. Todos os direitos reservados.
+            &copy; {new Date().getFullYear()} {data?.title[locale]}. {t('copyright')}
           </p>
         </div>
       </div>

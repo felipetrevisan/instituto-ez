@@ -90,7 +90,7 @@ function Toggle({ className, ...props }: React.ComponentProps<'button'>) {
   return (
     <button
       className={cn(
-        'flex cursor-pointer items-center justify-center rounded-full text-sm lg:hidden',
+        'flex cursor-pointer items-center justify-center rounded-full text-sm xl:hidden',
         className,
       )}
       {...props}

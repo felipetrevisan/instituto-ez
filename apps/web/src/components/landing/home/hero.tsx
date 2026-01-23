@@ -14,8 +14,6 @@ import { motion } from 'motion/react'
 export const Hero = ({ data, locale }: { data: SectionHero; locale: string }) => {
   const { setIsContactDialogOpen } = useShared()
 
-  console.log(data)
-
   return (
     <StickySection
       className="relative mt-24 h-full w-screen bg-gradient-to-br from-primary via-primary/95 to-primary/90"
@@ -29,7 +27,7 @@ export const Hero = ({ data, locale }: { data: SectionHero; locale: string }) =>
           backgroundPosition: 'center',
         }}
       />
-      <div className="relative z-10 max-w-7xl px-4 py-20 sm:px-6 md:py-32 lg:px-8">
+      <div className="relative z-10 px-4 py-20 sm:px-6 md:py-32 lg:px-8">
         <div className="mx-auto max-w-4xl text-center">
           <motion.h1
             animate={{ opacity: 1, y: 0 }}
@@ -66,7 +64,7 @@ export const Hero = ({ data, locale }: { data: SectionHero; locale: string }) =>
                   <CallAction
                     action={button.type === LinkType.DIALOG ? 'button' : 'link'}
                     base="default"
-                    className='group w-full px-8 py-6 font-semibold md:w-auto'
+                    className="group w-full px-8 py-6 font-semibold md:w-auto"
                     effect={button.theme.effect}
                     icon={{
                       prefix: {

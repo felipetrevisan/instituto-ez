@@ -42,12 +42,6 @@ export function LandingPageAbout({ data }: { data: Landing<'about'> }) {
           )
         }
 
-        // if (section._type === 'mentoring.cta') {
-        //   return (
-        //     <FinalCTA data={section as SectionMentoringCTA} key={section._type} locale={locale} />
-        //   )
-        // }
-
         return null
       })}
     </div>

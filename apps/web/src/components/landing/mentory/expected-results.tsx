@@ -30,7 +30,7 @@ export const ExpectedResults = ({
 
             {data.subheading && (
               <motion.p
-                className="mx-auto mb-12 max-w-3xl text-center text-lg text-white/80"
+                className="mx-auto mb-12 max-w-3xl text-justify text-lg text-white/80 md:text-center"
                 initial={{ opacity: 0, y: 20 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
                 viewport={{ once: true }}
@@ -57,7 +57,7 @@ export const ExpectedResults = ({
                   <div className="flex items-start gap-4">
                     <div className="mt-1 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-coral">
                       <svg
-                        className="h-3 w-3 text-white"
+                        className="size-3 text-white"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"

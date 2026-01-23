@@ -5,6 +5,9 @@ declare const messages: {
   "Manifest": {
     "name": "Instituto EZ"
   },
+  "Global": {
+    "copyright": "Todos os direitos reservados."
+  },
   "DialogContact": {
     "title": "¿Cómo podemos ayudarle?",
     "emailNotConfigured": "El correo electrónico de destino no está configurado.",

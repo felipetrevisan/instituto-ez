@@ -4,6 +4,7 @@ import type {
   SectionAboutServices,
   SectionAboutWhyChoose,
 } from '@ez/web/types/landing/about'
+import type { SectionEbooksCatalog, SectionEbooksHero } from '@ez/web/types/landing/ebooks'
 import type {
   SectionForBusinessConsulting,
   SectionForBusinessCourses,
@@ -98,6 +99,8 @@ export type LandingSectionsMap = {
     | SectionMentoringCTA
 
   about: SectionHero | SectionAboutIntro | SectionAboutServices | SectionAboutWhyChoose
+  ebooks: SectionEbooksHero | SectionEbooksCatalog
+
   services: SectionHero
   // | SectionServicestAssessment
   // | SectionServicesBenefits
@@ -105,22 +108,6 @@ export type LandingSectionsMap = {
   // | SectionServicesWhoIsItFor
   // | SectionServicesCTA
 }
-
-// export type LandingPageKey = {
-//   key: string
-//   slug: string[]
-//   component: React.ComponentType<{ data: Landing }>
-//   navigation: {
-//     header?: {
-//       desktop?: React.ComponentType<{ navigation?: Navigation }>
-//       mobile?: React.ComponentType<{ navigation?: Navigation }>
-//     }
-//     footer?: {
-//       desktop?: React.ComponentType<{ navigation?: Navigation }>
-//     }
-//   }
-//   classes?: string
-// }
 
 export type LandingNavigationSlot = {
   desktop?: React.ComponentType<{ navigation?: Navigation }>

@@ -138,7 +138,7 @@ export function EbookCard({
             <CardHeader
               className={cn(
                 'relative aspect-[2/3] h-[40vh] overflow-visible p-0 md:aspect-[1/2] md:h-full lg:aspect-[2/3] lg:w-[200px] lg:w-full',
-                { 'bg-[#f5f5f5] md:w-full dark:bg-accent dark:bg-accent': !description?.[locale] },
+                { 'bg-[#f5f5f5] md:w-full dark:bg-gray-900': !description?.[locale] },
               )}
               style={{
                 background: backgroundClass,
@@ -169,9 +169,11 @@ export function EbookCard({
           )}
           <CardContent className="relative flex w-full flex-col gap-4 p-0 md:py-10">
             {description?.[locale] && (
-              <ScrollArea className="overflow-auto! md:max-h-[315px]">
-                <div className="pointer-events-none absolute bottom-0 z-10 h-6 w-full bg-gradient-to-t from-white/90 to-transparent dark:from-accent/90" />
-                <div className="p-5 text-justify">{description?.[locale]}</div>
+              <ScrollArea className="overflow-auto! md:-ml-10 md:max-h-[315px]">
+                <div className="pointer-events-none absolute bottom-0 z-10 h-6 w-full bg-gradient-to-t from-bg-gray-800/90 to-transparent dark:from-bg-gray-900/90" />
+                <div className="p-5 text-justify dark:text-primary-foreground">
+                  {description?.[locale]}
+                </div>
               </ScrollArea>
             )}
             {button && (
@@ -180,10 +182,10 @@ export function EbookCard({
                   <LinkComponent href={`/${locale}/ebooks/${slug?.[locale].current}`}>
                     <div className="item-center lg:-right-[76px] md:-right-[86px] md:-bottom-[24px] flex h-[80px] w-full justify-center overflow-hidden md:absolute">
                       <Button
-                        className="md:-translate-x-1/2 mb-10 w-3/4 md:absolute md:bottom-5 md:left-1/2 md:m-0"
+                        className='md:-translate-x-1/2 mb-10 md:absolute md:bottom-5 md:left-1/2 md:m-0 lg:w-3/4'
                         disabled={disabled}
                         fullWidth
-                        rounded="2xl"
+                        rounded="full"
                         scaleEffect={false}
                         size="xl"
                         theme={theme}
@@ -200,7 +202,7 @@ export function EbookCard({
                       fullWidth
                       rounded="2xl"
                       scaleEffect={false}
-                      size="xl"
+                      size="lg"
                       theme={theme}
                     >
                       {!disabled ? button.label?.[locale] : 'Em breve'}

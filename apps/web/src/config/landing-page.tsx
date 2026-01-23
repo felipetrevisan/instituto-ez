@@ -1,4 +1,5 @@
 import { LandingPageAbout } from '@ez/web/components/landing/about'
+import { LandingPageEbooks } from '@ez/web/components/landing/ebooks'
 import { LandingPageForBusiness } from '@ez/web/components/landing/for-business'
 import { LandingPageHome } from '@ez/web/components/landing/home'
 import { LandingPageMathematizer } from '@ez/web/components/landing/mathematizer'
@@ -7,7 +8,6 @@ import { LandingPageServices } from '@ez/web/components/landing/services'
 import { MainDesktopNavigation as FooterDesktopNavigation } from '@ez/web/components/navigation/footer/desktop-navigation'
 import { MainDesktopNavigation as HeaderDesktopNavigation } from '@ez/web/components/navigation/header/desktop-navigation'
 import { MainMobileNavigation as HeaderMobileNavigation } from '@ez/web/components/navigation/header/mobile-navigation'
-import { LandingPageAboutDesktopNavigation as LandingPageAboutFooterDesktopNavigation } from '@ez/web/components/navigation/landing/about/footer/desktop-navigation'
 import { LandingPageAboutDesktopNavigation as LandingPageAboutHeaderDesktopNavigation } from '@ez/web/components/navigation/landing/about/header/desktop-navigation'
 import { LandingPageAboutMobileNavigation } from '@ez/web/components/navigation/landing/about/header/mobile-navigation'
 import { LandingPageForBusinessDesktopNavigation } from '@ez/web/components/navigation/landing/for-business/desktop-navigation'
@@ -92,7 +92,7 @@ export function getAvailableLandingPages(): LandingPageConfig[] {
           mobile: LandingPageAboutMobileNavigation,
         },
         footer: {
-          desktop: LandingPageAboutFooterDesktopNavigation,
+          desktop: FooterDesktopNavigation,
         },
       },
       classes: '',
@@ -105,6 +105,21 @@ export function getAvailableLandingPages(): LandingPageConfig[] {
         header: {
           desktop: LandingPageServicesDesktopNavigation,
           mobile: LandingPageServicesMobileNavigation,
+        },
+        footer: {
+          desktop: FooterDesktopNavigation,
+        },
+      },
+      classes: '',
+    },
+    {
+      key: 'ebooks',
+      slug: ['ebooks', 'produtos-digitais', 'digital-products'],
+      component: LandingPageEbooks,
+      navigation: {
+        header: {
+          desktop: HeaderDesktopNavigation,
+          mobile: HeaderMobileNavigation,
         },
         footer: {
           desktop: FooterDesktopNavigation,

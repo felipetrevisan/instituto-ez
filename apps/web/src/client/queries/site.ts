@@ -58,7 +58,9 @@ export const siteConfigQuery = groq`
     slogan,
     "contact": {
       "form": contactForm,
-      "email": email,
+      email,
+      phone,
+      location
     },
     "logo": logo {
       "asset": asset,
@@ -77,12 +79,6 @@ export const siteConfigQuery = groq`
       }, 
       title, 
       description 
-    },
-    "sections": sections_home[] {
-      "key": key_section,
-      "show": show_section,
-      "title": section_title,
-      "subtitle": section_subtitle
     },
     "navigation": {
       "header": main_nav-> {

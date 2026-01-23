@@ -25,7 +25,7 @@ const cardVariants = cva('relative transition-all duration-300', {
       accent: '',
       landing: 'bg-card text-card-foreground',
       custom:
-        'bg-linear-to-r from-[var(--secondary-c)] via-[var(--secondary-c)]/80 to-[var(--secondary-c)] text-[var(--secondary-c)] shadow-[var(--secondary-c)]/20 outline-[var(--secondary-c)]/40 hover:border-[var(--secondary-c)]/40 hover:bg-[var(--secondary-c)]/30 hover:text-[var(--secondary-c)]',
+        'bg-linear-to-r from-[var(--secondary)] via-[var(--secondary)]/80 to-[var(--secondary)] text-[var(--secondary)] shadow-[var(--secondary)]/20 outline-[var(--secondary)]/40 hover:border-[var(--secondary)]/40 hover:bg-[var(--secondary)]/30 hover:text-[var(--secondary)]',
     },
     rounded: {
       none: 'rounded-none **:data-[slot=card-content-action]:rounded-none',
@@ -60,7 +60,7 @@ const cardVariants = cva('relative transition-all duration-300', {
       variant: 'outline',
       theme: 'custom',
       class:
-        'bg-transparent text-[var(--primary-c)] hover:bg-transparent hover:text-[var(--primary-c)]',
+        'bg-transparent text-[var(--primary)] hover:bg-transparent hover:text-[var(--primary)]',
     },
     {
       variant: 'ghost',

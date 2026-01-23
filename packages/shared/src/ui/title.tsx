@@ -13,10 +13,10 @@ type TitleProps = {
 export const titleVariants = cva('font-bold font-oswald', {
   variants: {
     variant: {
-      default: 'text-primary',
-      secondary: 'text-secondary',
-      tertiary: 'text-tertiary',
-      accent: 'text-accent',
+      default: 'text-primary dark:text-primary-foreground',
+      secondary: 'text-secondary dark:text-secondary-foreground',
+      tertiary: 'text-tertiary dark:text-tertiary-foreground',
+      accent: 'text-accent dark:text-accent-foreground',
       white: 'text-white',
       custom: '',
     },
