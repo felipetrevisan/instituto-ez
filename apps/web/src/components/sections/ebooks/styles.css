@@ -1,0 +1,49 @@
+.ribbon-primary {
+  --bg: var(--color-primary);
+  --fc: var(--color-primary-foreground);
+
+  &.inverse {
+    --bg: var(--color-primary-foreground);
+    --fc: var(--color-primary);
+  }
+}
+
+.ribbon-secondary {
+  --bg: var(--color-secondary);
+  --fc: var(--color-secondary-foreground);
+
+  &.inverse {
+    --bg: var(--color-secondary-foreground);
+    --fc: var(--color-secondary);
+  }
+}
+
+.ribbon-tertiary {
+  --bg: var(--color-tertiary);
+  --fc: var(--color-tertiary-foreground);
+
+  &.inverse {
+    --bg: var(--color-tertiary-foreground);
+    --fc: var(--color-tertiary);
+  }
+}
+
+.ribbon {
+  --r: 0.4em;
+  --g: 100% / var(--r) calc(2 * var(--r)) no-repeat;
+
+  z-index: 10;
+  position: absolute;
+  top: 10px;
+  inset-inline: calc(-1 * var(--r));
+  text-align: center;
+  line-height: 1.8;
+  padding: 0 0.5em calc(2 * var(--r));
+  border-radius: var(--r);
+  color: var(--fc);
+  background:
+    radial-gradient(100% 50% at right, #0005 98%, #0000 101%) 0 var(--g),
+    radial-gradient(100% 50% at left, #0005 98%, #0000 101%) 100% var(--g),
+    conic-gradient(from 90deg at var(--r) calc(100% - 2 * var(--r)), #0000 25%, var(--bg) 0) 0 0 /
+    calc(100% - var(--r)) 100%;
+}
