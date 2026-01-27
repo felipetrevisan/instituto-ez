@@ -1,7 +1,7 @@
 import catalogDocument from '@ez/studio/schemas/documents/ebooks/catalog'
-import collectionDocument from '@ez/studio/schemas/documents/ebooks/collection'
+import categoryDocument from '@ez/studio/schemas/documents/ebooks/category'
 import settingsDocument from '@ez/studio/schemas/documents/ebooks/settings'
 
 export * from './objects'
 
-export { catalogDocument, collectionDocument, settingsDocument }
+export { catalogDocument, categoryDocument, settingsDocument }

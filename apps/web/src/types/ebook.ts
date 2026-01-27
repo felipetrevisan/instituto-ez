@@ -51,6 +51,8 @@ export type Ebook = {
   questions?: Question[]
   disabled: boolean
   button?: Button
+  type: 'EBOOK' | 'WEBINAR'
+  category: Category
 }
 
 export type Color = {
@@ -61,10 +63,15 @@ export type Color = {
   rgb: { _type: 'rgbaColor'; a: number; r: number; g: number; b: number }
 }
 
-export type EbookCollection = {
+// export type EbookCollection = {
+//   id: string
+//   title: string
+//   ebooks?: Ebook[]
+// }
+
+export type Category = {
   id: string
   title: string
-  ebooks?: Ebook[]
 }
 
 export type Metadata = {
@@ -199,4 +206,8 @@ export function mapThemeToCSSVars(theme?: ThemeEbook) {
     '--header-sticky-button-hover-text': theme.button?.stickyHeader?.hover?.text?.hex,
     '--header-sticky-button-hover-background': theme.button?.stickyHeader?.hover?.background?.hex,
   }
+}
+
+export const isWebinar = (ebook: Ebook) => {
+  return ebook.type === 'WEBINAR'
 }

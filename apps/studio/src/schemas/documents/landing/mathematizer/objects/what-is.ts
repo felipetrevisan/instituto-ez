@@ -10,6 +10,7 @@ export default defineType({
   fields: [
     defineField({ name: 'heading', type: 'localizedArray' }),
     defineField({ name: 'text', type: 'localizedArray' }),
+    defineField({ name: 'subtext', type: 'localizedArray' }),
   ],
   preview: {
     prepare() {

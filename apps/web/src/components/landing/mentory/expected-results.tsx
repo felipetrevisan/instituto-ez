@@ -18,17 +18,22 @@ export const ExpectedResults = ({
       <div className="bg-navy py-16 sm:py-20 md:py-28 dark:bg-gray-900">
         <div className="container mx-auto px-6 md:px-8">
           <div className="mx-auto max-w-4xl">
-            <motion.h2
-              className="mb-4 text-center font-bold text-3xl md:text-4xl lg:text-5xl"
-              initial={{ opacity: 0, y: 30 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              whileInView={{ opacity: 1, y: 0 }}
-            >
-              <PortableText components={createPortableComponents()} value={data.heading[locale]} />
-            </motion.h2>
+            {data?.heading?.[locale] && (
+              <motion.h2
+                className="mb-4 text-center font-bold text-3xl md:text-4xl lg:text-5xl"
+                initial={{ opacity: 0, y: 30 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                whileInView={{ opacity: 1, y: 0 }}
+              >
+                <PortableText
+                  components={createPortableComponents()}
+                  value={data.heading[locale]}
+                />
+              </motion.h2>
+            )}
 
-            {data.subheading && (
+            {data?.subheading?.[locale] && (
               <motion.p
                 className="mx-auto mb-12 max-w-3xl text-justify text-lg text-white/80 md:text-center"
                 initial={{ opacity: 0, y: 20 }}

@@ -42,6 +42,7 @@
   );
   --shadow-soft: 0 2px 16px -4px oklch(.45 .18 250 / .1);
   --shadow-medium: 0 4px 24px -4px oklch(.45 .18 250 / .15);
+  --radius: 0.75rem;
 }
 
 .dark [data-theme="about"] {

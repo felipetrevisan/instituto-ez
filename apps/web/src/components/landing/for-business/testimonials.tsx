@@ -27,17 +27,19 @@ export const Testimonials = ({
       <div className="bg-card py-20">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-6xl space-y-12">
-            <motion.div
-              className="space-y-4 text-center"
-              initial={{ opacity: 0, y: 40 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true, margin: '-100px' }}
-              whileInView={{ opacity: 1, y: 0 }}
-            >
-              <h2 className="font-bold text-3xl text-foreground md:text-4xl">
-                {data.heading[locale]}
-              </h2>
-            </motion.div>
+            {data?.heading?.[locale] && (
+              <motion.div
+                className="space-y-4 text-center"
+                initial={{ opacity: 0, y: 40 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true, margin: '-100px' }}
+                whileInView={{ opacity: 1, y: 0 }}
+              >
+                <h2 className="font-bold text-3xl text-foreground md:text-4xl">
+                  {data.heading[locale]}
+                </h2>
+              </motion.div>
+            )}
 
             {data.items.length > 0 && (
               <div className="grid gap-6 md:grid-cols-3">

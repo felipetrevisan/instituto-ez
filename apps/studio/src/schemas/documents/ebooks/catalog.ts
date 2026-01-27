@@ -194,6 +194,25 @@ export default defineType({
       of: [{ type: 'badge' }],
       group: ['badge'],
     }),
+    defineField({
+      name: 'category',
+      title: 'Category',
+      type: 'ebooks.category',
+    }),
+    defineField({
+      name: 'type',
+      title: 'Type',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+      initialValue: "EBOOK",
+      options: {
+        list: [
+          { title: 'e-Book', value: 'EBOOK' },
+          { title: 'Webinar', value: 'WEBINAR' },
+        ],
+        layout: 'radio',
+      },
+    }),
   ],
   preview: {
     select: {

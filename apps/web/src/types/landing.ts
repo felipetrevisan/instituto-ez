@@ -4,7 +4,11 @@ import type {
   SectionAboutServices,
   SectionAboutWhyChoose,
 } from '@ez/web/types/landing/about'
-import type { SectionEbooksCatalog, SectionEbooksHero } from '@ez/web/types/landing/ebooks'
+import type {
+  SectionEbooksCatalog,
+  SectionEbooksCTA,
+  SectionEbooksHero,
+} from '@ez/web/types/landing/ebooks'
 import type {
   SectionForBusinessConsulting,
   SectionForBusinessCourses,
@@ -35,6 +39,13 @@ import type {
   SectionMentoringMethodsStep,
   SectionMentoringTargetAudience,
 } from '@ez/web/types/landing/mentoring'
+import type {
+  SectionServicesAssessment,
+  SectionServicesBenefits,
+  SectionServicesCTA,
+  SectionServicesMethodSessions,
+  SectionServicesWhoIsItFor,
+} from '@ez/web/types/landing/services'
 import type { Navigation } from '@ez/web/types/site'
 import type { PortableTextBlock } from 'next-sanity'
 
@@ -99,14 +110,15 @@ export type LandingSectionsMap = {
     | SectionMentoringCTA
 
   about: SectionHero | SectionAboutIntro | SectionAboutServices | SectionAboutWhyChoose
-  ebooks: SectionEbooksHero | SectionEbooksCatalog
+  ebooks: SectionEbooksHero | SectionEbooksCatalog | SectionEbooksCTA
 
-  services: SectionHero
-  // | SectionServicestAssessment
-  // | SectionServicesBenefits
-  // | SectionServicesMethodSessions
-  // | SectionServicesWhoIsItFor
-  // | SectionServicesCTA
+  services:
+    | SectionHero
+    | SectionServicesAssessment
+    | SectionServicesMethodSessions
+    | SectionServicesBenefits
+    | SectionServicesWhoIsItFor
+    | SectionServicesCTA
 }
 
 export type LandingNavigationSlot = {

@@ -24,28 +24,35 @@ export const WhyCompaniesNeed = ({
       <div className="bg-secondary/30 py-16 sm:py-20 md:py-32">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-4xl space-y-8 text-center">
-            <motion.h2
-              className="font-bold text-3xl md:text-5xl"
-              initial={{ opacity: 0, y: 30 }}
-              transition={{ duration: 0.6, ease: 'easeOut' }}
-              viewport={{ once: true, amount: 0.3 }}
-              whileInView={{ opacity: 1, y: 0 }}
-            >
-              <PortableText components={createPortableComponents()} value={data.heading[locale]} />
-            </motion.h2>
+            {data?.heading?.[locale] && (
+              <motion.h2
+                className="font-bold text-3xl md:text-5xl"
+                initial={{ opacity: 0, y: 30 }}
+                transition={{ duration: 0.6, ease: 'easeOut' }}
+                viewport={{ once: true, amount: 0.3 }}
+                whileInView={{ opacity: 1, y: 0 }}
+              >
+                <PortableText
+                  components={createPortableComponents()}
+                  value={data.heading[locale]}
+                />
+              </motion.h2>
+            )}
 
-            <motion.p
-              className="mx-auto max-w-3xl text-foreground/90 text-xl leading-relaxed"
-              initial={{ opacity: 0, y: 20 }}
-              transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
-              viewport={{ once: true, amount: 0.3 }}
-              whileInView={{ opacity: 1, y: 0 }}
-            >
-              <PortableText
-                components={createPortableComponents()}
-                value={data.subheading[locale]}
-              />
-            </motion.p>
+            {data?.subheading?.[locale] && (
+              <motion.p
+                className="mx-auto max-w-3xl text-foreground/90 text-xl leading-relaxed"
+                initial={{ opacity: 0, y: 20 }}
+                transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
+                viewport={{ once: true, amount: 0.3 }}
+                whileInView={{ opacity: 1, y: 0 }}
+              >
+                <PortableText
+                  components={createPortableComponents()}
+                  value={data.subheading[locale]}
+                />
+              </motion.p>
+            )}
 
             {data.cta && (
               <motion.div

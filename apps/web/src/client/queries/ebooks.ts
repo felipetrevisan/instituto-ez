@@ -327,30 +327,53 @@ export const ebookQueryBySlug = groq`
   }
 `
 
-export const ebooksCollectionQuery = groq`
-  *[ _type == 'ebooks-collection'] { 
-    "id": _id,
-    title,
-    ebooks[]-> {
-      ${fields}
-      ${priceField}
-      ${imageField}
-      disabled,
-      ${buttonField}
-    }
-  }
-`
+// export const ebooksCollectionQuery = groq`
+//   *[ _type == 'ebooks-collection'] {
+//     "id": _id,
+//     title,
+//     ebooks[]-> {
+//       ${fields}
+//       ${priceField}
+//       ${imageField}
+//       disabled,
+//       ${buttonField}
+//     }
+//   }
+// `
 
-export const ebooksCollectionQueryByCollection = groq`
-  *[ _type == 'ebooks-collection' && _id == $id] [0] { 
-    "id": _id,
-    title,
-    ebooks[]-> {
-      ${fields}
-      ${priceField}
-      ${imageField}
-      disabled,
-      ${buttonField}
-    }
+// export const ebooksCollectionQueryByCollection = groq`
+//   *[ _type == 'ebooks-collection' && _id == $id] [0] {
+//     "id": _id,
+//     title,
+//     ebooks[]-> {
+//       ${fields}
+//       ${priceField}
+//       ${imageField}
+//       disabled,
+//       ${buttonField}
+//     }
+//   }
+// `
+
+export const ebooksQueryByType = groq`
+  *[
+    _type == "ebook" &&
+    type == $type && disabled != true
+  ] | order(_createdAt desc) {
+    ${fields}
+    ${priceField}
+    ${badgeField}
+    ${themeField}
+    ${seoField}
+    ${downloadField}
+    ${overviewField}
+    ${indexField}
+    ${questionField}
+    ${chapterField}
+    ${metadataField}
+    ${imageField}
+    ${authorField}
+    disabled,
+    ${buttonField}
   }
 `

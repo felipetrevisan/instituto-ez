@@ -18,6 +18,7 @@ export const Hero = ({ data, locale }: { data: SectionHero; locale: string }) =>
       <div className="relative overflow-hidden bg-gradient-hero py-24 md:py-32 lg:py-40">
         <div className="container relative z-10 mx-auto mt-10 px-6 md:px-8">
           <div className="mx-auto max-w-5xl text-center">
+          {data?.heading?.[locale] && (
             <motion.h1
               animate={{ opacity: 1, y: 0 }}
               className="mb-8 text-balance font-bold text-4xl md:text-5xl lg:text-7xl"
@@ -25,9 +26,9 @@ export const Hero = ({ data, locale }: { data: SectionHero; locale: string }) =>
               transition={{ duration: 0.6 }}
             >
               <PortableText components={createPortableComponents()} value={data.heading[locale]} />
-            </motion.h1>
+            </motion.h1>)}
 
-            {data.subheading && (
+            {data?.subheading?.[locale] && (
               <motion.p
                 animate={{ opacity: 1, y: 0 }}
                 className="mx-auto mb-12 max-w-4xl text-gray-warm text-lg leading-relaxed md:text-xl lg:text-2xl"

@@ -65,8 +65,8 @@ const structure = (S: StructureBuilder, context: ConfigContext) =>
                 context,
               }),
               orderableDocumentListDeskItem({
-                type: 'ebooks-collection',
-                title: 'Coleções',
+                type: 'ebooks.category',
+                title: 'Categorias',
                 S,
                 context,
               }),

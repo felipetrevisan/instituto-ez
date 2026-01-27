@@ -10,6 +10,7 @@ export default defineType({
   fields: [
     defineField({ name: 'heading', type: 'localizedArray' }),
     defineField({ name: 'text', type: 'localizedArray' }),
+    defineField({ name: 'footer', type: 'localizedArray' }),
     defineField({
       name: 'cta',
       title: 'CTA Buttons',

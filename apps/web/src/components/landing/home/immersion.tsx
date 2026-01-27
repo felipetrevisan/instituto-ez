@@ -11,9 +11,12 @@ import { PortableText } from '@portabletext/react'
 import type { IconName } from 'lucide-react/dynamic'
 import { motion } from 'motion/react'
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 
 export const Immersion = ({ data, locale }: { data: SectionHomeImmersion; locale: string }) => {
   const { setIsContactDialogOpen } = useShared()
+
+  const t = useTranslations('LandingPageHome')
 
   return (
     <StickySection className="relative bg-background py-20 md:py-32" id="immersion">
@@ -44,16 +47,17 @@ export const Immersion = ({ data, locale }: { data: SectionHomeImmersion; locale
             <div className="-bottom-4 -left-4 absolute size-32 rounded-full bg-accent/10 blur-3xl" />
           </div>
           <div className="order-1 lg:order-2">
-            <p className="mb-4 font-semibold text-2xl text-accent md:text-3xl">
-              A experiência que expande a vida
-            </p>
+            <p className="mb-4 font-semibold text-2xl text-accent md:text-3xl">{t('immersion')}</p>
 
-            <div className="mb-8 space-y-4 text-justify text-lg text-muted-foreground leading-relaxed md:text-xl">
-              <PortableText
-                components={createPortableComponents()}
-                value={data.subheading[locale]}
-              />
-            </div>
+            {data?.subheading?.[locale] && (
+              <div className="mb-8 space-y-4 text-justify text-lg text-muted-foreground leading-relaxed md:text-xl">
+                <PortableText
+                  components={createPortableComponents()}
+                  value={data.subheading[locale]}
+                />
+              </div>
+            )}
+
             {data.cta && data.cta.length > 0 && (
               <motion.div
                 animate={{ opacity: 1, y: 0 }}

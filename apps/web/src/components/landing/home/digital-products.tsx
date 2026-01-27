@@ -92,21 +92,28 @@ export const DigitalProducts = ({
 
       <div className="section-container relative z-10">
         <div className="mx-auto max-w-4xl text-center">
-          <motion.h2
-            animate={{ opacity: 1, y: 0 }}
-            className="mb-6 animate-fade-in-up font-bold text-3xl leading-tight md:text-5xl lg:text-6xl"
-            initial={{ opacity: 0, y: 20 }}
-            transition={{ duration: 0.6 }}
-          >
-            <PortableText components={createPortableComponents()} value={data.heading[locale]} />
-          </motion.h2>
+          {data?.heading?.[locale] && (
+            <motion.h2
+              animate={{ opacity: 1, y: 0 }}
+              className="mb-6 animate-fade-in-up font-bold text-3xl leading-tight md:text-5xl lg:text-6xl"
+              initial={{ opacity: 0, y: 20 }}
+              transition={{ duration: 0.6 }}
+            >
+              <PortableText components={createPortableComponents()} value={data.heading[locale]} />
+            </motion.h2>
+          )}
 
-          <p
-            className="mx-auto mb-10 max-w-2xl animate-fade-in-up text-lg text-primary-foreground/85 md:text-xl"
-            style={{ animationDelay: '0.1s' }}
-          >
-            <PortableText components={createPortableComponents()} value={data.subheading[locale]} />
-          </p>
+          {data?.subheading?.[locale] && (
+            <p
+              className="mx-auto mb-10 max-w-2xl animate-fade-in-up text-lg text-primary-foreground/85 md:text-xl"
+              style={{ animationDelay: '0.1s' }}
+            >
+              <PortableText
+                components={createPortableComponents()}
+                value={data.subheading[locale]}
+              />
+            </p>
+          )}
 
           {data.cta && data.cta.length > 0 && (
             <motion.div

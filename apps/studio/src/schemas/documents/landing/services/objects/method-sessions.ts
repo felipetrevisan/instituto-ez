@@ -16,6 +16,13 @@ export default defineType({
       of: [{ type: 'services.methodsessions.items' }],
     }),
     defineField({ name: 'footer', type: 'localizedArray' }),
+    defineField({
+      name: 'cta',
+      title: 'CTA Buttons',
+      type: 'array',
+      of: [{ type: 'button' }],
+      validation: (Rule) => Rule.max(3).warning('Ideally keep a maximum of 3 CTAs'),
+    }),
   ],
   preview: {
     prepare() {

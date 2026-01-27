@@ -34,9 +34,6 @@ const config = [
     type: 'testimonialWidget',
   },
   {
-    type: 'ebooksWidget',
-  },
-  {
     type: 'list',
   },
   {

@@ -34,11 +34,13 @@ export const Diagnostic = ({
               >
                 <div className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
                   <div className="space-y-6">
-                    <h2 className="font-bold text-3xl text-foreground leading-tight md:text-4xl">
-                      {data.heading[locale]}
-                    </h2>
+                    {data?.heading?.[locale] && (
+                      <h2 className="font-bold text-3xl text-foreground leading-tight md:text-4xl">
+                        {data.heading[locale]}
+                      </h2>
+                    )}
 
-                    {data.subheading && (
+                    {data?.subheading?.[locale] && (
                       <p className="text-lg text-muted-foreground leading-relaxed">
                         {data.subheading[locale]}
                       </p>

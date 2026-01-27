@@ -5,6 +5,7 @@ import type { PortableTextBlock } from 'next-sanity'
 export type SectionMathematizerWhatIs = {
   heading: Record<string, PortableTextBlock[]>
   text: Record<string, PortableTextBlock[]>
+  subtext: Record<string, PortableTextBlock[]>
   _type: string
 }
 

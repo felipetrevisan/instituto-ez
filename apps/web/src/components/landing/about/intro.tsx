@@ -24,9 +24,14 @@ export const Intro = ({ data, locale }: { data: SectionAboutIntro; locale: strin
             viewport={{ once: true }}
             whileInView={{ opacity: 1, y: 0 }}
           >
-            <h2 className="text-center font-bold text-3xl md:text-4xl lg:text-5xl">
-              <PortableText components={createPortableComponents()} value={data.heading[locale]} />
-            </h2>
+            {data?.heading?.[locale] && (
+              <h2 className="text-center font-bold text-3xl md:text-4xl lg:text-5xl">
+                <PortableText
+                  components={createPortableComponents()}
+                  value={data.heading[locale]}
+                />
+              </h2>
+            )}
             <Logo showSlogan={false} />
           </motion.div>
 

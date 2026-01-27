@@ -9,9 +9,12 @@ import { createPortableComponents } from '@ez/web/utils/create-portable-componen
 import { PortableText } from '@portabletext/react'
 import type { IconName } from 'lucide-react/dynamic'
 import { motion } from 'motion/react'
+import { useTranslations } from 'next-intl'
 
 export const Hero = ({ data, locale }: { data: SectionHero; locale: string }) => {
   const { setIsContactDialogOpen } = useShared()
+
+  const t = useTranslations('LandingPageMentoring')
 
   return (
     <StickySection id="hero">
@@ -28,19 +31,24 @@ export const Hero = ({ data, locale }: { data: SectionHero; locale: string }) =>
                 <span className="absolute inline-flex size-2 animate-ping rounded-full bg-cyan opacity-75"></span>
                 <span className="relative inline-flex size-2 rounded-full bg-cyan"></span>
               </span>
-              Mentoria Estratégica
+              {t('strategyMentoring')}
             </motion.div>
 
-            <motion.h1
-              animate={{ opacity: 1, y: 0 }}
-              className="mb-8 text-balance font-bold text-4xl md:text-5xl lg:text-7xl"
-              initial={{ opacity: 0, y: 20 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
-              <PortableText components={createPortableComponents()} value={data.heading[locale]} />
-            </motion.h1>
+            {data?.heading?.[locale] && (
+              <motion.h1
+                animate={{ opacity: 1, y: 0 }}
+                className="mb-8 text-balance font-bold text-4xl md:text-5xl lg:text-7xl"
+                initial={{ opacity: 0, y: 20 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+              >
+                <PortableText
+                  components={createPortableComponents()}
+                  value={data.heading[locale]}
+                />
+              </motion.h1>
+            )}
 
-            {data.subheading && (
+            {data?.subheading?.[locale] && (
               <motion.p
                 animate={{ opacity: 1, y: 0 }}
                 className="mx-auto mb-12 max-w-4xl text-justify text-gray-warm text-lg leading-relaxed md:text-center md:text-xl lg:text-2xl"

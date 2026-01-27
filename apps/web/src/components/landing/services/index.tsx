@@ -1,7 +1,17 @@
 'use client'
 
+import { Assessment } from '@ez/web/components/landing/services/assessment'
+import { Benefits } from '@ez/web/components/landing/services/benefits'
 import { Hero } from '@ez/web/components/landing/services/hero'
+import { MethodsSession } from '@ez/web/components/landing/services/methods-session'
+import { WhoIsItFor } from '@ez/web/components/landing/services/who-is-it-for'
 import type { Landing, SectionHero } from '@ez/web/types/landing'
+import type {
+  SectionServicesAssessment,
+  SectionServicesBenefits,
+  SectionServicesMethodSessions,
+  SectionServicesWhoIsItFor,
+} from '@ez/web/types/landing/services'
 import { useLocale } from 'next-intl'
 
 export function LandingPageServices({ data }: { data: Landing<'services'> }) {
@@ -14,25 +24,45 @@ export function LandingPageServices({ data }: { data: Landing<'services'> }) {
           return <Hero data={section as SectionHero} key={section._type} locale={locale} />
         }
 
-        // if (section._type === 'about.intro') {
-        //   return <Intro data={section as SectionAboutIntro} key={section._type} locale={locale} />
-        // }
+        if (section._type === 'services.assessment') {
+          return (
+            <Assessment
+              data={section as SectionServicesAssessment}
+              key={section._type}
+              locale={locale}
+            />
+          )
+        }
 
-        // if (section._type === 'about.services') {
-        //   return (
-        //     <Services data={section as SectionAboutServices} key={section._type} locale={locale} />
-        //   )
-        // }
+        if (section._type === 'services.methodsessions') {
+          return (
+            <MethodsSession
+              data={section as SectionServicesMethodSessions}
+              key={section._type}
+              locale={locale}
+            />
+          )
+        }
 
-        // if (section._type === 'about.whychoose') {
-        //   return (
-        //     <WhyChoose
-        //       data={section as SectionAboutWhyChoose}
-        //       key={section._type}
-        //       locale={locale}
-        //     />
-        //   )
-        // }
+        if (section._type === 'services.whoisitfor') {
+          return (
+            <WhoIsItFor
+              data={section as SectionServicesWhoIsItFor}
+              key={section._type}
+              locale={locale}
+            />
+          )
+        }
+
+        if (section._type === 'services.benefits') {
+          return (
+            <Benefits
+              data={section as SectionServicesBenefits}
+              key={section._type}
+              locale={locale}
+            />
+          )
+        }
 
         return null
       })}

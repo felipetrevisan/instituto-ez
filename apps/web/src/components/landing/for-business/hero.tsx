@@ -10,9 +10,12 @@ import { PortableText } from '@portabletext/react'
 import { Building2Icon } from 'lucide-react'
 import type { IconName } from 'lucide-react/dynamic'
 import { motion } from 'motion/react'
+import { useTranslations } from 'next-intl'
 
 export const Hero = ({ data, locale }: { data: SectionHero; locale: string }) => {
   const { setIsContactDialogOpen } = useShared()
+
+  const t = useTranslations('LandingPageForBusiness')
 
   return (
     <StickySection id="hero">
@@ -42,19 +45,23 @@ export const Hero = ({ data, locale }: { data: SectionHero; locale: string }) =>
               transition={{ delay: 0.2, duration: 0.5 }}
             >
               <Building2Icon className="size-4" />
-              <span>Soluções Corporativas</span>
+              <span>{t('corpSolutions')}</span>
             </motion.div>
+            {data?.heading?.[locale] && (
+              <motion.h1
+                animate={{ opacity: 1, y: 0 }}
+                className="font-bold text-4xl text-foreground leading-tight md:text-5xl lg:text-6xl"
+                initial={{ opacity: 0, y: 20 }}
+                transition={{ delay: 0.4, duration: 0.6 }}
+              >
+                <PortableText
+                  components={createPortableComponents()}
+                  value={data.heading[locale]}
+                />
+              </motion.h1>
+            )}
 
-            <motion.h1
-              animate={{ opacity: 1, y: 0 }}
-              className="font-bold text-4xl text-foreground leading-tight md:text-5xl lg:text-6xl"
-              initial={{ opacity: 0, y: 20 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-            >
-              <PortableText components={createPortableComponents()} value={data.heading[locale]} />
-            </motion.h1>
-
-            {data.subheading && (
+            {data?.subheading?.[locale] && (
               <motion.p
                 animate={{ opacity: 1, y: 0 }}
                 className="mx-auto max-w-3xl text-lg text-muted-foreground leading-relaxed md:text-xl"

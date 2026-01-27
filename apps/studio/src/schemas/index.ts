@@ -4,9 +4,9 @@ import {
   badgeObject,
   buttonObject as buttonThemeObject,
   catalogDocument,
+  categoryDocument,
   chapterObject,
   chaptersObject,
-  collectionDocument,
   contentObject,
   coverImageObject,
   downloadObject,
@@ -29,7 +29,9 @@ import {
 } from '@ez/studio/schemas/documents/landing/about'
 import {
   catalogObject,
+  ctaObject as ctaEbooksObject,
   heroObject as heroEbooksObject,
+  webinarObject,
 } from '@ez/studio/schemas/documents/landing/ebooks'
 import {
   consultingItemObject,
@@ -105,7 +107,6 @@ import {
   buttonObject as buttonEditorObject,
   cardsObject,
   dividerObject,
-  ebooksObject,
   listObject,
   richTextObject,
   tabsObject,
@@ -209,6 +210,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 
     // Ebooks
     catalogObject,
+    webinarObject,
+    ctaEbooksObject,
     heroEbooksObject,
 
     // Site
@@ -250,7 +253,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     footerThemeObject,
     sectionEbookObject,
     catalogDocument,
-    collectionDocument,
+    categoryDocument,
     settingsEbookDocument,
 
     // Editor Widgets
@@ -262,7 +265,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     alertObject,
     dividerObject,
     testimonialEditorObject,
-    ebooksObject,
     listObject,
     richTextObject,
     tabsObject,

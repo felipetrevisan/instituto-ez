@@ -22,6 +22,11 @@
   --ring: oklch(0.56 0.15 250);
   --footer: oklch(.45 .18 250);
   --footer-foreground: oklch(0.98 0 0);
+  --shadow-card: 0 4px 20px -2px oklch(0.56 0.15 250 / 0.08);
+  --shadow-card-hover: 0 8px 30px -4px oklch(0.56 0.15 250 / 0.15);
+  --shadow-soft: 0 2px 16px -4px oklch(.45 .18 250 / .1);
+  --shadow-medium: 0 4px 24px -4px oklch(.45 .18 250 / .15);
+  --radius: 0.75rem;
 }
 
 .dark [data-theme="for-business"] {
@@ -46,8 +51,11 @@
   --border: oklch(0.38 0.05 250);
   --input: oklch(0.38 0.05 250);
   --ring: oklch(0.64 0.15 250);  
-  --shadow-card: 0 4px 20px -2px oklch(0.56 0.15 250 / 0.08);
-  --shadow-card-hover: 0 8px 30px -4px oklch(0.56 0.15 250 / 0.15);
   --footer: oklch(0.35 0.08 250);
   --footer-foreground: oklch(0.98 0 0);
+  --shadow-card: 0 4px 20px -2px oklch(0.56 0.15 250 / 0.08);
+  --shadow-card-hover: 0 8px 30px -4px oklch(0.56 0.15 250 / 0.15);
+  --shadow-soft: 0 2px 16px -4px oklch(0% 0 0 / .3);
+  --shadow-medium: 0 4px 24px -4px oklch(0% 0 0 / .5);
+  --radius: 0.75rem;
 }

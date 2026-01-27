@@ -1,9 +1,8 @@
 'use client'
 
-import type { Badge } from '@ez/shared/types/ebook'
 import { BadgeButton } from '@ez/shared/ui/animated/badge'
 import { BadgeStarButton } from '@ez/shared/ui/animated/badge-star'
-import type { Ebook } from '@ez/web/types/ebook'
+import type { Badge, Ebook } from '@ez/web/types/ebook'
 import { DynamicIcon } from 'lucide-react/dynamic'
 import { motion } from 'motion/react'
 import { useLocale } from 'next-intl'

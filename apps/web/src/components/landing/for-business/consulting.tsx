@@ -40,11 +40,13 @@ export const Consulting = ({
               >
                 <div className="space-y-8">
                   <div className="space-y-4 text-center">
-                    <h2 className="font-bold text-3xl text-foreground md:text-4xl">
-                      {data.heading[locale]}
-                    </h2>
+                    {data?.heading?.[locale] && (
+                      <h2 className="font-bold text-3xl text-foreground md:text-4xl">
+                        {data.heading[locale]}
+                      </h2>
+                    )}
 
-                    {data.subheading && (
+                    {data?.subheading?.[locale] && (
                       <p className="mx-auto max-w-2xl text-lg text-muted-foreground leading-relaxed">
                         {data.subheading[locale]}
                       </p>

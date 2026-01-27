@@ -18,4 +18,9 @@ export default defineType({
       validation: (Rule) => Rule.max(3).warning('Ideally keep a maximum of 3 CTAs'),
     }),
   ],
+  preview: {
+    prepare() {
+      return { title: 'Final CTA' }
+    },
+  },
 })

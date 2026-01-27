@@ -16,6 +16,7 @@ const buttonVariants = cva(
         mentory: '',
         about: '',
         services: '',
+        ebook: ''
       },
 
       variant: {
@@ -31,6 +32,7 @@ const buttonVariants = cva(
         tertiary: 'bg-tertiary text-tertiary-foreground',
         accent: 'bg-accent text-accent-foreground',
         background: 'bg-foreground text-background',
+        catalog: 'text-navy hover:bg-cyan/10 hover:text-cyan',
         custom: '',
       },
 

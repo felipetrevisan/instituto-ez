@@ -20,14 +20,16 @@ export const MentorShip = ({ data, locale }: { data: SectionHomeMentorShip; loca
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(var(--brand-accent-rgb),0.03),transparent_50%)]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <motion.h2
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-4 text-center font-bold text-4xl text-foreground leading-tight md:text-5xl lg:text-6xl"
-          initial={{ opacity: 0, y: 20 }}
-          transition={{ duration: 0.6 }}
-        >
-          <PortableText components={createPortableComponents()} value={data.heading[locale]} />
-        </motion.h2>
+        {data?.heading?.[locale] && (
+          <motion.h2
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-4 text-center font-bold text-4xl text-foreground leading-tight md:text-5xl lg:text-6xl"
+            initial={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.6 }}
+          >
+            <PortableText components={createPortableComponents()} value={data.heading[locale]} />
+          </motion.h2>
+        )}
 
         <div className="space-y-5">
           {data.mainBox && (

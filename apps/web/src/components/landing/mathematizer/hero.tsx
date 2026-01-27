@@ -31,16 +31,21 @@ export const Hero = ({ data, locale }: { data: SectionHero; locale: string }) =>
             initial={{ opacity: 0, y: 30 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
           >
-            <motion.h1
-              animate={{ opacity: 1, y: 0 }}
-              className="font-bold text-4xl leading-tight md:text-6xl lg:text-7xl"
-              initial={{ opacity: 0, y: 20 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
-            >
-              <PortableText components={createPortableComponents()} value={data.heading[locale]} />
-            </motion.h1>
+            {data?.heading?.[locale] && (
+              <motion.h1
+                animate={{ opacity: 1, y: 0 }}
+                className="font-bold text-4xl leading-tight md:text-6xl lg:text-7xl"
+                initial={{ opacity: 0, y: 20 }}
+                transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
+              >
+                <PortableText
+                  components={createPortableComponents()}
+                  value={data.heading[locale]}
+                />
+              </motion.h1>
+            )}
 
-            {data.subheading && (
+            {data?.subheading?.[locale] && (
               <motion.p
                 animate={{ opacity: 1, y: 0 }}
                 className="mx-auto max-w-3xl text-muted-foreground text-xl leading-relaxed md:text-2xl"
@@ -54,7 +59,7 @@ export const Hero = ({ data, locale }: { data: SectionHero; locale: string }) =>
               </motion.p>
             )}
 
-            {data.description && (
+            {data?.description?.[locale] && (
               <motion.p
                 animate={{ opacity: 1, y: 0 }}
                 className="mx-auto max-w-2xl text-foreground/80 text-lg"

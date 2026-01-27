@@ -14,17 +14,22 @@ export const Services = ({ data, locale }: { data: SectionAboutServices; locale:
       <div className="bg-muted py-20 md:py-28">
         <div className="container mx-auto px-6 md:px-8">
           <div className="mx-auto max-w-6xl">
-            <motion.h2
-              className="mb-4 text-center font-bold text-3xl md:text-4xl lg:text-5xl"
-              initial={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              whileInView={{ opacity: 1, y: 0 }}
-            >
-              <PortableText components={createPortableComponents()} value={data.heading[locale]} />
-            </motion.h2>
+            {data?.heading?.[locale] && (
+              <motion.h2
+                className="mb-4 text-center font-bold text-3xl md:text-4xl lg:text-5xl"
+                initial={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                whileInView={{ opacity: 1, y: 0 }}
+              >
+                <PortableText
+                  components={createPortableComponents()}
+                  value={data.heading[locale]}
+                />
+              </motion.h2>
+            )}
 
-            {data.subheading && (
+            {data?.subheading?.[locale] && (
               <motion.p
                 className="mx-auto mb-16 max-w-3xl text-center text-gray-warm text-lg"
                 initial={{ opacity: 0, y: -20 }}

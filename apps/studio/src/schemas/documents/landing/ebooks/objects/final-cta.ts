@@ -2,15 +2,14 @@ import { PackageIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
-  name: 'mathematizer.cta',
-  title: 'CTA — Mathematizer',
+  name: 'ebooks.cta',
+  title: 'CTA — Ebooks',
   icon: PackageIcon,
   type: 'object',
-  hidden: ({ document }) => document?.key !== 'mathematizer',
+  hidden: ({ document }) => document?.key !== 'ebooks',
   fields: [
     defineField({ name: 'heading', type: 'localizedArray' }),
-    defineField({ name: 'text', type: 'localizedArray' }),
-    defineField({ name: 'footer', type: 'localizedArray' }),
+    defineField({ name: 'subheading', type: 'localizedArray' }),
     defineField({
       name: 'cta',
       title: 'CTA Buttons',

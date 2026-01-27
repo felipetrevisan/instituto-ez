@@ -117,6 +117,7 @@ export default defineType({
         // EBOOKS
         { type: 'ebooks.hero' },
         { type: 'ebooks.catalog' },
+        { type: 'ebooks.cta' }
       ],
     }),
   ],

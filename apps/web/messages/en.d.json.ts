@@ -27,7 +27,17 @@ declare const messages: {
     "expOfYears": "Years of Experience",
     "scienceBased": "Science Based",
     "metricsPrecision": "Precisão nas Métricas",
-    "safeDecision": "Tomada de Decisão Segura"
+    "safeDecision": "Tomada de Decisão Segura",
+    "immersion": "A experiência que expande a vida"
+  },
+  "LandingPageMathematizer": {
+    "resolvedProblems": "Problemas que resolve:"
+  },
+  "LandingPageForBusiness": {
+    "corpSolutions":  "Soluções Corporativas"
+  },
+  "LandingPageMentoring": {
+    "stratagyMentoring": "Mentoria Estratégica"
   },
   "Ebooks": {
     "backButton": "Back to Catalog",

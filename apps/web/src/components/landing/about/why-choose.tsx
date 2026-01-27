@@ -18,17 +18,22 @@ export const WhyChoose = ({ data, locale }: { data: SectionAboutWhyChoose; local
       <div className="bg-gradient-subtle py-20 md:py-28">
         <div className="container mx-auto px-6 md:px-8">
           <div className="mx-auto max-w-4xl">
-            <motion.h2
-              className="mb-12 text-center font-bold text-3xl md:text-4xl lg:text-5xl"
-              initial={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              whileInView={{ opacity: 1, y: 0 }}
-            >
-              <PortableText components={createPortableComponents()} value={data.heading[locale]} />
-            </motion.h2>
+            {data?.heading?.[locale] && (
+              <motion.h2
+                className="mb-12 text-center font-bold text-3xl md:text-4xl lg:text-5xl"
+                initial={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                whileInView={{ opacity: 1, y: 0 }}
+              >
+                <PortableText
+                  components={createPortableComponents()}
+                  value={data.heading[locale]}
+                />
+              </motion.h2>
+            )}
 
-            {data.description && (
+            {data?.description?.[locale] && (
               <motion.div
                 className="mb-12 space-y-6"
                 initial={{ opacity: 0, y: 30 }}

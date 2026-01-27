@@ -33,11 +33,13 @@ export const Lectures = ({
               viewport={{ once: true, margin: '-100px' }}
               whileInView={{ opacity: 1, y: 0 }}
             >
-              <h2 className="font-bold text-3xl text-foreground md:text-4xl">
-                {data.heading[locale]}
-              </h2>
+              {data?.heading?.[locale] && (
+                <h2 className="font-bold text-3xl text-foreground md:text-4xl">
+                  {data.heading[locale]}
+                </h2>
+              )}
 
-              {data.subheading && (
+              {data?.subheading?.[locale] && (
                 <p className="text-lg text-muted-foreground leading-relaxed">
                   {data.subheading[locale]}
                 </p>
