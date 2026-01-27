@@ -11,8 +11,6 @@ export default async function LandingLayout({
   settings?: Landing
   locale: string
 }) {
-  // const data = await getSiteConfig()
-
   return (
     <BaseLanding settings={settings} theme={pageKey}>
       {children}

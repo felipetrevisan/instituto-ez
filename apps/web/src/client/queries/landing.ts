@@ -12,9 +12,23 @@ const buttonFields = `
   "iconPrefix": button_icon_prefix,
   "iconSuffix": button_icon_suffix,
   "type": button_link_type,
-  "link": button_internal_link->slug,
+  "link": select(
+    button_link_type == "INTERNAL" || button_link_type == "LANDING" =>
+      button_internal_link->slug,
+    null
+  ),
+  "externalUrl": select(
+    button_link_type == "EXTERNAL" => button_external_url,
+    null
+  ),
+  "dialog": select(
+    button_link_type == "DIALOG" => {
+      "type": dialog_type,
+      "subject": dialog_contact_subject
+    },
+    null
+  ),
   "params": button_internal_params,
-  "externalUrl": button_external_url,
   "theme": {
     theme,
     variant,
@@ -67,6 +81,7 @@ const navigationFields = `
           is_home == true => {
             "link": "/"
           },
+          ...,
           link_type == "INTERNAL" || link_type == "LANDING" => {
             "link": internal_link->slug
           },
@@ -85,7 +100,7 @@ const navigationFields = `
         is_home == true => {
           "link": "/"
         },
-        link_type == "INTERNAL" => {
+        link_type == "INTERNAL" || link_type == "LANDING" => {
           "link": internal_link->slug
         },
         link_type == "EXTERNAL" => {

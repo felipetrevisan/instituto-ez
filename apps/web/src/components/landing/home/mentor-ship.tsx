@@ -1,19 +1,14 @@
 'use client'
 
-import { useShared } from '@ez/shared/hooks/use-shared'
-import { LinkType } from '@ez/shared/types'
 import { CallAction } from '@ez/web/components/ui/call-action-button'
 import { Icon } from '@ez/web/components/ui/icon'
 import { StickySection } from '@ez/web/components/ui/sticky-section'
 import type { SectionHomeMentorShip } from '@ez/web/types/landing/home'
 import { createPortableComponents } from '@ez/web/utils/create-portable-components'
 import { PortableText } from '@portabletext/react'
-import type { IconName } from 'lucide-react/dynamic'
 import { motion } from 'motion/react'
 
 export const MentorShip = ({ data, locale }: { data: SectionHomeMentorShip; locale: string }) => {
-  const { setIsContactDialogOpen } = useShared()
-
   return (
     <StickySection className="relative bg-brand-light py-20 md:py-32" id="mentor-ship">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(var(--brand-primary-rgb),0.05),transparent_50%)]" />
@@ -87,34 +82,13 @@ export const MentorShip = ({ data, locale }: { data: SectionHomeMentorShip; loca
             initial={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 0.8, ease: 'easeOut' }}
           >
-            {data.cta.map((button) => {
+            {data.cta.map((button, index) => {
               return (
                 <CallAction
-                  action={button.type === LinkType.DIALOG ? 'button' : 'link'}
+                  key={button._key ?? index}
                   base="default"
+                  button={button}
                   className="group px-8 py-6 font-semibold"
-                  effect={button.theme.effect}
-                  icon={{
-                    prefix: {
-                      className: 'size-5',
-                      name: button.iconPrefix as IconName,
-                    },
-                    suffix: {
-                      className:
-                        'ml-2 size-5 transition-transform group-hover:translate-x-1 hidden md:flex',
-                      name: button.iconSuffix as IconName,
-                    },
-                  }}
-                  key={button._key}
-                  label={button.label[locale]}
-                  link={button.type === LinkType.DIALOG ? undefined : button.link[locale]}
-                  onClick={
-                    button.type === LinkType.DIALOG ? () => setIsContactDialogOpen(true) : undefined
-                  }
-                  rounded={button.theme.rounded}
-                  size={button.theme.size}
-                  theme={button.theme.theme}
-                  variant={button.theme.variant}
                 />
               )
             })}

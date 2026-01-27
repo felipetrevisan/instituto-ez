@@ -1,14 +1,11 @@
 'use client'
 
-import { useShared } from '@ez/shared/hooks/use-shared'
 import { cn } from '@ez/shared/lib/utils'
-import { LinkType } from '@ez/shared/types'
 import { Card } from '@ez/shared/ui/card'
 import { CallAction } from '@ez/web/components/ui/call-action-button'
 import { Icon } from '@ez/web/components/ui/icon'
 import { StickySection } from '@ez/web/components/ui/sticky-section'
 import type { SectionForBusinessTestimonial } from '@ez/web/types/landing/for-business'
-import type { IconName } from 'lucide-react/dynamic'
 import { motion } from 'motion/react'
 
 export const Testimonials = ({
@@ -19,8 +16,6 @@ export const Testimonials = ({
   locale: string
 }) => {
   const colors = ['primary', 'secondary', 'tertiary', 'accent']
-
-  const { setIsContactDialogOpen } = useShared()
 
   return (
     <StickySection id="testimonials">
@@ -117,34 +112,7 @@ export const Testimonials = ({
 
             {data.cta && (
               <div className="pt-4 text-center">
-                <CallAction
-                  action={data.cta.type === LinkType.DIALOG ? 'button' : 'link'}
-                  base="for-business"
-                  className="group"
-                  effect={data.cta.theme.effect}
-                  icon={{
-                    prefix: {
-                      className: 'mr-2 size-5',
-                      name: data.cta.iconPrefix as IconName,
-                    },
-                    suffix: {
-                      className: 'ml-2 size-5 transition-transform group-hover:translate-x-1',
-                      name: data.cta.iconSuffix as IconName,
-                    },
-                  }}
-                  key={data.cta._key}
-                  label={data.cta.label[locale]}
-                  link={data.cta.type === LinkType.DIALOG ? undefined : data.cta.link[locale]}
-                  onClick={
-                    data.cta.type === LinkType.DIALOG
-                      ? () => setIsContactDialogOpen(true)
-                      : undefined
-                  }
-                  rounded={data.cta.theme.rounded}
-                  size={data.cta.theme.size}
-                  theme={data.cta.theme.theme}
-                  variant={data.cta.theme.variant}
-                />
+                <CallAction base="for-business" button={data.cta} className="group" />
               </div>
             )}
           </div>

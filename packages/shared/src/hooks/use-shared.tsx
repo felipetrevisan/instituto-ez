@@ -5,6 +5,7 @@ import {
   type Dispatch,
   type ReactNode,
   type SetStateAction,
+  useCallback,
   useContext,
   useState,
 } from 'react'
@@ -14,6 +15,7 @@ type SharedContextProps = {
   setIsContactDialogOpen: Dispatch<SetStateAction<boolean>>
   contactSubject: string
   setContactSubject: Dispatch<SetStateAction<string>>
+  handleOpenContactDialog:  (subject?: string) => void
 }
 
 const SharedContext = createContext({} as SharedContextProps)
@@ -22,6 +24,11 @@ export function SharedProvider({ children }: { children: ReactNode }) {
   const [isContactDialogOpen, setIsContactDialogOpen] = useState(false)
   const [contactSubject, setContactSubject] = useState('')
 
+  const handleOpenContactDialog = useCallback((subject?: string) => {
+     setIsContactDialogOpen(true)
+     setContactSubject(subject ?? '')
+  }, [])
+
   return (
     <SharedContext.Provider
       value={{
@@ -29,6 +36,7 @@ export function SharedProvider({ children }: { children: ReactNode }) {
         setIsContactDialogOpen,
         setContactSubject,
         contactSubject,
+        handleOpenContactDialog
       }}
     >
       {children}

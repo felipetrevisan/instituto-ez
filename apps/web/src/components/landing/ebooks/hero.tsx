@@ -1,13 +1,11 @@
 'use client'
 
-import { LinkType } from '@ez/shared/types'
 import { CallAction } from '@ez/web/components/ui/call-action-button'
 import { StickySection } from '@ez/web/components/ui/sticky-section'
 import { urlForImage } from '@ez/web/config/image'
 import type { SectionEbooksHero } from '@ez/web/types/landing/ebooks'
 import { createPortableComponents } from '@ez/web/utils/create-portable-components'
 import { ArrowDown, BookOpen } from 'lucide-react'
-import type { IconName } from 'lucide-react/dynamic'
 import { motion } from 'motion/react'
 import Image from 'next/image'
 import { PortableText } from 'next-sanity'
@@ -76,30 +74,13 @@ export const Hero = ({ data, locale }: { data: SectionEbooksHero; locale: string
                 viewport={{ once: true, amount: 0.3 }}
                 whileInView={{ opacity: 1, y: 0 }}
               >
-                {data.cta.map((button) => {
+                {data.cta.map((button, index) => {
                   return (
                     <CallAction
-                      action={button.type === LinkType.DIALOG ? 'button' : 'link'}
+                      key={button._key ?? index}
                       base="ebook"
+                      button={button}
                       className="group px-8 py-6 font-semibold"
-                      effect={button.theme.effect}
-                      icon={{
-                        prefix: {
-                          className: 'mr-2 size-5',
-                          name: button.iconPrefix as IconName,
-                        },
-                        suffix: {
-                          className: 'ml-2 size-5 transition-transform group-hover:translate-x-1',
-                          name: button.iconSuffix as IconName,
-                        },
-                      }}
-                      key={button._key}
-                      label={button.label[locale]}
-                      link={button.type === LinkType.DIALOG ? undefined : button.link[locale]}
-                      rounded={button.theme.rounded}
-                      size={button.theme.size}
-                      theme={button.theme.theme}
-                      variant={button.theme.variant}
                     />
                   )
                 })}

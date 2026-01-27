@@ -9,6 +9,10 @@ export type Button = {
   iconSuffix?: IconName
   type: LinkType
   link: Record<string, { current: string }>
+  dialog: {
+    type: 'CONTACT'
+    subject?: string
+  }
   theme: {
     variant: Variant
     theme: Theme

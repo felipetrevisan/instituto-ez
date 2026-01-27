@@ -1,7 +1,5 @@
 'use client'
 
-import { useShared } from '@ez/shared/hooks/use-shared'
-import { LinkType } from '@ez/shared/types'
 import { Card, CardContent } from '@ez/shared/ui/card'
 import { CallAction } from '@ez/web/components/ui/call-action-button'
 import { Icon } from '@ez/web/components/ui/icon'
@@ -9,7 +7,6 @@ import { StickySection } from '@ez/web/components/ui/sticky-section'
 import type { SectionMathematizerMathematizer } from '@ez/web/types/landing/mathematizer'
 import { createPortableComponents } from '@ez/web/utils/create-portable-components'
 import { PortableText } from '@portabletext/react'
-import type { IconName } from 'lucide-react/dynamic'
 import { motion } from 'motion/react'
 import { useTranslations } from 'next-intl'
 
@@ -20,8 +17,6 @@ export const Mathematizer = ({
   data: SectionMathematizerMathematizer
   locale: string
 }) => {
-  const { setIsContactDialogOpen } = useShared()
-
   const t = useTranslations('LandingPageMathematizer')
 
   return (
@@ -101,30 +96,9 @@ export const Mathematizer = ({
               whileInView={{ opacity: 1, y: 0 }}
             >
               <CallAction
-                action={data.cta.type === LinkType.DIALOG ? 'button' : 'link'}
                 base="mathematizer"
+                button={data.cta}
                 className="group px-8 py-6 font-semibold"
-                effect={data.cta.theme.effect}
-                icon={{
-                  prefix: {
-                    className: 'mr-2 size-5',
-                    name: data.cta.iconPrefix as IconName,
-                  },
-                  suffix: {
-                    className: 'ml-2 size-5 transition-transform group-hover:translate-x-1',
-                    name: data.cta.iconSuffix as IconName,
-                  },
-                }}
-                key={data.cta._key}
-                label={data.cta.label[locale]}
-                link={data.cta.type === LinkType.DIALOG ? undefined : data.cta.link[locale]}
-                onClick={
-                  data.cta.type === LinkType.DIALOG ? () => setIsContactDialogOpen(true) : undefined
-                }
-                rounded={data.cta.theme.rounded}
-                size={data.cta.theme.size}
-                theme={data.cta.theme.theme}
-                variant={data.cta.theme.variant}
               />
             </motion.div>
           )}

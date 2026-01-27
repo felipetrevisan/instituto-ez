@@ -184,6 +184,53 @@ export default defineType({
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),
     defineField({
+      name: 'dialog_type',
+      title: 'Dialog Type',
+      type: 'string',
+      group: 'link',
+      initialValue: 'CONTACT',
+      options: {
+        list: [
+          { title: 'Contato', value: 'CONTACT' },
+        ],
+        layout: 'radio',
+      },
+      hidden: ({ parent }) => parent?.button_link_type !== 'DIALOG',
+    }),
+    defineField({
+      name: 'dialog_contact_subject',
+      title: 'Dialog Contact Subject',
+      type: 'string',
+      group: 'link',
+      hidden: ({ parent }) =>
+        !parent?.show_button ||
+        parent?.disable_button ||
+        parent?.button_link_type !== 'DIALOG' ||
+        parent?.dialog_type !== 'CONTACT',
+    
+      validation: (Rule) =>
+        Rule.custom((value, context) => {
+          const parent = context.parent as {
+            show_button?: boolean
+            disable_button?: boolean
+            button_link_type?: string
+            dialog_type?: string
+          }
+    
+          const isContactDialog =
+            parent?.show_button &&
+            !parent?.disable_button &&
+            parent?.button_link_type === 'DIALOG' &&
+            parent?.dialog_type === 'CONTACT'
+    
+          if (isContactDialog && !value) {
+            return 'Contact subject is required when dialog type is Contact.'
+          }
+    
+          return true
+        }),
+    }),
+    defineField({
       name: 'button_internal_link',
       title: 'Button Link',
       description: 'Select a page',

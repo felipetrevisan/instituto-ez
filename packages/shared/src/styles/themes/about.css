@@ -28,7 +28,7 @@
   --purple: oklch(.70 .2 280);
   --gray-warm: oklch(.65 .02 240);
   --gray-light: oklch(.96 .01 240);
-  --footer: oklch(.45 .18 250);
+  --footer: oklch(0.32 0.08 240);
   --footer-foreground: oklch(0.98 0 0);
   --gradient-hero: linear-gradient(
     135deg,

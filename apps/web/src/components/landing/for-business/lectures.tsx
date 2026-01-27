@@ -1,14 +1,11 @@
 'use client'
 
-import { useShared } from '@ez/shared/hooks/use-shared'
 import { cn } from '@ez/shared/lib/utils'
-import { LinkType } from '@ez/shared/types'
 import { Card } from '@ez/shared/ui/card'
 import { CallAction } from '@ez/web/components/ui/call-action-button'
 import { Icon } from '@ez/web/components/ui/icon'
 import { StickySection } from '@ez/web/components/ui/sticky-section'
 import type { SectionForBusinessLectures } from '@ez/web/types/landing/for-business'
-import type { IconName } from 'lucide-react/dynamic'
 import { motion } from 'motion/react'
 
 export const Lectures = ({
@@ -19,7 +16,6 @@ export const Lectures = ({
   locale: string
 }) => {
   const colors = ['primary', 'secondary', 'tertiary', 'accent']
-  const { setIsContactDialogOpen } = useShared()
 
   return (
     <StickySection id="lectures">
@@ -126,37 +122,7 @@ export const Lectures = ({
                         <p className="text-muted-foreground leading-relaxed">{item.text[locale]}</p>
 
                         {item.cta && (
-                          <CallAction
-                            action={item.cta.type === LinkType.DIALOG ? 'button' : 'link'}
-                            base="for-business"
-                            className="group"
-                            effect={item.cta.theme.effect}
-                            icon={{
-                              prefix: {
-                                className: 'mr-2 size-5',
-                                name: item.cta.iconPrefix as IconName,
-                              },
-                              suffix: {
-                                className:
-                                  'ml-2 size-5 transition-transform group-hover:translate-x-1',
-                                name: item.cta.iconSuffix as IconName,
-                              },
-                            }}
-                            key={item.cta._key}
-                            label={item.cta.label[locale]}
-                            link={
-                              item.cta.type === LinkType.DIALOG ? undefined : item.cta.link[locale]
-                            }
-                            onClick={
-                              item.cta.type === LinkType.DIALOG
-                                ? () => setIsContactDialogOpen(true)
-                                : undefined
-                            }
-                            rounded={item.cta.theme.rounded}
-                            size={item.cta.theme.size}
-                            theme={item.cta.theme.theme}
-                            variant={item.cta.theme.variant}
-                          />
+                          <CallAction base="for-business" button={item.cta} className="group" />
                         )}
                       </Card>
                     </motion.div>

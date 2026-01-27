@@ -172,7 +172,6 @@ function Content({ className, children }: React.ComponentProps<'div'>) {
         'container relative flex h-full max-w-8xl flex-col items-center justify-center',
         {
           'mt-24': isNormalPage(),
-          //'mt-4': !isNormalPage(),
         },
         className,
       )}
