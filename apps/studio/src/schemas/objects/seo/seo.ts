@@ -26,6 +26,12 @@ export default defineType({
       type: 'localizedString',
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),
+    defineField({
+      name: 'image',
+      title: 'Open Graph Image',
+      type: 'image',
+      options: { hotspot: true },
+    }),
   ],
   preview: {
     select: {

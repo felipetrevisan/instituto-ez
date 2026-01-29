@@ -61,6 +61,7 @@ export type SectionForBusinessLecturesItem = {
 export type SectionForBusinessConsulting = {
   heading: Record<string, string>
   subheading: Record<string, string>
+  footer: Record<string, PortableTextBlock[]>
   items: SectionForBusinessConsultingItem[]
   cta?: Button
   _type: string

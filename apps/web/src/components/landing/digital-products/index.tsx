@@ -1,14 +1,14 @@
 'use client'
 
-import { CatalogEbooks } from '@ez/web/components/landing/ebooks/catalog-ebooks'
-import { FinalCTA } from '@ez/web/components/landing/ebooks/final-cta'
-import { Hero } from '@ez/web/components/landing/ebooks/hero'
+import { CatalogEbooks } from '@ez/web/components/landing/digital-products/catalog-ebooks'
+import { FinalCTA } from '@ez/web/components/landing/digital-products/final-cta'
+import { Hero } from '@ez/web/components/landing/digital-products/hero'
 import type { Landing } from '@ez/web/types/landing'
 import type {
   SectionEbooksCatalog,
   SectionEbooksCTA,
   SectionEbooksHero,
-} from '@ez/web/types/landing/ebooks'
+} from '@ez/web/types/landing/digital-products'
 import { useLocale } from 'next-intl'
 
 export function LandingPageEbooks({ data }: { data: Landing<'ebooks'> }) {

@@ -56,6 +56,14 @@ export default defineType({
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),
     defineField({
+      name: 'seoImage',
+      title: 'SEO Image',
+      description: 'Default Open Graph image for the site.',
+      type: 'image',
+      group: ['seo'],
+      options: { hotspot: true },
+    }),
+    defineField({
       name: 'slogan',
       title: 'Site Slogan',
       type: 'localizedString',

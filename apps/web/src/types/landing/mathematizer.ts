@@ -53,6 +53,7 @@ export type SectionMathematizerBenefitsItem = {
 export type SectionMathematizerCTA = {
   heading: Record<string, PortableTextBlock[]>
   text: Record<string, PortableTextBlock[]>
+  footer: Record<string, PortableTextBlock[]>
   cta?: Button[]
   _type: string
 }

@@ -4,6 +4,16 @@ const pageFields = `
   slug,
 `
 
+const seoImageField = `
+  "image": page.image {
+    "asset": asset,
+    "metadata": {
+      "lqip": asset->metadata.lqip,
+      "dimensions": asset->metadata.dimensions
+    }
+  },
+`
+
 const buttonFields = `
    _key,
   "visible": show_button,
@@ -121,6 +131,7 @@ export const landingPageQuery = groq`*[ _type == 'landingPage' && slug[$locale].
   "settings": {
     ...page,
     ${pageFields}
+    ${seoImageField}
     ${navigationFields}
     form,
   },

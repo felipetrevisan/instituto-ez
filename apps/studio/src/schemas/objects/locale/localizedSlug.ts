@@ -21,7 +21,7 @@ export default defineType({
       options: {
         // biome-ignore lint/suspicious/noExplicitAny: false positive
         source: (doc: any) => {
-          return doc?.page.title?.[lang.id]
+          return doc?.page?.title?.[lang.id] || doc?.title?.[lang.id]
         },
       },
     }),

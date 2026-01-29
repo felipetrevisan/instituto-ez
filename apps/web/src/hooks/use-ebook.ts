@@ -20,15 +20,6 @@ export function useEbook(slug: string, locale: string) {
   return { data, isLoading, isPending }
 }
 
-export function useEbooksByType(type: 'ebook' | 'webinar') {
-  const { data, isLoading, isPending } = useQuery<Ebook[]>({
-    queryKey: ['ebooks', type],
-    queryFn: () => getEbooksByType(type),
-  })
-
-  return { data, isLoading, isPending }
-}
-
 // export function useEbooksCollection() {
 //   const { data, isLoading, isPending } = useQuery<EbookCollection[]>({
 //     queryKey: ['ebooks-collection'],

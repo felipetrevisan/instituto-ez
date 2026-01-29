@@ -1,4 +1,4 @@
-import { BookIcon, CogIcon, PackageIcon } from '@sanity/icons'
+import { BookIcon, CogIcon, CommentIcon, PackageIcon, PlayIcon } from '@sanity/icons'
 import { orderableDocumentListDeskItem } from '@sanity/orderable-document-list'
 import type { ConfigContext } from 'sanity'
 import type { StructureBuilder } from 'sanity/structure'
@@ -7,7 +7,6 @@ const structure = (S: StructureBuilder, context: ConfigContext) =>
   S.list()
     .title('Content Manager')
     .items([
-      // Settings section
       S.listItem()
         .title('Configurações')
         .icon(CogIcon)
@@ -16,25 +15,9 @@ const structure = (S: StructureBuilder, context: ConfigContext) =>
             .title('Configurações')
             .items([
               S.listItem()
-                .title('Configurações')
+                .title('Site')
                 .child(S.document().schemaType('siteConfig').documentId('siteConfig')),
               S.listItem().title('Navegação').child(S.documentTypeList('navigation')),
-            ]),
-        ),
-
-      S.listItem()
-        .title('Home')
-        .icon(CogIcon)
-        .child(
-          S.list()
-            .title('Home')
-            .items([
-              orderableDocumentListDeskItem({
-                type: 'testimonial',
-                title: 'Depoimentos',
-                S,
-                context,
-              }),
             ]),
         ),
 
@@ -43,14 +26,19 @@ const structure = (S: StructureBuilder, context: ConfigContext) =>
       S.listItem()
         .title('Páginas')
         .icon(PackageIcon)
-        .child(S.documentTypeList('page').filter('_type == "page" && type == "page"')),
-
-      S.listItem()
-        .title('Landing Pages')
-        .icon(PackageIcon)
-        .child(S.documentTypeList('landingPage')),
+        .child(
+          S.list()
+            .title('Páginas')
+            .items([
+              S.listItem()
+                .title('Páginas')
+                .child(S.documentTypeList('page').filter('_type == "page" && type == "page"')),
+              S.listItem().title('Landing Pages').child(S.documentTypeList('landingPage')),
+            ]),
+        ),
 
       S.divider(),
+
       S.listItem()
         .title('Ebooks')
         .icon(BookIcon)
@@ -81,29 +69,65 @@ const structure = (S: StructureBuilder, context: ConfigContext) =>
             ]),
         ),
 
+      S.listItem()
+        .title('Webnarios')
+        .icon(PlayIcon)
+        .child(
+          S.list()
+            .title('Webnarios')
+            .items([
+              orderableDocumentListDeskItem({
+                type: 'webnario.catalog',
+                title: 'Webnarios',
+                S,
+                context,
+              }),
+              S.listItem()
+                .title('Configurações')
+                .child(
+                  S.document()
+                    .schemaType('webnario-landing-page-settings')
+                    .documentId('webnario-landing-page-settings')
+                    .title('Configurações'),
+                ),
+            ]),
+        ),
+
+      S.listItem()
+        .title('Depoimentos')
+        .icon(CommentIcon)
+        .child(
+          S.list()
+            .title('Webnarios')
+            .items([
+              orderableDocumentListDeskItem({
+                type: 'testimonial',
+                title: 'Depoimentos',
+                S,
+                context,
+              }),
+            ]),
+        ),
+
       S.divider(),
+
       ...S.documentTypeListItems().filter(
         (listItem) =>
           ![
             'siteConfig',
             'navigation',
             'page',
-            'section',
-            'about',
-            'logo',
-            'banner',
-            'service',
-            'workshop',
-            'immersion',
-            'lecture',
-            'mathematizer',
-            'ebook',
-            'ebooks-collection',
-            'testimonial',
-            'advanced-mentory',
-            'formGeneralSettings',
+            'landingPage',
             'landing-page-settings',
+            'webnario-landing-page-settings',
+            'webnario.catalog',
+            'ebook',
+            'ebooks.category',
+            'testimonial',
+            'section',
+            'formGeneralSettings',
             'landing-page-section',
+            'logo'
           ].includes(listItem.getId() || ''),
       ),
     ])

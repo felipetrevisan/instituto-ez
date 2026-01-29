@@ -59,10 +59,10 @@ export const Hero = ({ data, locale }: { data: SectionHero; locale: string }) =>
               {data.cta.map((button, index) => {
                 return (
                   <CallAction
-                    key={button._key ?? index}
                     base="default"
                     button={button}
                     className="group w-full px-8 py-6 font-semibold md:w-auto"
+                    key={button._key ?? index}
                   />
                 )
               })}

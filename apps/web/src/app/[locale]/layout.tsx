@@ -1,5 +1,7 @@
 import { routing } from '@ez/web/i18n/routing'
+import { resolveOpenGraphImage } from '@ez/web/config/image'
 import { getSiteConfig } from '@ez/web/server/get-site-config'
+import { getMetadataBase } from '@ez/web/utils/seo'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Metadata } from 'next'
@@ -37,16 +39,42 @@ export async function generateMetadata({
   const { locale } = await params
 
   const title = settings?.title[locale] || 'Instituto Enzo'
-  const description = settings?.description?.[locale] || ''
-  const keywords = settings?.keywords?.[locale] || ''
+  const description = settings?.description?.[locale]
+  const keywords = settings?.keywords?.[locale]
+  const ogImage = settings?.seoImage?.asset
+    ? resolveOpenGraphImage(settings.seoImage.asset)
+    : undefined
+  const openGraphImages = ogImage
+    ? [
+        {
+          ...ogImage,
+          alt: title || ogImage.alt || '',
+        },
+      ]
+    : undefined
 
   return {
+    metadataBase: getMetadataBase(),
     title: {
       template: `%s | ${title}`,
       default: title,
     },
     description,
     keywords,
+    openGraph: {
+      title,
+      description,
+      siteName: title,
+      locale,
+      type: 'website',
+      ...(openGraphImages ? { images: openGraphImages } : {}),
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      ...(openGraphImages ? { images: openGraphImages.map((image) => image.url) } : {}),
+    },
   }
 }
 

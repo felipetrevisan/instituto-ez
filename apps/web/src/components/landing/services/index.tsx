@@ -2,6 +2,7 @@
 
 import { Assessment } from '@ez/web/components/landing/services/assessment'
 import { Benefits } from '@ez/web/components/landing/services/benefits'
+import { FinalCTA } from '@ez/web/components/landing/services/final-cta'
 import { Hero } from '@ez/web/components/landing/services/hero'
 import { MethodsSession } from '@ez/web/components/landing/services/methods-session'
 import { WhoIsItFor } from '@ez/web/components/landing/services/who-is-it-for'
@@ -9,6 +10,7 @@ import type { Landing, SectionHero } from '@ez/web/types/landing'
 import type {
   SectionServicesAssessment,
   SectionServicesBenefits,
+  SectionServicesCTA,
   SectionServicesMethodSessions,
   SectionServicesWhoIsItFor,
 } from '@ez/web/types/landing/services'
@@ -58,6 +60,16 @@ export function LandingPageServices({ data }: { data: Landing<'services'> }) {
           return (
             <Benefits
               data={section as SectionServicesBenefits}
+              key={section._type}
+              locale={locale}
+            />
+          )
+        }
+
+        if (section._type === 'services.cta') {
+          return (
+            <FinalCTA
+              data={section as SectionServicesCTA}
               key={section._type}
               locale={locale}
             />

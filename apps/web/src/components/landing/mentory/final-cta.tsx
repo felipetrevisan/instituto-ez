@@ -13,120 +13,118 @@ export const FinalCTA = ({ data, locale }: { data: SectionMentoringCTA; locale: 
   const right = data.items.filter((item) => item.position === 'right')
 
   return (
-    <StickySection id="cta">
-      <div className="relative overflow-hidden bg-gradient-to-br from:bg-gray-light to:bg-background py-16 sm:py-20 md:py-28">
-        <div className="container mx-auto px-6 md:px-8">
-          <div className="relative mx-auto max-w-6xl">
-            {left.length > 0 && (
-              <div className="-left-12 absolute top-1/4 hidden lg:block">
-                <div className="flex flex-col gap-4">
-                  {left?.map((item, index) => {
-                    return (
-                      <div
-                        className="text-right"
-                        key={`left-${
-                          // biome-ignore lint/suspicious/noArrayIndexKey: false positive
-                          index
-                        }`}
-                      >
-                        <div className="rounded-2xl border border-white/20 bg-white/10 p-6 shadow-elegant backdrop-blur-sm">
-                          <div className="flex items-center gap-4">
-                            <div>
-                              <p className="font-bold text-navy">{item.title[locale]}</p>
-                              <p className="text-gray-warm text-sm">{item.description[locale]}</p>
+    <StickySection
+      className="relative overflow-hidden bg-gradient-to-br from:bg-gray-light to:bg-background py-16 sm:py-20 md:py-28"
+      id="cta"
+    >
+      <div className="container mx-auto px-6 md:px-8">
+        <div className="relative mx-auto max-w-6xl">
+          {left.length > 0 && (
+            <div className="-left-12 absolute top-1/4 hidden lg:block">
+              <div className="flex flex-col gap-4">
+                {left?.map((item, index) => {
+                  return (
+                    <div
+                      className="text-right"
+                      key={`left-${
+                        // biome-ignore lint/suspicious/noArrayIndexKey: false positive
+                        index
+                      }`}
+                    >
+                      <div className="rounded-2xl border border-white/20 bg-white/10 p-6 shadow-elegant backdrop-blur-sm">
+                        <div className="flex items-center gap-4">
+                          <div>
+                            <p className="font-bold text-navy">{item.title[locale]}</p>
+                            <p className="text-gray-warm text-sm">{item.description[locale]}</p>
+                          </div>
+                          {item.icon && (
+                            <div className="rounded-xl bg-coral/20 p-3">
+                              <Icon className="size-6 text-coral" name={item.icon} />
                             </div>
-                            {item.icon && (
-                              <div className="rounded-xl bg-coral/20 p-3">
-                                <Icon className="size-6 text-coral" name={item.icon} />
-                              </div>
-                            )}
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          )}
+
+          {right.length > 0 && (
+            <div className="-right-12 absolute top-1/4 hidden lg:block">
+              <div className="flex flex-col gap-4">
+                {right?.map((item, index) => {
+                  return (
+                    <div
+                      key={`right-${
+                        // biome-ignore lint/suspicious/noArrayIndexKey: false positive
+                        index
+                      }`}
+                    >
+                      <div className="rounded-2xl border border-white/20 bg-white/10 p-6 shadow-elegant backdrop-blur-sm">
+                        <div className="flex items-center gap-4">
+                          {item.icon && (
+                            <div className="rounded-xl bg-cyan/20 p-3">
+                              <Icon className="size-6 text-cyan" name={item.icon} />
+                            </div>
+                          )}
+                          <div>
+                            <p className="font-bold text-navy">{item.title[locale]}</p>
+                            <p className="text-gray-warm text-sm">{item.description[locale]}</p>
                           </div>
                         </div>
                       </div>
-                    )
-                  })}
-                </div>
+                    </div>
+                  )
+                })}
               </div>
-            )}
+            </div>
+          )}
 
-            {right.length > 0 && (
-              <div className="-right-12 absolute top-1/4 hidden lg:block">
-                <div className="flex flex-col gap-4">
-                  {right?.map((item, index) => {
-                    return (
-                      <div
-                        key={`right-${
-                          // biome-ignore lint/suspicious/noArrayIndexKey: false positive
-                          index
-                        }`}
-                      >
-                        <div className="rounded-2xl border border-white/20 bg-white/10 p-6 shadow-elegant backdrop-blur-sm">
-                          <div className="flex items-center gap-4">
-                            {item.icon && (
-                              <div className="rounded-xl bg-cyan/20 p-3">
-                                <Icon className="size-6 text-cyan" name={item.icon} />
-                              </div>
-                            )}
-                            <div>
-                              <p className="font-bold text-navy">{item.title[locale]}</p>
-                              <p className="text-gray-warm text-sm">{item.description[locale]}</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    )
-                  })}
-                </div>
-              </div>
-            )}
+          <div className="relative z-10 mx-auto max-w-3xl text-center">
+            <motion.h2
+              className="mb-6 font-bold text-3xl md:text-4xl lg:text-5xl"
+              initial={{ opacity: 0, y: 30 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              whileInView={{ opacity: 1, y: 0 }}
+            >
+              <PortableText components={createPortableComponents()} value={data.heading[locale]} />
+            </motion.h2>
 
-            <div className="relative z-10 mx-auto max-w-3xl text-center">
-              <motion.h2
-                className="mb-6 font-bold text-3xl md:text-4xl lg:text-5xl"
-                initial={{ opacity: 0, y: 30 }}
-                transition={{ duration: 0.6 }}
+            {data.text && (
+              <motion.p
+                className="mx-auto mb-10 max-w-2xl text-justify text-gray-warm text-lg leading-relaxed md:text-center md:text-xl"
+                initial={{ opacity: 0, y: 20 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
                 viewport={{ once: true }}
                 whileInView={{ opacity: 1, y: 0 }}
               >
-                <PortableText
-                  components={createPortableComponents()}
-                  value={data.heading[locale]}
-                />
-              </motion.h2>
+                <PortableText components={createPortableComponents()} value={data.text[locale]} />
+              </motion.p>
+            )}
 
-              {data.text && (
-                <motion.p
-                  className="mx-auto mb-10 max-w-2xl text-justify text-gray-warm text-lg leading-relaxed md:text-center md:text-xl"
-                  initial={{ opacity: 0, y: 20 }}
-                  transition={{ duration: 0.6, delay: 0.1 }}
-                  viewport={{ once: true }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                >
-                  <PortableText components={createPortableComponents()} value={data.text[locale]} />
-                </motion.p>
-              )}
-
-              {data.cta && data.cta.length > 0 && (
-                <motion.div
-                  className="flex flex-col items-center justify-center gap-4 pt-4 sm:flex-row"
-                  initial={{ opacity: 0, y: 20 }}
-                  transition={{ duration: 0.6, delay: 0.4, ease: 'easeOut' }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                >
-                  {data.cta.map((button, index) => {
-                    return (
-                      <CallAction
-                        key={button._key ?? index}
-                        base="mentory"
-                        button={button}
-                        className="group px-8 py-6 font-semibold"
-                      />
-                    )
-                  })}
-                </motion.div>
-              )}
-            </div>
+            {data.cta && data.cta.length > 0 && (
+              <motion.div
+                className="flex flex-col items-center justify-center gap-4 pt-4 sm:flex-row"
+                initial={{ opacity: 0, y: 20 }}
+                transition={{ duration: 0.6, delay: 0.4, ease: 'easeOut' }}
+                viewport={{ once: true, amount: 0.3 }}
+                whileInView={{ opacity: 1, y: 0 }}
+              >
+                {data.cta.map((button, index) => {
+                  return (
+                    <CallAction
+                      base="mentory"
+                      button={button}
+                      className="group px-8 py-6 font-semibold"
+                      key={button._key ?? index}
+                    />
+                  )
+                })}
+              </motion.div>
+            )}
           </div>
         </div>
       </div>

@@ -3,14 +3,14 @@
 import { CallAction } from '@ez/web/components/ui/call-action-button'
 import { StickySection } from '@ez/web/components/ui/sticky-section'
 import { urlForImage } from '@ez/web/config/image'
-import type { SectionEbooksHero } from '@ez/web/types/landing/ebooks'
+import type { SectionDigitalProductsHero } from '@ez/web/types/landing/digital-products'
 import { createPortableComponents } from '@ez/web/utils/create-portable-components'
 import { ArrowDown, BookOpen } from 'lucide-react'
 import { motion } from 'motion/react'
 import Image from 'next/image'
 import { PortableText } from 'next-sanity'
 
-export const Hero = ({ data, locale }: { data: SectionEbooksHero; locale: string }) => {
+export const Hero = ({ data, locale }: { data: SectionDigitalProductsHero; locale: string }) => {
   return (
     <StickySection className="relative mt-24 w-screen" id="hero">
       <div className="relative flex min-h-[90vh] items-center overflow-hidden">
@@ -77,17 +77,26 @@ export const Hero = ({ data, locale }: { data: SectionEbooksHero; locale: string
                 {data.cta.map((button, index) => {
                   return (
                     <CallAction
-                      key={button._key ?? index}
                       base="ebook"
                       button={button}
                       className="group px-8 py-6 font-semibold"
+                      key={button._key ?? index}
                     />
                   )
                 })}
-                <p className="mx-auto max-w-2xl text-muted-foreground text-sm">
-                  Aplicações limitadas por trimestre. Prioridade para organizações que valorizam
-                  métricas, precisão e resultados mensuráveis.
-                </p>
+                {data?.footer?.[locale] && (
+                  <motion.p
+                    animate={{ opacity: 1, y: 0 }}
+                    className="mx-auto max-w-2xl text-muted-foreground text-sm"
+                    initial={{ opacity: 0, y: 20 }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                  >
+                    <PortableText
+                      components={createPortableComponents()}
+                      value={data.footer[locale]}
+                    />
+                  </motion.p>
+                )}
               </motion.div>
             )}
           </div>

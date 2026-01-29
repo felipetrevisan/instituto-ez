@@ -14,6 +14,7 @@ export type Site = {
     location?: string
   }
   logo?: SanityAsset
+  seoImage?: SanityAsset
   navigation?: {
     header?: Navigation
     footer?: Navigation

@@ -16,97 +16,89 @@ export const MethodsStep = ({
   locale: string
 }) => {
   return (
-    <StickySection id="methods-step">
-      <div className="bg-background py-16 sm:py-20 md:py-28 dark:bg-gray-900">
-        <div className="container mx-auto px-6 md:px-8">
-          <div className="mx-auto max-w-6xl">
-            {data?.heading?.[locale] && (
-              <motion.h2
-                className="mb-4 text-center font-bold text-3xl md:text-4xl lg:text-5xl"
-                initial={{ opacity: 0, y: 30 }}
-                transition={{ duration: 0.6 }}
-                viewport={{ once: true }}
-                whileInView={{ opacity: 1, y: 0 }}
-              >
-                <PortableText
-                  components={createPortableComponents()}
-                  value={data.heading[locale]}
-                />
-              </motion.h2>
-            )}
+    <StickySection
+      className="bg-background py-16 sm:py-20 md:py-28 dark:bg-gray-900"
+      id="methods-step"
+    >
+      <div className="container mx-auto px-6 md:px-8">
+        <div className="mx-auto max-w-6xl">
+          {data?.heading?.[locale] && (
+            <motion.h2
+              className="mb-4 text-center font-bold text-3xl md:text-4xl lg:text-5xl"
+              initial={{ opacity: 0, y: 30 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              whileInView={{ opacity: 1, y: 0 }}
+            >
+              <PortableText components={createPortableComponents()} value={data.heading[locale]} />
+            </motion.h2>
+          )}
 
-            {data?.subheading?.[locale] && (
-              <motion.p
-                className="mx-auto mb-16 max-w-3xl text-justify text-gray-warm text-lg md:text-center"
-                initial={{ opacity: 0, y: 20 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                viewport={{ once: true }}
-                whileInView={{ opacity: 1, y: 0 }}
-              >
-                <PortableText
-                  components={createPortableComponents()}
-                  value={data.subheading[locale]}
-                />
-              </motion.p>
-            )}
+          {data?.subheading?.[locale] && (
+            <motion.p
+              className="mx-auto mb-16 max-w-3xl text-justify text-gray-warm text-lg md:text-center"
+              initial={{ opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true }}
+              whileInView={{ opacity: 1, y: 0 }}
+            >
+              <PortableText
+                components={createPortableComponents()}
+                value={data.subheading[locale]}
+              />
+            </motion.p>
+          )}
 
-            {data.items.length > 0 && (
-              <div className="grid gap-6 md:grid-cols-2">
-                {data.items.map((step, index) => {
-                  return (
-                    <motion.div
-                      className="group rounded-2xl border border-border/50 bg-card p-8 shadow-soft transition-all hover:border-cyan/30 hover:shadow-medium"
-                      initial={{ opacity: 0, y: 30 }}
-                      // biome-ignore lint/suspicious/noArrayIndexKey: false positive
-                      key={`mentory-step-${index}`}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      viewport={{ once: true }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                    >
-                      <div className="flex h-full flex-col">
-                        <div className="mb-6 flex items-center gap-4">
-                          {step.icon && (
-                            <div className="flex size-16 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-navy to-cyan transition-transform group-hover:scale-110">
-                              <Icon
-                                className="size-8 text-white"
-                                name={step.icon}
-                                strokeWidth={2}
-                              />
-                            </div>
-                          )}
-                          <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-navy/10 font-bold text-lg text-navy">
-                            {index + 1}
+          {data.items.length > 0 && (
+            <div className="grid gap-6 md:grid-cols-2">
+              {data.items.map((step, index) => {
+                return (
+                  <motion.div
+                    className="group rounded-2xl border border-border/50 bg-card p-8 shadow-soft transition-all hover:border-cyan/30 hover:shadow-medium"
+                    initial={{ opacity: 0, y: 30 }}
+                    // biome-ignore lint/suspicious/noArrayIndexKey: false positive
+                    key={`mentory-step-${index}`}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                  >
+                    <div className="flex h-full flex-col">
+                      <div className="mb-6 flex items-center gap-4">
+                        {step.icon && (
+                          <div className="flex size-16 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-navy to-cyan transition-transform group-hover:scale-110">
+                            <Icon className="size-8 text-white" name={step.icon} strokeWidth={2} />
                           </div>
+                        )}
+                        <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-navy/10 font-bold text-lg text-navy">
+                          {index + 1}
                         </div>
-                        <h3 className="mb-4 font-semibold text-navy text-xl">
-                          {step.title[locale]}
-                        </h3>
-                        <p className="text-justify text-base text-gray-warm leading-relaxed md:text-left">
-                          {step.description[locale]}
-                        </p>
                       </div>
-                    </motion.div>
-                  )
-                })}
-              </div>
-            )}
+                      <h3 className="mb-4 font-semibold text-navy text-xl">{step.title[locale]}</h3>
+                      <p className="text-justify text-base text-gray-warm leading-relaxed md:text-left">
+                        {step.description[locale]}
+                      </p>
+                    </div>
+                  </motion.div>
+                )
+              })}
+            </div>
+          )}
 
-            {data.cta && (
-              <motion.div
-                className="mt-12 flex justify-center"
-                initial={{ opacity: 0, y: 20 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                viewport={{ once: true }}
-                whileInView={{ opacity: 1, y: 0 }}
-              >
-                <CallAction
-                  base="mentory"
-                  button={data.cta}
-                  className="group px-8 py-6 font-semibold"
-                />
-              </motion.div>
-            )}
-          </div>
+          {data.cta && (
+            <motion.div
+              className="mt-12 flex justify-center"
+              initial={{ opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              viewport={{ once: true }}
+              whileInView={{ opacity: 1, y: 0 }}
+            >
+              <CallAction
+                base="mentory"
+                button={data.cta}
+                className="group px-8 py-6 font-semibold"
+              />
+            </motion.div>
+          )}
         </div>
       </div>
     </StickySection>

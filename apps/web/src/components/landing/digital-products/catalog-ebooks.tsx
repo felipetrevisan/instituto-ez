@@ -1,16 +1,16 @@
 'use client'
 
-import { EbookCard } from '@ez/web/components/landing/ebooks/ebook-card'
+import { EbookCard } from '@ez/web/components/landing/digital-products/ebook-card'
 import { StickySection } from '@ez/web/components/ui/sticky-section'
-import { useEbooksByType } from '@ez/web/hooks/use-ebook'
-import type { SectionEbooksCatalog } from '@ez/web/types/landing/ebooks'
+import { useEbooks } from '@ez/web/hooks/use-ebook'
+import type { SectionDigitalProductsEbooksCatalog } from '@ez/web/types/landing/digital-products'
 import { createPortableComponents } from '@ez/web/utils/create-portable-components'
 import { BookOpen } from 'lucide-react'
 import { motion } from 'motion/react'
 import { PortableText } from 'next-sanity'
 
-export const CatalogEbooks = ({ data, locale }: { data: SectionEbooksCatalog; locale: string }) => {
-  const { data: ebooks } = useEbooksByType('ebook')
+export const CatalogEbooks = ({ data, locale }: { data: SectionDigitalProductsEbooksCatalog; locale: string }) => {
+  const { data: ebooks } = useEbooks()
 
   return (
     <StickySection

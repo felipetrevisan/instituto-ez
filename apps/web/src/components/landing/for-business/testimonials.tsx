@@ -18,104 +18,100 @@ export const Testimonials = ({
   const colors = ['primary', 'secondary', 'tertiary', 'accent']
 
   return (
-    <StickySection id="testimonials">
-      <div className="bg-card py-20">
-        <div className="container mx-auto px-4">
-          <div className="mx-auto max-w-6xl space-y-12">
-            {data?.heading?.[locale] && (
-              <motion.div
-                className="space-y-4 text-center"
-                initial={{ opacity: 0, y: 40 }}
-                transition={{ duration: 0.6 }}
-                viewport={{ once: true, margin: '-100px' }}
-                whileInView={{ opacity: 1, y: 0 }}
-              >
-                <h2 className="font-bold text-3xl text-foreground md:text-4xl">
-                  {data.heading[locale]}
-                </h2>
-              </motion.div>
-            )}
+    <StickySection className="bg-card py-20" id="testimonials">
+      <div className="container mx-auto px-4">
+        <div className="mx-auto max-w-6xl space-y-12">
+          {data?.heading?.[locale] && (
+            <motion.div
+              className="space-y-4 text-center"
+              initial={{ opacity: 0, y: 40 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true, margin: '-100px' }}
+              whileInView={{ opacity: 1, y: 0 }}
+            >
+              <h2 className="font-bold text-3xl text-foreground md:text-4xl">
+                {data.heading[locale]}
+              </h2>
+            </motion.div>
+          )}
 
-            {data.items.length > 0 && (
-              <div className="grid gap-6 md:grid-cols-3">
-                {data.items.map((item, index) => {
-                  const color = colors[index % colors.length]
+          {data.items.length > 0 && (
+            <div className="grid gap-6 md:grid-cols-3">
+              {data.items.map((item, index) => {
+                const color = colors[index % colors.length]
 
-                  return (
-                    <motion.div
-                      initial={{ opacity: 0, x: 40 }}
-                      // biome-ignore lint/suspicious/noArrayIndexKey: false positive
-                      key={`forbusiness-testimonial-${index}`}
-                      transition={{ delay: 0.2 * (index + 1), duration: 0.5 }}
-                      viewport={{ once: true }}
-                      whileInView={{ opacity: 1, x: 0 }}
+                return (
+                  <motion.div
+                    initial={{ opacity: 0, x: 40 }}
+                    // biome-ignore lint/suspicious/noArrayIndexKey: false positive
+                    key={`forbusiness-testimonial-${index}`}
+                    transition={{ delay: 0.2 * (index + 1), duration: 0.5 }}
+                    viewport={{ once: true }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                  >
+                    <Card
+                      base="for-business"
+                      className={cn(
+                        'hover:-translate-y-1 space-y-4 bg-gradient-to-br from-card p-6 text-center hover:shadow-[var(--shadow-card-hover)]',
+                        {
+                          'to-primary/5': color === 'primary',
+                          'to-secondary/5': color === 'secondary',
+                          'to-tertiary/5': color === 'tertiary',
+                          'to-accent/5': color === 'accent',
+                        },
+                      )}
+                      theme="accent"
+                      variant="landing"
                     >
-                      <Card
-                        base="for-business"
-                        className={cn(
-                          'hover:-translate-y-1 space-y-4 bg-gradient-to-br from-card p-6 text-center hover:shadow-[var(--shadow-card-hover)]',
-                          {
-                            'to-primary/5': color === 'primary',
-                            'to-secondary/5': color === 'secondary',
-                            'to-tertiary/5': color === 'tertiary',
-                            'to-accent/5': color === 'accent',
-                          },
-                        )}
-                        theme="accent"
-                        variant="landing"
-                      >
-                        {item.icon && (
-                          <div
-                            className={cn(
-                              'mx-auto flex size-16 items-center justify-center rounded-full',
-                              {
-                                'bg-primary/10': color === 'primary',
-                                'bg-secondary/10': color === 'secondary',
-                                'bg-tertiary/10': color === 'tertiary',
-                                'bg-accent/10': color === 'accent',
-                              },
-                            )}
-                          >
-                            <Icon
-                              className={cn('size-8', {
-                                'text-primary': color === 'primary',
-                                'text-secondary': color === 'secondary',
-                                'text-tertiary': color === 'tertiary',
-                                'text-accent': color === 'accent',
-                              })}
-                              name={item.icon}
-                            />
-                          </div>
-                        )}
-                        <div className="space-y-2">
-                          <p
-                            className={cn('font-bold text-4xl', {
+                      {item.icon && (
+                        <div
+                          className={cn(
+                            'mx-auto flex size-16 items-center justify-center rounded-full',
+                            {
+                              'bg-primary/10': color === 'primary',
+                              'bg-secondary/10': color === 'secondary',
+                              'bg-tertiary/10': color === 'tertiary',
+                              'bg-accent/10': color === 'accent',
+                            },
+                          )}
+                        >
+                          <Icon
+                            className={cn('size-8', {
                               'text-primary': color === 'primary',
                               'text-secondary': color === 'secondary',
                               'text-tertiary': color === 'tertiary',
                               'text-accent': color === 'accent',
                             })}
-                          >
-                            {item.title[locale]}
-                          </p>
-                          <p className="font-semibold text-foreground">
-                            {item.description[locale]}
-                          </p>
-                          <p className="text-muted-foreground text-sm">{item.text[locale]}</p>
+                            name={item.icon}
+                          />
                         </div>
-                      </Card>
-                    </motion.div>
-                  )
-                })}
-              </div>
-            )}
+                      )}
+                      <div className="space-y-2">
+                        <p
+                          className={cn('font-bold text-4xl', {
+                            'text-primary': color === 'primary',
+                            'text-secondary': color === 'secondary',
+                            'text-tertiary': color === 'tertiary',
+                            'text-accent': color === 'accent',
+                          })}
+                        >
+                          {item.title[locale]}
+                        </p>
+                        <p className="font-semibold text-foreground">{item.description[locale]}</p>
+                        <p className="text-muted-foreground text-sm">{item.text[locale]}</p>
+                      </div>
+                    </Card>
+                  </motion.div>
+                )
+              })}
+            </div>
+          )}
 
-            {data.cta && (
-              <div className="pt-4 text-center">
-                <CallAction base="for-business" button={data.cta} className="group" />
-              </div>
-            )}
-          </div>
+          {data.cta && (
+            <div className="pt-4 text-center">
+              <CallAction base="for-business" button={data.cta} className="group" />
+            </div>
+          )}
         </div>
       </div>
     </StickySection>

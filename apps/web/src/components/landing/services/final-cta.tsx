@@ -9,7 +9,10 @@ import { motion } from 'motion/react'
 
 export const FinalCTA = ({ data, locale }: { data: SectionServicesCTA; locale: string }) => {
   return (
-    <StickySection className="w-screen bg-gray-light py-20 md:py-32" id="cta">
+    <StickySection
+      className="w-screen bg-gradient-to-b from-gray-light to-background py-20 md:py-32 dark:from-gray-light dark:via-gray-light/50 dark:to-background"
+      id="cta"
+    >
       <div className="container mx-auto px-4">
         <div className="mx-auto max-w-4xl space-y-8 text-center">
           <motion.h2
@@ -31,9 +34,14 @@ export const FinalCTA = ({ data, locale }: { data: SectionServicesCTA; locale: s
               whileInView={{ opacity: 1, y: 0 }}
             >
               <PortableText components={createPortableComponents()} value={data.text[locale]} />
-              <p className="pt-4 font-bold text-accent text-xl">
-                Pare de gerir no escuro. Comece a decidir com base em verdade matemática.
-              </p>
+              {data.subtext && (
+                <p className="pt-4 font-bold text-accent text-xl">
+                  <PortableText
+                    components={createPortableComponents()}
+                    value={data.subtext[locale]}
+                  />
+                </p>
+              )}
             </motion.div>
           )}
 
@@ -48,17 +56,22 @@ export const FinalCTA = ({ data, locale }: { data: SectionServicesCTA; locale: s
               {data.cta.map((button, index) => {
                 return (
                   <CallAction
-                    key={button._key ?? index}
                     base="mathematizer"
                     button={button}
                     className="group px-8 py-6 font-semibold"
+                    key={button._key ?? index}
                   />
                 )
               })}
-              <p className="mx-auto max-w-2xl text-muted-foreground text-sm">
-                Aplicações limitadas por trimestre. Prioridade para organizações que valorizam
-                métricas, precisão e resultados mensuráveis.
-              </p>
+
+              {data.footer && (
+                <p className="mx-auto max-w-2xl text-muted-foreground text-sm">
+                  <PortableText
+                    components={createPortableComponents()}
+                    value={data.footer[locale]}
+                  />
+                </p>
+              )}
             </motion.div>
           )}
         </div>

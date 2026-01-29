@@ -62,7 +62,7 @@ export const Benefits = ({ data, locale }: { data: SectionServicesBenefits; loca
                         <Icon className="size-6 text-accent" name={method.icon} />
                       </div>
                     )}
-                    <h3 className="font-medium text-xl">{method.title[locale]}</h3>
+                    <h3 className="font-medium text-lg">{method.title[locale]}</h3>
                   </motion.div>
                 )
               })}

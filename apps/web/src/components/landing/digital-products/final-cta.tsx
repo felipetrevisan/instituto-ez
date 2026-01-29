@@ -2,13 +2,13 @@
 
 import { CallAction } from '@ez/web/components/ui/call-action-button'
 import { StickySection } from '@ez/web/components/ui/sticky-section'
-import type { SectionEbooksCTA } from '@ez/web/types/landing/ebooks'
+import type { SectionDigitalProductsCTA } from '@ez/web/types/landing/digital-products'
 import { createPortableComponents } from '@ez/web/utils/create-portable-components'
 import { PortableText } from '@portabletext/react'
 import { Sparkles } from 'lucide-react'
 import { motion } from 'motion/react'
 
-export const FinalCTA = ({ data, locale }: { data: SectionEbooksCTA; locale: string }) => {
+export const FinalCTA = ({ data, locale }: { data: SectionDigitalProductsCTA; locale: string }) => {
   return (
     <StickySection
       className="w-screen bg-gradient-to-b from-gray-light to-background py-20 md:py-32 dark:from-secondary dark:to-background"
@@ -65,10 +65,10 @@ export const FinalCTA = ({ data, locale }: { data: SectionEbooksCTA; locale: str
               {data.cta.map((button, index) => {
                 return (
                   <CallAction
-                    key={button._key ?? index}
                     base="default"
                     button={button}
                     className="group px-8 py-6 font-semibold"
+                    key={button._key ?? index}
                   />
                 )
               })}

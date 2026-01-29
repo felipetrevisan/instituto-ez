@@ -47,7 +47,8 @@ export type SectionServicesMethodSessionsItem = {
 
 export type SectionServicesCTA = {
   heading: Record<string, PortableTextBlock[]>
-  text: Record<string, PortableTextBlock[]>
+  text: Record<string, PortableTextBlock[]> 
+  subtext?: Record<string, PortableTextBlock[]> 
   footer?: Record<string, PortableTextBlock[]>
   cta: Button[]
   _type: string

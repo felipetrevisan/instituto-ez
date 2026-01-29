@@ -199,14 +199,14 @@ export function ContactForm({
       {isDialog && !isPending && (
         <DialogFooter className="justify-center gap-5">
           <DialogTrigger asChild>
-            <Button onClick={onCloseAction} rounded="lg" size="lg" theme="tertiary" type="button">
+            <Button onClick={onCloseAction} rounded="full" size="lg" theme="tertiary" type="button">
               {t('cancelButton')}
             </Button>
           </DialogTrigger>
           <Button
             disabled={isSubmitting || !isValid}
             onClick={handleSubmit(handleSendForm)}
-            rounded="lg"
+            rounded="full"
             size="lg"
             theme="default"
             type="submit"
@@ -226,7 +226,7 @@ export function ContactForm({
           <Button
             className="w-full md:w-[200px]"
             disabled={isSubmitting || !isValid}
-            rounded="lg"
+            rounded="full"
             shadow
             size="lg"
             type="submit"

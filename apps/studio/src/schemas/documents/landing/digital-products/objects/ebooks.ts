@@ -2,18 +2,18 @@ import { PackageIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
-  name: 'ebooks.webinar',
-  title: 'Catalog / Webinar — Ebooks',
+  name: 'digital-products.ebooks',
+  title: 'Catalog / Ebooks — Digital Products',
   icon: PackageIcon,
   type: 'object',
-  hidden: ({ document }) => document?.key !== 'ebooks',
+  hidden: ({ document }) => document?.key !== 'digital-products',
   fields: [
     defineField({ name: 'heading', type: 'localizedArray' }),
     defineField({ name: 'subheading', type: 'localizedArray' }),
   ],
   preview: {
     prepare() {
-      return { title: 'Catalog Webinar' }
+      return { title: 'Catalog Ebooks' }
     },
   },
 })

@@ -2,15 +2,21 @@ import { PackageIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
-  name: 'ebooks.hero',
-  title: 'Hero — Ebooks',
+  name: 'webnario.finalCta',
+  title: 'Final CTA',
   icon: PackageIcon,
   type: 'object',
-  hidden: ({ document }) => document?.key !== 'ebooks',
   fields: [
+    defineField({ name: 'settings', title: 'Settings', type: 'webnario.sectionSettings' }),
     defineField({ name: 'heading', type: 'localizedArray' }),
-    defineField({ name: 'subheading', type: 'localizedArray' }),
-    defineField({ name: 'image', type: 'image' }),
+    defineField({ name: 'text', type: 'localizedArray' }),
+    defineField({ name: 'subtext', type: 'localizedArray' }),
+    defineField({
+      name: 'image',
+      title: 'Image',
+      type: 'image',
+      options: { hotspot: true },
+    }),
     defineField({
       name: 'cta',
       title: 'CTA Buttons',
@@ -21,7 +27,7 @@ export default defineType({
   ],
   preview: {
     prepare() {
-      return { title: 'Hero' }
+      return { title: 'Final CTA' }
     },
   },
 })

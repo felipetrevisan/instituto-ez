@@ -3,7 +3,7 @@ import { defineArrayMember, defineField, defineType } from 'sanity'
 
 export default defineType({
   name: 'landing-page-settings',
-  title: 'Landing Page Settings',
+  title: 'EBooks Landing Page Settings',
   icon: BlockContentIcon,
   type: 'document',
   fields: [

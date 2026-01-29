@@ -80,7 +80,7 @@ export default defineType({
     defineField({
       name: 'seoDescription',
       title: 'Description',
-      type: 'string',
+      type: 'localizedString',
       group: ['seo'],
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),

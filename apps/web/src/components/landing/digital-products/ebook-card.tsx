@@ -3,8 +3,8 @@
 import { cn } from '@ez/shared/lib/utils'
 import { Button } from '@ez/shared/ui'
 import { urlForImage } from '@ez/web/config/image'
-import { type Ebook, isWebinar } from '@ez/web/types/ebook'
-import { ArrowRight, BookOpen, Video } from 'lucide-react'
+import type { Ebook } from '@ez/web/types/ebook'
+import { ArrowRight, BookOpen } from 'lucide-react'
 import { motion } from 'motion/react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -26,19 +26,11 @@ export const EbookCard = ({ ebook, index }: { ebook: Ebook; index: number }) => 
           <div className="absolute top-4 left-4 z-10">
             <span
               className={cn(
-                'inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 font-semibold text-xs',
-                {
-                  'bg-purple-500/90 text-white': isWebinar(ebook),
-                  'bg-navy/90 text-white dark:bg-accent': !isWebinar(ebook),
-                },
+                'inline-flex items-center gap-1.5 rounded-full bg-navy/90 px-3 py-1.5 font-semibold text-white text-xs dark:bg-accent',
               )}
             >
-              {ebook.type === 'WEBINAR' ? (
-                <Video className="size-3.5" />
-              ) : (
-                <BookOpen className="size-3.5" />
-              )}
-              {ebook.type === 'WEBINAR' ? 'Webinário' : 'eBook'}
+              <BookOpen className="size-3.5" />
+              eBook
             </span>
           </div>
 
@@ -55,11 +47,7 @@ export const EbookCard = ({ ebook, index }: { ebook: Ebook; index: number }) => 
               />
             ) : (
               <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 dark:from-background dark:to-background/40">
-                {isWebinar(ebook) ? (
-                  <Video className="size-20 text-gray-400" />
-                ) : (
-                  <BookOpen className="size-20 text-gray-400" />
-                )}
+                <BookOpen className="size-20 text-gray-400" />
               </div>
             )}
 

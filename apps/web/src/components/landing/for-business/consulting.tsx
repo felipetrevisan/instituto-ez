@@ -6,7 +6,9 @@ import { CallAction } from '@ez/web/components/ui/call-action-button'
 import { Icon } from '@ez/web/components/ui/icon'
 import { StickySection } from '@ez/web/components/ui/sticky-section'
 import type { SectionForBusinessConsulting } from '@ez/web/types/landing/for-business'
+import { createPortableComponents } from '@ez/web/utils/create-portable-components'
 import { motion } from 'motion/react'
+import { PortableText } from 'next-sanity'
 
 export const Consulting = ({
   data,
@@ -18,91 +20,90 @@ export const Consulting = ({
   const colors = ['primary', 'secondary', 'accent']
 
   return (
-    <StickySection id="consulting">
-      <div className="bg-gradient-to-br from-muted/30 to-background py-16 sm:py-20">
-        <div className="container mx-auto px-4">
-          <div className="mx-auto max-w-5xl">
-            <motion.div
-              initial={{ opacity: 0, y: 60 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true, margin: '-100px' }}
-              whileInView={{ opacity: 1, y: 0 }}
+    <StickySection
+      className="bg-gradient-to-br from-muted/30 to-background py-16 sm:py-20"
+      id="consulting"
+    >
+      <div className="container mx-auto px-4">
+        <div className="mx-auto max-w-5xl">
+          <motion.div
+            initial={{ opacity: 0, y: 60 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true, margin: '-100px' }}
+            whileInView={{ opacity: 1, y: 0 }}
+          >
+            <Card
+              className="p-8 shadow-[var(--shadow-card)] transition-shadow duration-300 hover:shadow-[var(--shadow-card-hover)] md:p-12"
+              theme="landing"
+              variant="landing"
             >
-              <Card
-                className="p-8 shadow-[var(--shadow-card)] transition-shadow duration-300 hover:shadow-[var(--shadow-card-hover)] md:p-12"
-                theme="landing"
-                variant="landing"
-              >
-                <div className="space-y-8">
-                  <div className="space-y-4 text-center">
-                    {data?.heading?.[locale] && (
-                      <h2 className="font-bold text-3xl text-foreground md:text-4xl">
-                        {data.heading[locale]}
-                      </h2>
-                    )}
-
-                    {data?.subheading?.[locale] && (
-                      <p className="mx-auto max-w-2xl text-lg text-muted-foreground leading-relaxed">
-                        {data.subheading[locale]}
-                      </p>
-                    )}
-                  </div>
-
-                  {data.items.length > 0 && (
-                    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                      {data.items.map((item, index) => {
-                        const color = colors[index % colors.length]
-
-                        return (
-                          <motion.div
-                            className={cn(
-                              'space-y-2 rounded-lg p-5 text-center transition-colors',
-                              {
-                                'bg-primary/5 hover:bg-primary/10': color === 'primary',
-                                'bg-secondary/5 hover:bg-secondary/10': color === 'secondary',
-                                'bg-accent/5 hover:bg-accent/10': color === 'accent',
-                              },
-                            )}
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            // biome-ignore lint/suspicious/noArrayIndexKey: false positive
-                            key={`forbusiness-consulting-${index}`}
-                            transition={{ delay: 0.1, duration: 0.4 }}
-                            viewport={{ once: true }}
-                            whileHover={{ scale: 1.05 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                          >
-                            {item.icon && (
-                              <Icon
-                                className={cn('mx-auto size-8', {
-                                  'text-primary': color === 'primary',
-                                  'text-secondary': color === 'secondary',
-                                  'text-accent': color === 'accent',
-                                })}
-                                name={item.icon}
-                              />
-                            )}
-                            <h4 className="font-semibold text-foreground">{item.title[locale]}</h4>
-                          </motion.div>
-                        )
-                      })}
-                    </div>
+              <div className="space-y-8">
+                <div className="space-y-4 text-center">
+                  {data?.heading?.[locale] && (
+                    <h2 className="font-bold text-3xl text-foreground md:text-4xl">
+                      {data.heading[locale]}
+                    </h2>
                   )}
-                  <div className="space-y-4 pt-4 text-center">
-                    <p className="text-muted-foreground leading-relaxed">
-                      O resultado é uma{' '}
-                      <strong className="text-foreground">
-                        cultura organizacional mais coerente, humana e eficiente
-                      </strong>
-                      .
+
+                  {data?.subheading?.[locale] && (
+                    <p className="mx-auto max-w-2xl text-lg text-muted-foreground leading-relaxed">
+                      {data.subheading[locale]}
                     </p>
-                    {data.cta && (
-                      <CallAction base="for-business" button={data.cta} className="group" />
-                    )}
-                  </div>
+                  )}
                 </div>
-              </Card>
-            </motion.div>
-          </div>
+
+                {data.items.length > 0 && (
+                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                    {data.items.map((item, index) => {
+                      const color = colors[index % colors.length]
+
+                      return (
+                        <motion.div
+                          className={cn('space-y-2 rounded-lg p-5 text-center transition-colors', {
+                            'bg-primary/5 hover:bg-primary/10': color === 'primary',
+                            'bg-secondary/5 hover:bg-secondary/10': color === 'secondary',
+                            'bg-accent/5 hover:bg-accent/10': color === 'accent',
+                          })}
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          // biome-ignore lint/suspicious/noArrayIndexKey: false positive
+                          key={`forbusiness-consulting-${index}`}
+                          transition={{ delay: 0.1, duration: 0.4 }}
+                          viewport={{ once: true }}
+                          whileHover={{ scale: 1.05 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                        >
+                          {item.icon && (
+                            <Icon
+                              className={cn('mx-auto size-8', {
+                                'text-primary': color === 'primary',
+                                'text-secondary': color === 'secondary',
+                                'text-accent': color === 'accent',
+                              })}
+                              name={item.icon}
+                            />
+                          )}
+                          <h4 className="font-semibold text-foreground">{item.title[locale]}</h4>
+                        </motion.div>
+                      )
+                    })}
+                  </div>
+                )}
+                <div className="space-y-4 pt-4 text-center">
+                  {data.footer?.[locale] && (
+                    <p className="text-muted-foreground leading-relaxed">
+                      <PortableText
+                        components={createPortableComponents()}
+                        value={data.footer[locale]}
+                      />
+                    </p>
+                  )}
+                  {data.cta && (
+                    <CallAction base="for-business" button={data.cta} className="group" />
+                  )}
+                </div>
+              </div>
+            </Card>
+          </motion.div>
         </div>
       </div>
     </StickySection>

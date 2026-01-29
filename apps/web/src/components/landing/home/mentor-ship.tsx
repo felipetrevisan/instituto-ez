@@ -85,10 +85,10 @@ export const MentorShip = ({ data, locale }: { data: SectionHomeMentorShip; loca
             {data.cta.map((button, index) => {
               return (
                 <CallAction
-                  key={button._key ?? index}
                   base="default"
                   button={button}
                   className="group px-8 py-6 font-semibold"
+                  key={button._key ?? index}
                 />
               )
             })}

@@ -11,8 +11,8 @@ export type Ebook = {
   description?: Record<string, string>
   price: Price
   seo: {
-    description: Record<string, string>
-    keywords: Record<string, string>
+    description: Record<string, string> | string
+    keywords: Record<string, string> | string
   }
   download: {
     disabled: boolean
@@ -51,7 +51,6 @@ export type Ebook = {
   questions?: Question[]
   disabled: boolean
   button?: Button
-  type: 'EBOOK' | 'WEBINAR'
   category: Category
 }
 
@@ -62,12 +61,6 @@ export type Color = {
   hsv: { _type: 'hsvaColor'; a: number; h: number; s: number; v: number }
   rgb: { _type: 'rgbaColor'; a: number; r: number; g: number; b: number }
 }
-
-// export type EbookCollection = {
-//   id: string
-//   title: string
-//   ebooks?: Ebook[]
-// }
 
 export type Category = {
   id: string
@@ -206,8 +199,4 @@ export function mapThemeToCSSVars(theme?: ThemeEbook) {
     '--header-sticky-button-hover-text': theme.button?.stickyHeader?.hover?.text?.hex,
     '--header-sticky-button-hover-background': theme.button?.stickyHeader?.hover?.background?.hex,
   }
-}
-
-export const isWebinar = (ebook: Ebook) => {
-  return ebook.type === 'WEBINAR'
 }

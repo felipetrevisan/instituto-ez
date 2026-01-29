@@ -1,8 +1,10 @@
 import LandingPage from '@ez/web/app/[locale]/(public)/(root)/_landing-page'
 // import NormalPage from '@ez/web/app/[locale]/(public)/(root)/_normal-page'
 import { getAvailableLandingPages } from '@ez/web/config/landing-page'
-import { locales } from '@ez/web/config/locale'
+import { resolveOpenGraphImage } from '@ez/web/config/image'
 import { getLandingPage } from '@ez/web/server/get-landing'
+import type { Landing } from '@ez/web/types/landing'
+import { buildAlternates } from '@ez/web/utils/seo'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
@@ -10,6 +12,20 @@ import Loading from '../_loading'
 
 function resolveLanding(slug: string) {
   return getAvailableLandingPages().find((landing) => landing.slug.includes(slug))
+}
+
+function resolveLandingOpenGraphImage(sections: Landing['sections']) {
+  const sectionWithImage = sections.find(
+    (section) =>
+      Boolean(
+        (section as { image?: { asset?: Parameters<typeof resolveOpenGraphImage>[0] } }).image
+          ?.asset,
+      ),
+  ) as { image?: { asset?: Parameters<typeof resolveOpenGraphImage>[0] } } | undefined
+
+  if (!sectionWithImage?.image?.asset) return undefined
+
+  return resolveOpenGraphImage(sectionWithImage.image.asset)
 }
 
 export async function generateMetadata({
@@ -25,10 +41,43 @@ export async function generateMetadata({
     if (!data) return { title: '404' }
 
     const { title, description, keywords } = data.settings
+    const resolvedTitle = title?.[locale] ?? ''
+    const resolvedDescription = description?.[locale]
+    const resolvedKeywords = keywords?.[locale]
+    const alternates = buildAlternates(locale, `/${slug}`)
+    const seoImage = data.settings?.image?.asset
+      ? resolveOpenGraphImage(data.settings.image.asset)
+      : undefined
+    const ogImage = seoImage ?? resolveLandingOpenGraphImage(data.sections)
+    const openGraphImages = ogImage
+      ? [
+          {
+            ...ogImage,
+            alt: resolvedTitle || ogImage.alt || '',
+          },
+        ]
+      : undefined
+    const twitterImages = openGraphImages?.map((image) => image.url)
+
     return {
-      title: title?.[locale] ?? '',
-      description: description?.[locale] ?? '',
-      keywords: keywords?.[locale] ?? '',
+      title: resolvedTitle,
+      description: resolvedDescription,
+      keywords: resolvedKeywords,
+      alternates,
+      openGraph: {
+        title: resolvedTitle,
+        description: resolvedDescription,
+        type: 'website',
+        locale,
+        url: alternates.canonical,
+        images: openGraphImages,
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: resolvedTitle,
+        description: resolvedDescription,
+        images: twitterImages,
+      },
     }
   }
 

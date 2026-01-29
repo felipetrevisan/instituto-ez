@@ -28,11 +28,11 @@ import {
   whyChooseObject,
 } from '@ez/studio/schemas/documents/landing/about'
 import {
-  catalogObject,
   ctaObject as ctaEbooksObject,
+  ebooksObject,
   heroObject as heroEbooksObject,
   webinarObject,
-} from '@ez/studio/schemas/documents/landing/ebooks'
+} from '@ez/studio/schemas/documents/landing/digital-products'
 import {
   consultingItemObject,
   consultingObject,
@@ -99,6 +99,25 @@ import {
   settingsDocument,
   testimonialsDocument,
 } from '@ez/studio/schemas/documents/site'
+import {
+  contentItemObject as contentItemWebnarioObject,
+  contentObject as contentWebnarioObject,
+  expertItemObject,
+  expertObject,
+  expertSocialObject,
+  finalCtaObject as finalCtaWebnarioObject,
+  formatItemObject,
+  formatObject,
+  forWhoItemObject,
+  forWhoObject,
+  heroObject as heroWebnarioObject,
+  problemItemObject,
+  problemObject,
+  sectionSettingsObject,
+  transformationItemObject,
+  transformationObject,
+  webnarioDocument,
+} from '@ez/studio/schemas/documents/webnario'
 import {
   accordionContentLandingPageObject,
   accordionContentObject,
@@ -208,11 +227,30 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     digitalProductsObject,
     immersionObject,
 
-    // Ebooks
-    catalogObject,
+    // Digital Products
+    ebooksObject,
     webinarObject,
     ctaEbooksObject,
     heroEbooksObject,
+
+    // Webnario
+    webnarioDocument,
+    sectionSettingsObject,
+    heroWebnarioObject,
+    forWhoObject,
+    forWhoItemObject,
+    problemObject,
+    problemItemObject,
+    transformationObject,
+    transformationItemObject,
+    contentWebnarioObject,
+    contentItemWebnarioObject,
+    formatObject,
+    formatItemObject,
+    expertObject,
+    expertItemObject,
+    expertSocialObject,
+    finalCtaWebnarioObject,
 
     // Site
     settingsDocument,

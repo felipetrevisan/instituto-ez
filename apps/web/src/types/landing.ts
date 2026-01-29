@@ -8,7 +8,7 @@ import type {
   SectionEbooksCatalog,
   SectionEbooksCTA,
   SectionEbooksHero,
-} from '@ez/web/types/landing/ebooks'
+} from '@ez/web/types/landing/digital-products'
 import type {
   SectionForBusinessConsulting,
   SectionForBusinessCourses,
@@ -58,6 +58,7 @@ export type Landing<K extends keyof LandingSectionsMap = any> = {
     slug: Record<string, { current: string }>
     description?: Record<string, string>
     keywords?: Record<string, string>
+    image?: SanityAsset
     type: 'landing'
     navigation?: Navigation
     form?: { _ref: string }

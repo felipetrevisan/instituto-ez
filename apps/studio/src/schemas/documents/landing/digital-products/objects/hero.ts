@@ -2,14 +2,16 @@ import { PackageIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
-  name: 'ebooks.cta',
-  title: 'CTA — Ebooks',
+  name: 'digital-products.hero',
+  title: 'Hero — Digital Products',
   icon: PackageIcon,
   type: 'object',
-  hidden: ({ document }) => document?.key !== 'ebooks',
+  hidden: ({ document }) => document?.key !== 'digital-products',
   fields: [
     defineField({ name: 'heading', type: 'localizedArray' }),
     defineField({ name: 'subheading', type: 'localizedArray' }),
+    defineField({ name: 'footer', type: 'localizedArray' }),
+    defineField({ name: 'image', type: 'image' }),
     defineField({
       name: 'cta',
       title: 'CTA Buttons',
@@ -20,7 +22,7 @@ export default defineType({
   ],
   preview: {
     prepare() {
-      return { title: 'Final CTA' }
+      return { title: 'Hero' }
     },
   },
 })

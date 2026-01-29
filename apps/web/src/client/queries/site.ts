@@ -69,6 +69,13 @@ export const siteConfigQuery = groq`
         "dimensions": asset->metadata.dimensions
       }
     },
+    "seoImage": seoImage {
+      "asset": asset,
+      "metadata": {
+        "lqip": asset->metadata.lqip,
+        "dimensions": asset->metadata.dimensions
+      }
+    },
     "hero": hero[] { 
       "background": background_image {
         "asset": asset,
