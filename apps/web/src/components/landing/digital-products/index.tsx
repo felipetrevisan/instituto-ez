@@ -5,34 +5,46 @@ import { FinalCTA } from '@ez/web/components/landing/digital-products/final-cta'
 import { Hero } from '@ez/web/components/landing/digital-products/hero'
 import type { Landing } from '@ez/web/types/landing'
 import type {
-  SectionEbooksCatalog,
-  SectionEbooksCTA,
-  SectionEbooksHero,
+  SectionDigitalProductsCTA,
+  SectionDigitalProductsEbooksCatalog,
+  SectionDigitalProductsHero,
 } from '@ez/web/types/landing/digital-products'
 import { useLocale } from 'next-intl'
 
-export function LandingPageEbooks({ data }: { data: Landing<'ebooks'> }) {
+export function LandingPageDigitalProducts({ data }: { data: Landing<'digital-products'> }) {
   const locale = useLocale()
 
   return (
     <div className="min-h-screen">
       {data.sections.map((section) => {
-        if (section._type === 'ebooks.hero') {
-          return <Hero data={section as SectionEbooksHero} key={section._type} locale={locale} />
-        }
-
-        if (section._type === 'ebooks.catalog') {
+        if (section._type === 'digital-products.hero') {
           return (
-            <CatalogEbooks
-              data={section as SectionEbooksCatalog}
+            <Hero
+              data={section as SectionDigitalProductsHero}
               key={section._type}
               locale={locale}
             />
           )
         }
 
-        if (section._type === 'ebooks.cta') {
-          return <FinalCTA data={section as SectionEbooksCTA} key={section._type} locale={locale} />
+        if (section._type === 'digital-products.ebooks') {
+          return (
+            <CatalogEbooks
+              data={section as SectionDigitalProductsEbooksCatalog}
+              key={section._type}
+              locale={locale}
+            />
+          )
+        }
+
+        if (section._type === 'digital-products.cta') {
+          return (
+            <FinalCTA
+              data={section as SectionDigitalProductsCTA}
+              key={section._type}
+              locale={locale}
+            />
+          )
         }
 
         return null

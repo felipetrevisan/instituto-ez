@@ -1,5 +1,5 @@
 import { LandingPageAbout } from '@ez/web/components/landing/about'
-import { LandingPageEbooks } from '@ez/web/components/landing/digital-products'
+import { LandingPageDigitalProducts } from '@ez/web/components/landing/digital-products'
 import { LandingPageForBusiness } from '@ez/web/components/landing/for-business'
 import { LandingPageHome } from '@ez/web/components/landing/home'
 import { LandingPageMathematizer } from '@ez/web/components/landing/mathematizer'
@@ -115,7 +115,7 @@ export function getAvailableLandingPages(): LandingPageConfig[] {
     {
       key: 'ebooks',
       slug: ['ebooks', 'produtos-digitais', 'digital-products'],
-      component: LandingPageEbooks,
+      component: LandingPageDigitalProducts,
       navigation: {
         header: {
           desktop: HeaderDesktopNavigation,

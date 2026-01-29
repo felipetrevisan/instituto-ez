@@ -1,4 +1,4 @@
-import { getEbookBySlug, getEbooks, getEbooksByType } from '@ez/web/server/get-ebook'
+import { getEbookBySlug, getEbooks } from '@ez/web/server/get-ebook'
 import type { Ebook } from '@ez/web/types/ebook'
 import { useQuery } from '@tanstack/react-query'
 

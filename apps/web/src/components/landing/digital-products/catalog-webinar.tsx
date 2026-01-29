@@ -2,10 +2,10 @@
 
 import { WebinarCard } from '@ez/web/components/landing/digital-products/webinar-card'
 import { StickySection } from '@ez/web/components/ui/sticky-section'
-import { useEbooksByType } from '@ez/web/hooks/use-ebook'
+import { useWebinars } from '@ez/web/hooks/use-webinar'
 import type { SectionDigitalProductsWebinarCatalog } from '@ez/web/types/landing/digital-products'
 import { createPortableComponents } from '@ez/web/utils/create-portable-components'
-import { BookOpen, Video } from 'lucide-react'
+import { Video } from 'lucide-react'
 import { motion } from 'motion/react'
 import { PortableText } from 'next-sanity'
 
@@ -16,7 +16,7 @@ export const CatalogWebinar = ({
   data: SectionDigitalProductsWebinarCatalog
   locale: string
 }) => {
-  const { data: ebooks } = useEbooksByType('webinar')
+  const { data: webinar } = useWebinars()
 
   return (
     <StickySection className="bg-navy py-20" id="catalog-webinar">
@@ -54,13 +54,13 @@ export const CatalogWebinar = ({
           </p>
         </motion.div>
 
-        {ebooks && ebooks.length > 0 && (
+        {/* {ebooks && ebooks.length > 0 && (
           <div className="mx-auto grid max-w-4xl grid-cols-1 gap-8 md:grid-cols-2">
             {ebooks.map((ebook, index) => (
               <WebinarCard ebook={ebook} index={index} key={ebook.id} />
             ))}
           </div>
-        )}
+        )} */}
       </div>
     </StickySection>
   )

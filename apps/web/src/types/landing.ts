@@ -5,9 +5,9 @@ import type {
   SectionAboutWhyChoose,
 } from '@ez/web/types/landing/about'
 import type {
-  SectionEbooksCatalog,
-  SectionEbooksCTA,
-  SectionEbooksHero,
+  SectionDigitalProductsCTA,
+  SectionDigitalProductsEbooksCatalog,
+  SectionDigitalProductsHero,
 } from '@ez/web/types/landing/digital-products'
 import type {
   SectionForBusinessConsulting,
@@ -111,7 +111,10 @@ export type LandingSectionsMap = {
     | SectionMentoringCTA
 
   about: SectionHero | SectionAboutIntro | SectionAboutServices | SectionAboutWhyChoose
-  ebooks: SectionEbooksHero | SectionEbooksCatalog | SectionEbooksCTA
+  'digital-products':
+    | SectionDigitalProductsHero
+    | SectionDigitalProductsEbooksCatalog
+    | SectionDigitalProductsCTA
 
   services:
     | SectionHero
