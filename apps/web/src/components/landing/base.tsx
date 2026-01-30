@@ -5,6 +5,7 @@ import { FooterFactory } from '@ez/web/components/layout/footer-factory'
 import { HeaderFactory } from '@ez/web/components/layout/header-factory'
 import { FooterLandingNavigation } from '@ez/web/components/navigation/landing/footer'
 import { HeaderLandingNavigation } from '@ez/web/components/navigation/landing/header'
+import { FadeIn } from '@ez/web/components/ui/fade-in'
 import { useSite } from '@ez/web/hooks/use-site'
 import type { Landing } from '@ez/web/types/landing'
 import { Fragment, useEffect } from 'react'
@@ -41,7 +42,9 @@ export function BaseLanding({
         pageKey={theme}
         theme="landing"
       />
-      <App.Content>{children}</App.Content>
+      <FadeIn inView={false}>
+        <App.Content>{children}</App.Content>
+      </FadeIn>
       <FooterFactory
         data={data}
         FooterComponent={FooterLandingNavigation}
@@ -77,7 +80,9 @@ export function BaseNormal({ theme, children }: { children: React.ReactNode; the
         pageKey={theme}
         theme="default"
       />
-      <App.Content>{children}</App.Content>
+      <FadeIn inView={false}>
+        <App.Content>{children}</App.Content>
+      </FadeIn>
       <FooterFactory
         data={data}
         FooterComponent={FooterLandingNavigation}

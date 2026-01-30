@@ -59,7 +59,7 @@ export function Header({ data }: { data: Ebook }) {
               transition={{ duration: 0.8, delay: 0.6 }}
             >
               <Image
-                alt="Book Cover"
+                alt={t('bookCoverAlt')}
                 className="object-cover"
                 fill
                 priority
@@ -122,7 +122,7 @@ export function Header({ data }: { data: Ebook }) {
               transition={{ duration: 0.8, delay: 0.6 }}
             >
               <Image
-                alt="Book Cover"
+                alt={t('bookCoverAlt')}
                 className="object-cover"
                 fill
                 priority

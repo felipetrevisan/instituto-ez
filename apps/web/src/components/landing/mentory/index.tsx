@@ -6,6 +6,7 @@ import { Hero } from '@ez/web/components/landing/mentory/hero'
 import { Intro } from '@ez/web/components/landing/mentory/intro'
 import { MethodsStep } from '@ez/web/components/landing/mentory/methods-step'
 import { TargetAudience } from '@ez/web/components/landing/mentory/target-audience'
+import { FadeIn } from '@ez/web/components/ui/fade-in'
 import './style.css'
 import type { Landing, SectionHero } from '@ez/web/types/landing'
 import type {
@@ -21,7 +22,7 @@ export function LandingPageMentory({ data }: { data: Landing<'mentoring'> }) {
   const locale = useLocale()
 
   return (
-    <div className="min-h-screen">
+    <FadeIn className="min-h-screen" inView={false}>
       {data.sections.map((section) => {
         if (section._type === 'section.hero') {
           return <Hero data={section as SectionHero} key={section._type} locale={locale} />
@@ -71,6 +72,6 @@ export function LandingPageMentory({ data }: { data: Landing<'mentoring'> }) {
 
         return null
       })}
-    </div>
+    </FadeIn>
   )
 }

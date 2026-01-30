@@ -1,6 +1,6 @@
 import type { Button, SanityAsset } from '@ez/shared/types'
 import type { Ebook } from '@ez/web/types/ebook'
-import type { Webinar } from '@ez/web/types/webinar'
+import type { Masterclass } from '@ez/web/types/masterclass'
 import type { PortableTextBlock } from 'next-sanity'
 
 export type SectionDigitalProductsHero = {
@@ -19,10 +19,10 @@ export type SectionDigitalProductsEbooksCatalog = {
   _type: string
 }
 
-export type SectionDigitalProductsWebinarCatalog = {
+export type SectionDigitalProductsMasterclassCatalog = {
   heading: Record<string, PortableTextBlock[]>
   subheading: Record<string, PortableTextBlock[]>
-  webinar: Webinar[]
+  masterclass: Masterclass[]
   _type: string
 }
 

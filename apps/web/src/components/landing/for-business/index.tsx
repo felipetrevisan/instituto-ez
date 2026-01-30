@@ -7,6 +7,7 @@ import { FinalCTA } from '@ez/web/components/landing/for-business/final-cta'
 import { Hero } from '@ez/web/components/landing/for-business/hero'
 import { Lectures } from '@ez/web/components/landing/for-business/lectures'
 import { Testimonials } from '@ez/web/components/landing/for-business/testimonials'
+import { FadeIn } from '@ez/web/components/ui/fade-in'
 import type { Landing, SectionHero } from '@ez/web/types/landing'
 import type {
   SectionForBusinessConsulting,
@@ -22,7 +23,7 @@ export function LandingPageForBusiness({ data }: { data: Landing<'forbusiness'> 
   const locale = useLocale()
 
   return (
-    <div className="min-h-screen">
+    <FadeIn className="min-h-screen" inView={false}>
       {data.sections.map((section) => {
         if (section._type === 'section.hero') {
           return <Hero data={section as SectionHero} key={section._type} locale={locale} />
@@ -86,6 +87,6 @@ export function LandingPageForBusiness({ data }: { data: Landing<'forbusiness'> 
 
         return null
       })}
-    </div>
+    </FadeIn>
   )
 }

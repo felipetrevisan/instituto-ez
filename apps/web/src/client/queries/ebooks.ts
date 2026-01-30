@@ -184,7 +184,14 @@ const themeField = `
 const seoField = `
   "seo": {
     "description": seoDescription,
-    "keywords": seoKeywords
+    "keywords": seoKeywords,
+    "image": seoImage {
+      "asset": asset,
+      "metadata": {
+        "lqip": asset->metadata.lqip,
+        "dimensions": asset->metadata.dimensions
+      }
+    }
   },
 `
 

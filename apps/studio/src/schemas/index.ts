@@ -31,7 +31,7 @@ import {
   ctaObject as ctaEbooksObject,
   ebooksObject,
   heroObject as heroEbooksObject,
-  webinarObject,
+  masterclassObject,
 } from '@ez/studio/schemas/documents/landing/digital-products'
 import {
   consultingItemObject,
@@ -58,6 +58,14 @@ import {
   servicesObject as servicesHomeObject,
   servicesItemObject as servicesItemHomeObject,
 } from '@ez/studio/schemas/documents/landing/home'
+import {
+  experienceElementsObject,
+  experienceFeaturedElementObject,
+  experienceObject,
+  instructorItemObject,
+  instructorObject,
+  introObject as introImmersionObject,
+} from '@ez/studio/schemas/documents/landing/immersion'
 import landingPageDocument from '@ez/studio/schemas/documents/landing/landing'
 import {
   benefitsItemObject as benefitsItemMathematizerObject,
@@ -89,6 +97,25 @@ import {
   whoIsItForObject,
 } from '@ez/studio/schemas/documents/landing/services'
 import {
+  contentItemObject as contentItemMasterclassObject,
+  contentObject as contentMasterclassObject,
+  expertItemObject,
+  expertObject,
+  expertSocialObject,
+  finalCtaObject as finalCtaMasterclassObject,
+  formatItemObject,
+  formatObject,
+  forWhoItemObject,
+  forWhoObject,
+  heroObject as heroMasterclassObject,
+  masterclassDocument,
+  problemItemObject,
+  problemObject,
+  sectionSettingsObject,
+  transformationItemObject,
+  transformationObject,
+} from '@ez/studio/schemas/documents/masterclass'
+import {
   linkObject,
   navigationDocument,
   navigationItemObject,
@@ -99,25 +126,6 @@ import {
   settingsDocument,
   testimonialsDocument,
 } from '@ez/studio/schemas/documents/site'
-import {
-  contentItemObject as contentItemWebnarioObject,
-  contentObject as contentWebnarioObject,
-  expertItemObject,
-  expertObject,
-  expertSocialObject,
-  finalCtaObject as finalCtaWebnarioObject,
-  formatItemObject,
-  formatObject,
-  forWhoItemObject,
-  forWhoObject,
-  heroObject as heroWebnarioObject,
-  problemItemObject,
-  problemObject,
-  sectionSettingsObject,
-  transformationItemObject,
-  transformationObject,
-  webnarioDocument,
-} from '@ez/studio/schemas/documents/webnario'
 import {
   accordionContentLandingPageObject,
   accordionContentObject,
@@ -215,6 +223,14 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     whoIsItForObject,
     finalCtaServicesObject,
 
+    // Immersion
+    introImmersionObject,
+    experienceObject,
+    experienceElementsObject,
+    experienceFeaturedElementObject,
+    instructorObject,
+    instructorItemObject,
+
     // Home
     servicesHomeObject,
     servicesItemHomeObject,
@@ -229,28 +245,28 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 
     // Digital Products
     ebooksObject,
-    webinarObject,
+    masterclassObject,
     ctaEbooksObject,
     heroEbooksObject,
 
-    // Webnario
-    webnarioDocument,
+    // Masterclass
+    masterclassDocument,
     sectionSettingsObject,
-    heroWebnarioObject,
+    heroMasterclassObject,
     forWhoObject,
     forWhoItemObject,
     problemObject,
     problemItemObject,
     transformationObject,
     transformationItemObject,
-    contentWebnarioObject,
-    contentItemWebnarioObject,
+    contentMasterclassObject,
+    contentItemMasterclassObject,
     formatObject,
     formatItemObject,
     expertObject,
     expertItemObject,
     expertSocialObject,
-    finalCtaWebnarioObject,
+    finalCtaMasterclassObject,
 
     // Site
     settingsDocument,

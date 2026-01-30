@@ -8,7 +8,7 @@ import type { Ebook } from '@ez/web/types/ebook'
 import { createPortableComponents } from '@ez/web/utils/create-portable-components'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { PortableText } from 'next-sanity'
 
 const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false })
@@ -16,6 +16,7 @@ const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false })
 export function Index({ data }: { data: Ebook }) {
   const { isMobile } = useDeviceType()
   const locale = useLocale()
+  const t = useTranslations('Ebooks')
 
   const { index, download } = data
 
@@ -26,7 +27,7 @@ export function Index({ data }: { data: Ebook }) {
           className="after:-bottom-1 after:-translate-x-1/2 relative text-center font-questrial font-semibold text-[var(--primary)] after:absolute after:left-1/2 after:h-[2px] after:w-[40%] after:rounded-xl after:bg-[var(--primary)]/60 after:transition-all"
           size="2xl"
         >
-          {index?.title?.[locale] || 'O que você vai encontrar nesse Ebook'}
+          {index?.title?.[locale] || t('indexFallbackTitle')}
         </Title>
         {index?.video?.url?.[locale] && (
           <>

@@ -8,11 +8,11 @@ import { Input } from '@ez/shared/ui/input'
 import { Textarea } from '@ez/shared/ui/textarea'
 import { useForm as useBaseForm } from '@ez/web/hooks/use-form'
 import { useSite } from '@ez/web/hooks/use-site'
-import { type ContactFormSchema, contactFormSchema } from '@ez/web/types/contact'
+import { type ContactFormSchema, createContactFormSchema } from '@ez/web/types/contact'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { AnimatePresence, motion } from 'motion/react'
-import { useTranslations } from 'next-intl'
-import { useEffect, useState } from 'react'
+import { useLocale, useTranslations } from 'next-intl'
+import { useEffect, useMemo, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Comment } from 'react-loader-spinner'
 import { toast } from 'sonner'
@@ -35,6 +35,20 @@ export function ContactForm({
   const { data: settings } = useSite()
   const { data: form, isPending } = useBaseForm(formRef)
   const t = useTranslations('DialogContact')
+  const locale = useLocale()
+
+  const schema = useMemo(
+    () =>
+      createContactFormSchema({
+        nameRequired: t('nameRequired'),
+        emailRequired: t('emailRequired'),
+        emailInvalid: t('emailInvalid'),
+        phoneRequired: t('phoneRequired'),
+        subjectRequired: t('subjectRequired'),
+        messageRequired: t('messageRequired'),
+      }),
+    [t],
+  )
 
   const {
     register,
@@ -44,7 +58,7 @@ export function ContactForm({
     reset,
     setValue,
   } = useForm<ContactFormSchema>({
-    resolver: zodResolver(contactFormSchema),
+    resolver: zodResolver(schema),
     mode: 'all',
   })
 
@@ -67,6 +81,7 @@ export function ContactForm({
       formData,
       settings.contact.email,
       settings?.logo,
+      locale,
     )
 
     if (error) {
@@ -94,7 +109,7 @@ export function ContactForm({
       >
         {isPending && (
           <Comment
-            ariaLabel="form-loading"
+            ariaLabel={t('loadingAria')}
             backgroundColor="var(--tertiary)"
             color="#fff"
             height="80"

@@ -6,8 +6,11 @@ import type { SectionMathematizerCTA } from '@ez/web/types/landing/mathematizer'
 import { createPortableComponents } from '@ez/web/utils/create-portable-components'
 import { PortableText } from '@portabletext/react'
 import { motion } from 'motion/react'
+import { useTranslations } from 'next-intl'
 
 export const FinalCTA = ({ data, locale }: { data: SectionMathematizerCTA; locale: string }) => {
+  const t = useTranslations('LandingPageMathematizer')
+
   return (
     <StickySection
       className="bg-gradient-to-b from-secondary/30 to-background py-16 sm:py-20 md:py-32 dark:from-secondary/20 dark:via-gray-900 dark:to-background"
@@ -37,7 +40,7 @@ export const FinalCTA = ({ data, locale }: { data: SectionMathematizerCTA; local
             >
               <PortableText components={createPortableComponents()} value={data.text[locale]} />
               <p className="pt-4 font-bold text-accent text-xl">
-                Pare de gerir no escuro. Comece a decidir com base em verdade matemática.
+                {t('finalCtaHighlight')}
               </p>
             </motion.div>
           )}

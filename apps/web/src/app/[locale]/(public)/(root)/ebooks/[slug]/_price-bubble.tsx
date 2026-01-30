@@ -129,7 +129,7 @@ export default function PriceBubble({ price }: { price: Price }) {
                         ease: 'easeInOut',
                       }}
                     >
-                      {price.discount?.text?.[locale]}wewqe
+                      {price.discount?.text?.[locale]}
                     </motion.span>
                   ) : (
                     <>
@@ -158,7 +158,7 @@ export default function PriceBubble({ price }: { price: Price }) {
                 >
                   {isFree ? (
                     <motion.span className="text-4xl uppercase">
-                      {price.regular.text?.[locale]}sadsadsa
+                      {price.regular.text?.[locale]}
                     </motion.span>
                   ) : (
                     <>

@@ -23,6 +23,7 @@ export default function LandingPage({ data }: { data: Landing }) {
   }, [])
 
   const available = getAvailableLandingPages()
+
   const landing = available.find((p) => p.key === data.key)
 
   if (!landing) return null

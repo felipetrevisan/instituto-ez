@@ -1,6 +1,7 @@
 import { urlForImage } from '@ez/web/config/image'
 import type { Ebook } from '@ez/web/types/ebook'
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 
 type CoverBookProps = React.ComponentProps<'div'> & {
   cover: Ebook['chapter']['cover']
@@ -9,6 +10,8 @@ type CoverBookProps = React.ComponentProps<'div'> & {
 }
 
 export const CoverBook = ({ cover, locale, ref }: CoverBookProps) => {
+  const t = useTranslations('Ebooks')
+
   return (
     <div
       className="--right --hard --simple overflow-hidden bg-white p-20 shadow-2xl"
@@ -18,7 +21,7 @@ export const CoverBook = ({ cover, locale, ref }: CoverBookProps) => {
       <div className="flex h-full w-full flex-col items-stretch justify-between">
         {cover?.[locale]?.cover.asset && (
           <Image
-            alt="Book Cover"
+            alt={t('bookCoverAlt')}
             blurDataURL={cover?.[locale].cover.metadata.lqip}
             className="object-cover"
             fill

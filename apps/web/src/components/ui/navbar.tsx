@@ -122,7 +122,7 @@ function SelectLocale({ onChange }: { onChange: (value: string) => void }) {
                 src="/assets/images/flags/brazil.png"
                 width={32}
               />
-              <span className="group-hover:text-primary">PT</span>
+              <span className="group-hover:text-primary">{t('ptShort')}</span>
             </div>
           </SelectItem>
           <SelectItem className="group" value="en">
@@ -135,7 +135,7 @@ function SelectLocale({ onChange }: { onChange: (value: string) => void }) {
                 src="/assets/images/flags/usa.png"
                 width={32}
               />
-              <span className="group-hover:text-primary">EN</span>
+              <span className="group-hover:text-primary">{t('enShort')}</span>
             </div>
           </SelectItem>
           <SelectItem className="group" value="es">
@@ -148,7 +148,7 @@ function SelectLocale({ onChange }: { onChange: (value: string) => void }) {
                 src="/assets/images/flags/euro.png"
                 width={32}
               />
-              <span className="group-hover:text-primary">ES</span>
+              <span className="group-hover:text-primary">{t('esShort')}</span>
             </div>
           </SelectItem>
         </SelectGroup>

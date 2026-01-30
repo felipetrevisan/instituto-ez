@@ -7,14 +7,16 @@ import { Icon } from '@ez/web/components/ui/icon'
 import { StickySection } from '@ez/web/components/ui/sticky-section'
 import type { Category, SectionForBusinessCourses } from '@ez/web/types/landing/for-business'
 import { motion } from 'motion/react'
+import { useTranslations } from 'next-intl'
 
 export const Courses = ({ data, locale }: { data: SectionForBusinessCourses; locale: string }) => {
   const colors = ['primary', 'secondary', 'tertiary', 'accent']
+  const t = useTranslations('LandingPageForBusiness')
 
   const formatCategory = (categories: Category[]) =>
     categories.reduce((acc, item, index) => {
       if (index === 0) return item[locale]
-      if (index === categories.length - 1) return `${acc} e ${item[locale]}`
+      if (index === categories.length - 1) return `${acc} ${t('and')} ${item[locale]}`
       return `${acc}, ${item[locale]}`
     }, '')
 
@@ -93,13 +95,14 @@ export const Courses = ({ data, locale }: { data: SectionForBusinessCourses; loc
 
                       <div className="space-y-2 text-muted-foreground text-sm">
                         <p>
-                          <span className="font-semibold text-foreground">Formato:</span> Workshop{' '}
-                          {item.type === 'INPERSON' ? 'presencial' : 'remoto'},{' '}
+                          <span className="font-semibold text-foreground">{t('format')}:</span>{' '}
+                          {t('workshop')}{' '}
+                          {item.type === 'INPERSON' ? t('inPerson') : t('remote')},{' '}
                           {item.time?.[locale]}
                         </p>
                         {item.categories && (
                           <p>
-                            <span className="font-semibold text-foreground">Foco:</span>{' '}
+                            <span className="font-semibold text-foreground">{t('focus')}:</span>{' '}
                             {formatCategory(item.categories ?? [])}
                           </p>
                         )}

@@ -1,9 +1,11 @@
 'use client'
 
+import { FadeIn } from '@ez/web/components/ui/fade-in'
 import { useShared } from '@ez/shared/hooks/use-shared'
 import { Button } from '@ez/shared/ui'
 import { BaseDesktopNavigation } from '@ez/web/components/navigation/base/header/base-desktop-navigation'
 import type { Navigation } from '@ez/web/types/site'
+import { useTranslations } from 'next-intl'
 
 type NavigationProps = {
   navigation?: Navigation
@@ -11,22 +13,25 @@ type NavigationProps = {
 
 export const LandingPageMathematizerDesktopNavigation = ({ navigation }: NavigationProps) => {
   const { setIsContactDialogOpen } = useShared()
+  const t = useTranslations('Navigation')
 
   return (
-    <BaseDesktopNavigation
-      additionalContent={
-        <Button
-          base="mathematizer"
-          className="mt-2"
-          onClick={() => setIsContactDialogOpen(true)}
-          rounded="full"
-          size="sm"
-          theme="background"
+    <FadeIn>
+      <BaseDesktopNavigation
+        additionalContent={
+          <Button
+            base="mathematizer"
+            className="mt-2"
+            onClick={() => setIsContactDialogOpen(true)}
+            rounded="full"
+            size="sm"
+            theme="background"
         >
-          Solicitar Diagnóstico
+          {t('requestDiagnosis')}
         </Button>
-      }
-      navigation={navigation}
-    />
+        }
+        navigation={navigation}
+      />
+    </FadeIn>
   )
 }

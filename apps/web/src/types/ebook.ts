@@ -13,6 +13,7 @@ export type Ebook = {
   seo: {
     description: Record<string, string> | string
     keywords: Record<string, string> | string
+    image?: SanityAsset
   }
   download: {
     disabled: boolean

@@ -7,6 +7,7 @@ import { Immersion } from '@ez/web/components/landing/home/immersion'
 import { Mathematizers } from '@ez/web/components/landing/home/mathematizer'
 import { MentorShip } from '@ez/web/components/landing/home/mentor-ship'
 import { Services } from '@ez/web/components/landing/home/services'
+import { FadeIn } from '@ez/web/components/ui/fade-in'
 import type { Landing, SectionHero } from '@ez/web/types/landing'
 import type {
   SectionHomeDevelopment,
@@ -22,7 +23,7 @@ export function LandingPageHome({ data }: { data: Landing<'home'> }) {
   const locale = useLocale()
 
   return (
-    <div className="min-h-screen">
+    <FadeIn className="min-h-screen" inView={false}>
       {data.sections.map((section) => {
         if (section._type === 'section.hero') {
           return <Hero data={section as SectionHero} key={section._type} locale={locale} />
@@ -82,6 +83,6 @@ export function LandingPageHome({ data }: { data: Landing<'home'> }) {
 
         return null
       })}
-    </div>
+    </FadeIn>
   )
 }

@@ -6,6 +6,7 @@ import { Hero } from '@ez/web/components/landing/mathematizer/hero'
 import { Mathematizer } from '@ez/web/components/landing/mathematizer/mathematizer'
 import { WhatIs } from '@ez/web/components/landing/mathematizer/what-is'
 import { WhyCompaniesNeed } from '@ez/web/components/landing/mathematizer/why-companies-need'
+import { FadeIn } from '@ez/web/components/ui/fade-in'
 import type { Landing, SectionHero } from '@ez/web/types/landing'
 import type {
   SectionMathematizerBenefits,
@@ -22,7 +23,7 @@ export function LandingPageMathematizer({ data }: { data: Landing<'mathematizer'
   const locale = useLocale()
 
   return (
-    <div className="min-h-screen">
+    <FadeIn className="min-h-screen" inView={false}>
       {data.sections.map((section) => {
         if (section._type === 'section.hero') {
           return <Hero data={section as SectionHero} key={section._type} locale={locale} />
@@ -80,6 +81,6 @@ export function LandingPageMathematizer({ data }: { data: Landing<'mathematizer'
 
         return null
       })}
-    </div>
+    </FadeIn>
   )
 }

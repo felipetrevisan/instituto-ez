@@ -8,10 +8,11 @@ import { ArrowRight, BookOpen } from 'lucide-react'
 import { motion } from 'motion/react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 
 export const EbookCard = ({ ebook, index }: { ebook: Ebook; index: number }) => {
   const locale = useLocale()
+  const t = useTranslations('DigitalProducts')
 
   return (
     <motion.div
@@ -30,7 +31,7 @@ export const EbookCard = ({ ebook, index }: { ebook: Ebook; index: number }) => 
               )}
             >
               <BookOpen className="size-3.5" />
-              eBook
+              {t('badgeEbook')}
             </span>
           </div>
 
@@ -68,7 +69,7 @@ export const EbookCard = ({ ebook, index }: { ebook: Ebook; index: number }) => 
               theme="catalog"
               variant="ghost"
             >
-              Saiba mais
+              {t('learnMoreEbook')}
               <ArrowRight className="size-4 transition-transform group-hover/btn:translate-x-1" />
             </Button>
           </div>

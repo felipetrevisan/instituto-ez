@@ -1,6 +1,7 @@
 'use client'
 
 import { mapThemeToCSSVars, type ThemeEbook } from '@ez/web/types/ebook'
+import { FadeIn } from '@ez/web/components/ui/fade-in'
 import type { ReactNode } from 'react'
 
 type ThemeScopeProps = {
@@ -19,8 +20,8 @@ export function ThemeScope({ theme, children }: ThemeScopeProps) {
   }, {})
 
   return (
-    <div data-theme="dynamic" style={style}>
+    <FadeIn data-theme="dynamic" style={style}>
       {children}
-    </div>
+    </FadeIn>
   )
 }

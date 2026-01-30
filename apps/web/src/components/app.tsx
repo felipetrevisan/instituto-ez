@@ -258,7 +258,7 @@ function Footer({
           </div>
 
           <div className="flex flex-col items-center justify-center md:items-start">
-            <h4 className="mb-4 font-semibold text-lg">Serviços</h4>
+            <h4 className="mb-4 font-semibold text-lg">{t('services')}</h4>
             {data?.navigation?.footer && (
               <NavigationRenderer
                 Component={DesktopNavigation}
@@ -268,7 +268,7 @@ function Footer({
           </div>
 
           <div className="flex flex-col items-center justify-center md:items-start">
-            <h4 className="mb-4 font-semibold text-lg">Contato</h4>
+            <h4 className="mb-4 font-semibold text-lg">{t('contact')}</h4>
             <ul className="space-y-3 text-footer-foreground/80 text-sm">
               <li className="flex items-center gap-2">
                 <Mail className="size-4 flex-shrink-0" />
@@ -346,6 +346,7 @@ function ButtonLink({
 function ThemeToggle() {
   const { theme, setTheme, systemTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
+  const t = useTranslations('Global')
 
   useEffect(() => setMounted(true), [])
 
@@ -357,7 +358,7 @@ function ThemeToggle() {
 
   return (
     <IconButton
-      aria-label="Toggle theme"
+      aria-label={t('toggleTheme')}
       className="flex items-center justify-center bg-transparent p-2 text-foreground hover:bg-background hover:text-foreground"
       icon={icon}
       onClick={() => setTheme(nextTheme)}

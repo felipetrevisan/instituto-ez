@@ -1,10 +1,12 @@
 'use client'
 
+import { FadeIn } from '@ez/web/components/ui/fade-in'
 import { useShared } from '@ez/shared/hooks/use-shared'
 import { Button } from '@ez/shared/ui'
 import { BaseMobileNavigation } from '@ez/web/components/navigation/base/header/base-mobile-navigation'
 import type { Navigation } from '@ez/web/types/site'
 import { Phone } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 type NavigationProps = {
   navigation?: Navigation
@@ -12,6 +14,7 @@ type NavigationProps = {
 
 export const LandingPageServicesMobileNavigation = ({ navigation }: NavigationProps) => {
   const { setIsContactDialogOpen } = useShared()
+  const t = useTranslations('Navigation')
 
   return (
     <BaseMobileNavigation
@@ -23,7 +26,7 @@ export const LandingPageServicesMobileNavigation = ({ navigation }: NavigationPr
           rounded="full"
           theme="background"
         >
-          Falar com o Instituto
+          {t('talkToInstitute')}
           <Phone className="size-4 transition-transform group-hover:rotate-12" />
         </Button>
       }

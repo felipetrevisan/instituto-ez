@@ -6,7 +6,10 @@ declare const messages: {
     "name": "Instituto EZ"
   },
   "Global": {
-    "copyright": "Todos os direitos reservados."
+    "copyright": "All rights reserved.",
+    "services": "Services",
+    "contact": "Contact",
+    "toggleTheme": "Toggle theme"
   },
   "DialogContact": {
     "title": "How can we help you?",
@@ -14,30 +17,59 @@ declare const messages: {
     "sendEmailError": "Unable to send message",
     "sendEmailSuccess": "Message sent successfully",
     "isRequired": "is required",
+    "nameRequired": "Name is required",
+    "emailRequired": "Email is required",
+    "emailInvalid": "Please enter a valid email",
+    "phoneRequired": "Phone is required",
+    "subjectRequired": "Subject is required",
+    "messageRequired": "Message is required",
+    "loadingAria": "Loading form",
     "cancelButton": "Close",
     "sendButton": "Send Message",
     "loadingButton": "Sending message..."
   },
   "LandingPage": {
-    "title": "Solicitar Diagnóstico",
-    "sendButton": "Solicitar",
-    "loadingButton": "Solicitando diagnóstico..."
+    "title": "Request a Diagnosis",
+    "sendButton": "Request",
+    "loadingButton": "Requesting diagnosis..."
   },
   "LandingPageHome": {
     "expOfYears": "Years of Experience",
     "scienceBased": "Science Based",
-    "metricsPrecision": "Precisão nas Métricas",
-    "safeDecision": "Tomada de Decisão Segura",
-    "immersion": "A experiência que expande a vida"
+    "metricsPrecision": "Metric Precision",
+    "safeDecision": "Safe Decision-Making",
+    "immersion": "The experience that expands life",
+    "firstConsultationIncludes": "The first consultation includes a complete neurocognitive assessment"
   },
   "LandingPageMathematizer": {
-    "resolvedProblems": "Problemas que resolve:"
+    "resolvedProblems": "Problems it solves:",
+    "howItWorks": "How it works:",
+    "result": "Result:",
+    "finalCtaHighlight": "Stop managing in the dark. Start deciding based on mathematical truth."
   },
   "LandingPageForBusiness": {
-    "corpSolutions":  "Soluções Corporativas"
+    "corpSolutions": "Corporate Solutions",
+    "format": "Format",
+    "focus": "Focus",
+    "workshop": "Workshop",
+    "inPerson": "in-person",
+    "remote": "remote",
+    "and": "and"
   },
   "LandingPageMentoring": {
-    "stratagyMentoring": "Mentoria Estratégica"
+    "stratagyMentoring": "Strategic Mentoring"
+  },
+  "DigitalProducts": {
+    "sectionTitle": "Digital Products",
+    "badgeEbooks": "eBooks",
+    "badgeEbook": "eBook",
+    "badgeMasterclasses": "Masterclasses",
+    "badgeVideoClass": "Video Class",
+    "ctaBadge": "Questions?",
+    "learnMoreEbook": "Learn more",
+    "learnMoreMasterclass": "Learn more",
+    "lifetimeAccess": "Lifetime access",
+    "durationContent": "{duration} of content"
   },
   "Ebooks": {
     "backButton": "Back to Catalog",
@@ -48,13 +80,35 @@ declare const messages: {
     "aboutAuthors": "About the Authors",
     "frequentlyQuestions": "Frequently Asked Questions",
     "onlyText": "Only",
-    "testimonial": "Testimonials"
+    "indexFallbackTitle": "What you will find in this eBook",
+    "comingSoon": "Coming soon",
+    "testimonial": "Testimonials",
+    "bookCoverAlt": "Ebook cover"
   },
   "Languages": {
     "placeholder": "Language",
     "pt": "Portuguese",
     "en": "English",
-    "es": "Spanish"
+    "es": "Spanish",
+    "ptShort": "PT",
+    "enShort": "EN",
+    "esShort": "ES"
+  },
+  "Navigation": {
+    "talkToInstitute": "Talk to the Institute",
+    "requestDiagnosis": "Request a Diagnosis"
+  },
+  "EmailTemplate": {
+    "preview": "New contact from the form",
+    "title": "New contact received",
+    "subjectLabel": "Subject:",
+    "nameLabel": "Name:",
+    "emailLabel": "Email:",
+    "phoneLabel": "Phone:",
+    "fromLabel": "Contact - Website"
+  },
+  "Errors": {
+    "notFoundTitle": "404"
   }
 };
 export default messages;

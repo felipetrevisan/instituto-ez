@@ -9,6 +9,7 @@ import {
   NavigationMenuItem,
   NavigationMenuList,
 } from '@ez/shared/ui/navigation-menu'
+import { FadeIn } from '@ez/web/components/ui/fade-in'
 import { useApp } from '@ez/web/hooks/use-app'
 import type { Navigation } from '@ez/web/types/site'
 import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
@@ -51,42 +52,48 @@ export function BaseDesktopNavigation({
   const { isMenuActive } = useApp()
 
   return (
-    <Fragment>
-      <NavigationMenu className="hidden lg:flex">
-        <NavigationMenuList>
-          <MotionHighlight
-            className={highlightClassName}
-            containerClassName="flex justify-center items-center"
-            controlledItems
-            hover
-            mode="parent"
-          >
-            {navigation?.items?.map(({ id, label, url }) => (
-              <MenuItemMotion data-value={id} key={id}>
-                <MotionHighlightItem activeClassName={activeClassName}>
-                  <Link
-                    className={linkClassName}
-                    data-active={isMenuActive(url.link?.[locale]?.current)}
-                    data-slot="navigation-menu-link"
-                    href={getLocalizedLink(
-                      locale,
-                      url.link?.[locale]?.current ?? url.link,
-                      url.type === 'EXTERNAL',
-                      url.type === 'HASH',
-                    )}
-                    onClick={url.type === 'HASH' ? (e) => navigateToHash(e, url) : undefined}
-                    rel={url.isExternal ? 'noopener noreferrer' : undefined}
-                    target={url.isExternal ? '_blank' : undefined}
-                  >
-                    {label?.[locale]}
-                  </Link>
-                </MotionHighlightItem>
-              </MenuItemMotion>
-            ))}
-          </MotionHighlight>
-        </NavigationMenuList>
-      </NavigationMenu>
-      {additionalContent}
-    </Fragment>
+    <div className="flex items-center gap-4 lg:flex-nowrap">
+      <FadeIn>
+        <NavigationMenu className="hidden lg:flex">
+          <NavigationMenuList>
+            <MotionHighlight
+              className={highlightClassName}
+              containerClassName="flex justify-center items-center"
+              controlledItems
+              hover
+              mode="parent"
+            >
+              {navigation?.items?.map(({ id, label, url }) => (
+                <MenuItemMotion data-value={id} key={id}>
+                  <MotionHighlightItem activeClassName={activeClassName}>
+                    <Link
+                      className={linkClassName}
+                      data-active={isMenuActive(url.link?.[locale]?.current)}
+                      data-slot="navigation-menu-link"
+                      href={getLocalizedLink(
+                        locale,
+                        url.link?.[locale]?.current ?? url.link,
+                        url.type === 'EXTERNAL',
+                        url.type === 'HASH',
+                      )}
+                      onClick={url.type === 'HASH' ? (e) => navigateToHash(e, url) : undefined}
+                      rel={url.isExternal ? 'noopener noreferrer' : undefined}
+                      target={url.isExternal ? '_blank' : undefined}
+                    >
+                      {label?.[locale]}
+                    </Link>
+                  </MotionHighlightItem>
+                </MenuItemMotion>
+              ))}
+            </MotionHighlight>
+          </NavigationMenuList>
+        </NavigationMenu>
+      </FadeIn>
+      {additionalContent && (
+        <FadeIn className="shrink-0" delay={0.05}>
+          {additionalContent}
+        </FadeIn>
+      )}
+    </div>
   )
 }

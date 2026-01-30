@@ -4,6 +4,7 @@ import { Hero } from '@ez/web/components/landing/about/hero'
 import { Intro } from '@ez/web/components/landing/about/intro'
 import { Services } from '@ez/web/components/landing/about/services'
 import { WhyChoose } from '@ez/web/components/landing/about/why-choose'
+import { FadeIn } from '@ez/web/components/ui/fade-in'
 import type { Landing, SectionHero } from '@ez/web/types/landing'
 import type {
   SectionAboutIntro,
@@ -16,7 +17,7 @@ export function LandingPageAbout({ data }: { data: Landing<'about'> }) {
   const locale = useLocale()
 
   return (
-    <div className="min-h-screen">
+    <FadeIn className="min-h-screen" inView={false}>
       {data.sections.map((section) => {
         if (section._type === 'section.hero') {
           return <Hero data={section as SectionHero} key={section._type} locale={locale} />
@@ -44,6 +45,6 @@ export function LandingPageAbout({ data }: { data: Landing<'about'> }) {
 
         return null
       })}
-    </div>
+    </FadeIn>
   )
 }

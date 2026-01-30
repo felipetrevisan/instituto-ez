@@ -1,4 +1,4 @@
-import { BlockContentIcon } from '@sanity/icons'
+import { BlockContentIcon, ColorWheelIcon, HashIcon, ImagesIcon, InfoFilledIcon, LinkIcon, ListIcon, TagsIcon } from '@sanity/icons'
 import { orderRankField, orderRankOrdering } from '@sanity/orderable-document-list'
 import { defineField, defineType } from 'sanity'
 import { i18n } from '../../objects/locale/locales'
@@ -10,54 +10,18 @@ export default defineType({
   type: 'document',
   orderings: [orderRankOrdering],
   groups: [
-    {
-      name: 'seo',
-      title: 'SEO',
-    },
-    {
-      name: 'cover',
-      title: 'Cover Images',
-    },
-    {
-      name: 'metadata',
-      title: 'Metadata',
-    },
-    {
-      name: 'chapters',
-      title: 'Chapters',
-    },
-    {
-      name: 'authors',
-      title: 'Authors',
-    },
-    {
-      name: 'overview',
-      title: 'Overview',
-    },
-    {
-      name: 'index',
-      title: 'Index',
-    },
-    {
-      name: 'theme',
-      title: 'Theme',
-    },
-    {
-      name: 'questions',
-      title: 'Questions',
-    },
-    {
-      name: 'link',
-      title: 'Link',
-    },
-    {
-      name: 'price',
-      title: 'Price',
-    },
-    {
-      name: 'badge',
-      title: 'Badges',
-    },
+    { name: 'seo', title: 'SEO', icon: HashIcon },
+    { name: 'cover', title: 'Cover Images', icon: ImagesIcon },
+    { name: 'metadata', title: 'Metadata', icon: InfoFilledIcon },
+    { name: 'chapters', title: 'Chapters', icon: BlockContentIcon },
+    { name: 'authors', title: 'Authors', icon: BlockContentIcon },
+    { name: 'overview', title: 'Overview', icon: BlockContentIcon },
+    { name: 'index', title: 'Index', icon: BlockContentIcon },
+    { name: 'theme', title: 'Theme', icon: ColorWheelIcon },
+    { name: 'questions', title: 'Questions', icon: ListIcon },
+    { name: 'link', title: 'Link', icon: LinkIcon },
+    { name: 'price', title: 'Price', icon: TagsIcon },
+    { name: 'badge', title: 'Badges', icon: InfoFilledIcon },
   ],
   fields: [
     orderRankField({ type: 'ebook' }),
@@ -90,6 +54,13 @@ export default defineType({
       type: 'localizedString',
       group: ['seo'],
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
+    }),
+    defineField({
+      name: 'seoImage',
+      title: 'Open Graph Image',
+      type: 'image',
+      group: ['seo'],
+      options: { hotspot: true },
     }),
     defineField({
       name: 'subtitle',

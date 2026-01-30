@@ -4,6 +4,7 @@ import { Button, type buttonVariants } from '@ez/shared/ui'
 import { Icon } from '@ez/web/components/ui/icon'
 import type { VariantProps } from 'class-variance-authority'
 import type { IconName } from 'lucide-react/dynamic'
+import { motion } from 'motion/react'
 import Link from 'next/link'
 import { useLocale } from 'next-intl'
 
@@ -52,20 +53,27 @@ export const CallActionButton = ({
   const path = link?.current ? `/${locale}/${link.current}` : `/${locale}`
 
   const ButtonContent = (
-    <Button
-      base={base}
-      className={className}
-      effect={effect}
-      onClick={action === 'button' ? onClick : undefined}
-      rounded={rounded}
-      size={size}
-      theme={theme}
-      variant={variant}
+    <motion.div
+      className="inline-flex"
+      transition={{ type: 'spring', stiffness: 260, damping: 18 }}
+      whileHover={{ y: -1 }}
+      whileTap={{ scale: 0.98 }}
     >
-      {icon?.prefix?.name && <Icon className={icon.prefix.className} name={icon.prefix.name} />}
-      {label}
-      {icon?.suffix?.name && <Icon className={icon.suffix.className} name={icon.suffix.name} />}
-    </Button>
+      <Button
+        base={base}
+        className={className}
+        effect={effect}
+        onClick={action === 'button' ? onClick : undefined}
+        rounded={rounded}
+        size={size}
+        theme={theme}
+        variant={variant}
+      >
+        {icon?.prefix?.name && <Icon className={icon.prefix.className} name={icon.prefix.name} />}
+        {label}
+        {icon?.suffix?.name && <Icon className={icon.suffix.className} name={icon.suffix.name} />}
+      </Button>
+    </motion.div>
   )
 
   if (action === 'link') {
@@ -107,7 +115,7 @@ export const CallAction = ({ className, base, button }: CallActionProps) => {
       }}
       key={button._key}
       label={button.label[locale]}
-      link={button.type === LinkType.DIALOG ? undefined : button.link[locale]}
+      link={button.type === LinkType.DIALOG ? undefined : button.link?.[locale]}
       onClick={
         button.type === LinkType.DIALOG && button.dialog.type === 'CONTACT'
           ? () => handleOpenContactDialog(button.dialog.subject)

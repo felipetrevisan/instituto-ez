@@ -6,6 +6,7 @@ import { FinalCTA } from '@ez/web/components/landing/services/final-cta'
 import { Hero } from '@ez/web/components/landing/services/hero'
 import { MethodsSession } from '@ez/web/components/landing/services/methods-session'
 import { WhoIsItFor } from '@ez/web/components/landing/services/who-is-it-for'
+import { FadeIn } from '@ez/web/components/ui/fade-in'
 import type { Landing, SectionHero } from '@ez/web/types/landing'
 import type {
   SectionServicesAssessment,
@@ -20,7 +21,7 @@ export function LandingPageServices({ data }: { data: Landing<'services'> }) {
   const locale = useLocale()
 
   return (
-    <div className="min-h-screen">
+    <FadeIn className="min-h-screen" inView={false}>
       {data.sections.map((section) => {
         if (section._type === 'section.hero') {
           return <Hero data={section as SectionHero} key={section._type} locale={locale} />
@@ -78,6 +79,6 @@ export function LandingPageServices({ data }: { data: Landing<'services'> }) {
 
         return null
       })}
-    </div>
+    </FadeIn>
   )
 }

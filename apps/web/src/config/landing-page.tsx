@@ -113,7 +113,7 @@ export function getAvailableLandingPages(): LandingPageConfig[] {
       classes: '',
     },
     {
-      key: 'ebooks',
+      key: 'digital-products',
       slug: ['ebooks', 'produtos-digitais', 'digital-products'],
       component: LandingPageDigitalProducts,
       navigation: {

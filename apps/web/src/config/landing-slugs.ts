@@ -15,8 +15,7 @@ export const landingSlugs = [
   'services',
   'servicios',
   'ebooks',
-  'webinario',
-  'webinar',
+  'masterclass',
   'produtos-digitais',
   'digital-products',
 ]

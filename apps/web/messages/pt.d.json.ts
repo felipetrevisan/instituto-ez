@@ -6,7 +6,10 @@ declare const messages: {
     "name": "Instituto EZ"
   },
   "Global": {
-    "copyright": "Todos os direitos reservados."
+    "copyright": "Todos os direitos reservados.",
+    "services": "Serviços",
+    "contact": "Contato",
+    "toggleTheme": "Alternar tema"
   },
   "DialogContact": {
     "title": "Como podemos te ajudar?",
@@ -14,6 +17,13 @@ declare const messages: {
     "sendEmailError": "Não foi possível enviar a mensagem",
     "sendEmailSuccess": "Mensagem enviada com sucesso",
     "isRequired": "é obrigatório",
+    "nameRequired": "O nome é obrigatório",
+    "emailRequired": "O e-mail é obrigatório",
+    "emailInvalid": "Digite um e-mail válido",
+    "phoneRequired": "O telefone é obrigatório",
+    "subjectRequired": "O assunto é obrigatório",
+    "messageRequired": "A mensagem é obrigatória",
+    "loadingAria": "Carregando formulário",
     "cancelButton": "Fechar",
     "sendButton": "Enviar Mensagem",
     "loadingButton": "Enviando mensagem..."
@@ -28,16 +38,38 @@ declare const messages: {
     "scienceBased": "Baseado em Ciência",
     "metricsPrecision": "Precisão nas Métricas",
     "safeDecision": "Tomada de Decisão Segura",
-    "immersion": "A experiência que expande a vida"
+    "immersion": "A experiência que expande a vida",
+    "firstConsultationIncludes": "Primeira Consulta Inclui Avaliação Neurocognitiva Completa"
   },
   "LandingPageMathematizer": {
-    "resolvedProblems": "Problemas que resolve:"
+    "resolvedProblems": "Problemas que resolve:",
+    "howItWorks": "Como atua:",
+    "result": "Resultado:",
+    "finalCtaHighlight": "Pare de gerir no escuro. Comece a decidir com base em verdade matemática."
   },
   "LandingPageForBusiness": {
-    "corpSolutions":  "Soluções Corporativas"
+    "corpSolutions": "Soluções Corporativas",
+    "format": "Formato",
+    "focus": "Foco",
+    "workshop": "Workshop",
+    "inPerson": "presencial",
+    "remote": "remoto",
+    "and": "e"
   },
   "LandingPageMentoring": {
     "stratagyMentoring": "Mentoria Estratégica"
+  },
+  "DigitalProducts": {
+    "sectionTitle": "Produtos Digitais",
+    "badgeEbooks": "eBooks",
+    "badgeEbook": "eBook",
+    "badgeMasterclasses": "Masterclasses",
+    "badgeVideoClass": "Vídeo Aula",
+    "ctaBadge": "Dúvidas?",
+    "learnMoreEbook": "Saiba mais",
+    "learnMoreMasterclass": "Saber mais",
+    "lifetimeAccess": "Acesso vitalício",
+    "durationContent": "{duration} de conteúdo"
   },
   "Ebooks": {
     "backButton": "Voltar para o Catálogo",
@@ -48,13 +80,35 @@ declare const messages: {
     "aboutAuthors": "Sobre os Autores",
     "frequentlyQuestions": "Perguntas Frequentes",
     "onlyText": "Apenas",
-    "testimonial": "Depoimentos"
+    "indexFallbackTitle": "O que você vai encontrar nesse Ebook",
+    "comingSoon": "Em breve",
+    "testimonial": "Depoimentos",
+    "bookCoverAlt": "Capa do eBook"
   },
   "Languages": {
     "placeholder": "Idioma",
     "pt": "Português",
     "en": "Inglês",
-    "es": "Espanhol"
+    "es": "Espanhol",
+    "ptShort": "PT",
+    "enShort": "EN",
+    "esShort": "ES"
+  },
+  "Navigation": {
+    "talkToInstitute": "Falar com o Instituto",
+    "requestDiagnosis": "Solicitar Diagnóstico"
+  },
+  "EmailTemplate": {
+    "preview": "Novo contato pelo formulário",
+    "title": "Novo contato recebido",
+    "subjectLabel": "Assunto:",
+    "nameLabel": "Nome:",
+    "emailLabel": "Email:",
+    "phoneLabel": "Telefone:",
+    "fromLabel": "Contato - Site"
+  },
+  "Errors": {
+    "notFoundTitle": "404"
   }
 };
 export default messages;

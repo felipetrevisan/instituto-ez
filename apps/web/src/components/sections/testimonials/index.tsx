@@ -4,6 +4,7 @@ import { BorderRounded, Theme, Variant } from '@ez/shared/types/global'
 import { Carousel, CarouselContent, CarouselDots, CarouselItem } from '@ez/shared/ui/carousel'
 import { TestimonialAnimated } from '@ez/web/components/testimonals/animated'
 import { TestimonialMinimalist } from '@ez/web/components/testimonals/minimalist'
+import { FadeIn } from '@ez/web/components/ui/fade-in'
 import { useSite } from '@ez/web/hooks/use-site'
 import { useTestimonials } from '@ez/web/hooks/use-testimonials'
 import ClassNames from 'embla-carousel-class-names'
@@ -27,7 +28,7 @@ export function Testimonials() {
   const TestimonialRender = type === 'MINIMALIST' ? TestimonialMinimalist : TestimonialAnimated
 
   return (
-    <div className="flex h-full w-full flex-col space-y-14">
+    <FadeIn className="flex h-full w-full flex-col space-y-14">
       <div className="flex flex-col justify-center">
         {isLoading && <Skeleton />}
         {!isLoading && (
@@ -54,6 +55,6 @@ export function Testimonials() {
           </Carousel>
         )}
       </div>
-    </div>
+    </FadeIn>
   )
 }

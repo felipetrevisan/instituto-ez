@@ -13,7 +13,7 @@ import Image from 'next/image'
 
 import './styles.css'
 import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 
 type Props = {
   item: Ebook
@@ -30,6 +30,7 @@ export function EbookCard({
   className,
 }: Props) {
   const locale = useLocale()
+  const t = useTranslations('Ebooks')
   const backgroundClass = image?.[locale].preview
     ? `url('${urlForImage(image?.[locale].preview.asset)}') no-repeat center center / cover`
     : 'transparent'
@@ -46,7 +47,7 @@ export function EbookCard({
             'ribbon-tertiary': theme === 'tertiary',
           })}
         >
-          Em breve
+          {t('comingSoon')}
         </div>
       )}
       <MotionCard
@@ -163,7 +164,7 @@ export function EbookCard({
                         size="xl"
                         theme={theme}
                       >
-                        {!disabled ? button.label?.[locale] : 'Em breve'}
+                        {!disabled ? button.label?.[locale] : t('comingSoon')}
                       </Button>
                     </div>
                   </ButtonLink>
@@ -179,7 +180,7 @@ export function EbookCard({
                       size="xl"
                       theme={theme}
                     >
-                      {!disabled ? button.label?.[locale] : 'Em breve'}
+                      {!disabled ? button.label?.[locale] : t('comingSoon')}
                     </Button>
                   </div>
                 )}

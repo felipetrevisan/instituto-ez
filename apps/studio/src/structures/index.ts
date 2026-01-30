@@ -70,15 +70,15 @@ const structure = (S: StructureBuilder, context: ConfigContext) =>
         ),
 
       S.listItem()
-        .title('Webnarios')
+        .title('Masterclasses')
         .icon(PlayIcon)
         .child(
           S.list()
-            .title('Webnarios')
+            .title('Masterclasses')
             .items([
               orderableDocumentListDeskItem({
-                type: 'webnario.catalog',
-                title: 'Webnarios',
+                type: 'masterclass',
+                title: 'Masterclasses',
                 S,
                 context,
               }),
@@ -86,8 +86,8 @@ const structure = (S: StructureBuilder, context: ConfigContext) =>
                 .title('Configurações')
                 .child(
                   S.document()
-                    .schemaType('webnario-landing-page-settings')
-                    .documentId('webnario-landing-page-settings')
+                    .schemaType('masterclass-landing-page-settings')
+                    .documentId('masterclass-landing-page-settings')
                     .title('Configurações'),
                 ),
             ]),
@@ -98,7 +98,7 @@ const structure = (S: StructureBuilder, context: ConfigContext) =>
         .icon(CommentIcon)
         .child(
           S.list()
-            .title('Webnarios')
+            .title('Masterclasses')
             .items([
               orderableDocumentListDeskItem({
                 type: 'testimonial',
@@ -119,8 +119,8 @@ const structure = (S: StructureBuilder, context: ConfigContext) =>
             'page',
             'landingPage',
             'landing-page-settings',
-            'webnario-landing-page-settings',
-            'webnario.catalog',
+            'masterclass-landing-page-settings',
+            'masterclass',
             'ebook',
             'ebooks.category',
             'testimonial',

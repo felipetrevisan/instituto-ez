@@ -28,6 +28,7 @@ export default defineType({
           { title: 'Mentoring', value: 'mentoring' },
           { title: 'About', value: 'about' },
           { title: 'Services', value: 'services' },
+          { title: 'Immersion', value: 'immersion' },
           { title: 'Digital Products', value: 'digital-products' },
         ],
         layout: 'radio',
@@ -106,6 +107,11 @@ export default defineType({
         { type: 'services.whoisitfor' },
         { type: 'services.cta' },
 
+        // IMMERSION
+        { type: 'immersion.intro' },
+        { type: 'immersion.experience' },
+        { type: 'immersion.instructor' },
+
         // HOME
         { type: 'home.services' },
         { type: 'home.mentorship' },
@@ -117,8 +123,8 @@ export default defineType({
         // DIGITAL PRODUCTS
         { type: 'digital-products.hero' },
         { type: 'digital-products.ebooks' },
-        { type: 'digital-products.webinar' },
-        { type: 'digital-products.cta' }
+        { type: 'digital-products.masterclass' },
+        { type: 'digital-products.cta' },
       ],
     }),
   ],

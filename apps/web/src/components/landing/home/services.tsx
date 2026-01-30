@@ -114,7 +114,7 @@ export const Services = ({ data, locale }: { data: SectionHomeServices; locale: 
                 <ShieldCheck className="size-6 text-accent/70" />
               </div>
               <p className="font-semibold text-[0.9rem] text-foreground/95 leading-snug">
-                Primeira Consulta Inclui Avaliação Neurocognitiva Completa
+                {t('firstConsultationIncludes')}
               </p>
             </div>
           </div>

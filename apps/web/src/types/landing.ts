@@ -8,6 +8,7 @@ import type {
   SectionDigitalProductsCTA,
   SectionDigitalProductsEbooksCatalog,
   SectionDigitalProductsHero,
+  SectionDigitalProductsMasterclassCatalog,
 } from '@ez/web/types/landing/digital-products'
 import type {
   SectionForBusinessConsulting,
@@ -114,6 +115,7 @@ export type LandingSectionsMap = {
   'digital-products':
     | SectionDigitalProductsHero
     | SectionDigitalProductsEbooksCatalog
+    | SectionDigitalProductsMasterclassCatalog
     | SectionDigitalProductsCTA
 
   services:

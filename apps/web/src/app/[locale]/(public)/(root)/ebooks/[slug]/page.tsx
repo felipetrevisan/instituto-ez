@@ -4,6 +4,7 @@ import { getEbookBySlug, getEbooks } from '@ez/web/server/get-ebook'
 import { getLandingPageSettings } from '@ez/web/server/get-landing-page-settings'
 import { buildAlternates } from '@ez/web/utils/seo'
 import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { Content } from './_content'
 
@@ -14,8 +15,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug, locale } = await params
 
+  const t = await getTranslations({ locale, namespace: 'Errors' })
+  const notFoundTitle = t('notFoundTitle')
+
   const data = await getEbookBySlug(slug, locale)
-  if (!data) return { title: '404' }
+  if (!data) return { title: notFoundTitle }
 
   const resolvedTitle = data.title?.[locale] ?? ''
   const rawSeoDescription = data.seo?.description
@@ -27,7 +31,9 @@ export async function generateMetadata({
   const resolvedKeywords =
     typeof rawSeoKeywords === 'string' ? rawSeoKeywords : rawSeoKeywords?.[locale]
   const alternates = buildAlternates(locale, `/ebooks/${slug}`)
+  const seoImageAsset = data.seo?.image?.asset
   const ogImageAsset =
+    seoImageAsset ??
     data.image?.[locale]?.large?.asset ??
     data.image?.[locale]?.preview?.asset ??
     data.image?.[locale]?.background?.asset

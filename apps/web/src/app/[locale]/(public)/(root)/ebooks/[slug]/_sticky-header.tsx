@@ -59,7 +59,7 @@ export default function StickyHeader({ title, image, download }: Ebook) {
               {!isMobile && image?.[locale].large && (
                 <div className="relative size-10">
                   <Image
-                    alt="Book Cover"
+                    alt={t('bookCoverAlt')}
                     className="object-cover"
                     fill
                     priority

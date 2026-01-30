@@ -1,4 +1,5 @@
 import type { Navigation } from '@ez/web/types/site'
+import { FadeIn } from '@ez/web/components/ui/fade-in'
 
 type NavigationRendererProps = {
   Component?: React.ComponentType<{ navigation?: Navigation }>
@@ -7,5 +8,9 @@ type NavigationRendererProps = {
 
 export function NavigationRenderer({ Component, navigation }: NavigationRendererProps) {
   if (!Component || !navigation) return null
-  return <Component navigation={navigation} />
+  return (
+    <FadeIn>
+      <Component navigation={navigation} />
+    </FadeIn>
+  )
 }

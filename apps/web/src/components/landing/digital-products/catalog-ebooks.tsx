@@ -8,9 +8,11 @@ import { createPortableComponents } from '@ez/web/utils/create-portable-componen
 import { BookOpen } from 'lucide-react'
 import { motion } from 'motion/react'
 import { PortableText } from 'next-sanity'
+import { useTranslations } from 'next-intl'
 
 export const CatalogEbooks = ({ data, locale }: { data: SectionDigitalProductsEbooksCatalog; locale: string }) => {
   const { data: ebooks } = useEbooks()
+  const t = useTranslations('DigitalProducts')
 
   return (
     <StickySection
@@ -26,7 +28,7 @@ export const CatalogEbooks = ({ data, locale }: { data: SectionDigitalProductsEb
         >
           <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-navy/10 px-4 py-2 font-medium text-navy text-sm">
             <BookOpen className="size-4" />
-            eBooks
+            {t('badgeEbooks')}
           </div>
           {data?.heading?.[locale] && (
             <h2 className="mb-4 font-bold text-3xl text-navy md:text-4xl lg:text-5xl">

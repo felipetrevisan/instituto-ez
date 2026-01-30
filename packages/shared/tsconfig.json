@@ -12,6 +12,7 @@
 		"skipLibCheck": true,
 		"strict": true,
 		"noEmit": true,
+		"allowArbitraryExtensions": true,
 		"esModuleInterop": true,
 		"baseUrl": "./src",
     "paths": {

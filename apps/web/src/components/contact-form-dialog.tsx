@@ -1,5 +1,6 @@
 import { useShared } from '@ez/shared/hooks/use-shared'
 import { DialogContent, DialogHeader, DialogTitle } from '@ez/shared/ui/dialog'
+import { FadeIn } from '@ez/web/components/ui/fade-in'
 import { ContactForm } from './contact-form'
 
 export function ContactFormDialog({
@@ -19,19 +20,21 @@ export function ContactFormDialog({
 
   return (
     <DialogContent className="container max-w-3xl" from="left" onClose={closeDialog}>
-      {title && (
-        <DialogHeader>
-          <DialogTitle>{title}</DialogTitle>
-        </DialogHeader>
-      )}
+      <FadeIn>
+        {title && (
+          <DialogHeader>
+            <DialogTitle>{title}</DialogTitle>
+          </DialogHeader>
+        )}
 
-      <ContactForm
-        formRef={formRef}
-        isDialog
-        onCloseAction={closeDialog}
-        sendButtonLabel={sendButtonLabel}
-        subject={contactSubject}
-      />
+        <ContactForm
+          formRef={formRef}
+          isDialog
+          onCloseAction={closeDialog}
+          sendButtonLabel={sendButtonLabel}
+          subject={contactSubject}
+        />
+      </FadeIn>
     </DialogContent>
   )
 }

@@ -9,8 +9,11 @@ import { ArrowDown, BookOpen } from 'lucide-react'
 import { motion } from 'motion/react'
 import Image from 'next/image'
 import { PortableText } from 'next-sanity'
+import { useTranslations } from 'next-intl'
 
 export const Hero = ({ data, locale }: { data: SectionDigitalProductsHero; locale: string }) => {
+  const t = useTranslations('DigitalProducts')
+
   return (
     <StickySection className="relative mt-24 w-screen" id="hero">
       <div className="relative flex min-h-[90vh] items-center overflow-hidden">
@@ -35,7 +38,7 @@ export const Hero = ({ data, locale }: { data: SectionDigitalProductsHero; local
               transition={{ duration: 0.6 }}
             >
               <BookOpen className="size-4" />
-              Produtos Digitais
+              {t('sectionTitle')}
             </motion.div>
 
             {data?.heading?.[locale] && (

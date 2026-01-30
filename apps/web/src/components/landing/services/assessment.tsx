@@ -1,6 +1,7 @@
 'use client'
 
 import { StickySection } from '@ez/web/components/ui/sticky-section'
+import { FadeIn } from '@ez/web/components/ui/fade-in'
 import type { SectionServicesAssessment } from '@ez/web/types/landing/services'
 import { createPortableComponents } from '@ez/web/utils/create-portable-components'
 import { PortableText } from '@portabletext/react'
@@ -17,15 +18,22 @@ export const Assessment = ({
       <div className="container mx-auto px-4">
         <div className="mx-auto max-w-4xl space-y-8">
           {data?.heading?.[locale] && (
-            <h2 className="text-center font-bold text-3xl md:text-4xl lg:text-5xl">
-              <PortableText components={createPortableComponents()} value={data.heading[locale]} />
-            </h2>
+            <FadeIn>
+              <h2 className="text-center font-bold text-3xl md:text-4xl lg:text-5xl">
+                <PortableText
+                  components={createPortableComponents()}
+                  value={data.heading[locale]}
+                />
+              </h2>
+            </FadeIn>
           )}
 
           {data?.text?.[locale] && (
-            <div className="space-y-6 text-foreground/90 text-lg leading-relaxed">
-              <PortableText components={createPortableComponents()} value={data.text[locale]} />
-            </div>
+            <FadeIn delay={0.1}>
+              <div className="space-y-6 text-foreground/90 text-lg leading-relaxed">
+                <PortableText components={createPortableComponents()} value={data.text[locale]} />
+              </div>
+            </FadeIn>
           )}
         </div>
       </div>

@@ -1,5 +1,6 @@
 'use client'
 
+import { FadeIn } from '@ez/web/components/ui/fade-in'
 import { BaseMobileNavigation } from '@ez/web/components/navigation/base/header/base-mobile-navigation'
 import type { Navigation } from '@ez/web/types/site'
 
@@ -8,5 +9,9 @@ type NavigationProps = {
 }
 
 export const MainMobileNavigation = ({ navigation }: NavigationProps) => {
-  return <BaseMobileNavigation navigation={navigation} />
+  return (
+    <FadeIn>
+      <BaseMobileNavigation navigation={navigation} />
+    </FadeIn>
+  )
 }

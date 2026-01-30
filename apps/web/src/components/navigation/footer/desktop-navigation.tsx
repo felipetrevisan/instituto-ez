@@ -1,5 +1,6 @@
 'use client'
 
+import { FadeIn } from '@ez/web/components/ui/fade-in'
 import { BaseDesktopNavigation } from '@ez/web/components/navigation/base/footer/base-desktop-navigation'
 import type { Navigation } from '@ez/web/types/site'
 
@@ -8,5 +9,9 @@ type NavigationProps = {
 }
 
 export const MainDesktopNavigation = ({ navigation }: NavigationProps) => {
-  return <BaseDesktopNavigation navigation={navigation} />
+  return (
+    <FadeIn>
+      <BaseDesktopNavigation navigation={navigation} />
+    </FadeIn>
+  )
 }

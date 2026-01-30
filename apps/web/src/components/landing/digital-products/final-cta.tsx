@@ -7,8 +7,11 @@ import { createPortableComponents } from '@ez/web/utils/create-portable-componen
 import { PortableText } from '@portabletext/react'
 import { Sparkles } from 'lucide-react'
 import { motion } from 'motion/react'
+import { useTranslations } from 'next-intl'
 
 export const FinalCTA = ({ data, locale }: { data: SectionDigitalProductsCTA; locale: string }) => {
+  const t = useTranslations('DigitalProducts')
+
   return (
     <StickySection
       className="w-screen bg-gradient-to-b from-gray-light to-background py-20 md:py-32 dark:from-secondary dark:to-background"
@@ -26,7 +29,7 @@ export const FinalCTA = ({ data, locale }: { data: SectionDigitalProductsCTA; lo
         >
           <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-navy/10 px-4 py-2 font-medium text-navy text-sm">
             <Sparkles className="size-4" />
-            Dúvidas?
+            {t('ctaBadge')}
           </div>
 
           <motion.h2

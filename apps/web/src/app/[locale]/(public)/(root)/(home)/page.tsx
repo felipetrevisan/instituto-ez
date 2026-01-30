@@ -6,6 +6,7 @@ import { getLandingPage } from '@ez/web/server/get-landing'
 import type { Landing } from '@ez/web/types/landing'
 import { buildAlternates } from '@ez/web/utils/seo'
 import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 import Loading from '../_loading'
@@ -35,10 +36,13 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params
 
+  const t = await getTranslations({ locale, namespace: 'Errors' })
+  const notFoundTitle = t('notFoundTitle')
+
   const landing = resolveLanding('home')
   if (landing) {
     const data = await getLandingPage('home', locale)
-    if (!data) return { title: '404' }
+    if (!data) return { title: notFoundTitle }
 
     const { title, description, keywords } = data.settings
     const resolvedTitle = title?.[locale] ?? ''
@@ -81,10 +85,10 @@ export async function generateMetadata({
     }
   }
 
-  return { title: '404' }
+  return { title: notFoundTitle }
 
   // const data = await getPageBySlug('home', locale)
-  // if (!data) return { title: '404' }
+  // if (!data) return { title: notFoundTitle }
 
   // return {
   //   title: data.title?.[locale] ?? '',

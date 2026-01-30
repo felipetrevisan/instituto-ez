@@ -3,6 +3,7 @@
 import { useDeviceType } from '@ez/shared/hooks/use-media-query'
 import { cn } from '@ez/shared/lib/utils'
 import { motion } from 'motion/react'
+import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
 type AnimatedValue = Record<
@@ -24,7 +25,7 @@ type AnimatedButtonProps = {
 }
 
 export function AnimatedButton({
-  label = 'Voltar para o Catálogo',
+  label,
   icon = null,
   width = 160,
   justify = 'start',
@@ -34,6 +35,8 @@ export function AnimatedButton({
 }: AnimatedButtonProps) {
   const [hovered, setHovered] = useState(false)
   const { isMobile } = useDeviceType()
+  const t = useTranslations('Ebooks')
+  const resolvedLabel = label ?? t('backButton')
 
   function getAnimationState(map: AnimatedValue, hovered: boolean) {
     return Object.fromEntries(
@@ -83,7 +86,7 @@ export function AnimatedButton({
           delay: 0.05,
         }}
       >
-        {label}
+        {resolvedLabel}
       </motion.span>
     </motion.button>
   )

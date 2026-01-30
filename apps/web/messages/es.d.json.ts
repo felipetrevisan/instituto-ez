@@ -6,7 +6,10 @@ declare const messages: {
     "name": "Instituto EZ"
   },
   "Global": {
-    "copyright": "Todos os direitos reservados."
+    "copyright": "Todos los derechos reservados.",
+    "services": "Servicios",
+    "contact": "Contacto",
+    "toggleTheme": "Alternar tema"
   },
   "DialogContact": {
     "title": "¿Cómo podemos ayudarle?",
@@ -14,30 +17,59 @@ declare const messages: {
     "sendEmailError": "No se puede enviar el mensaje",
     "sendEmailSuccess": "Mensaje enviado correctamente",
     "isRequired": "es obligatorio",
+    "nameRequired": "El nombre es obligatorio",
+    "emailRequired": "El correo electrónico es obligatorio",
+    "emailInvalid": "Introduce un correo electrónico válido",
+    "phoneRequired": "El teléfono es obligatorio",
+    "subjectRequired": "El asunto es obligatorio",
+    "messageRequired": "El mensaje es obligatorio",
+    "loadingAria": "Cargando formulario",
     "cancelButton": "Cerrar",
     "sendButton": "Enviar mensaje",
     "loadingButton": "Enviando mensaje..."
   },
   "LandingPage": {
-    "title": "Solicitar Diagnóstico",
+    "title": "Solicitar diagnóstico",
     "sendButton": "Solicitar",
     "loadingButton": "Solicitando diagnóstico..."
   },
   "LandingPageHome": {
-    "expOfYears": "Anos de Experiência",
-    "scienceBased": "Baseado em Ciência",
-    "metricsPrecision": "Precisão nas Métricas",
-    "safeDecision": "Tomada de Decisão Segura",
-    "immersion": "A experiência que expande a vida"
+    "expOfYears": "Años de experiencia",
+    "scienceBased": "Basado en la ciencia",
+    "metricsPrecision": "Precisión en las métricas",
+    "safeDecision": "Toma de decisiones segura",
+    "immersion": "La experiencia que expande la vida",
+    "firstConsultationIncludes": "La primera consulta incluye una evaluación neurocognitiva completa"
   },
   "LandingPageMathematizer": {
-    "resolvedProblems": "Problemas que resolve:"
+    "resolvedProblems": "Problemas que resuelve:",
+    "howItWorks": "Cómo actúa:",
+    "result": "Resultado:",
+    "finalCtaHighlight": "Deja de gestionar en la oscuridad. Comienza a decidir con base en la verdad matemática."
   },
   "LandingPageForBusiness": {
-    "corpSolutions":  "Soluções Corporativas"
+    "corpSolutions": "Soluciones corporativas",
+    "format": "Formato",
+    "focus": "Enfoque",
+    "workshop": "Taller",
+    "inPerson": "presencial",
+    "remote": "remoto",
+    "and": "y"
   },
   "LandingPageMentoring": {
-    "stratagyMentoring": "Mentoria Estratégica"
+    "stratagyMentoring": "Mentoría estratégica"
+  },
+  "DigitalProducts": {
+    "sectionTitle": "Productos digitales",
+    "badgeEbooks": "eBooks",
+    "badgeEbook": "eBook",
+    "badgeMasterclasses": "Masterclasses",
+    "badgeVideoClass": "Clase en video",
+    "ctaBadge": "¿Dudas?",
+    "learnMoreEbook": "Saber más",
+    "learnMoreMasterclass": "Saber más",
+    "lifetimeAccess": "Acceso vitalicio",
+    "durationContent": "{duration} de contenido"
   },
   "Ebooks": {
     "backButton": "Volver al catálogo",
@@ -45,16 +77,38 @@ declare const messages: {
     "guaranteeSeals": "Sellos de garantía",
     "virtualEbook": "Navega y descubre el Ebook que hay dentro",
     "aboutAuthor": "Acerca del Autor",
-    "aboutAuthors": "Acerca del Autores",
+    "aboutAuthors": "Acerca de los autores",
     "frequentlyQuestions": "Preguntas Frecuentes",
-    "onlyText": "Apenas",
-    "testimonial": "Testimonios"
+    "onlyText": "Solo",
+    "indexFallbackTitle": "Lo que encontrarás en este eBook",
+    "comingSoon": "Próximamente",
+    "testimonial": "Testimonios",
+    "bookCoverAlt": "Portada del eBook"
   },
   "Languages": {
     "placeholder": "Idioma",
     "pt": "Portugués",
     "en": "Inglés",
-    "es": "Español"
+    "es": "Español",
+    "ptShort": "PT",
+    "enShort": "EN",
+    "esShort": "ES"
+  },
+  "Navigation": {
+    "talkToInstitute": "Hablar con el Instituto",
+    "requestDiagnosis": "Solicitar diagnóstico"
+  },
+  "EmailTemplate": {
+    "preview": "Nuevo contacto desde el formulario",
+    "title": "Nuevo contacto recibido",
+    "subjectLabel": "Asunto:",
+    "nameLabel": "Nombre:",
+    "emailLabel": "Correo electrónico:",
+    "phoneLabel": "Teléfono:",
+    "fromLabel": "Contacto - Sitio"
+  },
+  "Errors": {
+    "notFoundTitle": "404"
   }
 };
 export default messages;
