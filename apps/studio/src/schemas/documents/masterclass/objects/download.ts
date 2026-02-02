@@ -12,13 +12,6 @@ export default defineType({
       title: 'Is Button Disabled?',
       type: 'boolean',
       initialValue: false,
-      validation: (Rule) =>
-        Rule.custom((field, context) => {
-          if (context?.document?.show_button && !field) {
-            return 'This field must not be empty.'
-          }
-          return true
-        }).warning(),
     }),
     defineField({
       name: 'label',

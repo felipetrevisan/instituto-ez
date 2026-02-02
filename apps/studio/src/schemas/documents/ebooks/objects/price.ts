@@ -55,17 +55,5 @@ export default defineType({
           return true
         }).warning(),
     }),
-    defineField({
-      name: 'price_regular_color',
-      title: 'Price Regular Color',
-      type: 'price_badge_color',
-      options: { collapsible: true, collapsed: false },
-    }),
-    defineField({
-      name: 'price_free_color',
-      title: 'Price Free Color',
-      type: 'price_badge_color',
-      options: { collapsible: true, collapsed: false },
-    }),
   ],
 })

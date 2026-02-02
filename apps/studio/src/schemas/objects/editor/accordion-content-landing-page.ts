@@ -1,6 +1,6 @@
+import { i18n } from '@ez/studio/schemas/objects/locale/locales'
 import { MenuIcon } from '@sanity/icons'
 import { defineType } from 'sanity'
-import { i18n } from '../locale/locales'
 
 export default defineType({
   name: 'accordion-content-landing-page',

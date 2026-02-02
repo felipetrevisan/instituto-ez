@@ -54,7 +54,15 @@ declare const messages: {
     "workshop": "Workshop",
     "inPerson": "in-person",
     "remote": "remote",
-    "and": "and"
+    "and": "and",
+    "testimonials": {
+      "reductionTitle": "Reduction in internal conflicts",
+      "reductionSubtitle": "After the communication workshop",
+      "productivityTitle": "More productivity",
+      "productivitySubtitle": "After the health talks",
+      "climateTitle": "Organizational climate",
+      "climateSubtitle": "Decrease in stress-related absences"
+    }
   },
   "LandingPageMentoring": {
     "stratagyMentoring": "Strategic Mentoring"

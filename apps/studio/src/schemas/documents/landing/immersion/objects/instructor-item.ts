@@ -1,4 +1,3 @@
-import { i18n } from '@ez/studio/schemas/objects/locale/locales'
 import { PackageIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
@@ -8,6 +7,7 @@ export default defineType({
   icon: PackageIcon,
   type: 'object',
   fields: [
+    defineField({ name: 'name', type: 'string' }),
     defineField({ name: 'title', type: 'localizedString' }),
     defineField({ name: 'subtitle', type: 'localizedString' }),
     defineField({ name: 'description', type: 'localizedArray' }),
@@ -19,7 +19,7 @@ export default defineType({
   ],
   preview: {
     select: {
-      title: `title.${i18n.base}`,
+      title: `name`,
     },
     prepare({ title }) {
       return {

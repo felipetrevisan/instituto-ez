@@ -1,17 +1,21 @@
 import { AccordionComponent } from '@ez/shared/sanity/components/accordion'
 import { AlertComponent } from '@ez/shared/sanity/components/alert'
 import { ButtonComponent } from '@ez/shared/sanity/components/button'
-import { DividerComponent } from '@ez/shared/sanity/components/divider'
 import { ImageComponent } from '@ez/shared/sanity/components/image'
 import { ListComponent } from '@ez/shared/sanity/components/list'
-import { TitleComponent } from '@ez/shared/sanity/components/title'
+import { QuoteComponent } from '@ez/shared/sanity/components/quote'
+import { TestimonialComponent } from '@ez/shared/sanity/components/testimonial'
 
 export const portableTypes = {
   image: ImageComponent,
-  buttonLink: ButtonComponent,
-  title: TitleComponent,
+  buttonLinkWidget: ButtonComponent,
   accordion: AccordionComponent,
-  divider: DividerComponent,
+  accordionWidget: AccordionComponent,
   alert: AlertComponent,
+  alertWidget: AlertComponent,
   list: ListComponent,
+  listWidget: ListComponent,
+  quote: QuoteComponent,
+  quoteWidget: QuoteComponent,
+  testimonialWidget: TestimonialComponent,
 }

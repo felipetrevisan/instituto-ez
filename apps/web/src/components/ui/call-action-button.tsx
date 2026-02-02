@@ -17,9 +17,7 @@ export type CallActionButtonProps = {
   variant?: ButtonVariants['variant']
   theme?: ButtonVariants['theme']
   size?: ButtonVariants['size']
-  rounded?: ButtonVariants['rounded']
   fullWidth?: ButtonVariants['fullWidth']
-  effect?: ButtonVariants['effect']
   label: string
   action: 'link' | 'button'
   onClick?: () => void
@@ -41,11 +39,9 @@ export const CallActionButton = ({
   label,
   action,
   icon,
-  rounded,
   variant,
   size,
   theme,
-  effect,
   base,
   onClick,
 }: CallActionButtonProps) => {
@@ -62,9 +58,7 @@ export const CallActionButton = ({
       <Button
         base={base}
         className={className}
-        effect={effect}
         onClick={action === 'button' ? onClick : undefined}
-        rounded={rounded}
         size={size}
         theme={theme}
         variant={variant}
@@ -102,7 +96,6 @@ export const CallAction = ({ className, base, button }: CallActionProps) => {
       action={button.type === LinkType.DIALOG ? 'button' : 'link'}
       base={base ?? 'default'}
       className={className}
-      effect={button.theme.effect}
       icon={{
         prefix: {
           className: 'size-5',
@@ -121,7 +114,6 @@ export const CallAction = ({ className, base, button }: CallActionProps) => {
           ? () => handleOpenContactDialog(button.dialog.subject)
           : undefined
       }
-      rounded={button.theme.rounded}
       size={button.theme.size}
       theme={button.theme.theme}
       variant={button.theme.variant}

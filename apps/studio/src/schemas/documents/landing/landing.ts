@@ -1,13 +1,12 @@
 import { i18n } from '@ez/studio/schemas/objects/locale/locales'
-import { BlockContentIcon, CogIcon, HashIcon } from '@sanity/icons'
-import { ViewIcon } from 'lucide-react'
+import { BlockContentIcon, CogIcon, HashIcon, EyeOpenIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
   name: 'landingPage',
   title: 'Landing Page',
   type: 'document',
-  icon: ViewIcon,
+  icon: EyeOpenIcon,
   groups: [
     { name: 'content', title: 'Content', icon: BlockContentIcon },
     { name: 'seo', title: 'SEO', icon: HashIcon },
@@ -130,12 +129,13 @@ export default defineType({
   ],
   preview: {
     select: {
-      title: `page.title.${i18n.base}`,
+      title: 'page.title',
       key: 'key',
     },
     prepare({ title, key }) {
+      const localized = Array.isArray(title) ? title.find((item) => item?.lang === i18n.base) : null
       return {
-        title,
+        title: localized?.value || title || 'Sem título',
         subtitle: key,
       }
     },

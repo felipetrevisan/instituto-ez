@@ -16,9 +16,10 @@ type ExternalLinkValue = {
 
 export const portableMarks: PortableTextComponents['marks'] = {
   bold: ({ children }) => <span className="font-bold">{children}</span>,
-  medium: ({ children }) => <span className="font-medium">{children}</span>,
   semibold: ({ children }) => <span className="font-semibold">{children}</span>,
-  extrabold: ({ children }) => <span className="font-extrabold">{children}</span>,
+  'size-sm': ({ children }) => <span className="text-sm">{children}</span>,
+  'size-base': ({ children }) => <span className="text-base">{children}</span>,
+  'size-lg': ({ children }) => <span className="text-lg">{children}</span>,
   accent: ({ children }) => <span className="text-accent">{children}</span>,
   primary: ({ children }) => <span className="text-primary">{children}</span>,
   secondary: ({ children }) => <span className="text-secondary">{children}</span>,

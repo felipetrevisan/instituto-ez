@@ -9,7 +9,7 @@ const fields = `
 `
 
 const priceField = `
-  "price": price {
+  "price": coalesce(price, priceRef->) {
     "regular": {
       "price": regular,
       "text": regular_text
@@ -20,30 +20,6 @@ const priceField = `
     "discount": {
       "price": discount_price,
       "text": discount_text
-    },
-    "theme": {
-      "regular": price_regular_color {
-        "background": {
-          "primary": background_primary,
-          "secondary": background_secondary,
-        },
-        border,
-        "text": {
-          "stroke": text_stroke,
-          "fill": text_fill
-        }
-      },
-      "free": price_free_color {
-        "background": {
-          "primary": background_primary,
-          "secondary": background_secondary,
-        },
-        border,
-        "text": {
-          "stroke": text_stroke,
-          "fill": text_fill
-        }
-      }
     }
   },
 `
@@ -124,12 +100,9 @@ const imageField = `
 
 const buttonField = `
   "button": button {
-    "visible": show_button,
-    "disabled": disable_button,
     "label": button_label,
     "type": button_link_type,
     "link": button_internal_link->slug,
-    "params": button_internal_params,
     "externalUrl": button_external_url
   }
 `
@@ -147,44 +120,16 @@ const badgeField = `
 `
 
 const themeField = `
-  "theme": theme {
+  "theme": coalesce(theme, themeRef->) {
     text,
     primary,
-    secondary,
-    tertiary,
-    "footer": footer {
-      "text": text,
-      "background": background
-    },
-    "button": {
-      "header": header_button {
-        "default": {
-          "text": text_default,
-          "background": default
-        },
-        "hover": {
-          "text": text_hover,
-          "background": hover
-        },
-      },
-      "stickyHeader": sticky_header_button {
-        "default": {
-          "text": text_default,
-          "background": default
-        },
-        "hover": {
-          "text": text_hover,
-          "background": hover
-        },
-      }
-    }
+    secondary
   },
 `
 
 const seoField = `
   "seo": {
     "description": seoDescription,
-    "keywords": seoKeywords,
     "image": seoImage {
       "asset": asset,
       "metadata": {

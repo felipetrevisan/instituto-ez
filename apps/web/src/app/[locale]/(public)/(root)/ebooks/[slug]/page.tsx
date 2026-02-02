@@ -23,13 +23,10 @@ export async function generateMetadata({
 
   const resolvedTitle = data.title?.[locale] ?? ''
   const rawSeoDescription = data.seo?.description
-  const rawSeoKeywords = data.seo?.keywords
   const resolvedDescription =
     typeof rawSeoDescription === 'string'
       ? rawSeoDescription
       : rawSeoDescription?.[locale] ?? data.description?.[locale]
-  const resolvedKeywords =
-    typeof rawSeoKeywords === 'string' ? rawSeoKeywords : rawSeoKeywords?.[locale]
   const alternates = buildAlternates(locale, `/ebooks/${slug}`)
   const seoImageAsset = data.seo?.image?.asset
   const ogImageAsset =
@@ -51,7 +48,6 @@ export async function generateMetadata({
   return {
     title: resolvedTitle,
     description: resolvedDescription,
-    keywords: resolvedKeywords,
     alternates,
     openGraph: {
       title: resolvedTitle,

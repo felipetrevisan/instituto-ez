@@ -27,6 +27,11 @@ import type {
   SectionHomeServices,
 } from '@ez/web/types/landing/home'
 import type {
+  SectionImmersionExperience,
+  SectionImmersionInstructor,
+  SectionImmersionIntro,
+} from '@ez/web/types/landing/immersion'
+import type {
   SectionMathematizerBenefits,
   SectionMathematizerCTA,
   SectionMathematizerMathematizer,
@@ -58,7 +63,6 @@ export type Landing<K extends keyof LandingSectionsMap = any> = {
     title: Record<string, string>
     slug: Record<string, { current: string }>
     description?: Record<string, string>
-    keywords?: Record<string, string>
     image?: SanityAsset
     type: 'landing'
     navigation?: Navigation
@@ -71,7 +75,7 @@ export type SectionHero = {
   heading: Record<string, PortableTextBlock[]>
   subheading: Record<string, PortableTextBlock[]>
   description: Record<string, PortableTextBlock[]>
-  image: SanityAsset
+  image?: SanityAsset
   cta: Button[]
   _type: string
 }
@@ -125,6 +129,12 @@ export type LandingSectionsMap = {
     | SectionServicesBenefits
     | SectionServicesWhoIsItFor
     | SectionServicesCTA
+
+  immersion:
+    | SectionHero
+    | SectionImmersionIntro
+    | SectionImmersionExperience
+    | SectionImmersionInstructor
 }
 
 export type LandingNavigationSlot = {

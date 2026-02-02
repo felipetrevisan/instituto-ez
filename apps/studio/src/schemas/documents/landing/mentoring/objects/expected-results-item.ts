@@ -10,11 +10,12 @@ export default defineType({
   fields: [defineField({ name: 'title', type: 'localizedString' })],
   preview: {
     select: {
-      title: `title.${i18n.base}`,
+      title: `title`,
     },
     prepare({ title }) {
+      const localized = Array.isArray(title) ? title.find((item) => item?.lang === i18n.base) : null
       return {
-        title,
+        title: localized?.value || title || 'Sem título',
       }
     },
   },

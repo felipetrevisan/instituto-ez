@@ -1,11 +1,11 @@
-import { BadgeCentIcon } from 'lucide-react'
+import { ImageIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 import { i18n } from '../../../objects/locale/locales'
 
 export default defineType({
   name: 'seal',
   title: 'Seals',
-  icon: BadgeCentIcon,
+  icon: ImageIcon,
   type: 'object',
   fields: [
     defineField({

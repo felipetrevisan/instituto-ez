@@ -11,11 +11,6 @@ export default defineType({
     defineField({ name: 'heading', type: 'localizedArray' }),
     defineField({ name: 'text', type: 'localizedArray' }),
     defineField({
-      name: 'items',
-      type: 'array',
-      of: [{ type: 'mentoring.cta.items' }],
-    }),
-    defineField({
       name: 'cta',
       title: 'CTA Buttons',
       type: 'array',

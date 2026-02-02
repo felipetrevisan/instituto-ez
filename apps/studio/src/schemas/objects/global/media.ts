@@ -1,20 +1,19 @@
-import { LeaveIcon } from '@sanity/icons'
+import { ImageIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
   name: 'media',
   title: 'Media',
   type: 'object',
-  icon: LeaveIcon,
+  icon: ImageIcon,
   fields: [
     defineField({
       name: 'type',
       title: 'Type',
-      initialValue: 'none',
       type: 'string',
+      initialValue: 'icon',
       options: {
         list: [
-          { title: 'None', value: 'none' },
           { title: 'Icon', value: 'icon' },
           { title: 'Image', value: 'image' },
         ],
@@ -31,6 +30,7 @@ export default defineType({
       name: 'image',
       title: 'Image',
       type: 'image',
+      options: { hotspot: true },
       hidden: ({ parent }) => parent?.type !== 'image',
     }),
   ],

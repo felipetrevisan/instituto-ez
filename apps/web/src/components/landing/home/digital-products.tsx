@@ -17,7 +17,7 @@ export const DigitalProducts = ({
 }) => {
   return (
     <StickySection
-      className="relative bg-gradient-to-br from-primary via-primary/95 to-primary/90 py-20 text-primary-foreground md:py-32"
+      className="relative bg-gradient-to-br from-navy via-navy/95 to-navy/90 py-20 text-primary-foreground md:py-32"
       id="digital-products"
     >
       <div className="pointer-events-none absolute inset-0 overflow-hidden">

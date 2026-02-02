@@ -33,7 +33,7 @@ export const ExpectedResults = ({
           )}
 
           {data?.subheading?.[locale] && (
-            <motion.p
+            <motion.div
               className="mx-auto mb-12 max-w-3xl text-justify text-lg text-white/80 md:text-center"
               initial={{ opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.1 }}
@@ -44,7 +44,7 @@ export const ExpectedResults = ({
                 components={createPortableComponents()}
                 value={data.subheading[locale]}
               />
-            </motion.p>
+            </motion.div>
           )}
 
           <div className="grid gap-6 md:grid-cols-2">

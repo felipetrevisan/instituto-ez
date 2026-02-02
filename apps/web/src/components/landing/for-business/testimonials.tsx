@@ -1,12 +1,12 @@
 'use client'
 
-import { cn } from '@ez/shared/lib/utils'
 import { Card } from '@ez/shared/ui/card'
 import { CallAction } from '@ez/web/components/ui/call-action-button'
-import { Icon } from '@ez/web/components/ui/icon'
 import { StickySection } from '@ez/web/components/ui/sticky-section'
 import type { SectionForBusinessTestimonial } from '@ez/web/types/landing/for-business'
+import { Heart, TrendingDown, TrendingUp } from 'lucide-react'
 import { motion } from 'motion/react'
+import { useTranslations } from 'next-intl'
 
 export const Testimonials = ({
   data,
@@ -15,7 +15,7 @@ export const Testimonials = ({
   data: SectionForBusinessTestimonial
   locale: string
 }) => {
-  const colors = ['primary', 'secondary', 'tertiary', 'accent']
+  const t = useTranslations('LandingPageForBusiness')
 
   return (
     <StickySection className="bg-card py-20" id="testimonials">
@@ -35,77 +35,85 @@ export const Testimonials = ({
             </motion.div>
           )}
 
-          {data.items.length > 0 && (
-            <div className="grid gap-6 md:grid-cols-3">
-              {data.items.map((item, index) => {
-                const color = colors[index % colors.length]
+          <div className='grid gap-6 md:grid-cols-3'>
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              transition={{ delay: 0.1, duration: 0.5 }}
+              viewport={{ once: true, margin: '-100px' }}
+              whileHover={{ y: -8 }}
+              whileInView={{ opacity: 1, y: 0 }}
+            >
+              <Card
+                base="for-business"
+                className='h-full space-y-4 bg-gradient-to-br from-card to-primary/5 p-6 text-center transition-all duration-300 hover:shadow-[var(--shadow-card-hover)]'
+              >
+                <div className='mx-auto flex size-16 items-center justify-center rounded-full bg-primary/10'>
+                  <TrendingDown className="size-8 text-primary" />
+                </div>
+                <div className="space-y-2">
+                  <p className='font-bold text-4xl text-primary'>30%</p>
+                  <p className='font-semibold text-foreground'>
+                    {t('testimonials.reductionTitle')}
+                  </p>
+                  <p className='text-muted-foreground text-sm'>
+                    {t('testimonials.reductionSubtitle')}
+                  </p>
+                </div>
+              </Card>
+            </motion.div>
 
-                return (
-                  <motion.div
-                    initial={{ opacity: 0, x: 40 }}
-                    // biome-ignore lint/suspicious/noArrayIndexKey: false positive
-                    key={`forbusiness-testimonial-${index}`}
-                    transition={{ delay: 0.2 * (index + 1), duration: 0.5 }}
-                    viewport={{ once: true }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                  >
-                    <Card
-                      base="for-business"
-                      className={cn(
-                        'hover:-translate-y-1 space-y-4 bg-gradient-to-br from-card p-6 text-center hover:shadow-[var(--shadow-card-hover)]',
-                        {
-                          'to-primary/5': color === 'primary',
-                          'to-secondary/5': color === 'secondary',
-                          'to-tertiary/5': color === 'tertiary',
-                          'to-accent/5': color === 'accent',
-                        },
-                      )}
-                      theme="accent"
-                      variant="landing"
-                    >
-                      {item.icon && (
-                        <div
-                          className={cn(
-                            'mx-auto flex size-16 items-center justify-center rounded-full',
-                            {
-                              'bg-primary/10': color === 'primary',
-                              'bg-secondary/10': color === 'secondary',
-                              'bg-tertiary/10': color === 'tertiary',
-                              'bg-accent/10': color === 'accent',
-                            },
-                          )}
-                        >
-                          <Icon
-                            className={cn('size-8', {
-                              'text-primary': color === 'primary',
-                              'text-secondary': color === 'secondary',
-                              'text-tertiary': color === 'tertiary',
-                              'text-accent': color === 'accent',
-                            })}
-                            name={item.icon}
-                          />
-                        </div>
-                      )}
-                      <div className="space-y-2">
-                        <p
-                          className={cn('font-bold text-4xl', {
-                            'text-primary': color === 'primary',
-                            'text-secondary': color === 'secondary',
-                            'text-tertiary': color === 'tertiary',
-                            'text-accent': color === 'accent',
-                          })}
-                        >
-                          {item.title[locale]}
-                        </p>
-                        <p className="font-semibold text-foreground">{item.description[locale]}</p>
-                        <p className="text-muted-foreground text-sm">{item.text[locale]}</p>
-                      </div>
-                    </Card>
-                  </motion.div>
-                )
-              })}
-            </div>
-          )}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+              viewport={{ once: true, margin: '-100px' }}
+              whileHover={{ y: -8 }}
+              whileInView={{ opacity: 1, y: 0 }}
+            >
+              <Card
+                base="for-business"
+                className='h-full space-y-4 bg-gradient-to-br from-card to-secondary/5 p-6 text-center transition-all duration-300 hover:shadow-[var(--shadow-card-hover)]'
+              >
+                <div className='mx-auto flex size-16 items-center justify-center rounded-full bg-secondary/10'>
+                  <TrendingUp className="size-8 text-secondary" />
+                </div>
+                <div className="space-y-2">
+                  <p className='font-bold text-4xl text-secondary'>40%</p>
+                  <p className='font-semibold text-foreground'>
+                    {t('testimonials.productivityTitle')}
+                  </p>
+                  <p className='text-muted-foreground text-sm'>
+                    {t('testimonials.productivitySubtitle')}
+                  </p>
+                </div>
+              </Card>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+              viewport={{ once: true, margin: '-100px' }}
+              whileHover={{ y: -8 }}
+              whileInView={{ opacity: 1, y: 0 }}
+            >
+              <Card
+                base="for-business"
+                className='h-full space-y-4 bg-gradient-to-br from-card to-accent/5 p-6 text-center transition-all duration-300 hover:shadow-[var(--shadow-card-hover)]'
+              >
+                <div className='mx-auto flex size-16 items-center justify-center rounded-full bg-accent/10'>
+                  <Heart className="size-8 text-accent" />
+                </div>
+                <div className="space-y-2">
+                  <p className='font-bold text-4xl text-accent'>+</p>
+                  <p className='font-semibold text-foreground'>
+                    {t('testimonials.climateTitle')}
+                  </p>
+                  <p className='text-muted-foreground text-sm'>
+                    {t('testimonials.climateSubtitle')}
+                  </p>
+                </div>
+              </Card>
+            </motion.div>
+          </div>
 
           {data.cta && (
             <div className="pt-4 text-center">

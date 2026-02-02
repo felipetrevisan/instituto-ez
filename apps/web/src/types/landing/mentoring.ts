@@ -3,12 +3,14 @@ import type { IconName } from 'lucide-react/dynamic'
 import type { PortableTextBlock } from 'next-sanity'
 
 export type SectionMentoringIntro = {
-  heading: Record<string, PortableTextBlock[]>
-  text: SectionMentoringIntroText[]
+  heading: LocalizedPortableText
+  text: LocalizedPortableText
   _type: string
 }
 
-export type SectionMentoringIntroText = Record<string, PortableTextBlock[]>
+export type LocalizedPortableText =
+  | Record<string, PortableTextBlock[]>
+  | { lang?: string; value?: PortableTextBlock[] }[]
 
 export type SectionMentoringExpectedResults = {
   heading: Record<string, PortableTextBlock[]>
@@ -46,20 +48,6 @@ export type SectionMentoringTargetAudience = {
 export type SectionMentoringCTA = {
   heading: Record<string, PortableTextBlock[]>
   text: Record<string, PortableTextBlock[]>
-  items: SectionMentoringCTAItem[]
   cta: Button[]
   _type: string
-}
-
-export type SectionMentoringCTAItem = {
-  title: Record<string, string>
-  description: Record<string, string>
-  position: 'left' | 'right'
-  icon?: IconName
-  _type: string
-}
-
-export type SectionMentoringCTASplitItems = {
-  left: SectionMentoringCTAItem[]
-  right: SectionMentoringCTAItem[]
 }

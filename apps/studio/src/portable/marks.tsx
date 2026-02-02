@@ -18,4 +18,7 @@ export const portableMarks: PortableTextComponents['marks'] = {
       {children}
     </span>
   ),
+  quote: ({ children }) => (
+    <div className="rounded-xl border-coral border-l-4 bg-navy/5 p-6">{children}</div>
+  ),
 }

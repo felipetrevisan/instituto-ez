@@ -7,11 +7,22 @@ import { PortableText } from '@portabletext/react'
 import { motion } from 'motion/react'
 
 export const Intro = ({ data, locale }: { data: SectionMentoringIntro; locale: string }) => {
+  const resolvePortableText = (value: SectionMentoringIntro['text']) => {
+    if (!value) return undefined
+    if (Array.isArray(value)) {
+      return value.find((item) => item?.lang === locale)?.value
+    }
+    return value[locale]
+  }
+
+  const heading = resolvePortableText(data.heading)
+  const text = resolvePortableText(data.text)
+
   return (
     <StickySection className="bg-gray-light py-16 sm:py-20 md:py-28" id="intro">
       <div className="container mx-auto px-6 md:px-8">
         <div className="mx-auto max-w-4xl">
-          {data?.heading?.[locale] && (
+          {heading && (
             <motion.h2
               className="mb-12 text-center font-bold text-3xl md:text-4xl lg:text-5xl"
               initial={{ opacity: 0, y: 30 }}
@@ -19,11 +30,11 @@ export const Intro = ({ data, locale }: { data: SectionMentoringIntro; locale: s
               viewport={{ once: true }}
               whileInView={{ opacity: 1, y: 0 }}
             >
-              <PortableText components={createPortableComponents()} value={data.heading[locale]} />
+              <PortableText components={createPortableComponents()} value={heading} />
             </motion.h2>
           )}
 
-          {data.text.length > 0 && (
+          {text && text.length > 0 && (
             <motion.div
               className="space-y-6"
               initial={{ opacity: 0, y: 30 }}
@@ -31,15 +42,9 @@ export const Intro = ({ data, locale }: { data: SectionMentoringIntro; locale: s
               viewport={{ once: true }}
               whileInView={{ opacity: 1, y: 0 }}
             >
-              {data.text?.map((text, index) => (
-                <p
-                  className="text-justify text-gray-warm text-lg leading-relaxed md:text-left md:text-xl"
-                  // biome-ignore lint/suspicious/noArrayIndexKey: false positive
-                  key={`mentory-${index}`}
-                >
-                  <PortableText components={createPortableComponents()} value={text[locale]} />
-                </p>
-              ))}
+              <div className="text-justify text-gray-warm text-lg leading-relaxed md:text-left md:text-xl">
+                <PortableText components={createPortableComponents()} value={text} />
+              </div>
             </motion.div>
           )}
         </div>

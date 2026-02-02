@@ -15,7 +15,7 @@ const MotionTitle = motion(Title)
 const DownloadIconMotion = motion(DownloadIcon)
 
 export default function BuySection({ data }: { data: Ebook }) {
-  const { download, price, image } = data
+  const { download, price, image, theme } = data
   const locale = useLocale()
 
   const t = useTranslations('Ebooks')
@@ -65,7 +65,7 @@ export default function BuySection({ data }: { data: Ebook }) {
           )}
         </div>
         <div className="flex h-full w-full justify-center gap-4 md:justify-end lg:col-span-2">
-          <PriceBubble price={price} />
+          <PriceBubble price={price} theme={theme} />
         </div>
       </div>
     </div>

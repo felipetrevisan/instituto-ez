@@ -35,7 +35,8 @@ export type SectionForBusinessCoursesItem = {
   _type: string
 }
 
-export type Category = Record<string, string> & {
+export type Category = {
+  label?: Record<string, string> | { lang?: string; value?: string }[]
   _type: string
   _key: string
 }
@@ -76,17 +77,7 @@ export type SectionForBusinessConsultingItem = {
 
 export type SectionForBusinessTestimonial = {
   heading: Record<string, string>
-  items: SectionForBusinessTestimonialItem[]
   cta?: Button
-  _type: string
-}
-
-export type SectionForBusinessTestimonialItem = {
-  title: Record<string, string>
-  description: Record<string, string>
-  text: Record<string, string>
-  classname?: string
-  icon?: IconName
   _type: string
 }
 

@@ -16,7 +16,6 @@ export type MasterclassCard = {
 export type MasterclassSeo = {
   title?: Record<string, string>
   description?: Record<string, string>
-  keywords?: Record<string, string>
   image?: SanityAsset
 }
 

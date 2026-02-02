@@ -40,7 +40,6 @@ export async function generateMetadata({
 
   const title = settings?.title[locale] || 'Instituto Enzo'
   const description = settings?.description?.[locale]
-  const keywords = settings?.keywords?.[locale]
   const ogImage = settings?.seoImage?.asset
     ? resolveOpenGraphImage(settings.seoImage.asset)
     : undefined
@@ -60,7 +59,6 @@ export async function generateMetadata({
       default: title,
     },
     description,
-    keywords,
     openGraph: {
       title,
       description,

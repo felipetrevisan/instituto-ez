@@ -2,7 +2,7 @@
 
 import { cn } from '@ez/shared/lib/utils'
 import { CountingNumber } from '@ez/shared/ui/animated/text/counter'
-import type { Price } from '@ez/web/types/ebook'
+import type { Price, ThemeEbook } from '@ez/web/types/ebook'
 import { motion } from 'motion/react'
 import { useLocale, useTranslations } from 'next-intl'
 
@@ -10,7 +10,7 @@ type CSSVariables = {
   [key: `--${string}`]: string
 }
 
-export default function PriceBubble({ price }: { price: Price }) {
+export default function PriceBubble({ price, theme }: { price: Price; theme?: ThemeEbook }) {
   const locale = useLocale()
   const t = useTranslations('Ebooks')
 
@@ -18,15 +18,15 @@ export default function PriceBubble({ price }: { price: Price }) {
     typeof price?.regular.price === 'number' &&
     (price?.regular.price === 0 || (price.hasDiscount && price?.discount?.price === 0))
 
-  const theme = price.theme
+  const primary = theme?.primary?.hex ?? 'var(--primary, #18e2e2)'
+  const secondary = theme?.secondary?.hex ?? 'var(--secondary, #06b6d4)'
+  const text = 'var(--primary-foreground, #ffffff)'
+  const border = theme?.text?.hex ?? 'var(--text, #0f172a)'
 
   const style: React.CSSProperties & CSSVariables = {
-    '--regular-stroke-c': `${theme?.regular.text.stroke?.hex}`,
-    '--regular-fill-c': `${theme?.regular.text.fill?.hex}`,
-    '--regular-border-c': `${theme?.regular.border?.hex}`,
-    '--free-stroke-c': `${theme?.free.text.stroke?.hex}`,
-    '--free-fill-c': `${theme?.free.text.fill?.hex}`,
-    '--free-border-c': `${theme?.free.border?.hex}`,
+    '--price-stroke-c': text,
+    '--price-fill-c': text,
+    '--price-border-c': border,
   }
 
   return (
@@ -50,17 +50,8 @@ export default function PriceBubble({ price }: { price: Price }) {
         >
           <defs>
             <linearGradient id="starGradient" x1="0%" x2="100%" y1="0%" y2="100%">
-              {isFree ? (
-                <>
-                  <stop offset="0%" stopColor={theme.free.background.primary.hex} />
-                  <stop offset="100%" stopColor={theme.free.background.secondary.hex} />
-                </>
-              ) : (
-                <>
-                  <stop offset="0%" stopColor={theme.regular.background.primary.hex} />
-                  <stop offset="100%" stopColor={theme.regular.background.secondary.hex} />
-                </>
-              )}
+              <stop offset="0%" stopColor={primary} />
+              <stop offset="100%" stopColor={secondary} />
             </linearGradient>
           </defs>
 
@@ -68,8 +59,8 @@ export default function PriceBubble({ price }: { price: Price }) {
             animate={{ rotate: 360 }}
             fill="url(#starGradient)"
             points="100,5 114,47 148,18 139,61 182,53 153,86 195,100 153,114 182,148 139,139 148,182 114,153 100,195 86,153 52,182 61,139 18,148 47,114 5,100 47,86 18,53 61,61 52,18 86,47"
-            stroke={isFree ? theme.free.border.hex : theme.regular.border.hex}
-            strokeWidth="3"
+            stroke={border}
+            strokeWidth="4"
             transition={{ duration: 15, repeat: Number.POSITIVE_INFINITY, ease: 'circInOut' }}
           />
         </motion.svg>
@@ -78,9 +69,9 @@ export default function PriceBubble({ price }: { price: Price }) {
             <motion.span
               animate={{ scale: [0, 1.1] }}
               className={cn(
-                '[--tw-drop-shadow-color:_var(--regular-border-c)]] [-webkit-text-fill-color:_var(--regular-fill-c)]] flex flex-row items-center justify-center gap-2 text-center font-bold font-oswald text-3xl text-black drop-shadow-xl [-webkit-text-stroke:_1px_var(--regular-stroke-c)]',
+                '[--tw-drop-shadow-color:_var(--price-border-c)]] [-webkit-text-fill-color:_var(--price-fill-c)]] flex flex-row items-center justify-center gap-2 text-center font-bold font-oswald text-3xl text-white drop-shadow-2xl [-webkit-text-stroke:_1px_var(--price-stroke-c)]',
                 {
-                  'text-white drop-shadow-xl [--tw-drop-shadow-color:_var(--free-fill-c)] [-webkit-text-fill-color:_var(--free-fill-c)] [-webkit-text-stroke:_1px_var(--free-stroke-c)]':
+                  'text-white drop-shadow-2xl [--tw-drop-shadow-color:_var(--price-border-c)] [-webkit-text-fill-color:_var(--price-fill-c)] [-webkit-text-stroke:_1px_var(--price-stroke-c)]':
                     isFree,
                 },
               )}
@@ -109,9 +100,9 @@ export default function PriceBubble({ price }: { price: Price }) {
                 <motion.span
                   animate={{ scale: [0, 1.1] }}
                   className={cn(
-                    '[-webkit-text-fill-color:_var(--regular-fill-c)]] flex flex-col items-center justify-center gap-2 text-center font-bold font-oswald text-3xl text-black drop-shadow-xl [--tw-drop-shadow-color:_var(--regular-border-c)] [-webkit-text-stroke:_1px_var(--regular-stroke-c)]',
+                    '[-webkit-text-fill-color:_var(--price-fill-c)]] flex flex-col items-center justify-center gap-2 text-center font-bold font-oswald text-3xl text-white drop-shadow-2xl [--tw-drop-shadow-color:_var(--price-border-c)] [-webkit-text-stroke:_1px_var(--price-stroke-c)]',
                     {
-                      'text-white drop-shadow-xl [--tw-drop-shadow-color:_var(--free-fill-c)] [-webkit-text-fill-color:_var(--regular-fill-c)] [-webkit-text-stroke:_1px_var(--free-stroke-c)]':
+                      'text-white drop-shadow-2xl [--tw-drop-shadow-color:_var(--price-border-c)] [-webkit-text-fill-color:_var(--price-fill-c)] [-webkit-text-stroke:_1px_var(--price-stroke-c)]':
                         isFree,
                     },
                   )}
@@ -149,9 +140,9 @@ export default function PriceBubble({ price }: { price: Price }) {
               {!price?.hasDiscount && (
                 <motion.span
                   className={cn(
-                    '[-webkit-text-fill-color:_var(--regular-fill-c)]] flex flex-col items-center justify-center gap-2 text-center font-bold font-oswald text-3xl text-black drop-shadow-xl [--tw-drop-shadow-color:_var(--regular-border-c)] [-webkit-text-stroke:_1px_var(--regular-stroke-c)]',
+                    '[-webkit-text-fill-color:_var(--price-fill-c)]] flex flex-col items-center justify-center gap-2 text-center font-bold font-oswald text-3xl text-white drop-shadow-2xl [--tw-drop-shadow-color:_var(--price-border-c)] [-webkit-text-stroke:_1px_var(--price-stroke-c)]',
                     {
-                      'text-white drop-shadow-xl [--tw-drop-shadow-color:_var(--free-fill-c)] [-webkit-text-fill-color:_var(--regular-fill-c)] [-webkit-text-stroke:_1px_var(--free-stroke-c)]':
+                      'text-white drop-shadow-2xl [--tw-drop-shadow-color:_var(--price-border-c)] [-webkit-text-fill-color:_var(--price-fill-c)] [-webkit-text-stroke:_1px_var(--price-stroke-c)]':
                         isFree,
                     },
                   )}

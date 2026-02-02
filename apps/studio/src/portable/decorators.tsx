@@ -49,3 +49,18 @@ export const FontWeightDecorator = (props: any, weight: string) => {
 
   return <span className={classes}>{props.children}</span>
 }
+
+// biome-ignore lint/suspicious/noExplicitAny: false positive
+export const FontSizeDecorator = (props: any, size: string) => {
+  const sizeMap = {
+    sm: 'text-sm',
+    base: 'text-base',
+    lg: 'text-lg',
+    xl: 'text-xl',
+    '2xl': 'text-2xl',
+  } as const
+
+  const classes = sizeMap[size as keyof typeof sizeMap]
+
+  return <span className={classes}>{props.children}</span>
+}

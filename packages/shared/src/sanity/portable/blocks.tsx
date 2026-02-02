@@ -34,7 +34,6 @@ export const portableBlocks: PortableTextComponents['block'] = {
   'normal-center': ({ children }) => (
     <span className="my-2 inline-block text-center text-base">{children}</span>
   ),
-
   'h1-left': ({ children }) => (
     <h1 className="my-6 inline-block text-left font-bold text-4xl">{children}</h1>
   ),
@@ -53,7 +52,6 @@ export const portableBlocks: PortableTextComponents['block'] = {
   'normal-left': ({ children }) => (
     <span className="my-2 inline-block text-left text-base">{children}</span>
   ),
-
   'h1-right': ({ children }) => (
     <h1 className="my-6 inline-block text-right font-bold text-4xl">{children}</h1>
   ),
@@ -72,7 +70,6 @@ export const portableBlocks: PortableTextComponents['block'] = {
   'normal-right': ({ children }) => (
     <span className="my-2 inline-block text-right">{children}</span>
   ),
-
   'h1-justify': ({ children }) => (
     <h1 className="my-6 inline-block text-justify text-4xl">{children}</h1>
   ),

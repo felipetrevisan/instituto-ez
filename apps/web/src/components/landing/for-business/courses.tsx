@@ -13,11 +13,22 @@ export const Courses = ({ data, locale }: { data: SectionForBusinessCourses; loc
   const colors = ['primary', 'secondary', 'tertiary', 'accent']
   const t = useTranslations('LandingPageForBusiness')
 
+  const resolveCategoryLabel = (category: Category) => {
+    const value = category.label
+    if (!value) return ''
+    if (Array.isArray(value)) {
+      return value.find((item) => item?.lang === locale)?.value ?? ''
+    }
+    return value[locale] ?? ''
+  }
+
   const formatCategory = (categories: Category[]) =>
     categories.reduce((acc, item, index) => {
-      if (index === 0) return item[locale]
-      if (index === categories.length - 1) return `${acc} ${t('and')} ${item[locale]}`
-      return `${acc}, ${item[locale]}`
+      const label = resolveCategoryLabel(item)
+      if (!label) return acc
+      if (index === 0) return label
+      if (index === categories.length - 1) return `${acc} ${t('and')} ${label}`
+      return `${acc}, ${label}`
     }, '')
 
   return (
@@ -100,7 +111,7 @@ export const Courses = ({ data, locale }: { data: SectionForBusinessCourses; loc
                           {item.type === 'INPERSON' ? t('inPerson') : t('remote')},{' '}
                           {item.time?.[locale]}
                         </p>
-                        {item.categories && (
+                        {item.categories && formatCategory(item.categories) && (
                           <p>
                             <span className="font-semibold text-foreground">{t('focus')}:</span>{' '}
                             {formatCategory(item.categories ?? [])}

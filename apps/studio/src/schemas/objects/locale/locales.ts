@@ -4,7 +4,6 @@
 const supportedLanguages = [
   { id: 'pt', title: 'Portuguese', isDefault: true },
   { id: 'en', title: 'English' },
-  { id: 'es', title: 'Spanish' },
 ]
 
 export const baseLanguage = supportedLanguages.find((l) => l.isDefault)

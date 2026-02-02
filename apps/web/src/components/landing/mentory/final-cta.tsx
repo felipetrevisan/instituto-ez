@@ -1,17 +1,14 @@
 'use client'
 
 import { CallAction } from '@ez/web/components/ui/call-action-button'
-import { Icon } from '@ez/web/components/ui/icon'
 import { StickySection } from '@ez/web/components/ui/sticky-section'
 import type { SectionMentoringCTA } from '@ez/web/types/landing/mentoring'
 import { createPortableComponents } from '@ez/web/utils/create-portable-components'
 import { PortableText } from '@portabletext/react'
+import { CheckCircle2, Target, TrendingUp, Zap } from 'lucide-react'
 import { motion } from 'motion/react'
 
 export const FinalCTA = ({ data, locale }: { data: SectionMentoringCTA; locale: string }) => {
-  const left = data.items.filter((item) => item.position === 'left')
-  const right = data.items.filter((item) => item.position === 'right')
-
   return (
     <StickySection
       className="relative overflow-hidden bg-gradient-to-br from:bg-gray-light to:bg-background py-16 sm:py-20 md:py-28"
@@ -19,68 +16,68 @@ export const FinalCTA = ({ data, locale }: { data: SectionMentoringCTA; locale: 
     >
       <div className="container mx-auto px-6 md:px-8">
         <div className="relative mx-auto max-w-6xl">
-          {left.length > 0 && (
-            <div className="-left-12 absolute top-1/4 hidden lg:block">
-              <div className="flex flex-col gap-4">
-                {left?.map((item, index) => {
-                  return (
-                    <div
-                      className="text-right"
-                      key={`left-${
-                        // biome-ignore lint/suspicious/noArrayIndexKey: false positive
-                        index
-                      }`}
-                    >
-                      <div className="rounded-2xl border border-white/20 bg-white/10 p-6 shadow-elegant backdrop-blur-sm">
-                        <div className="flex items-center gap-4">
-                          <div>
-                            <p className="font-bold text-navy">{item.title[locale]}</p>
-                            <p className="text-gray-warm text-sm">{item.description[locale]}</p>
-                          </div>
-                          {item.icon && (
-                            <div className="rounded-xl bg-coral/20 p-3">
-                              <Icon className="size-6 text-coral" name={item.icon} />
-                            </div>
-                          )}
-                        </div>
-                      </div>
+          <div className="-left-12 absolute top-1/4 hidden lg:block">
+            <div className="flex flex-col gap-4">
+              <div className="text-right">
+                <div className="rounded-2xl border border-white/20 bg-white/10 p-6 shadow-elegant backdrop-blur-sm">
+                  <div className="flex items-center gap-4">
+                    <div>
+                      <p className="font-bold text-navy">15+</p>
+                      <p className="text-gray-warm text-sm">Anos de Experiência</p>
                     </div>
-                  )
-                })}
+                    <div className="rounded-xl bg-coral/20 p-3">
+                      <TrendingUp className="size-6 text-coral" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="text-right">
+                <div className="rounded-2xl border border-white/20 bg-white/10 p-6 shadow-elegant backdrop-blur-sm">
+                  <div className="flex items-center gap-4">
+                    <div>
+                      <p className="font-bold text-navy">Resultados+</p>
+                      <p className="text-gray-warm text-sm">Mensuráveis e Reais</p>
+                    </div>
+                    <div className="rounded-xl bg-coral/20 p-3">
+                      <CheckCircle2 className="size-6 text-coral" />
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          )}
+          </div>
 
-          {right.length > 0 && (
-            <div className="-right-12 absolute top-1/4 hidden lg:block">
-              <div className="flex flex-col gap-4">
-                {right?.map((item, index) => {
-                  return (
-                    <div
-                      key={`right-${
-                        // biome-ignore lint/suspicious/noArrayIndexKey: false positive
-                        index
-                      }`}
-                    >
-                      <div className="rounded-2xl border border-white/20 bg-white/10 p-6 shadow-elegant backdrop-blur-sm">
-                        <div className="flex items-center gap-4">
-                          {item.icon && (
-                            <div className="rounded-xl bg-cyan/20 p-3">
-                              <Icon className="size-6 text-cyan" name={item.icon} />
-                            </div>
-                          )}
-                          <div>
-                            <p className="font-bold text-navy">{item.title[locale]}</p>
-                            <p className="text-gray-warm text-sm">{item.description[locale]}</p>
-                          </div>
-                        </div>
-                      </div>
+          <div className="-right-12 absolute top-1/4 hidden lg:block">
+            <div className="flex flex-col gap-4">
+              <div>
+                <div className="rounded-2xl border border-white/20 bg-white/10 p-6 shadow-elegant backdrop-blur-sm">
+                  <div className="flex items-center gap-4">
+                    <div className="rounded-xl bg-cyan/20 p-3">
+                      <Target className="size-6 text-cyan" />
                     </div>
-                  )
-                })}
+                    <div>
+                      <p className="font-bold text-navy">100%</p>
+                      <p className="text-gray-warm text-sm">Método Comprovado</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div className="rounded-2xl border border-white/20 bg-white/10 p-6 shadow-elegant backdrop-blur-sm">
+                  <div className="flex items-center gap-4">
+                    <div className="rounded-xl bg-cyan/20 p-3">
+                      <Zap className="size-6 text-cyan" />
+                    </div>
+                    <div>
+                      <p className="font-bold text-navy">Execução</p>
+                      <p className="text-gray-warm text-sm">De Alto Impacto</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          )}
+          </div>
 
           <div className="relative z-10 mx-auto max-w-3xl text-center">
             <motion.h2
@@ -94,7 +91,7 @@ export const FinalCTA = ({ data, locale }: { data: SectionMentoringCTA; locale: 
             </motion.h2>
 
             {data.text && (
-              <motion.p
+              <motion.div
                 className="mx-auto mb-10 max-w-2xl text-justify text-gray-warm text-lg leading-relaxed md:text-center md:text-xl"
                 initial={{ opacity: 0, y: 20 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
@@ -102,7 +99,7 @@ export const FinalCTA = ({ data, locale }: { data: SectionMentoringCTA; locale: 
                 whileInView={{ opacity: 1, y: 0 }}
               >
                 <PortableText components={createPortableComponents()} value={data.text[locale]} />
-              </motion.p>
+              </motion.div>
             )}
 
             {data.cta && data.cta.length > 0 && (

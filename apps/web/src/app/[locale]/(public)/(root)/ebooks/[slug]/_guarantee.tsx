@@ -1,8 +1,6 @@
 'use client'
 
 import { Title } from '@ez/shared/ui/title'
-import { urlForImage } from '@ez/web/config/image'
-import { useLandingPageSettings } from '@ez/web/hooks/use-landing-page-settings'
 import { motion } from 'motion/react'
 import Image from 'next/image'
 import { useLocale, useTranslations } from 'next-intl'
@@ -10,7 +8,6 @@ import { useLocale, useTranslations } from 'next-intl'
 const MotionTitle = motion(Title)
 
 export default function GuaranteeSection() {
-  const { data } = useLandingPageSettings()
   const locale = useLocale()
 
   const t = useTranslations('Ebooks')
@@ -31,7 +28,7 @@ export default function GuaranteeSection() {
         </MotionTitle>
       </motion.h2>
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 lg:gap-8">
-        {data?.seals?.[locale].map((seal, i) => (
+        {/* {data?.seals?.[locale].map((seal, i) => (
           <motion.div
             className="relative flex size-40 flex-col items-center lg:size-64 lg:p-8"
             initial={{ opacity: 0, y: 40 }}
@@ -47,7 +44,7 @@ export default function GuaranteeSection() {
               src={urlForImage(seal.seal.image.asset).format('webp').quality(80).url()}
             />
           </motion.div>
-        ))}
+        ))} */}
       </div>
     </div>
   )

@@ -10,11 +10,6 @@ export default defineType({
   fields: [
     defineField({ name: 'element', type: 'immersion.experience.elements' }),
     defineField({ name: 'image', type: 'image' }),
-    defineField({
-      name: 'icon',
-      title: 'Icon',
-      type: 'lucide-icon',
-    }),
   ],
   preview: {
     select: {

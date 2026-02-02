@@ -2,6 +2,37 @@ import { env } from '@ez/web/config/env'
 import type { ClientPerspective, QueryParams } from 'next-sanity'
 import { client } from './client'
 
+const localizedLangs = new Set(['pt', 'en', 'es'])
+
+const isLocalizedEntry = (value: unknown): value is { lang: string; value: unknown } => {
+  if (!value || typeof value !== 'object') return false
+  const entry = value as { lang?: unknown; value?: unknown }
+  return typeof entry.lang === 'string' && localizedLangs.has(entry.lang) && 'value' in entry
+}
+
+const normalizeLocalizedArrays = (value: unknown): unknown => {
+  if (Array.isArray(value)) {
+    if (value.length > 0 && value.every(isLocalizedEntry)) {
+      const mapped: Record<string, unknown> = {}
+      for (const entry of value) {
+        mapped[entry.lang] = normalizeLocalizedArrays(entry.value)
+      }
+      return mapped
+    }
+    return value.map(normalizeLocalizedArrays)
+  }
+
+  if (value && typeof value === 'object') {
+    const mapped: Record<string, unknown> = {}
+    for (const [key, child] of Object.entries(value)) {
+      mapped[key] = normalizeLocalizedArrays(child)
+    }
+    return mapped
+  }
+
+  return value
+}
+
 /**
  * Used to fetch data in Server Components, it has built in support for handling Draft Mode and perspectives.
  * When using the "published" perspective then time-based revalidation is used, set to match the time-to-live on Sanity's API CDN (60 seconds)
@@ -25,7 +56,7 @@ export async function sanityFetch<QueryResponse>({
   stega?: boolean
 }) {
   if (perspective === 'previewDrafts') {
-    return client.fetch<QueryResponse>(query, params, {
+    const result = await client.fetch<QueryResponse>(query, params, {
       stega,
       perspective: 'previewDrafts',
       // The token is required to fetch draft content
@@ -35,9 +66,11 @@ export async function sanityFetch<QueryResponse>({
       // And we can't cache the responses as it would slow down the live preview experience
       next: { revalidate: 0 },
     })
+
+    return normalizeLocalizedArrays(result) as QueryResponse
   }
 
-  return client.fetch<QueryResponse>(query, params, {
+  const result = await client.fetch<QueryResponse>(query, params, {
     stega,
     perspective: 'published',
     returnQuery: true,
@@ -47,4 +80,6 @@ export async function sanityFetch<QueryResponse>({
     // When using the `published` perspective we use time-based revalidation to match the time-to-live on Sanity's API CDN (60 seconds)
     next: { revalidate: 60 },
   })
+
+  return normalizeLocalizedArrays(result) as QueryResponse
 }

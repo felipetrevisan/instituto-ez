@@ -9,7 +9,7 @@ export default defineType({
   hidden: ({ document }) => document?.key !== 'mentoring',
   fields: [
     defineField({ name: 'heading', type: 'localizedArray' }),
-    defineField({ name: 'text', type: 'array', of: [{ type: 'localizedArray' }] }),
+    defineField({ name: 'text', type: 'localizedArray' }),
   ],
   preview: {
     prepare() {

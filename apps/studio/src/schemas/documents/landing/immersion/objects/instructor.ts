@@ -3,7 +3,7 @@ import { defineField, defineType } from 'sanity'
 
 export default defineType({
   name: 'immersion.instructor',
-  title: 'Instuctor — Immersion',
+  title: 'Instructor — Immersion',
   icon: PackageIcon,
   type: 'object',
   hidden: ({ document }) => document?.key !== 'immersion',
@@ -19,7 +19,7 @@ export default defineType({
   ],
   preview: {
     prepare() {
-      return { title: 'Instuctor' }
+      return { title: 'Instructor' }
     },
   },
 })

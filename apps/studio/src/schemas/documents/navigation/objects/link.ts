@@ -40,7 +40,7 @@ export default defineType({
       title: 'Internal Link',
       description: 'Select a page to navigate',
       type: 'reference',
-      to: [{ type: 'page' }, { type: 'landingPage' }],
+      to: [{ type: 'landingPage' }],
       hidden: ({ parent }) =>
         (parent?.link_type !== 'INTERNAL' && parent?.link_type !== 'LANDING') || parent?.is_home,
       validation: (Rule) =>

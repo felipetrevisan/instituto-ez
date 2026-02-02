@@ -2,7 +2,7 @@ import { MenuIcon } from '@sanity/icons'
 import { defineType } from 'sanity'
 
 export default defineType({
-  name: 'accordion-content',
+  name: 'accordionContentWidget',
   type: 'object',
   title: 'Content',
   icon: MenuIcon,

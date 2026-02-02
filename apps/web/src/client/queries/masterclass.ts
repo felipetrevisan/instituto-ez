@@ -38,7 +38,6 @@ const seoField = `
   "seo": seo {
     title,
     description,
-    keywords,
     "image": image {
       ${imageField}
     }
@@ -47,8 +46,6 @@ const seoField = `
 
 const buttonFields = `
    _key,
-  "visible": show_button,
-  "disabled": disable_button,
   "label": button_label,
   "iconPrefix": button_icon_prefix,
   "iconSuffix": button_icon_suffix,
@@ -69,13 +66,10 @@ const buttonFields = `
     },
     null
   ),
-  "params": button_internal_params,
   "theme": {
     theme,
     variant,
-    rounded,
-    size,
-    effect
+    size
   }
 `
 

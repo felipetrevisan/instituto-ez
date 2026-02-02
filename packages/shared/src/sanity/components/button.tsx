@@ -13,7 +13,6 @@ type ButtonType = {
   variant: ButtonVariants['variant']
   theme: ButtonVariants['theme']
   size: ButtonVariants['size']
-  rounded: ButtonVariants['rounded']
   fullWidth: ButtonVariants['fullWidth']
   label: string
   action: 'link' | 'dialog'
@@ -24,7 +23,7 @@ type ButtonType = {
 const ButtonComponent = ({ value }: { value: ButtonType }) => {
   const { setIsContactDialogOpen, setContactSubject } = useShared()
 
-  const { label, link, variant, theme, size, rounded, fullWidth, action, icon, subject } = value
+  const { label, link, variant, theme, size, fullWidth, action, icon, subject } = value
 
   const handleClick = () => {
     if (action === 'dialog') {
@@ -40,7 +39,6 @@ const ButtonComponent = ({ value }: { value: ButtonType }) => {
       className="p-5 font-bold"
       fullWidth={fullWidth}
       onClick={action === 'dialog' ? handleClick : undefined}
-      rounded={rounded}
       size={size}
       theme={theme}
       variant={variant}

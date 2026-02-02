@@ -2,7 +2,6 @@ import {
   authorObject,
   authorsObject,
   badgeObject,
-  buttonObject as buttonThemeObject,
   catalogDocument,
   categoryDocument,
   chapterObject,
@@ -10,12 +9,11 @@ import {
   contentObject,
   coverImageObject,
   downloadObject,
-  footerObject as footerThemeObject,
+  ebookPriceDocument,
+  ebookThemeDocument,
   metadataObject,
   overviewObject,
-  priceBadgeObject,
   priceObject,
-  sealObjectObject,
   sectionObject as sectionEbookObject,
   settingsDocument as settingsEbookDocument,
   themeObject,
@@ -79,7 +77,6 @@ import {
 import {
   expectedResultsItemObject,
   expectedResultsObject,
-  finalCtaItemObject as finalCtaItemMentoringObject,
   finalCtaObject as finalCtaMentoringObject,
   introObject as introMentoringObject,
   methodsStepItemObject,
@@ -96,33 +93,13 @@ import {
   methodSessionsObject,
   whoIsItForObject,
 } from '@ez/studio/schemas/documents/landing/services'
-import {
-  contentItemObject as contentItemMasterclassObject,
-  contentObject as contentMasterclassObject,
-  expertItemObject,
-  expertObject,
-  expertSocialObject,
-  finalCtaObject as finalCtaMasterclassObject,
-  formatItemObject,
-  formatObject,
-  forWhoItemObject,
-  forWhoObject,
-  heroObject as heroMasterclassObject,
-  masterclassDocument,
-  problemItemObject,
-  problemObject,
-  sectionSettingsObject,
-  transformationItemObject,
-  transformationObject,
-} from '@ez/studio/schemas/documents/masterclass'
+import { masterclassDocument } from '@ez/studio/schemas/documents/masterclass'
 import {
   linkObject,
   navigationDocument,
   navigationItemObject,
-  navigationSubmenuItemObject,
 } from '@ez/studio/schemas/documents/navigation'
 import {
-  pageDocument,
   settingsDocument,
   testimonialsDocument,
 } from '@ez/studio/schemas/documents/site'
@@ -130,26 +107,21 @@ import {
   accordionContentLandingPageObject,
   accordionContentObject,
   accordionObject,
-  alertObject,
-  buttonObject as buttonEditorObject,
-  cardsObject,
-  dividerObject,
-  listObject,
+  quoteObject,
   richTextObject,
-  tabsObject,
-  testimonialObject as testimonialEditorObject,
-  titleObject,
 } from '@ez/studio/schemas/objects/editor'
 import {
   buttonObject,
-  iconObject,
   logoObject,
-  pageObject,
-  ribbonObject,
-  sectionObject,
+  mediaObject,
   socialNetworksItemObject,
 } from '@ez/studio/schemas/objects/global'
 import {
+  localeImageValueObject,
+  localePortableTextValueObject,
+  localeStringValueObject,
+  localeTextValueObject,
+  localeUrlValueObject,
   localizedArrayPortableTextObject,
   localizedImageObject,
   localizedSlugObject,
@@ -163,6 +135,11 @@ import type { SchemaTypeDefinition } from 'sanity'
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
     // Localization
+    localeStringValueObject,
+    localeTextValueObject,
+    localePortableTextValueObject,
+    localeUrlValueObject,
+    localeImageValueObject,
     localizedSlugObject,
     localizedStringObject,
     localizedTextObject,
@@ -205,7 +182,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     introMentoringObject,
     targetAudienceObject,
     finalCtaMentoringObject,
-    finalCtaItemMentoringObject,
 
     // About
     servicesAboutObject,
@@ -251,47 +227,25 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 
     // Masterclass
     masterclassDocument,
-    sectionSettingsObject,
-    heroMasterclassObject,
-    forWhoObject,
-    forWhoItemObject,
-    problemObject,
-    problemItemObject,
-    transformationObject,
-    transformationItemObject,
-    contentMasterclassObject,
-    contentItemMasterclassObject,
-    formatObject,
-    formatItemObject,
-    expertObject,
-    expertItemObject,
-    expertSocialObject,
-    finalCtaMasterclassObject,
 
     // Site
     settingsDocument,
     testimonialsDocument,
-    pageDocument,
 
     // Navigation
     navigationDocument,
     navigationItemObject,
-    navigationSubmenuItemObject,
     socialNetworksItemObject,
     linkObject,
 
     // Global
     buttonObject,
-    ribbonObject,
-    iconObject,
     logoObject,
-    pageObject,
-    sectionObject,
+    mediaObject,
 
     // Ebook
     coverImageObject,
     metadataObject,
-    sealObjectObject,
     chaptersObject,
     chapterObject,
     authorsObject,
@@ -299,29 +253,21 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     downloadObject,
     priceObject,
     badgeObject,
-    priceBadgeObject,
     overviewObject,
     contentObject,
     themeObject,
-    buttonThemeObject,
-    footerThemeObject,
     sectionEbookObject,
     catalogDocument,
     categoryDocument,
+    ebookPriceDocument,
+    ebookThemeDocument,
     settingsEbookDocument,
 
     // Editor Widgets
-    buttonEditorObject,
-    titleObject,
     accordionObject,
     accordionContentObject,
     accordionContentLandingPageObject,
-    alertObject,
-    dividerObject,
-    testimonialEditorObject,
-    listObject,
     richTextObject,
-    tabsObject,
-    cardsObject,
+    quoteObject,
   ],
 }

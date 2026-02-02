@@ -12,7 +12,6 @@ export type Ebook = {
   price: Price
   seo: {
     description: Record<string, string> | string
-    keywords: Record<string, string> | string
     image?: SanityAsset
   }
   download: {
@@ -125,79 +124,54 @@ export type Price = {
     price: number
     text?: Record<string, string>
   }
-  theme: {
-    regular: PriceTheme
-    free: PriceTheme
-  }
-}
-
-export type PriceTheme = {
-  background: {
-    primary: Color
-    secondary: Color
-  }
-  border: Color
-  text: {
-    stroke: Color
-    fill: Color
-  }
 }
 
 export type ThemeEbook = {
   text: Color
   primary: Color
   secondary: Color
-  tertiary: Color
-  footer: {
-    background: Color
-    text: Color
-  }
-  button: {
-    header: {
-      default: {
-        text: Color
-        background: Color
-      }
-      hover: {
-        text: Color
-        background: Color
-      }
-    }
-    stickyHeader: {
-      default: {
-        text: Color
-        background: Color
-      }
-      hover: {
-        text: Color
-        background: Color
-      }
-    }
-  }
+}
+
+const parseHexChannel = (value: string) => Number.parseInt(value, 16) / 255
+
+const isLightColor = (hex?: string) => {
+  if (!hex || !hex.startsWith('#') || (hex.length !== 7 && hex.length !== 4)) return false
+  const normalized =
+    hex.length === 4
+      ? `#${hex[1]}${hex[1]}${hex[2]}${hex[2]}${hex[3]}${hex[3]}`
+      : hex
+  const r = parseHexChannel(normalized.slice(1, 3))
+  const g = parseHexChannel(normalized.slice(3, 5))
+  const b = parseHexChannel(normalized.slice(5, 7))
+  const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b
+  return luminance > 0.6
 }
 
 export function mapThemeToCSSVars(theme?: ThemeEbook) {
   if (!theme) return {}
 
+  const primary = theme.primary?.hex
+  const secondary = theme.secondary?.hex ?? primary
+  const text = theme.text?.hex
+  const primaryForeground = isLightColor(primary) ? '#0f172a' : '#f8fafc'
+  const secondaryForeground = isLightColor(secondary) ? '#0f172a' : '#f8fafc'
+
   return {
-    '--primary': theme.primary?.hex,
-    '--secondary': theme.secondary?.hex,
-    '--tertiary': theme.tertiary?.hex,
-
-    '--footer': theme.footer.background?.hex,
-    '--footer-foreground': theme.footer.text?.hex,
-
-    '--header-button-default-text': theme.button?.header?.default?.text?.hex,
-    '--header-button-default-background': theme.button?.header?.default?.background?.hex,
-
-    '--header-button-hover-text': theme.button?.header?.hover?.text?.hex,
-    '--header-button-hover-background': theme.button?.header?.hover?.background?.hex,
-
-    '--header-sticky-button-default-text': theme.button?.stickyHeader?.default?.text?.hex,
-    '--header-sticky-button-default-background':
-      theme.button?.stickyHeader?.default?.background?.hex,
-
-    '--header-sticky-button-hover-text': theme.button?.stickyHeader?.hover?.text?.hex,
-    '--header-sticky-button-hover-background': theme.button?.stickyHeader?.hover?.background?.hex,
+    '--primary': primary,
+    '--secondary': secondary,
+    '--tertiary': secondary ?? primary,
+    '--text': text,
+    '--primary-foreground': primaryForeground,
+    '--secondary-foreground': secondaryForeground,
+    '--footer': primary,
+    '--footer-foreground': primaryForeground,
+    '--header-button-default-text': primaryForeground,
+    '--header-button-default-background': primary,
+    '--header-button-hover-text': secondaryForeground,
+    '--header-button-hover-background': secondary ?? primary,
+    '--header-sticky-button-default-text': primaryForeground,
+    '--header-sticky-button-default-background': primary,
+    '--header-sticky-button-hover-text': secondaryForeground,
+    '--header-sticky-button-hover-background': secondary ?? primary,
   }
 }

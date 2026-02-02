@@ -21,12 +21,6 @@ export default defineType({
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),
     defineField({
-      name: 'keywords',
-      title: 'Keywords',
-      type: 'localizedString',
-      validation: (Rule) => Rule.required().warning('This field must not be empty.'),
-    }),
-    defineField({
       name: 'image',
       title: 'Open Graph Image',
       type: 'image',

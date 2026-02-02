@@ -2,8 +2,6 @@ import type { IconName } from 'lucide-react/dynamic'
 
 export type Button = {
   _key: string
-  visible: boolean
-  disabled: boolean
   label: Record<string, string>
   iconPrefix?: IconName
   iconSuffix?: IconName
@@ -16,11 +14,8 @@ export type Button = {
   theme: {
     variant: Variant
     theme: Theme
-    rounded: BorderRounded
     size: Size
-    effect: ButtonEffect
   }
-  params?: string
   externalUrl?: string
 }
 
@@ -37,6 +32,9 @@ export enum Theme {
   tertiary = 'tertiary',
   accent = 'accent',
   custom = 'custom',
+  cyan = 'cyan',
+  coral = 'coral',
+  navy = 'navy'
 }
 
 export enum Variant {
@@ -59,12 +57,6 @@ export enum Size {
   lg = 'lg',
   xl = 'xl',
   '2xl' = '2xl',
-}
-
-export enum ButtonEffect {
-  none = 'none',
-  pulse = 'pulse',
-  gradient = 'gradient',
 }
 
 export enum PageType {

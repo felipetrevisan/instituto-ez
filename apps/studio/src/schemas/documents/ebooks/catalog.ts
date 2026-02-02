@@ -49,13 +49,6 @@ export default defineType({
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),
     defineField({
-      name: 'seoKeywords',
-      title: 'Keywords',
-      type: 'localizedString',
-      group: ['seo'],
-      validation: (Rule) => Rule.required().warning('This field must not be empty.'),
-    }),
-    defineField({
       name: 'seoImage',
       title: 'Open Graph Image',
       type: 'image',
@@ -130,6 +123,15 @@ export default defineType({
       options: { collapsible: true, collapsed: false },
     }),
     defineField({
+      name: 'themeRef',
+      title: 'Theme (Ref)',
+      type: 'reference',
+      to: [{ type: 'ebookTheme' }],
+      group: ['theme'],
+      readOnly: true,
+      hidden: true,
+    }),
+    defineField({
       name: 'questions',
       title: 'Questions',
       type: 'array',
@@ -157,6 +159,15 @@ export default defineType({
       group: ['price'],
       options: { collapsible: true, collapsed: false },
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
+    }),
+    defineField({
+      name: 'priceRef',
+      title: 'Price (Ref)',
+      type: 'reference',
+      to: [{ type: 'ebookPrice' }],
+      group: ['price'],
+      readOnly: true,
+      hidden: true,
     }),
     defineField({
       name: 'badge',

@@ -2,7 +2,7 @@ import { MarkerIcon, MenuIcon } from '@sanity/icons'
 import { defineType } from 'sanity'
 
 export default defineType({
-  name: 'accordion',
+  name: 'accordionWidget',
   type: 'object',
   title: 'Accordion',
   icon: MenuIcon,
@@ -56,7 +56,7 @@ export default defineType({
       name: 'content',
       title: 'Content',
       type: 'array',
-      of: [{ type: 'accordion-content' }],
+      of: [{ type: 'accordionContentWidget' }],
       validation: (Rule) => Rule.required().warning('Must have at least one content.'),
     },
   ],

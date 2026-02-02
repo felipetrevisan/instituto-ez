@@ -1,30 +1,21 @@
-import { defineField, defineType } from 'sanity'
-import { i18n } from './locales'
+import { defineType } from 'sanity'
 
 export default defineType({
   name: 'localizedUrl',
   title: 'Localized URL',
-  type: 'object',
-  fieldsets: [
-    {
-      title: 'Translations',
-      name: 'translations',
-      options: { collapsible: true, collapsed: false },
-    },
-  ],
-  fields: i18n.languages.map((lang) =>
-    defineField({
-      name: lang.id,
-      title: lang.title,
-      type: 'url',
-      fieldset: lang.isDefault ? undefined : 'translations',
-      validation: (Rule) =>
-        Rule.required()
-          .warning('This field must not be empty.')
-          .uri({
-            scheme: ['http', 'https'],
-          })
-          .warning('This field must be a valid url.'),
+  type: 'array',
+  of: [{ type: 'localeUrlValue' }],
+  validation: (Rule) =>
+    Rule.custom((items) => {
+      if (!items) return true
+      const langs = items
+        .map((item) => (item && typeof item === 'object' ? (item as { lang?: string }).lang : null))
+        .filter(Boolean) as string[]
+      const seen = new Set<string>()
+      for (const lang of langs) {
+        if (seen.has(lang)) return `Language "${lang}" is duplicated.`
+        seen.add(lang)
+      }
+      return true
     }),
-  ),
 })

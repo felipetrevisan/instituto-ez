@@ -42,10 +42,9 @@ export async function generateMetadata({
     const data = await getLandingPage(slug, locale)
     if (!data) return { title: notFoundTitle }
 
-    const { title, description, keywords } = data.settings
+    const { title, description } = data.settings
     const resolvedTitle = title?.[locale] ?? ''
     const resolvedDescription = description?.[locale]
-    const resolvedKeywords = keywords?.[locale]
     const alternates = buildAlternates(locale, `/${slug}`)
     const seoImage = data.settings?.image?.asset
       ? resolveOpenGraphImage(data.settings.image.asset)
@@ -64,7 +63,6 @@ export async function generateMetadata({
     return {
       title: resolvedTitle,
       description: resolvedDescription,
-      keywords: resolvedKeywords,
       alternates,
       openGraph: {
         title: resolvedTitle,

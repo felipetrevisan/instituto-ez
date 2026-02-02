@@ -2,6 +2,7 @@ import { LandingPageAbout } from '@ez/web/components/landing/about'
 import { LandingPageDigitalProducts } from '@ez/web/components/landing/digital-products'
 import { LandingPageForBusiness } from '@ez/web/components/landing/for-business'
 import { LandingPageHome } from '@ez/web/components/landing/home'
+import { LandingPageImmersion } from '@ez/web/components/landing/immersion'
 import { LandingPageMathematizer } from '@ez/web/components/landing/mathematizer'
 import { LandingPageMentory } from '@ez/web/components/landing/mentory'
 import { LandingPageServices } from '@ez/web/components/landing/services'
@@ -19,12 +20,13 @@ import { LandingPageMentoryMobileNavigation } from '@ez/web/components/navigatio
 import { LandingPageServicesDesktopNavigation } from '@ez/web/components/navigation/landing/services/desktop-navigation'
 import { LandingPageServicesMobileNavigation } from '@ez/web/components/navigation/landing/services/mobile-navigation'
 import type { LandingPageConfig } from '@ez/web/types/landing'
+import { landingSlugsByKey } from './landing-slugs'
 
 export function getAvailableLandingPages(): LandingPageConfig[] {
   return [
     {
       key: 'home',
-      slug: ['/', 'home'],
+      slug: [...landingSlugsByKey.home],
       component: LandingPageHome,
       navigation: {
         header: {
@@ -39,7 +41,7 @@ export function getAvailableLandingPages(): LandingPageConfig[] {
     },
     {
       key: 'mathematizer',
-      slug: ['matematizador', 'mathematizer'],
+      slug: [...landingSlugsByKey.mathematizer],
       component: LandingPageMathematizer,
       navigation: {
         header: {
@@ -54,7 +56,7 @@ export function getAvailableLandingPages(): LandingPageConfig[] {
     },
     {
       key: 'for-business',
-      slug: ['para-empresas', 'desenvolvimento-humano', 'for-business', 'human-development'],
+      slug: [...landingSlugsByKey['for-business']],
       component: LandingPageForBusiness,
       navigation: {
         header: {
@@ -69,7 +71,7 @@ export function getAvailableLandingPages(): LandingPageConfig[] {
     },
     {
       key: 'mentoring',
-      slug: ['mentoria-e-assessoria', 'mentoring'],
+      slug: [...landingSlugsByKey.mentoring],
       component: LandingPageMentory,
       navigation: {
         header: {
@@ -84,7 +86,7 @@ export function getAvailableLandingPages(): LandingPageConfig[] {
     },
     {
       key: 'about',
-      slug: ['sobre-nos', 'about-us', 'sobre-nosotros'],
+      slug: [...landingSlugsByKey.about],
       component: LandingPageAbout,
       navigation: {
         header: {
@@ -99,7 +101,7 @@ export function getAvailableLandingPages(): LandingPageConfig[] {
     },
     {
       key: 'services',
-      slug: ['atendimento', 'services', 'servicios'],
+      slug: [...landingSlugsByKey.services],
       component: LandingPageServices,
       navigation: {
         header: {
@@ -114,8 +116,23 @@ export function getAvailableLandingPages(): LandingPageConfig[] {
     },
     {
       key: 'digital-products',
-      slug: ['ebooks', 'produtos-digitais', 'digital-products'],
+      slug: [...landingSlugsByKey['digital-products']],
       component: LandingPageDigitalProducts,
+      navigation: {
+        header: {
+          desktop: HeaderDesktopNavigation,
+          mobile: HeaderMobileNavigation,
+        },
+        footer: {
+          desktop: FooterDesktopNavigation,
+        },
+      },
+      classes: '',
+    },
+    {
+      key: 'immersion',
+      slug: [...landingSlugsByKey.immersion],
+      component: LandingPageImmersion,
       navigation: {
         header: {
           desktop: HeaderDesktopNavigation,

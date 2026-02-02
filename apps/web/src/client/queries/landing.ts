@@ -16,8 +16,6 @@ const seoImageField = `
 
 const buttonFields = `
    _key,
-  "visible": show_button,
-  "disabled": disable_button,
   "label": button_label,
   "iconPrefix": button_icon_prefix,
   "iconSuffix": button_icon_suffix,
@@ -38,13 +36,10 @@ const buttonFields = `
     },
     null
   ),
-  "params": button_internal_params,
   "theme": {
     theme,
     variant,
-    rounded,
-    size,
-    effect
+    size
   }
 `
 
@@ -80,30 +75,7 @@ const navigationFields = `
   "navigation": navigation-> {
     "items": items[] {
       "id": _key,
-      "hasSubmenu": has_submenu,
       "label": navigation_label,
-      "columns": submenu_columns,
-      "submenu": navigation_submenu_items[] {
-        "label": navigation_label,
-        "url": navigation_item_url {
-          "isHome": is_home,
-          "type": link_type,
-          is_home == true => {
-            "link": "/"
-          },
-          ...,
-          link_type == "INTERNAL" || link_type == "LANDING" => {
-            "link": internal_link->slug
-          },
-          link_type == "EXTERNAL" => {
-            "link": external_url,
-            "isExternal": true
-          },
-          link_type == "HASH" => {
-            "link": hash_id
-          },
-        }
-      },
       "url": navigation_item_url {
         "isHome": is_home,
         "type": link_type,

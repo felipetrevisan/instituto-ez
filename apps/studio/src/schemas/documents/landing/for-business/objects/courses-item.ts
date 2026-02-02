@@ -32,7 +32,13 @@ export default defineType({
       name: 'categories',
       title: 'Categories',
       type: 'array',
-      of: [{ type: 'localizedString' }],
+      of: [
+        {
+          name: 'category',
+          type: 'object',
+          fields: [defineField({ name: 'label', type: 'localizedString' })],
+        },
+      ],
     }),
     defineField({
       name: 'icon',
@@ -52,11 +58,12 @@ export default defineType({
   ],
   preview: {
     select: {
-      title: `title.${i18n.base}`,
+      title: `title`,
     },
     prepare({ title }) {
+      const localized = Array.isArray(title) ? title.find((item) => item?.lang === i18n.base) : null
       return {
-        title,
+        title: localized?.value || title || 'Sem título',
       }
     },
   },

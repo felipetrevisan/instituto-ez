@@ -30,9 +30,6 @@ const structure = (S: StructureBuilder, context: ConfigContext) =>
           S.list()
             .title('Páginas')
             .items([
-              S.listItem()
-                .title('Páginas')
-                .child(S.documentTypeList('page').filter('_type == "page" && type == "page"')),
               S.listItem().title('Landing Pages').child(S.documentTypeList('landingPage')),
             ]),
         ),

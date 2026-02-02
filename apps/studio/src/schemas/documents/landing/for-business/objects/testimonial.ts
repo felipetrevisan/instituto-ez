@@ -10,11 +10,6 @@ export default defineType({
   fields: [
     defineField({ name: 'heading', type: 'localizedString' }),
     defineField({
-      name: 'items',
-      type: 'array',
-      of: [{ type: 'forbusiness.testimonial.items' }],
-    }),
-    defineField({
       name: 'cta',
       title: 'Call Action',
       type: 'button',

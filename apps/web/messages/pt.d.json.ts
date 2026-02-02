@@ -54,7 +54,15 @@ declare const messages: {
     "workshop": "Workshop",
     "inPerson": "presencial",
     "remote": "remoto",
-    "and": "e"
+    "and": "e",
+    "testimonials": {
+      "reductionTitle": "Redução em conflitos internos",
+      "reductionSubtitle": "Após o workshop de comunicação",
+      "productivityTitle": "Mais produtividade",
+      "productivitySubtitle": "Após as palestras de saúde",
+      "climateTitle": "Clima organizacional",
+      "climateSubtitle": "Queda nas ausências por estresse"
+    }
   },
   "LandingPageMentoring": {
     "stratagyMentoring": "Mentoria Estratégica"

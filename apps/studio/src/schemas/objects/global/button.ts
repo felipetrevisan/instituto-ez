@@ -1,4 +1,5 @@
-import { ColorWheelIcon, EyeOpenIcon, LinkIcon, PlugIcon } from '@sanity/icons'
+import { i18n } from '@ez/studio/schemas/objects/locale/locales'
+import { ColorWheelIcon, LinkIcon, PlugIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
@@ -21,45 +22,16 @@ export default defineType({
       title: 'Theme',
       icon: ColorWheelIcon,
     },
-    {
-      name: 'visibility',
-      title: 'Visibility',
-      icon: EyeOpenIcon,
-    },
   ],
   fields: [
-    defineField({
-      name: 'show_button',
-      title: 'Show Button?',
-      type: 'boolean',
-      group: 'visibility',
-      initialValue: false,
-      validation: (Rule) => Rule.required().warning('This field must not be empty.'),
-    }),
-    defineField({
-      name: 'disable_button',
-      title: 'Is Disabled?',
-      type: 'boolean',
-      group: 'visibility',
-      initialValue: false,
-      hidden: ({ parent }) => !parent?.show_button,
-      validation: (Rule) =>
-        Rule.custom((field, context) => {
-          if (context?.document?.show_button && !field) {
-            return 'This field must not be empty.'
-          }
-          return true
-        }).warning(),
-    }),
     defineField({
       name: 'button_label',
       title: 'Button Label',
       group: 'general',
       type: 'localizedString',
-      hidden: ({ parent }) => !parent?.show_button,
       validation: (Rule) =>
         Rule.custom((field, context) => {
-          if (context?.document?.show_button && !field) {
+          if (!field) {
             return 'This field must not be empty.'
           }
           return true
@@ -70,14 +42,12 @@ export default defineType({
       title: 'Button Prefix Icon',
       group: 'general',
       type: 'lucide-icon',
-      hidden: ({ parent }) => !parent?.show_button,
     }),
     defineField({
       name: 'button_icon_suffix',
       title: 'Button Suffix Icon',
       group: 'general',
       type: 'lucide-icon',
-      hidden: ({ parent }) => !parent?.show_button,
     }),
     defineField({
       name: 'variant',
@@ -85,7 +55,6 @@ export default defineType({
       type: 'string',
       group: 'theme',
       initialValue: 'default',
-      hidden: ({ parent }) => !parent?.show_button,
       options: {
         list: [
           { title: 'Default', value: 'default' },
@@ -102,7 +71,6 @@ export default defineType({
       type: 'string',
       group: 'theme',
       initialValue: 'default',
-      hidden: ({ parent }) => !parent?.show_button,
       options: {
         list: [
           { title: 'Default', value: 'default' },
@@ -115,30 +83,11 @@ export default defineType({
       },
     }),
     defineField({
-      name: 'rounded',
-      title: 'Border Rounded',
-      type: 'string',
-      group: 'theme',
-      initialValue: 'full',
-      hidden: ({ parent }) => !parent?.show_button,
-      options: {
-        list: [
-          { title: 'None', value: 'none' },
-          { title: 'Full', value: 'full' },
-          { title: 'Large', value: 'lg' },
-          { title: 'Extra Large', value: 'xl' },
-          { title: '2x Extra Large', value: '2xl' },
-        ],
-        layout: 'dropdown',
-      },
-    }),
-    defineField({
       name: 'size',
       title: 'Size',
       type: 'string',
       group: 'theme',
       initialValue: 'sm',
-      hidden: ({ parent }) => !parent?.show_button,
       options: {
         list: [
           { title: 'Default', value: 'default' },
@@ -146,22 +95,6 @@ export default defineType({
           { title: 'Large', value: 'lg' },
           { title: 'Extra Large', value: 'xl' },
           { title: '2x Extra Large', value: '2xl' },
-        ],
-        layout: 'dropdown',
-      },
-    }),
-    defineField({
-      name: 'effect',
-      title: 'Effect',
-      type: 'string',
-      group: 'theme',
-      initialValue: 'none',
-      hidden: ({ parent }) => !parent?.show_button,
-      options: {
-        list: [
-          { title: 'None', value: 'none' },
-          { title: 'Pulse', value: 'pulse' },
-          { title: 'Gradient', value: 'gradient' },
         ],
         layout: 'dropdown',
       },
@@ -180,7 +113,6 @@ export default defineType({
         ],
         layout: 'radio',
       },
-      hidden: ({ parent }) => !parent?.show_button || parent?.disable_button,
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),
     defineField({
@@ -190,9 +122,7 @@ export default defineType({
       group: 'link',
       initialValue: 'CONTACT',
       options: {
-        list: [
-          { title: 'Contato', value: 'CONTACT' },
-        ],
+        list: [{ title: 'Contato', value: 'CONTACT' }],
         layout: 'radio',
       },
       hidden: ({ parent }) => parent?.button_link_type !== 'DIALOG',
@@ -203,30 +133,23 @@ export default defineType({
       type: 'string',
       group: 'link',
       hidden: ({ parent }) =>
-        !parent?.show_button ||
-        parent?.disable_button ||
         parent?.button_link_type !== 'DIALOG' ||
         parent?.dialog_type !== 'CONTACT',
-    
       validation: (Rule) =>
         Rule.custom((value, context) => {
           const parent = context.parent as {
-            show_button?: boolean
-            disable_button?: boolean
             button_link_type?: string
             dialog_type?: string
           }
-    
+
           const isContactDialog =
-            parent?.show_button &&
-            !parent?.disable_button &&
             parent?.button_link_type === 'DIALOG' &&
             parent?.dialog_type === 'CONTACT'
-    
+
           if (isContactDialog && !value) {
             return 'Contact subject is required when dialog type is Contact.'
           }
-    
+
           return true
         }),
     }),
@@ -237,13 +160,9 @@ export default defineType({
       type: 'reference',
       group: 'link',
       to: [{ type: 'landingPage' }],
-      hidden: ({ parent }) =>
-        !parent?.show_button ||
-        (parent?.show_button && parent?.button_link_type !== 'INTERNAL') ||
-        parent?.disable_button,
+      hidden: ({ parent }) => parent?.button_link_type !== 'INTERNAL',
       validation: (Rule) =>
         Rule.custom((field, context) =>
-          context?.document?.show_button &&
           context?.document?.button_link_type === 'INTERNAL' &&
           !field
             ? 'This field must not be empty.'
@@ -251,25 +170,12 @@ export default defineType({
         ).warning(),
     }),
     defineField({
-      name: 'button_internal_params',
-      title: 'Button Link Params',
-      type: 'string',
-      group: 'link',
-      hidden: ({ parent }) =>
-        !parent?.show_button ||
-        (parent?.show_button && parent?.button_link_type !== 'INTERNAL') ||
-        parent?.disable_button,
-    }),
-    defineField({
       name: 'button_external_url',
       title: 'Button Link',
       description: 'Enter the button URL',
       type: 'url',
       group: 'link',
-      hidden: ({ parent }) =>
-        !parent?.show_button ||
-        (parent?.show_button && parent?.button_link_type !== 'EXTERNAL') ||
-        parent?.disable_button,
+      hidden: ({ parent }) => parent?.button_link_type !== 'EXTERNAL',
       validation: (Rule) =>
         Rule.uri({
           scheme: ['http', 'https'],
@@ -278,12 +184,13 @@ export default defineType({
   ],
   preview: {
     select: {
-      title: 'button_label.pt',
+      title: `button_label`,
       type: 'button_link_type',
     },
     prepare({ title, type }) {
+      const localized = Array.isArray(title) ? title.find((item) => item?.lang === i18n.base) : null
       return {
-        title,
+        title: localized?.value || title || 'Sem título',
         subtitle: type,
       }
     },

@@ -1,20 +1,14 @@
 import {
   FontColorDecorator,
+  FontSizeDecorator,
   FontWeightDecorator,
-  HighlightDecorator,
 } from '@ez/studio/portable/decorators'
-import { BoldIcon, BulbOutlineIcon, ColorWheelIcon, LinkIcon } from '@sanity/icons'
+import { BoldIcon, ColorWheelIcon, LinkIcon } from '@sanity/icons'
 
 const basicDecorators = [
   { title: 'Bold', value: 'strong' },
   { title: 'Emphasis', value: 'em' },
   { title: 'Underline', value: 'underline' },
-  {
-    title: 'Highlight',
-    value: 'highlight',
-    icon: BulbOutlineIcon,
-    component: HighlightDecorator,
-  },
 ]
 
 const styles = [
@@ -58,13 +52,6 @@ const decorators = [
     component: (props: any) => FontWeightDecorator(props, 'bold'),
   },
   {
-    title: 'Medium Bold',
-    value: 'medium',
-    icon: BoldIcon,
-    // biome-ignore lint/suspicious/noExplicitAny: false positive
-    component: (props: any) => FontWeightDecorator(props, 'medium'),
-  },
-  {
     title: 'Semi Bold',
     value: 'semibold',
     icon: BoldIcon,
@@ -72,20 +59,25 @@ const decorators = [
     component: (props: any) => FontWeightDecorator(props, 'semibold'),
   },
   {
-    title: 'Extra Bold',
-    value: 'extrabold',
-    icon: BoldIcon,
+    title: 'Small Text',
+    value: 'size-sm',
     // biome-ignore lint/suspicious/noExplicitAny: false positive
-    component: (props: any) => FontWeightDecorator(props, 'extrabold'),
+    component: (props: any) => FontSizeDecorator(props, 'sm'),
+  },
+  {
+    title: 'Base Text',
+    value: 'size-base',
+    // biome-ignore lint/suspicious/noExplicitAny: false positive
+    component: (props: any) => FontSizeDecorator(props, 'base'),
+  },
+  {
+    title: 'Large Text',
+    value: 'size-lg',
+    // biome-ignore lint/suspicious/noExplicitAny: false positive
+    component: (props: any) => FontSizeDecorator(props, 'lg'),
   },
   { title: 'Emphasis', value: 'em' },
   { title: 'Underline', value: 'underline' },
-  {
-    title: 'Highlight',
-    value: 'highlight',
-    icon: BulbOutlineIcon,
-    component: HighlightDecorator,
-  },
   {
     title: 'Primary Color',
     value: 'primary',
@@ -150,31 +142,6 @@ const decorators = [
   },
 ]
 
-const annotations = [
-  {
-    name: 'link',
-    type: 'object',
-    title: 'Link',
-    fields: [
-      {
-        name: 'url',
-        type: 'url',
-      },
-    ],
-  },
-  {
-    name: 'internalLink',
-    type: 'object',
-    title: 'Internal Link',
-    icon: LinkIcon,
-    fields: [
-      {
-        name: 'reference',
-        type: 'reference',
-        to: [{ type: 'page' }],
-      },
-    ],
-  },
-]
+const annotations = []
 
 export { decorators, styles, annotations, basicDecorators }

@@ -49,13 +49,6 @@ export default defineType({
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),
     defineField({
-      name: 'keywords',
-      title: 'Keywords',
-      type: 'localizedString',
-      group: ['seo'],
-      validation: (Rule) => Rule.required().warning('This field must not be empty.'),
-    }),
-    defineField({
       name: 'seoImage',
       title: 'SEO Image',
       description: 'Default Open Graph image for the site.',
@@ -129,66 +122,6 @@ export default defineType({
         Rule.custom((_field, context) =>
           !context?.document?.social_nav ? 'Social networks links must be configured' : true,
         ).warning(),
-    }),
-    defineField({
-      name: 'testimonials_type',
-      title: 'Testimonials Type',
-      type: 'string',
-      group: ['others'],
-      initialValue: 'ANIMATED',
-      options: {
-        list: [
-          { title: 'Animated', value: 'ANIMATED' },
-          { title: 'Minimalist', value: 'MINIMALIST' },
-        ],
-        layout: 'dropdown',
-      },
-    }),
-    defineField({
-      name: 'testimonials_variant',
-      title: 'Testimonials Card Variant',
-      type: 'string',
-      initialValue: 'default',
-      group: ['others'],
-      options: {
-        list: [
-          { title: 'Default', value: 'default' },
-          { title: 'Outline', value: 'outline' },
-        ],
-        layout: 'dropdown',
-      },
-    }),
-    defineField({
-      name: 'testimonials_theme',
-      title: 'Testimonials Card Theme',
-      type: 'string',
-      initialValue: 'default',
-      group: ['others'],
-      options: {
-        list: [
-          { title: 'Default', value: 'default' },
-          { title: 'Secondary', value: 'secondary' },
-          { title: 'Tertiary', value: 'tertiary' },
-        ],
-        layout: 'dropdown',
-      },
-    }),
-    defineField({
-      name: 'testimonials_rounded',
-      title: 'Testimonals Card Border Rounded',
-      type: 'string',
-      initialValue: 'full',
-      group: ['others'],
-      options: {
-        list: [
-          { title: 'None', value: 'none' },
-          { title: 'Full', value: 'full' },
-          { title: 'Large', value: 'lg' },
-          { title: 'Extra Large', value: 'xl' },
-          { title: '2x Extra Large', value: '2xl' },
-        ],
-        layout: 'dropdown',
-      },
     }),
     defineField({
       name: 'contactForm',

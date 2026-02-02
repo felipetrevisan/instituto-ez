@@ -50,7 +50,7 @@ export default defineType({
     }),
     defineField({
       name: 'media',
-      title: 'Media Type',
+      title: 'Icon',
       type: 'media',
     }),
   ],

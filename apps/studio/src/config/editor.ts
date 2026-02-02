@@ -1,4 +1,4 @@
-import { annotations, decorators, styles } from '@ez/studio/config/decorators'
+import { decorators, styles } from '@ez/studio/config/decorators'
 
 const config = [
   {
@@ -6,38 +6,16 @@ const config = [
     styles,
     marks: {
       decorators,
-      annotations,
     },
-  },
-  {
-    type: 'buttonLink',
   },
   {
     type: 'image',
   },
   {
-    type: 'title',
+    type: 'accordionWidget',
   },
   {
-    type: 'accordion',
-  },
-  {
-    type: 'alert',
-  },
-  {
-    type: 'tabsWidget',
-  },
-  {
-    type: 'divider',
-  },
-  {
-    type: 'testimonialWidget',
-  },
-  {
-    type: 'list',
-  },
-  {
-    type: 'cardsWidget',
+    type: 'quoteWidget',
   },
 ]
 

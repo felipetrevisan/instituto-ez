@@ -8,6 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@ez/shared/ui/select'
+import { localeOptions } from '@ez/web/config/locale'
 import { useApp } from '@ez/web/hooks/use-app'
 import { Slot } from '@radix-ui/react-slot'
 import { cva, type VariantProps } from 'class-variance-authority'
@@ -106,6 +107,8 @@ function SelectLocale({ onChange }: { onChange: (value: string) => void }) {
   const { isMobile } = useDeviceType()
   const t = useTranslations('Languages')
 
+  if (localeOptions.length <= 1) return null
+
   return (
     <Select defaultValue={locale} onValueChange={onChange}>
       <SelectTrigger className="max-w-max cursor-pointer p-3">
@@ -113,44 +116,21 @@ function SelectLocale({ onChange }: { onChange: (value: string) => void }) {
       </SelectTrigger>
       <SelectContent className="relative z-150" side={isMobile ? 'left' : 'bottom'}>
         <SelectGroup>
-          <SelectItem className="group" value="pt">
-            <div className="flex items-center gap-2">
-              <Image
-                alt=""
-                className="size-8"
-                height={32}
-                src="/assets/images/flags/brazil.png"
-                width={32}
-              />
-              <span className="group-hover:text-primary">{t('ptShort')}</span>
-            </div>
-          </SelectItem>
-          <SelectItem className="group" value="en">
-            <div className="flex items-center gap-2">
-              <Image
-                alt=""
-                className="size-8"
-                height={32}
-                priority
-                src="/assets/images/flags/usa.png"
-                width={32}
-              />
-              <span className="group-hover:text-primary">{t('enShort')}</span>
-            </div>
-          </SelectItem>
-          <SelectItem className="group" value="es">
-            <div className="flex items-center gap-2">
-              <Image
-                alt=""
-                className="size-8"
-                height={32}
-                priority
-                src="/assets/images/flags/euro.png"
-                width={32}
-              />
-              <span className="group-hover:text-primary">{t('esShort')}</span>
-            </div>
-          </SelectItem>
+          {localeOptions.map((option) => (
+            <SelectItem className="group" key={option.id} value={option.id}>
+              <div className="flex items-center gap-2">
+                <Image
+                  alt=""
+                  className="size-8"
+                  height={32}
+                  priority
+                  src={option.flag}
+                  width={32}
+                />
+                <span className="group-hover:text-primary">{t(option.shortLabelKey)}</span>
+              </div>
+            </SelectItem>
+          ))}
         </SelectGroup>
       </SelectContent>
     </Select>

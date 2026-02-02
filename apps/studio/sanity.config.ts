@@ -53,14 +53,15 @@ export default defineConfig({
     languageFilter({
       supportedLanguages: [
         { id: 'en', title: 'English' },
-        { id: 'es', title: 'Spanish' },
         { id: 'pt', title: 'Portuguese' },
         //...
       ],
       defaultLanguages: ['pt'],
       documentTypes: ['page'],
       filterField: (enclosingType, member, selectedLanguageIds) =>
-        !enclosingType.name.startsWith('locale') || selectedLanguageIds.includes(member.name),
+        !enclosingType?.name?.startsWith('locale') ||
+        !member?.name ||
+        selectedLanguageIds.includes(member.name),
     }),
     // Vision lets you query your content with GROQ in the studio
     // https://www.sanity.io/docs/the-vision-plugin

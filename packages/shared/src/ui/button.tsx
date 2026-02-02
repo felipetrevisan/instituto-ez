@@ -6,7 +6,7 @@ import React from 'react'
 
 const buttonVariants = cva(
   // Base
-  'relative z-1 inline-flex w-full cursor-pointer items-center justify-center gap-2 font-semibold md:w-auto',
+  'relative z-1 inline-flex w-full cursor-pointer items-center justify-center gap-2 font-semibold shadow-xl md:w-auto',
   {
     variants: {
       base: {
@@ -16,7 +16,7 @@ const buttonVariants = cva(
         mentory: '',
         about: '',
         services: '',
-        ebook: ''
+        ebook: '',
       },
 
       variant: {
@@ -33,6 +33,9 @@ const buttonVariants = cva(
         accent: 'bg-accent text-accent-foreground',
         background: 'bg-foreground text-background',
         catalog: 'text-navy hover:bg-cyan/10 hover:text-cyan',
+        coral: 'bg-coral text-coral-foreground',
+        cyan: 'bg-cyan text-cyan-foreground',
+        navy: 'bg-navy text-navy-foreground',
         custom: '',
       },
 
@@ -74,7 +77,7 @@ const buttonVariants = cva(
       theme: 'default',
       size: 'default',
       effect: 'none',
-      rounded: 'none',
+      rounded: 'full',
       shadow: false,
       fullWidth: false,
     },

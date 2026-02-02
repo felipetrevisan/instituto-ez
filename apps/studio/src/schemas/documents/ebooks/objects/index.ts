@@ -9,11 +9,7 @@ import downloadObject from '@ez/studio/schemas/documents/ebooks/objects/download
 import metadataObject from '@ez/studio/schemas/documents/ebooks/objects/metadata'
 import overviewObject from '@ez/studio/schemas/documents/ebooks/objects/overview'
 import priceObject from '@ez/studio/schemas/documents/ebooks/objects/price'
-import sealObjectObject from '@ez/studio/schemas/documents/ebooks/objects/seal'
 import sectionObject from '@ez/studio/schemas/documents/ebooks/objects/section'
-import buttonObject from '@ez/studio/schemas/documents/ebooks/objects/theme/button'
-import footerObject from '@ez/studio/schemas/documents/ebooks/objects/theme/footer'
-import priceBadgeObject from '@ez/studio/schemas/documents/ebooks/objects/theme/price-badge'
 import themeObject from '@ez/studio/schemas/documents/ebooks/objects/theme/theme'
 
 export {
@@ -28,10 +24,6 @@ export {
   metadataObject,
   overviewObject,
   priceObject,
-  sealObjectObject,
   sectionObject,
-  buttonObject,
-  footerObject,
-  priceBadgeObject,
   themeObject,
 }
