@@ -14,14 +14,16 @@ export const Hero = ({ data, locale }: { data: SectionHero; locale: string }) =>
       className="relative mt-24 h-full w-screen bg-gradient-to-br from-primary via-primary/95 to-primary/90"
       id="hero"
     >
-      <div
-        className="absolute inset-0 opacity-20"
-        style={{
-          backgroundImage: `url(${urlForImage(data.image.asset).auto('format').quality(80).flipHorizontal().url()})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      />
+      {data?.image && (
+        <div
+          className="absolute inset-0 opacity-20"
+          style={{
+            backgroundImage: `url(${urlForImage(data.image.asset).auto('format').quality(80).flipHorizontal().url()})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        />
+      )}
       <div className="relative z-10 px-4 py-20 sm:px-6 md:py-32 lg:px-8">
         <div className="mx-auto max-w-4xl text-center">
           {data?.heading?.[locale] && (

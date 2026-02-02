@@ -24,6 +24,9 @@ const cardVariants = cva('relative transition-all duration-300', {
         'bg-linear-to-r from-tertiary via-tertiary/80 to-tertiary text-tertiary-foreground shadow-tertiary/20 outline-tertiary/40 hover:border-tertiary/40 hover:bg-tertiary/30 hover:text-tertiary-foreground',
       accent: '',
       landing: 'bg-card text-card-foreground',
+      coral: 'bg-coral text-coral-foreground',
+      cyan: 'bg-cyan text-cyan-foreground',
+      navy: 'bg-navy text-navy-foreground',
       custom:
         'bg-linear-to-r from-[var(--secondary)] via-[var(--secondary)]/80 to-[var(--secondary)] text-[var(--secondary)] shadow-[var(--secondary)]/20 outline-[var(--secondary)]/40 hover:border-[var(--secondary)]/40 hover:bg-[var(--secondary)]/30 hover:text-[var(--secondary)]',
     },

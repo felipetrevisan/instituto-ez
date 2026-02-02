@@ -43,6 +43,9 @@ const carouselVariants = cva(
           '**:data-[slot=carousel-dot]:shadow-tertiary **:data-[slot=carousel-dot]:hover:after:shadow-tertiary',
         accent:
           '**:data-[slot=carousel-dot]:shadow-accent **:data-[slot=carousel-dot]:hover:after:shadow-accent',
+        coral: '**:data-[slot=carousel-dot]:shadow-coral **:data-[slot=carousel-dot]:hover:after:shadow-coral',
+        cyan: '**:data-[slot=carousel-dot]:shadow-cyan **:data-[slot=carousel-dot]:hover:after:shadow-cyan',
+        navy: '**:data-[slot=carousel-dot]:shadow-navy **:data-[slot=carousel-dot]:hover:after:shadow-navy',
         custom:
           '**:data-[slot=carousel-dot]:shadow-[var(--secondary)] **:data-[slot=carousel-dot]:hover:after:shadow-[var(--secondary)]',
       },

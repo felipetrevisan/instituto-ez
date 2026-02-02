@@ -9,6 +9,7 @@ import type { VariantProps } from 'class-variance-authority'
 import { motion } from 'motion/react'
 
 import './styles.css'
+import type { Theme } from '@ez/shared/types'
 
 const MotionCard = motion(Card)
 
@@ -16,7 +17,7 @@ type CardVariants = VariantProps<typeof cardVariants>
 
 type Props = {
   item: Testimonial
-  theme?: CardVariants['theme']
+  theme?: keyof typeof Theme
   variant?: CardVariants['variant']
   rounded?: CardVariants['rounded']
   className?: string

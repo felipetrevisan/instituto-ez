@@ -18,7 +18,7 @@ export function Testimonials() {
   const { data, isLoading } = useTestimonials('service')
   const [hoveredIndex, setHoveredIndex] = useState<string | null>(null)
 
-  const { type, theme, variant, rounded } = site?.testimonialsConfig ?? {
+  const { type, theme, variant, rounded } = {
     type: 'MINIMALIST',
     theme: Theme.tertiary,
     variant: Variant.outline,
