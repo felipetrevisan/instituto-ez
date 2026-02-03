@@ -20,8 +20,6 @@ export const CatalogMasterclass = ({
   const { data: masterclasses } = useMasterclasses()
   const t = useTranslations('DigitalProducts')
 
-  console.log(masterclasses)
-
   return (
     <StickySection className="bg-navy py-20" id="catalog-masterclass">
       <div className="container mx-auto px-6 md:px-8">

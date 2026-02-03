@@ -27,44 +27,58 @@ const priceField = `
 const imageField = `
   "image": {
     "en": {
-      "background": images.background_image.en {
+      "background": images.background_image[lang == "en"][0].value {
         "asset": asset,
-          "metadata": {
-            "lqip": asset->metadata.lqip,
-            "dimensions": asset->metadata.dimensions
-          }
+        "metadata": {
+          "lqip": asset->metadata.lqip,
+          "dimensions": asset->metadata.dimensions
+        }
       },
-      "preview": images.small_image.en {
+      "preview": images.small_image[lang == "en"][0].value {
         "asset": asset,
-          "metadata": {
-            "lqip": asset->metadata.lqip,
-            "dimensions": asset->metadata.dimensions
-          }
+        "metadata": {
+          "lqip": asset->metadata.lqip,
+          "dimensions": asset->metadata.dimensions
+        }
       },
-      "large": images.large_image.en {
+      "large": images.large_image[lang == "en"][0].value {
         "asset": asset,
-          "metadata": {
-            "lqip": asset->metadata.lqip,
-            "dimensions": asset->metadata.dimensions
-          }
+        "metadata": {
+          "lqip": asset->metadata.lqip,
+          "dimensions": asset->metadata.dimensions
+        }
+      },
+      "footer": images.footer_image[lang == "en"][0].value {
+        "asset": asset,
+        "metadata": {
+          "lqip": asset->metadata.lqip,
+          "dimensions": asset->metadata.dimensions
+        }
       }
     },
     "es": {
-      "background": images.background_image.es {
+      "background": images.background_image[lang == "es"][0].value {
         "asset": asset,
-          "metadata": {
-            "lqip": asset->metadata.lqip,
-            "dimensions": asset->metadata.dimensions
-          }
+        "metadata": {
+          "lqip": asset->metadata.lqip,
+          "dimensions": asset->metadata.dimensions
+        }
       },
-      "preview": images.small_image.es {
+      "preview": images.small_image[lang == "es"][0].value {
         "asset": asset,
-          "metadata": {
-            "lqip": asset->metadata.lqip,
-            "dimensions": asset->metadata.dimensions
-          }
+        "metadata": {
+          "lqip": asset->metadata.lqip,
+          "dimensions": asset->metadata.dimensions
+        }
       },
-      "large": images.large_image.es {
+      "large": images.large_image[lang == "es"][0].value {
+        "asset": asset,
+        "metadata": {
+          "lqip": asset->metadata.lqip,
+          "dimensions": asset->metadata.dimensions
+        }
+      },
+      "footer": images.footer_image[lang == "es"][0].value {
         "asset": asset,
         "metadata": {
           "lqip": asset->metadata.lqip,
@@ -73,21 +87,28 @@ const imageField = `
       }
     },
     "pt": {
-      "background": images.background_image.pt {
+      "background": images.background_image[lang == "pt"][0].value {
         "asset": asset,
         "metadata": {
           "lqip": asset->metadata.lqip,
           "dimensions": asset->metadata.dimensions
         }
       },
-      "preview": images.small_image.pt {
+      "preview": images.small_image[lang == "pt"][0].value {
         "asset": asset,
         "metadata": {
           "lqip": asset->metadata.lqip,
           "dimensions": asset->metadata.dimensions
         }
       },
-      "large": images.large_image.pt {
+      "large": images.large_image[lang == "pt"][0].value {
+        "asset": asset,
+        "metadata": {
+          "lqip": asset->metadata.lqip,
+          "dimensions": asset->metadata.dimensions
+        }
+      },
+      "footer": images.footer_image[lang == "pt"][0].value {
         "asset": asset,
         "metadata": {
           "lqip": asset->metadata.lqip,
@@ -178,8 +199,8 @@ const chapterField = `
   "chapter": chapter {
     "cover": {
      "en": {
-        "cover": cover.en {
-        "asset": asset,
+        "cover": cover[lang == "en"][0].value {
+          "asset": asset,
           "metadata": {
             "lqip": asset->metadata.lqip,
             "dimensions": asset->metadata.dimensions
@@ -187,8 +208,8 @@ const chapterField = `
         }
       },
       "es": {
-        "cover": cover.es {
-        "asset": asset,
+        "cover": cover[lang == "es"][0].value {
+          "asset": asset,
           "metadata": {
             "lqip": asset->metadata.lqip,
             "dimensions": asset->metadata.dimensions
@@ -196,8 +217,8 @@ const chapterField = `
         }
       },
       "pt": {
-        "cover": cover.pt {
-        "asset": asset,
+        "cover": cover[lang == "pt"][0].value {
+          "asset": asset,
           "metadata": {
             "lqip": asset->metadata.lqip,
             "dimensions": asset->metadata.dimensions

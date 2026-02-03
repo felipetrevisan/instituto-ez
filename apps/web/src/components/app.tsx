@@ -9,6 +9,7 @@ import { IconButton } from '@ez/shared/ui/animated/button/icon-button'
 import { Dialog } from '@ez/shared/ui/dialog'
 
 import { FooterNavigation } from '@ez/web/components/navigation/footer/footer'
+import { MainDesktopNavigation as FooterDesktopNavigation } from '@ez/web/components/navigation/footer/desktop-navigation'
 import { HeaderNavigation } from '@ez/web/components/navigation/header/header'
 import { NavigationRenderer } from '@ez/web/components/navigation/navigation-renderer'
 import * as Navbar from '@ez/web/components/ui/navbar'
@@ -227,7 +228,9 @@ function Footer({
     dataset: env.NEXT_PUBLIC_SANITY_DATASET,
   })
 
-  const DesktopNavigation = landing?.navigation?.footer?.desktop ?? DesktopNavComponent
+  const DesktopNavigation =
+    landing?.navigation?.footer?.desktop ?? DesktopNavComponent ?? FooterDesktopNavigation
+  const resolvedNavigation = customNavigation ?? data?.navigation?.footer
 
   return (
     <FooterComponent theme={theme}>
@@ -259,10 +262,10 @@ function Footer({
 
           <div className="flex flex-col items-center justify-center md:items-start">
             <h4 className="mb-4 font-semibold text-lg">{t('services')}</h4>
-            {data?.navigation?.footer && (
+            {resolvedNavigation && (
               <NavigationRenderer
                 Component={DesktopNavigation}
-                navigation={customNavigation ?? data?.navigation.footer}
+                navigation={resolvedNavigation}
               />
             )}
           </div>

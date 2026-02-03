@@ -13,6 +13,7 @@ import { useMotionValueEvent, useScroll } from 'motion/react'
 import { useLocale } from 'next-intl'
 import { Fragment, useEffect, useState } from 'react'
 import { getLandingPageSections } from './_sections'
+import StickyHeader from './_sticky-header'
 
 export function Content({ data, settings }: { data: Ebook; settings: LandingPageSetting }) {
   const { setPageType, isEbookPage } = useApp()
@@ -61,6 +62,7 @@ export function Content({ data, settings }: { data: Ebook; settings: LandingPage
 
   return (
     <div className="flex w-full flex-col items-center justify-center space-y-14">
+      <StickyHeader {...data} />
       <div className="relative flex w-screen flex-col items-center justify-center">
         {settings.sections?.map(({ key, show }: Section) =>
           show ? <Fragment key={key}>{avaliableSections[key]?.component}</Fragment> : null,

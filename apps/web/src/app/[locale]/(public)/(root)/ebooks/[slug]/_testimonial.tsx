@@ -12,7 +12,7 @@ export function Testimonial({ data }: { data: Ebook }) {
 
   const { data: testimonials, isLoading } = useTestimonialsByEbook(
     'ebook',
-    data.slug?.[locale].current,
+    data.slug?.[locale]?.current,
     locale,
   )
 

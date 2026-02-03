@@ -86,7 +86,7 @@ export function BaseNormal({ theme, children }: { children: React.ReactNode; the
       <FooterFactory
         data={data}
         FooterComponent={FooterLandingNavigation}
-        navigation={data?.navigation?.header}
+        navigation={data?.navigation?.footer}
         pageKey={theme}
         theme="default"
       />

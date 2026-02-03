@@ -42,8 +42,8 @@ export default function BuySection({ data }: { data: Ebook }) {
               className="object-contain"
               fill
               src={
-                image?.[locale].footer?.asset
-                  ? urlForImage(image?.[locale].footer.asset).format('webp').quality(80).url()
+                image?.[locale]?.footer?.asset
+                  ? urlForImage(image?.[locale]?.footer.asset).format('webp').quality(80).url()
                   : '/assets/images/buy-ebook.png'
               }
             />

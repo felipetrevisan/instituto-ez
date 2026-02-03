@@ -29,7 +29,7 @@ export default function StickyHeader({ title, image, download }: Ebook) {
       {showSticky && (
         <motion.div
           animate={{ y: 0, opacity: 1 }}
-          className="fixed top-[env(safe-area-inset-top,0px)] right-0 left-0 z-50 flex items-center justify-between bg-white/90 p-4 shadow-md backdrop-blur-xl"
+          className="fixed top-[90px] right-0 left-0 z-50 flex items-center justify-between bg-white/70 p-4 shadow-sm backdrop-blur-xl"
           exit={{ y: -80, opacity: 0 }}
           initial={{ y: -80, opacity: 0 }}
           transition={{ duration: 0.3, type: 'spring', stiffness: 300, damping: 20 }}
@@ -56,14 +56,14 @@ export default function StickyHeader({ title, image, download }: Ebook) {
               )}
             </Link>
             <div className="flex items-center justify-center md:max-w-[70vw]">
-              {!isMobile && image?.[locale].large && (
+              {!isMobile && image?.[locale]?.large && (
                 <div className="relative size-10">
                   <Image
                     alt={t('bookCoverAlt')}
                     className="object-cover"
                     fill
                     priority
-                    src={urlForImage(image?.[locale].large.asset)
+                    src={urlForImage(image?.[locale]?.large.asset)
                       .width(64)
                       .height(64)
                       .format('webp')

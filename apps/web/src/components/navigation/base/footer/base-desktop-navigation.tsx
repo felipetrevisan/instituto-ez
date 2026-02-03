@@ -51,6 +51,8 @@ export function BaseDesktopNavigation({
   const locale = useLocale()
   const { isMenuActive } = useApp()
 
+  console.log(navigation.items)
+
   return (
     <Fragment>
       <FadeIn>
