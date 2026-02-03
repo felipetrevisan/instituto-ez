@@ -27,6 +27,7 @@
   --brand-text: oklch(0.22 0.03 240);
   --brand-text-muted: oklch(0.55 0.04 240);
   --navy: oklch(0.32 0.08 240);
+  --navy-foreground: oklch(1 0 0);
   --footer: oklch(0.32 0.08 240);
   --footer-foreground: oklch(0.98 0 0);
   --gradient-subtle: linear-gradient(180deg, oklch(1 0 0) 0%, oklch(0.97 0.01 240) 100%);
@@ -70,6 +71,7 @@
   --brand-text: oklch(0.95 0.01 240);
   --brand-text-muted: oklch(0.70 0.03 240);
   --navy: oklch(0.62 0.10 240);
+  --navy-foreground: oklch(0.18 0.02 240);
   --footer: oklch(0.32 0.08 240);
   --footer-foreground: oklch(0.75 0.13 70);
   --gradient-subtle: linear-gradient(

@@ -34,10 +34,7 @@ const landingSlugConfig = {
 
 export type LandingSlugKey = keyof typeof landingSlugConfig
 
-const landingSlugEntries = Object.entries(landingSlugConfig) as [
-  LandingSlugKey,
-  LandingSlugEntry,
-][]
+const landingSlugEntries = Object.entries(landingSlugConfig) as [LandingSlugKey, LandingSlugEntry][]
 
 export const landingSlugsByKey = Object.fromEntries(
   landingSlugEntries.map(([key, value]) => [key, value.slugs]),

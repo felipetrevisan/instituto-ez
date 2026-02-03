@@ -16,6 +16,7 @@ const buttonVariants = cva(
         mentory: '',
         about: '',
         services: '',
+        immersion: '',
         ebook: '',
       },
 

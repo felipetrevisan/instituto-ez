@@ -1,5 +1,5 @@
-import type { Navigation } from '@ez/web/types/site'
 import { FadeIn } from '@ez/web/components/ui/fade-in'
+import type { Navigation } from '@ez/web/types/site'
 
 type NavigationRendererProps = {
   Component?: React.ComponentType<{ navigation?: Navigation }>

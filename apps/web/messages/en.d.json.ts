@@ -67,6 +67,21 @@ declare const messages: {
   "LandingPageMentoring": {
     "stratagyMentoring": "Strategic Mentoring"
   },
+  "LandingPageImmersion": {
+    "heroTopics": {
+      "neuroscience": "Neuroscience",
+      "spirituality": "Spirituality",
+      "consciousness": "Consciousness",
+      "faith": "Faith"
+    },
+    "mainTargetLabel": "Who is this immersion for",
+    "experienceLabel": "What you will experience",
+    "instructorLabel": "Your Guides",
+    "faqLabel": "Frequently Asked Questions",
+    "nextClassLabel": "Next Class",
+    "nextClassFooter": "Limited spots • Certification included",
+    "finalCtaImageAlt": "Immersion {index}"
+  },
   "DigitalProducts": {
     "sectionTitle": "Digital Products",
     "badgeEbooks": "eBooks",

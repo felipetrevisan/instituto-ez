@@ -59,17 +59,16 @@ export default defineType({
     prepare({ title }) {
       const localized = Array.isArray(title) ? title.find((item) => item?.lang === i18n.base) : null
       const blocks = localized?.value
-      const text =
-        Array.isArray(blocks)
-          ? blocks
-              .map((block) =>
-                Array.isArray(block?.children)
-                  ? block.children.map((child) => child?.text).join('')
-                  : '',
-              )
-              .join(' ')
-              .trim()
-          : ''
+      const text = Array.isArray(blocks)
+        ? blocks
+            .map((block) =>
+              Array.isArray(block?.children)
+                ? block.children.map((child) => child?.text).join('')
+                : '',
+            )
+            .join(' ')
+            .trim()
+        : ''
       return {
         title: text || 'Sem texto',
       }

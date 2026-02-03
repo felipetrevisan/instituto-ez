@@ -1,11 +1,11 @@
-import { locales } from '@ez/web/config/locale'
 import { resolveOpenGraphImage } from '@ez/web/config/image'
+import { locales } from '@ez/web/config/locale'
 import { getEbookBySlug, getEbooks } from '@ez/web/server/get-ebook'
 import { getLandingPageSettings } from '@ez/web/server/get-landing-page-settings'
 import { buildAlternates } from '@ez/web/utils/seo'
 import type { Metadata } from 'next'
-import { getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
+import { getTranslations } from 'next-intl/server'
 import { Content } from './_content'
 
 export async function generateMetadata({
@@ -26,7 +26,7 @@ export async function generateMetadata({
   const resolvedDescription =
     typeof rawSeoDescription === 'string'
       ? rawSeoDescription
-      : rawSeoDescription?.[locale] ?? data.description?.[locale]
+      : (rawSeoDescription?.[locale] ?? data.description?.[locale])
   const alternates = buildAlternates(locale, `/ebooks/${slug}`)
   const seoImageAsset = data.seo?.image?.asset
   const ogImageAsset =

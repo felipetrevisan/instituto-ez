@@ -7,6 +7,8 @@ import { useLocale, useTranslations } from 'next-intl'
 
 const MotionTitle = motion(Title)
 
+const seals = ['guarantee', 'quality', 'refund', 'safe-buy']
+
 export default function GuaranteeSection() {
   const locale = useLocale()
 
@@ -28,7 +30,7 @@ export default function GuaranteeSection() {
         </MotionTitle>
       </motion.h2>
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 lg:gap-8">
-        {/* {data?.seals?.[locale].map((seal, i) => (
+        {seals?.map((seal, i) => (
           <motion.div
             className="relative flex size-40 flex-col items-center lg:size-64 lg:p-8"
             initial={{ opacity: 0, y: 40 }}
@@ -38,13 +40,9 @@ export default function GuaranteeSection() {
             whileHover={{ scale: 1.1 }}
             whileInView={{ opacity: 1, y: 0 }}
           >
-            <Image
-              alt=""
-              fill
-              src={urlForImage(seal.seal.image.asset).format('webp').quality(80).url()}
-            />
+            <Image alt="" fill src={`/assets/images/seals/${locale}/${seal}.png`} />
           </motion.div>
-        ))} */}
+        ))}
       </div>
     </div>
   )

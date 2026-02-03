@@ -34,7 +34,7 @@ export enum Theme {
   custom = 'custom',
   cyan = 'cyan',
   coral = 'coral',
-  navy = 'navy'
+  navy = 'navy',
 }
 
 export enum Variant {

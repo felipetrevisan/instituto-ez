@@ -60,6 +60,9 @@ const ctaField = `
     _type == "home.immersion" ||
     _type == "services.methodsessions" ||
     _type == "services.whoisitfor" ||
+    _type == "immersion.experience" ||
+    _type == "immersion.final-cta" ||
+    _type == "immersion.next-class" ||
     _type == "ebooks.cta" => cta[] {
       ...,
      ${buttonFields}

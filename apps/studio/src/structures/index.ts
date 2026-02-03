@@ -29,9 +29,7 @@ const structure = (S: StructureBuilder, context: ConfigContext) =>
         .child(
           S.list()
             .title('Páginas')
-            .items([
-              S.listItem().title('Landing Pages').child(S.documentTypeList('landingPage')),
-            ]),
+            .items([S.listItem().title('Landing Pages').child(S.documentTypeList('landingPage'))]),
         ),
 
       S.divider(),
@@ -124,7 +122,7 @@ const structure = (S: StructureBuilder, context: ConfigContext) =>
             'section',
             'formGeneralSettings',
             'landing-page-section',
-            'logo'
+            'logo',
           ].includes(listItem.getId() || ''),
       ),
     ])

@@ -69,11 +69,7 @@ export function LandingPageServices({ data }: { data: Landing<'services'> }) {
 
         if (section._type === 'services.cta') {
           return (
-            <FinalCTA
-              data={section as SectionServicesCTA}
-              key={section._type}
-              locale={locale}
-            />
+            <FinalCTA data={section as SectionServicesCTA} key={section._type} locale={locale} />
           )
         }
 

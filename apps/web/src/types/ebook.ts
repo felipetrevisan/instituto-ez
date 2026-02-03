@@ -49,7 +49,6 @@ export type Ebook = {
     }
   >
   questions?: Question[]
-  disabled: boolean
   button?: Button
   category: Category
 }
@@ -137,9 +136,7 @@ const parseHexChannel = (value: string) => Number.parseInt(value, 16) / 255
 const isLightColor = (hex?: string) => {
   if (!hex || !hex.startsWith('#') || (hex.length !== 7 && hex.length !== 4)) return false
   const normalized =
-    hex.length === 4
-      ? `#${hex[1]}${hex[1]}${hex[2]}${hex[2]}${hex[3]}${hex[3]}`
-      : hex
+    hex.length === 4 ? `#${hex[1]}${hex[1]}${hex[2]}${hex[2]}${hex[3]}${hex[3]}` : hex
   const r = parseHexChannel(normalized.slice(1, 3))
   const g = parseHexChannel(normalized.slice(3, 5))
   const b = parseHexChannel(normalized.slice(5, 7))

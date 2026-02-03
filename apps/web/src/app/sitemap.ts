@@ -32,8 +32,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const ebooks = await getEbooks()
 
   for (const ebook of ebooks ?? []) {
-    if (ebook.disabled) continue
-
     for (const locale of routing.locales) {
       const currentSlug = ebook.slug?.[locale]?.current
       if (!currentSlug) continue

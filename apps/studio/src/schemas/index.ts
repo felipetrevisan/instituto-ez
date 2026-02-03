@@ -60,9 +60,16 @@ import {
   experienceElementsObject,
   experienceFeaturedElementObject,
   experienceObject,
+  faqItemObject,
+  faqObject,
+  finalCtaObject as finalCtaImmersionObject,
   instructorItemObject,
   instructorObject,
   introObject as introImmersionObject,
+  mainTargetItemObject,
+  mainTargetObject,
+  nextClassItemObject,
+  nextClassObject,
 } from '@ez/studio/schemas/documents/landing/immersion'
 import landingPageDocument from '@ez/studio/schemas/documents/landing/landing'
 import {
@@ -99,10 +106,7 @@ import {
   navigationDocument,
   navigationItemObject,
 } from '@ez/studio/schemas/documents/navigation'
-import {
-  settingsDocument,
-  testimonialsDocument,
-} from '@ez/studio/schemas/documents/site'
+import { settingsDocument, testimonialsDocument } from '@ez/studio/schemas/documents/site'
 import {
   accordionContentLandingPageObject,
   accordionContentObject,
@@ -206,6 +210,13 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     experienceFeaturedElementObject,
     instructorObject,
     instructorItemObject,
+    mainTargetObject,
+    mainTargetItemObject,
+    finalCtaImmersionObject,
+    faqObject,
+    faqItemObject,
+    nextClassObject,
+    nextClassItemObject,
 
     // Home
     servicesHomeObject,

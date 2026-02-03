@@ -1,6 +1,5 @@
 'use client'
 
-import { FadeIn } from '@ez/web/components/ui/fade-in'
 import { useShared } from '@ez/shared/hooks/use-shared'
 import { Button } from '@ez/shared/ui'
 import { BaseDesktopNavigation } from '@ez/web/components/navigation/base/header/base-desktop-navigation'

@@ -1,5 +1,5 @@
 import { i18n } from '@ez/studio/schemas/objects/locale/locales'
-import { BlockContentIcon, CogIcon, HashIcon, EyeOpenIcon } from '@sanity/icons'
+import { BlockContentIcon, CogIcon, EyeOpenIcon, HashIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
@@ -110,6 +110,10 @@ export default defineType({
         { type: 'immersion.intro' },
         { type: 'immersion.experience' },
         { type: 'immersion.instructor' },
+        { type: 'immersion.main-target' },
+        { type: 'immersion.final-cta' },
+        { type: 'immersion.faq' },
+        { type: 'immersion.next-class' },
 
         // HOME
         { type: 'home.services' },

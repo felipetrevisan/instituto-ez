@@ -3,7 +3,7 @@ import {
   FontSizeDecorator,
   FontWeightDecorator,
 } from '@ez/studio/portable/decorators'
-import { BoldIcon, ColorWheelIcon, LinkIcon } from '@sanity/icons'
+import { BoldIcon, ColorWheelIcon } from '@sanity/icons'
 
 const basicDecorators = [
   { title: 'Bold', value: 'strong' },

@@ -11,7 +11,7 @@ import { motion } from 'motion/react'
 export const Hero = ({ data, locale }: { data: SectionHero; locale: string }) => {
   return (
     <StickySection
-      className="relative mt-24 h-full w-screen bg-gradient-to-br from-primary via-primary/95 to-primary/90"
+      className="relative mt-24 h-full w-screen bg-gradient-to-br from-primary via-primary/95 to-primary/90 dark:from-background dark:via-background/95 dark:to-background/90"
       id="hero"
     >
       {data?.image && (

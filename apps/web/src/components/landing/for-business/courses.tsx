@@ -107,8 +107,7 @@ export const Courses = ({ data, locale }: { data: SectionForBusinessCourses; loc
                       <div className="space-y-2 text-muted-foreground text-sm">
                         <p>
                           <span className="font-semibold text-foreground">{t('format')}:</span>{' '}
-                          {t('workshop')}{' '}
-                          {item.type === 'INPERSON' ? t('inPerson') : t('remote')},{' '}
+                          {t('workshop')} {item.type === 'INPERSON' ? t('inPerson') : t('remote')},{' '}
                           {item.time?.[locale]}
                         </p>
                         {item.categories && formatCategory(item.categories) && (

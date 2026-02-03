@@ -38,7 +38,7 @@ export const MasterclassCard = ({
       whileInView={{ opacity: 1, y: 0 }}
     >
       <Link href={href}>
-        <div className='group hover:-translate-y-2 relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 transition-all duration-300 hover:border-cyan/30'>
+        <div className="group hover:-translate-y-2 relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 transition-all duration-300 hover:border-cyan/30">
           {/* Video Preview with Image */}
           <div className="relative aspect-video overflow-hidden">
             {imageAsset ? (
@@ -49,15 +49,15 @@ export const MasterclassCard = ({
                 src={urlForImage(imageAsset).auto('format').quality(80).url()}
               />
             ) : (
-              <div className='flex h-full w-full items-center justify-center bg-gradient-to-br from-gray-800 to-gray-900'>
+              <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-gray-800 to-gray-900">
                 <Video className="size-20 text-gray-400" />
               </div>
             )}
 
             <div className="absolute inset-0 bg-gradient-to-t from-navy/80 to-transparent" />
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className='flex size-16 items-center justify-center rounded-full border-2 border-cyan bg-cyan/20 transition-all duration-300 group-hover:scale-110 group-hover:bg-cyan/30'>
-                <Play className='ml-1 size-6 text-cyan' />
+              <div className="flex size-16 items-center justify-center rounded-full border-2 border-cyan bg-cyan/20 transition-all duration-300 group-hover:scale-110 group-hover:bg-cyan/30">
+                <Play className="ml-1 size-6 text-cyan" />
               </div>
             </div>
 
@@ -68,8 +68,8 @@ export const MasterclassCard = ({
             </div>
           </div>
 
-          <div className='flex h-[180px] flex-col p-6'>
-            {description && <p className='mb-4 flex-grow text-gray-300 text-sm'>{description}</p>}
+          <div className="flex h-[180px] flex-col p-6">
+            {description && <p className="mb-4 flex-grow text-gray-300 text-sm">{description}</p>}
 
             {durationLabel && (
               <div className="mb-4 flex items-center gap-4 text-gray-500 text-xs">

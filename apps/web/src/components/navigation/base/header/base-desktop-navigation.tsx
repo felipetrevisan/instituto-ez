@@ -17,7 +17,7 @@ import { navigateToHash } from '@ez/web/utils/scroll-to-id'
 import { motion } from 'motion/react'
 import Link from 'next/link'
 import { useLocale } from 'next-intl'
-import { Fragment, type ReactNode } from 'react'
+import type { ReactNode } from 'react'
 
 type BaseDesktopNavigationProps = {
   navigation?: Navigation

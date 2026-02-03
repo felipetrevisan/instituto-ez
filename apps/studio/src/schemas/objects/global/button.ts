@@ -30,7 +30,7 @@ export default defineType({
       group: 'general',
       type: 'localizedString',
       validation: (Rule) =>
-        Rule.custom((field, context) => {
+        Rule.custom((field, _context) => {
           if (!field) {
             return 'This field must not be empty.'
           }
@@ -78,6 +78,7 @@ export default defineType({
           { title: 'Tertiary', value: 'tertiary' },
           { title: 'Accent', value: 'accent' },
           { title: 'Background', value: 'background' },
+          { title: 'Cyan', value: 'cyan' },
         ],
         layout: 'dropdown',
       },
@@ -133,8 +134,7 @@ export default defineType({
       type: 'string',
       group: 'link',
       hidden: ({ parent }) =>
-        parent?.button_link_type !== 'DIALOG' ||
-        parent?.dialog_type !== 'CONTACT',
+        parent?.button_link_type !== 'DIALOG' || parent?.dialog_type !== 'CONTACT',
       validation: (Rule) =>
         Rule.custom((value, context) => {
           const parent = context.parent as {
@@ -143,8 +143,7 @@ export default defineType({
           }
 
           const isContactDialog =
-            parent?.button_link_type === 'DIALOG' &&
-            parent?.dialog_type === 'CONTACT'
+            parent?.button_link_type === 'DIALOG' && parent?.dialog_type === 'CONTACT'
 
           if (isContactDialog && !value) {
             return 'Contact subject is required when dialog type is Contact.'
@@ -163,8 +162,7 @@ export default defineType({
       hidden: ({ parent }) => parent?.button_link_type !== 'INTERNAL',
       validation: (Rule) =>
         Rule.custom((field, context) =>
-          context?.document?.button_link_type === 'INTERNAL' &&
-          !field
+          context?.document?.button_link_type === 'INTERNAL' && !field
             ? 'This field must not be empty.'
             : true,
         ).warning(),

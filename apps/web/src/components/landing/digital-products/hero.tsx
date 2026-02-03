@@ -8,8 +8,8 @@ import { createPortableComponents } from '@ez/web/utils/create-portable-componen
 import { ArrowDown, BookOpen } from 'lucide-react'
 import { motion } from 'motion/react'
 import Image from 'next/image'
-import { PortableText } from 'next-sanity'
 import { useTranslations } from 'next-intl'
+import { PortableText } from 'next-sanity'
 
 export const Hero = ({ data, locale }: { data: SectionDigitalProductsHero; locale: string }) => {
   const t = useTranslations('DigitalProducts')

@@ -1,7 +1,7 @@
 'use client'
 
-import { StickySection } from '@ez/web/components/ui/sticky-section'
 import { FadeIn } from '@ez/web/components/ui/fade-in'
+import { StickySection } from '@ez/web/components/ui/sticky-section'
 import type { SectionServicesAssessment } from '@ez/web/types/landing/services'
 import { createPortableComponents } from '@ez/web/utils/create-portable-components'
 import { PortableText } from '@portabletext/react'

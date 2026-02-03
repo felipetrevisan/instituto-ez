@@ -19,10 +19,10 @@ export const CoverBook = ({ cover, locale, ref }: CoverBookProps) => {
       ref={ref}
     >
       <div className="flex h-full w-full flex-col items-stretch justify-between">
-        {cover?.[locale]?.cover.asset && (
+        {cover?.[locale]?.cover?.asset && (
           <Image
             alt={t('bookCoverAlt')}
-            blurDataURL={cover?.[locale].cover.metadata.lqip}
+            blurDataURL={cover[locale].cover.metadata.lqip}
             className="object-cover"
             fill
             priority

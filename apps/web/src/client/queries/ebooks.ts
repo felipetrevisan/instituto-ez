@@ -254,7 +254,6 @@ export const ebookQuery = groq`
     ${fields}
     ${priceField}
     ${imageField}
-    disabled,
     ${buttonField}
   }
 `
@@ -274,7 +273,6 @@ export const ebookQueryBySlug = groq`
     ${metadataField}
     ${imageField}
     ${authorField}
-    disabled,
     ${buttonField}
   }
 `

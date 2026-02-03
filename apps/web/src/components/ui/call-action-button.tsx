@@ -50,7 +50,7 @@ export const CallActionButton = ({
 
   const ButtonContent = (
     <motion.div
-      className="inline-flex"
+      className="inline-flex w-full md:w-auto"
       transition={{ type: 'spring', stiffness: 260, damping: 18 }}
       whileHover={{ y: -1 }}
       whileTap={{ scale: 0.98 }}

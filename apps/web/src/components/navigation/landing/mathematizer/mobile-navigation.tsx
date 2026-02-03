@@ -1,9 +1,9 @@
 'use client'
 
-import { FadeIn } from '@ez/web/components/ui/fade-in'
 import { useShared } from '@ez/shared/hooks/use-shared'
 import { Button } from '@ez/shared/ui'
 import { BaseMobileNavigation } from '@ez/web/components/navigation/base/header/base-mobile-navigation'
+import { FadeIn } from '@ez/web/components/ui/fade-in'
 import type { Navigation } from '@ez/web/types/site'
 import { useTranslations } from 'next-intl'
 
@@ -16,18 +16,18 @@ export const LandingPageMathematizerMobileNavigation = ({ navigation }: Navigati
   const t = useTranslations('Navigation')
 
   return (
-    <FadeIn>
+    <FadeIn className="mx-10">
       <BaseMobileNavigation
         additionalContent={
           <Button
             base="mathematizer"
-            className="mt-2 flex justify-self-center"
+            className="m-2 flex justify-self-center"
             onClick={() => setIsContactDialogOpen(true)}
             rounded="full"
             theme="background"
-        >
-          {t('requestDiagnosis')}
-        </Button>
+          >
+            {t('requestDiagnosis')}
+          </Button>
         }
         navClassName="fixed top-[80px] z-90 w-full divide-y divide-primary/5 border-border/40 border-t bg-background/90 pb-4 backdrop-blur-2xl"
         navigation={navigation}

@@ -43,7 +43,8 @@ const carouselVariants = cva(
           '**:data-[slot=carousel-dot]:shadow-tertiary **:data-[slot=carousel-dot]:hover:after:shadow-tertiary',
         accent:
           '**:data-[slot=carousel-dot]:shadow-accent **:data-[slot=carousel-dot]:hover:after:shadow-accent',
-        coral: '**:data-[slot=carousel-dot]:shadow-coral **:data-[slot=carousel-dot]:hover:after:shadow-coral',
+        coral:
+          '**:data-[slot=carousel-dot]:shadow-coral **:data-[slot=carousel-dot]:hover:after:shadow-coral',
         cyan: '**:data-[slot=carousel-dot]:shadow-cyan **:data-[slot=carousel-dot]:hover:after:shadow-cyan',
         navy: '**:data-[slot=carousel-dot]:shadow-navy **:data-[slot=carousel-dot]:hover:after:shadow-navy',
         custom:
@@ -230,13 +231,14 @@ function CarouselPrevious({
   className,
   variant = 'outline',
   ...props
-}: React.ComponentProps<typeof Button>) {
+}: Omit<React.ComponentProps<typeof Button>, 'children'>) {
   const { orientation, scrollPrev, canScrollPrev } = useCarousel()
 
   return (
     <Button
+      aria-label="Previous slide"
       className={cn(
-        'absolute size-8 rounded-full',
+        'absolute h-10 w-10 rounded-full p-2',
         orientation === 'horizontal'
           ? '-left-12 -translate-y-1/2 top-1/2'
           : '-top-12 -translate-x-1/2 left-1/2 rotate-90',
@@ -258,13 +260,14 @@ function CarouselNext({
   className,
   variant = 'outline',
   ...props
-}: React.ComponentProps<typeof Button>) {
+}: Omit<React.ComponentProps<typeof Button>, 'children'>) {
   const { orientation, scrollNext, canScrollNext } = useCarousel()
 
   return (
     <Button
+      aria-label="Next slide"
       className={cn(
-        'absolute size-8 rounded-full',
+        'absolute h-10 w-10 rounded-full p-2',
         orientation === 'horizontal'
           ? '-right-12 -translate-y-1/2 top-1/2'
           : '-bottom-12 -translate-x-1/2 left-1/2 rotate-90',

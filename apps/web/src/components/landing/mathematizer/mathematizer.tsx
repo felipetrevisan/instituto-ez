@@ -76,9 +76,7 @@ export const Mathematizer = ({
                         </div>
 
                         <div>
-                          <p className="mb-2 font-semibold text-accent text-sm">
-                            {t('result')}
-                          </p>
+                          <p className="mb-2 font-semibold text-accent text-sm">{t('result')}</p>
                           <p className="font-medium text-foreground">{item.result[locale]}</p>
                         </div>
                       </div>

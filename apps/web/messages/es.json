@@ -64,6 +64,21 @@
   "LandingPageMentoring": {
     "stratagyMentoring": "Mentoría estratégica"
   },
+  "LandingPageImmersion": {
+    "heroTopics": {
+      "neuroscience": "Neurociencia",
+      "spirituality": "Espiritualidad",
+      "consciousness": "Conciencia",
+      "faith": "Fe"
+    },
+    "mainTargetLabel": "Para quién es esta inmersión",
+    "experienceLabel": "Lo que vas a vivir",
+    "instructorLabel": "Tus Guías",
+    "faqLabel": "Preguntas frecuentes",
+    "nextClassLabel": "Próxima clase",
+    "nextClassFooter": "Cupos limitados • Certificación incluida",
+    "finalCtaImageAlt": "Inmersión {index}"
+  },
   "DigitalProducts": {
     "sectionTitle": "Productos digitales",
     "badgeEbooks": "eBooks",

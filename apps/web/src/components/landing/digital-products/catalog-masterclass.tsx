@@ -7,8 +7,8 @@ import type { SectionDigitalProductsMasterclassCatalog } from '@ez/web/types/lan
 import { createPortableComponents } from '@ez/web/utils/create-portable-components'
 import { Video } from 'lucide-react'
 import { motion } from 'motion/react'
-import { PortableText } from 'next-sanity'
 import { useTranslations } from 'next-intl'
+import { PortableText } from 'next-sanity'
 
 export const CatalogMasterclass = ({
   data,
@@ -36,7 +36,7 @@ export const CatalogMasterclass = ({
             {t('badgeMasterclasses')}
           </div>
           {data?.heading?.[locale] && (
-            <h2 className='mb-4 font-bold text-3xl text-white md:text-4xl lg:text-5xl'>
+            <h2 className="mb-4 font-bold text-3xl text-white md:text-4xl lg:text-5xl">
               <PortableText components={createPortableComponents()} value={data.heading[locale]} />
             </h2>
           )}

@@ -8,8 +8,11 @@ import { createPortableComponents } from '@ez/web/utils/create-portable-componen
 import { PortableText } from '@portabletext/react'
 import { motion } from 'motion/react'
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 
 export const Hero = ({ data, locale }: { data: SectionHero; locale: string }) => {
+  const t = useTranslations('LandingPageImmersion')
+
   return (
     <StickySection className="relative w-screen overflow-hidden py-24 md:py-32 lg:py-40" id="hero">
       {data.image && (
@@ -43,13 +46,21 @@ export const Hero = ({ data, locale }: { data: SectionHero; locale: string }) =>
             initial={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <span className="font-medium text-white text-xl md:text-2xl">Neurociência</span>
+            <span className="font-medium text-white text-xl md:text-2xl">
+              {t('heroTopics.neuroscience')}
+            </span>
             <span className="text-white/50 text-xl md:text-2xl">•</span>
-            <span className="font-medium text-white text-xl md:text-2xl">Espiritualidade</span>
+            <span className="font-medium text-white text-xl md:text-2xl">
+              {t('heroTopics.spirituality')}
+            </span>
             <span className="text-white/50 text-xl md:text-2xl">•</span>
-            <span className="font-medium text-white text-xl md:text-2xl">Consciência</span>
+            <span className="font-medium text-white text-xl md:text-2xl">
+              {t('heroTopics.consciousness')}
+            </span>
             <span className="text-white/50 text-xl md:text-2xl">•</span>
-            <span className="font-medium text-white text-xl md:text-2xl">Fé</span>
+            <span className="font-medium text-white text-xl md:text-2xl">
+              {t('heroTopics.faith')}
+            </span>
           </motion.div>
 
           {data.cta && data.cta.length > 0 && (

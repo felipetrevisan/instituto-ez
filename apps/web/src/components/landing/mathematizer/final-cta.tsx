@@ -39,9 +39,7 @@ export const FinalCTA = ({ data, locale }: { data: SectionMathematizerCTA; local
               whileInView={{ opacity: 1, y: 0 }}
             >
               <PortableText components={createPortableComponents()} value={data.text[locale]} />
-              <p className="pt-4 font-bold text-accent text-xl">
-                {t('finalCtaHighlight')}
-              </p>
+              <p className="pt-4 font-bold text-accent text-xl">{t('finalCtaHighlight')}</p>
             </motion.div>
           )}
 

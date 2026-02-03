@@ -7,6 +7,7 @@ import type { SectionImmersionInstructor } from '@ez/web/types/landing/immersion
 import { createPortableComponents } from '@ez/web/utils/create-portable-components'
 import { PortableText } from '@portabletext/react'
 import { motion } from 'motion/react'
+import { useTranslations } from 'next-intl'
 
 export const Instructor = ({
   data,
@@ -15,6 +16,7 @@ export const Instructor = ({
   data: SectionImmersionInstructor
   locale: string
 }) => {
+  const t = useTranslations('LandingPageImmersion')
   const colors = ['cyan', 'coral']
 
   return (
@@ -28,7 +30,7 @@ export const Instructor = ({
           whileInView={{ opacity: 1, y: 0 }}
         >
           <span className="mb-3 block font-semibold text-coral text-sm uppercase tracking-wider">
-            Seus Guias
+            {t('instructorLabel')}
           </span>
 
           {data?.heading?.[locale] && (
@@ -51,12 +53,12 @@ export const Instructor = ({
         </motion.div>
 
         {data.items && data.items?.length > 0 && (
-          <div className='mx-auto grid max-w-5xl gap-8 md:grid-cols-2'>
+          <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-2">
             {data.items.map((instructor, index) => {
               const color = colors[index % colors.length]
               return (
                 <motion.div
-                  className='rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm transition-all duration-300 hover:border-coral/30'
+                  className="rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm transition-all duration-300 hover:border-coral/30"
                   initial={{ opacity: 0, y: 30 }}
                   key={instructor.name}
                   transition={{ duration: 0.6, delay: index * 0.2 }}
@@ -80,10 +82,10 @@ export const Instructor = ({
                     )}
                   </div>
 
-                  <h3 className='mb-1 font-bold text-2xl text-white'>
+                  <h3 className="mb-1 font-bold text-2xl text-white">
                     {instructor.name}
                     {instructor.subtitle?.[locale] && (
-                      <span className='ml-2 font-normal text-coral'>
+                      <span className="ml-2 font-normal text-coral">
                         {instructor.subtitle[locale]}
                       </span>
                     )}

@@ -1,5 +1,5 @@
 import type { SanityAsset } from '@ez/shared/types/assets'
-import type { BorderRounded, LinkType, Theme, Variant } from '@ez/shared/types/global'
+import type { LinkType } from '@ez/shared/types/global'
 
 export type Site = {
   id: string

@@ -11,13 +11,14 @@ const accordionVariants = cva('relative', {
   variants: {
     theme: {
       default:
-        '**:data-[slot=accordion-item]:border-primary **:data-[slot=accordion-content]:text-primary **:data-[slot=accordion-trigger]:text-primary **:data-[slot=accordion-trigger]:hover:bg-primary/10',
+        '**:data-[slot=accordion-content]:text-primary **:data-[slot=accordion-trigger]:text-primary',
       secondary:
-        '**:data-[slot=accordion-item]:border-secondary **:data-[slot=accordion-content]:text-secondary **:data-[slot=accordion-trigger]:text-secondary **:data-[slot=accordion-trigger]:hover:bg-secondary/10',
+        '**:data-[slot=accordion-content]:text-secondary **:data-[slot=accordion-trigger]:text-secondary',
       tertiary:
-        '**:data-[slot=accordion-item]:border-tertiary **:data-[slot=accordion-content]:text-tertiary **:data-[slot=accordion-trigger]:text-tertiary **:data-[slot=accordion-trigger]:hover:bg-tertiary/10',
+        '**:data-[slot=accordion-content]:text-tertiary **:data-[slot=accordion-trigger]:text-tertiary',
+      navy: '**:data-[slot=accordion-content]:text-navy **:data-[slot=accordion-trigger]:text-navy',
       custom:
-        '**:data-[slot=accordion-item]:white **:data-[slot=accordion-item]:border-[var(--secondary)] **:data-[slot=accordion-content]:text-[var(--secondary)] **:data-[slot=accordion-trigger]:text-[var(--secondary)] **:data-[slot=accordion-trigger]:hover:bg-[var(--secondary)]/10',
+        '**:data-[slot=accordion-item]:border-[var(--secondary)] **:data-[slot=accordion-content]:text-[var(--secondary)] **:data-[slot=accordion-trigger]:text-[var(--secondary)]',
     },
     rounded: {
       none: '**:data-[slot=accordion-item]:rounded-none **:data-[slot=accordion-trigger]:rounded-none',
@@ -79,7 +80,7 @@ function AccordionItem({ children, className, ...props }: AccordionItemProps) {
   return (
     <AccordionItemContext.Provider value={{ isOpen, setIsOpen }}>
       <AccordionPrimitive.Item
-        className={cn('relative mb-3 border shadow-xl backdrop-blur-md', className)}
+        className={cn('relative mb-3 border shadow-sm backdrop-blur-md', className)}
         data-slot="accordion-item"
         {...props}
       >
@@ -131,7 +132,10 @@ function AccordionTrigger({
   }, [setIsOpen])
 
   return (
-    <AccordionPrimitive.Header className="flex" data-slot="accordion-header">
+    <AccordionPrimitive.Header
+      className="flex [&:has([data-slot=accordion-trigger]:hover)_[data-slot=accordion-trigger]]:text-secondary"
+      data-slot="accordion-header"
+    >
       <AccordionPrimitive.Trigger
         className={cn(
           'flex flex-1 items-start justify-between gap-4 px-4 py-5 text-left font-semibold text-md outline-none transition-all focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 [&[data-state=open]>svg]:rotate-180',

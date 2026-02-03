@@ -1,9 +1,9 @@
 'use client'
 
-import { FadeIn } from '@ez/web/components/ui/fade-in'
 import { useShared } from '@ez/shared/hooks/use-shared'
 import { Button } from '@ez/shared/ui'
 import { BaseDesktopNavigation } from '@ez/web/components/navigation/base/header/base-desktop-navigation'
+import { FadeIn } from '@ez/web/components/ui/fade-in'
 import type { Navigation } from '@ez/web/types/site'
 import { Phone } from 'lucide-react'
 import { useTranslations } from 'next-intl'
@@ -26,11 +26,11 @@ export const LandingPageForBusinessDesktopNavigation = ({ navigation }: Navigati
             onClick={() => setIsContactDialogOpen(true)}
             rounded="full"
             size="sm"
-          theme="background"
-        >
-          {t('talkToInstitute')}
-          <Phone className="size-4 transition-transform group-hover:rotate-12" />
-        </Button>
+            theme="background"
+          >
+            {t('talkToInstitute')}
+            <Phone className="size-4 transition-transform group-hover:rotate-12" />
+          </Button>
         }
         navigation={navigation}
       />

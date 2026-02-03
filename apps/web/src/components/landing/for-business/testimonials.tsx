@@ -35,7 +35,7 @@ export const Testimonials = ({
             </motion.div>
           )}
 
-          <div className='grid gap-6 md:grid-cols-3'>
+          <div className="grid gap-6 md:grid-cols-3">
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               transition={{ delay: 0.1, duration: 0.5 }}
@@ -45,17 +45,17 @@ export const Testimonials = ({
             >
               <Card
                 base="for-business"
-                className='h-full space-y-4 bg-gradient-to-br from-card to-primary/5 p-6 text-center transition-all duration-300 hover:shadow-[var(--shadow-card-hover)]'
+                className="h-full space-y-4 bg-gradient-to-br from-card to-primary/5 p-6 text-center transition-all duration-300 hover:shadow-[var(--shadow-card-hover)]"
               >
-                <div className='mx-auto flex size-16 items-center justify-center rounded-full bg-primary/10'>
+                <div className="mx-auto flex size-16 items-center justify-center rounded-full bg-primary/10">
                   <TrendingDown className="size-8 text-primary" />
                 </div>
                 <div className="space-y-2">
-                  <p className='font-bold text-4xl text-primary'>30%</p>
-                  <p className='font-semibold text-foreground'>
+                  <p className="font-bold text-4xl text-primary">30%</p>
+                  <p className="font-semibold text-foreground">
                     {t('testimonials.reductionTitle')}
                   </p>
-                  <p className='text-muted-foreground text-sm'>
+                  <p className="text-muted-foreground text-sm">
                     {t('testimonials.reductionSubtitle')}
                   </p>
                 </div>
@@ -71,17 +71,17 @@ export const Testimonials = ({
             >
               <Card
                 base="for-business"
-                className='h-full space-y-4 bg-gradient-to-br from-card to-secondary/5 p-6 text-center transition-all duration-300 hover:shadow-[var(--shadow-card-hover)]'
+                className="h-full space-y-4 bg-gradient-to-br from-card to-secondary/5 p-6 text-center transition-all duration-300 hover:shadow-[var(--shadow-card-hover)]"
               >
-                <div className='mx-auto flex size-16 items-center justify-center rounded-full bg-secondary/10'>
+                <div className="mx-auto flex size-16 items-center justify-center rounded-full bg-secondary/10">
                   <TrendingUp className="size-8 text-secondary" />
                 </div>
                 <div className="space-y-2">
-                  <p className='font-bold text-4xl text-secondary'>40%</p>
-                  <p className='font-semibold text-foreground'>
+                  <p className="font-bold text-4xl text-secondary">40%</p>
+                  <p className="font-semibold text-foreground">
                     {t('testimonials.productivityTitle')}
                   </p>
-                  <p className='text-muted-foreground text-sm'>
+                  <p className="text-muted-foreground text-sm">
                     {t('testimonials.productivitySubtitle')}
                   </p>
                 </div>
@@ -97,17 +97,15 @@ export const Testimonials = ({
             >
               <Card
                 base="for-business"
-                className='h-full space-y-4 bg-gradient-to-br from-card to-accent/5 p-6 text-center transition-all duration-300 hover:shadow-[var(--shadow-card-hover)]'
+                className="h-full space-y-4 bg-gradient-to-br from-card to-accent/5 p-6 text-center transition-all duration-300 hover:shadow-[var(--shadow-card-hover)]"
               >
-                <div className='mx-auto flex size-16 items-center justify-center rounded-full bg-accent/10'>
+                <div className="mx-auto flex size-16 items-center justify-center rounded-full bg-accent/10">
                   <Heart className="size-8 text-accent" />
                 </div>
                 <div className="space-y-2">
-                  <p className='font-bold text-4xl text-accent'>+</p>
-                  <p className='font-semibold text-foreground'>
-                    {t('testimonials.climateTitle')}
-                  </p>
-                  <p className='text-muted-foreground text-sm'>
+                  <p className="font-bold text-4xl text-accent">+</p>
+                  <p className="font-semibold text-foreground">{t('testimonials.climateTitle')}</p>
+                  <p className="text-muted-foreground text-sm">
                     {t('testimonials.climateSubtitle')}
                   </p>
                 </div>

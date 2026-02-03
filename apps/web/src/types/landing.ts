@@ -28,8 +28,12 @@ import type {
 } from '@ez/web/types/landing/home'
 import type {
   SectionImmersionExperience,
+  SectionImmersionFAQ,
+  SectionImmersionFinalCTA,
   SectionImmersionInstructor,
   SectionImmersionIntro,
+  SectionImmersionMainTarget,
+  SectionImmersionNextClass,
 } from '@ez/web/types/landing/immersion'
 import type {
   SectionMathematizerBenefits,
@@ -135,6 +139,10 @@ export type LandingSectionsMap = {
     | SectionImmersionIntro
     | SectionImmersionExperience
     | SectionImmersionInstructor
+    | SectionImmersionMainTarget
+    | SectionImmersionFinalCTA
+    | SectionImmersionFAQ
+    | SectionImmersionNextClass
 }
 
 export type LandingNavigationSlot = {

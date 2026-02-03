@@ -6,4 +6,10 @@ import settingsDocument from '@ez/studio/schemas/documents/ebooks/settings'
 
 export * from './objects'
 
-export { catalogDocument, categoryDocument, ebookPriceDocument, ebookThemeDocument, settingsDocument }
+export {
+  catalogDocument,
+  categoryDocument,
+  ebookPriceDocument,
+  ebookThemeDocument,
+  settingsDocument,
+}

@@ -67,6 +67,21 @@ declare const messages: {
   "LandingPageMentoring": {
     "stratagyMentoring": "Mentoria Estratégica"
   },
+  "LandingPageImmersion": {
+    "heroTopics": {
+      "neuroscience": "Neurociência",
+      "spirituality": "Espiritualidade",
+      "consciousness": "Consciência",
+      "faith": "Fé"
+    },
+    "mainTargetLabel": "Para Quem é Esta Imersão",
+    "experienceLabel": "O Que Você Vai Vivenciar",
+    "instructorLabel": "Seus Guias",
+    "faqLabel": "Dúvidas Frequentes",
+    "nextClassLabel": "Próxima Turma",
+    "nextClassFooter": "Vagas limitadas • Certificação inclusa",
+    "finalCtaImageAlt": "Imersão {index}"
+  },
   "DigitalProducts": {
     "sectionTitle": "Produtos Digitais",
     "badgeEbooks": "eBooks",

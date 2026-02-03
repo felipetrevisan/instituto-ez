@@ -5,7 +5,6 @@ import { Carousel, CarouselContent, CarouselDots, CarouselItem } from '@ez/share
 import { TestimonialAnimated } from '@ez/web/components/testimonals/animated'
 import { TestimonialMinimalist } from '@ez/web/components/testimonals/minimalist'
 import { FadeIn } from '@ez/web/components/ui/fade-in'
-import { useSite } from '@ez/web/hooks/use-site'
 import { useTestimonials } from '@ez/web/hooks/use-testimonials'
 import ClassNames from 'embla-carousel-class-names'
 import { useState } from 'react'
@@ -14,7 +13,6 @@ import { Skeleton } from './skeleton'
 import './styles.css'
 
 export function Testimonials() {
-  const { data: site } = useSite()
   const { data, isLoading } = useTestimonials('service')
   const [hoveredIndex, setHoveredIndex] = useState<string | null>(null)
 

@@ -6,8 +6,8 @@ import { getLandingPage } from '@ez/web/server/get-landing'
 import type { Landing } from '@ez/web/types/landing'
 import { buildAlternates } from '@ez/web/utils/seo'
 import type { Metadata } from 'next'
-import { getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
+import { getTranslations } from 'next-intl/server'
 import { Suspense } from 'react'
 import Loading from '../_loading'
 
@@ -95,7 +95,7 @@ export default async function Page({
 
   if (landing) {
     const data = await getLandingPage(slug, locale)
-    
+
     if (!data) notFound()
 
     return (

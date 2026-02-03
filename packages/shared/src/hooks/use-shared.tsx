@@ -15,7 +15,7 @@ type SharedContextProps = {
   setIsContactDialogOpen: Dispatch<SetStateAction<boolean>>
   contactSubject: string
   setContactSubject: Dispatch<SetStateAction<string>>
-  handleOpenContactDialog:  (subject?: string) => void
+  handleOpenContactDialog: (subject?: string) => void
 }
 
 const SharedContext = createContext({} as SharedContextProps)
@@ -25,8 +25,8 @@ export function SharedProvider({ children }: { children: ReactNode }) {
   const [contactSubject, setContactSubject] = useState('')
 
   const handleOpenContactDialog = useCallback((subject?: string) => {
-     setIsContactDialogOpen(true)
-     setContactSubject(subject ?? '')
+    setIsContactDialogOpen(true)
+    setContactSubject(subject ?? '')
   }, [])
 
   return (
@@ -36,7 +36,7 @@ export function SharedProvider({ children }: { children: ReactNode }) {
         setIsContactDialogOpen,
         setContactSubject,
         contactSubject,
-        handleOpenContactDialog
+        handleOpenContactDialog,
       }}
     >
       {children}

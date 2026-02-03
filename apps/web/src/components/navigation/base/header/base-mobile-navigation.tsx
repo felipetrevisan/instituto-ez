@@ -1,10 +1,10 @@
 'use client'
 
+import { FadeIn } from '@ez/web/components/ui/fade-in'
 import { useApp } from '@ez/web/hooks/use-app'
 import type { Navigation, NavigationItemURL } from '@ez/web/types/site'
 import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
 import { navigateToHash } from '@ez/web/utils/scroll-to-id'
-import { FadeIn } from '@ez/web/components/ui/fade-in'
 import Link from 'next/link'
 import { useLocale } from 'next-intl'
 import type { ReactNode } from 'react'

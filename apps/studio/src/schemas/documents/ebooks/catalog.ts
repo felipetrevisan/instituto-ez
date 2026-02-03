@@ -1,4 +1,13 @@
-import { BlockContentIcon, ColorWheelIcon, HashIcon, ImagesIcon, InfoFilledIcon, LinkIcon, ListIcon, TagsIcon } from '@sanity/icons'
+import {
+  BlockContentIcon,
+  ColorWheelIcon,
+  HashIcon,
+  ImagesIcon,
+  InfoFilledIcon,
+  LinkIcon,
+  ListIcon,
+  TagsIcon,
+} from '@sanity/icons'
 import { orderRankField, orderRankOrdering } from '@sanity/orderable-document-list'
 import { defineField, defineType } from 'sanity'
 import { i18n } from '../../objects/locale/locales'
@@ -140,12 +149,6 @@ export default defineType({
       validation: (Rule) => Rule.required().warning('Must have at least one content.'),
     }),
     defineField({
-      name: 'disabled',
-      title: 'Disable?',
-      type: 'boolean',
-      initialValue: true,
-    }),
-    defineField({
       name: 'button',
       title: 'Button',
       type: 'button',
@@ -181,30 +184,17 @@ export default defineType({
       title: 'Category',
       type: 'ebooks.category',
     }),
-    defineField({
-      name: 'type',
-      title: 'Type',
-      type: 'string',
-      validation: (Rule) => Rule.required(),
-      initialValue: "EBOOK",
-      options: {
-        list: [
-          { title: 'e-Book', value: 'EBOOK' },
-          { title: 'Webinar', value: 'WEBINAR' },
-        ],
-        layout: 'radio',
-      },
-    }),
   ],
   preview: {
     select: {
       image: 'images.small_image',
-      title: `title.${i18n.base}`,
+      title: `title`,
     },
-    prepare({ image, title }) {
+    prepare({ title, image }) {
+      const localized = Array.isArray(title) ? title.find((item) => item?.lang === i18n.base) : null
       return {
+        title: localized?.value || title || 'Sem título',
         media: image,
-        title,
       }
     },
   },

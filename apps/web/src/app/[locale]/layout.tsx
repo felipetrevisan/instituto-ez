@@ -1,5 +1,5 @@
-import { routing } from '@ez/web/i18n/routing'
 import { resolveOpenGraphImage } from '@ez/web/config/image'
+import { routing } from '@ez/web/i18n/routing'
 import { getSiteConfig } from '@ez/web/server/get-site-config'
 import { getMetadataBase } from '@ez/web/utils/seo'
 import { Analytics } from '@vercel/analytics/next'

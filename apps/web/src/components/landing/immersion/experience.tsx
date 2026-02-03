@@ -1,6 +1,7 @@
 'use client'
 
 import { cn } from '@ez/shared/lib/utils'
+import { CallAction } from '@ez/web/components/ui/call-action-button'
 import { Icon } from '@ez/web/components/ui/icon'
 import { StickySection } from '@ez/web/components/ui/sticky-section'
 import { urlForImage } from '@ez/web/config/image'
@@ -9,6 +10,7 @@ import { createPortableComponents } from '@ez/web/utils/create-portable-componen
 import { PortableText } from '@portabletext/react'
 import { motion } from 'motion/react'
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 
 export const Experience = ({
   data,
@@ -17,10 +19,11 @@ export const Experience = ({
   data: SectionImmersionExperience
   locale: string
 }) => {
+  const t = useTranslations('LandingPageImmersion')
   const colors = ['coral', 'cyan', 'amber', 'purple', 'rose', 'emerald']
 
   return (
-    <StickySection className="bg-gradient-subtle" id="experience">
+    <StickySection className="bg-gradient-subtle py-20 md:py-28" id="experience">
       <div className="container mx-auto px-6 md:px-8">
         <motion.div
           className="mb-16 text-center"
@@ -30,7 +33,7 @@ export const Experience = ({
           whileInView={{ opacity: 1, y: 0 }}
         >
           <span className="mb-3 block font-semibold text-coral text-sm uppercase tracking-wider">
-            O Que Você Vai Vivenciar
+            {t('experienceLabel')}
           </span>
 
           {data?.heading?.[locale] && (
@@ -151,30 +154,39 @@ export const Experience = ({
           </div>
         </motion.div>
 
-        {/* <motion.div
+        <motion.div
           className="text-center"
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
+          viewport={{ once: true }}
+          whileInView={{ opacity: 1, y: 0 }}
         >
-          <p className="text-xl text-navy font-medium mb-8">
-            Cada um desses elementos será vivido com{' '}
-            <span className="text-coral">profundidade</span>,{' '}
-            <span className="text-coral">respeito</span> e{' '}
-            <span className="text-coral">verdade</span>. <br />
-            Ao final da imersão, não será apenas sua fé que estará mais forte —{' '}
-            <strong>será você por inteiro!</strong>
-          </p>
+          {data?.footer?.[locale] && (
+            <div className="mb-8 font-medium text-navy text-xl">
+              <PortableText components={createPortableComponents()} value={data.footer[locale]} />
+            </div>
+          )}
 
-          <Button
-            size="lg"
-            onClick={scrollToContact}
-            className="bg-coral hover:bg-coral/90 text-white px-10 py-7 text-lg font-semibold shadow-medium transition-all hover:scale-105 rounded-full"
-          >
-            Quero Participar da Imersão
-          </Button>
-        </motion.div> */}
+          {data.cta && data.cta.length > 0 && (
+            <motion.div
+              animate={{ opacity: 1, y: 0 }}
+              className="flex flex-col items-center justify-center gap-4 pt-4 sm:flex-row"
+              initial={{ opacity: 0, y: 20 }}
+              transition={{ delay: 0.8, duration: 0.6 }}
+            >
+              {data.cta.map((button, index) => {
+                return (
+                  <CallAction
+                    base="immersion"
+                    button={button}
+                    className="group px-8 py-6 font-semibold"
+                    key={button._key ?? index}
+                  />
+                )
+              })}
+            </motion.div>
+          )}
+        </motion.div>
       </div>
     </StickySection>
   )

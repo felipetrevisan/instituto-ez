@@ -28,6 +28,54 @@ export type SectionImmersionInstructorItem = {
   _type: string
 }
 
+export type SectionImmersionMainTarget = {
+  heading?: Record<string, PortableTextBlock[]>
+  profile?: SectionImmersionMainTargetItem[]
+  footer?: Record<string, PortableTextBlock[]>
+  _type: string
+}
+
+export type SectionImmersionMainTargetItem = {
+  text?: Record<string, string>
+  icon?: IconName
+  _type: string
+}
+
+export type SectionImmersionFinalCTA = {
+  heading?: Record<string, PortableTextBlock[]>
+  subheading?: Record<string, PortableTextBlock[]>
+  images?: SanityAsset[]
+  cta?: Button[]
+  _type: string
+}
+
+export type SectionImmersionFAQ = {
+  heading?: Record<string, PortableTextBlock[]>
+  questions?: SectionImmersionFAQItem[]
+  _type: string
+}
+
+export type SectionImmersionFAQItem = {
+  question?: Record<string, string>
+  answer?: Record<string, string>
+  _key?: string
+  _type: string
+}
+
+export type SectionImmersionNextClass = {
+  heading?: Record<string, PortableTextBlock[]>
+  subheading?: Record<string, PortableTextBlock[]>
+  details?: SectionImmersionNextClassItem[]
+  cta?: Button[]
+  _type: string
+}
+
+export type SectionImmersionNextClassItem = {
+  title?: Record<string, string>
+  icon?: IconName
+  _type: string
+}
+
 export type SectionImmersionExperience = {
   heading?: Record<string, PortableTextBlock[]>
   subheading?: Record<string, PortableTextBlock[]>

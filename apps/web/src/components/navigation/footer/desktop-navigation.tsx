@@ -1,7 +1,7 @@
 'use client'
 
-import { FadeIn } from '@ez/web/components/ui/fade-in'
 import { BaseDesktopNavigation } from '@ez/web/components/navigation/base/footer/base-desktop-navigation'
+import { FadeIn } from '@ez/web/components/ui/fade-in'
 import type { Navigation } from '@ez/web/types/site'
 
 type NavigationProps = {

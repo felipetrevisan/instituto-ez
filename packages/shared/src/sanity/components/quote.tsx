@@ -1,4 +1,4 @@
-import { Quote, quoteVariants } from '@ez/shared/ui'
+import { Quote, type quoteVariants } from '@ez/shared/ui'
 import {
   PortableText,
   type PortableTextBlock,

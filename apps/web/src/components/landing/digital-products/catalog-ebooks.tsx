@@ -7,10 +7,16 @@ import type { SectionDigitalProductsEbooksCatalog } from '@ez/web/types/landing/
 import { createPortableComponents } from '@ez/web/utils/create-portable-components'
 import { BookOpen } from 'lucide-react'
 import { motion } from 'motion/react'
-import { PortableText } from 'next-sanity'
 import { useTranslations } from 'next-intl'
+import { PortableText } from 'next-sanity'
 
-export const CatalogEbooks = ({ data, locale }: { data: SectionDigitalProductsEbooksCatalog; locale: string }) => {
+export const CatalogEbooks = ({
+  data,
+  locale,
+}: {
+  data: SectionDigitalProductsEbooksCatalog
+  locale: string
+}) => {
   const { data: ebooks } = useEbooks()
   const t = useTranslations('DigitalProducts')
 
