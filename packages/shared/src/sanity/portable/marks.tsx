@@ -24,7 +24,7 @@ export const portableMarks: PortableTextComponents['marks'] = {
   primary: ({ children }) => <span className="text-primary">{children}</span>,
   secondary: ({ children }) => <span className="text-secondary">{children}</span>,
   tertiary: ({ children }) => <span className="text-tertiary">{children}</span>,
-  navy: ({ children }) => <span className="text-navy dark:text-navy-light">{children}</span>,
+  navy: ({ children }) => <span className="text-navy dark:text-navy-foreground">{children}</span>,
   cyan: ({ children }) => <span className="text-cyan">{children}</span>,
   coral: ({ children }) => <span className="text-coral">{children}</span>,
   white: ({ children }) => <span className="text-white">{children}</span>,

@@ -30,7 +30,7 @@ export const FAQ = ({ data, locale }: { data: SectionImmersionFAQ; locale: strin
             {t('faqLabel')}
           </span>
           {data?.heading?.[locale] && (
-            <h2 className="mb-6 font-bold text-3xl text-navy md:text-5xl">
+            <h2 className="mb-6 font-bold text-3xl text-navy-foreground md:text-5xl">
               <PortableText components={createPortableComponents()} value={data.heading[locale]} />
             </h2>
           )}
@@ -46,7 +46,7 @@ export const FAQ = ({ data, locale }: { data: SectionImmersionFAQ; locale: strin
           <Accordion className="space-y-4" collapsible rounded="lg" theme="navy" type="single">
             {data?.questions?.map((item, index) => (
               <AccordionItem
-                className="overflow-hidden rounded-xl border border-navy/10 bg-white px-6"
+                className="overflow-hidden rounded-xl border border-navy/10 bg-background px-6"
                 key={item._key ?? item.question?.[locale] ?? item.answer?.[locale] ?? 'faq-item'}
                 value={`item-${index}`}
               >

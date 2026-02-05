@@ -22,10 +22,12 @@ export const FinalCTA = ({ data, locale }: { data: SectionServicesCTA; locale: s
             viewport={{ once: true, amount: 0.3 }}
             whileInView={{ opacity: 1, y: 0 }}
           >
-            <PortableText components={createPortableComponents()} value={data.heading[locale]} />
+            {data.heading?.[locale] && (
+              <PortableText components={createPortableComponents()} value={data.heading[locale]} />
+            )}
           </motion.h2>
 
-          {data.text && (
+          {data.text?.[locale] && (
             <motion.div
               className="space-y-6 text-foreground/90 text-lg leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
@@ -34,7 +36,7 @@ export const FinalCTA = ({ data, locale }: { data: SectionServicesCTA; locale: s
               whileInView={{ opacity: 1, y: 0 }}
             >
               <PortableText components={createPortableComponents()} value={data.text[locale]} />
-              {data.subtext && (
+              {data.subtext?.[locale] && (
                 <p className="pt-4 font-bold text-accent text-xl">
                   <PortableText
                     components={createPortableComponents()}
@@ -64,7 +66,7 @@ export const FinalCTA = ({ data, locale }: { data: SectionServicesCTA; locale: s
                 )
               })}
 
-              {data.footer && (
+              {data.footer?.[locale] && (
                 <p className="mx-auto max-w-2xl text-muted-foreground text-sm">
                   <PortableText
                     components={createPortableComponents()}

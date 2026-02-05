@@ -38,7 +38,7 @@ export const Experience = ({
 
           {data?.heading?.[locale] && (
             <motion.h2
-              className="mb-6 font-bold text-3xl text-navy md:text-5xl"
+              className="mb-6 font-bold text-3xl text-navy text-navy-foreground md:text-5xl"
               initial={{ opacity: 0, y: 30 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
@@ -82,12 +82,14 @@ export const Experience = ({
                   whileInView={{ opacity: 1, y: 0 }}
                 >
                   {element.icon && (
-                    <div className="mb-4 flex size-12 items-center justify-center rounded-xl bg-white shadow-soft transition-transform group-hover:scale-110">
-                      <Icon className="size-6 text-navy" name={element.icon} />
+                    <div className="mb-4 flex size-12 items-center justify-center rounded-xl bg-white shadow-soft transition-transform group-hover:scale-110 dark:bg-navy">
+                      <Icon className="size-6 text-navy-foreground" name={element.icon} />
                     </div>
                   )}
 
-                  <h3 className="mb-3 font-bold text-navy text-xl">{element.title?.[locale]}</h3>
+                  <h3 className="mb-3 font-bold text-navy-foreground text-xl">
+                    {element.title?.[locale]}
+                  </h3>
 
                   {element.description?.[locale] && (
                     <div className="text-gray-warm leading-relaxed">
@@ -112,25 +114,17 @@ export const Experience = ({
         >
           <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-navy to-navy-light p-8 text-center">
             {data.featuredElement?.image && (
-              <motion.div
-                className="relative h-[400px] w-full"
-                initial={{ opacity: 0, x: 30 }}
-                transition={{ duration: 0.6 }}
-                viewport={{ once: true }}
-                whileInView={{ opacity: 1, x: 0 }}
-              >
-                <div className="absolute inset-0 opacity-20">
-                  <Image
-                    alt=""
-                    className="h-full w-full object-cover"
-                    fill
-                    src={urlForImage(data.featuredElement.image.asset)
-                      .auto('format')
-                      .quality(80)
-                      .url()}
-                  />
-                </div>
-              </motion.div>
+              <div className="absolute inset-0 opacity-20">
+                <Image
+                  alt=""
+                  className="h-full w-full object-cover"
+                  fill
+                  src={urlForImage(data.featuredElement.image.asset)
+                    .auto('format')
+                    .quality(80)
+                    .url()}
+                />
+              </div>
             )}
             <div className="relative z-10">
               {data?.featuredElement?.element?.icon && (
@@ -162,7 +156,7 @@ export const Experience = ({
           whileInView={{ opacity: 1, y: 0 }}
         >
           {data?.footer?.[locale] && (
-            <div className="mb-8 font-medium text-navy text-xl">
+            <div className="mb-8 font-medium text-navy-foreground text-xl">
               <PortableText components={createPortableComponents()} value={data.footer[locale]} />
             </div>
           )}

@@ -94,7 +94,7 @@ function Toggle({ className, ...props }: React.ComponentProps<'button'>) {
         'flex cursor-pointer items-center justify-center rounded-full text-sm xl:hidden',
         className,
       )}
-      style={{ color: 'var(--header-button-default-text, var(--foreground))' }}
+      style={{ color: 'var(--primary, var(--header-button-default-text, var(--foreground)))' }}
       {...props}
       onClick={() => toggleMenu()}
     >

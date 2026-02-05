@@ -44,14 +44,12 @@ const MenuItemMotion = motion(NavigationMenuItem)
 export function BaseDesktopNavigation({
   navigation,
   highlightClassName = 'flex flex-col border-b-2 border-b-primary-foreground bg-transparent text-primary-foreground',
-  linkClassName = 'text-center md:text-left hover:after:animation-pulse after:-bottom-1 after:-translate-x-1/2 relative flex flex-col rounded-xl bg-transparent p-4 text-footer-foreground outline-none transition-all after:absolute after:left-1/2 after:h-[2px] after:w-0 after:rounded-xl after:bg-transparent after:transition-all hover:text-primary-foreground hover:after:w-full hover:after:shadow-xl focus:bg-transparent focus:text-primary-foreground focus-visible:outline-1 focus-visible:ring-[3px] focus-visible:ring-ring/50 data-[active=true]:border-b-primary-foreground data-[active=true]:p-4 data-[active=true]:text-primary-foreground lg:gap-1 lg:text-sm! [&_svg:not([class*="size-"])]:size-4',
-  activeClassName = 'border-b-primary-foreground text-primary-foreground p-4',
+  linkClassName = 'relative flex flex-col rounded-xl bg-transparent p-4 text-center outline-none transition-all after:absolute after:-bottom-1 after:left-1/2 after:h-[2px] after:w-0 after:-translate-x-1/2 after:rounded-xl after:bg-transparent after:transition-all hover:after:animation-pulse hover:after:w-full hover:after:shadow-xl focus:bg-transparent focus-visible:outline-1 focus-visible:ring-[3px] focus-visible:ring-ring/50 data-[active=true]:border-b-primary-foreground data-[active=true]:p-4 lg:gap-1 lg:text-left lg:text-sm! [&_svg:not([class*="size-"])]:size-4',
+  activeClassName = 'border-b-primary-foreground p-4',
   additionalContent,
 }: BaseDesktopNavigationProps) {
   const locale = useLocale()
   const { isMenuActive } = useApp()
-
-  console.log(navigation.items)
 
   return (
     <Fragment>
@@ -80,6 +78,7 @@ export function BaseDesktopNavigation({
                       )}
                       onClick={url.type === 'HASH' ? (e) => navigateToHash(e, url) : undefined}
                       rel={url.isExternal ? 'noopener noreferrer' : undefined}
+                      style={{ color: 'var(--footer-link-color, var(--footer-foreground))' }}
                       target={url.isExternal ? '_blank' : undefined}
                     >
                       {label?.[locale]}

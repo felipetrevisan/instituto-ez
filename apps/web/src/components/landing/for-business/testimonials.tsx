@@ -46,6 +46,8 @@ export const Testimonials = ({
               <Card
                 base="for-business"
                 className="h-full space-y-4 bg-gradient-to-br from-card to-primary/5 p-6 text-center transition-all duration-300 hover:shadow-[var(--shadow-card-hover)]"
+                theme="landing"
+                variant="landing"
               >
                 <div className="mx-auto flex size-16 items-center justify-center rounded-full bg-primary/10">
                   <TrendingDown className="size-8 text-primary" />
@@ -72,6 +74,8 @@ export const Testimonials = ({
               <Card
                 base="for-business"
                 className="h-full space-y-4 bg-gradient-to-br from-card to-secondary/5 p-6 text-center transition-all duration-300 hover:shadow-[var(--shadow-card-hover)]"
+                theme="landing"
+                variant="landing"
               >
                 <div className="mx-auto flex size-16 items-center justify-center rounded-full bg-secondary/10">
                   <TrendingUp className="size-8 text-secondary" />
@@ -98,6 +102,8 @@ export const Testimonials = ({
               <Card
                 base="for-business"
                 className="h-full space-y-4 bg-gradient-to-br from-card to-accent/5 p-6 text-center transition-all duration-300 hover:shadow-[var(--shadow-card-hover)]"
+                theme="landing"
+                variant="landing"
               >
                 <div className="mx-auto flex size-16 items-center justify-center rounded-full bg-accent/10">
                   <Heart className="size-8 text-accent" />

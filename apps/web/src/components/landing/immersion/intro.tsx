@@ -22,7 +22,7 @@ export const Intro = ({ data, locale }: { data: SectionImmersionIntro; locale: s
           >
             {data?.heading?.[locale] && (
               <motion.h2
-                className="font-bold text-3xl text-navy md:text-4xl"
+                className="font-bold text-3xl text-navy-foreground md:text-4xl"
                 initial={{ opacity: 0, y: 30 }}
                 transition={{ duration: 0.6 }}
                 viewport={{ once: true }}

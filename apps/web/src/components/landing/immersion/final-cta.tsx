@@ -77,7 +77,7 @@ export const FinalCTA = ({ data, locale }: { data: SectionImmersionFinalCTA; loc
                     'image'
 
                   return (
-                    <CarouselItem className="basis-1/3 pl-4" key={imageKey}>
+                    <CarouselItem className="pl-4 md:basis-1/3" key={imageKey}>
                       <div className="overflow-hidden rounded-2xl">
                         {image?.asset && (
                           <Image

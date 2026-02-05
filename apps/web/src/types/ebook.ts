@@ -162,6 +162,7 @@ export function mapThemeToCSSVars(theme?: ThemeEbook) {
     '--secondary-foreground': secondaryForeground,
     '--footer': primary,
     '--footer-foreground': primaryForeground,
+    '--footer-link-color': primaryForeground,
     '--header-button-default-text': primaryForeground,
     '--header-button-default-background': primary,
     '--header-button-hover-text': secondaryForeground,

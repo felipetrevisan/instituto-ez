@@ -28,6 +28,6 @@ html {
 
 @layer components {
   .bprogress .bar {
-    @apply bg-gradient-to-r from-primary via-secondary to-tertiary;
+    background: var(--primary) !important;
   }
 }

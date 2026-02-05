@@ -16,7 +16,7 @@ const accordionVariants = cva('relative', {
         '**:data-[slot=accordion-content]:text-secondary **:data-[slot=accordion-trigger]:text-secondary',
       tertiary:
         '**:data-[slot=accordion-content]:text-tertiary **:data-[slot=accordion-trigger]:text-tertiary',
-      navy: '**:data-[slot=accordion-content]:text-navy **:data-[slot=accordion-trigger]:text-navy',
+      navy: '**:data-[slot=accordion-content]:text-navy **:data-[slot=accordion-trigger]:text-navy dark:**:data-[slot=accordion-trigger]:text-navy-foreground',
       custom:
         '**:data-[slot=accordion-item]:border-[var(--secondary)] **:data-[slot=accordion-content]:text-[var(--secondary)] **:data-[slot=accordion-trigger]:text-[var(--secondary)]',
     },

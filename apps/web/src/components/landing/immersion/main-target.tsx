@@ -6,7 +6,6 @@ import type { SectionImmersionMainTarget } from '@ez/web/types/landing/immersion
 import { createPortableComponents } from '@ez/web/utils/create-portable-components'
 import { PortableText } from '@portabletext/react'
 import { motion } from 'motion/react'
-import { useTranslations } from 'next-intl'
 
 export const MainTarget = ({
   data,
@@ -15,8 +14,6 @@ export const MainTarget = ({
   data: SectionImmersionMainTarget
   locale: string
 }) => {
-  const t = useTranslations('LandingPageImmersion')
-
   return (
     <StickySection className="bg-background py-20 md:py-28" id="main-target">
       <div className="container mx-auto px-6 md:px-8">
@@ -28,11 +25,11 @@ export const MainTarget = ({
           whileInView={{ opacity: 1, y: 0 }}
         >
           <span className="mb-3 block font-semibold text-coral text-sm uppercase tracking-wider">
-            {t('mainTargetLabel')}
+            Para Quem é Esta Imersão
           </span>
 
           {data?.heading?.[locale] && (
-            <h2 className="mb-6 font-bold text-3xl text-navy md:text-5xl">
+            <h2 className="mb-6 font-bold text-3xl text-navy-foreground md:text-5xl">
               <PortableText components={createPortableComponents()} value={data.heading[locale]} />
             </h2>
           )}
@@ -71,7 +68,7 @@ export const MainTarget = ({
             whileInView={{ opacity: 1, y: 0 }}
           >
             <div className="rounded-2xl border border-coral/20 bg-gradient-to-r from-coral/10 via-cyan/10 to-coral/10 p-8">
-              <div className="mb-4 font-medium text-navy text-xl">
+              <div className="mb-4 font-medium text-navy-foreground text-xl">
                 <PortableText components={createPortableComponents()} value={data.footer[locale]} />
               </div>
             </div>

@@ -1,10 +1,12 @@
 'use client'
 
 import { FadeIn } from '@ez/web/components/ui/fade-in'
+import { menuItemVariants, menuListVariants } from '@ez/web/config/animation'
 import { useApp } from '@ez/web/hooks/use-app'
 import type { Navigation, NavigationItemURL } from '@ez/web/types/site'
 import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
 import { navigateToHash } from '@ez/web/utils/scroll-to-id'
+import { motion } from 'motion/react'
 import Link from 'next/link'
 import { useLocale } from 'next-intl'
 import type { ReactNode } from 'react'
@@ -42,9 +44,14 @@ export function BaseMobileNavigation({
   }
 
   return (
-    <FadeIn as="nav" className={navClassName}>
-      {navigation?.items?.map(({ id, label, url }, index) => (
-        <FadeIn className="flex w-full" delay={index * 0.04} key={id}>
+    <motion.nav
+      animate="open"
+      className={navClassName}
+      initial="closed"
+      variants={menuListVariants}
+    >
+      {navigation?.items?.map(({ id, label, url }) => (
+        <motion.div className="flex w-full" key={id} variants={menuItemVariants}>
           <Link
             className={linkClassName}
             data-active={isMenuActive(url.link?.[locale]?.current)}
@@ -60,9 +67,13 @@ export function BaseMobileNavigation({
           >
             {label?.[locale]}
           </Link>
-        </FadeIn>
+        </motion.div>
       ))}
-      {additionalContent && <FadeIn delay={0.1}>{additionalContent}</FadeIn>}
-    </FadeIn>
+      {additionalContent && (
+        <motion.div variants={menuItemVariants}>
+          <FadeIn delay={0.1}>{additionalContent}</FadeIn>
+        </motion.div>
+      )}
+    </motion.nav>
   )
 }

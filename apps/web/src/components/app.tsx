@@ -7,13 +7,12 @@ import { cn } from '@ez/shared/lib/utils'
 import { getImageUrlBuilder } from '@ez/shared/sanity/image'
 import { IconButton } from '@ez/shared/ui/animated/button/icon-button'
 import { Dialog } from '@ez/shared/ui/dialog'
-
-import { FooterNavigation } from '@ez/web/components/navigation/footer/footer'
 import { MainDesktopNavigation as FooterDesktopNavigation } from '@ez/web/components/navigation/footer/desktop-navigation'
+import { FooterNavigation } from '@ez/web/components/navigation/footer/footer'
 import { HeaderNavigation } from '@ez/web/components/navigation/header/header'
 import { NavigationRenderer } from '@ez/web/components/navigation/navigation-renderer'
 import * as Navbar from '@ez/web/components/ui/navbar'
-import { menuListVariants, sidebarVariants } from '@ez/web/config/animation'
+import { sidebarVariants } from '@ez/web/config/animation'
 import { env } from '@ez/web/config/env'
 import { urlForImage } from '@ez/web/config/image'
 import { useApp } from '@ez/web/hooks/use-app'
@@ -24,6 +23,7 @@ import { useSite } from '@ez/web/hooks/use-site'
 import type { Navigation, Site } from '@ez/web/types/site'
 import { Mail, MapPin, Monitor, Moon, Phone, Sun } from 'lucide-react'
 import {
+  AnimatePresence,
   type HTMLMotionProps,
   motion,
   useAnimation,
@@ -109,8 +109,6 @@ function Header({
 
   const DesktopNavigation = landing?.navigation?.header?.desktop ?? DesktopNavComponent
   const MobileNavigation = landing?.navigation?.header?.mobile ?? MobileNavComponent
-  const MotionMobileNavigation = motion(MobileNavigation)
-
   return (
     <Fragment>
       <HeaderComponent className={className} currentScrollY={currentScrollY} theme={theme}>
@@ -140,23 +138,23 @@ function Header({
           </div>
         </Navbar.Root>
       </HeaderComponent>
-      <motion.div
-        animate={isMenuOpen ? 'open' : 'closed'}
-        className="flex gap-10"
-        custom={height}
-        initial="closed"
-        ref={containerRef}
-        variants={sidebarVariants}
-      >
-        {!isDesktop && (isTablet || isMobile) && (
-          <MotionMobileNavigation
-            animate={isMenuOpen ? 'open' : 'closed'}
+      <AnimatePresence>
+        {!isDesktop && (isTablet || isMobile) && isMenuOpen && (
+          <motion.div
+            animate="open"
+            className="pointer-events-none fixed inset-x-0 top-0 z-95 flex origin-top gap-10"
+            custom={height}
+            exit="closed"
             initial="closed"
-            navigation={customNavigation ?? data?.navigation?.header}
-            variants={menuListVariants}
-          />
+            ref={containerRef}
+            variants={sidebarVariants}
+          >
+            <div className="pointer-events-auto w-full">
+              <MobileNavigation navigation={customNavigation ?? data?.navigation?.header} />
+            </div>
+          </motion.div>
         )}
-      </motion.div>
+      </AnimatePresence>
     </Fragment>
   )
 }
@@ -230,7 +228,8 @@ function Footer({
 
   const DesktopNavigation =
     landing?.navigation?.footer?.desktop ?? DesktopNavComponent ?? FooterDesktopNavigation
-  const resolvedNavigation = customNavigation ?? data?.navigation?.footer
+  const resolvedNavigation =
+    customNavigation ?? data?.navigation?.footer ?? data?.navigation?.header
 
   return (
     <FooterComponent theme={theme}>
@@ -263,10 +262,7 @@ function Footer({
           <div className="flex flex-col items-center justify-center md:items-start">
             <h4 className="mb-4 font-semibold text-lg">{t('services')}</h4>
             {resolvedNavigation && (
-              <NavigationRenderer
-                Component={DesktopNavigation}
-                navigation={resolvedNavigation}
-              />
+              <NavigationRenderer Component={DesktopNavigation} navigation={resolvedNavigation} />
             )}
           </div>
 

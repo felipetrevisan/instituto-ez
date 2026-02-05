@@ -14,7 +14,6 @@ import Link from 'next/link'
 import { useLocale, useTranslations } from 'next-intl'
 import Badges from './_badges'
 import { AnimatedButton } from './_button'
-import StickyHeader from './_sticky-header'
 
 const DownloadIconMotion = motion(DownloadIcon)
 const ChevronLeftIconMotion = motion(ChevronLeftIcon)

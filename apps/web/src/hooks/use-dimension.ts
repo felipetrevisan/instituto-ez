@@ -6,6 +6,8 @@ export const useDimensions = (ref: React.RefObject<any>) => {
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: ref is stable and intentional
   useEffect(() => {
+    if (!ref.current) return
+
     dimensions.current.width = ref.current.offsetWidth
     dimensions.current.height = ref.current.offsetHeight
   }, [])

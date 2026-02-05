@@ -92,15 +92,17 @@ export const sidebarVariants: Variants = {
   open: {
     opacity: 1,
     y: 0,
+    scaleY: 1,
     transition: {
       type: 'spring',
-      stiffness: 260,
-      damping: 25,
+      stiffness: 240,
+      damping: 24,
     },
   },
   closed: {
     opacity: 0,
-    y: -20,
+    y: -14,
+    scaleY: 0.96,
     transition: {
       type: 'spring',
       stiffness: 300,
