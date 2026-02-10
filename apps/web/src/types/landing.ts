@@ -8,7 +8,6 @@ import type {
   SectionDigitalProductsCTA,
   SectionDigitalProductsEbooksCatalog,
   SectionDigitalProductsHero,
-  SectionDigitalProductsMasterclassCatalog,
 } from '@ez/web/types/landing/digital-products'
 import type {
   SectionForBusinessConsulting,
@@ -36,6 +35,14 @@ import type {
   SectionImmersionNextClass,
 } from '@ez/web/types/landing/immersion'
 import type {
+  SectionMasterclassCatalog,
+  SectionMasterclassExpert,
+  SectionMasterclassFinalCTA,
+  SectionMasterclassForWho,
+  SectionMasterclassHero,
+  SectionMasterclassProblem,
+} from '@ez/web/types/landing/masterclass'
+import type {
   SectionMathematizerBenefits,
   SectionMathematizerCTA,
   SectionMathematizerMathematizer,
@@ -56,7 +63,6 @@ import type {
   SectionServicesMethodSessions,
   SectionServicesWhoIsItFor,
 } from '@ez/web/types/landing/services'
-import type { Navigation } from '@ez/web/types/site'
 import type { PortableTextBlock } from 'next-sanity'
 
 // biome-ignore lint/suspicious/noExplicitAny: false positive
@@ -69,8 +75,6 @@ export type Landing<K extends keyof LandingSectionsMap = any> = {
     description?: Record<string, string>
     image?: SanityAsset
     type: 'landing'
-    navigation?: Navigation
-    form?: { _ref: string }
   }
   sections: LandingSectionsMap[K][]
 }
@@ -123,7 +127,6 @@ export type LandingSectionsMap = {
   'digital-products':
     | SectionDigitalProductsHero
     | SectionDigitalProductsEbooksCatalog
-    | SectionDigitalProductsMasterclassCatalog
     | SectionDigitalProductsCTA
 
   services:
@@ -143,18 +146,14 @@ export type LandingSectionsMap = {
     | SectionImmersionFinalCTA
     | SectionImmersionFAQ
     | SectionImmersionNextClass
-}
 
-export type LandingNavigationSlot = {
-  desktop?: React.ComponentType<{ navigation?: Navigation }>
-  mobile?: React.ComponentType<{ navigation?: Navigation }>
-}
-
-export type LandingNavigationConfig = {
-  header?: LandingNavigationSlot
-  footer?: {
-    desktop?: React.ComponentType<{ navigation?: Navigation }>
-  }
+  masterclass:
+    | SectionMasterclassHero
+    | SectionMasterclassForWho
+    | SectionMasterclassProblem
+    | SectionMasterclassExpert
+    | SectionMasterclassFinalCTA
+    | SectionMasterclassCatalog
 }
 
 export type LandingPageConfig = {
@@ -162,7 +161,6 @@ export type LandingPageConfig = {
   slug: string[]
   classes?: string
   component: React.ComponentType<{ data: Landing }>
-  navigation?: LandingNavigationConfig
   layout?: {
     hideFooter?: boolean
     hideHeader?: boolean

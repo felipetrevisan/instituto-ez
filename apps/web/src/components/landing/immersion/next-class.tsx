@@ -68,8 +68,8 @@ export const NextClass = ({
                     viewport={{ once: true }}
                     whileInView={{ opacity: 1, x: 0 }}
                   >
-                    <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-coral/20">
-                      {detail.icon && <Icon className="h-5 w-5 text-coral" name={detail.icon} />}
+                    <div className="flex size-12 flex-shrink-0 items-center justify-center rounded-full bg-coral/20">
+                      {detail.icon && <Icon className="size-5 text-coral" name={detail.icon} />}
                     </div>
                     <p className="text-white/80">{detail.title?.[locale]}</p>
                   </motion.div>

@@ -56,7 +56,7 @@ export const Hero = ({ data, locale }: { data: SectionDigitalProductsHero; local
             )}
 
             {data?.subheading?.[locale] && (
-              <motion.p
+              <motion.div
                 animate={{ opacity: 1, y: 0 }}
                 className="mb-10 text-gray-300 text-lg leading-relaxed md:text-xl"
                 initial={{ opacity: 0, y: 20 }}
@@ -66,7 +66,7 @@ export const Hero = ({ data, locale }: { data: SectionDigitalProductsHero; local
                   components={createPortableComponents()}
                   value={data.subheading[locale]}
                 />
-              </motion.p>
+              </motion.div>
             )}
 
             {data.cta && data.cta.length > 0 && (
@@ -88,7 +88,7 @@ export const Hero = ({ data, locale }: { data: SectionDigitalProductsHero; local
                   )
                 })}
                 {data?.footer?.[locale] && (
-                  <motion.p
+                  <motion.div
                     animate={{ opacity: 1, y: 0 }}
                     className="mx-auto max-w-2xl text-muted-foreground text-sm"
                     initial={{ opacity: 0, y: 20 }}
@@ -98,7 +98,7 @@ export const Hero = ({ data, locale }: { data: SectionDigitalProductsHero; local
                       components={createPortableComponents()}
                       value={data.footer[locale]}
                     />
-                  </motion.p>
+                  </motion.div>
                 )}
               </motion.div>
             )}

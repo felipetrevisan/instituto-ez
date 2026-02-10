@@ -4,7 +4,10 @@ const fields = `
   "id": _id,
   "author": {
     "name": author_name,
+    "role": author_role,
   },
+  "rating": rating,
+  "showStars": show_stars,
   testimonial,
   categories,
 `

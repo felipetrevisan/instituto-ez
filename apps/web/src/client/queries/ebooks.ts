@@ -124,7 +124,11 @@ const buttonField = `
     "label": button_label,
     "type": button_link_type,
     "link": button_internal_link->slug,
-    "externalUrl": button_external_url
+    "externalUrl": button_external_url,
+    "scrollTo": select(
+      button_link_type == "HASH" => button_scroll_to,
+      null
+    )
   }
 `
 
@@ -280,7 +284,15 @@ export const ebookQuery = groq`
 `
 
 export const ebookQueryBySlug = groq`
-  *[ _type == 'ebook' && slug[$locale].current == $slug] [0] {
+  *[
+    _type == 'ebook' &&
+      (
+        slug[$locale].current == $slug ||
+        slug[$locale] == $slug ||
+        slug.current == $slug ||
+        slug == $slug
+      )
+  ] [0] {
     ${fields}
     ${priceField}
     ${badgeField}

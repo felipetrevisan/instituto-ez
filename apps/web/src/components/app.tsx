@@ -107,8 +107,10 @@ function Header({
 
   if (landing?.layout?.hideHeader) return null
 
-  const DesktopNavigation = landing?.navigation?.header?.desktop ?? DesktopNavComponent
-  const MobileNavigation = landing?.navigation?.header?.mobile ?? MobileNavComponent
+  const DesktopNavigation = DesktopNavComponent
+  const MobileNavigation = MobileNavComponent
+  const logoClassName =
+    pageKey === 'ebooks' ? 'drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)]' : undefined
   return (
     <Fragment>
       <HeaderComponent className={className} currentScrollY={currentScrollY} theme={theme}>
@@ -122,6 +124,8 @@ function Header({
         >
           <Navbar.Brand theme={theme}>
             <Logo
+              className={logoClassName}
+              fill
               src={data?.logo && urlForImage(data.logo?.asset).format('webp').quality(80).url()}
             />
           </Navbar.Brand>
@@ -178,11 +182,7 @@ function Content({ className, children }: React.ComponentProps<'div'>) {
       {children}
       {data && (
         <Dialog open={isContactDialogOpen}>
-          <ContactFormDialog
-            formRef={data.contact.form._ref}
-            sendButtonLabel={t('sendButton')}
-            title={t('title')}
-          />
+          <ContactFormDialog sendButtonLabel={t('sendButton')} title={t('title')} />
         </Dialog>
       )}
     </motion.main>
@@ -226,8 +226,7 @@ function Footer({
     dataset: env.NEXT_PUBLIC_SANITY_DATASET,
   })
 
-  const DesktopNavigation =
-    landing?.navigation?.footer?.desktop ?? DesktopNavComponent ?? FooterDesktopNavigation
+  const DesktopNavigation = DesktopNavComponent ?? FooterDesktopNavigation
   const resolvedNavigation =
     customNavigation ?? data?.navigation?.footer ?? data?.navigation?.header
 

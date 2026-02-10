@@ -25,7 +25,10 @@ const landingSlugConfig = {
     slugs: ['atendimento', 'services', 'servicios'],
   },
   'digital-products': {
-    slugs: ['ebooks', 'masterclass', 'produtos-digitais', 'digital-products'],
+    slugs: ['ebooks', 'produtos-digitais', 'digital-products'],
+  },
+  masterclass: {
+    slugs: ['masterclass'],
   },
   immersion: {
     slugs: ['imersao', 'immersion'],

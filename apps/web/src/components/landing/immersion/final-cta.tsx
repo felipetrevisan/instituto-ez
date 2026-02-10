@@ -26,8 +26,8 @@ export const FinalCTA = ({ data, locale }: { data: SectionImmersionFinalCTA; loc
       id="final-cta"
     >
       <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-20 left-1/4 h-80 w-80 rounded-full bg-cyan blur-[100px]" />
-        <div className="absolute right-1/4 bottom-20 h-60 w-60 rounded-full bg-purple blur-[80px]" />
+        <div className="absolute top-20 left-1/4 size-80 rounded-full bg-cyan blur-[100px]" />
+        <div className="absolute right-1/4 bottom-20 size-60 rounded-full bg-purple blur-[80px]" />
       </div>
       <div className="container relative z-10 mx-auto px-6 md:px-8">
         <motion.div

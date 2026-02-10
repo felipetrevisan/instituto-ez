@@ -18,12 +18,11 @@ import Image from 'next/image'
 import { useLocale, useTranslations } from 'next-intl'
 import type React from 'react'
 
-const navbarVariants = cva('h-auto w-full p-2', {
+const navbarVariants = cva('h-auto w-full p-4', {
   variants: {
     theme: {
-      default:
-        'md:*:data-[slot=header-container]:container md:*:data-[slot=header-container]:max-w-8xl',
-      landing: 'md:*:data-[slot=header-container]:px-20',
+      default: 'md:*:data-[slot=header-container]:max-w-8xl',
+      landing: 'md:*:data-[slot=header-container]:px-10',
     },
     sticky: {
       true: 'fixed start-0 top-0 z-90',
@@ -55,7 +54,10 @@ function Root({
       initial={false}
       {...props}
     >
-      <div className="flex flex-wrap items-center justify-between" data-slot="header-container">
+      <div
+        className="flex flex-wrap items-center justify-between gap-3 md:flex-nowrap"
+        data-slot="header-container"
+      >
         {children}
       </div>
     </motion.div>

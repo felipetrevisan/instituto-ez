@@ -4,15 +4,7 @@ const fields = `
   "id": _id,
   title,
   slug,
-  "template": {
-    "id": templateId
-  },
   enabled,
-  status,
-  startAt,
-  duration,
-  timezone,
-  location,
 `
 
 const imageField = `
@@ -59,6 +51,10 @@ const buttonFields = `
     button_link_type == "EXTERNAL" => button_external_url,
     null
   ),
+  "scrollTo": select(
+    button_link_type == "HASH" => button_scroll_to,
+    null
+  ),
   "dialog": select(
     button_link_type == "DIALOG" => {
       "type": dialog_type,
@@ -73,55 +69,139 @@ const buttonFields = `
   }
 `
 
-const ctaField = `
-  "cta": select(
-    _type == "masterclass.hero" || _type == "masterclass.finalCta" => cta[] {
-      ...,
-      ${buttonFields}
-    },
-    cta {
-      ...,
-      ${buttonFields}
-    }
-  )
-`
-
 export const masterclassQuery = groq`
-  *[ _type == "masterclass" && enabled == true ] | order(orderRank) {
+  *[ _type == "masterclass" && (!defined(enabled) || enabled == true) ] | order(orderRank) {
     ${fields}
     ${cardField}
   }
 `
 
 export const masterclassQueryBySlug = groq`
-  *[ _type == "masterclass" && slug[$locale].current == $slug && enabled == true ] [0] {
+  *[
+    _type == "masterclass" &&
+    (
+      (
+        (!defined(enabled) || enabled == true) &&
+        (
+          slug[$locale].current == $slug ||
+          slug[$locale] == $slug ||
+          slug.current == $slug ||
+          slug == $slug ||
+          slug[lang == $locale][0].value.current == $slug ||
+          slug[lang == $locale][0].value == $slug
+        )
+      ) ||
+      _id == $slug ||
+      _id == "masterclass." + $slug ||
+      _id == "drafts.masterclass." + $slug
+    )
+  ] [0] {
     ${fields}
     ${seoField}
     ${cardField}
-    sections[] {
-      ...,
-      ${ctaField},
-      _type == "masterclass.hero" => {
-        ...,
+    hero {
+      badge,
+      heading,
+      "video": video {
+        url,
+        duration,
+        caption
+      }
+    },
+    pillars {
+      badge,
+      heading,
+      subheading,
+      items[] {
+        number,
+        title,
+        subtitle,
+        label,
+        heading,
+        body,
+        icon,
+        theme,
+        "cta": cta {
+          ${buttonFields}
+        },
+        "core": core {
+          label,
+          icon
+        },
+        "orbitItems": orbitItems[] {
+          label,
+          icon
+        }
+      },
+      "cta": cta {
+        ${buttonFields}
+      }
+    },
+    testimonials {
+      badge,
+      heading,
+      description
+    },
+    why {
+      badge,
+      statement,
+      items[] {
+        title,
+        description
+      },
+      body,
+      closing,
+      "cta": cta {
+        ${buttonFields}
+      }
+    },
+    author {
+      badge,
+      heading,
+      "author": author {
+        name,
+        role,
+        bio,
         "image": image {
           ${imageField}
         }
       },
-      _type == "masterclass.finalCta" => {
-        ...,
+      highlights[] {
+        icon,
+        label,
+        text
+      }
+    },
+    offer {
+      badge,
+      heading,
+      subheading,
+      sealsHeading,
+      seals[] {
+        label,
         "image": image {
           ${imageField}
         }
       },
-      _type == "masterclass.expert" => {
-        ...,
-        "experts": experts[] {
-          ...,
-          "photo": photo {
-            ${imageField}
-          },
-          "socials": socials[] { ... }
-        }
+      "price": price {
+        original,
+        prefix,
+        current
+      },
+      "cta": cta {
+        ${buttonFields}
+      }
+    },
+    final {
+      heading,
+      summary,
+      benefits,
+      "cta": cta {
+        ${buttonFields}
+      },
+      details[] {
+        icon,
+        label
       }
     }
   }

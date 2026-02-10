@@ -79,7 +79,7 @@ export function Header({ data }: { data: Ebook }) {
             <WritingText
               asChild="h1"
               className="font-extrabold text-2xl leading-tight drop-shadow-md"
-              text={title?.[locale] as string}
+              text={title?.[locale] ?? ''}
             />
           )}
           <Badges data={data} />

@@ -35,13 +35,13 @@ export const DigitalProducts = ({
           className="absolute top-20 right-[8%] animate-pulse opacity-25"
           style={{ animationDelay: '0.3s' }}
         >
-          <Globe className="h-10 w-10 text-accent" />
+          <Globe className="size-10 text-accent" />
         </div>
         <div
           className="absolute top-40 right-[15%] animate-bounce opacity-20"
           style={{ animationDelay: '0.7s' }}
         >
-          <Wifi className="h-5 w-5 text-primary-foreground" />
+          <Wifi className="size-5 text-primary-foreground" />
         </div>
 
         <div
@@ -54,7 +54,7 @@ export const DigitalProducts = ({
           className="absolute top-[60%] left-[12%] animate-bounce opacity-20"
           style={{ animationDelay: '1s' }}
         >
-          <Zap className="h-5 w-5 text-primary-foreground" />
+          <Zap className="size-5 text-primary-foreground" />
         </div>
 
         <div

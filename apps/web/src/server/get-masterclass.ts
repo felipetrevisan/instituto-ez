@@ -9,5 +9,16 @@ export async function getMasterclasses() {
 }
 
 export async function getMasterclassBySlug(slug: string, locale: string) {
-  return sanityFetch<Masterclass>({ query: masterclassQueryBySlug, params: { slug, locale } })
+  const data = await sanityFetch<Masterclass>({
+    query: masterclassQueryBySlug,
+    params: { slug, locale },
+  })
+
+  if (data) return data
+
+  return sanityFetch<Masterclass>({
+    query: masterclassQueryBySlug,
+    params: { slug, locale },
+    perspective: 'previewDrafts',
+  })
 }

@@ -28,7 +28,7 @@ export default async function PageLayout({
     if (!data) notFound()
 
     return (
-      <LandingLayout locale={locale} pageKey={data.key} settings={data}>
+      <LandingLayout locale={locale} pageKey={data.key}>
         {children}
       </LandingLayout>
     )

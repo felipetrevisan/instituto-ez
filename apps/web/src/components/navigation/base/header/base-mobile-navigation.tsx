@@ -1,5 +1,11 @@
 'use client'
 
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@ez/shared/ui/accordion'
 import { FadeIn } from '@ez/web/components/ui/fade-in'
 import { menuItemVariants, menuListVariants } from '@ez/web/config/animation'
 import { useApp } from '@ez/web/hooks/use-app'
@@ -36,9 +42,44 @@ export function BaseMobileNavigation({
   const locale = useLocale()
   const { isMenuActive, setIsMenuOpen } = useApp()
 
-  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, url: NavigationItemURL) => {
+  const getHash = (raw?: string) => {
+    if (!raw) return undefined
+    return raw.startsWith('#') ? raw : `#${raw}`
+  }
+
+  const isHashLink = (url?: NavigationItemURL) => String(url?.type) === 'HASH'
+
+  const getLinkValue = (url?: NavigationItemURL) => {
+    const link = url?.link
+    if (!link) return undefined
+    if (typeof link === 'string') return link
+    return link?.[locale]?.current
+  }
+
+  const getHref = (url?: NavigationItemURL) => {
+    const linkValue = getLinkValue(url)
+    if (!url || !linkValue) return '#'
+    const normalized = isHashLink(url) ? (getHash(linkValue) ?? '#') : linkValue
+    return getLocalizedLink(locale, normalized, url.type === 'EXTERNAL', isHashLink(url))
+  }
+
+  const getSubmenuHref = (submenuUrl?: NavigationItemURL, parentUrl?: NavigationItemURL) => {
+    if (!submenuUrl) return '#'
+    if (!isHashLink(submenuUrl)) return getHref(submenuUrl)
+
+    const parentHref = getHref(parentUrl)
+    const hash = getHash(getLinkValue(submenuUrl))
+    return parentHref && hash ? `${parentHref}${hash}` : (hash ?? '#')
+  }
+
+  const handleLinkClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    url?: NavigationItemURL,
+    href?: string,
+  ) => {
     setIsMenuOpen(false)
-    if (url.type === 'HASH') {
+    if (!url) return
+    if (isHashLink(url) && href?.startsWith('#')) {
       navigateToHash(e, url)
     }
   }
@@ -50,25 +91,76 @@ export function BaseMobileNavigation({
       initial="closed"
       variants={menuListVariants}
     >
-      {navigation?.items?.map(({ id, label, url }) => (
-        <motion.div className="flex w-full" key={id} variants={menuItemVariants}>
-          <Link
-            className={linkClassName}
-            data-active={isMenuActive(url.link?.[locale]?.current)}
-            href={getLocalizedLink(
-              locale,
-              url.link?.[locale]?.current ?? url.link,
-              url.type === 'EXTERNAL',
-              url.type === 'HASH',
-            )}
-            onClick={(e) => handleLinkClick(e, url)}
-            rel={url.isExternal ? 'noopener noreferrer' : undefined}
-            target={url.isExternal ? '_blank' : undefined}
-          >
-            {label?.[locale]}
-          </Link>
-        </motion.div>
-      ))}
+      {navigation?.items?.map(({ id, label, url, submenuItems }) => {
+        const hasSubmenu = !!submenuItems?.length
+
+        if (!hasSubmenu) {
+          return (
+            <motion.div className="flex w-full" key={id} variants={menuItemVariants}>
+              <Link
+                className={linkClassName}
+                data-active={isMenuActive(getHref(url))}
+                href={getHref(url)}
+                onClick={(event) => handleLinkClick(event, url, getHref(url))}
+                rel={url?.isExternal ? 'noopener noreferrer' : undefined}
+                target={url?.isExternal ? '_blank' : undefined}
+              >
+                {label?.[locale]}
+              </Link>
+            </motion.div>
+          )
+        }
+
+        return (
+          <motion.div className="flex w-full flex-col" key={id} variants={menuItemVariants}>
+            <Accordion className="w-full" collapsible type="single">
+              <AccordionItem
+                className="mb-0 border-none shadow-none backdrop-blur-none"
+                value={`mobile-nav-${id}`}
+              >
+                <AccordionTrigger className="justify-center px-4 py-3 text-center font-medium text-base text-foreground/80 hover:text-accent">
+                  {label?.[locale]}
+                </AccordionTrigger>
+                <AccordionContent className="pb-0">
+                  <div className="flex flex-col border-primary/5 border-t">
+                    {url ? (
+                      <Link
+                        className="w-full px-6 py-2 text-center font-medium text-foreground/80 text-sm transition-colors hover:text-accent"
+                        data-active={isMenuActive(getHref(url))}
+                        href={getHref(url)}
+                        onClick={(event) => handleLinkClick(event, url, getHref(url))}
+                        rel={url?.isExternal ? 'noopener noreferrer' : undefined}
+                        target={url?.isExternal ? '_blank' : undefined}
+                      >
+                        {label?.[locale]}
+                      </Link>
+                    ) : null}
+                    {submenuItems?.map((submenuItem) => (
+                      <Link
+                        className="w-full px-6 py-2 text-center text-foreground/70 text-sm transition-colors hover:text-accent"
+                        data-active={isMenuActive(getSubmenuHref(submenuItem.url, url))}
+                        href={getSubmenuHref(submenuItem.url, url)}
+                        key={submenuItem.id}
+                        onClick={(event) =>
+                          handleLinkClick(
+                            event,
+                            submenuItem.url,
+                            getSubmenuHref(submenuItem.url, url),
+                          )
+                        }
+                        rel={submenuItem.url?.isExternal ? 'noopener noreferrer' : undefined}
+                        target={submenuItem.url?.isExternal ? '_blank' : undefined}
+                      >
+                        {submenuItem.label?.[locale]}
+                      </Link>
+                    ))}
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </motion.div>
+        )
+      })}
       {additionalContent && (
         <motion.div variants={menuItemVariants}>
           <FadeIn delay={0.1}>{additionalContent}</FadeIn>

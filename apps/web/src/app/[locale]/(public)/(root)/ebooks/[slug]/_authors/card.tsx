@@ -39,7 +39,7 @@ export function AuthorCard({ author: { photo, name, content }, index }: Props) {
       <div className="relative flex max-w-4xl items-center gap-6 rounded-3xl border border-[var(--tertiary)] bg-white p-6 shadow-[5px_5px_0_0_color-mix(in_srgb,_var(--tertiary)_50%,_transparent)]">
         <div
           className={cn(
-            '-top-[200px] -translate-x-1/2 absolute left-1/2 h-80 w-80 flex-shrink-0 overflow-visible rounded-full bg-gradient-to-br from-white to-white/50 shadow-[5px_5px_0_0_color-mix(in_srgb,_var(--tertiary)_50%,_transparent)] backdrop-blur-2xl md:top-0 md:left-0 md:translate-x-0 md:rounded-none md:bg-none md:shadow-none md:backdrop-blur-none',
+            '-top-[200px] -translate-x-1/2 absolute left-1/2 size-80 flex-shrink-0 overflow-visible rounded-full bg-gradient-to-br from-white to-white/50 shadow-[5px_5px_0_0_color-mix(in_srgb,_var(--tertiary)_50%,_transparent)] backdrop-blur-2xl md:top-0 md:left-0 md:translate-x-0 md:rounded-none md:bg-none md:shadow-none md:backdrop-blur-none',
             {
               'md:-left-[130px] md:right-0': isEven,
               'md:right-[30px] md:left-auto': !isEven,

@@ -17,7 +17,7 @@ type AppContextProps = {
   isMenuOpen: boolean
   toggleMenu: () => void
   setIsMenuOpen: Dispatch<SetStateAction<boolean>>
-  isMenuActive: (menu: string) => boolean
+  isMenuActive: (menu?: string) => boolean
   isHome: boolean
   setActiveMenu: Dispatch<SetStateAction<string>>
   activeMenu: string
@@ -44,8 +44,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const isHome = activeMenu === '/'
 
   const isMenuActive = useCallback(
-    (menu: string) => {
-      return currentUrl.includes(menu) && menu !== '/'
+    (menu?: string) => {
+      if (!menu || menu === '/' || menu.startsWith('#')) return false
+      if (/^(https?:\/\/|mailto:|tel:)/i.test(menu)) return false
+      const current = currentUrl.split('?')[0].split('#')[0].replace(/\/$/, '')
+      const target = menu.split('?')[0].split('#')[0].replace(/\/$/, '')
+      return current === target || current.startsWith(`${target}/`)
     },
     [currentUrl],
   )

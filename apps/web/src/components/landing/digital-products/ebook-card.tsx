@@ -13,6 +13,82 @@ import { useLocale, useTranslations } from 'next-intl'
 export const EbookCard = ({ ebook, index }: { ebook: Ebook; index: number }) => {
   const locale = useLocale()
   const t = useTranslations('DigitalProducts')
+  const slug = (() => {
+    const raw = ebook.slug
+    if (!raw) return undefined
+    if (typeof raw === 'string') return raw
+    if (typeof raw === 'object') {
+      const slugObject = raw as Record<string, unknown>
+      const localized = slugObject[locale]
+      if (localized && typeof localized === 'object') {
+        const localizedCurrent = (localized as { current?: string }).current
+        if (localizedCurrent) return localizedCurrent
+      }
+
+      const directCurrent = (slugObject as { current?: string }).current
+      if (directCurrent) return directCurrent
+
+      for (const value of Object.values(slugObject)) {
+        if (typeof value === 'string') return value
+        if (value && typeof value === 'object') {
+          const current = (value as { current?: string }).current
+          if (current) return current
+        }
+      }
+    }
+    return undefined
+  })()
+
+  const card = (
+    <div className="hover:-translate-y-2 relative overflow-hidden rounded-2xl border border-gray-200/50 bg-gradient-to-br shadow-md transition-all duration-300 hover:shadow-xl dark:border-background">
+      <div className="absolute top-4 left-4 z-10">
+        <span
+          className={cn(
+            'inline-flex items-center gap-1.5 rounded-full bg-navy/90 px-3 py-1.5 font-semibold text-white text-xs dark:bg-accent',
+          )}
+        >
+          <BookOpen className="size-3.5" />
+          {t('badgeEbook')}
+        </span>
+      </div>
+
+      <div className="relative aspect-[3/4] overflow-hidden bg-white/50 dark:bg-background/50">
+        {ebook.image?.[locale].large ? (
+          <Image
+            alt=""
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            fill
+            src={urlForImage(ebook.image?.[locale].large.asset).auto('format').quality(80).url()}
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 dark:from-background dark:to-background/40">
+            <BookOpen className="size-20 text-gray-400" />
+          </div>
+        )}
+
+        <div className="absolute inset-0 bg-navy/0 transition-all duration-300 group-hover:bg-navy/20" />
+      </div>
+
+      <div className="flex h-[240px] flex-col bg-white p-5 dark:bg-background/50">
+        {ebook.description?.[locale] && (
+          <p className="mb-4 line-clamp-3 flex-grow text-gray-600 text-sm">
+            {ebook.description[locale]}
+          </p>
+        )}
+
+        <Button
+          base="ebook"
+          className="group/btn w-full"
+          rounded="full"
+          theme="catalog"
+          variant="ghost"
+        >
+          {t('learnMoreEbook')}
+          <ArrowRight className="size-4 transition-transform group-hover/btn:translate-x-1" />
+        </Button>
+      </div>
+    </div>
+  )
 
   return (
     <motion.div
@@ -22,59 +98,7 @@ export const EbookCard = ({ ebook, index }: { ebook: Ebook; index: number }) => 
       viewport={{ once: true }}
       whileInView={{ opacity: 1, y: 0 }}
     >
-      <Link href={`/${locale}/ebooks/${ebook.slug?.[locale].current}`}>
-        <div className="hover:-translate-y-2 relative overflow-hidden rounded-2xl border border-gray-200/50 bg-gradient-to-br shadow-md transition-all duration-300 hover:shadow-xl dark:border-background">
-          <div className="absolute top-4 left-4 z-10">
-            <span
-              className={cn(
-                'inline-flex items-center gap-1.5 rounded-full bg-navy/90 px-3 py-1.5 font-semibold text-white text-xs dark:bg-accent',
-              )}
-            >
-              <BookOpen className="size-3.5" />
-              {t('badgeEbook')}
-            </span>
-          </div>
-
-          <div className="relative aspect-[3/4] overflow-hidden bg-white/50 dark:bg-background/50">
-            {ebook.image?.[locale].large ? (
-              <Image
-                alt=""
-                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                fill
-                src={urlForImage(ebook.image?.[locale].large.asset)
-                  .auto('format')
-                  .quality(80)
-                  .url()}
-              />
-            ) : (
-              <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 dark:from-background dark:to-background/40">
-                <BookOpen className="size-20 text-gray-400" />
-              </div>
-            )}
-
-            <div className="absolute inset-0 bg-navy/0 transition-all duration-300 group-hover:bg-navy/20" />
-          </div>
-
-          <div className="flex h-[240px] flex-col bg-white p-5 dark:bg-background/50">
-            {ebook.description?.[locale] && (
-              <p className="mb-4 line-clamp-3 flex-grow text-gray-600 text-sm">
-                {ebook.description[locale]}
-              </p>
-            )}
-
-            <Button
-              base="ebook"
-              className="group/btn w-full"
-              rounded="full"
-              theme="catalog"
-              variant="ghost"
-            >
-              {t('learnMoreEbook')}
-              <ArrowRight className="size-4 transition-transform group-hover/btn:translate-x-1" />
-            </Button>
-          </div>
-        </div>
-      </Link>
+      {slug ? <Link href={`/${locale}/ebooks/${slug}`}>{card}</Link> : card}
     </motion.div>
   )
 }

@@ -6,11 +6,9 @@ import { ContactForm } from './contact-form'
 export function ContactFormDialog({
   title,
   sendButtonLabel,
-  formRef,
 }: {
   title?: string
   sendButtonLabel: string
-  formRef: string
 }) {
   const { setIsContactDialogOpen, contactSubject } = useShared()
 
@@ -28,7 +26,6 @@ export function ContactFormDialog({
         )}
 
         <ContactForm
-          formRef={formRef}
           isDialog
           onCloseAction={closeDialog}
           sendButtonLabel={sendButtonLabel}

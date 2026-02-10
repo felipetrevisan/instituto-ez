@@ -17,8 +17,8 @@ export const FinalCTA = ({ data, locale }: { data: SectionDigitalProductsCTA; lo
       className="w-screen bg-gradient-to-b from-gray-light to-background py-20 md:py-32 dark:from-secondary dark:to-background"
       id="cta"
     >
-      <div className="-translate-x-1/2 -translate-y-1/2 absolute top-0 left-0 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
-      <div className="absolute right-0 bottom-0 h-96 w-96 translate-x-1/2 translate-y-1/2 rounded-full bg-navy/10 blur-3xl" />
+      <div className="-translate-x-1/2 -translate-y-1/2 absolute top-0 left-0 size-64 rounded-full bg-white/10 blur-3xl" />
+      <div className="absolute right-0 bottom-0 size-96 translate-x-1/2 translate-y-1/2 rounded-full bg-navy/10 blur-3xl" />
 
       <div className="container relative z-10 mx-auto px-6 md:px-8">
         <motion.div
@@ -43,7 +43,7 @@ export const FinalCTA = ({ data, locale }: { data: SectionDigitalProductsCTA; lo
           </motion.h2>
 
           {data.subheading && (
-            <motion.p
+            <motion.div
               className="mx-auto mb-10 max-w-2xl text-lg text-navy/80"
               initial={{ opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
@@ -54,7 +54,7 @@ export const FinalCTA = ({ data, locale }: { data: SectionDigitalProductsCTA; lo
                 components={createPortableComponents()}
                 value={data.subheading[locale]}
               />
-            </motion.p>
+            </motion.div>
           )}
 
           {data.cta && data.cta.length > 0 && (

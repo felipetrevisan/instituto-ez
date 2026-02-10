@@ -29,6 +29,10 @@ const buttonFields = `
     button_link_type == "EXTERNAL" => button_external_url,
     null
   ),
+  "scrollTo": select(
+    button_link_type == "HASH" => button_scroll_to,
+    null
+  ),
   "dialog": select(
     button_link_type == "DIALOG" => {
       "type": dialog_type,
@@ -63,6 +67,12 @@ const ctaField = `
     _type == "immersion.experience" ||
     _type == "immersion.final-cta" ||
     _type == "immersion.next-class" ||
+    _type == "masterclass.hero" ||
+    _type == "masterclass.for-who" ||
+    _type == "masterclass.problem" ||
+    _type == "masterclass.expert" ||
+    _type == "masterclass.final-cta" ||
+    _type == "masterclass.catalog" ||
     _type == "ebooks.cta" => cta[] {
       ...,
      ${buttonFields}
@@ -74,32 +84,6 @@ const ctaField = `
   )
 `
 
-const navigationFields = `
-  "navigation": navigation-> {
-    "items": items[] {
-      "id": _key,
-      "label": navigation_label,
-      "url": navigation_item_url {
-        "isHome": is_home,
-        "type": link_type,
-        is_home == true => {
-          "link": "/"
-        },
-        link_type == "INTERNAL" || link_type == "LANDING" => {
-          "link": internal_link->slug
-        },
-        link_type == "EXTERNAL" => {
-          "link": external_url,
-          "isExternal": true
-        },
-        link_type == "HASH" => {
-          "link": hash_id
-        },
-      }
-    }
-  },
-`
-
 export const landingPageQuery = groq`*[ _type == 'landingPage' && slug[$locale].current == $slug] [0] {
   "id": _id,
   key,
@@ -107,14 +91,64 @@ export const landingPageQuery = groq`*[ _type == 'landingPage' && slug[$locale].
     ...page,
     ${pageFields}
     ${seoImageField}
-    ${navigationFields}
-    form,
   },
   sections[] {
     ...,
     ${ctaField},
     _type == "forbusiness.courses" || _type == "forbusiness.lectures" => {
       "items": items[] {
+        ...,
+        "cta": cta {
+          ${buttonFields}
+        }
+      }
+    },
+    _type == "masterclass.for-who" || _type == "masterclass.problem" => {
+      "cta": cta[] {
+        ...,
+        ${buttonFields}
+      }
+    },
+    _type == "masterclass.final-cta" => {
+      "ctaOptions": ctaOptions[] {
+        ...,
+        "cta": cta {
+          ${buttonFields}
+        }
+      }
+    },
+    _type == "masterclass.catalog" => {
+      "featured": featured {
+        ...,
+        "masterclass": masterclass->{
+          slug,
+          _id
+        },
+        "masterclassRef": masterclass._ref,
+        "masterclassId": masterclass->_id,
+        "masterclassSlug": coalesce(
+          masterclass->slug[$locale].current,
+          masterclass->slug[$locale],
+          masterclass->slug.current,
+          masterclass->slug
+        )
+      },
+      "items": items[] {
+        ...,
+        "masterclass": masterclass->{
+          slug,
+          _id
+        },
+        "masterclassRef": masterclass._ref,
+        "masterclassId": masterclass->_id,
+        "masterclassSlug": coalesce(
+          masterclass->slug[$locale].current,
+          masterclass->slug[$locale],
+          masterclass->slug.current,
+          masterclass->slug
+        )
+      },
+      "ctaOptions": ctaOptions[] {
         ...,
         "cta": cta {
           ${buttonFields}

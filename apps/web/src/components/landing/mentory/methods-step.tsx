@@ -35,7 +35,7 @@ export const MethodsStep = ({
           )}
 
           {data?.subheading?.[locale] && (
-            <motion.p
+            <motion.div
               className="mx-auto mb-16 max-w-3xl text-justify text-gray-warm text-lg md:text-center"
               initial={{ opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.1 }}
@@ -46,7 +46,7 @@ export const MethodsStep = ({
                 components={createPortableComponents()}
                 value={data.subheading[locale]}
               />
-            </motion.p>
+            </motion.div>
           )}
 
           {data.items.length > 0 && (
@@ -69,7 +69,7 @@ export const MethodsStep = ({
                             <Icon className="size-8 text-white" name={step.icon} strokeWidth={2} />
                           </div>
                         )}
-                        <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-navy/10 font-bold text-lg text-navy">
+                        <div className="flex size-10 flex-shrink-0 items-center justify-center rounded-full bg-navy/10 font-bold text-lg text-navy">
                           {index + 1}
                         </div>
                       </div>

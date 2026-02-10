@@ -1,5 +1,4 @@
 import { Footer } from '@ez/web/components/app'
-import { useLandingConfig } from '@ez/web/hooks/use-landing-config'
 import type { Navigation, Site } from '@ez/web/types/site'
 import type { HTMLMotionProps } from 'motion/react'
 
@@ -20,12 +19,9 @@ export function FooterFactory({
   navigation,
   FooterComponent,
 }: FooterFactoryFactoryProps) {
-  const landing = useLandingConfig(pageKey)
-
   return (
     <Footer
       customNavigation={navigation}
-      DesktopNavComponent={landing?.navigation?.footer?.desktop}
       data={data}
       FooterComponent={FooterComponent}
       pageKey={pageKey}

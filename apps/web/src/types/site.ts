@@ -7,7 +7,6 @@ export type Site = {
   slogan: Record<string, string>
   description?: Record<string, string>
   contact: {
-    form: { _ref: string }
     email: string
     phone?: string
     location?: string
@@ -32,7 +31,8 @@ export type SocialNetwork = {
 export type NavigationItem = {
   id: string
   label: Record<string, string>
-  url: NavigationItemURL
+  url?: NavigationItemURL
+  submenuItems?: NavigationItem[]
 }
 
 export type SocialNetworkItem = {

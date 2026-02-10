@@ -7,18 +7,9 @@ import { FooterLandingNavigation } from '@ez/web/components/navigation/landing/f
 import { HeaderLandingNavigation } from '@ez/web/components/navigation/landing/header'
 import { FadeIn } from '@ez/web/components/ui/fade-in'
 import { useSite } from '@ez/web/hooks/use-site'
-import type { Landing } from '@ez/web/types/landing'
 import { Fragment, useEffect } from 'react'
 
-export function BaseLanding({
-  theme,
-  settings,
-  children,
-}: {
-  children: React.ReactNode
-  theme: string
-  settings?: Landing
-}) {
+export function BaseLanding({ theme, children }: { children: React.ReactNode; theme: string }) {
   useEffect(() => {
     import(`@ez/shared/styles/themes/${theme}.css`)
 
@@ -31,27 +22,29 @@ export function BaseLanding({
 
   const { data } = useSite()
 
-  if (!data) return
-
   return (
     <Fragment>
-      <HeaderFactory
-        data={data}
-        HeaderComponent={HeaderLandingNavigation}
-        navigation={settings?.settings.navigation}
-        pageKey={theme}
-        theme="landing"
-      />
+      {data && (
+        <HeaderFactory
+          data={data}
+          HeaderComponent={HeaderLandingNavigation}
+          navigation={data?.navigation?.header}
+          pageKey={theme}
+          theme="landing"
+        />
+      )}
       <FadeIn inView={false}>
         <App.Content>{children}</App.Content>
       </FadeIn>
-      <FooterFactory
-        data={data}
-        FooterComponent={FooterLandingNavigation}
-        navigation={settings?.settings.navigation}
-        pageKey={theme}
-        theme="landing"
-      />
+      {data && (
+        <FooterFactory
+          data={data}
+          FooterComponent={FooterLandingNavigation}
+          navigation={data?.navigation?.footer}
+          pageKey={theme}
+          theme="landing"
+        />
+      )}
     </Fragment>
   )
 }
@@ -69,27 +62,29 @@ export function BaseNormal({ theme, children }: { children: React.ReactNode; the
 
   const { data } = useSite()
 
-  if (!data) return
-
   return (
     <Fragment>
-      <HeaderFactory
-        data={data}
-        HeaderComponent={HeaderLandingNavigation}
-        navigation={data?.navigation?.header}
-        pageKey={theme}
-        theme="default"
-      />
+      {data && (
+        <HeaderFactory
+          data={data}
+          HeaderComponent={HeaderLandingNavigation}
+          navigation={data?.navigation?.header}
+          pageKey={theme}
+          theme="default"
+        />
+      )}
       <FadeIn inView={false}>
         <App.Content>{children}</App.Content>
       </FadeIn>
-      <FooterFactory
-        data={data}
-        FooterComponent={FooterLandingNavigation}
-        navigation={data?.navigation?.footer}
-        pageKey={theme}
-        theme="default"
-      />
+      {data && (
+        <FooterFactory
+          data={data}
+          FooterComponent={FooterLandingNavigation}
+          navigation={data?.navigation?.footer}
+          pageKey={theme}
+          theme="default"
+        />
+      )}
     </Fragment>
   )
 }

@@ -10,6 +10,57 @@ import { useLocale } from 'next-intl'
 
 type ButtonVariants = VariantProps<typeof buttonVariants>
 
+type LocalizedLabel = { lang?: string; value?: string }
+
+const resolveLabel = (label: unknown, locale: string) => {
+  if (!label) return ''
+  if (typeof label === 'string') return label
+
+  if (Array.isArray(label)) {
+    const match =
+      label.find((item: LocalizedLabel) => item?.lang === locale) ??
+      label.find((item: LocalizedLabel) => item?.lang === 'pt') ??
+      label.find((item: LocalizedLabel) => item?.lang === 'en') ??
+      label[0]
+    return typeof match?.value === 'string' ? match.value : ''
+  }
+
+  if (typeof label === 'object') {
+    const record = label as Record<string, unknown>
+    const direct = record[locale]
+    if (typeof direct === 'string') return direct
+    if (direct && typeof direct === 'object') {
+      const directRecord = direct as Record<string, unknown>
+      if (typeof directRecord.value === 'string') return directRecord.value
+      if (typeof directRecord.current === 'string') return directRecord.current
+    }
+
+    const pt = record.pt
+    if (typeof pt === 'string') return pt
+    if (pt && typeof pt === 'object') {
+      const ptRecord = pt as Record<string, unknown>
+      if (typeof ptRecord.value === 'string') return ptRecord.value
+      if (typeof ptRecord.current === 'string') return ptRecord.current
+    }
+
+    const en = record.en
+    if (typeof en === 'string') return en
+    if (en && typeof en === 'object') {
+      const enRecord = en as Record<string, unknown>
+      if (typeof enRecord.value === 'string') return enRecord.value
+      if (typeof enRecord.current === 'string') return enRecord.current
+    }
+
+    if (typeof record.value === 'string') return record.value
+    if (typeof record.current === 'string') return record.current
+
+    const anyValue = Object.values(record).find((value) => typeof value === 'string')
+    return typeof anyValue === 'string' ? anyValue : ''
+  }
+
+  return ''
+}
+
 export type CallActionButtonProps = {
   className?: string
   base: ButtonVariants['base']
@@ -90,10 +141,23 @@ export type CallActionProps = {
 export const CallAction = ({ className, base, button }: CallActionProps) => {
   const locale = useLocale()
   const { handleOpenContactDialog } = useShared()
+  const isDialog = button.type === LinkType.DIALOG
+  const isScroll = button.type === LinkType.HASH
+  const label = resolveLabel(button.label, locale)
+  const buttonTheme = button.theme ?? { size: 'default', theme: 'default', variant: 'default' }
+
+  const handleScrollTo = (target?: string) => {
+    const id = target?.replace(/^#/, '')
+    if (!id) return
+    const element = document.getElementById(id)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }
 
   return (
     <CallActionButton
-      action={button.type === LinkType.DIALOG ? 'button' : 'link'}
+      action={isDialog || isScroll ? 'button' : 'link'}
       base={base ?? 'default'}
       className={className}
       icon={{
@@ -107,16 +171,18 @@ export const CallAction = ({ className, base, button }: CallActionProps) => {
         },
       }}
       key={button._key}
-      label={button.label[locale]}
-      link={button.type === LinkType.DIALOG ? undefined : button.link?.[locale]}
+      label={label}
+      link={isDialog || isScroll ? undefined : button.link?.[locale]}
       onClick={
-        button.type === LinkType.DIALOG && button.dialog.type === 'CONTACT'
-          ? () => handleOpenContactDialog(button.dialog.subject)
-          : undefined
+        isDialog && button.dialog?.type === 'CONTACT'
+          ? () => handleOpenContactDialog(button.dialog?.subject)
+          : isScroll
+            ? () => handleScrollTo(button.scrollTo)
+            : undefined
       }
-      size={button.theme.size}
-      theme={button.theme.theme}
-      variant={button.theme.variant}
+      size={buttonTheme.size}
+      theme={buttonTheme.theme}
+      variant={buttonTheme.variant}
     />
   )
 }

@@ -10,6 +10,9 @@ import { AuthorCard } from './_authors/card'
 
 export function Authors({ data }: { data: Ebook }) {
   const t = useTranslations('Ebooks')
+  const authors = data.authors ?? []
+
+  if (!authors.length) return null
 
   return (
     <section
@@ -23,13 +26,13 @@ export function Authors({ data }: { data: Ebook }) {
             className="after:-bottom-1 after:-translate-x-1/2 relative text-center font-questrial font-semibold text-[var(--primary)] after:absolute after:left-1/2 after:h-[2px] after:w-[40%] after:rounded-xl after:bg-[var(--primary)]/60 after:transition-all"
             size="2xl"
           >
-            {data.authors.length === 1 ? t('aboutAuthor') : t('aboutAuthors')}
+            {authors.length === 1 ? t('aboutAuthor') : t('aboutAuthors')}
           </Title>
           <div className="mt-20 flex w-full justify-center">
             <div className="w-full md:hidden">
               <Carousel plugins={[ClassNames()]} theme="custom">
                 <CarouselContent>
-                  {data.authors?.map((author, index) => (
+                  {authors.map((author, index) => (
                     <CarouselItem className="basis-full" key={author._key}>
                       <AuthorCard author={author} index={index} />
                     </CarouselItem>
@@ -39,7 +42,7 @@ export function Authors({ data }: { data: Ebook }) {
               </Carousel>
             </div>
             <div className="hidden w-full gap-6 space-y-24 md:grid md:grid-cols-1">
-              {data.authors?.map((author, index) => (
+              {authors.map((author, index) => (
                 <AuthorCard author={author} index={index} key={author._key} />
               ))}
             </div>

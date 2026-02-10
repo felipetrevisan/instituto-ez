@@ -20,7 +20,7 @@ export function ThemeScope({ theme, children }: ThemeScopeProps) {
   }, {})
 
   return (
-    <FadeIn data-theme="dynamic" style={style}>
+    <FadeIn data-theme="dynamic" inView={false} style={style}>
       {children}
     </FadeIn>
   )

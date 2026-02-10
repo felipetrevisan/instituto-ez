@@ -1,10 +1,7 @@
 import type { SanityAsset } from '@ez/shared/types/assets'
 import type { Button } from '@ez/shared/types/global'
-import type { Color } from '@ez/web/types/ebook'
 import type { IconName } from 'lucide-react/dynamic'
 import type { PortableTextBlock } from 'next-sanity'
-
-export type MasterclassStatus = 'draft' | 'upcoming' | 'live' | 'ended'
 
 export type MasterclassCard = {
   title?: Record<string, string>
@@ -19,148 +16,139 @@ export type MasterclassSeo = {
   image?: SanityAsset
 }
 
-export type MasterclassSectionSettings = {
-  id?: string
-  enabled?: boolean
-  variant?: string
-  background?: Color
-}
-
-export type MasterclassSectionHero = {
-  settings?: MasterclassSectionSettings
-  heading?: Record<string, PortableTextBlock[]>
-  subheading?: Record<string, PortableTextBlock[]>
-  description?: Record<string, PortableTextBlock[]>
-  image?: SanityAsset
-  cta?: Button[]
-  _type: string
-}
-
-export type MasterclassForWhoItem = {
-  title?: Record<string, string>
-  description?: Record<string, PortableTextBlock[]>
-  icon?: IconName
-}
-
-export type MasterclassSectionForWho = {
-  settings?: MasterclassSectionSettings
-  heading?: Record<string, PortableTextBlock[]>
-  text?: Record<string, PortableTextBlock[]>
-  items?: MasterclassForWhoItem[]
-  _type: string
-}
-
-export type MasterclassProblemItem = {
-  title?: Record<string, string>
-  description?: Record<string, PortableTextBlock[]>
-  icon?: IconName
-}
-
-export type MasterclassSectionProblem = {
-  settings?: MasterclassSectionSettings
-  heading?: Record<string, PortableTextBlock[]>
-  text?: Record<string, PortableTextBlock[]>
-  items?: MasterclassProblemItem[]
-  _type: string
-}
-
-export type MasterclassTransformationItem = {
-  title?: Record<string, string>
-  description?: Record<string, PortableTextBlock[]>
-  icon?: IconName
-}
-
-export type MasterclassSectionTransformation = {
-  settings?: MasterclassSectionSettings
-  heading?: Record<string, PortableTextBlock[]>
-  text?: Record<string, PortableTextBlock[]>
-  items?: MasterclassTransformationItem[]
-  _type: string
-}
-
-export type MasterclassContentItem = {
-  title?: Record<string, string>
-  description?: Record<string, PortableTextBlock[]>
-  meta?: Record<string, string>
-}
-
-export type MasterclassSectionContent = {
-  settings?: MasterclassSectionSettings
-  heading?: Record<string, PortableTextBlock[]>
-  text?: Record<string, PortableTextBlock[]>
-  items?: MasterclassContentItem[]
-  _type: string
-}
-
-export type MasterclassFormatItem = {
-  label?: Record<string, string>
-  value?: Record<string, string>
-  icon?: IconName
-}
-
-export type MasterclassSectionFormat = {
-  settings?: MasterclassSectionSettings
-  heading?: Record<string, PortableTextBlock[]>
-  text?: Record<string, PortableTextBlock[]>
-  items?: MasterclassFormatItem[]
-  _type: string
-}
-
-export type MasterclassExpertSocial = {
-  label?: string
+export type MasterclassHeroVideo = {
   url?: string
+  duration?: string
+  caption?: string
 }
 
-export type MasterclassExpert = {
+export type MasterclassHero = {
+  badge?: string
+  heading?: PortableTextBlock[]
+  video?: MasterclassHeroVideo
+}
+
+export type MasterclassPillarTheme = 'coral' | 'violet' | 'cyan' | 'amber' | 'emerald' | 'primary'
+
+export type MasterclassPillarOrbitItem = {
+  label?: string
+  icon?: IconName
+}
+
+export type MasterclassPillarCore = {
+  label?: string
+  icon?: IconName
+}
+
+export type MasterclassPillar = {
+  number?: string
+  title?: string
+  subtitle?: string
+  label?: string
+  heading?: PortableTextBlock[]
+  body?: PortableTextBlock[]
+  icon?: IconName
+  theme?: MasterclassPillarTheme
+  cta?: Button
+  core?: MasterclassPillarCore
+  orbitItems?: MasterclassPillarOrbitItem[]
+}
+
+export type MasterclassPillars = {
+  badge?: string
+  heading?: PortableTextBlock[]
+  subheading?: PortableTextBlock[]
+  items?: MasterclassPillar[]
+  cta?: Button
+}
+
+export type MasterclassTestimonials = {
+  badge?: string
+  heading?: PortableTextBlock[]
+  description?: string
+}
+
+export type MasterclassWhyItem = {
+  title?: string
+  description?: string
+}
+
+export type MasterclassWhy = {
+  badge?: string
+  statement?: PortableTextBlock[]
+  items?: MasterclassWhyItem[]
+  body?: PortableTextBlock[]
+  closing?: PortableTextBlock[]
+  cta?: Button
+}
+
+export type MasterclassAuthorHighlight = {
+  icon?: IconName
+  label?: string
+  text?: string
+}
+
+export type MasterclassAuthorInfo = {
   name?: string
-  role?: Record<string, string>
-  bio?: Record<string, PortableTextBlock[]>
-  photo?: SanityAsset
-  socials?: MasterclassExpertSocial[]
-}
-
-export type MasterclassSectionExpert = {
-  settings?: MasterclassSectionSettings
-  heading?: Record<string, PortableTextBlock[]>
-  text?: Record<string, PortableTextBlock[]>
-  experts?: MasterclassExpert[]
-  _type: string
-}
-
-export type MasterclassSectionFinalCta = {
-  settings?: MasterclassSectionSettings
-  heading?: Record<string, PortableTextBlock[]>
-  text?: Record<string, PortableTextBlock[]>
-  subtext?: Record<string, PortableTextBlock[]>
+  role?: string
+  bio?: string
   image?: SanityAsset
-  cta?: Button[]
-  _type: string
 }
 
-export type MasterclassSection =
-  | MasterclassSectionHero
-  | MasterclassSectionForWho
-  | MasterclassSectionProblem
-  | MasterclassSectionTransformation
-  | MasterclassSectionContent
-  | MasterclassSectionFormat
-  | MasterclassSectionExpert
-  | MasterclassSectionFinalCta
+export type MasterclassAuthor = {
+  badge?: string
+  heading?: PortableTextBlock[]
+  author?: MasterclassAuthorInfo
+  highlights?: MasterclassAuthorHighlight[]
+}
+
+export type MasterclassOfferSeal = {
+  _key?: string
+  label?: string
+  image?: SanityAsset
+}
+
+export type MasterclassOfferPrice = {
+  original?: string
+  prefix?: string
+  current?: string
+}
+
+export type MasterclassOffer = {
+  badge?: string
+  heading?: string
+  subheading?: string
+  sealsHeading?: string
+  seals?: MasterclassOfferSeal[]
+  price?: MasterclassOfferPrice
+  cta?: Button
+}
+
+export type MasterclassFinalDetail = {
+  icon?: IconName
+  label?: string
+}
+
+export type MasterclassFinal = {
+  heading?: string
+  summary?: string
+  benefits?: string[]
+  cta?: Button
+  details?: MasterclassFinalDetail[]
+}
 
 export type Masterclass = {
   id: string
   title: Record<string, string>
   slug: Record<string, { current: string }>
-  template: {
-    id: string
-  }
   enabled?: boolean
-  status?: MasterclassStatus
-  startAt?: string
-  duration?: string
-  timezone?: string
-  location?: string
   seo?: MasterclassSeo
   card?: MasterclassCard
-  sections?: MasterclassSection[]
+  hero?: MasterclassHero
+  pillars?: MasterclassPillars
+  testimonials?: MasterclassTestimonials
+  why?: MasterclassWhy
+  author?: MasterclassAuthor
+  offer?: MasterclassOffer
+  final?: MasterclassFinal
 }

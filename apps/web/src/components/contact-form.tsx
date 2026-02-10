@@ -6,7 +6,6 @@ import { Button } from '@ez/shared/ui/button'
 import { DialogFooter, DialogTrigger } from '@ez/shared/ui/dialog'
 import { Input } from '@ez/shared/ui/input'
 import { Textarea } from '@ez/shared/ui/textarea'
-import { useForm as useBaseForm } from '@ez/web/hooks/use-form'
 import { useSite } from '@ez/web/hooks/use-site'
 import { type ContactFormSchema, createContactFormSchema } from '@ez/web/types/contact'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -14,26 +13,22 @@ import { AnimatePresence, motion } from 'motion/react'
 import { useLocale, useTranslations } from 'next-intl'
 import { useEffect, useMemo, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Comment } from 'react-loader-spinner'
 import { toast } from 'sonner'
 import { sendEmail } from '../server/send-email'
 
 export function ContactForm({
   isDialog = false,
   subject = '',
-  formRef,
   onCloseAction,
   sendButtonLabel,
 }: {
   isDialog: boolean
   subject: string
-  formRef: string
   sendButtonLabel: string
   onCloseAction: () => void
 }) {
   const [focusedField, setFocusedField] = useState<string | null>('name')
   const { data: settings } = useSite()
-  const { data: form, isPending } = useBaseForm(formRef)
   const t = useTranslations('DialogContact')
   const locale = useLocale()
 
@@ -47,6 +42,17 @@ export function ContactForm({
         subjectRequired: t('subjectRequired'),
         messageRequired: t('messageRequired'),
       }),
+    [t],
+  )
+
+  const fields = useMemo(
+    () => [
+      { name: 'name', label: t('nameLabel'), type: 'text', isRequired: true },
+      { name: 'email', label: t('emailLabel'), type: 'email', isRequired: true },
+      { name: 'phone', label: t('phoneLabel'), type: 'tel', isRequired: true },
+      { name: 'subject', label: t('subjectLabel'), type: 'text', isRequired: true },
+      { name: 'message', label: t('messageLabel'), type: 'textarea', isRequired: true },
+    ],
     [t],
   )
 
@@ -102,24 +108,9 @@ export function ContactForm({
 
   return (
     <form className="w-full">
-      <div
-        className={cn('grid gap-4 py-4', {
-          'justify-center': isPending,
-        })}
-      >
-        {isPending && (
-          <Comment
-            ariaLabel={t('loadingAria')}
-            backgroundColor="var(--tertiary)"
-            color="#fff"
-            height="80"
-            visible={true}
-            width="80"
-            wrapperStyle={{}}
-          />
-        )}
+      <div className={cn('grid gap-4 py-4')}>
         <div className="grid grid-cols-1 items-baseline gap-8 md:grid-cols-2">
-          {form?.fields.map(({ name, label, type, isRequired }) => {
+          {fields.map(({ name, label, type, isRequired }) => {
             const value = watch(name as keyof ContactFormSchema)
             const hasError = !!errors[name as keyof ContactFormSchema]
             const isFocused = focusedField === name || !!value
@@ -211,7 +202,7 @@ export function ContactForm({
           })}
         </div>
       </div>
-      {isDialog && !isPending && (
+      {isDialog && (
         <DialogFooter className="justify-center gap-5">
           <DialogTrigger asChild>
             <Button onClick={onCloseAction} rounded="full" size="lg" theme="tertiary" type="button">
@@ -228,7 +219,7 @@ export function ContactForm({
           >
             {isSubmitting ? (
               <>
-                <Loader2Icon className="mr-2 h-4 w-4 animate-spin" /> {t('loadingButton')}
+                <Loader2Icon className="mr-2 size-4 animate-spin" /> {t('loadingButton')}
               </>
             ) : (
               sendButtonLabel
@@ -236,7 +227,7 @@ export function ContactForm({
           </Button>
         </DialogFooter>
       )}
-      {!isDialog && !isPending && (
+      {!isDialog && (
         <div className="flex flex-row md:justify-end">
           <Button
             className="w-full md:w-[200px]"
@@ -249,7 +240,7 @@ export function ContactForm({
           >
             {isSubmitting ? (
               <>
-                <Loader2Icon className="mr-2 h-4 w-4 animate-spin" /> {t('loadingButton')}
+                <Loader2Icon className="mr-2 size-4 animate-spin" /> {t('loadingButton')}
               </>
             ) : (
               t('sendButton')

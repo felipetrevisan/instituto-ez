@@ -20,6 +20,8 @@ export default function BuySection({ data }: { data: Ebook }) {
 
   const t = useTranslations('Ebooks')
 
+  if (!price) return null
+
   return (
     <div className="flex flex-col items-center justify-center gap-2">
       <div className="grid h-full grid-cols-1 gap-8 lg:grid-cols-4">

@@ -1,7 +1,6 @@
 import { resolveOpenGraphImage } from '@ez/web/config/image'
 import { locales } from '@ez/web/config/locale'
 import { getEbookBySlug, getEbooks } from '@ez/web/server/get-ebook'
-import { getLandingPageSettings } from '@ez/web/server/get-landing-page-settings'
 import { buildAlternates } from '@ez/web/utils/seo'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
@@ -81,9 +80,7 @@ export default async function Page({
     notFound()
   }
 
-  const settings = await getLandingPageSettings()
-
-  return <Content data={data} settings={settings} />
+  return <Content data={data} />
 }
 
 export async function generateStaticParams() {
@@ -92,12 +89,31 @@ export async function generateStaticParams() {
   return ebooks.flatMap((ebook) =>
     locales
       .map((locale) => {
-        const currentSlug = ebook.slug?.[locale]?.current
-        if (!currentSlug) return null
-        return {
-          slug: currentSlug,
-          locale,
+        const rawSlug = ebook.slug
+        if (!rawSlug) return null
+        if (typeof rawSlug === 'string') {
+          return { slug: rawSlug, locale }
         }
+        if (typeof rawSlug === 'object') {
+          const slugObject = rawSlug as Record<string, unknown>
+          const localized = slugObject[locale]
+          if (localized && typeof localized === 'object') {
+            const localizedCurrent = (localized as { current?: string }).current
+            if (localizedCurrent) return { slug: localizedCurrent, locale }
+          }
+
+          const directCurrent = (slugObject as { current?: string }).current
+          if (directCurrent) return { slug: directCurrent, locale }
+
+          for (const value of Object.values(slugObject)) {
+            if (typeof value === 'string') return { slug: value, locale }
+            if (value && typeof value === 'object') {
+              const current = (value as { current?: string }).current
+              if (current) return { slug: current, locale }
+            }
+          }
+        }
+        return null
       })
       .filter(Boolean),
   )

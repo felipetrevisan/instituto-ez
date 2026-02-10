@@ -26,7 +26,7 @@ export const Services = ({ data, locale }: { data: SectionAboutServices; locale:
           )}
 
           {data?.subheading?.[locale] && (
-            <motion.p
+            <motion.div
               className="mx-auto mb-16 max-w-3xl text-center text-gray-warm text-lg"
               initial={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.6, delay: 0.1 }}
@@ -37,7 +37,7 @@ export const Services = ({ data, locale }: { data: SectionAboutServices; locale:
                 components={createPortableComponents()}
                 value={data.subheading[locale]}
               />
-            </motion.p>
+            </motion.div>
           )}
 
           {data.items.length > 0 && (

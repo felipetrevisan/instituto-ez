@@ -10,6 +10,9 @@ import { useLocale } from 'next-intl'
 export default function Badges({ data }: { data: Ebook }) {
   const { badges } = data
   const locale = useLocale()
+  const items = badges ?? []
+
+  if (!items.length) return null
 
   const BadgeChip = ({
     type,
@@ -52,7 +55,7 @@ export default function Badges({ data }: { data: Ebook }) {
 
   return (
     <div className="mt-4 mb-6 flex flex-row flex-wrap justify-center gap-4 md:justify-start">
-      {badges.map((badge, i) => (
+      {items.map((badge, i) => (
         <BadgeChip {...badge} index={i} key={badge._key} />
       ))}
     </div>

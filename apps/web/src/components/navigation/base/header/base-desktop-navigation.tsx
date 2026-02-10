@@ -6,12 +6,15 @@ import {
 } from '@ez/shared/ui/animated/effects/motion-highlight'
 import {
   NavigationMenu,
+  NavigationMenuContent,
   NavigationMenuItem,
+  NavigationMenuLink,
   NavigationMenuList,
+  NavigationMenuTrigger,
 } from '@ez/shared/ui/navigation-menu'
 import { FadeIn } from '@ez/web/components/ui/fade-in'
 import { useApp } from '@ez/web/hooks/use-app'
-import type { Navigation } from '@ez/web/types/site'
+import type { Navigation, NavigationItem, NavigationItemURL } from '@ez/web/types/site'
 import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
 import { navigateToHash } from '@ez/web/utils/scroll-to-id'
 import { motion } from 'motion/react'
@@ -44,47 +47,178 @@ const MenuItemMotion = motion(NavigationMenuItem)
 export function BaseDesktopNavigation({
   navigation,
   highlightClassName = 'flex flex-row border-b-2 border-b-primary dark:border-b-accent bg-transparent text-primary dark:text-accent',
-  linkClassName = 'hover:after:animation-pulse after:-bottom-1 after:-translate-x-1/2 relative flex flex-col rounded-xl bg-transparent p-4 text-primary dark:text-accent text-xl outline-none transition-all after:absolute after:left-1/2 after:h-[2px] after:w-0 after:rounded-xl after:bg-transparent after:transition-all hover:text-primary dark:hover:text-accent hover:after:w-full hover:after:shadow-xl focus:bg-transparent focus:text-primary dark:focus:text-accent focus-visible:outline-1 focus-visible:ring-[3px] focus-visible:ring-ring/50 data-[active=true]:border-b-primary data-[active=true]:p-4 data-[active=true]:text-primary dark:data-[active=true]:text-accent lg:gap-1 lg:text-sm! [&_svg:not([class*="size-"])]:size-4',
-  activeClassName = 'border-b-primary dark:border-b-accent text-primary dark:text-accent p-4',
+  linkClassName = 'relative flex flex-col rounded-xl bg-transparent p-4 text-primary dark:text-accent text-xl outline-none transition-all hover:text-primary dark:hover:text-accent focus:bg-transparent focus:text-primary dark:focus:text-accent focus-visible:outline-1 focus-visible:ring-[3px] focus-visible:ring-ring/50 data-[active=true]:text-primary dark:data-[active=true]:text-accent lg:gap-1 lg:text-sm! whitespace-nowrap [&_svg:not([class*="size-"])]:size-4',
+  activeClassName = '',
   additionalContent,
 }: BaseDesktopNavigationProps) {
   const locale = useLocale()
   const { isMenuActive } = useApp()
 
+  const getHash = (raw?: string) => {
+    if (!raw) return '#'
+    return raw.startsWith('#') ? raw : `#${raw}`
+  }
+
+  const isHashLink = (url?: NavigationItemURL) => String(url?.type) === 'HASH'
+
+  const getHref = (url?: NavigationItemURL) => {
+    if (!url) return '#'
+    if (isHashLink(url)) {
+      return getHash(url.link?.[locale]?.current ?? url.link)
+    }
+    return getLocalizedLink(
+      locale,
+      url.link?.[locale]?.current ?? url.link,
+      url.type === 'EXTERNAL',
+      isHashLink(url),
+    )
+  }
+
+  const getSubmenuHref = (submenuUrl?: NavigationItemURL, parentUrl?: NavigationItemURL) => {
+    if (!submenuUrl) return '#'
+    if (isHashLink(submenuUrl)) {
+      const hash = getHash(submenuUrl.link?.[locale]?.current ?? submenuUrl.link)
+      if (!parentUrl) return hash
+      const parentHref = getHref(parentUrl)
+      if (
+        !parentHref ||
+        parentHref.startsWith('#') ||
+        /^(https?:\/\/|mailto:|tel:)/i.test(parentHref)
+      ) {
+        return hash
+      }
+      return `${parentHref}${hash}`
+    }
+    return getHref(submenuUrl)
+  }
+
+  const handleHashClick = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    url?: NavigationItemURL,
+    href?: string,
+  ) => {
+    if (!url) return
+    if (isHashLink(url) && href?.startsWith('#')) {
+      navigateToHash(event, url)
+    }
+  }
+
+  const isItemActive = (item: NavigationItem, parentUrl?: NavigationItemURL) =>
+    isMenuActive(getSubmenuHref(item.url, parentUrl))
+
+  const submenuLinkClassName =
+    'block rounded-lg px-3 py-2 text-sm text-foreground/80 transition-colors hover:bg-accent/10 hover:text-accent'
+
+  const isEntryActive = (entry: NavigationItem) => {
+    if (entry.submenuItems?.length) {
+      return entry.submenuItems.some((item) => isItemActive(item, entry.url))
+    }
+    return isMenuActive(getHref(entry.url))
+  }
+
+  const activeId = navigation?.items?.find((item) => isEntryActive(item))?.id ?? null
+
   return (
     <div className="flex items-center gap-4 lg:flex-nowrap">
       <FadeIn>
-        <NavigationMenu className="hidden lg:flex">
+        <NavigationMenu className="hidden lg:flex" viewport={false}>
           <NavigationMenuList>
             <MotionHighlight
               className={highlightClassName}
               containerClassName="flex justify-center items-center"
               controlledItems
-              hover
+              hover={!activeId}
               mode="parent"
+              value={activeId}
             >
-              {navigation?.items?.map(({ id, label, url }) => (
-                <MenuItemMotion data-value={id} key={id}>
-                  <MotionHighlightItem activeClassName={activeClassName}>
-                    <Link
-                      className={linkClassName}
-                      data-active={isMenuActive(url.link?.[locale]?.current)}
-                      data-slot="navigation-menu-link"
-                      href={getLocalizedLink(
-                        locale,
-                        url.link?.[locale]?.current ?? url.link,
-                        url.type === 'EXTERNAL',
-                        url.type === 'HASH',
+              {navigation?.items?.map(({ id, label, url, submenuItems }) => {
+                const hasSubmenu = !!submenuItems?.length
+                const isActive = hasSubmenu
+                  ? submenuItems.some((item) => isItemActive(item, url))
+                  : isMenuActive(getHref(url))
+
+                return (
+                  <MenuItemMotion data-value={id} key={id}>
+                    <MotionHighlightItem activeClassName={activeClassName}>
+                      {hasSubmenu ? (
+                        <NavigationMenuTrigger
+                          className={`${linkClassName} h-auto flex-row items-center gap-2 bg-transparent hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent`}
+                          data-active={isActive}
+                        >
+                          {label?.[locale]}
+                        </NavigationMenuTrigger>
+                      ) : (
+                        <Link
+                          className={linkClassName}
+                          data-active={isActive}
+                          data-slot="navigation-menu-link"
+                          href={getHref(url)}
+                          onClick={(event) => handleHashClick(event, url, getHref(url))}
+                          rel={url?.isExternal ? 'noopener noreferrer' : undefined}
+                          target={url?.isExternal ? '_blank' : undefined}
+                        >
+                          {label?.[locale]}
+                        </Link>
                       )}
-                      onClick={url.type === 'HASH' ? (e) => navigateToHash(e, url) : undefined}
-                      rel={url.isExternal ? 'noopener noreferrer' : undefined}
-                      target={url.isExternal ? '_blank' : undefined}
-                    >
-                      {label?.[locale]}
-                    </Link>
-                  </MotionHighlightItem>
-                </MenuItemMotion>
-              ))}
+                    </MotionHighlightItem>
+                    {hasSubmenu && (
+                      <NavigationMenuContent className="border-none bg-transparent p-2 shadow-none">
+                        <MotionHighlight className="rounded-lg bg-accent/10" hover>
+                          <ul className="min-w-[220px] space-y-1 p-2">
+                            {url && (
+                              <MotionHighlightItem asChild key={`${id}-parent`}>
+                                <li className="relative">
+                                  <NavigationMenuLink asChild>
+                                    <Link
+                                      className={submenuLinkClassName}
+                                      href={getHref(url)}
+                                      onClick={(event) => handleHashClick(event, url, getHref(url))}
+                                      rel={url?.isExternal ? 'noopener noreferrer' : undefined}
+                                      target={url?.isExternal ? '_blank' : undefined}
+                                    >
+                                      {label?.[locale]}
+                                    </Link>
+                                  </NavigationMenuLink>
+                                </li>
+                              </MotionHighlightItem>
+                            )}
+                            {submenuItems.map((submenuItem) => (
+                              <MotionHighlightItem asChild key={submenuItem.id}>
+                                <li className="relative">
+                                  <NavigationMenuLink asChild>
+                                    <Link
+                                      className={submenuLinkClassName}
+                                      data-active={isMenuActive(
+                                        getSubmenuHref(submenuItem.url, url),
+                                      )}
+                                      href={getSubmenuHref(submenuItem.url, url)}
+                                      onClick={(event) =>
+                                        handleHashClick(
+                                          event,
+                                          submenuItem.url,
+                                          getSubmenuHref(submenuItem.url, url),
+                                        )
+                                      }
+                                      rel={
+                                        submenuItem.url?.isExternal
+                                          ? 'noopener noreferrer'
+                                          : undefined
+                                      }
+                                      target={submenuItem.url?.isExternal ? '_blank' : undefined}
+                                    >
+                                      {submenuItem.label?.[locale]}
+                                    </Link>
+                                  </NavigationMenuLink>
+                                </li>
+                              </MotionHighlightItem>
+                            ))}
+                          </ul>
+                        </MotionHighlight>
+                      </NavigationMenuContent>
+                    )}
+                  </MenuItemMotion>
+                )
+              })}
             </MotionHighlight>
           </NavigationMenuList>
         </NavigationMenu>

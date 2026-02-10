@@ -1,5 +1,4 @@
 import { Header } from '@ez/web/components/app'
-import { useLandingConfig } from '@ez/web/hooks/use-landing-config'
 import type { Navigation, Site } from '@ez/web/types/site'
 import type { HTMLMotionProps } from 'motion/react'
 
@@ -20,15 +19,11 @@ export function HeaderFactory({
   navigation,
   HeaderComponent,
 }: HeaderFactoryProps) {
-  const landing = useLandingConfig(pageKey)
-
   return (
     <Header
       customNavigation={navigation}
-      DesktopNavComponent={landing?.navigation?.header?.desktop}
       data={data}
       HeaderComponent={HeaderComponent}
-      MobileNavComponent={landing?.navigation?.header?.mobile}
       pageKey={pageKey}
       theme={theme}
     />

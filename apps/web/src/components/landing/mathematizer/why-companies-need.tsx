@@ -31,7 +31,7 @@ export const WhyCompaniesNeed = ({
           )}
 
           {data?.subheading?.[locale] && (
-            <motion.p
+            <motion.div
               className="mx-auto max-w-3xl text-foreground/90 text-xl leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
@@ -42,7 +42,7 @@ export const WhyCompaniesNeed = ({
                 components={createPortableComponents()}
                 value={data.subheading[locale]}
               />
-            </motion.p>
+            </motion.div>
           )}
 
           {data.cta && (

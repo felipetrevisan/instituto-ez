@@ -6,8 +6,6 @@ import { PageType } from '@ez/shared/types/global'
 import { IconButton } from '@ez/shared/ui/animated/button/icon-button'
 import { useApp } from '@ez/web/hooks/use-app'
 import type { Ebook } from '@ez/web/types/ebook'
-import type { LandingPageSetting } from '@ez/web/types/landing-page-setting'
-import type { Section, SectionKey } from '@ez/web/types/sections'
 import { ChevronUpIcon } from 'lucide-react'
 import { useMotionValueEvent, useScroll } from 'motion/react'
 import { useLocale } from 'next-intl'
@@ -15,7 +13,7 @@ import { Fragment, useEffect, useState } from 'react'
 import { getLandingPageSections } from './_sections'
 import StickyHeader from './_sticky-header'
 
-export function Content({ data, settings }: { data: Ebook; settings: LandingPageSetting }) {
+export function Content({ data }: { data: Ebook }) {
   const { setPageType, isEbookPage } = useApp()
   const { setIsContactDialogOpen, setContactSubject } = useShared()
   const locale = useLocale()
@@ -47,13 +45,7 @@ export function Content({ data, settings }: { data: Ebook; settings: LandingPage
     }
   }, [])
 
-  const avaliableSections = getLandingPageSections(data).reduce(
-    (acc, section) => {
-      acc[section.key] = section
-      return acc
-    },
-    {} as Record<string, SectionKey>,
-  )
+  const avaliableSections = getLandingPageSections(data)
 
   function askAboutEbook() {
     setContactSubject(data.title?.[locale])
@@ -64,9 +56,9 @@ export function Content({ data, settings }: { data: Ebook; settings: LandingPage
     <div className="flex w-full flex-col items-center justify-center space-y-14">
       <StickyHeader {...data} />
       <div className="relative flex w-screen flex-col items-center justify-center">
-        {settings.sections?.map(({ key, show }: Section) =>
-          show ? <Fragment key={key}>{avaliableSections[key]?.component}</Fragment> : null,
-        )}
+        {avaliableSections.map((section) => (
+          <Fragment key={section.key}>{section.component}</Fragment>
+        ))}
       </div>
       <div className="fixed right-10 bottom-10 z-50 flex flex-row items-center gap-4">
         <IconButton

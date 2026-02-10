@@ -31,7 +31,7 @@ export const MentorShip = ({ data, locale }: { data: SectionHomeMentorShip; loca
             <div className="group rounded-2xl border border-accent/20 bg-card/90 p-6 backdrop-blur-sm transition-all duration-300 hover:border-accent/40">
               <div className="flex items-start gap-5">
                 {data.mainBox.icon && (
-                  <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-xl bg-accent/20 transition-all duration-300 group-hover:bg-accent/30">
+                  <div className="flex size-14 flex-shrink-0 items-center justify-center rounded-xl bg-accent/20 transition-all duration-300 group-hover:bg-accent/30">
                     <Icon className="size-7 text-accent" name={data.mainBox.icon} strokeWidth={2} />
                   </div>
                 )}

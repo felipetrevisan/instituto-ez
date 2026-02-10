@@ -66,23 +66,39 @@ export function BaseDesktopNavigation({
               {navigation?.items?.map(({ id, label, url }) => (
                 <MenuItemMotion data-value={id} key={id}>
                   <MotionHighlightItem activeClassName={activeClassName}>
-                    <Link
-                      className={linkClassName}
-                      data-active={isMenuActive(url.link?.[locale]?.current)}
-                      data-slot="navigation-menu-link"
-                      href={getLocalizedLink(
-                        locale,
-                        url.link?.[locale]?.current ?? url.link,
-                        url.type === 'EXTERNAL',
-                        url.type === 'HASH',
-                      )}
-                      onClick={url.type === 'HASH' ? (e) => navigateToHash(e, url) : undefined}
-                      rel={url.isExternal ? 'noopener noreferrer' : undefined}
-                      style={{ color: 'var(--footer-link-color, var(--footer-foreground))' }}
-                      target={url.isExternal ? '_blank' : undefined}
-                    >
-                      {label?.[locale]}
-                    </Link>
+                    {url ? (
+                      <Link
+                        className={linkClassName}
+                        data-active={isMenuActive(
+                          getLocalizedLink(
+                            locale,
+                            url.link?.[locale]?.current ?? url.link,
+                            url.type === 'EXTERNAL',
+                            url.type === 'HASH',
+                          ),
+                        )}
+                        data-slot="navigation-menu-link"
+                        href={getLocalizedLink(
+                          locale,
+                          url.link?.[locale]?.current ?? url.link,
+                          url.type === 'EXTERNAL',
+                          url.type === 'HASH',
+                        )}
+                        onClick={url.type === 'HASH' ? (e) => navigateToHash(e, url) : undefined}
+                        rel={url.isExternal ? 'noopener noreferrer' : undefined}
+                        style={{ color: 'var(--footer-link-color, var(--footer-foreground))' }}
+                        target={url.isExternal ? '_blank' : undefined}
+                      >
+                        {label?.[locale]}
+                      </Link>
+                    ) : (
+                      <span
+                        className={linkClassName}
+                        style={{ color: 'var(--footer-link-color, var(--footer-foreground))' }}
+                      >
+                        {label?.[locale]}
+                      </span>
+                    )}
                   </MotionHighlightItem>
                 </MenuItemMotion>
               ))}
