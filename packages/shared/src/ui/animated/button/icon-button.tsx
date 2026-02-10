@@ -116,7 +116,7 @@ function IconButton({
                   scale: [0, 1, 0],
                   opacity: [0, 1, 0],
                 }}
-                className="absolute h-1 w-1 rounded-full bg-[var(--icon-button-color)]"
+                className="absolute size-1 rounded-full bg-[var(--icon-button-color)]"
                 initial={{ x: '50%', y: '50%', scale: 0, opacity: 0 }}
                 key={id}
                 transition={{ duration: 0.8, delay: i * 0.05, ease: 'easeOut' }}

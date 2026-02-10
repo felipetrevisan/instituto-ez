@@ -109,13 +109,49 @@ const buttonVariants = cva(
       {
         variant: 'outline',
         theme: 'background',
-        className: 'bg-transparent text-foreground outline-foreground hover:bg-background/90',
+        className:
+          'border-foreground bg-transparent text-foreground hover:bg-foreground hover:text-background',
+      },
+      {
+        variant: 'outline',
+        theme: 'default',
+        className:
+          'border-primary bg-transparent text-primary hover:bg-primary hover:text-primary-foreground',
+      },
+      {
+        variant: 'outline',
+        theme: 'secondary',
+        className:
+          'border-secondary bg-transparent text-secondary hover:bg-secondary hover:text-secondary-foreground',
+      },
+      {
+        variant: 'outline',
+        theme: 'tertiary',
+        className:
+          'border-tertiary bg-transparent text-tertiary hover:bg-tertiary hover:text-tertiary-foreground',
+      },
+      {
+        variant: 'outline',
+        theme: 'coral',
+        className:
+          'border-coral bg-transparent text-coral hover:bg-coral hover:text-coral-foreground',
+      },
+      {
+        variant: 'outline',
+        theme: 'cyan',
+        className: 'border-cyan bg-transparent text-cyan hover:bg-cyan hover:text-cyan-foreground',
+      },
+      {
+        variant: 'outline',
+        theme: 'navy',
+        className: 'border-navy bg-transparent text-navy hover:bg-navy hover:text-navy-foreground',
       },
 
       {
         variant: 'outline',
         theme: 'accent',
-        className: 'bg-transparent text-accent hover:bg-accent/80 hover:text-accent-foreground',
+        className:
+          'border-accent bg-transparent text-accent hover:bg-accent hover:text-accent-foreground',
       },
 
       // Marca específica

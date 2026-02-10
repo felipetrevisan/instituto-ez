@@ -1,0 +1,147 @@
+[data-theme="masterclass"] {
+  --background: oklch(0.128 0.007 261.3);
+  --foreground: oklch(0.968 0.008 91.5);
+  --card: oklch(0.164 0.012 264.2);
+  --card-foreground: oklch(0.968 0.008 91.5);
+  --popover: oklch(0.164 0.012 264.2);
+  --popover-foreground: oklch(0.968 0.008 91.5);
+  --primary: oklch(0.801 0.154 82.9);
+  --primary-foreground: oklch(0.153 0.010 264.2);
+  --secondary: oklch(0.228 0.017 264.2);
+  --secondary-foreground: oklch(0.935 0.016 91.6);
+  --muted: oklch(0.261 0.015 264.3);
+  --muted-foreground: oklch(0.627 0.025 264.4);
+  --accent: oklch(0.801 0.154 82.9);
+  --accent-foreground: oklch(0.153 0.010 264.2);
+  --destructive: oklch(0.636 0.208 25.4);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.261 0.015 264.3);
+  --input: oklch(0.261 0.015 264.3);
+  --ring: oklch(0.801 0.154 82.9);
+  --radius: 0.75rem;
+  --gold: oklch(0.801 0.154 82.9);
+  --gold-light: oklch(0.833 0.128 86.1);
+  --gold-dark: oklch(0.673 0.137 79.9);
+  --gold-foreground: oklch(0.153 0.010 264.2);
+  --gold-light-foreground: oklch(0.153 0.010 264.2);
+  --gold-dark-foreground: oklch(0.153 0.010 264.2);
+  --navy: oklch(0.181 0.024 263.7);
+  --navy-light: oklch(0.254 0.031 263.8);
+  --navy-dark: oklch(0.136 0.017 259.6);
+  --navy-foreground: oklch(0.98 0 0);
+  --navy-light-foreground: oklch(0.98 0 0);
+  --navy-dark-foreground: oklch(0.98 0 0);
+  --section-dark: oklch(0.112 0.01 261.1);
+  --vivid-amber: oklch(0.82 0.17 84.5);
+  --vivid-coral: oklch(0.72 0.19 32.5);
+  --vivid-cyan: oklch(0.78 0.16 196.2);
+  --vivid-emerald: oklch(0.72 0.18 160.5);
+  --vivid-violet: oklch(0.66 0.2 289.5);
+  --gray-warm: oklch(0.627 0.025 264.4);
+  --gray-light: oklch(0.261 0.015 264.3);
+  --gray-warm-foreground: oklch(0.128 0.007 261.3);
+  --gray-light-foreground: oklch(0.968 0.008 91.5);
+  --footer: oklch(0.136 0.017 259.6);
+  --footer-foreground: oklch(0.968 0.008 91.5);
+  --gradient-gold: linear-gradient(135deg, oklch(0.801 0.154 82.9) 0%, oklch(0.689 0.152 65.0) 100%);
+  --gradient-hero: linear-gradient(180deg, oklch(0.181 0.024 263.7) 0%, oklch(0.136 0.017 259.6) 100%);
+  --gradient-card: linear-gradient(180deg, oklch(0.185 0.015 264.1) 0%, oklch(0.153 0.010 264.2) 100%);
+  --gradient-text: linear-gradient(135deg, oklch(0.968 0.008 91.5) 0%, oklch(0.841 0.134 85.9) 100%);
+  --gradient-text-white: linear-gradient(135deg, oklch(1 0 0) 0%, oklch(0.968 0.008 91.5) 100%);
+  --gradient-subtle: linear-gradient(180deg, oklch(0.164 0.012 264.2) 0%, oklch(0.128 0.007 261.3) 100%);
+  --shadow-gold: 0 0 40px oklch(0.801 0.154 82.9 / 0.2);
+  --shadow-card: 0 25px 50px -12px oklch(0 0 0 / 0.5);
+  --shadow-button: 0 10px 30px -5px oklch(0.801 0.154 82.9 / 0.4);
+}
+
+.dark [data-theme="masterclass"] {
+  --background: oklch(0.128 0.007 261.3);
+  --foreground: oklch(0.968 0.008 91.5);
+  --card: oklch(0.164 0.012 264.2);
+  --card-foreground: oklch(0.968 0.008 91.5);
+  --popover: oklch(0.164 0.012 264.2);
+  --popover-foreground: oklch(0.968 0.008 91.5);
+  --primary: oklch(0.801 0.154 82.9);
+  --primary-foreground: oklch(0.153 0.010 264.2);
+  --secondary: oklch(0.228 0.017 264.2);
+  --secondary-foreground: oklch(0.935 0.016 91.6);
+  --muted: oklch(0.261 0.015 264.3);
+  --muted-foreground: oklch(0.627 0.025 264.4);
+  --accent: oklch(0.801 0.154 82.9);
+  --accent-foreground: oklch(0.153 0.010 264.2);
+  --destructive: oklch(0.636 0.208 25.4);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.261 0.015 264.3);
+  --input: oklch(0.261 0.015 264.3);
+  --ring: oklch(0.801 0.154 82.9);
+  --radius: 0.75rem;
+  --gold: oklch(0.801 0.154 82.9);
+  --gold-light: oklch(0.833 0.128 86.1);
+  --gold-dark: oklch(0.673 0.137 79.9);
+  --gold-foreground: oklch(0.153 0.010 264.2);
+  --gold-light-foreground: oklch(0.153 0.010 264.2);
+  --gold-dark-foreground: oklch(0.153 0.010 264.2);
+  --navy: oklch(0.181 0.024 263.7);
+  --navy-light: oklch(0.254 0.031 263.8);
+  --navy-dark: oklch(0.136 0.017 259.6);
+  --navy-foreground: oklch(0.98 0 0);
+  --navy-light-foreground: oklch(0.98 0 0);
+  --navy-dark-foreground: oklch(0.98 0 0);
+  --section-dark: oklch(0.112 0.01 261.1);
+  --vivid-amber: oklch(0.82 0.17 84.5);
+  --vivid-coral: oklch(0.72 0.19 32.5);
+  --vivid-cyan: oklch(0.78 0.16 196.2);
+  --vivid-emerald: oklch(0.72 0.18 160.5);
+  --vivid-violet: oklch(0.66 0.2 289.5);
+  --gray-warm: oklch(0.627 0.025 264.4);
+  --gray-light: oklch(0.261 0.015 264.3);
+  --gray-warm-foreground: oklch(0.128 0.007 261.3);
+  --gray-light-foreground: oklch(0.968 0.008 91.5);
+  --footer: oklch(0.136 0.017 259.6);
+  --footer-foreground: oklch(0.968 0.008 91.5);
+  --gradient-gold: linear-gradient(135deg, oklch(0.801 0.154 82.9) 0%, oklch(0.689 0.152 65.0) 100%);
+  --gradient-hero: linear-gradient(180deg, oklch(0.181 0.024 263.7) 0%, oklch(0.136 0.017 259.6) 100%);
+  --gradient-card: linear-gradient(180deg, oklch(0.185 0.015 264.1) 0%, oklch(0.153 0.010 264.2) 100%);
+  --gradient-text: linear-gradient(135deg, oklch(0.968 0.008 91.5) 0%, oklch(0.841 0.134 85.9) 100%);
+  --gradient-text-white: linear-gradient(135deg, oklch(1 0 0) 0%, oklch(0.968 0.008 91.5) 100%);
+  --gradient-subtle: linear-gradient(180deg, oklch(0.164 0.012 264.2) 0%, oklch(0.128 0.007 261.3) 100%);
+  --shadow-gold: 0 0 40px oklch(0.801 0.154 82.9 / 0.2);
+  --shadow-card: 0 25px 50px -12px oklch(0 0 0 / 0.5);
+  --shadow-button: 0 10px 30px -5px oklch(0.801 0.154 82.9 / 0.4);
+}
+
+@layer utilities {
+  [data-theme="masterclass"] .bg-gradient-gold {
+    background-image: var(--gradient-gold);
+  }
+
+  [data-theme="masterclass"] .bg-gradient-card {
+    background-image: var(--gradient-card);
+  }
+
+  [data-theme="masterclass"] .text-gradient {
+    background-image: var(--gradient-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  [data-theme="masterclass"] .text-gradient-white {
+    background-image: var(--gradient-text-white);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  [data-theme="masterclass"] .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  [data-theme="masterclass"] .shadow-button {
+    box-shadow: var(--shadow-button);
+  }
+
+  [data-theme="masterclass"] .shadow-gold {
+    box-shadow: var(--shadow-gold);
+  }
+}

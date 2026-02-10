@@ -54,12 +54,11 @@ function NavigationMenuItem({
 }
 
 const navigationMenuTriggerStyle = cva(
-  'group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 font-medium text-3xl outline-none transition-[color,box-shadow] focus:bg-primary focus:text-primary focus-visible:outline-1 focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 lg:text-sm!',
+  'group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 font-medium text-3xl outline-none transition-[color,box-shadow] focus:text-primary focus-visible:outline-1 focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 lg:text-sm!',
   {
     variants: {
       theme: {
-        default:
-          'hover:bg-primary hover:text-primary data-[state=open]:bg-primary/50 data-[state=open]:text-primary data-[state=open]:focus:bg-primary data-[state=open]:hover:bg-primary',
+        default: 'hover:text-primary data-[state=open]:text-primary',
         landing: 'data-[state=open]:text-accent',
       },
     },
@@ -171,7 +170,7 @@ function NavigationMenuIndicator({
       data-slot="navigation-menu-indicator"
       {...props}
     >
-      <div className="relative top-[60%] h-2 w-2 rotate-45 rounded-tl-sm bg-border shadow-md" />
+      <div className="relative top-[60%] size-2 rotate-45 rounded-tl-sm bg-border shadow-md" />
     </NavigationMenuPrimitive.Indicator>
   )
 }

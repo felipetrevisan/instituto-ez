@@ -61,6 +61,7 @@ export function TestimonialAnimated({
           </ScrollArea>
           <div className="author font-bold" data-slot="card-content-action">
             {item.author?.name}
+            {item.author?.role && <span className="author-role">{item.author.role}</span>}
           </div>
         </div>
       </CardContent>

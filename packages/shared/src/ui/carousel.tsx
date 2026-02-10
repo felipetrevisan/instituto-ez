@@ -238,7 +238,7 @@ function CarouselPrevious({
     <Button
       aria-label="Previous slide"
       className={cn(
-        'absolute h-10 w-10 rounded-full p-2',
+        'absolute size-10 rounded-full p-2',
         orientation === 'horizontal'
           ? '-left-12 -translate-y-1/2 top-1/2'
           : '-top-12 -translate-x-1/2 left-1/2 rotate-90',
@@ -267,7 +267,7 @@ function CarouselNext({
     <Button
       aria-label="Next slide"
       className={cn(
-        'absolute h-10 w-10 rounded-full p-2',
+        'absolute size-10 rounded-full p-2',
         orientation === 'horizontal'
           ? '-right-12 -translate-y-1/2 top-1/2'
           : '-bottom-12 -translate-x-1/2 left-1/2 rotate-90',

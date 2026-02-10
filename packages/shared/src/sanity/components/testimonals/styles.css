@@ -60,3 +60,10 @@
     calc(101% - 0.5lh) 100%;
   background-repeat: no-repeat;
 }
+
+.author-role {
+  display: block;
+  font-size: 0.75em;
+  font-weight: 500;
+  opacity: 0.8;
+}

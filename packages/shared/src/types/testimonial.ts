@@ -5,7 +5,10 @@ export type Testimonial = {
   id: string
   author: {
     name: string
+    role?: string
   }
+  rating?: number
+  showStars?: boolean
   testimonial: PortableTextBlock[]
   category: string[]
   ebook_page?: SanityReference

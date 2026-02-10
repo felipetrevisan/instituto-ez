@@ -203,7 +203,7 @@ function BadgeStarButton({
                     scale: [0, 1, 0],
                     opacity: [0, 1, 0],
                   }}
-                  className="absolute h-1 w-1 rounded-full bg-yellow-500"
+                  className="absolute size-1 rounded-full bg-yellow-500"
                   initial={{ x: '50%', y: '50%', scale: 0, opacity: 0 }}
                   // biome-ignore lint/suspicious/noArrayIndexKey: using index as key is acceptable here due to static segment order
                   key={i}

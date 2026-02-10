@@ -17,6 +17,7 @@ export type Button = {
     size: Size
   }
   externalUrl?: string
+  scrollTo?: string
 }
 
 export enum LinkType {

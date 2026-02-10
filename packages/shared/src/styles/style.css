@@ -66,6 +66,12 @@
   --color-cyan-foreground: var(--cyan-foreground);
   --color-coral: var(--coral);
   --color-coral-foreground: var(--coral-foreground);
+  --color-section-dark: var(--section-dark);
+  --color-vivid-amber: var(--vivid-amber);
+  --color-vivid-coral: var(--vivid-coral);
+  --color-vivid-cyan: var(--vivid-cyan);
+  --color-vivid-emerald: var(--vivid-emerald);
+  --color-vivid-violet: var(--vivid-violet);
   --color-purple: var(--purple);
   --color-purple-foreground: var(--purple-foreground);
   --color-gray-warm: var(--gray-warm);
