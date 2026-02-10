@@ -1,10 +1,10 @@
-import { PackageIcon } from '@sanity/icons'
+import { SparklesIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
   name: 'digital-products.cta',
   title: 'CTA — Digital Products',
-  icon: PackageIcon,
+  icon: SparklesIcon,
   type: 'object',
   hidden: ({ document }) => document?.key !== 'digital-products',
   fields: [

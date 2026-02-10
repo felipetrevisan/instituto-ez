@@ -9,31 +9,51 @@ export default defineType({
   icon: MenuIcon,
   fields: [
     defineField({
+      name: 'has_submenu',
+      title: 'Has Submenu?',
+      type: 'boolean',
+      initialValue: false,
+    }),
+    defineField({
       name: 'navigation_label',
       title: 'Navigation Label',
       type: 'localizedString',
       validation: (Rule) => Rule.required().warning(),
     }),
     defineField({
+      name: 'submenu_items',
+      title: 'Submenu Items',
+      type: 'array',
+      of: [{ type: 'navigationItem' }],
+      hidden: ({ parent }) => !parent?.has_submenu,
+    }),
+    defineField({
       name: 'navigation_item_url',
       title: 'Navigation Item',
       type: 'link',
-      hidden: ({ parent }) => parent?.has_submenu,
+      hidden: ({ parent }) =>
+        !!parent?.has_submenu &&
+        Array.isArray(parent?.submenu_items) &&
+        parent.submenu_items.length > 0,
       validation: (Rule) =>
-        Rule.custom((field, context) =>
-          !context?.document?.navigation_submenu_items && field === undefined
-            ? 'This field must not be empty.'
-            : true,
-        ).warning(),
+        Rule.custom((field, context) => {
+          const hasSubmenuItems =
+            Array.isArray(context?.parent?.submenu_items) && context.parent.submenu_items.length > 0
+          if (!hasSubmenuItems && field === undefined) {
+            return 'This field must not be empty.'
+          }
+          return true
+        }).warning(),
     }),
   ],
   preview: {
     select: {
-      title: `navigation_label.${i18n.base}`,
+      title: `navigation_label`,
     },
     prepare({ title }) {
+      const localized = Array.isArray(title) ? title.find((item) => item?.lang === i18n.base) : null
       return {
-        title,
+        title: localized?.value || title || 'Sem título',
       }
     },
   },

@@ -53,14 +53,6 @@ const structure = (S: StructureBuilder, context: ConfigContext) =>
                 S,
                 context,
               }),
-              S.listItem()
-                .title('Configurações')
-                .child(
-                  S.document()
-                    .schemaType('landing-page-settings')
-                    .documentId('landing-page-settings')
-                    .title('Configurações'),
-                ),
             ]),
         ),
 
@@ -77,14 +69,6 @@ const structure = (S: StructureBuilder, context: ConfigContext) =>
                 S,
                 context,
               }),
-              S.listItem()
-                .title('Configurações')
-                .child(
-                  S.document()
-                    .schemaType('masterclass-landing-page-settings')
-                    .documentId('masterclass-landing-page-settings')
-                    .title('Configurações'),
-                ),
             ]),
         ),
 
@@ -113,15 +97,11 @@ const structure = (S: StructureBuilder, context: ConfigContext) =>
             'navigation',
             'page',
             'landingPage',
-            'landing-page-settings',
-            'masterclass-landing-page-settings',
             'masterclass',
             'ebook',
             'ebooks.category',
             'testimonial',
             'section',
-            'formGeneralSettings',
-            'landing-page-section',
             'logo',
           ].includes(listItem.getId() || ''),
       ),

@@ -1,11 +1,11 @@
 import { i18n } from '@ez/studio/schemas/objects/locale/locales'
-import { PackageIcon } from '@sanity/icons'
+import { MarkerIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
   name: 'mathematizer.mathematizer.items',
   title: 'Mathematizer — Items - Mathematizer',
-  icon: PackageIcon,
+  icon: MarkerIcon,
   type: 'object',
   fields: [
     defineField({ name: 'title', type: 'localizedString' }),

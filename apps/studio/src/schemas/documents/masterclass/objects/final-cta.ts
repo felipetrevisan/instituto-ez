@@ -1,10 +1,10 @@
-import { PackageIcon } from '@sanity/icons'
+import { SparklesIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
   name: 'masterclass.finalCta',
   title: 'Final CTA',
-  icon: PackageIcon,
+  icon: SparklesIcon,
   type: 'object',
   fields: [
     defineField({ name: 'settings', title: 'Settings', type: 'masterclass.sectionSettings' }),

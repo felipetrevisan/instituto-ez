@@ -1,4 +1,4 @@
-import { PackageIcon } from '@sanity/icons'
+import { UserIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 import { i18n } from '../../../objects/locale/locales'
 
@@ -6,7 +6,7 @@ export default defineType({
   name: 'webnario.forwho',
   title: 'For Who — Webnario',
   type: 'object',
-  icon: PackageIcon,
+  icon: UserIcon,
   fields: [
     defineField({
       name: 'title',
@@ -56,11 +56,12 @@ export default defineType({
   ],
   preview: {
     select: {
-      title: `title.${i18n.base}`,
+      title: 'title',
     },
     prepare({ title }) {
+      const localized = Array.isArray(title) ? title.find((item) => item?.lang === i18n.base) : null
       return {
-        title,
+        title: localized?.value || title || 'Sem título',
       }
     },
   },

@@ -29,6 +29,7 @@ export default defineType({
           { title: 'Services', value: 'services' },
           { title: 'Immersion', value: 'immersion' },
           { title: 'Digital Products', value: 'digital-products' },
+          { title: 'Masterclass', value: 'masterclass' },
         ],
         layout: 'radio',
       },
@@ -47,21 +48,6 @@ export default defineType({
         source: 'title',
         maxLength: 96,
       },
-      validation: (Rule) => Rule.required().warning('This field must not be empty.'),
-    }),
-    defineField({
-      name: 'form',
-      title: 'Form',
-      description: 'Select a form',
-      type: 'reference',
-      to: { type: 'contactForm' },
-    }),
-    defineField({
-      name: 'navigation',
-      title: 'Navigation',
-      description: 'Select a main navigation that is used in header',
-      type: 'reference',
-      to: { type: 'navigation' },
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),
     defineField({
@@ -126,8 +112,15 @@ export default defineType({
         // DIGITAL PRODUCTS
         { type: 'digital-products.hero' },
         { type: 'digital-products.ebooks' },
-        { type: 'digital-products.masterclass' },
         { type: 'digital-products.cta' },
+
+        // MASTERCLASS
+        { type: 'masterclass.hero' },
+        { type: 'masterclass.for-who' },
+        { type: 'masterclass.problem' },
+        { type: 'masterclass.expert' },
+        { type: 'masterclass.final-cta' },
+        { type: 'masterclass.catalog' },
       ],
     }),
   ],

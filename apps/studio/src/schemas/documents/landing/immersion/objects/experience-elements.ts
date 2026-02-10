@@ -1,11 +1,11 @@
 import { i18n } from '@ez/studio/schemas/objects/locale/locales'
-import { PackageIcon } from '@sanity/icons'
+import { MarkerIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
   name: 'immersion.experience.elements',
   title: 'Experience — Elements - Immersion',
-  icon: PackageIcon,
+  icon: MarkerIcon,
   type: 'object',
   fields: [
     defineField({ name: 'title', type: 'localizedString' }),
@@ -18,11 +18,12 @@ export default defineType({
   ],
   preview: {
     select: {
-      title: `title.${i18n.base}`,
+      title: 'title',
     },
     prepare({ title }) {
+      const localized = Array.isArray(title) ? title.find((item) => item?.lang === i18n.base) : null
       return {
-        title,
+        title: localized?.value || title || 'Sem título',
       }
     },
   },

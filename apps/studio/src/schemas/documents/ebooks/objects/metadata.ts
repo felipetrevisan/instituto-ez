@@ -1,4 +1,4 @@
-import { PackageIcon } from '@sanity/icons'
+import { InfoFilledIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 import { i18n } from '../../../objects/locale/locales'
 
@@ -6,7 +6,7 @@ export default defineType({
   name: 'metadata',
   title: 'Metadata',
   type: 'object',
-  icon: PackageIcon,
+  icon: InfoFilledIcon,
   fields: [
     defineField({
       name: 'title',

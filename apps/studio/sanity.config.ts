@@ -1,7 +1,6 @@
 import { dataset, projectId } from '@ez/studio/config/env'
 import { schema } from '@ez/studio/schemas'
 import structure from '@ez/studio/structures'
-import { contactFormPlugin } from '@multidots/sanity-plugin-contact-form'
 //import { theme } from 'https://themer.sanity.build/api/hues?default=49197f;600&primary=3f156e;600&transparent=4b395f;600&positive=43d675;300&caution=fbd024;200&lightest=fcfcfd&darkest=110d16';
 import { colorInput } from '@sanity/color-input'
 import { languageFilter } from '@sanity/language-filter'
@@ -49,7 +48,6 @@ export default defineConfig({
     unsplashImageAsset(),
     lucideIconPicker(),
     colorInput(),
-    contactFormPlugin(),
     languageFilter({
       supportedLanguages: [
         { id: 'en', title: 'English' },

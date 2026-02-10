@@ -9,7 +9,6 @@ import downloadObject from '@ez/studio/schemas/documents/ebooks/objects/download
 import metadataObject from '@ez/studio/schemas/documents/ebooks/objects/metadata'
 import overviewObject from '@ez/studio/schemas/documents/ebooks/objects/overview'
 import priceObject from '@ez/studio/schemas/documents/ebooks/objects/price'
-import sectionObject from '@ez/studio/schemas/documents/ebooks/objects/section'
 import themeObject from '@ez/studio/schemas/documents/ebooks/objects/theme/theme'
 
 export {
@@ -24,6 +23,5 @@ export {
   metadataObject,
   overviewObject,
   priceObject,
-  sectionObject,
   themeObject,
 }

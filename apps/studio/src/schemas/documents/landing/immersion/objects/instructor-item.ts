@@ -1,10 +1,10 @@
-import { PackageIcon } from '@sanity/icons'
+import { UserIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
   name: 'immersion.instructor.items',
   title: 'Instructor — Items - Immersion',
-  icon: PackageIcon,
+  icon: UserIcon,
   type: 'object',
   fields: [
     defineField({ name: 'name', type: 'string' }),

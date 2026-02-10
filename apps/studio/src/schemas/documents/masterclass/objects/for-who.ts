@@ -1,10 +1,10 @@
-import { PackageIcon } from '@sanity/icons'
+import { UserIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
   name: 'masterclass.forWho',
   title: 'For Who',
-  icon: PackageIcon,
+  icon: UserIcon,
   type: 'object',
   fields: [
     defineField({ name: 'settings', title: 'Settings', type: 'masterclass.sectionSettings' }),

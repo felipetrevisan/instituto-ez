@@ -1,10 +1,10 @@
-import { PackageIcon } from '@sanity/icons'
+import { BlockContentIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
   name: 'mentoring.intro',
   title: 'Intro — Mentoring',
-  icon: PackageIcon,
+  icon: BlockContentIcon,
   type: 'object',
   hidden: ({ document }) => document?.key !== 'mentoring',
   fields: [

@@ -1,10 +1,10 @@
-import { PackageIcon } from '@sanity/icons'
+import { WarningOutlineIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
   name: 'mathematizer.whycompanyneed',
   title: 'Why Company Need — Mathematizer',
-  icon: PackageIcon,
+  icon: WarningOutlineIcon,
   type: 'object',
   hidden: ({ document }) => document?.key !== 'mathematizer',
   fields: [

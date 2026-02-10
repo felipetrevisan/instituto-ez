@@ -1,10 +1,10 @@
-import { PackageIcon } from '@sanity/icons'
+import { UserIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
   name: 'services.whoisitfor',
   title: 'Who is it for — services',
-  icon: PackageIcon,
+  icon: UserIcon,
   type: 'object',
   hidden: ({ document }) => document?.key !== 'services',
   fields: [

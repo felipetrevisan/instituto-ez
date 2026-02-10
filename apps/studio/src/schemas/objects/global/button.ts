@@ -110,11 +110,28 @@ export default defineType({
         list: [
           { title: 'Page', value: 'INTERNAL' },
           { title: 'External Link', value: 'EXTERNAL' },
+          { title: 'Scroll to Section', value: 'HASH' },
           { title: 'Dialog', value: 'DIALOG' },
         ],
         layout: 'radio',
       },
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
+    }),
+    defineField({
+      name: 'button_scroll_to',
+      title: 'Scroll Target (Section ID)',
+      description: 'ID da seção para scroll (ex: "faq"). Não inclua #.',
+      type: 'string',
+      group: 'link',
+      hidden: ({ parent }) => parent?.button_link_type !== 'HASH',
+      validation: (Rule) =>
+        Rule.custom((value, context) => {
+          const parent = context.parent as { button_link_type?: string }
+          if (parent?.button_link_type === 'HASH' && !value) {
+            return 'Informe o ID da seção para scroll.'
+          }
+          return true
+        }).warning(),
     }),
     defineField({
       name: 'dialog_type',

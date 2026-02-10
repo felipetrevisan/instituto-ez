@@ -24,10 +24,11 @@ export default defineType({
   ],
   preview: {
     select: {
-      title: `title.${i18n.base}`,
+      title: 'title',
     },
     prepare({ title }) {
-      return { title }
+      const localized = Array.isArray(title) ? title.find((item) => item?.lang === i18n.base) : null
+      return { title: localized?.value || title || 'Sem título' }
     },
   },
 })

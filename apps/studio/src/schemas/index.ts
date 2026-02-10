@@ -14,8 +14,6 @@ import {
   metadataObject,
   overviewObject,
   priceObject,
-  sectionObject as sectionEbookObject,
-  settingsDocument as settingsEbookDocument,
   themeObject,
 } from '@ez/studio/schemas/documents/ebooks'
 import {
@@ -29,7 +27,6 @@ import {
   ctaObject as ctaEbooksObject,
   ebooksObject,
   heroObject as heroEbooksObject,
-  masterclassObject,
 } from '@ez/studio/schemas/documents/landing/digital-products'
 import {
   consultingItemObject,
@@ -73,6 +70,14 @@ import {
 } from '@ez/studio/schemas/documents/landing/immersion'
 import landingPageDocument from '@ez/studio/schemas/documents/landing/landing'
 import {
+  catalogObject as catalogMasterclassObject,
+  expertObject as expertMasterclassObject,
+  finalCtaObject as finalCtaMasterclassObject,
+  forWhoObject as forWhoMasterclassObject,
+  heroObject as heroMasterclassObject,
+  problemObject as problemMasterclassObject,
+} from '@ez/studio/schemas/documents/landing/masterclass'
+import {
   benefitsItemObject as benefitsItemMathematizerObject,
   benefitsObject as benefitsMathematizerObject,
   finalCtaObject as finalCtaMathematizerObject,
@@ -101,6 +106,13 @@ import {
   whoIsItForObject,
 } from '@ez/studio/schemas/documents/landing/services'
 import { masterclassDocument } from '@ez/studio/schemas/documents/masterclass'
+import masterclassDetailAuthorObject from '@ez/studio/schemas/documents/masterclass/objects/detail-author'
+import masterclassDetailFinalObject from '@ez/studio/schemas/documents/masterclass/objects/detail-final'
+import masterclassDetailHeroObject from '@ez/studio/schemas/documents/masterclass/objects/detail-hero'
+import masterclassDetailOfferObject from '@ez/studio/schemas/documents/masterclass/objects/detail-offer'
+import masterclassDetailPillarsObject from '@ez/studio/schemas/documents/masterclass/objects/detail-pillars'
+import masterclassDetailTestimonialsObject from '@ez/studio/schemas/documents/masterclass/objects/detail-testimonials'
+import masterclassDetailWhyObject from '@ez/studio/schemas/documents/masterclass/objects/detail-why'
 import {
   linkObject,
   navigationDocument,
@@ -111,15 +123,11 @@ import {
   accordionContentLandingPageObject,
   accordionContentObject,
   accordionObject,
+  portableTextObject,
   quoteObject,
   richTextObject,
 } from '@ez/studio/schemas/objects/editor'
-import {
-  buttonObject,
-  logoObject,
-  mediaObject,
-  socialNetworksItemObject,
-} from '@ez/studio/schemas/objects/global'
+import { buttonObject, logoObject, mediaObject } from '@ez/studio/schemas/objects/global'
 import {
   localeImageValueObject,
   localePortableTextValueObject,
@@ -218,6 +226,14 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     nextClassObject,
     nextClassItemObject,
 
+    // Masterclass Landing
+    catalogMasterclassObject,
+    expertMasterclassObject,
+    finalCtaMasterclassObject,
+    forWhoMasterclassObject,
+    heroMasterclassObject,
+    problemMasterclassObject,
+
     // Home
     servicesHomeObject,
     servicesItemHomeObject,
@@ -232,11 +248,17 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 
     // Digital Products
     ebooksObject,
-    masterclassObject,
     ctaEbooksObject,
     heroEbooksObject,
 
     // Masterclass
+    masterclassDetailAuthorObject,
+    masterclassDetailFinalObject,
+    masterclassDetailHeroObject,
+    masterclassDetailOfferObject,
+    masterclassDetailPillarsObject,
+    masterclassDetailTestimonialsObject,
+    masterclassDetailWhyObject,
     masterclassDocument,
 
     // Site
@@ -246,7 +268,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     // Navigation
     navigationDocument,
     navigationItemObject,
-    socialNetworksItemObject,
     linkObject,
 
     // Global
@@ -267,17 +288,16 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     overviewObject,
     contentObject,
     themeObject,
-    sectionEbookObject,
     catalogDocument,
     categoryDocument,
     ebookPriceDocument,
     ebookThemeDocument,
-    settingsEbookDocument,
 
     // Editor Widgets
     accordionObject,
     accordionContentObject,
     accordionContentLandingPageObject,
+    portableTextObject,
     richTextObject,
     quoteObject,
   ],

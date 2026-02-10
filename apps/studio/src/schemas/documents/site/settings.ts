@@ -111,34 +111,15 @@ export default defineType({
           !context?.document?.footer_nav ? 'Footer navigation must be configured.' : true,
         ).warning(),
     }),
-    defineField({
-      name: 'social_nav',
-      title: 'Social Navigation',
-      description: 'Select a social network navigation',
-      type: 'reference',
-      group: ['navigation'],
-      to: { type: 'navigation' },
-      validation: (Rule) =>
-        Rule.custom((_field, context) =>
-          !context?.document?.social_nav ? 'Social networks links must be configured' : true,
-        ).warning(),
-    }),
-    defineField({
-      name: 'contactForm',
-      title: 'Contact Form',
-      group: ['contact'],
-      type: 'reference',
-      to: [{ type: 'contactForm' }],
-      description: 'Select a contact form to display.',
-    }),
   ],
   preview: {
     select: {
-      title: `title.${i18n.base}`,
+      title: 'title',
     },
     prepare({ title }) {
+      const localized = Array.isArray(title) ? title.find((item) => item?.lang === i18n.base) : null
       return {
-        title,
+        title: localized?.value || title || 'Sem título',
       }
     },
   },

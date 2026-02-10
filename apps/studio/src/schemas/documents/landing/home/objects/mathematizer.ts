@@ -1,10 +1,10 @@
-import { PackageIcon } from '@sanity/icons'
+import { BlockContentIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
   name: 'home.mathematizer',
   title: 'Mathematizer — Home',
-  icon: PackageIcon,
+  icon: BlockContentIcon,
   type: 'object',
   hidden: ({ document }) => document?.key !== 'home',
   fields: [

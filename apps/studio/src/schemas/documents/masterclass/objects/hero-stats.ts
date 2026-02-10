@@ -1,11 +1,11 @@
 import { i18n } from '@ez/studio/schemas/objects/locale/locales'
-import { PackageIcon } from '@sanity/icons'
+import { BarChartIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
   name: 'masterclass.hero.stats',
   title: 'Hero — Stats - Masterclass',
-  icon: PackageIcon,
+  icon: BarChartIcon,
   type: 'object',
   fields: [
     defineField({ name: 'value', type: 'localizedString' }),
@@ -18,11 +18,13 @@ export default defineType({
   ],
   preview: {
     select: {
-      title: `title.${i18n.base}`,
+      title: 'title',
     },
     prepare({ title }) {
       return {
-        title,
+        title: Array.isArray(title)
+          ? title.find((item) => item?.lang === i18n.base)?.value || 'Sem título'
+          : title || 'Sem título',
       }
     },
   },

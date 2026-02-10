@@ -1,10 +1,10 @@
-import { PackageIcon } from '@sanity/icons'
+import { BarChartIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
   name: 'forbusiness.diagnostic',
   title: 'Diagnostic — For Business',
-  icon: PackageIcon,
+  icon: BarChartIcon,
   type: 'object',
   hidden: ({ document }) => document?.key !== 'for-business',
   fields: [

@@ -1,10 +1,10 @@
-import { PackageIcon } from '@sanity/icons'
+import { EyeOpenIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
   name: 'mentoring.expectedresults',
   title: 'Expected Results — Mentoring',
-  icon: PackageIcon,
+  icon: EyeOpenIcon,
   type: 'object',
   hidden: ({ document }) => document?.key !== 'mentoring',
   fields: [

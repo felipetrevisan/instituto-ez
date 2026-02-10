@@ -1,10 +1,10 @@
-import { PackageIcon } from '@sanity/icons'
+import { EyeOpenIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
   name: 'immersion.main-target',
   title: 'Main Target — Immersion',
-  icon: PackageIcon,
+  icon: EyeOpenIcon,
   type: 'object',
   hidden: ({ document }) => document?.key !== 'immersion',
   fields: [

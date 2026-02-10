@@ -36,13 +36,6 @@ export default defineType({
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),
     defineField({
-      name: 'templateId',
-      title: 'Template ID',
-      type: 'string',
-      group: 'content',
-      validation: (Rule) => Rule.required().warning('This field must not be empty.'),
-    }),
-    defineField({
       name: 'enabled',
       title: 'Enabled?',
       type: 'boolean',
@@ -50,50 +43,52 @@ export default defineType({
       group: 'settings',
     }),
     defineField({
-      name: 'status',
-      title: 'Status',
-      type: 'string',
-      initialValue: 'draft',
-      group: 'settings',
-      options: {
-        list: [
-          { title: 'Draft', value: 'draft' },
-          { title: 'Upcoming', value: 'upcoming' },
-          { title: 'Live', value: 'live' },
-          { title: 'Ended', value: 'ended' },
-        ],
-        layout: 'dropdown',
-      },
-    }),
-    defineField({
-      name: 'startAt',
-      title: 'Start Date',
-      type: 'datetime',
-      group: 'settings',
-    }),
-    defineField({
-      name: 'duration',
-      title: 'Duration',
-      type: 'string',
-      group: 'settings',
-    }),
-    defineField({
-      name: 'timezone',
-      title: 'Timezone',
-      type: 'string',
-      group: 'settings',
-    }),
-    defineField({
-      name: 'location',
-      title: 'Location / Link',
-      type: 'string',
-      group: 'settings',
-    }),
-    defineField({
       name: 'seo',
       title: 'SEO',
       type: 'seo',
       group: 'seo',
+    }),
+    defineField({
+      name: 'hero',
+      title: 'Hero',
+      type: 'masterclassDetailHero',
+      group: 'content',
+    }),
+    defineField({
+      name: 'pillars',
+      title: 'Pillars',
+      type: 'masterclassDetailPillars',
+      group: 'content',
+    }),
+    defineField({
+      name: 'why',
+      title: 'Why',
+      type: 'masterclassDetailWhy',
+      group: 'content',
+    }),
+    defineField({
+      name: 'author',
+      title: 'Author',
+      type: 'masterclassDetailAuthor',
+      group: 'content',
+    }),
+    defineField({
+      name: 'offer',
+      title: 'Offer',
+      type: 'masterclassDetailOffer',
+      group: 'content',
+    }),
+    defineField({
+      name: 'final',
+      title: 'Final',
+      type: 'masterclassDetailFinal',
+      group: 'content',
+    }),
+    defineField({
+      name: 'testimonials',
+      title: 'Testimonials',
+      type: 'masterclassDetailTestimonials',
+      group: 'content',
     }),
     defineField({
       name: 'card',
@@ -144,12 +139,13 @@ export default defineType({
   ],
   preview: {
     select: {
-      title: `title.${i18n.base}`,
+      title: 'title',
       media: 'card.image',
     },
     prepare({ title, media }) {
+      const localized = Array.isArray(title) ? title.find((item) => item?.lang === i18n.base) : null
       return {
-        title,
+        title: localized?.value || title || 'Sem título',
         media,
       }
     },

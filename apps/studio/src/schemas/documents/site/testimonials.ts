@@ -18,6 +18,25 @@ export default defineType({
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),
     defineField({
+      name: 'author_role',
+      title: 'Author Role / Location',
+      type: 'string',
+      description: 'Ex: Empreendedora, São Paulo',
+    }),
+    defineField({
+      name: 'show_stars',
+      title: 'Show Stars?',
+      type: 'boolean',
+      initialValue: true,
+    }),
+    defineField({
+      name: 'rating',
+      title: 'Rating (1-5)',
+      type: 'number',
+      hidden: ({ parent }) => parent?.show_stars === false,
+      validation: (Rule) => Rule.min(1).max(5),
+    }),
+    defineField({
       name: 'testimonial',
       title: 'Testimonial',
       type: 'array',
@@ -42,6 +61,7 @@ export default defineType({
               { title: 'Ebooks', value: 'ebook' },
               { title: 'Workshops', value: 'workshop' },
               { title: 'Mentoria Avançada', value: 'advanced-mentory' },
+              { title: 'Masterclass', value: 'masterclass' },
             ],
             layout: 'dropdown',
           },

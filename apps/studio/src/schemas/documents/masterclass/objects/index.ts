@@ -1,5 +1,12 @@
 import contentObject from '@ez/studio/schemas/documents/masterclass/objects/content'
 import contentItemObject from '@ez/studio/schemas/documents/masterclass/objects/content-item'
+import detailAuthorObject from '@ez/studio/schemas/documents/masterclass/objects/detail-author'
+import detailFinalObject from '@ez/studio/schemas/documents/masterclass/objects/detail-final'
+import detailHeroObject from '@ez/studio/schemas/documents/masterclass/objects/detail-hero'
+import detailOfferObject from '@ez/studio/schemas/documents/masterclass/objects/detail-offer'
+import detailPillarsObject from '@ez/studio/schemas/documents/masterclass/objects/detail-pillars'
+import detailTestimonialsObject from '@ez/studio/schemas/documents/masterclass/objects/detail-testimonials'
+import detailWhyObject from '@ez/studio/schemas/documents/masterclass/objects/detail-why'
 import expertObject from '@ez/studio/schemas/documents/masterclass/objects/expert'
 import expertItemObject from '@ez/studio/schemas/documents/masterclass/objects/expert-item'
 import expertSocialObject from '@ez/studio/schemas/documents/masterclass/objects/expert-social'
@@ -18,6 +25,13 @@ import transformationItemObject from '@ez/studio/schemas/documents/masterclass/o
 export {
   contentObject,
   contentItemObject,
+  detailAuthorObject,
+  detailFinalObject,
+  detailHeroObject,
+  detailOfferObject,
+  detailPillarsObject,
+  detailTestimonialsObject,
+  detailWhyObject,
   expertObject,
   expertItemObject,
   expertSocialObject,
