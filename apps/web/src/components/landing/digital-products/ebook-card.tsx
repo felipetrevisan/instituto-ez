@@ -13,6 +13,7 @@ import { useLocale, useTranslations } from 'next-intl'
 export const EbookCard = ({ ebook, index }: { ebook: Ebook; index: number }) => {
   const locale = useLocale()
   const t = useTranslations('DigitalProducts')
+  const localizedImage = ebook.image?.[locale]
   const slug = (() => {
     const raw = ebook.slug
     if (!raw) return undefined
@@ -53,12 +54,12 @@ export const EbookCard = ({ ebook, index }: { ebook: Ebook; index: number }) => 
       </div>
 
       <div className="relative aspect-[3/4] overflow-hidden bg-white/50 dark:bg-background/50">
-        {ebook.image?.[locale].large ? (
+        {localizedImage?.large ? (
           <Image
             alt=""
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             fill
-            src={urlForImage(ebook.image?.[locale].large.asset).auto('format').quality(80).url()}
+            src={urlForImage(localizedImage.large.asset).auto('format').quality(80).url()}
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 dark:from-background dark:to-background/40">
