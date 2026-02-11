@@ -17,7 +17,7 @@ export const Intro = ({ data, locale }: { data: SectionAboutIntro; locale: strin
     <StickySection className="bg-background py-20 md:py-28" id="intro">
       <div className="container mx-auto px-6 md:px-8">
         <motion.div
-          className="mb-12 flex items-center justify-center gap-4"
+          className="mb-12 flex flex-col items-center justify-center gap-4 md:flex-row"
           initial={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}

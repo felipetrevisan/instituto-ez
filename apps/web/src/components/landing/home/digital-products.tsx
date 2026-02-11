@@ -84,7 +84,7 @@ export const DigitalProducts = ({
         </div>
       </div>
 
-      <div className="section-container relative z-10">
+      <div className="container relative z-10">
         <div className="mx-auto max-w-4xl text-center">
           {data?.heading?.[locale] && (
             <motion.h2
