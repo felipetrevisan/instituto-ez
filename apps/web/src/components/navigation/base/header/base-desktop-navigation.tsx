@@ -206,23 +206,6 @@ export function BaseDesktopNavigation({
           <NavigationMenuContent className="border-none bg-transparent p-2 shadow-none">
             <MotionHighlight className="rounded-lg bg-accent/10" hover>
               <ul className="min-w-[220px] space-y-1 p-2">
-                {url && (
-                  <MotionHighlightItem asChild key={`${id}-parent`}>
-                    <li className="relative cursor-pointer">
-                      <NavigationMenuLink asChild>
-                        <Link
-                          className={submenuLinkClassName}
-                          href={getHref(url)}
-                          onClick={(event) => handleHashClick(event, url, getHref(url))}
-                          rel={url?.isExternal ? 'noopener noreferrer' : undefined}
-                          target={url?.isExternal ? '_blank' : undefined}
-                        >
-                          {displayLabel}
-                        </Link>
-                      </NavigationMenuLink>
-                    </li>
-                  </MotionHighlightItem>
-                )}
                 {submenuItems.map((submenuItem) => (
                   <MotionHighlightItem asChild key={submenuItem.id}>
                     <li className="relative cursor-pointer">

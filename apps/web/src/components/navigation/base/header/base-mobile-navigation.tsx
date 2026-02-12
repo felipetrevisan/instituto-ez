@@ -129,18 +129,6 @@ export function BaseMobileNavigation({
                 </AccordionTrigger>
                 <AccordionContent className="pb-0">
                   <div className="flex flex-col border-primary/5 border-t">
-                    {url ? (
-                      <Link
-                        className="w-full px-6 py-2 text-center font-medium text-foreground/80 text-sm transition-colors hover:text-accent"
-                        data-active={isMenuActive(getHref(url))}
-                        href={getHref(url)}
-                        onClick={(event) => handleLinkClick(event, url, getHref(url))}
-                        rel={url?.isExternal ? 'noopener noreferrer' : undefined}
-                        target={url?.isExternal ? '_blank' : undefined}
-                      >
-                        {displayLabel}
-                      </Link>
-                    ) : null}
                     {submenuItems?.map((submenuItem) => (
                       <Link
                         className="w-full px-6 py-2 text-center text-foreground/70 text-sm transition-colors hover:text-accent"
