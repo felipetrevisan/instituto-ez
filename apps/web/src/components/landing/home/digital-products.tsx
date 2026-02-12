@@ -114,7 +114,7 @@ export const DigitalProducts = ({
 
           {data.cards?.length ? (
             <div
-              className="grid gap-8 md:grid-cols-2 animate-fade-in-up"
+              className="grid animate-fade-in-up gap-8 md:grid-cols-2"
               style={{ animationDelay: '0.15s' }}
             >
               {data.cards.map((card, index) => {
@@ -139,7 +139,7 @@ export const DigitalProducts = ({
                       ) : null}
                       <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent" />
                       {(badgeLabel || card.badgeIcon) && (
-                        <div className="absolute top-4 left-4 flex items-center gap-2 rounded-full bg-accent/90 px-3 py-1.5 text-xs font-semibold text-primary-foreground">
+                        <div className="absolute top-4 left-4 flex items-center gap-2 rounded-full bg-accent/90 px-3 py-1.5 font-semibold text-primary-foreground text-xs">
                           {card.badgeIcon && <Icon className="size-3.5" name={card.badgeIcon} />}
                           {badgeLabel}
                         </div>
@@ -147,12 +147,10 @@ export const DigitalProducts = ({
                     </div>
                     <div className="p-6 text-left">
                       {title && (
-                        <h3 className="mb-2 font-bold text-2xl text-primary-foreground">
-                          {title}
-                        </h3>
+                        <h3 className="mb-2 font-bold text-2xl text-primary-foreground">{title}</h3>
                       )}
                       {description && (
-                        <p className="mb-5 text-sm text-primary-foreground/70 leading-relaxed">
+                        <p className="mb-5 text-primary-foreground/70 text-sm leading-relaxed">
                           {description}
                         </p>
                       )}

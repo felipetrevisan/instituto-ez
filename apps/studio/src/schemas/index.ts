@@ -242,10 +242,10 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     mathematizerItemHomeObject,
     mentorShipObject,
     mentorShipItemObject,
-  developmentObject,
-  developmentItemObject,
-  digitalProductsCardObject,
-  digitalProductsObject,
+    developmentObject,
+    developmentItemObject,
+    digitalProductsCardObject,
+    digitalProductsObject,
     immersionObject,
 
     // Digital Products

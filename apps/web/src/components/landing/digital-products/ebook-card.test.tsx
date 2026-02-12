@@ -1,6 +1,8 @@
-import React from 'react'
+import type { Ebook } from '@ez/web/types/ebook'
 import { render, screen } from '@testing-library/react'
+import type React from 'react'
 import { describe, expect, it, vi } from 'vitest'
+import { EbookCard } from './ebook-card'
 
 vi.mock('next-intl', () => ({
   useLocale: () => 'pt',
@@ -26,11 +28,11 @@ vi.mock('next/link', () => ({
 }))
 
 vi.mock('next/image', () => ({
-  default: (props: React.ImgHTMLAttributes<HTMLImageElement>) => <img {...props} />,
+  default: (props: React.ImgHTMLAttributes<HTMLImageElement>) => (
+    // biome-ignore lint/performance/noImgElement: test mock for next/image
+    <img alt={props.alt ?? ''} {...props} />
+  ),
 }))
-
-import type { Ebook } from '@ez/web/types/ebook'
-import { EbookCard } from './ebook-card'
 
 describe('EbookCard', () => {
   it('renders without a link when slug is missing', () => {

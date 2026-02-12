@@ -145,9 +145,7 @@ export function BaseMobileNavigation({
                         rel={submenuItem.url?.isExternal ? 'noopener noreferrer' : undefined}
                         target={submenuItem.url?.isExternal ? '_blank' : undefined}
                       >
-                        {normalizeLabel(
-                          getLabelText(submenuItem.label, submenuItem.id),
-                        )}
+                        {normalizeLabel(getLabelText(submenuItem.label, submenuItem.id))}
                       </Link>
                     ))}
                   </div>

@@ -18,6 +18,16 @@ export const Services = ({ data, locale }: { data: SectionHomeServices; locale: 
   return (
     <StickySection className="relative bg-background py-20 md:py-32" id="services">
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <motion.div
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-4 text-center"
+          initial={{ opacity: 0, y: 12 }}
+          transition={{ duration: 0.6, delay: 0.05 }}
+        >
+          <span className="inline-block rounded-full border border-accent/20 bg-accent/5 px-5 py-2 font-semibold text-accent text-sm uppercase tracking-widest shadow-[0_0_18px_rgba(var(--brand-accent-rgb),0.12)]">
+            Atendimentos Individuais
+          </span>
+        </motion.div>
         {data?.heading?.[locale] && (
           <motion.h2
             animate={{ opacity: 1, y: 0 }}

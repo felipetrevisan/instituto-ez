@@ -19,6 +19,16 @@ export const Immersion = ({ data, locale }: { data: SectionHomeImmersion; locale
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(var(--brand-accent-rgb),0.03),transparent_50%)]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <motion.div
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-4 text-center"
+          initial={{ opacity: 0, y: 12 }}
+          transition={{ duration: 0.6, delay: 0.05 }}
+        >
+          <span className="inline-block rounded-full border border-accent/20 bg-accent/5 px-5 py-2 font-semibold text-accent text-sm uppercase tracking-widest shadow-[0_0_18px_rgba(var(--brand-accent-rgb),0.12)]">
+            Vivência Presencial Imersiva
+          </span>
+        </motion.div>
         <motion.h2
           animate={{ opacity: 1, y: 0 }}
           className="mb-12 text-center font-bold text-4xl text-foreground md:text-5xl lg:mb-16 lg:text-6xl"

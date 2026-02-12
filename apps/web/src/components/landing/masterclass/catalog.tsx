@@ -350,7 +350,7 @@ export const Catalog = ({ data, locale }: { data: SectionMasterclassCatalog; loc
             {data.ctaOptions.map((option, index) => {
               const isFeatured = Boolean(option.featured)
               const badgeLabel = resolveLocaleString(option.badgeLabel, locale)
-                const benefits = option.benefits ?? []
+              const benefits = option.benefits ?? []
 
               return (
                 <div
@@ -390,26 +390,26 @@ export const Catalog = ({ data, locale }: { data: SectionMasterclassCatalog; loc
                       {resolveLocaleString(option.description, locale)}
                     </p>
                   )}
-                    {benefits.length > 0 && (
-                      <div className="mb-4 space-y-1 font-medium text-primary text-xs">
-                        {benefits.map((benefit, benefitIndex) => {
-                          const benefitText =
-                            typeof benefit === 'object' && benefit !== null && 'text' in benefit
-                              ? (benefit as { text?: Record<string, string> }).text
-                              : (benefit as Record<string, string>)
-                          const key =
-                            typeof benefit === 'object' && benefit !== null && '_key' in benefit
-                              ? benefit._key
-                              : undefined
+                  {benefits.length > 0 && (
+                    <div className="mb-4 space-y-1 font-medium text-primary text-xs">
+                      {benefits.map((benefit, benefitIndex) => {
+                        const benefitText =
+                          typeof benefit === 'object' && benefit !== null && 'text' in benefit
+                            ? (benefit as { text?: Record<string, string> }).text
+                            : (benefit as Record<string, string>)
+                        const key =
+                          typeof benefit === 'object' && benefit !== null && '_key' in benefit
+                            ? benefit._key
+                            : undefined
 
-                          return (
-                            <p key={key ?? `${option._key ?? index}-benefit-${benefitIndex}`}>
-                              {resolveLocaleString(benefitText ?? undefined, locale)}
-                            </p>
-                          )
-                        })}
-                      </div>
-                    )}
+                        return (
+                          <p key={key ?? `${option._key ?? index}-benefit-${benefitIndex}`}>
+                            {resolveLocaleString(benefitText ?? undefined, locale)}
+                          </p>
+                        )
+                      })}
+                    </div>
+                  )}
                   {option.cta && (
                     <CallAction base="default" button={option.cta} className="w-full" />
                   )}
