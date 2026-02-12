@@ -44,6 +44,7 @@ import {
 import {
   developmentItemObject,
   developmentObject,
+  digitalProductsCardObject,
   digitalProductsObject,
   immersionObject,
   mathematizerObject as mathematizerHomeObject,
@@ -241,9 +242,10 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     mathematizerItemHomeObject,
     mentorShipObject,
     mentorShipItemObject,
-    developmentObject,
-    developmentItemObject,
-    digitalProductsObject,
+  developmentObject,
+  developmentItemObject,
+  digitalProductsCardObject,
+  digitalProductsObject,
     immersionObject,
 
     // Digital Products

@@ -1,12 +1,15 @@
 'use client'
 
 import { CallAction } from '@ez/web/components/ui/call-action-button'
+import { Icon } from '@ez/web/components/ui/icon'
 import { StickySection } from '@ez/web/components/ui/sticky-section'
+import { urlForImage } from '@ez/web/config/image'
 import type { SectionHomeDigitalProducts } from '@ez/web/types/landing/home'
 import { createPortableComponents } from '@ez/web/utils/create-portable-components'
 import { PortableText } from '@portabletext/react'
 import { Cloud, Database, Globe, Laptop, Monitor, Smartphone, Wifi, Zap } from 'lucide-react'
 import { motion } from 'motion/react'
+import Image from 'next/image'
 
 export const DigitalProducts = ({
   data,
@@ -109,25 +112,63 @@ export const DigitalProducts = ({
             </p>
           )}
 
-          {data.cta && data.cta.length > 0 && (
-            <motion.div
-              animate={{ opacity: 1, y: 0 }}
-              className="mt-10 flex flex-col justify-center gap-4 sm:flex-row"
-              initial={{ opacity: 0, y: 20 }}
-              transition={{ duration: 0.8, delay: 0.8, ease: 'easeOut' }}
+          {data.cards?.length ? (
+            <div
+              className="grid gap-8 md:grid-cols-2 animate-fade-in-up"
+              style={{ animationDelay: '0.15s' }}
             >
-              {data.cta.map((button, index) => {
+              {data.cards.map((card, index) => {
+                const title = card.title?.[locale]
+                const description = card.description?.[locale]
+                const badgeLabel = card.badgeLabel?.[locale]
+
                 return (
-                  <CallAction
-                    base="default"
-                    button={button}
-                    className="group px-8 py-6 font-semibold"
-                    key={button._key ?? index}
-                  />
+                  <div
+                    className="group relative overflow-hidden rounded-2xl border border-primary-foreground/10 bg-primary-foreground/5 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl"
+                    key={card._key ?? `digital-product-${index}`}
+                  >
+                    <div className="relative h-56 overflow-hidden">
+                      {card.image?.asset ? (
+                        <Image
+                          alt={title ?? 'Digital product'}
+                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                          height={560}
+                          src={urlForImage(card.image.asset).format('webp').quality(80).url()}
+                          width={640}
+                        />
+                      ) : null}
+                      <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent" />
+                      {(badgeLabel || card.badgeIcon) && (
+                        <div className="absolute top-4 left-4 flex items-center gap-2 rounded-full bg-accent/90 px-3 py-1.5 text-xs font-semibold text-primary-foreground">
+                          {card.badgeIcon && <Icon className="size-3.5" name={card.badgeIcon} />}
+                          {badgeLabel}
+                        </div>
+                      )}
+                    </div>
+                    <div className="p-6 text-left">
+                      {title && (
+                        <h3 className="mb-2 font-bold text-2xl text-primary-foreground">
+                          {title}
+                        </h3>
+                      )}
+                      {description && (
+                        <p className="mb-5 text-sm text-primary-foreground/70 leading-relaxed">
+                          {description}
+                        </p>
+                      )}
+                      {card.button && (
+                        <CallAction
+                          base="default"
+                          button={card.button}
+                          className="group/btn w-full text-base shadow-lg transition-all hover:shadow-xl"
+                        />
+                      )}
+                    </div>
+                  </div>
                 )
               })}
-            </motion.div>
-          )}
+            </div>
+          ) : null}
         </div>
       </div>
     </StickySection>

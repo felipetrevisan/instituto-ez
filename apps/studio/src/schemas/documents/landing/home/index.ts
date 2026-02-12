@@ -1,5 +1,6 @@
 import developmentObject from '@ez/studio/schemas/documents/landing/home/objects/development'
 import developmentItemObject from '@ez/studio/schemas/documents/landing/home/objects/development-item'
+import digitalProductsCardObject from '@ez/studio/schemas/documents/landing/home/objects/digital-products-card'
 import digitalProductsObject from '@ez/studio/schemas/documents/landing/home/objects/digital-products'
 import immersionObject from '@ez/studio/schemas/documents/landing/home/objects/immersion'
 import mathematizerObject from '@ez/studio/schemas/documents/landing/home/objects/mathematizer'
@@ -19,5 +20,6 @@ export {
   developmentObject,
   developmentItemObject,
   digitalProductsObject,
+  digitalProductsCardObject,
   immersionObject,
 }

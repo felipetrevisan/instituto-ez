@@ -67,8 +67,18 @@ export type SectionHomeDevelopmentItem = {
 export type SectionHomeDigitalProducts = {
   heading: Record<string, PortableTextBlock[]>
   subheading: Record<string, PortableTextBlock[]>
-  cta: Button[]
+  cards: SectionHomeDigitalProductsCard[]
   _type: string
+}
+
+export type SectionHomeDigitalProductsCard = {
+  _key?: string
+  image?: SanityAsset
+  badgeLabel?: Record<string, string>
+  badgeIcon?: IconName
+  title?: Record<string, string>
+  description?: Record<string, string>
+  button?: Button
 }
 
 export type SectionHomeImmersion = {

@@ -11,11 +11,11 @@ export default defineType({
     defineField({ name: 'heading', type: 'localizedArray' }),
     defineField({ name: 'subheading', type: 'localizedArray' }),
     defineField({
-      name: 'cta',
-      title: 'CTA Buttons',
+      name: 'cards',
+      title: 'Cards',
       type: 'array',
-      of: [{ type: 'button' }],
-      validation: (Rule) => Rule.max(3).warning('Ideally keep a maximum of 3 CTAs'),
+      of: [{ type: 'home.digitalproducts.card' }],
+      validation: (Rule) => Rule.max(2).warning('Ideal: 2 cards'),
     }),
   ],
   preview: {

@@ -60,7 +60,6 @@ const ctaField = `
     _type == "home.mentorship" ||
     _type == "home.development" ||
     _type == "home.mathematizer" ||
-    _type == "home.digitalproducts" ||
     _type == "home.immersion" ||
     _type == "services.methodsessions" ||
     _type == "services.whoisitfor" ||
@@ -113,6 +112,14 @@ export const landingPageQuery = groq`*[ _type == 'landingPage' && slug[$locale].
       "ctaOptions": ctaOptions[] {
         ...,
         "cta": cta {
+          ${buttonFields}
+        }
+      }
+    },
+    _type == "home.digitalproducts" => {
+      "cards": cards[] {
+        ...,
+        "button": button {
           ${buttonFields}
         }
       }
