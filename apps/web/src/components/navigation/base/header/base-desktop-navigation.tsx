@@ -275,7 +275,7 @@ export function BaseDesktopNavigation({
                       className="relative inline-flex items-center gap-1"
                       key="digital-products-group"
                     >
-                      <span className='-translate-x-1/2 -top-0.5 absolute left-1/2 whitespace-nowrap font-semibold text-[10px] text-muted-foreground uppercase tracking-[0.3em]'>
+                      <span className='-translate-x-1/2 -top-0.5 absolute left-1/2 whitespace-nowrap font-extrabold text-[10px] text-muted-foreground uppercase tracking-[0.3em]'>
                         Produtos Digitais
                       </span>
                       {digitalItems.map((item) => renderEntry(item))}
