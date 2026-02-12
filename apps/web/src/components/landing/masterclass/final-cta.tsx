@@ -132,8 +132,8 @@ export const FinalCTA = ({
                         {benefits.map((benefit, benefitIndex) => {
                           const benefitText =
                             typeof benefit === 'object' && benefit !== null && 'text' in benefit
-                              ? benefit.text
-                              : benefit
+                              ? (benefit as { text?: Record<string, string> }).text
+                              : (benefit as Record<string, string>)
                           const key =
                             typeof benefit === 'object' && benefit !== null && '_key' in benefit
                               ? benefit._key
@@ -141,7 +141,7 @@ export const FinalCTA = ({
 
                           return (
                             <p key={key ?? `${option._key ?? index}-benefit-${benefitIndex}`}>
-                              {resolveLocaleString(benefitText, locale)}
+                              {resolveLocaleString(benefitText ?? undefined, locale)}
                             </p>
                           )
                         })}
