@@ -116,19 +116,19 @@ const buttonVariants = cva(
         variant: 'outline',
         theme: 'default',
         className:
-          'border-primary-foreground dark:border-primary bg-transparent text-primary-foreground dark:text-primary hover:bg-primary hover:text-primary-foreground',
+          'border-primary-foreground bg-transparent text-primary-foreground hover:bg-primary hover:text-primary-foreground dark:border-primary dark:text-primary dark:hover:bg-primary dark:hover:text-primary-foreground',
       },
       {
         variant: 'outline',
         theme: 'secondary',
         className:
-          'border-secondary-foreground dark:border-secondary bg-transparent text-secondary-foreground dark:text-secondary hover:bg-secondary hover:text-secondary-foreground',
+          'border-secondary-foreground bg-transparent text-secondary-foreground hover:bg-secondary hover:text-secondary-foreground dark:border-secondary dark:text-secondary',
       },
       {
         variant: 'outline',
         theme: 'tertiary',
         className:
-          'border-tertiary-foreground dark:border-tertiary bg-transparent text-tertiary-foreground dark:text-tertiary hover:bg-tertiary hover:text-tertiary-foreground',
+          'border-tertiary-foreground bg-transparent text-tertiary-foreground hover:bg-tertiary hover:text-tertiary-foreground dark:border-tertiary dark:text-tertiary',
       },
       {
         variant: 'outline',

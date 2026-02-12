@@ -16,7 +16,7 @@ export const HeaderNavigation = ({
   return (
     <motion.header
       className={cn(
-        'h-20 w-full bg-primary backdrop-blur-md',
+        'min-h-20 w-full bg-primary backdrop-blur-md',
         {
           'bg-primary/90 shadow-md backdrop-blur-3xl dark:bg-accent/90':
             currentScrollY !== undefined && currentScrollY > 80,

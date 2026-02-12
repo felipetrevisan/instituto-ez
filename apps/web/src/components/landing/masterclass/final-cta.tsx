@@ -129,11 +129,22 @@ export const FinalCTA = ({
                     )}
                     {benefits.length > 0 && (
                       <div className="mb-4 space-y-1 font-medium text-primary text-xs">
-                        {benefits.map((benefit, benefitIndex) => (
-                          <p key={`${option._key ?? index}-benefit-${benefitIndex}`}>
-                            {resolveLocaleString(benefit, locale)}
-                          </p>
-                        ))}
+                        {benefits.map((benefit, benefitIndex) => {
+                          const benefitText =
+                            typeof benefit === 'object' && benefit !== null && 'text' in benefit
+                              ? benefit.text
+                              : benefit
+                          const key =
+                            typeof benefit === 'object' && benefit !== null && '_key' in benefit
+                              ? benefit._key
+                              : undefined
+
+                          return (
+                            <p key={key ?? `${option._key ?? index}-benefit-${benefitIndex}`}>
+                              {resolveLocaleString(benefitText, locale)}
+                            </p>
+                          )
+                        })}
                       </div>
                     )}
                     {option.cta && (

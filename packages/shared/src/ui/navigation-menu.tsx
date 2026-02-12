@@ -54,7 +54,7 @@ function NavigationMenuItem({
 }
 
 const navigationMenuTriggerStyle = cva(
-  'group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 font-medium text-3xl outline-none transition-[color,box-shadow] focus:text-primary focus-visible:outline-1 focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 lg:text-sm!',
+  'group inline-flex h-9 w-max cursor-pointer items-center justify-center rounded-md bg-background px-4 py-2 font-medium text-3xl outline-none transition-[color,box-shadow] focus:text-primary focus-visible:outline-1 focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 lg:text-sm!',
   {
     variants: {
       theme: {

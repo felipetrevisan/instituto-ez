@@ -56,6 +56,11 @@ export function BaseMobileNavigation({
     return link?.[locale]?.current
   }
 
+  const getLabelText = (label?: Record<string, string>, fallback = '') =>
+    label?.[locale] ?? label?.pt ?? label?.en ?? fallback
+
+  const normalizeLabel = (value: string) => (value === 'Produtos Digitais' ? 'Ebooks' : value)
+
   const getHref = (url?: NavigationItemURL) => {
     const linkValue = getLinkValue(url)
     if (!url || !linkValue) return '#'
@@ -93,6 +98,7 @@ export function BaseMobileNavigation({
     >
       {navigation?.items?.map(({ id, label, url, submenuItems }) => {
         const hasSubmenu = !!submenuItems?.length
+        const displayLabel = normalizeLabel(getLabelText(label, id))
 
         if (!hasSubmenu) {
           return (
@@ -105,7 +111,7 @@ export function BaseMobileNavigation({
                 rel={url?.isExternal ? 'noopener noreferrer' : undefined}
                 target={url?.isExternal ? '_blank' : undefined}
               >
-                {label?.[locale]}
+                {displayLabel}
               </Link>
             </motion.div>
           )
@@ -119,7 +125,7 @@ export function BaseMobileNavigation({
                 value={`mobile-nav-${id}`}
               >
                 <AccordionTrigger className="justify-center px-4 py-3 text-center font-medium text-base text-foreground/80 hover:text-accent">
-                  {label?.[locale]}
+                  {displayLabel}
                 </AccordionTrigger>
                 <AccordionContent className="pb-0">
                   <div className="flex flex-col border-primary/5 border-t">
@@ -132,7 +138,7 @@ export function BaseMobileNavigation({
                         rel={url?.isExternal ? 'noopener noreferrer' : undefined}
                         target={url?.isExternal ? '_blank' : undefined}
                       >
-                        {label?.[locale]}
+                        {displayLabel}
                       </Link>
                     ) : null}
                     {submenuItems?.map((submenuItem) => (
@@ -151,7 +157,9 @@ export function BaseMobileNavigation({
                         rel={submenuItem.url?.isExternal ? 'noopener noreferrer' : undefined}
                         target={submenuItem.url?.isExternal ? '_blank' : undefined}
                       >
-                        {submenuItem.label?.[locale]}
+                        {normalizeLabel(
+                          getLabelText(submenuItem.label, submenuItem.id),
+                        )}
                       </Link>
                     ))}
                   </div>

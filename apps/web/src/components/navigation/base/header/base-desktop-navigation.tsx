@@ -1,5 +1,6 @@
 'use client'
 
+import { LinkType } from '@ez/shared/types/global'
 import {
   MotionHighlight,
   MotionHighlightItem,
@@ -16,11 +17,12 @@ import { FadeIn } from '@ez/web/components/ui/fade-in'
 import { useApp } from '@ez/web/hooks/use-app'
 import type { Navigation, NavigationItem, NavigationItemURL } from '@ez/web/types/site'
 import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
-import { navigateToHash } from '@ez/web/utils/scroll-to-id'
+import { navigateToHash, scrollToId } from '@ez/web/utils/scroll-to-id'
 import { motion } from 'motion/react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useLocale } from 'next-intl'
-import type { ReactNode } from 'react'
+import type { MouseEvent, ReactNode } from 'react'
 
 type BaseDesktopNavigationProps = {
   navigation?: Navigation
@@ -52,6 +54,7 @@ export function BaseDesktopNavigation({
   additionalContent,
 }: BaseDesktopNavigationProps) {
   const locale = useLocale()
+  const router = useRouter()
   const { isMenuActive } = useApp()
 
   const getHash = (raw?: string) => {
@@ -73,6 +76,17 @@ export function BaseDesktopNavigation({
       isHashLink(url),
     )
   }
+
+  const getLabelText = (label?: Record<string, string>, fallback = '') =>
+    label?.[locale] ?? label?.pt ?? label?.en ?? fallback
+
+  const normalizeLabel = (value: string) => (value === 'Produtos Digitais' ? 'Ebooks' : value)
+
+  const isDigitalGroupItem = (value: string) =>
+    value === 'Masterclass' ||
+    value === 'Produtos Digitais' ||
+    value === 'Ebooks' ||
+    value === 'Digital Products'
 
   const getSubmenuHref = (submenuUrl?: NavigationItemURL, parentUrl?: NavigationItemURL) => {
     if (!submenuUrl) return '#'
@@ -103,11 +117,41 @@ export function BaseDesktopNavigation({
     }
   }
 
+  const handleTriggerClick = (event: MouseEvent<HTMLButtonElement>, url?: NavigationItemURL) => {
+    if (!url) return
+    const href = getHref(url)
+    if (!href || href === '#') return
+
+    if (href.startsWith('#')) {
+      event.preventDefault()
+      scrollToId(href.replace('#', ''))
+      return
+    }
+
+    if (url.type === LinkType.DIALOG) return
+
+    if (
+      url.type === LinkType.EXTERNAL ||
+      url.isExternal ||
+      /^(https?:\/\/|mailto:|tel:)/i.test(href)
+    ) {
+      event.preventDefault()
+      if (url.isExternal) {
+        window.open(href, '_blank', 'noopener,noreferrer')
+      } else {
+        window.location.href = href
+      }
+      return
+    }
+
+    router.push(href)
+  }
+
   const isItemActive = (item: NavigationItem, parentUrl?: NavigationItemURL) =>
     isMenuActive(getSubmenuHref(item.url, parentUrl))
 
   const submenuLinkClassName =
-    'block rounded-lg px-3 py-2 text-sm text-foreground/80 transition-colors hover:bg-accent/10 hover:text-accent'
+    'block cursor-pointer rounded-lg px-3 py-2 text-sm text-foreground/80 transition-colors hover:bg-accent/10 hover:text-accent'
 
   const isEntryActive = (entry: NavigationItem) => {
     if (entry.submenuItems?.length) {
@@ -117,108 +161,127 @@ export function BaseDesktopNavigation({
   }
 
   const activeId = navigation?.items?.find((item) => isEntryActive(item))?.id ?? null
+  const items = navigation?.items ?? []
+  const digitalItems = items.filter((item) => isDigitalGroupItem(getLabelText(item.label, item.id)))
+  const regularItems = items.filter(
+    (item) => !isDigitalGroupItem(getLabelText(item.label, item.id)),
+  )
+  const hasDigitalGroup = digitalItems.length >= 2
 
-  return (
-    <div className="flex items-center gap-4 lg:flex-nowrap">
-      <FadeIn>
-        <NavigationMenu className="hidden lg:flex" viewport={false}>
-          <NavigationMenuList>
-            <MotionHighlight
-              className={highlightClassName}
-              containerClassName="flex justify-center items-center"
-              controlledItems
-              hover={!activeId}
-              mode="parent"
-              value={activeId}
+  const renderEntry = ({ id, label, url, submenuItems }: NavigationItem) => {
+    const hasSubmenu = !!submenuItems?.length
+    const isActive = hasSubmenu
+      ? submenuItems.some((item) => isItemActive(item, url))
+      : isMenuActive(getHref(url))
+    const rawLabel = getLabelText(label, id)
+    const displayLabel = normalizeLabel(rawLabel)
+    const triggerUrl = url ?? submenuItems?.[0]?.url
+
+    return (
+      <MenuItemMotion data-value={id} key={id}>
+        <MotionHighlightItem activeClassName={activeClassName}>
+          {hasSubmenu ? (
+            <NavigationMenuTrigger
+              className={`${linkClassName} h-auto flex-row items-center gap-2 bg-transparent hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent`}
+              data-active={isActive}
+              onClick={(event) => handleTriggerClick(event, triggerUrl)}
             >
-              {navigation?.items?.map(({ id, label, url, submenuItems }) => {
-                const hasSubmenu = !!submenuItems?.length
-                const isActive = hasSubmenu
-                  ? submenuItems.some((item) => isItemActive(item, url))
-                  : isMenuActive(getHref(url))
-
-                return (
-                  <MenuItemMotion data-value={id} key={id}>
-                    <MotionHighlightItem activeClassName={activeClassName}>
-                      {hasSubmenu ? (
-                        <NavigationMenuTrigger
-                          className={`${linkClassName} h-auto flex-row items-center gap-2 bg-transparent hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent`}
-                          data-active={isActive}
-                        >
-                          {label?.[locale]}
-                        </NavigationMenuTrigger>
-                      ) : (
+              {displayLabel}
+            </NavigationMenuTrigger>
+          ) : (
+            <Link
+              className={linkClassName}
+              data-active={isActive}
+              data-slot="navigation-menu-link"
+              href={getHref(url)}
+              onClick={(event) => handleHashClick(event, url, getHref(url))}
+              rel={url?.isExternal ? 'noopener noreferrer' : undefined}
+              target={url?.isExternal ? '_blank' : undefined}
+            >
+              {displayLabel}
+            </Link>
+          )}
+        </MotionHighlightItem>
+        {hasSubmenu && (
+          <NavigationMenuContent className="border-none bg-transparent p-2 shadow-none">
+            <MotionHighlight className="rounded-lg bg-accent/10" hover>
+              <ul className="min-w-[220px] space-y-1 p-2">
+                {url && (
+                  <MotionHighlightItem asChild key={`${id}-parent`}>
+                    <li className="relative cursor-pointer">
+                      <NavigationMenuLink asChild>
                         <Link
-                          className={linkClassName}
-                          data-active={isActive}
-                          data-slot="navigation-menu-link"
+                          className={submenuLinkClassName}
                           href={getHref(url)}
                           onClick={(event) => handleHashClick(event, url, getHref(url))}
                           rel={url?.isExternal ? 'noopener noreferrer' : undefined}
                           target={url?.isExternal ? '_blank' : undefined}
                         >
-                          {label?.[locale]}
+                          {displayLabel}
                         </Link>
-                      )}
-                    </MotionHighlightItem>
-                    {hasSubmenu && (
-                      <NavigationMenuContent className="border-none bg-transparent p-2 shadow-none">
-                        <MotionHighlight className="rounded-lg bg-accent/10" hover>
-                          <ul className="min-w-[220px] space-y-1 p-2">
-                            {url && (
-                              <MotionHighlightItem asChild key={`${id}-parent`}>
-                                <li className="relative">
-                                  <NavigationMenuLink asChild>
-                                    <Link
-                                      className={submenuLinkClassName}
-                                      href={getHref(url)}
-                                      onClick={(event) => handleHashClick(event, url, getHref(url))}
-                                      rel={url?.isExternal ? 'noopener noreferrer' : undefined}
-                                      target={url?.isExternal ? '_blank' : undefined}
-                                    >
-                                      {label?.[locale]}
-                                    </Link>
-                                  </NavigationMenuLink>
-                                </li>
-                              </MotionHighlightItem>
-                            )}
-                            {submenuItems.map((submenuItem) => (
-                              <MotionHighlightItem asChild key={submenuItem.id}>
-                                <li className="relative">
-                                  <NavigationMenuLink asChild>
-                                    <Link
-                                      className={submenuLinkClassName}
-                                      data-active={isMenuActive(
-                                        getSubmenuHref(submenuItem.url, url),
-                                      )}
-                                      href={getSubmenuHref(submenuItem.url, url)}
-                                      onClick={(event) =>
-                                        handleHashClick(
-                                          event,
-                                          submenuItem.url,
-                                          getSubmenuHref(submenuItem.url, url),
-                                        )
-                                      }
-                                      rel={
-                                        submenuItem.url?.isExternal
-                                          ? 'noopener noreferrer'
-                                          : undefined
-                                      }
-                                      target={submenuItem.url?.isExternal ? '_blank' : undefined}
-                                    >
-                                      {submenuItem.label?.[locale]}
-                                    </Link>
-                                  </NavigationMenuLink>
-                                </li>
-                              </MotionHighlightItem>
-                            ))}
-                          </ul>
-                        </MotionHighlight>
-                      </NavigationMenuContent>
-                    )}
-                  </MenuItemMotion>
-                )
-              })}
+                      </NavigationMenuLink>
+                    </li>
+                  </MotionHighlightItem>
+                )}
+                {submenuItems.map((submenuItem) => (
+                  <MotionHighlightItem asChild key={submenuItem.id}>
+                    <li className="relative cursor-pointer">
+                      <NavigationMenuLink asChild>
+                        <Link
+                          className={submenuLinkClassName}
+                          data-active={isMenuActive(getSubmenuHref(submenuItem.url, url))}
+                          href={getSubmenuHref(submenuItem.url, url)}
+                          onClick={(event) =>
+                            handleHashClick(
+                              event,
+                              submenuItem.url,
+                              getSubmenuHref(submenuItem.url, url),
+                            )
+                          }
+                          rel={submenuItem.url?.isExternal ? 'noopener noreferrer' : undefined}
+                          target={submenuItem.url?.isExternal ? '_blank' : undefined}
+                        >
+                          {normalizeLabel(getLabelText(submenuItem.label, submenuItem.id))}
+                        </Link>
+                      </NavigationMenuLink>
+                    </li>
+                  </MotionHighlightItem>
+                ))}
+              </ul>
+            </MotionHighlight>
+          </NavigationMenuContent>
+        )}
+      </MenuItemMotion>
+    )
+  }
+
+  return (
+    <div className="flex items-center gap-4 lg:flex-nowrap">
+      <FadeIn>
+        <NavigationMenu className="hidden lg:flex" viewport={false}>
+          <NavigationMenuList className="space-x-0">
+            <MotionHighlight
+              className={highlightClassName}
+              containerClassName="flex items-center justify-center gap-x-2"
+              controlledItems
+              hover={!activeId}
+              mode="parent"
+              value={activeId}
+            >
+              {hasDigitalGroup
+                ? [
+                    ...regularItems.map((item) => renderEntry(item)),
+                    <div
+                      className="relative inline-flex items-center gap-1"
+                      key="digital-products-group"
+                    >
+                      <span className='-translate-x-1/2 -top-0.5 absolute left-1/2 whitespace-nowrap font-semibold text-[10px] text-muted-foreground uppercase tracking-[0.3em]'>
+                        Produtos Digitais
+                      </span>
+                      {digitalItems.map((item) => renderEntry(item))}
+                    </div>,
+                  ]
+                : items.map((item) => renderEntry(item))}
             </MotionHighlight>
           </NavigationMenuList>
         </NavigationMenu>

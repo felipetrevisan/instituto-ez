@@ -25,7 +25,7 @@ export type MasterclassCatalogOption = {
   title?: LocalizedString
   description?: LocalizedString
   badgeLabel?: LocalizedString
-  benefits?: LocalizedString[]
+  benefits?: Array<LocalizedString | { _key?: string; text?: LocalizedString }>
   icon?: string
   featured?: boolean
   cta?: Button
@@ -55,7 +55,7 @@ export type MasterclassCTAOption = {
   title?: LocalizedString
   description?: LocalizedString
   badgeLabel?: LocalizedString
-  benefits?: LocalizedString[]
+  benefits?: Array<LocalizedString | { _key?: string; text?: LocalizedString }>
   icon?: string
   featured?: boolean
   cta?: Button

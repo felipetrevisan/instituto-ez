@@ -146,7 +146,30 @@ export default defineType({
               name: 'benefits',
               title: 'Benefits',
               type: 'array',
-              of: [{ type: 'localizedString' }],
+              of: [
+                {
+                  name: 'benefit',
+                  title: 'Benefit',
+                  type: 'object',
+                  fields: [
+                    defineField({
+                      name: 'text',
+                      title: 'Text',
+                      type: 'localizedString',
+                    }),
+                  ],
+                  preview: {
+                    select: { title: 'text' },
+                    prepare({ title }) {
+                      if (Array.isArray(title)) {
+                        const localized = title.find((item) => item?.lang === 'pt')
+                        return { title: localized?.value ?? 'Benefit' }
+                      }
+                      return { title: title ?? 'Benefit' }
+                    },
+                  },
+                },
+              ],
             }),
             defineField({
               name: 'icon',
