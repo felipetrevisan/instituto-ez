@@ -26,22 +26,19 @@ export const Mathematizers = ({
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(var(--brand-accent-rgb),0.03),transparent_50%)]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {data?.heading?.[locale] && (
+          <motion.h2
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-4 text-center font-bold text-4xl text-foreground leading-tight md:text-5xl lg:text-6xl"
+            initial={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.6 }}
+          >
+            <PortableText components={createPortableComponents()} value={data.heading[locale]} />
+          </motion.h2>
+        )}
+
         <div className="mb-16 grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div className="flex flex-col items-center">
-            {data?.heading?.[locale] && (
-              <motion.h2
-                animate={{ opacity: 1, y: 0 }}
-                className="mb-4 font-bold text-4xl text-foreground leading-tight md:text-5xl lg:text-6xl"
-                initial={{ opacity: 0, y: 20 }}
-                transition={{ duration: 0.6 }}
-              >
-                <PortableText
-                  components={createPortableComponents()}
-                  value={data.heading[locale]}
-                />
-              </motion.h2>
-            )}
-
             {data?.subheading?.[locale] && (
               <div className="space-y-4 text-justify text-lg text-muted-foreground leading-relaxed md:text-xl">
                 <PortableText
