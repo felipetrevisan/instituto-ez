@@ -30,7 +30,7 @@ export default defineType({
     }),
     defineField({
       name: 'description',
-      type: 'localizedString',
+      type: 'localizedText',
     }),
     defineField({
       name: 'button',
