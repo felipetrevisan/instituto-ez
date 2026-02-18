@@ -10,7 +10,7 @@ import { PortableText } from '@portabletext/react'
 import { motion } from 'motion/react'
 
 export const Development = ({ data, locale }: { data: SectionHomeDevelopment; locale: string }) => {
-  const colors = ['blue', 'emerald', 'amber', 'rose']
+  const colors = ['blue', 'emerald', 'amber', 'cyan']
 
   return (
     <StickySection className="relative bg-brand-light py-20 md:py-32" id="development">
@@ -70,13 +70,13 @@ export const Development = ({ data, locale }: { data: SectionHomeDevelopment; lo
                     className={cn(
                       'flex items-start gap-4 rounded-xl border border-border/30 p-6 backdrop-blur-sm transition-all hover:border-accent/30',
                       {
-                        'bg-gradient-to-l from-blue-100/80 to-blue-50/40 dark:from-blue-800/80 dark:to-blue-450/40':
+                        'bg-gradient-to-l from-blue-200/80 to-blue-100/40 dark:from-blue-800/80 dark:to-blue-450/40':
                           color === 'blue',
-                        'bg-gradient-to-l from-emerald-100/80 to-emerald-50/40 dark:from-emerald-800/80 dark:to-emerald-450/40':
+                        'bg-gradient-to-l from-emerald-200/80 to-emerald-100/40 dark:from-emerald-800/80 dark:to-emerald-450/40':
                           color === 'emerald',
-                        'bg-gradient-to-l from-amber-100/80 to-amber-50/40 dark:from-amber-800/80 dark:to-amber-450/40':
+                        'bg-gradient-to-l from-amber-200/80 to-amber-100/40 dark:from-amber-800/80 dark:to-amber-450/40':
                           color === 'amber',
-                        'bg-gradient-to-l from-rose-100/80 to-rose-50/40 dark:from-rose-800/80 dark:to-rose-450/40':
+                        'bg-gradient-to-l from-cyan-200/80 to-cyan-100/40 dark:from-cyan-800/80 dark:to-cyan-450/40':
                           color === 'rose',
                       },
                     )}

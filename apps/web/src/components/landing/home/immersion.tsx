@@ -26,7 +26,7 @@ export const Immersion = ({ data, locale }: { data: SectionHomeImmersion; locale
           transition={{ duration: 0.6, delay: 0.05 }}
         >
           <span className="inline-block rounded-full border border-accent/20 bg-accent/5 px-5 py-2 font-semibold text-accent text-sm uppercase tracking-widest shadow-[0_0_18px_rgba(var(--brand-accent-rgb),0.12)]">
-            Vivência Presencial Imersiva
+            Vivência Presencial
           </span>
         </motion.div>
         <motion.h2
