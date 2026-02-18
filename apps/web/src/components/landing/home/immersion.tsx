@@ -52,8 +52,6 @@ export const Immersion = ({ data, locale }: { data: SectionHomeImmersion; locale
             <div className="-bottom-4 -left-4 absolute size-32 rounded-full bg-accent/10 blur-3xl" />
           </div>
           <div className="order-1 lg:order-2">
-            <p className="mb-4 font-semibold text-2xl text-accent md:text-3xl">{t('immersion')}</p>
-
             {data?.subheading?.[locale] && (
               <div className="mb-8 space-y-4 text-justify text-lg text-muted-foreground leading-relaxed md:text-xl">
                 <PortableText
