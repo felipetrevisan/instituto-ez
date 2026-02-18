@@ -150,7 +150,7 @@ export const DigitalProducts = ({
                         <h3 className="mb-2 font-bold text-2xl text-primary-foreground">{title}</h3>
                       )}
                       {description && (
-                        <p className="mb-5 text-primary-foreground/70 text-sm leading-relaxed">
+                        <p className="mb-5 whitespace-pre-line text-primary-foreground/70 text-sm leading-relaxed">
                           {description}
                         </p>
                       )}

@@ -22,6 +22,9 @@ export default defineType({
       name: 'value',
       title: 'Value',
       type: 'text',
+      options: {
+        rows: 5,
+      },
     }),
   ],
   preview: {
