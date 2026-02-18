@@ -77,7 +77,7 @@ export const Development = ({ data, locale }: { data: SectionHomeDevelopment; lo
                         'bg-gradient-to-l from-amber-200/80 to-amber-100/40 dark:from-amber-800/80 dark:to-amber-450/40':
                           color === 'amber',
                         'bg-gradient-to-l from-cyan-200/80 to-cyan-100/40 dark:from-cyan-800/80 dark:to-cyan-450/40':
-                          color === 'rose',
+                          color === 'cyan',
                       },
                     )}
                     initial={{ opacity: 0, y: 30 }}
