@@ -14,10 +14,10 @@ export function Content({ data }: { data: Masterclass }) {
     <>
       {data.hero && <Hero data={data.hero} />}
       {data.pillars && <Pillars data={data.pillars} />}
+      {data.id && <Testimonials data={data.testimonials ?? {}} masterclassId={data.id} />}
       {data.why && <Why data={data.why} />}
       {data.author && <Author data={data.author} />}
       {data.offer && <Offer data={data.offer} />}
-      {data.testimonials && <Testimonials data={data.testimonials} />}
       {data.final && <Final data={data.final} />}
     </>
   )

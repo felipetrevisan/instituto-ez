@@ -1,6 +1,8 @@
 'use client'
 
+import { cn } from '@ez/shared/lib/utils'
 import { CallAction } from '@ez/web/components/ui/call-action-button'
+import { ComingSoonRibbon } from '@ez/web/components/ui/coming-soon-ribbon'
 import { Icon } from '@ez/web/components/ui/icon'
 import { StickySection } from '@ez/web/components/ui/sticky-section'
 import { urlForImage } from '@ez/web/config/image'
@@ -14,16 +16,27 @@ import Image from 'next/image'
 export const DigitalProducts = ({
   data,
   locale,
+  comingSoon = false,
 }: {
   data: SectionHomeDigitalProducts
   locale: string
+  comingSoon?: boolean
 }) => {
   return (
     <StickySection
-      className="relative bg-gradient-to-br from-navy via-navy/95 to-navy/90 py-20 text-primary-foreground md:py-32"
+      className={cn(
+        'relative py-20 text-primary-foreground md:py-32',
+        comingSoon
+          ? 'bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-900'
+          : 'bg-gradient-to-br from-navy via-navy/95 to-navy/90',
+      )}
       id="digital-products"
     >
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+      {comingSoon && (
+        <ComingSoonRibbon className="absolute top-6 right-6 z-20 px-4 py-1.5 text-xs tracking-[0.22em]" />
+      )}
+      <div className={cn(comingSoon && 'grayscale')}>
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute top-16 left-[10%] animate-pulse opacity-30">
           <Laptop className="size-8 text-accent" />
         </div>
@@ -85,9 +98,9 @@ export const DigitalProducts = ({
         >
           <Laptop className="size-7 text-primary-foreground" />
         </div>
-      </div>
+        </div>
 
-      <div className="container relative z-10">
+        <div className="container relative z-10">
         <div className="mx-auto max-w-4xl text-center">
           {data?.heading?.[locale] && (
             <motion.h2
@@ -124,7 +137,10 @@ export const DigitalProducts = ({
 
                 return (
                   <div
-                    className="group relative overflow-hidden rounded-2xl border border-primary-foreground/10 bg-primary-foreground/5 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl"
+                    className={cn(
+                      'group relative overflow-hidden rounded-2xl border border-primary-foreground/10 bg-primary-foreground/5 backdrop-blur-sm transition-all duration-300',
+                      comingSoon ? 'pointer-events-none' : 'hover:scale-[1.02] hover:shadow-2xl',
+                    )}
                     key={card._key ?? `digital-product-${index}`}
                   >
                     <div className="relative h-56 overflow-hidden">
@@ -155,11 +171,13 @@ export const DigitalProducts = ({
                         </p>
                       )}
                       {card.button && (
-                        <CallAction
-                          base="default"
-                          button={card.button}
-                          className="group/btn w-full text-base shadow-lg transition-all hover:shadow-xl"
-                        />
+                        <div className={cn(comingSoon && 'opacity-70')}>
+                          <CallAction
+                            base="default"
+                            button={card.button}
+                            className="group/btn w-full text-base shadow-lg transition-all hover:shadow-xl"
+                          />
+                        </div>
                       )}
                     </div>
                   </div>
@@ -167,6 +185,7 @@ export const DigitalProducts = ({
               })}
             </div>
           ) : null}
+        </div>
         </div>
       </div>
     </StickySection>

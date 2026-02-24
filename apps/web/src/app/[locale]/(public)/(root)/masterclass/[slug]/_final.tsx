@@ -17,8 +17,9 @@ export function Final({ data }: { data: MasterclassFinal }) {
   const rightBenefits = benefits.slice(mid)
 
   return (
-    <section className="relative w-screen overflow-hidden bg-foreground py-20 text-card md:py-28">
+    <section className="relative w-screen overflow-hidden bg-foreground py-20 text-card dark:bg-zinc-950 dark:text-zinc-100 md:py-28">
       <div className="-translate-x-1/2 -translate-y-1/2 pointer-events-none absolute top-1/2 left-1/2 size-[500px] rounded-full bg-primary/10 blur-[100px]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.06),transparent_45%)] dark:bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.1),transparent_45%)]" />
 
       <div className="container relative z-10">
         <motion.div
@@ -54,7 +55,9 @@ export function Final({ data }: { data: MasterclassFinal }) {
             whileInView={{ opacity: 1, y: 0 }}
           >
             {summary && (
-              <p className="mx-auto mb-10 max-w-2xl text-base text-card/80 md:text-lg">{summary}</p>
+              <p className="mx-auto mb-10 max-w-2xl text-base text-card/80 dark:text-zinc-300 md:text-lg">
+                {summary}
+              </p>
             )}
 
             {data?.cta && (
@@ -66,7 +69,7 @@ export function Final({ data }: { data: MasterclassFinal }) {
             )}
 
             {details.length > 0 && (
-              <div className="mt-8 flex flex-wrap items-center justify-center gap-6 text-card/60 text-sm">
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-6 text-card/60 text-sm dark:text-zinc-400">
                 {details.map((item, index) => (
                   <span
                     className="flex items-center gap-2"
@@ -135,7 +138,7 @@ function BenefitCard({
         <span className="mt-0.5 flex size-6 flex-shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
           <Check className={compact ? 'size-3.5' : 'size-3.5'} />
         </span>
-        <span className="text-card/80 text-sm leading-snug">{text}</span>
+        <span className="text-card/80 text-sm leading-snug dark:text-zinc-300">{text}</span>
       </div>
     </motion.div>
   )

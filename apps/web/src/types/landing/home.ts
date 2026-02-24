@@ -88,3 +88,11 @@ export type SectionHomeImmersion = {
   cta: Button[]
   _type: string
 }
+
+export type SectionHomeTestimonials = {
+  badge?: Record<string, string>
+  heading?: Record<string, PortableTextBlock[]>
+  description?: Record<string, string>
+  maxItems?: number
+  _type: string
+}

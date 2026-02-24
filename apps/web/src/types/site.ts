@@ -31,6 +31,7 @@ export type SocialNetwork = {
 export type NavigationItem = {
   id: string
   label: Record<string, string>
+  comingSoon?: boolean
   url?: NavigationItemURL
   submenuItems?: NavigationItem[]
 }

@@ -44,29 +44,40 @@ export default defineType({
       validation: (Rule) => Rule.required().warning('This field must not be empty.'),
     }),
     defineField({
-      name: 'categories',
-      title: 'Categories',
+      name: 'display_areas',
+      title: 'Display Areas',
+      description: 'Select where this testimonial should appear.',
       type: 'array',
       of: [
         defineArrayMember({
           type: 'string',
           options: {
             list: [
-              { title: 'Sobre', value: 'about' },
-              { title: 'Imersão', value: 'immersion' },
-              { title: 'Palestras', value: 'lecture' },
-              { title: 'Atendimentos', value: 'service' },
-              { title: 'Matematizador', value: 'mathematizer' },
-              { title: 'Depoimentos', value: 'testimonial' },
-              { title: 'Ebooks', value: 'ebook' },
-              { title: 'Workshops', value: 'workshop' },
-              { title: 'Mentoria Avançada', value: 'advanced-mentory' },
-              { title: 'Masterclass', value: 'masterclass' },
+              { title: 'Home', value: 'home' },
+              { title: 'Masterclass (specific)', value: 'masterclass' },
+              { title: 'Ebook (specific)', value: 'ebook' },
             ],
             layout: 'dropdown',
           },
         }),
       ],
+      validation: (Rule) => Rule.required().min(1).warning('Select at least one display area.'),
+    }),
+    defineField({
+      name: 'masterclass_page',
+      title: 'Masterclass Page',
+      description: 'Select a specific masterclass page',
+      type: 'reference',
+      to: [{ type: 'masterclass' }],
+      hidden: ({ parent }) => !parent?.display_areas?.includes('masterclass'),
+      validation: (Rule) =>
+        Rule.custom((value, context) => {
+          const parent = context.parent as { display_areas?: string[] } | undefined
+          if (parent?.display_areas?.includes('masterclass') && !value) {
+            return 'Select a masterclass page when "Masterclass (specific)" is selected.'
+          }
+          return true
+        }),
     }),
     defineField({
       name: 'ebook_page',
@@ -74,13 +85,21 @@ export default defineType({
       description: 'Select a ebook page',
       type: 'reference',
       to: [{ type: 'ebook' }],
-      hidden: ({ parent }) => !parent?.categories?.includes('ebook'),
+      hidden: ({ parent }) => !parent?.display_areas?.includes('ebook'),
+      validation: (Rule) =>
+        Rule.custom((value, context) => {
+          const parent = context.parent as { display_areas?: string[] } | undefined
+          if (parent?.display_areas?.includes('ebook') && !value) {
+            return 'Select an ebook page when "Ebook (specific)" is selected.'
+          }
+          return true
+        }),
     }),
   ],
   preview: {
     select: {
       title: 'author_name',
-      subtitle: 'categories.0',
+      subtitle: 'display_areas.0',
     },
     prepare(selection) {
       const { title } = selection

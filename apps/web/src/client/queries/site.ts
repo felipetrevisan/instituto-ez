@@ -3,6 +3,7 @@ import { groq } from 'next-sanity'
 const navigationItem = `
   "id": _key,
   "label": navigation_label,
+  "comingSoon": coming_soon,
   "url": navigation_item_url {
     "isHome": is_home,
     "type": link_type,
@@ -26,6 +27,7 @@ const navigationItem = `
   "submenuItems": submenu_items[] {
     "id": _key,
     "label": navigation_label,
+    "comingSoon": coming_soon,
     "url": navigation_item_url {
       "isHome": is_home,
       "type": link_type,

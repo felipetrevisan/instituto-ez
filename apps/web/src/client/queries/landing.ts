@@ -116,6 +116,18 @@ export const landingPageQuery = groq`*[ _type == 'landingPage' && slug[$locale].
         }
       }
     },
+    _type == "masterclass.testimonials" => {
+      "testimonials": testimonials[]-> {
+        "id": _id,
+        "author": {
+          "name": author_name,
+          "role": author_role
+        },
+        "rating": rating,
+        "showStars": show_stars,
+        testimonial
+      }
+    },
     _type == "home.digitalproducts" => {
       "cards": cards[] {
         ...,

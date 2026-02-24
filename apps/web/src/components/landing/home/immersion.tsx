@@ -1,6 +1,8 @@
 'use client'
 
+import { cn } from '@ez/shared/lib/utils'
 import { CallAction } from '@ez/web/components/ui/call-action-button'
+import { ComingSoonRibbon } from '@ez/web/components/ui/coming-soon-ribbon'
 import { StickySection } from '@ez/web/components/ui/sticky-section'
 import { urlForImage } from '@ez/web/config/image'
 import type { SectionHomeImmersion } from '@ez/web/types/landing/home'
@@ -8,17 +10,26 @@ import { createPortableComponents } from '@ez/web/utils/create-portable-componen
 import { PortableText } from '@portabletext/react'
 import { motion } from 'motion/react'
 import Image from 'next/image'
-import { useTranslations } from 'next-intl'
 
-export const Immersion = ({ data, locale }: { data: SectionHomeImmersion; locale: string }) => {
-  const t = useTranslations('LandingPageHome')
-
+export const Immersion = ({
+  data,
+  locale,
+  comingSoon = false,
+}: {
+  data: SectionHomeImmersion
+  locale: string
+  comingSoon?: boolean
+}) => {
   return (
     <StickySection className="relative bg-background py-20 md:py-32" id="immersion">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(var(--brand-primary-rgb),0.05),transparent_50%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(var(--brand-accent-rgb),0.03),transparent_50%)]" />
+      {comingSoon && (
+        <ComingSoonRibbon className="absolute top-6 right-6 z-20 px-4 py-1.5 text-xs tracking-[0.22em]" />
+      )}
+      <div className={cn(comingSoon && 'grayscale')}>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(var(--brand-primary-rgb),0.05),transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(var(--brand-accent-rgb),0.03),transparent_50%)]" />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           animate={{ opacity: 1, y: 0 }}
           className="mb-4 text-center"
@@ -81,6 +92,7 @@ export const Immersion = ({ data, locale }: { data: SectionHomeImmersion; locale
               </motion.div>
             )}
           </div>
+        </div>
         </div>
       </div>
     </StickySection>

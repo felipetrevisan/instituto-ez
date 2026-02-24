@@ -135,6 +135,25 @@ export type MasterclassTrustBadge = {
   label?: LocalizedString
 }
 
+export type MasterclassLandingTestimonial = {
+  id: string
+  author?: {
+    name?: string
+    role?: string
+  }
+  rating?: number
+  showStars?: boolean
+  testimonial?: PortableTextBlock[]
+}
+
+export type SectionMasterclassTestimonials = {
+  badge?: LocalizedString
+  heading?: LocalizedPortableText
+  description?: LocalizedString
+  testimonials?: MasterclassLandingTestimonial[]
+  _type: string
+}
+
 export type SectionMasterclassFinalCTA = {
   heading?: LocalizedPortableText
   subheading?: LocalizedPortableText

@@ -24,6 +24,7 @@ import type {
   SectionHomeMathematizer,
   SectionHomeMentorShip,
   SectionHomeServices,
+  SectionHomeTestimonials,
 } from '@ez/web/types/landing/home'
 import type {
   SectionImmersionExperience,
@@ -41,6 +42,7 @@ import type {
   SectionMasterclassForWho,
   SectionMasterclassHero,
   SectionMasterclassProblem,
+  SectionMasterclassTestimonials,
 } from '@ez/web/types/landing/masterclass'
 import type {
   SectionMathematizerBenefits,
@@ -97,6 +99,7 @@ export type LandingSectionsMap = {
     | SectionHomeDevelopment
     | SectionHomeDigitalProducts
     | SectionHomeImmersion
+    | SectionHomeTestimonials
 
   mathematizer:
     | SectionHero
@@ -152,6 +155,7 @@ export type LandingSectionsMap = {
     | SectionMasterclassForWho
     | SectionMasterclassProblem
     | SectionMasterclassExpert
+    | SectionMasterclassTestimonials
     | SectionMasterclassFinalCTA
     | SectionMasterclassCatalog
 }

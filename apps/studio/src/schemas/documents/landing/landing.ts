@@ -108,6 +108,7 @@ export default defineType({
         { type: 'home.development' },
         { type: 'home.digitalproducts' },
         { type: 'home.immersion' },
+        { type: 'home.testimonials' },
 
         // DIGITAL PRODUCTS
         { type: 'digital-products.hero' },
@@ -119,6 +120,7 @@ export default defineType({
         { type: 'masterclass.for-who' },
         { type: 'masterclass.problem' },
         { type: 'masterclass.expert' },
+        { type: 'masterclass.testimonials' },
         { type: 'masterclass.final-cta' },
         { type: 'masterclass.catalog' },
       ],

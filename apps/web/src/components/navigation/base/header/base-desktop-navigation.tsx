@@ -1,5 +1,6 @@
 'use client'
 
+import { cn } from '@ez/shared/lib/utils'
 import { LinkType } from '@ez/shared/types/global'
 import {
   MotionHighlight,
@@ -14,6 +15,7 @@ import {
   NavigationMenuTrigger,
 } from '@ez/shared/ui/navigation-menu'
 import { FadeIn } from '@ez/web/components/ui/fade-in'
+import { ComingSoonRibbon } from '@ez/web/components/ui/coming-soon-ribbon'
 import { useApp } from '@ez/web/hooks/use-app'
 import type { Navigation, NavigationItem, NavigationItemURL } from '@ez/web/types/site'
 import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
@@ -106,11 +108,7 @@ export function BaseDesktopNavigation({
     return getHref(submenuUrl)
   }
 
-  const handleHashClick = (
-    event: React.MouseEvent<HTMLAnchorElement>,
-    url?: NavigationItemURL,
-    href?: string,
-  ) => {
+  const handleHashClick = (event: MouseEvent<HTMLAnchorElement>, url?: NavigationItemURL, href?: string) => {
     if (!url) return
     if (isHashLink(url) && href?.startsWith('#')) {
       navigateToHash(event, url)
@@ -162,14 +160,29 @@ export function BaseDesktopNavigation({
 
   const activeId = navigation?.items?.find((item) => isEntryActive(item))?.id ?? null
   const items = navigation?.items ?? []
+  const isGroupedDigitalNavigationItem = (item: NavigationItem) =>
+    isDigitalGroupItem(getLabelText(item.label, item.id))
   const digitalItems = items.filter((item) => isDigitalGroupItem(getLabelText(item.label, item.id)))
-  const regularItems = items.filter(
-    (item) => !isDigitalGroupItem(getLabelText(item.label, item.id)),
-  )
   const hasDigitalGroup = digitalItems.length >= 2
+  const digitalGroupComingSoon =
+    hasDigitalGroup &&
+    digitalItems.some((item) => item.comingSoon || item.submenuItems?.some((sub) => sub.comingSoon))
+  const firstDigitalItemId = hasDigitalGroup ? digitalItems[0]?.id : undefined
+  const digitalIndexes = items
+    .map((item, index) => (isGroupedDigitalNavigationItem(item) ? index : -1))
+    .filter((index) => index >= 0)
+  const areDigitalItemsContiguous = digitalIndexes.every(
+    (index, idx) => idx === 0 || index === digitalIndexes[idx - 1] + 1,
+  )
+  const firstDigitalIndex = digitalIndexes[0] ?? -1
+  const lastDigitalIndex = digitalIndexes[digitalIndexes.length - 1] ?? -1
 
-  const renderEntry = ({ id, label, url, submenuItems }: NavigationItem) => {
+  const renderEntry = (
+    { id, label, url, submenuItems, comingSoon }: NavigationItem,
+    options?: { forceComingSoon?: boolean; hideComingSoonBadge?: boolean },
+  ) => {
     const hasSubmenu = !!submenuItems?.length
+    const itemComingSoon = options?.forceComingSoon || Boolean(comingSoon)
     const isActive = hasSubmenu
       ? submenuItems.some((item) => isItemActive(item, url))
       : isMenuActive(getHref(url))
@@ -181,52 +194,94 @@ export function BaseDesktopNavigation({
       <MenuItemMotion data-value={id} key={id}>
         <MotionHighlightItem activeClassName={activeClassName}>
           {hasSubmenu ? (
-            <NavigationMenuTrigger
-              className={`${linkClassName} h-auto flex-row items-center gap-2 bg-transparent hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent`}
-              data-active={isActive}
-              onClick={(event) => handleTriggerClick(event, triggerUrl)}
-            >
-              {displayLabel}
-            </NavigationMenuTrigger>
+            <div className="relative inline-flex">
+              <NavigationMenuTrigger
+                className={cn(
+                  `${linkClassName} h-auto flex-row items-center gap-2 bg-transparent hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent`,
+                  itemComingSoon && 'pointer-events-none cursor-not-allowed opacity-45',
+                )}
+                data-active={!itemComingSoon && isActive}
+                onClick={(event) => {
+                  if (itemComingSoon) {
+                    event.preventDefault()
+                    return
+                  }
+                  handleTriggerClick(event, triggerUrl)
+                }}
+              >
+                {displayLabel}
+              </NavigationMenuTrigger>
+              {itemComingSoon && !options?.hideComingSoonBadge && (
+                <ComingSoonRibbon className="-right-2 -top-2 absolute scale-90" />
+              )}
+            </div>
           ) : (
-            <Link
-              className={linkClassName}
-              data-active={isActive}
-              data-slot="navigation-menu-link"
-              href={getHref(url)}
-              onClick={(event) => handleHashClick(event, url, getHref(url))}
-              rel={url?.isExternal ? 'noopener noreferrer' : undefined}
-              target={url?.isExternal ? '_blank' : undefined}
-            >
-              {displayLabel}
-            </Link>
+            <div className="relative inline-flex">
+              {itemComingSoon ? (
+                <span
+                  aria-disabled
+                  className={cn(linkClassName, 'cursor-not-allowed opacity-45')}
+                  data-slot="navigation-menu-link"
+                >
+                  {displayLabel}
+                </span>
+              ) : (
+                <Link
+                  className={linkClassName}
+                  data-active={isActive}
+                  data-slot="navigation-menu-link"
+                  href={getHref(url)}
+                  onClick={(event) => handleHashClick(event, url, getHref(url))}
+                  rel={url?.isExternal ? 'noopener noreferrer' : undefined}
+                  target={url?.isExternal ? '_blank' : undefined}
+                >
+                  {displayLabel}
+                </Link>
+              )}
+              {itemComingSoon && !options?.hideComingSoonBadge && (
+                <ComingSoonRibbon className="-right-2 -top-2 absolute scale-90" />
+              )}
+            </div>
           )}
         </MotionHighlightItem>
-        {hasSubmenu && (
+        {hasSubmenu && !itemComingSoon && (
           <NavigationMenuContent className="border-none bg-transparent p-2 shadow-none">
             <MotionHighlight className="rounded-lg bg-accent/10" hover>
               <ul className="min-w-[220px] space-y-1 p-2">
                 {submenuItems.map((submenuItem) => (
                   <MotionHighlightItem asChild key={submenuItem.id}>
                     <li className="relative cursor-pointer">
-                      <NavigationMenuLink asChild>
-                        <Link
-                          className={submenuLinkClassName}
-                          data-active={isMenuActive(getSubmenuHref(submenuItem.url, url))}
-                          href={getSubmenuHref(submenuItem.url, url)}
-                          onClick={(event) =>
-                            handleHashClick(
-                              event,
-                              submenuItem.url,
-                              getSubmenuHref(submenuItem.url, url),
-                            )
-                          }
-                          rel={submenuItem.url?.isExternal ? 'noopener noreferrer' : undefined}
-                          target={submenuItem.url?.isExternal ? '_blank' : undefined}
+                      {submenuItem.comingSoon ? (
+                        <span
+                          aria-disabled
+                          className={cn(
+                            submenuLinkClassName,
+                            'flex cursor-not-allowed items-center justify-between gap-2 opacity-45',
+                          )}
                         >
                           {normalizeLabel(getLabelText(submenuItem.label, submenuItem.id))}
-                        </Link>
-                      </NavigationMenuLink>
+                          <ComingSoonRibbon className="scale-75" />
+                        </span>
+                      ) : (
+                        <NavigationMenuLink asChild>
+                          <Link
+                            className={submenuLinkClassName}
+                            data-active={isMenuActive(getSubmenuHref(submenuItem.url, url))}
+                            href={getSubmenuHref(submenuItem.url, url)}
+                            onClick={(event) =>
+                              handleHashClick(
+                                event,
+                                submenuItem.url,
+                                getSubmenuHref(submenuItem.url, url),
+                              )
+                            }
+                            rel={submenuItem.url?.isExternal ? 'noopener noreferrer' : undefined}
+                            target={submenuItem.url?.isExternal ? '_blank' : undefined}
+                          >
+                            {normalizeLabel(getLabelText(submenuItem.label, submenuItem.id))}
+                          </Link>
+                        </NavigationMenuLink>
+                      )}
                     </li>
                   </MotionHighlightItem>
                 ))}
@@ -237,6 +292,57 @@ export function BaseDesktopNavigation({
       </MenuItemMotion>
     )
   }
+
+  const navigationEntries: ReactNode[] = []
+
+  items.forEach((item, index) => {
+    const isGroupedDigitalItem = isGroupedDigitalNavigationItem(item)
+
+    if (hasDigitalGroup && areDigitalItemsContiguous && index === firstDigitalIndex) {
+      const groupedItems = items
+        .slice(firstDigitalIndex, lastDigitalIndex + 1)
+        .filter(isGroupedDigitalNavigationItem)
+
+      navigationEntries.push(
+        <div
+          className={cn('relative inline-flex items-center gap-1', digitalGroupComingSoon && 'opacity-70')}
+          key="digital-products-group"
+        >
+          <span className="-translate-x-1/2 -top-0.5 absolute left-1/2 whitespace-nowrap font-extrabold text-[10px] text-muted-foreground uppercase tracking-[0.3em]">
+            Produtos Digitais
+          </span>
+          {digitalGroupComingSoon && (
+            <ComingSoonRibbon className="-translate-x-1/2 pointer-events-none absolute -bottom-4 left-1/2 scale-90" />
+          )}
+          {groupedItems.map((groupedItem) =>
+            renderEntry(groupedItem, {
+              forceComingSoon: digitalGroupComingSoon,
+              hideComingSoonBadge: digitalGroupComingSoon,
+            }),
+          )}
+        </div>,
+      )
+      return
+    }
+
+    if (
+      hasDigitalGroup &&
+      areDigitalItemsContiguous &&
+      index > firstDigitalIndex &&
+      index <= lastDigitalIndex &&
+      isGroupedDigitalItem
+    ) {
+      return
+    }
+
+    navigationEntries.push(
+      renderEntry(item, {
+        forceComingSoon: digitalGroupComingSoon && isGroupedDigitalItem,
+        hideComingSoonBadge:
+          digitalGroupComingSoon && isGroupedDigitalItem && item.id !== firstDigitalItemId,
+      }),
+    )
+  })
 
   return (
     <div className="flex items-center gap-4 lg:flex-nowrap">
@@ -251,20 +357,7 @@ export function BaseDesktopNavigation({
               mode="parent"
               value={activeId}
             >
-              {hasDigitalGroup
-                ? [
-                    ...regularItems.map((item) => renderEntry(item)),
-                    <div
-                      className="relative inline-flex items-center gap-1"
-                      key="digital-products-group"
-                    >
-                      <span className="-translate-x-1/2 -top-0.5 absolute left-1/2 whitespace-nowrap font-extrabold text-[10px] text-muted-foreground uppercase tracking-[0.3em]">
-                        Produtos Digitais
-                      </span>
-                      {digitalItems.map((item) => renderEntry(item))}
-                    </div>,
-                  ]
-                : items.map((item) => renderEntry(item))}
+              {navigationEntries}
             </MotionHighlight>
           </NavigationMenuList>
         </NavigationMenu>

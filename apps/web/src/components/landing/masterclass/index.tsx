@@ -6,6 +6,7 @@ import { FinalCTA } from '@ez/web/components/landing/masterclass/final-cta'
 import { ForWho } from '@ez/web/components/landing/masterclass/for-who'
 import { Hero } from '@ez/web/components/landing/masterclass/hero'
 import { Problem } from '@ez/web/components/landing/masterclass/problem'
+import { Testimonials } from '@ez/web/components/landing/masterclass/testimonials'
 import type { Landing } from '@ez/web/types/landing'
 import type {
   SectionMasterclassCatalog,
@@ -14,6 +15,7 @@ import type {
   SectionMasterclassForWho,
   SectionMasterclassHero,
   SectionMasterclassProblem,
+  SectionMasterclassTestimonials,
 } from '@ez/web/types/landing/masterclass'
 import { useLocale } from 'next-intl'
 
@@ -53,6 +55,16 @@ export function LandingPageMasterclass({ data }: { data: Landing<'masterclass'> 
           return (
             <Expert
               data={section as SectionMasterclassExpert}
+              key={section._type}
+              locale={locale}
+            />
+          )
+        }
+
+        if (section._type === 'masterclass.testimonials') {
+          return (
+            <Testimonials
+              data={section as SectionMasterclassTestimonials}
               key={section._type}
               locale={locale}
             />

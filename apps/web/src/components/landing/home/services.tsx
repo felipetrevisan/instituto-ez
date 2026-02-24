@@ -1,6 +1,8 @@
 'use client'
 
+import { cn } from '@ez/shared/lib/utils'
 import { CallAction } from '@ez/web/components/ui/call-action-button'
+import { ComingSoonRibbon } from '@ez/web/components/ui/coming-soon-ribbon'
 import { Icon } from '@ez/web/components/ui/icon'
 import { StickySection } from '@ez/web/components/ui/sticky-section'
 import { urlForImage } from '@ez/web/config/image'
@@ -12,12 +14,24 @@ import { motion } from 'motion/react'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
-export const Services = ({ data, locale }: { data: SectionHomeServices; locale: string }) => {
+export const Services = ({
+  data,
+  locale,
+  comingSoon = false,
+}: {
+  data: SectionHomeServices
+  locale: string
+  comingSoon?: boolean
+}) => {
   const t = useTranslations('LandingPageHome')
 
   return (
     <StickySection className="relative bg-background py-20 md:py-32" id="services">
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      {comingSoon && (
+        <ComingSoonRibbon className="absolute top-6 right-6 z-20 px-4 py-1.5 text-xs tracking-[0.22em]" />
+      )}
+      <div className={cn(comingSoon && 'grayscale')}>
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           animate={{ opacity: 1, y: 0 }}
           className="mb-4 text-center"
@@ -145,6 +159,7 @@ export const Services = ({ data, locale }: { data: SectionHomeServices; locale: 
             </motion.div>
           )}
         </div>
+      </div>
       </div>
     </StickySection>
   )

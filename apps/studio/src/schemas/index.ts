@@ -53,6 +53,7 @@ import {
   mentorShipObject,
   servicesObject as servicesHomeObject,
   servicesItemObject as servicesItemHomeObject,
+  testimonialsObject as testimonialsHomeObject,
 } from '@ez/studio/schemas/documents/landing/home'
 import {
   experienceElementsObject,
@@ -77,6 +78,7 @@ import {
   forWhoObject as forWhoMasterclassObject,
   heroObject as heroMasterclassObject,
   problemObject as problemMasterclassObject,
+  testimonialsObject as testimonialsMasterclassObject,
 } from '@ez/studio/schemas/documents/landing/masterclass'
 import {
   benefitsItemObject as benefitsItemMathematizerObject,
@@ -234,6 +236,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     forWhoMasterclassObject,
     heroMasterclassObject,
     problemMasterclassObject,
+    testimonialsMasterclassObject,
 
     // Home
     servicesHomeObject,
@@ -247,6 +250,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     digitalProductsCardObject,
     digitalProductsObject,
     immersionObject,
+    testimonialsHomeObject,
 
     // Digital Products
     ebooksObject,

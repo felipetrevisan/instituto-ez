@@ -9,6 +9,7 @@ import mentorShipObject from '@ez/studio/schemas/documents/landing/home/objects/
 import mentorShipItemObject from '@ez/studio/schemas/documents/landing/home/objects/mentor-ship-item'
 import servicesObject from '@ez/studio/schemas/documents/landing/home/objects/services'
 import servicesItemObject from '@ez/studio/schemas/documents/landing/home/objects/services-item'
+import testimonialsObject from '@ez/studio/schemas/documents/landing/home/objects/testimonials'
 
 export {
   mathematizerObject,
@@ -22,4 +23,5 @@ export {
   digitalProductsObject,
   digitalProductsCardObject,
   immersionObject,
+  testimonialsObject,
 }

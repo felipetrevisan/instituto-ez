@@ -4,5 +4,14 @@ import finalCtaObject from '@ez/studio/schemas/documents/landing/masterclass/obj
 import forWhoObject from '@ez/studio/schemas/documents/landing/masterclass/objects/for-who'
 import heroObject from '@ez/studio/schemas/documents/landing/masterclass/objects/hero'
 import problemObject from '@ez/studio/schemas/documents/landing/masterclass/objects/problem'
+import testimonialsObject from '@ez/studio/schemas/documents/landing/masterclass/objects/testimonials'
 
-export { catalogObject, expertObject, finalCtaObject, forWhoObject, heroObject, problemObject }
+export {
+  catalogObject,
+  expertObject,
+  finalCtaObject,
+  forWhoObject,
+  heroObject,
+  problemObject,
+  testimonialsObject,
+}

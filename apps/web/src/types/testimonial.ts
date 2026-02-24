@@ -10,6 +10,8 @@ export type Testimonial = {
   rating?: number
   showStars?: boolean
   testimonial: PortableTextBlock[]
-  category: string[]
-  ebook_page?: SanityReference
+  categories?: string[]
+  displayAreas?: Array<'home' | 'masterclass' | 'ebook'>
+  masterclassPage?: SanityReference
+  ebookPage?: SanityReference
 }

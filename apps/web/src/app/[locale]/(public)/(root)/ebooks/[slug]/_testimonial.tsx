@@ -2,19 +2,14 @@
 
 import { TestimonialComponent } from '@ez/shared/sanity/components/testimonial'
 import { Title } from '@ez/shared/ui/title'
-import { useTestimonialsByEbook } from '@ez/web/hooks/use-testimonials'
+import { useTestimonialsByEbookId } from '@ez/web/hooks/use-testimonials'
 import type { Ebook } from '@ez/web/types/ebook'
-import { useLocale, useTranslations } from 'next-intl'
+import { useTranslations } from 'next-intl'
 
 export function Testimonial({ data }: { data: Ebook }) {
-  const locale = useLocale()
   const t = useTranslations('Ebooks')
 
-  const { data: testimonials, isLoading } = useTestimonialsByEbook(
-    'ebook',
-    data.slug?.[locale]?.current,
-    locale,
-  )
+  const { data: testimonials, isLoading } = useTestimonialsByEbookId(data.id)
 
   if (isLoading) return null
 

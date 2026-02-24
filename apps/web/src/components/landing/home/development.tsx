@@ -2,6 +2,7 @@
 
 import { cn } from '@ez/shared/lib/utils'
 import { CallAction } from '@ez/web/components/ui/call-action-button'
+import { ComingSoonRibbon } from '@ez/web/components/ui/coming-soon-ribbon'
 import { Icon } from '@ez/web/components/ui/icon'
 import { StickySection } from '@ez/web/components/ui/sticky-section'
 import type { SectionHomeDevelopment } from '@ez/web/types/landing/home'
@@ -9,15 +10,33 @@ import { createPortableComponents } from '@ez/web/utils/create-portable-componen
 import { PortableText } from '@portabletext/react'
 import { motion } from 'motion/react'
 
-export const Development = ({ data, locale }: { data: SectionHomeDevelopment; locale: string }) => {
+export const Development = ({
+  data,
+  locale,
+  comingSoon = false,
+}: {
+  data: SectionHomeDevelopment
+  locale: string
+  comingSoon?: boolean
+}) => {
   const colors = ['blue', 'emerald', 'amber', 'cyan']
 
   return (
-    <StickySection className="relative bg-brand-light py-20 md:py-32" id="development">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(var(--brand-primary-rgb),0.05),transparent_50%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(var(--brand-accent-rgb),0.03),transparent_50%)]" />
+    <StickySection
+      className={cn(
+        'relative py-20 md:py-32',
+        comingSoon ? 'bg-zinc-100 dark:bg-zinc-900' : 'bg-brand-light',
+      )}
+      id="development"
+    >
+      {comingSoon && (
+        <ComingSoonRibbon className="absolute top-6 right-6 z-20 px-4 py-1.5 text-xs tracking-[0.22em]" />
+      )}
+      <div className={cn(comingSoon && 'grayscale')}>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(var(--brand-primary-rgb),0.05),transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(var(--brand-accent-rgb),0.03),transparent_50%)]" />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           animate={{ opacity: 1, y: 0 }}
           className="mb-4 text-center"
@@ -125,6 +144,7 @@ export const Development = ({ data, locale }: { data: SectionHomeDevelopment; lo
             })}
           </motion.div>
         )}
+        </div>
       </div>
     </StickySection>
   )

@@ -21,6 +21,13 @@ export default defineType({
       validation: (Rule) => Rule.required().warning(),
     }),
     defineField({
+      name: 'coming_soon',
+      title: 'Coming Soon?',
+      description: 'When enabled, this item is shown as unavailable with an "Em breve" ribbon.',
+      type: 'boolean',
+      initialValue: false,
+    }),
+    defineField({
       name: 'submenu_items',
       title: 'Submenu Items',
       type: 'array',
