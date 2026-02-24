@@ -84,7 +84,11 @@ export function BaseMobileNavigation({
     return parentHref && hash ? `${parentHref}${hash}` : (hash ?? '#')
   }
 
-  const handleLinkClick = (e: MouseEvent<HTMLAnchorElement>, url?: NavigationItemURL, href?: string) => {
+  const handleLinkClick = (
+    e: MouseEvent<HTMLAnchorElement>,
+    url?: NavigationItemURL,
+    href?: string,
+  ) => {
     setIsMenuOpen(false)
     if (!url) return
     if (isHashLink(url) && href?.startsWith('#')) {
@@ -120,14 +124,23 @@ export function BaseMobileNavigation({
         const displayLabel = normalizeLabel(getLabelText(label, id))
         const isGroupedDigitalItem = isDigitalGroupItem(displayLabel)
         const showDigitalGroupLabel =
-          hasDigitalGroup && areDigitalItemsContiguous && isGroupedDigitalItem && id === firstDigitalItemId
-        const itemComingSoon = (digitalGroupComingSoon && isDigitalGroupItem(displayLabel)) || Boolean(comingSoon)
+          hasDigitalGroup &&
+          areDigitalItemsContiguous &&
+          isGroupedDigitalItem &&
+          id === firstDigitalItemId
+        const itemComingSoon =
+          (digitalGroupComingSoon && isDigitalGroupItem(displayLabel)) || Boolean(comingSoon)
         const showCenteredGroupedBadge = showDigitalGroupLabel && digitalGroupComingSoon
-        const showComingSoonBadge = itemComingSoon && (!digitalGroupComingSoon || id === firstDigitalItemId)
+        const showComingSoonBadge =
+          itemComingSoon && (!digitalGroupComingSoon || id === firstDigitalItemId)
 
         if (!hasSubmenu) {
           return (
-            <motion.div className="relative flex w-full flex-col" key={id} variants={menuItemVariants}>
+            <motion.div
+              className="relative flex w-full flex-col"
+              key={id}
+              variants={menuItemVariants}
+            >
               {showDigitalGroupLabel && (
                 <div className="pt-3 pb-1 text-center">
                   <span className="font-extrabold text-[10px] text-muted-foreground uppercase tracking-[0.3em]">
@@ -137,7 +150,10 @@ export function BaseMobileNavigation({
               )}
               <div className="relative flex w-full items-center justify-center">
                 {itemComingSoon ? (
-                  <span aria-disabled className={cn(linkClassName, 'cursor-not-allowed opacity-45')}>
+                  <span
+                    aria-disabled
+                    className={cn(linkClassName, 'cursor-not-allowed opacity-45')}
+                  >
                     {displayLabel}
                   </span>
                 ) : (
@@ -157,14 +173,18 @@ export function BaseMobileNavigation({
                 )}
               </div>
               {showCenteredGroupedBadge && (
-                <ComingSoonRibbon className="-translate-x-1/2 pointer-events-none absolute -bottom-3 left-1/2 z-10 scale-75" />
+                <ComingSoonRibbon className="-translate-x-1/2 -bottom-3 pointer-events-none absolute left-1/2 z-10 scale-75" />
               )}
             </motion.div>
           )
         }
 
         return (
-          <motion.div className="relative flex w-full flex-col" key={id} variants={menuItemVariants}>
+          <motion.div
+            className="relative flex w-full flex-col"
+            key={id}
+            variants={menuItemVariants}
+          >
             {showDigitalGroupLabel && (
               <div className="pt-3 pb-1 text-center">
                 <span className="font-extrabold text-[10px] text-muted-foreground uppercase tracking-[0.3em]">
@@ -194,10 +214,14 @@ export function BaseMobileNavigation({
                   <div className="flex flex-col border-primary/5 border-t">
                     {submenuItems?.map((submenuItem) => {
                       const submenuComingSoon =
-                        Boolean(submenuItem.comingSoon) || (itemComingSoon && !digitalGroupComingSoon)
+                        Boolean(submenuItem.comingSoon) ||
+                        (itemComingSoon && !digitalGroupComingSoon)
 
                       return (
-                        <div className="relative flex items-center justify-center" key={submenuItem.id}>
+                        <div
+                          className="relative flex items-center justify-center"
+                          key={submenuItem.id}
+                        >
                           {submenuComingSoon ? (
                             <span className="w-full cursor-not-allowed px-6 py-2 text-center text-foreground/70 text-sm opacity-45">
                               {normalizeLabel(getLabelText(submenuItem.label, submenuItem.id))}
@@ -231,7 +255,7 @@ export function BaseMobileNavigation({
               </AccordionItem>
             </Accordion>
             {showCenteredGroupedBadge && (
-              <ComingSoonRibbon className="-translate-x-1/2 pointer-events-none absolute -bottom-3 left-1/2 z-10 scale-75" />
+              <ComingSoonRibbon className="-translate-x-1/2 -bottom-3 pointer-events-none absolute left-1/2 z-10 scale-75" />
             )}
           </motion.div>
         )

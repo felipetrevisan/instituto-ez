@@ -19,7 +19,10 @@ const defaultHomeComingSoonMap: HomeComingSoonMap = {
 }
 
 const normalizeText = (value: string) =>
-  value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+  value
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
 
 const toTokenList = (value: unknown): string[] => {
   if (!value) return []
@@ -45,7 +48,13 @@ const resolveFeatureFlags = (tokens: string[]) => {
     services: includesAny(tokens, ['service', 'servico', 'atendimento']),
     mentorship: includesAny(tokens, ['mentorship', 'mentoria', 'mentoring']),
     mathematizer: includesAny(tokens, ['mathematizer', 'matematizador']),
-    development: includesAny(tokens, ['workshop', 'palestra', 'lecture', 'development', 'desenvolvimento']),
+    development: includesAny(tokens, [
+      'workshop',
+      'palestra',
+      'lecture',
+      'development',
+      'desenvolvimento',
+    ]),
     immersion: includesAny(tokens, ['immersion', 'imersao']),
     digitalProducts: includesAny(tokens, [
       'masterclass',

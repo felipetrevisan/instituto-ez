@@ -1,5 +1,5 @@
 import { getImageDimensions, type SanityImageSource } from '@sanity/asset-utils'
-import type { ImageUrlBuilder } from '@sanity/image-url/lib/types/builder'
+import type { ImageUrlBuilder } from '@sanity/image-url'
 
 const ImageComponent = ({
   value,

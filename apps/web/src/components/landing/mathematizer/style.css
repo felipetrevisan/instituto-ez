@@ -1,9 +1,7 @@
+@reference "../../../app/styles.css";
+
 @layer base {
   [data-theme="mathematizer"] {
-    /* * {
-      @apply border-border;
-    } */
-
     body {
       @apply text-foreground font-sans antialiased border-4;
     }

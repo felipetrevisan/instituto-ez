@@ -57,7 +57,9 @@ export const Testimonials = ({
             </h2>
           )}
 
-          {description && <p className="text-lg text-muted-foreground leading-relaxed">{description}</p>}
+          {description && (
+            <p className="text-lg text-muted-foreground leading-relaxed">{description}</p>
+          )}
         </motion.div>
 
         <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-2 lg:grid-cols-3">
@@ -68,7 +70,7 @@ export const Testimonials = ({
 
             return (
               <motion.div
-                className="group relative flex h-[360px] flex-col overflow-hidden rounded-2xl border border-accent/20 bg-card/90 p-6 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-xl md:h-[380px]"
+                className="group hover:-translate-y-1 relative flex h-[360px] flex-col overflow-hidden rounded-2xl border border-accent/20 bg-card/90 p-6 shadow-sm backdrop-blur-sm transition-all duration-300 hover:border-accent/40 hover:shadow-xl md:h-[380px]"
                 initial={{ opacity: 0, y: 20 }}
                 key={item.id}
                 transition={{ duration: 0.5, delay: index * 0.05 }}

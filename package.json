@@ -33,8 +33,9 @@
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
     "@types/node": "^20",
-    "@types/react": "19.2.1",
-    "@types/react-dom": "19.2.1",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "baseline-browser-mapping": "2.10.0",
     "jsdom": "^25.0.1",
     "tailwindcss": "^4.1.7",
     "turbo": "2.5.5",
@@ -43,11 +44,12 @@
   },
   "pnpm": {
     "overrides": {
-      "react": "19.2.1",
-      "react-dom": "19.2.1",
-      "@types/react": "19.2.1",
-      "@types/react-dom": "19.2.1",
-      "lucide-react": "^0.474.0"
+      "react": "19.2.4",
+      "react-dom": "19.2.4",
+      "@types/react": "19.2.14",
+      "@types/react-dom": "19.2.3",
+      "lucide-react": "^0.474.0",
+      "baseline-browser-mapping": "2.10.0"
     }
   },
   "engines": {

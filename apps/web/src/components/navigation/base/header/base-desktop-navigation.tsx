@@ -14,8 +14,8 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from '@ez/shared/ui/navigation-menu'
-import { FadeIn } from '@ez/web/components/ui/fade-in'
 import { ComingSoonRibbon } from '@ez/web/components/ui/coming-soon-ribbon'
+import { FadeIn } from '@ez/web/components/ui/fade-in'
 import { useApp } from '@ez/web/hooks/use-app'
 import type { Navigation, NavigationItem, NavigationItemURL } from '@ez/web/types/site'
 import { getLocalizedLink } from '@ez/web/utils/get-localized-link'
@@ -108,7 +108,11 @@ export function BaseDesktopNavigation({
     return getHref(submenuUrl)
   }
 
-  const handleHashClick = (event: MouseEvent<HTMLAnchorElement>, url?: NavigationItemURL, href?: string) => {
+  const handleHashClick = (
+    event: MouseEvent<HTMLAnchorElement>,
+    url?: NavigationItemURL,
+    href?: string,
+  ) => {
     if (!url) return
     if (isHashLink(url) && href?.startsWith('#')) {
       navigateToHash(event, url)
@@ -305,14 +309,17 @@ export function BaseDesktopNavigation({
 
       navigationEntries.push(
         <div
-          className={cn('relative inline-flex items-center gap-1', digitalGroupComingSoon && 'opacity-70')}
+          className={cn(
+            'relative inline-flex items-center gap-1',
+            digitalGroupComingSoon && 'opacity-70',
+          )}
           key="digital-products-group"
         >
           <span className="-translate-x-1/2 -top-0.5 absolute left-1/2 whitespace-nowrap font-extrabold text-[10px] text-muted-foreground uppercase tracking-[0.3em]">
             Produtos Digitais
           </span>
           {digitalGroupComingSoon && (
-            <ComingSoonRibbon className="-translate-x-1/2 pointer-events-none absolute -bottom-4 left-1/2 scale-90" />
+            <ComingSoonRibbon className="-translate-x-1/2 -bottom-4 pointer-events-none absolute left-1/2 scale-90" />
           )}
           {groupedItems.map((groupedItem) =>
             renderEntry(groupedItem, {
