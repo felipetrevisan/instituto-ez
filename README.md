@@ -79,7 +79,7 @@ ez-site/
 ### Build & Dev Tools
 - **Turborepo** - Build system para monorepos
 - **Biome** - Linter e formatter
-- **pnpm 10.4.1** - Gerenciador de pacotes
+- **Bun 1.2** - Gerenciador de pacotes
 
 ### Analytics & Performance
 - **@vercel/analytics** - Analytics da Vercel
@@ -150,13 +150,13 @@ packages/shared/
 ### Pré-requisitos
 
 - Node.js 22.x
-- pnpm 10.4.1
+- Bun 1.2
 
 ### Instalação
 
 ```bash
 # Instalar dependências
-pnpm install
+bun install
 
 # Configurar variáveis de ambiente
 # Copie .env.example para .env e preencha as variáveis necessárias
@@ -166,23 +166,23 @@ pnpm install
 
 ```bash
 # Iniciar aplicação web
-pnpm dev:web
+bun run dev:web
 
 # Iniciar Sanity Studio
-pnpm dev:studio
+bun run dev:studio
 
 # Executar linter
-pnpm lint:apps:check
+bun run lint:apps:check
 
 # Formatar código
-pnpm lint:apps:format
+bun run lint:apps:format
 ```
 
 ### Build
 
 ```bash
 # Build de todos os workspaces
-pnpm build
+bun run build
 ```
 
 ## 🔧 Configuração
@@ -212,23 +212,23 @@ Consulte `apps/web/src/config/env.ts` para a lista completa de variáveis.
 ## 📝 Scripts Disponíveis
 
 ### Root
-- `pnpm build` - Build de todos os workspaces
-- `pnpm dev:web` - Inicia o servidor de desenvolvimento do web
-- `pnpm dev:studio` - Inicia o Sanity Studio
-- `pnpm lint:apps:check` - Verifica linting nos apps
-- `pnpm lint:apps:format` - Formata código dos apps
-- `pnpm lint:packages:check` - Verifica linting nos packages
-- `pnpm lint:packages:format` - Formata código dos packages
+- `bun run build` - Build de todos os workspaces
+- `bun run dev:web` - Inicia o servidor de desenvolvimento do web
+- `bun run dev:studio` - Inicia o Sanity Studio
+- `bun run lint:apps:check` - Verifica linting nos apps
+- `bun run lint:apps:format` - Formata código dos apps
+- `bun run lint:packages:check` - Verifica linting nos packages
+- `bun run lint:packages:format` - Formata código dos packages
 
 ### Web App
-- `pnpm --filter web dev` - Desenvolvimento
-- `pnpm --filter web build` - Build de produção
-- `pnpm --filter web start` - Inicia servidor de produção
+- `bun run --filter '@ez/web' dev` - Desenvolvimento
+- `bun run --filter '@ez/web' build` - Build de produção
+- `bun run --filter '@ez/web' start` - Inicia servidor de produção
 
 ### Studio
-- `pnpm --filter studio dev` - Desenvolvimento
-- `pnpm --filter studio build` - Build
-- `pnpm --filter studio deploy` - Deploy do studio
+- `bun run --filter '@ez/studio' dev` - Desenvolvimento
+- `bun run --filter '@ez/studio' build` - Build
+- `bun run --filter '@ez/studio' deploy` - Deploy do studio
 
 ## 🌍 Internacionalização
 

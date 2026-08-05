@@ -6,7 +6,7 @@ function Input({
   type,
   icon: Icon,
   ...props
-}: React.ComponentProps<typeof motion.input> & { icon?: React.ElementType }) {
+}: React.ComponentProps<typeof motion.input> & { icon?: React.ComponentType }) {
   return (
     <div className="relative">
       {Icon && (

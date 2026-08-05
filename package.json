@@ -8,12 +8,12 @@
   ],
   "scripts": {
     "build": "turbo run build",
-    "dev:web": "pnpm --filter web dev",
-    "dev:studio": "pnpm --filter studio dev",
-    "lint:apps:check": "pnpm biome check --formatter-enabled=true --linter-enabled=true ./apps/**/src",
-    "lint:apps:format": "pnpm biome format --write ./apps/**/src",
-    "lint:packages:check": "pnpm biome check --formatter-enabled=true --linter-enabled=true ./packages/**/src",
-    "lint:packages:format": "pnpm biome format --write ./packages/**/src",
+    "dev:web": "bun run --filter '@ez/web' dev",
+    "dev:studio": "bun run --filter '@ez/studio' dev",
+    "lint:apps:check": "biome check --formatter-enabled=true --linter-enabled=true ./apps/**/src",
+    "lint:apps:format": "biome format --write ./apps/**/src",
+    "lint:packages:check": "biome check --formatter-enabled=true --linter-enabled=true ./packages/**/src",
+    "lint:packages:format": "biome format --write ./packages/**/src",
     "test": "vitest run",
     "test:watch": "vitest"
   },
@@ -39,21 +39,23 @@
     "jsdom": "^25.0.1",
     "tailwindcss": "^4.1.7",
     "turbo": "2.5.5",
-    "typescript": "^5.8",
+    "typescript": "5.8.3",
     "vitest": "^3.2.0"
   },
-  "pnpm": {
-    "overrides": {
-      "react": "19.2.4",
-      "react-dom": "19.2.4",
-      "@types/react": "19.2.14",
-      "@types/react-dom": "19.2.3",
-      "lucide-react": "^0.474.0",
-      "baseline-browser-mapping": "2.10.0"
-    }
+  "overrides": {
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "lucide-react": "^0.474.0",
+    "baseline-browser-mapping": "2.10.0"
   },
   "engines": {
     "node": "22.x"
   },
-  "packageManager": "pnpm@10.24.0"
+  "packageManager": "bun@1.2.2",
+  "trustedDependencies": [
+    "@parcel/watcher",
+    "@tailwindcss/oxide"
+  ]
 }

@@ -147,7 +147,7 @@ function TypingText<T extends React.ElementType = 'span'>({
     }
   }, [text, duration, started, loop, holdDelay])
 
-  const Component = asChild || 'span'
+  const Component = (asChild || 'span') as React.ElementType
 
   return (
     <Component data-slot="typing-text" ref={localRef} {...props}>

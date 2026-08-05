@@ -1,7 +1,7 @@
 import { cn } from '@ez/shared/lib/utils'
 import { Slot } from '@radix-ui/react-slot'
 import { cva, type VariantProps } from 'class-variance-authority'
-import type * as React from 'react'
+import * as React from 'react'
 
 type TitleProps = {
   asChild?: boolean
@@ -109,13 +109,12 @@ function Subtitle({
 }
 
 function TitleBase({ as = 'h2', asChild = false, className, children, ...props }: TitleProps) {
-  const Comp = asChild ? Slot : as
+  // biome-ignore lint/suspicious/noExplicitAny: polymorphic "as" element, JSX/createElement can't resolve props across the full IntrinsicElements union otherwise
+  const Comp = (asChild ? Slot : as) as React.ElementType<any>
 
-  return (
-    <Comp className={className} data-slot="title" {...props}>
-      {children}
-    </Comp>
-  )
+  // JSX can't resolve children arity across the full IntrinsicElements union
+  // (collapses to `never`), so this renders via createElement instead.
+  return React.createElement(Comp, { className, 'data-slot': 'title', ...props }, children)
 }
 
 export { TitleBase, Title, Subtitle }

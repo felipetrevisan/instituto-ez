@@ -37,25 +37,27 @@ function WritingText<T extends React.ElementType = 'span'>({
 
   const Component = asChild || 'span'
 
-  return (
-    <Component data-slot="writing-text" ref={localRef} {...props}>
-      {words.map((word, index) => (
-        <motion.span
-          animate={isInView ? { opacity: 1, y: 0 } : undefined}
-          className="inline-block will-change-opacity will-change-transform"
-          initial={{ opacity: 0, y: 10 }}
-          // biome-ignore lint/suspicious/noArrayIndexKey: using index as key is acceptable here
-          key={index}
-          style={{ marginRight: spacing }}
-          transition={{
-            ...transition,
-            delay: index * (transition?.delay ?? 0),
-          }}
-        >
-          {word}{' '}
-        </motion.span>
-      ))}
-    </Component>
+  // JSX can't resolve a generic ElementType's children arity here (collapses to
+  // `never`), so this renders via createElement instead of `<Component>` JSX.
+  return React.createElement(
+    Component,
+    { 'data-slot': 'writing-text', ref: localRef, ...props },
+    words.map((word, index) => (
+      <motion.span
+        animate={isInView ? { opacity: 1, y: 0 } : undefined}
+        className="inline-block will-change-opacity will-change-transform"
+        initial={{ opacity: 0, y: 10 }}
+        // biome-ignore lint/suspicious/noArrayIndexKey: using index as key is acceptable here
+        key={index}
+        style={{ marginRight: spacing }}
+        transition={{
+          ...transition,
+          delay: index * (transition?.delay ?? 0),
+        }}
+      >
+        {word}{' '}
+      </motion.span>
+    )),
   )
 }
 

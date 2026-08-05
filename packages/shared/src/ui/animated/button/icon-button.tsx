@@ -24,7 +24,7 @@ const themes = {
 }
 
 type IconButtonProps = Omit<HTMLMotionProps<'button'>, 'color'> & {
-  icon: React.ElementType
+  icon: React.ComponentType
   active?: boolean
   className?: string
   animated?: boolean
