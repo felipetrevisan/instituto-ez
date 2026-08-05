@@ -1,0 +1,261 @@
+/*
+ * Isolated design tokens for the v1 redesign (Navy + Copper / "Neuro-Vision").
+ * Scoped under .rdg-scope so nothing here can collide with the existing
+ * site's Tailwind theme tokens (--primary, --background, etc). Colors are
+ * unified from the Stitch export, which used slightly different copper
+ * shades across screens (#ffb77b in sobre/DESIGN.md vs #cc8e5c in home).
+ */
+
+/*
+ * Theme tokens. `next-themes` (already wired up app-wide in
+ * app/[locale]/providers.tsx, attribute="class") toggles a `dark`/`light`
+ * class on <html> — these blocks just supply the two token sets it
+ * switches between. Everything else in this file reads the vars below, so
+ * it repaints for free.
+ */
+.dark .rdg-scope {
+  --rdg-bg: #111317;
+  --rdg-bg-lowest: #0c0e12;
+  --rdg-surface: #1e2023;
+  --rdg-surface-low: #1a1c1f;
+  --rdg-surface-high: #282a2e;
+  --rdg-navy-deep: #0a1128;
+
+  --rdg-on-surface: #e2e2e7;
+  --rdg-on-surface-variant: #c6c6ce;
+
+  --rdg-copper: #cc8e5c;
+  --rdg-copper-light: #ffb77b;
+  --rdg-copper-dark: #7a4100;
+  --rdg-on-copper: #2e1500;
+
+  --rdg-outline-ghost: rgb(255 255 255 / 10%);
+  --rdg-scrim: rgb(255 255 255 / 5%);
+  --rdg-glass-from: rgb(35 37 41 / 88%);
+  --rdg-glass-to: rgb(24 26 29 / 82%);
+
+  color-scheme: dark;
+}
+
+.light .rdg-scope {
+  --rdg-bg: #f7f4ef;
+  --rdg-bg-lowest: #ffffff;
+  --rdg-surface: #ffffff;
+  --rdg-surface-low: #efe9e1;
+  --rdg-surface-high: #e3dccf;
+  --rdg-navy-deep: #eef1fb;
+
+  --rdg-on-surface: #211c15;
+  --rdg-on-surface-variant: #5b5348;
+
+  --rdg-copper: #a8662f;
+  --rdg-copper-light: #c98247;
+  --rdg-copper-dark: #6b3d15;
+  --rdg-on-copper: #fff9f4;
+
+  --rdg-outline-ghost: rgb(0 0 0 / 10%);
+  --rdg-scrim: rgb(0 0 0 / 5%);
+  --rdg-glass-from: rgb(255 255 255 / 82%);
+  --rdg-glass-to: rgb(247 244 239 / 88%);
+
+  color-scheme: light;
+}
+
+.rdg-scope {
+  --rdg-radius-card: 1.5rem;
+  --rdg-radius-card-lg: 3rem;
+
+  position: relative;
+  background: var(--rdg-bg);
+  color: var(--rdg-on-surface);
+  font-family: var(--font-hanken), sans-serif;
+}
+
+/*
+ * Subtle film grain. Deliberately NOT mix-blend-mode — blending a fixed
+ * full-viewport layer against constantly-changing content forces the
+ * compositor to repaint it every scroll frame, which was the single
+ * biggest cause of scroll jank on this page. Plain low-opacity overlay
+ * instead: composites on its own layer, basically free.
+ */
+.rdg-scope::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.rdg-scope .rdg-display {
+  font-size: clamp(2.5rem, 6vw + 1rem, 5.5rem);
+  line-height: 1.02;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.rdg-scope .rdg-headline {
+  font-size: clamp(1.75rem, 2.4vw + 1.2rem, 2.5rem);
+  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.rdg-scope .rdg-label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.rdg-scope .rdg-label::before {
+  content: '';
+  width: 1.25em;
+  height: 1px;
+  background: currentcolor;
+  opacity: 0.6;
+}
+
+.rdg-scope .rdg-glass {
+  position: relative;
+  background: linear-gradient(160deg, var(--rdg-glass-from), var(--rdg-glass-to));
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--rdg-outline-ghost);
+  box-shadow:
+    0 1px 0 0 rgb(255 255 255 / 6%) inset,
+    0 20px 40px -24px rgb(0 0 0 / 60%);
+  transition:
+    border-color 0.4s ease,
+    box-shadow 0.4s ease,
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.rdg-scope .rdg-glass:hover {
+  border-color: rgb(204 142 92 / 35%);
+  box-shadow:
+    0 1px 0 0 rgb(255 255 255 / 8%) inset,
+    0 24px 48px -20px rgb(0 0 0 / 70%),
+    0 0 32px -8px rgb(204 142 92 / 25%);
+  transform: translateY(-4px);
+}
+
+.rdg-scope .rdg-copper-text {
+  background: linear-gradient(135deg, var(--rdg-copper-light) 0%, var(--rdg-copper) 100%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.rdg-scope .rdg-copper-gradient {
+  background: linear-gradient(135deg, var(--rdg-copper-light) 0%, var(--rdg-copper-dark) 100%);
+}
+
+.rdg-scope .rdg-btn {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 9999px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease,
+    background-color 0.35s ease;
+}
+
+.rdg-scope .rdg-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(115deg, transparent 30%, rgb(255 255 255 / 35%) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 0.6s ease;
+}
+
+.rdg-scope .rdg-btn:hover::before {
+  transform: translateX(120%);
+}
+
+.rdg-scope .rdg-btn-primary {
+  background: linear-gradient(135deg, var(--rdg-copper-light) 0%, var(--rdg-copper-dark) 100%);
+  color: var(--rdg-on-copper);
+  box-shadow: 0 8px 24px -8px rgb(204 142 92 / 45%);
+}
+
+.rdg-scope .rdg-btn-primary:hover {
+  box-shadow: 0 12px 32px -6px rgb(204 142 92 / 60%);
+  transform: translateY(-2px) scale(1.02);
+}
+
+.rdg-scope .rdg-btn-ghost {
+  border: 1.5px solid var(--rdg-copper);
+  color: var(--rdg-copper);
+}
+
+.rdg-scope .rdg-btn-ghost:hover {
+  background: rgb(204 142 92 / 10%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -10px rgb(204 142 92 / 40%);
+}
+
+.rdg-scope .rdg-btn span,
+.rdg-scope .rdg-btn svg {
+  position: relative;
+}
+
+/* Nav link — copper underline sweeps in from the left on hover/focus. */
+.rdg-scope .rdg-nav-link {
+  position: relative;
+  padding-bottom: 0.2rem;
+}
+
+.rdg-scope .rdg-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: var(--rdg-copper);
+  transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.rdg-scope .rdg-nav-link:hover::after,
+.rdg-scope .rdg-nav-link:focus-visible::after,
+.rdg-scope .rdg-nav-link[data-open='true']::after {
+  width: 100%;
+}
+
+/* Nav dropdown row — icon glows copper and the row nudges right on hover. */
+.rdg-scope .rdg-nav-row {
+  transition:
+    background-color 0.3s ease,
+    padding-left 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.rdg-scope .rdg-nav-row:hover {
+  background: var(--rdg-scrim);
+  padding-left: 1rem;
+}
+
+.rdg-scope .rdg-nav-row-icon {
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.rdg-scope .rdg-nav-row:hover .rdg-nav-row-icon {
+  background: var(--rdg-copper);
+  color: var(--rdg-on-copper);
+  transform: scale(1.08) rotate(-6deg);
+}
