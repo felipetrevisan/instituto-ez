@@ -10,9 +10,7 @@
     ],
     "baseUrl": "./src",
     "paths": {
-      "@ez/web/*": ["*"],
-      "@ez/assets/*": ["../public/assets/*"],
-      "@ez/shared/*": ["../../../packages/shared/src/*"]
+      "@ez/web/*": ["*"]
     }
   },
   "include": ["web/next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

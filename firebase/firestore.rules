@@ -1,0 +1,15 @@
+rules_version = '2';
+
+// O site público lê o catálogo pelo servidor (Firebase Admin, que ignora estas regras).
+// No navegador, somente administradores (custom claim `admin`) leem e escrevem.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAdmin() {
+      return request.auth != null && request.auth.token.admin == true;
+    }
+
+    match /{document=**} {
+      allow read, write: if isAdmin();
+    }
+  }
+}

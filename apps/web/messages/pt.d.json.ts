@@ -2,15 +2,6 @@
 // See: https://next-intl.dev/docs/workflows/typescript#messages-arguments
 
 declare const messages: {
-  "Manifest": {
-    "name": "Instituto EZ"
-  },
-  "Global": {
-    "copyright": "Todos os direitos reservados.",
-    "services": "Serviços",
-    "contact": "Contato",
-    "toggleTheme": "Alternar tema"
-  },
   "DialogContact": {
     "title": "Como podemos te ajudar?",
     "emailNotConfigured": "Email de destino não está configurado.",
@@ -33,99 +24,6 @@ declare const messages: {
     "sendButton": "Enviar Mensagem",
     "loadingButton": "Enviando mensagem..."
   },
-  "LandingPage": {
-    "title": "Solicitar Diagnóstico",
-    "sendButton": "Solicitar",
-    "loadingButton": "Solicitando diagnóstico..."
-  },
-  "LandingPageHome": {
-    "expOfYears": "Anos de Experiência",
-    "scienceBased": "Protocolo Estruturado",
-    "metricsPrecision": "Precisão nas Métricas",
-    "safeDecision": "Tomada de Decisão Segura",
-    "immersion": "A experiência que expande a vida",
-    "firstConsultationIncludes": "Primeira Consulta com Avaliação Neurocognitiva Completa"
-  },
-  "LandingPageMathematizer": {
-    "resolvedProblems": "Problemas que resolve:",
-    "howItWorks": "Como atua:",
-    "result": "Resultado:",
-    "finalCtaHighlight": "Pare de gerir no escuro. Comece a decidir com base em verdade matemática."
-  },
-  "LandingPageForBusiness": {
-    "corpSolutions": "Soluções Corporativas",
-    "format": "Formato",
-    "focus": "Foco",
-    "workshop": "Workshop",
-    "inPerson": "presencial",
-    "remote": "remoto",
-    "and": "e",
-    "testimonials": {
-      "reductionTitle": "Redução em conflitos internos",
-      "reductionSubtitle": "Após o workshop de comunicação",
-      "productivityTitle": "Mais produtividade",
-      "productivitySubtitle": "Após as palestras de saúde",
-      "climateTitle": "Clima organizacional",
-      "climateSubtitle": "Queda nas ausências por estresse"
-    }
-  },
-  "LandingPageMentoring": {
-    "stratagyMentoring": "Mentoria Estratégica"
-  },
-  "LandingPageImmersion": {
-    "heroTopics": {
-      "neuroscience": "Neurociência",
-      "spirituality": "Espiritualidade",
-      "consciousness": "Consciência",
-      "faith": "Fé"
-    },
-    "mainTargetLabel": "Para Quem é Esta Imersão",
-    "experienceLabel": "O Que Você Vai Vivenciar",
-    "instructorLabel": "Seus Guias",
-    "faqLabel": "Dúvidas Frequentes",
-    "nextClassLabel": "Próxima Turma",
-    "nextClassFooter": "Vagas limitadas • Certificação inclusa",
-    "finalCtaImageAlt": "Imersão {index}"
-  },
-  "DigitalProducts": {
-    "sectionTitle": "Produtos Digitais",
-    "badgeEbooks": "eBooks",
-    "badgeEbook": "eBook",
-    "badgeMasterclasses": "Masterclasses",
-    "badgeVideoClass": "Vídeo Aula",
-    "ctaBadge": "Dúvidas?",
-    "learnMoreEbook": "Saiba mais",
-    "learnMoreMasterclass": "Saber mais",
-    "lifetimeAccess": "Acesso vitalício",
-    "durationContent": "{duration} de conteúdo"
-  },
-  "Ebooks": {
-    "backButton": "Voltar para o Catálogo",
-    "reserveYourEbook": "Garanta já seu eBook",
-    "guaranteeSeals": "Selos de Garantia",
-    "virtualEbook": "Folheie e conheça o Ebook por dentro",
-    "aboutAuthor": "Sobre o Autor",
-    "aboutAuthors": "Sobre os Autores",
-    "frequentlyQuestions": "Perguntas Frequentes",
-    "onlyText": "Apenas",
-    "indexFallbackTitle": "O que você vai encontrar nesse Ebook",
-    "comingSoon": "Em breve",
-    "testimonial": "Depoimentos",
-    "bookCoverAlt": "Capa do eBook"
-  },
-  "Languages": {
-    "placeholder": "Idioma",
-    "pt": "Português",
-    "en": "Inglês",
-    "es": "Espanhol",
-    "ptShort": "PT",
-    "enShort": "EN",
-    "esShort": "ES"
-  },
-  "Navigation": {
-    "talkToInstitute": "Falar com o Instituto",
-    "requestDiagnosis": "Solicitar Diagnóstico"
-  },
   "EmailTemplate": {
     "preview": "Novo contato pelo formulário",
     "title": "Novo contato recebido",
@@ -134,9 +32,6 @@ declare const messages: {
     "emailLabel": "Email:",
     "phoneLabel": "Telefone:",
     "fromLabel": "Contato - Site"
-  },
-  "Errors": {
-    "notFoundTitle": "404"
   }
 };
 export default messages;

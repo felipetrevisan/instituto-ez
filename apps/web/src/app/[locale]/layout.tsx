@@ -1,11 +1,11 @@
-import { resolveOpenGraphImage } from '@ez/web/config/image'
 import { routing } from '@ez/web/i18n/routing'
-import { getSiteConfig } from '@ez/web/server/get-site-config'
+import { getSiteSettings } from '@ez/web/server/catalog'
+import { DEFAULT_FAVICON } from '@ez/web/types/site'
 import { getMetadataBase } from '@ez/web/utils/seo'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Metadata } from 'next'
-import { Inter, Oswald, Questrial } from 'next/font/google'
+import { Instrument_Serif, Inter, Sora } from 'next/font/google'
 import { type Locale, NextIntlClientProvider } from 'next-intl'
 import { setRequestLocale } from 'next-intl/server'
 import type { ReactNode } from 'react'
@@ -14,20 +14,21 @@ import '../styles.css'
 
 const inter = Inter({
   subsets: ['latin'],
-  weight: ['200', '300', '400', '500', '600', '700'],
+  weight: ['300', '400', '500', '600', '700'],
   variable: '--font-inter',
 })
 
-const oswald = Oswald({
+const sora = Sora({
   subsets: ['latin'],
-  weight: ['200', '300', '400', '500', '600', '700'],
-  variable: '--font-oswald',
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-sora',
 })
 
-const questrial = Questrial({
+const instrumentSerif = Instrument_Serif({
   subsets: ['latin'],
   weight: ['400'],
-  variable: '--font-questrial',
+  style: ['italic', 'normal'],
+  variable: '--font-serif',
 })
 
 export async function generateMetadata({
@@ -35,44 +36,19 @@ export async function generateMetadata({
 }: {
   params: Promise<{ locale: Locale }>
 }): Promise<Metadata> {
-  const settings = await getSiteConfig()
   const { locale } = await params
-
-  const title = settings?.title[locale] || 'Instituto Enzo'
-  const description = settings?.description?.[locale]
-  const ogImage = settings?.seoImage?.asset
-    ? resolveOpenGraphImage(settings.seoImage.asset)
-    : undefined
-  const openGraphImages = ogImage
-    ? [
-        {
-          ...ogImage,
-          alt: title || ogImage.alt || '',
-        },
-      ]
-    : undefined
+  const settings = await getSiteSettings()
+  const title = settings.name
+  const description = settings.description
+  const icon = settings.favicon || DEFAULT_FAVICON
 
   return {
     metadataBase: getMetadataBase(),
-    title: {
-      template: `%s | ${title}`,
-      default: title,
-    },
+    title: { template: `%s | ${title}`, default: title },
     description,
-    openGraph: {
-      title,
-      description,
-      siteName: title,
-      locale,
-      type: 'website',
-      ...(openGraphImages ? { images: openGraphImages } : {}),
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title,
-      description,
-      ...(openGraphImages ? { images: openGraphImages.map((image) => image.url) } : {}),
-    },
+    icons: { icon, shortcut: icon, apple: settings.favicon || settings.logo },
+    openGraph: { title, description, siteName: title, locale, type: 'website' },
+    twitter: { card: 'summary_large_image', title, description },
   }
 }
 
@@ -93,14 +69,11 @@ export default async function RootLayout({ children, params }: Props) {
 
   return (
     <html
-      className={`${inter.variable} ${oswald.variable} ${questrial.variable}`}
+      className={`${inter.variable} ${sora.variable} ${instrumentSerif.variable}`}
       lang={locale}
       suppressHydrationWarning
     >
-      <body
-        className="flex h-full flex-col overflow-x-hidden bg-background text-foreground antialiased"
-        data-page="main"
-      >
+      <body className="overflow-x-hidden bg-[#03050d] text-white antialiased" data-page="main">
         <Providers>
           <NextIntlClientProvider>{children}</NextIntlClientProvider>
         </Providers>

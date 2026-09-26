@@ -1,259 +1,160 @@
-# EZ Site
+# Instituto EZ
 
-Sistema de gerenciamento de conteúdo e site institucional construído com Next.js, Sanity CMS e TypeScript.
+Site institucional imersivo (3D) do Instituto EZ, com catálogo de ebooks, venda via **Stripe** e/ou **Hotmart** e um **painel administrativo** com login, tudo sobre **Firebase**.
 
-## 📋 Descrição
+## Visão geral
 
-Este projeto é uma aplicação web moderna que combina um site institucional com um sistema de gerenciamento de conteúdo (CMS) headless. O projeto utiliza uma arquitetura de monorepo para organizar o código em aplicações e pacotes compartilhados.
+- **Site público** (`/`): páginas institucionais com cena WebGL própria (partículas neurais que mudam de forma por página) e componentes 3D em CSS/Motion. Os textos institucionais ficam fixos em `apps/web/src/content/`.
+- **Catálogo de ebooks** (`/ebooks`, `/ebooks/[slug]`): dados vindos do Firestore, com revalidação automática quando o painel salva algo.
+- **Painel admin** (`/admin`): login com e-mail e senha (Firebase Auth), cadastro de ebooks (capa, páginas de amostra e PDF), depoimentos, configuração de pagamentos e **Site e contato** (nome, slogan, logo, ícone do site e dados de contato).
+- **Pagamentos**:
+  - **Stripe** — checkout no próprio site; após o pagamento o cliente baixa o PDF por um link temporário (a entrega verifica o pagamento na Stripe antes de liberar o arquivo privado).
+  - **Hotmart** — o botão leva ao link de checkout do produto; a Hotmart cuida do pagamento e da entrega.
+  - Sem pagamento online, o botão abre o formulário de contato.
 
-### Principais Funcionalidades
+## Stack
 
-- 🌐 **Site Institucional Multilíngue** (PT, EN, ES)
-- 📝 **CMS Headless** com Sanity Studio
-- 🎨 **Landing Pages Customizáveis** com componentes reutilizáveis
-- 📧 **Sistema de Formulários de Contato** com envio de emails
-- 📚 **Gerenciamento de E-books** com visualização interativa
-- 🎯 **SEO Otimizado** com metadados dinâmicos
-- 🌓 **Tema Claro/Escuro** com suporte a sistema
-- 📱 **Design Responsivo** com mobile-first
+| Área | Tecnologia |
+| --- | --- |
+| Framework | Next.js 16 (App Router, Turbopack), React 19, TypeScript |
+| Estilo e animação | Tailwind CSS 4, Motion, WebGL (sem bibliotecas 3D) |
+| Dados e auth | Firebase (Auth e Firestore — funciona no plano gratuito Spark) + Firebase Admin no servidor |
+| Arquivos | Cloudflare R2 (imagens e PDFs), servido pelo próprio site em `/files/…` |
+| Pagamentos | Stripe Checkout, links de checkout Hotmart |
+| Formulários | react-hook-form + zod |
+| E-mail | Resend + React Email |
+| i18n | next-intl (rotas `/pt`, `/en`, `/es`) |
+| Ferramentas | Bun (pacotes e scripts), Turborepo, Biome, Vitest |
 
-## 🏗️ Arquitetura
+## Estrutura
 
-O projeto utiliza uma arquitetura de **monorepo** com os seguintes workspaces:
-
-```
-ez-site/
-├── apps/
-│   ├── web/          # Aplicação Next.js (frontend)
-│   └── studio/       # Sanity Studio (CMS)
-├── packages/
-│   └── shared/       # Componentes e utilitários compartilhados
-└── package.json      # Configuração do workspace
-```
-
-## 🛠️ Tecnologias
-
-### Core
-- **Next.js 15.1.6** - Framework React com App Router
-- **React 19.1.0** - Biblioteca UI
-- **TypeScript 5.8** - Tipagem estática
-- **Node.js 22.x** - Runtime JavaScript
-
-### CMS & Content
-- **Sanity 3.99.0** - CMS Headless
-- **next-sanity 10.0.4** - Integração Next.js + Sanity
-- **@portabletext/react** - Renderização de conteúdo rich text
-
-### Estilização
-- **Tailwind CSS 4.1.7** - Framework CSS utility-first
-- **Motion (Framer Motion) 12.15.0** - Animações
-- **Sass 1.71.1** - Pré-processador CSS
-
-### Internacionalização
-- **next-intl 4.3.4** - Internacionalização para Next.js
-
-### Formulários & Validação
-- **react-hook-form 7.56.3** - Gerenciamento de formulários
-- **zod 3.24.4** - Validação de schemas
-- **@hookform/resolvers** - Integração Zod + React Hook Form
-
-### UI Components
-- **Radix UI** - Componentes acessíveis e não estilizados
-  - Dialog, Select, Navigation Menu, Tabs, etc.
-- **Lucide React** - Ícones
-- **Sonner** - Notificações toast
-
-### Carrosséis & Animações
-- **Embla Carousel** - Carrossel performático
-- **react-parallax** - Efeitos parallax
-- **react-pageflip** - Visualização de e-books estilo livro
-
-### Email
-- **Resend 4.5.1** - Serviço de envio de emails
-- **@react-email/components** - Templates de email
-
-### Data Fetching
-- **@tanstack/react-query 5.24.8** - Gerenciamento de estado servidor
-- **React Query Devtools** - Ferramentas de desenvolvimento
-
-### Build & Dev Tools
-- **Turborepo** - Build system para monorepos
-- **Biome** - Linter e formatter
-- **pnpm 10.4.1** - Gerenciador de pacotes
-
-### Analytics & Performance
-- **@vercel/analytics** - Analytics da Vercel
-- **@vercel/speed-insights** - Métricas de performance
-- **@bprogress/next** - Barra de progresso de navegação
-
-### Outras
-- **next-themes** - Gerenciamento de temas
-- **class-variance-authority** - Variantes de componentes
-- **tailwind-merge** - Merge de classes Tailwind
-
-## 📦 Estrutura do Projeto
-
-### Apps
-
-#### `apps/web`
-Aplicação Next.js principal que serve o site institucional.
-
-**Estrutura:**
 ```
 apps/web/
-├── src/
-│   ├── app/              # App Router do Next.js
-│   ├── components/       # Componentes React
-│   ├── hooks/           # Custom hooks
-│   ├── server/          # Server actions e funções
-│   ├── client/          # Cliente Sanity e queries
-│   ├── config/          # Configurações
-│   ├── types/           # Tipos TypeScript
-│   └── utils/           # Funções utilitárias
-├── messages/            # Arquivos de tradução
-└── public/              # Assets estáticos
+├── public/assets/          # Imagens do site e do ebook inicial
+├── scripts/                # CLI: criar admin, seed do Firestore
+└── src/
+    ├── app/
+    │   ├── [locale]/…      # Site público
+    │   ├── admin/…         # Painel (login, ebooks, depoimentos, pagamentos)
+    │   └── api/…           # checkout, download, revalidate, status
+    ├── components/
+    │   ├── experience/     # Cena 3D, header/footer e primitivas 3D
+    │   ├── pages/          # Páginas do site
+    │   └── admin/          # UI do painel
+    ├── content/            # Textos fixos + dados iniciais (seed)
+    ├── lib/                # Firebase (client/admin), Stripe, painel
+    ├── server/             # Leitura do catálogo, compras, auth do admin
+    └── types/catalog.ts    # Schemas (zod) de ebook, depoimento e pagamento
+firebase/                   # Regras do Firestore
+firebase.json               # Configuração dos emuladores e deploy de regras
 ```
 
-#### `apps/studio`
-Sanity Studio para gerenciamento de conteúdo.
+## Rodando localmente
 
-**Estrutura:**
-```
-apps/studio/
-├── src/
-│   ├── schemas/         # Schemas do Sanity
-│   ├── components/      # Componentes do Studio
-│   ├── structures/      # Estrutura de navegação
-│   └── preview/         # Previews customizados
-└── static/              # Assets estáticos
-```
-
-### Packages
-
-#### `packages/shared`
-Pacote compartilhado com componentes UI, hooks e utilitários reutilizáveis.
-
-**Estrutura:**
-```
-packages/shared/
-├── src/
-│   ├── ui/              # Componentes UI base
-│   ├── hooks/           # Hooks compartilhados
-│   ├── icons/           # Ícones
-│   ├── lib/             # Utilitários
-│   ├── sanity/          # Helpers do Sanity
-│   └── types/           # Tipos compartilhados
-```
-
-## 🚀 Como Começar
-
-### Pré-requisitos
-
-- Node.js 22.x
-- pnpm 10.4.1
-
-### Instalação
+Pré-requisitos: **Bun 1.3+**, **Node 22** e **Java 17+** (para os emuladores do Firebase).
 
 ```bash
-# Instalar dependências
-pnpm install
-
-# Configurar variáveis de ambiente
-# Copie .env.example para .env e preencha as variáveis necessárias
+bun install
+cp apps/web/.env.example apps/web/.env.local
 ```
 
-### Desenvolvimento
+### Opção A — sem Firebase
+
+Com as variáveis do Firebase vazias, o site usa os dados de seed locais (`src/content`). O painel mostra um aviso de configuração.
 
 ```bash
-# Iniciar aplicação web
-pnpm dev:web
-
-# Iniciar Sanity Studio
-pnpm dev:studio
-
-# Executar linter
-pnpm lint:apps:check
-
-# Formatar código
-pnpm lint:apps:format
+bun run dev:web
 ```
 
-### Build
+### Opção B — com os emuladores do Firebase (recomendado)
 
-```bash
-# Build de todos os workspaces
-pnpm build
+1. No `apps/web/.env.local`, descomente o bloco **Emuladores locais**.
+2. Em um terminal, suba os emuladores (a interface fica em http://127.0.0.1:4000):
+   ```bash
+   bun run firebase:emulators
+   ```
+3. Em outro terminal, importe os dados iniciais e crie um administrador:
+   ```bash
+   bun run firebase:seed
+   bun run admin:create voce@exemplo.com "uma-senha-forte"
+   ```
+4. Rode o site e acesse http://localhost:3000/admin:
+   ```bash
+   bun run dev:web
+   ```
+
+> Os emuladores não persistem dados entre execuções: rode o seed e o `admin:create` sempre que subi-los.
+
+## Configurando o Firebase (produção)
+
+1. Crie um projeto em https://console.firebase.google.com.
+2. **Authentication** → Método de login → ative **E-mail/senha**.
+3. **Firestore Database**: crie o banco (modo produção, região `southamerica-east1`). O Storage não é usado — as imagens são informadas por link.
+4. **Configurações do projeto → Seus apps**: registre um app da Web e copie os valores para as variáveis `NEXT_PUBLIC_FIREBASE_*`.
+5. **Configurações do projeto → Contas de serviço → Gerar nova chave privada**: use o JSON para preencher `FIREBASE_PROJECT_ID`, `FIREBASE_CLIENT_EMAIL` e `FIREBASE_PRIVATE_KEY`.
+6. Publique as regras de segurança (o `.firebaserc` já aponta para o projeto `instituto-ez`; os emuladores usam o alias `demo`):
+   ```bash
+   bun run firebase:deploy-rules
+   ```
+7. Com o `.env.local` apontando para o projeto real, importe o conteúdo inicial e crie o admin:
+   ```bash
+   bun run firebase:seed
+   bun run admin:create voce@institutoez.com.br "uma-senha-forte"
+   ```
+
+**Segurança:** apenas usuários com a custom claim `admin` (definida pelo `admin:create`) leem ou escrevem no Firestore pelo navegador. O site público lê o catálogo pelo servidor (Firebase Admin). O link do PDF fica só no banco e é liberado pela rota `/api/download` após pagamento confirmado na Stripe.
+
+## Arquivos (Cloudflare R2)
+
+Com o R2 configurado, o painel envia imagens e PDFs direto do navegador para o bucket: o servidor confere o login de admin e gera um link de envio válido por 10 minutos. Sem o R2, o painel continua aceitando **links** de imagem (`/assets/…` ou `https://…`).
+
+Estrutura do bucket (privado, sem acesso público nem domínio próprio):
+
+| Caminho no bucket | Conteúdo | Como é entregue |
+| --- | --- | --- |
+| `public/ebooks/<id>/…` | Capas e páginas de amostra | `/files/ebooks/<id>/…` com cache permanente |
+| `public/site/…` | Logo e ícone | `/files/site/…` com cache permanente |
+| `private/ebooks/<id>/…` | PDFs vendidos | Link assinado de 5 minutos, só após pagamento na Stripe |
+
+**Configuração:** crie o bucket em R2, adicione a política de CORS abaixo (Settings → CORS Policy) e gere um token em *Manage R2 API Tokens* com **Object Read & Write** no bucket. Preencha `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY` e `R2_BUCKET`.
+
+```json
+[
+  {
+    "AllowedOrigins": ["http://localhost:3000", "https://institutoez.com.br", "https://www.institutoez.com.br"],
+    "AllowedMethods": ["PUT", "GET"],
+    "AllowedHeaders": ["content-type"],
+    "MaxAgeSeconds": 3600
+  }
+]
 ```
 
-## 🔧 Configuração
+> **Antivírus com inspeção HTTPS (ex.: Norton Web/Mail Shield):** no desenvolvimento local o Node pode recusar a conexão com o R2 e com o Google Fonts (`unable to verify the first certificate`). Exporte a raiz do antivírus em PEM e rode o servidor com `NODE_EXTRA_CA_CERTS=caminho/do/certificado.pem`. Em produção (Vercel) isso não ocorre.
 
-### Variáveis de Ambiente
+## Pagamentos
 
-O projeto utiliza validação de variáveis de ambiente com `@t3-oss/env-core` e `zod`.
+Ative ou desative cada forma de pagamento em **Admin → Pagamentos**. A escolha por ebook fica na aba **Venda** do ebook.
 
-**Variáveis necessárias:**
+- **Stripe**: defina `STRIPE_SECRET_KEY` (use `sk_test_…` para testar) e envie o PDF na aba Venda (ou informe um link externo, como Google Drive). O preço usado no checkout vem sempre do servidor. A chave nunca é salva no banco nem exibida no painel.
+- **Hotmart**: cadastre o produto na Hotmart e cole o link de checkout (`https://pay.hotmart.com/…`) na aba Venda.
 
-```env
-# Sanity
-NEXT_PUBLIC_SANITY_PROJECT_ID=seu_project_id
-NEXT_PUBLIC_SANITY_DATASET=production
-SANITY_API_READ_TOKEN=seu_token
+## Deploy (Vercel)
 
-# Resend (Email)
-RESEND_API_KEY=seu_api_key
+Cadastre em **Settings → Environment Variables** as variáveis de `apps/web/.env.example` (sem o bloco de emuladores) e faça o deploy. As páginas são estáticas com revalidação a cada 5 minutos e também sob demanda, sempre que algo é salvo no painel.
 
-# Vercel
-NEXT_PUBLIC_VERCEL_URL=https://seu-dominio.com
-VERCEL_ENV=production
-```
+## Scripts
 
-Consulte `apps/web/src/config/env.ts` para a lista completa de variáveis.
+| Comando | Descrição |
+| --- | --- |
+| `bun run dev:web` | Servidor de desenvolvimento |
+| `bun run build` | Build de produção |
+| `bun run test` | Testes (Vitest) |
+| `bun run lint` / `bun run lint:fix` | Biome (verificar / corrigir) |
+| `bun run firebase:emulators` | Emuladores locais (Auth e Firestore) |
+| `bun run firebase:seed [--force]` | Importa ebook e depoimentos iniciais |
+| `bun run admin:create <email> [senha]` | Cria ou promove um administrador |
+| `bun run firebase:deploy-rules` | Publica as regras do Firestore |
 
-## 📝 Scripts Disponíveis
+## Licença
 
-### Root
-- `pnpm build` - Build de todos os workspaces
-- `pnpm dev:web` - Inicia o servidor de desenvolvimento do web
-- `pnpm dev:studio` - Inicia o Sanity Studio
-- `pnpm lint:apps:check` - Verifica linting nos apps
-- `pnpm lint:apps:format` - Formata código dos apps
-- `pnpm lint:packages:check` - Verifica linting nos packages
-- `pnpm lint:packages:format` - Formata código dos packages
-
-### Web App
-- `pnpm --filter web dev` - Desenvolvimento
-- `pnpm --filter web build` - Build de produção
-- `pnpm --filter web start` - Inicia servidor de produção
-
-### Studio
-- `pnpm --filter studio dev` - Desenvolvimento
-- `pnpm --filter studio build` - Build
-- `pnpm --filter studio deploy` - Deploy do studio
-
-## 🌍 Internacionalização
-
-O projeto suporta três idiomas:
-- **pt** - Português (padrão)
-- **en** - Inglês
-- **es** - Espanhol
-
-As traduções estão em `apps/web/messages/` e são gerenciadas pelo `next-intl`.
-
-## 🎨 Sistema de Design
-
-O projeto utiliza:
-- **Tailwind CSS** para estilização
-- **Radix UI** para componentes base acessíveis
-- **Motion** para animações
-- **CSS Variables** para temas
-
-## 🤝 Contribuindo
-
-1. Siga os padrões de código documentados
-2. Execute o linter antes de commitar
-3. Mantenha os testes atualizados
-4. Documente mudanças significativas
-
-## 📄 Licença
-
-Este projeto é privado e proprietário.
+Projeto privado e proprietário.

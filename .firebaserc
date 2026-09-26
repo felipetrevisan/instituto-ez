@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "instituto-ez",
+    "demo": "demo-instituto-ez"
+  }
+}

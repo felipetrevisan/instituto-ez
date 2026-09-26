@@ -3,42 +3,52 @@ import { z } from 'zod'
 
 const nodeEnv = z.enum(['development', 'production', 'test'])
 
-function requiredOnEnv(env: z.infer<typeof nodeEnv>) {
-  // biome-ignore lint/suspicious/noExplicitAny: usage required for dynamic value validation
-  return (value: any): boolean => {
-    if (env === process.env.NODE_ENV && !value) {
-      return false
-    }
-
-    return true
-  }
-}
+const optional = z.string().optional()
 
 export const env = createEnv({
   server: {
-    SANITY_API_READ_TOKEN: z.string().refine(requiredOnEnv('production')),
-    RESEND_API_KEY: z
-      .string()
-      .refine(requiredOnEnv('production'))
-      .refine(requiredOnEnv('development')),
+    // Opcional: sem a chave o formulário de contato avisa que o envio falhou.
+    RESEND_API_KEY: optional,
+    // Conta de serviço do Firebase Admin (leitura do catálogo, checkout e downloads).
+    FIREBASE_PROJECT_ID: optional,
+    FIREBASE_CLIENT_EMAIL: optional,
+    FIREBASE_PRIVATE_KEY: optional,
+    STRIPE_SECRET_KEY: optional,
+    // Cloudflare R2 (upload de imagens e PDFs pelo painel).
+    R2_ACCOUNT_ID: optional,
+    R2_ACCESS_KEY_ID: optional,
+    R2_SECRET_ACCESS_KEY: optional,
+    R2_BUCKET: optional,
   },
   client: {
     NEXT_PUBLIC_VERCEL_URL: z.string().url().min(1),
-    NEXT_PUBLIC_SANITY_PROJECT_ID: z.string().min(1),
-    NEXT_PUBLIC_SANITY_DATASET: z
-      .enum(['production', 'preview', 'development'])
-      .default('production'),
+    NEXT_PUBLIC_FIREBASE_API_KEY: optional,
+    NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: optional,
+    NEXT_PUBLIC_FIREBASE_PROJECT_ID: optional,
+    NEXT_PUBLIC_FIREBASE_APP_ID: optional,
+    /** "true" conecta o painel aos emuladores locais do Firebase. */
+    NEXT_PUBLIC_FIREBASE_EMULATOR: z.enum(['true', 'false']).default('false'),
   },
   shared: {
     NODE_ENV: nodeEnv,
     VERCEL_ENV: z.enum(['production', 'preview', 'development']).default('development'),
   },
   runtimeEnv: {
-    SANITY_API_READ_TOKEN: process.env.SANITY_API_READ_TOKEN,
     RESEND_API_KEY: process.env.RESEND_API_KEY,
-    NEXT_PUBLIC_SANITY_PROJECT_ID: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-    NEXT_PUBLIC_SANITY_DATASET: process.env.NEXT_PUBLIC_SANITY_DATASET,
+    FIREBASE_PROJECT_ID: process.env.FIREBASE_PROJECT_ID,
+    FIREBASE_CLIENT_EMAIL: process.env.FIREBASE_CLIENT_EMAIL,
+    FIREBASE_PRIVATE_KEY: process.env.FIREBASE_PRIVATE_KEY,
+    STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
+    R2_ACCOUNT_ID: process.env.R2_ACCOUNT_ID,
+    R2_ACCESS_KEY_ID: process.env.R2_ACCESS_KEY_ID,
+    R2_SECRET_ACCESS_KEY: process.env.R2_SECRET_ACCESS_KEY,
+    R2_BUCKET: process.env.R2_BUCKET,
     NEXT_PUBLIC_VERCEL_URL: process.env.NEXT_PUBLIC_VERCEL_URL,
+    NEXT_PUBLIC_FIREBASE_API_KEY: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+    NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+    NEXT_PUBLIC_FIREBASE_PROJECT_ID: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+    NEXT_PUBLIC_FIREBASE_APP_ID: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+    NEXT_PUBLIC_FIREBASE_EMULATOR: process.env.NEXT_PUBLIC_FIREBASE_EMULATOR,
     NODE_ENV: process.env.NODE_ENV,
     VERCEL_ENV: process.env.VERCEL_ENV,
   },

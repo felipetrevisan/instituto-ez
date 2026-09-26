@@ -1,109 +1,42 @@
-import LandingPage from '@ez/web/app/[locale]/(public)/(root)/_landing-page'
-import { resolveOpenGraphImage } from '@ez/web/config/image'
-// import NormalPage from '@ez/web/app/[locale]/(public)/(root)/_normal-page'
-import { getAvailableLandingPages } from '@ez/web/config/landing-page'
-import { getLandingPage } from '@ez/web/server/get-landing'
-import type { Landing } from '@ez/web/types/landing'
+import { pages, resolvePageKey } from '@ez/web/components/pages/registry'
+import { landingSlugs } from '@ez/web/config/landing-slugs'
+import { pageMeta } from '@ez/web/content/seo'
+import { routing } from '@ez/web/i18n/routing'
 import { buildAlternates } from '@ez/web/utils/seo'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { getTranslations } from 'next-intl/server'
-import { Suspense } from 'react'
-import Loading from '../_loading'
 
-function resolveLanding(slug: string) {
-  return getAvailableLandingPages().find((landing) => landing.slug.includes(slug))
+export const revalidate = 300
+
+type Params = Promise<{ slug: string; locale: string }>
+
+export function generateStaticParams() {
+  return routing.locales.flatMap((locale) =>
+    landingSlugs.filter((slug) => slug !== '/').map((slug) => ({ locale, slug })),
+  )
 }
 
-function resolveLandingOpenGraphImage(sections: Landing['sections']) {
-  const sectionWithImage = sections?.find((section) =>
-    Boolean(
-      (section as { image?: { asset?: Parameters<typeof resolveOpenGraphImage>[0] } }).image?.asset,
-    ),
-  ) as { image?: { asset?: Parameters<typeof resolveOpenGraphImage>[0] } } | undefined
-
-  if (!sectionWithImage?.image?.asset) return undefined
-
-  return resolveOpenGraphImage(sectionWithImage.image.asset)
-}
-
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string; locale: string }>
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { slug, locale } = await params
+  const key = resolvePageKey(slug)
+  if (!key) return {}
 
-  const t = await getTranslations({ locale, namespace: 'Errors' })
-  const notFoundTitle = t('notFoundTitle')
+  const { title, description } = pageMeta[key]
+  const alternates = buildAlternates(locale, `/${slug}`)
 
-  const landing = resolveLanding(slug)
-  if (landing) {
-    const data = await getLandingPage(slug, locale)
-    if (!data) return { title: notFoundTitle }
-
-    const { title, description } = data.settings
-    const resolvedTitle = title?.[locale] ?? ''
-    const resolvedDescription = description?.[locale]
-    const alternates = buildAlternates(locale, `/${slug}`)
-    const seoImage = data.settings?.image?.asset
-      ? resolveOpenGraphImage(data.settings.image.asset)
-      : undefined
-    const ogImage = seoImage ?? resolveLandingOpenGraphImage(data.sections)
-    const openGraphImages = ogImage
-      ? [
-          {
-            ...ogImage,
-            alt: resolvedTitle || ogImage.alt || '',
-          },
-        ]
-      : undefined
-    const twitterImages = openGraphImages?.map((image) => image.url)
-
-    return {
-      title: resolvedTitle,
-      description: resolvedDescription,
-      alternates,
-      openGraph: {
-        title: resolvedTitle,
-        description: resolvedDescription,
-        type: 'website',
-        locale,
-        url: alternates.canonical,
-        images: openGraphImages,
-      },
-      twitter: {
-        card: 'summary_large_image',
-        title: resolvedTitle,
-        description: resolvedDescription,
-        images: twitterImages,
-      },
-    }
+  return {
+    title,
+    description,
+    alternates,
+    openGraph: { title, description, type: 'website', locale, url: alternates.canonical },
+    twitter: { card: 'summary_large_image', title, description },
   }
-
-  return { title: notFoundTitle }
 }
 
-export default async function Page({
-  params,
-}: {
-  params: Promise<{ slug: string; locale: string }>
-}) {
-  const { slug, locale } = await params
+export default async function Page({ params }: { params: Params }) {
+  const { slug } = await params
+  const key = resolvePageKey(slug)
+  if (!key) notFound()
 
-  const landing = resolveLanding(slug)
-
-  if (landing) {
-    const data = await getLandingPage(slug, locale)
-
-    if (!data) notFound()
-
-    return (
-      <Suspense fallback={<Loading />}>
-        <LandingPage data={data} />
-      </Suspense>
-    )
-  }
-
-  return null
+  return pages[key]()
 }

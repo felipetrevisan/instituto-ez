@@ -14,9 +14,7 @@
     "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
-      "@ez/shared/*": ["packages/shared/src/*"],
-      "@ez/web/*": ["apps/web/src/*"],
-      "@ez/studio/*": ["apps/studio/src/*"]
+      "@ez/web/*": ["apps/web/src/*"]
     }
   }
 }
