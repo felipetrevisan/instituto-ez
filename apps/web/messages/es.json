@@ -1,13 +1,4 @@
 {
-  "Manifest": {
-    "name": "Instituto EZ"
-  },
-  "Global": {
-    "copyright": "Todos los derechos reservados.",
-    "services": "Servicios",
-    "contact": "Contacto",
-    "toggleTheme": "Alternar tema"
-  },
   "DialogContact": {
     "title": "¿Cómo podemos ayudarle?",
     "emailNotConfigured": "El correo electrónico de destino no está configurado.",
@@ -30,99 +21,6 @@
     "sendButton": "Enviar mensaje",
     "loadingButton": "Enviando mensaje..."
   },
-  "LandingPage": {
-    "title": "Solicitar diagnóstico",
-    "sendButton": "Solicitar",
-    "loadingButton": "Solicitando diagnóstico..."
-  },
-  "LandingPageHome": {
-    "expOfYears": "Años de experiencia",
-    "scienceBased": "Basado en la ciencia",
-    "metricsPrecision": "Precisión en las métricas",
-    "safeDecision": "Toma de decisiones segura",
-    "immersion": "La experiencia que expande la vida",
-    "firstConsultationIncludes": "La primera consulta incluye una evaluación neurocognitiva completa"
-  },
-  "LandingPageMathematizer": {
-    "resolvedProblems": "Problemas que resuelve:",
-    "howItWorks": "Cómo actúa:",
-    "result": "Resultado:",
-    "finalCtaHighlight": "Deja de gestionar en la oscuridad. Comienza a decidir con base en la verdad matemática."
-  },
-  "LandingPageForBusiness": {
-    "corpSolutions": "Soluciones corporativas",
-    "format": "Formato",
-    "focus": "Enfoque",
-    "workshop": "Taller",
-    "inPerson": "presencial",
-    "remote": "remoto",
-    "and": "y",
-    "testimonials": {
-      "reductionTitle": "Reducción de conflictos internos",
-      "reductionSubtitle": "Después del taller de comunicación",
-      "productivityTitle": "Más productividad",
-      "productivitySubtitle": "Después de las charlas de salud",
-      "climateTitle": "Clima organizacional",
-      "climateSubtitle": "Disminución de ausencias por estrés"
-    }
-  },
-  "LandingPageMentoring": {
-    "stratagyMentoring": "Mentoría estratégica"
-  },
-  "LandingPageImmersion": {
-    "heroTopics": {
-      "neuroscience": "Neurociencia",
-      "spirituality": "Espiritualidad",
-      "consciousness": "Conciencia",
-      "faith": "Fe"
-    },
-    "mainTargetLabel": "Para quién es esta inmersión",
-    "experienceLabel": "Lo que vas a vivir",
-    "instructorLabel": "Tus Guías",
-    "faqLabel": "Preguntas frecuentes",
-    "nextClassLabel": "Próxima clase",
-    "nextClassFooter": "Cupos limitados • Certificación incluida",
-    "finalCtaImageAlt": "Inmersión {index}"
-  },
-  "DigitalProducts": {
-    "sectionTitle": "Productos digitales",
-    "badgeEbooks": "eBooks",
-    "badgeEbook": "eBook",
-    "badgeMasterclasses": "Masterclasses",
-    "badgeVideoClass": "Clase en video",
-    "ctaBadge": "¿Dudas?",
-    "learnMoreEbook": "Saber más",
-    "learnMoreMasterclass": "Saber más",
-    "lifetimeAccess": "Acceso vitalicio",
-    "durationContent": "{duration} de contenido"
-  },
-  "Ebooks": {
-    "backButton": "Volver al catálogo",
-    "reserveYourEbook": "Consigue tu eBook ahora",
-    "guaranteeSeals": "Sellos de garantía",
-    "virtualEbook": "Navega y descubre el Ebook que hay dentro",
-    "aboutAuthor": "Acerca del Autor",
-    "aboutAuthors": "Acerca de los autores",
-    "frequentlyQuestions": "Preguntas Frecuentes",
-    "onlyText": "Solo",
-    "indexFallbackTitle": "Lo que encontrarás en este eBook",
-    "comingSoon": "Próximamente",
-    "testimonial": "Testimonios",
-    "bookCoverAlt": "Portada del eBook"
-  },
-  "Languages": {
-    "placeholder": "Idioma",
-    "pt": "Portugués",
-    "en": "Inglés",
-    "es": "Español",
-    "ptShort": "PT",
-    "enShort": "EN",
-    "esShort": "ES"
-  },
-  "Navigation": {
-    "talkToInstitute": "Hablar con el Instituto",
-    "requestDiagnosis": "Solicitar diagnóstico"
-  },
   "EmailTemplate": {
     "preview": "Nuevo contacto desde el formulario",
     "title": "Nuevo contacto recibido",
@@ -131,8 +29,5 @@
     "emailLabel": "Correo electrónico:",
     "phoneLabel": "Teléfono:",
     "fromLabel": "Contacto - Sitio"
-  },
-  "Errors": {
-    "notFoundTitle": "404"
   }
 }

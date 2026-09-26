@@ -1,6 +1,6 @@
 import { landingSlugs } from '@ez/web/config/landing-slugs'
 import { routing } from '@ez/web/i18n/routing'
-import { getEbooks } from '@ez/web/server/get-ebook'
+import { getEbooks } from '@ez/web/server/catalog'
 import { getCanonicalPath, getMetadataBase } from '@ez/web/utils/seo'
 import type { MetadataRoute } from 'next'
 
@@ -9,6 +9,8 @@ function normalizePath(slug: string) {
 
   return `/${slug.replace(/^\/+/, '')}`
 }
+
+export const revalidate = 3600
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = getMetadataBase()
@@ -29,14 +31,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
 
-  const ebooks = await getEbooks()
-
-  for (const ebook of ebooks ?? []) {
+  for (const ebook of await getEbooks()) {
     for (const locale of routing.locales) {
-      const currentSlug = ebook.slug?.[locale]?.current
-      if (!currentSlug) continue
-
-      const canonicalPath = getCanonicalPath(locale, `/ebooks/${currentSlug}`)
+      const canonicalPath = getCanonicalPath(locale, `/ebooks/${ebook.slug}`)
       pushUrl(canonicalPath)
     }
   }

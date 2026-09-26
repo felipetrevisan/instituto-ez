@@ -2,15 +2,6 @@
 // See: https://next-intl.dev/docs/workflows/typescript#messages-arguments
 
 declare const messages: {
-  "Manifest": {
-    "name": "Instituto EZ"
-  },
-  "Global": {
-    "copyright": "All rights reserved.",
-    "services": "Services",
-    "contact": "Contact",
-    "toggleTheme": "Toggle theme"
-  },
   "DialogContact": {
     "title": "How can we help you?",
     "emailNotConfigured": "Target email is not configured.",
@@ -33,99 +24,6 @@ declare const messages: {
     "sendButton": "Send Message",
     "loadingButton": "Sending message..."
   },
-  "LandingPage": {
-    "title": "Request a Diagnosis",
-    "sendButton": "Request",
-    "loadingButton": "Requesting diagnosis..."
-  },
-  "LandingPageHome": {
-    "expOfYears": "Years of Experience",
-    "scienceBased": "Science Based",
-    "metricsPrecision": "Metric Precision",
-    "safeDecision": "Safe Decision-Making",
-    "immersion": "The experience that expands life",
-    "firstConsultationIncludes": "The first consultation includes a complete neurocognitive assessment"
-  },
-  "LandingPageMathematizer": {
-    "resolvedProblems": "Problems it solves:",
-    "howItWorks": "How it works:",
-    "result": "Result:",
-    "finalCtaHighlight": "Stop managing in the dark. Start deciding based on mathematical truth."
-  },
-  "LandingPageForBusiness": {
-    "corpSolutions": "Corporate Solutions",
-    "format": "Format",
-    "focus": "Focus",
-    "workshop": "Workshop",
-    "inPerson": "in-person",
-    "remote": "remote",
-    "and": "and",
-    "testimonials": {
-      "reductionTitle": "Reduction in internal conflicts",
-      "reductionSubtitle": "After the communication workshop",
-      "productivityTitle": "More productivity",
-      "productivitySubtitle": "After the health talks",
-      "climateTitle": "Organizational climate",
-      "climateSubtitle": "Decrease in stress-related absences"
-    }
-  },
-  "LandingPageMentoring": {
-    "stratagyMentoring": "Strategic Mentoring"
-  },
-  "LandingPageImmersion": {
-    "heroTopics": {
-      "neuroscience": "Neuroscience",
-      "spirituality": "Spirituality",
-      "consciousness": "Consciousness",
-      "faith": "Faith"
-    },
-    "mainTargetLabel": "Who is this immersion for",
-    "experienceLabel": "What you will experience",
-    "instructorLabel": "Your Guides",
-    "faqLabel": "Frequently Asked Questions",
-    "nextClassLabel": "Next Class",
-    "nextClassFooter": "Limited spots • Certification included",
-    "finalCtaImageAlt": "Immersion {index}"
-  },
-  "DigitalProducts": {
-    "sectionTitle": "Digital Products",
-    "badgeEbooks": "eBooks",
-    "badgeEbook": "eBook",
-    "badgeMasterclasses": "Masterclasses",
-    "badgeVideoClass": "Video Class",
-    "ctaBadge": "Questions?",
-    "learnMoreEbook": "Learn more",
-    "learnMoreMasterclass": "Learn more",
-    "lifetimeAccess": "Lifetime access",
-    "durationContent": "{duration} of content"
-  },
-  "Ebooks": {
-    "backButton": "Back to Catalog",
-    "reserveYourEbook": "Get your eBook now",
-    "guaranteeSeals": "Guarantee Seals",
-    "virtualEbook": "Browse through and discover the Ebook inside",
-    "aboutAuthor": "About the Author",
-    "aboutAuthors": "About the Authors",
-    "frequentlyQuestions": "Frequently Asked Questions",
-    "onlyText": "Only",
-    "indexFallbackTitle": "What you will find in this eBook",
-    "comingSoon": "Coming soon",
-    "testimonial": "Testimonials",
-    "bookCoverAlt": "Ebook cover"
-  },
-  "Languages": {
-    "placeholder": "Language",
-    "pt": "Portuguese",
-    "en": "English",
-    "es": "Spanish",
-    "ptShort": "PT",
-    "enShort": "EN",
-    "esShort": "ES"
-  },
-  "Navigation": {
-    "talkToInstitute": "Talk to the Institute",
-    "requestDiagnosis": "Request a Diagnosis"
-  },
   "EmailTemplate": {
     "preview": "New contact from the form",
     "title": "New contact received",
@@ -134,9 +32,6 @@ declare const messages: {
     "emailLabel": "Email:",
     "phoneLabel": "Phone:",
     "fromLabel": "Contact - Website"
-  },
-  "Errors": {
-    "notFoundTitle": "404"
   }
 };
 export default messages;

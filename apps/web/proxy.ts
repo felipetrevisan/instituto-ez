@@ -4,5 +4,6 @@ import { routing } from './src/i18n/routing'
 export default createMiddleware(routing)
 
 export const config = {
-	matcher: ['/((?!api|trpc|_next|_vercel|.*\\..*).*)'],
+  // Painel (/admin), arquivos (/files) e rotas de API ficam fora do roteamento por idioma.
+  matcher: ['/((?!api|admin|files|trpc|_next|_vercel|.*\\..*).*)'],
 }

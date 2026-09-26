@@ -1,16 +1,20 @@
-import { routing } from '@ez/web/i18n/routing'
+import { getSiteSettings } from '@ez/web/server/catalog'
+import { DEFAULT_FAVICON } from '@ez/web/types/site'
 import type { MetadataRoute } from 'next'
-import { getTranslations } from 'next-intl/server'
+
+export const revalidate = 300
 
 export default async function manifest(): Promise<MetadataRoute.Manifest> {
-  const t = await getTranslations({
-    locale: routing.defaultLocale,
-    namespace: 'Manifest',
-  })
+  const settings = await getSiteSettings()
 
   return {
-    name: t('name'),
+    name: settings.name,
+    short_name: settings.name,
+    description: settings.description,
     start_url: '/',
-    theme_color: '#101E33',
+    display: 'standalone',
+    background_color: '#03050d',
+    theme_color: '#03050d',
+    icons: [{ src: settings.favicon || DEFAULT_FAVICON, sizes: 'any' }],
   }
 }

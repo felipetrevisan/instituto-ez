@@ -1,33 +1,17 @@
 @import "tailwindcss";
-@import "@ez/shared/style.css";
 @source "../**/*.{ts,tsx}";
 
 html {
   scroll-behavior: smooth;
+  background: #03050d;
 }
 
-.force-light {
-  color-scheme: light;
-}
-
-.force-light.dark & {
-  /* Cancela o dark */
-  --tw-bg-opacity: 1 !important;
-  --tw-text-opacity: 1 !important;
-}
-
-@utility container {
-  margin-inline: auto;
-  padding-inline: 2rem;
-}
-
-@utility bg-ebooks {
-  background-image:
-    linear-gradient(var(--tw-gradient-stops)), url("/assets/images/bg-ebooks-pattern.png");
-}
-
-@layer components {
-  .bprogress .bar {
-    background: var(--primary) !important;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
+}
+
+.bprogress .bar {
+  background: var(--ez-accent, #f2b544) !important;
 }

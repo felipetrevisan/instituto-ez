@@ -1,4 +1,3 @@
-import type { SanityAsset } from '@ez/shared/types'
 import type { ContactFormSchema } from '@ez/web/types/contact'
 import { Body, Container, Head, Hr, Html, Preview, Section, Text } from '@react-email/components'
 import enMessages from '../../../messages/en.json'
@@ -18,7 +17,7 @@ export function EmailTemplate({
   subject,
   message,
   locale = 'pt',
-}: ContactFormSchema & { logo?: SanityAsset; locale?: string }) {
+}: ContactFormSchema & { locale?: string }) {
   const t = getEmailMessages(locale)
 
   return (
@@ -27,15 +26,6 @@ export function EmailTemplate({
       <Preview>{t.preview}</Preview>
       <Body style={{ backgroundColor: '#f5f7fb', margin: 0, padding: 0 }}>
         <Container style={{ margin: '0 auto', padding: '24px 16px', maxWidth: 680 }}>
-          {/* <Section style={{ textAlign: 'center', padding: '16px 0' }}>
-            <Img
-              alt="Logo"
-              height={40}
-              src={logo && urlForImage(logo?.asset).format('webp').quality(80).url()}
-              style={{ display: 'block', margin: '0 auto' }}
-              width={160}
-            />
-          </Section> */}
           <Section style={{ backgroundColor: '#ffffff', borderRadius: 12, padding: 24 }}>
             <Text style={{ ...base, fontSize: 20, fontWeight: 600 }}>{t.title}</Text>
             <Text style={{ ...base, fontSize: 18, fontWeight: 600 }}>

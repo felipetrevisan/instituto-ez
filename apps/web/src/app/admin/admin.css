@@ -1,0 +1,11 @@
+@import "tailwindcss";
+@source "../../components/admin";
+@source "./";
+
+:root {
+  color-scheme: dark;
+}
+
+::selection {
+  background: rgba(242, 181, 68, 0.35);
+}
