@@ -2,6 +2,7 @@
 import { cert, getApps, initializeApp } from 'firebase-admin/app'
 import { getAuth } from 'firebase-admin/auth'
 import { getFirestore } from 'firebase-admin/firestore'
+import { getStorage } from 'firebase-admin/storage'
 
 const projectId = process.env.FIREBASE_PROJECT_ID ?? process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID
 const usingEmulator = Boolean(
@@ -26,6 +27,7 @@ const app =
   getApps()[0] ??
   initializeApp({
     projectId,
+    storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
     ...(usingEmulator
       ? {}
       : {
@@ -39,4 +41,11 @@ const app =
 
 export const auth = getAuth(app)
 export const db = getFirestore(app)
+export const bucket = () => {
+  if (!process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET) {
+    console.error('Defina NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET no apps/web/.env.local.')
+    process.exit(1)
+  }
+  return getStorage(app).bucket()
+}
 export const target = usingEmulator ? `emulador (${projectId})` : `projeto ${projectId}`

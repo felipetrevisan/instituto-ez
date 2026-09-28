@@ -1,9 +1,9 @@
-import { isR2Configured, presignDownload } from '@ez/web/lib/r2'
+import { isStorageConfigured, signedDownloadUrl } from '@ez/web/lib/storage'
 import { getPaidPurchase } from '@ez/web/server/purchase'
 
 /**
- * Libera o PDF somente para sessões Stripe pagas: gera um link temporário do R2
- * (5 min) ou, na falta de arquivo enviado, redireciona para o link externo.
+ * Libera o PDF somente para sessões Stripe pagas: gera um link temporário do
+ * Storage (5 min) ou, na falta de arquivo enviado, redireciona para o link externo.
  */
 export async function GET(request: Request) {
   const sessionId = new URL(request.url).searchParams.get('session_id') ?? ''
@@ -12,7 +12,7 @@ export async function GET(request: Request) {
 
   const { file, downloadUrl } = purchase.ebook
   const location =
-    file && isR2Configured ? await presignDownload(file.key, file.name) : downloadUrl || null
+    file && isStorageConfigured ? await signedDownloadUrl(file.key, file.name) : downloadUrl || null
 
   if (!location) return Response.json({ error: 'Download indisponível' }, { status: 404 })
 

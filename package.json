@@ -13,9 +13,10 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "firebase:emulators": "bun x firebase-tools@14 emulators:start --project demo",
-    "firebase:deploy-rules": "bun x firebase-tools@14 deploy --only firestore:rules",
+    "firebase:deploy-rules": "bun x firebase-tools@14 deploy --only firestore:rules,storage",
     "admin:create": "bun --cwd apps/web scripts/create-admin.ts",
-    "firebase:seed": "bun --cwd apps/web scripts/seed.ts"
+    "firebase:seed": "bun --cwd apps/web scripts/seed.ts",
+    "storage:migrate": "bun --cwd apps/web scripts/migrate-assets.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.2",

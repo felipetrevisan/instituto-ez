@@ -19,7 +19,7 @@ Site institucional imersivo (3D) do Instituto EZ, com catálogo de ebooks, venda
 | Framework | Next.js 16 (App Router, Turbopack), React 19, TypeScript |
 | Estilo e animação | Tailwind CSS 4, Motion, WebGL (sem bibliotecas 3D) |
 | Dados e auth | Firebase (Auth e Firestore — funciona no plano gratuito Spark) + Firebase Admin no servidor |
-| Arquivos | Cloudflare R2 (imagens e PDFs), servido pelo próprio site em `/files/…` |
+| Arquivos | Firebase Storage (imagens e PDFs), servido pelo próprio site em `/files/…` |
 | Pagamentos | Stripe Checkout, links de checkout Hotmart |
 | Formulários | react-hook-form + zod |
 | E-mail | Resend + React Email |
@@ -83,16 +83,17 @@ bun run dev:web
    bun run dev:web
    ```
 
-> Os emuladores não persistem dados entre execuções: rode o seed e o `admin:create` sempre que subi-los.
+> Os emuladores não persistem dados entre execuções: rode o seed e o `admin:create` sempre que subi-los. O bloco de emuladores do `.env.local` já inclui o Storage (porta 9199).
 
 ## Configurando o Firebase (produção)
 
 1. Crie um projeto em https://console.firebase.google.com.
 2. **Authentication** → Método de login → ative **E-mail/senha**.
-3. **Firestore Database**: crie o banco (modo produção, região `southamerica-east1`). O Storage não é usado — as imagens são informadas por link.
+3. **Firestore Database**: crie o banco (modo produção, região `southamerica-east1`). Ative também o **Storage** (mesma região). O plano Blaze é exigido pelo Google para novos buckets.
 4. **Configurações do projeto → Seus apps**: registre um app da Web e copie os valores para as variáveis `NEXT_PUBLIC_FIREBASE_*`.
+   Preencha `NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET` com o nome do bucket (ex.: `instituto-ez.firebasestorage.app`).
 5. **Configurações do projeto → Contas de serviço → Gerar nova chave privada**: use o JSON para preencher `FIREBASE_PROJECT_ID`, `FIREBASE_CLIENT_EMAIL` e `FIREBASE_PRIVATE_KEY`.
-6. Publique as regras de segurança (o `.firebaserc` já aponta para o projeto `instituto-ez`; os emuladores usam o alias `demo`):
+6. Publique as regras do Firestore e do Storage (o `.firebaserc` já aponta para o projeto `instituto-ez`; os emuladores usam o alias `demo`):
    ```bash
    bun run firebase:deploy-rules
    ```
@@ -102,13 +103,13 @@ bun run dev:web
    bun run admin:create voce@institutoez.com.br "uma-senha-forte"
    ```
 
-**Segurança:** apenas usuários com a custom claim `admin` (definida pelo `admin:create`) leem ou escrevem no Firestore pelo navegador. O site público lê o catálogo pelo servidor (Firebase Admin). O link do PDF fica só no banco e é liberado pela rota `/api/download` após pagamento confirmado na Stripe.
+**Segurança:** apenas usuários com a custom claim `admin` (definida pelo `admin:create`) leem ou escrevem no Firestore pelo navegador. O site público lê o catálogo pelo servidor (Firebase Admin). O PDF fica em uma pasta privada do Storage e é liberado pela rota `/api/download` (link temporário) após pagamento confirmado na Stripe.
 
-## Arquivos (Cloudflare R2)
+## Arquivos (Firebase Storage)
 
-Com o R2 configurado, o painel envia imagens e PDFs direto do navegador para o bucket: o servidor confere o login de admin e gera um link de envio válido por 10 minutos. Sem o R2, o painel continua aceitando **links** de imagem (`/assets/…` ou `https://…`).
+Com o Storage configurado, o painel envia imagens e PDFs direto do navegador para o bucket; as regras (`firebase/storage.rules`) só aceitam administradores, com tipo e tamanho corretos (imagens até 15 MB, PDFs até 100 MB). Sem o Storage, o painel continua aceitando **links** de imagem (`/assets/…` ou `https://…`).
 
-Estrutura do bucket (privado, sem acesso público nem domínio próprio):
+O bucket é privado (nenhum arquivo é lido direto do Google pelo público) e não precisa de CORS:
 
 | Caminho no bucket | Conteúdo | Como é entregue |
 | --- | --- | --- |
@@ -116,20 +117,9 @@ Estrutura do bucket (privado, sem acesso público nem domínio próprio):
 | `public/site/…` | Logo e ícone | `/files/site/…` com cache permanente |
 | `private/ebooks/<id>/…` | PDFs vendidos | Link assinado de 5 minutos, só após pagamento na Stripe |
 
-**Configuração:** crie o bucket em R2, adicione a política de CORS abaixo (Settings → CORS Policy) e gere um token em *Manage R2 API Tokens* com **Object Read & Write** no bucket. Preencha `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY` e `R2_BUCKET`.
+**Migrar imagens antigas:** `bun run storage:migrate` lista as imagens que o banco ainda aponta em `/assets/…` (capa, páginas, foto do autor, logo e ícone); com `--apply`, envia para o Storage e troca as referências por `/files/…`. Pode ser executado de novo sem duplicar nada.
 
-```json
-[
-  {
-    "AllowedOrigins": ["http://localhost:3000", "https://institutoez.com.br", "https://www.institutoez.com.br"],
-    "AllowedMethods": ["PUT", "GET"],
-    "AllowedHeaders": ["content-type"],
-    "MaxAgeSeconds": 3600
-  }
-]
-```
-
-> **Antivírus com inspeção HTTPS (ex.: Norton Web/Mail Shield):** no desenvolvimento local o Node pode recusar a conexão com o R2 e com o Google Fonts (`unable to verify the first certificate`). Exporte a raiz do antivírus em PEM e rode o servidor com `NODE_EXTRA_CA_CERTS=caminho/do/certificado.pem`. Em produção (Vercel) isso não ocorre.
+> **Antivírus com inspeção HTTPS (ex.: Norton Web/Mail Shield):** no desenvolvimento local o Node pode recusar a conexão com o Firebase e com o Google Fonts (`unable to verify the first certificate`). Exporte a raiz do antivírus em PEM e rode o servidor com `NODE_EXTRA_CA_CERTS=caminho/do/certificado.pem`. Em produção (Vercel) isso não ocorre.
 
 ## Pagamentos
 
@@ -150,10 +140,11 @@ Cadastre em **Settings → Environment Variables** as variáveis de `apps/web/.e
 | `bun run build` | Build de produção |
 | `bun run test` | Testes (Vitest) |
 | `bun run lint` / `bun run lint:fix` | Biome (verificar / corrigir) |
-| `bun run firebase:emulators` | Emuladores locais (Auth e Firestore) |
+| `bun run firebase:emulators` | Emuladores locais (Auth, Firestore e Storage) |
 | `bun run firebase:seed [--force]` | Importa ebook e depoimentos iniciais |
 | `bun run admin:create <email> [senha]` | Cria ou promove um administrador |
-| `bun run firebase:deploy-rules` | Publica as regras do Firestore |
+| `bun run firebase:deploy-rules` | Publica as regras do Firestore e do Storage |
+| `bun run storage:migrate [--apply]` | Move imagens de `/assets/…` para o Storage |
 
 ## Licença
 

@@ -2,6 +2,7 @@ import { env } from '@ez/web/config/env'
 import { type App, cert, getApps, initializeApp } from 'firebase-admin/app'
 import { getAuth } from 'firebase-admin/auth'
 import { getFirestore } from 'firebase-admin/firestore'
+import { getStorage } from 'firebase-admin/storage'
 
 // Com os emuladores ativos (FIRESTORE_EMULATOR_HOST etc.) basta o projectId.
 const usingEmulator = Boolean(process.env.FIRESTORE_EMULATOR_HOST)
@@ -25,6 +26,7 @@ function adminApp() {
     getApps()[0] ??
     initializeApp({
       projectId,
+      storageBucket: env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
       ...(usingEmulator
         ? {}
         : {
@@ -41,3 +43,4 @@ function adminApp() {
 
 export const adminDb = () => getFirestore(adminApp())
 export const adminAuth = () => getAuth(adminApp())
+export const adminBucket = () => getStorage(adminApp()).bucket()
