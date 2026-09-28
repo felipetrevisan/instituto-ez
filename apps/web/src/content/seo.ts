@@ -1,6 +1,11 @@
 import type { LandingSlugKey } from '@ez/web/config/landing-slugs'
 
 export const pageMeta: Record<LandingSlugKey, { title: string; description: string }> = {
+  privacy: {
+    title: 'Política de Privacidade',
+    description:
+      'Como o Instituto EZ coleta, usa e protege os seus dados pessoais, o uso de cookies e os seus direitos previstos na LGPD.',
+  },
   home: {
     title: 'Home',
     description:

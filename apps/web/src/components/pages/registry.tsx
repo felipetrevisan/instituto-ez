@@ -11,6 +11,7 @@ import { ImmersionPage } from './immersion'
 import { MasterclassPage } from './masterclass'
 import { MathematizerPage } from './mathematizer'
 import { MentoringPage } from './mentoring'
+import { PrivacyPage } from './privacy'
 import { ServicesPage } from './services'
 
 /** Cada página carrega no servidor apenas os dados dinâmicos (Firebase) de que precisa. */
@@ -31,6 +32,7 @@ export const pages: Record<LandingSlugKey, () => Promise<ReactElement>> = {
   'for-business': async () => <HumanDevelopmentPage />,
   immersion: async () => <ImmersionPage testimonials={await getTestimonials('immersion')} />,
   masterclass: async () => <MasterclassPage />,
+  privacy: async () => <PrivacyPage />,
   'digital-products': async () => {
     const [ebooks, settings] = await Promise.all([getEbooks(), getPaymentSettings()])
     return <DigitalProductsPage currency={settings.currency} ebooks={ebooks.map(toPublicEbook)} />
