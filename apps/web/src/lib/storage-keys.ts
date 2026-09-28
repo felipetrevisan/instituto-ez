@@ -1,4 +1,5 @@
-// Regras de nomes/caminhos dos arquivos no R2 — compartilhadas entre painel e servidor.
+// Regras de nomes/caminhos dos arquivos no Firebase Storage — compartilhadas entre painel,
+// servidor e regras de segurança (firebase/storage.rules).
 //
 // Estrutura do bucket:
 //   public/ebooks/<id>/…   capas e páginas de amostra   → servidas em /files/ebooks/<id>/…

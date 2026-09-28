@@ -113,7 +113,7 @@ function UploadButton({
   )
 }
 
-/** Link de uma imagem com prévia — e envio ao R2 quando o armazenamento está configurado. */
+/** Link de uma imagem com prévia — e envio ao Firebase Storage quando configurado. */
 export function ImageUrlField({
   value,
   onChange,
@@ -306,7 +306,7 @@ export function ImageUrlList({
   )
 }
 
-/** PDF privado no R2 (entregue só após pagamento). */
+/** PDF privado no Firebase Storage (entregue só após pagamento). */
 export function PdfField({
   value,
   onChange,

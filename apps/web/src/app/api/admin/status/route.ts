@@ -1,5 +1,5 @@
 import { env } from '@ez/web/config/env'
-import { isR2Configured } from '@ez/web/lib/r2'
+import { isStorageConfigured } from '@ez/web/lib/storage'
 import { isStripeConfigured } from '@ez/web/lib/stripe'
 import { unauthorized, verifyAdminRequest } from '@ez/web/server/admin-auth'
 
@@ -11,6 +11,6 @@ export async function GET(request: Request) {
     stripe: isStripeConfigured,
     stripeMode: env.STRIPE_SECRET_KEY?.startsWith('sk_live_') ? 'live' : 'test',
     email: Boolean(env.RESEND_API_KEY),
-    storage: isR2Configured,
+    storage: isStorageConfigured,
   })
 }

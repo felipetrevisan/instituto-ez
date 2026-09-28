@@ -1,22 +1,27 @@
 'use client'
 
+import { env } from '@ez/web/config/env'
 import { firebase } from '@ez/web/lib/firebase/client'
 import {
+  buildObjectKey,
   imageTypes,
   MAX_IMAGE_BYTES,
   MAX_PDF_BYTES,
   pdfTypes,
+  publicUrlForKey,
   type UploadKind,
 } from '@ez/web/lib/storage-keys'
+import { ref, uploadBytesResumable } from 'firebase/storage'
 import { useEffect, useState } from 'react'
 import { getIntegrationStatus } from './data'
 
 let storageStatus: Promise<boolean> | null = null
 
-/** O upload só aparece quando o servidor tem o R2 configurado. */
+/** O upload só aparece quando o Storage está configurado no servidor e no navegador. */
 export function useStorageEnabled() {
   const [enabled, setEnabled] = useState(false)
   useEffect(() => {
+    if (!env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET) return
     storageStatus ??= getIntegrationStatus().then((status) => Boolean(status?.storage))
     storageStatus.then(setEnabled)
   }, [])
@@ -39,8 +44,8 @@ export function validateFile(file: File, kind: UploadKind) {
 }
 
 /**
- * Envia um arquivo ao R2: pede ao servidor um link assinado (só admins) e faz o
- * PUT direto do navegador, reportando o progresso (0–1).
+ * Envia um arquivo ao Firebase Storage. As regras de segurança exigem login de
+ * admin, o tipo e o tamanho corretos; o progresso é reportado de 0 a 1.
  */
 export async function uploadToStorage({
   kind,
@@ -53,41 +58,26 @@ export async function uploadToStorage({
   file: File
   onProgress?: (progress: number) => void
 }): Promise<{ key: string; url: string | null }> {
-  const token = await firebase().auth.currentUser?.getIdToken()
-  const response = await fetch('/api/admin/uploads', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-    body: JSON.stringify({
-      kind,
-      folder,
-      filename: file.name,
-      contentType: file.type,
-      size: file.size,
-    }),
-  })
-  const data = (await response.json()) as {
-    uploadUrl?: string
-    key?: string
-    url?: string | null
-    error?: string
-  }
-  if (!response.ok || !data.uploadUrl || !data.key)
-    throw new Error(data.error ?? 'Falha ao preparar o envio.')
+  const key = buildObjectKey({ kind, folder, filename: file.name, contentType: file.type })
+  if (!key) throw new Error('Tipo de arquivo ou pasta não permitidos.')
+
+  const task = uploadBytesResumable(ref(firebase().storage, key), file, { contentType: file.type })
 
   await new Promise<void>((resolve, reject) => {
-    const xhr = new XMLHttpRequest()
-    xhr.open('PUT', data.uploadUrl as string)
-    xhr.setRequestHeader('Content-Type', file.type)
-    xhr.upload.onprogress = (event) => {
-      if (event.lengthComputable) onProgress?.(event.loaded / event.total)
-    }
-    xhr.onload = () =>
-      xhr.status >= 200 && xhr.status < 300
-        ? resolve()
-        : reject(new Error(`Envio recusado (${xhr.status}).`))
-    xhr.onerror = () => reject(new Error('Falha de conexão durante o envio.'))
-    xhr.send(file)
+    task.on(
+      'state_changed',
+      (snapshot) => onProgress?.(snapshot.bytesTransferred / snapshot.totalBytes),
+      (error) =>
+        reject(
+          new Error(
+            error.code === 'storage/unauthorized'
+              ? 'Envio recusado pelas regras do Storage (sessão de admin, tipo ou tamanho).'
+              : 'Falha no envio do arquivo.',
+          ),
+        ),
+      () => resolve(),
+    )
   })
 
-  return { key: data.key, url: data.url ?? null }
+  return { key, url: publicUrlForKey(key) }
 }

@@ -65,7 +65,7 @@ export const ebookSchema = z.object({
   downloadUrl: z
     .union([z.literal(''), z.string().url('Informe o link completo (https://…)')])
     .default(''),
-  /** PDF enviado ao R2 (pasta privada). Tem prioridade sobre o link externo. */
+  /** PDF enviado ao Firebase Storage (pasta privada). Tem prioridade sobre o link externo. */
   file: z
     .object({ key: z.string().startsWith('private/'), name: z.string() })
     .nullable()
