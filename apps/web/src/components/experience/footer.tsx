@@ -98,9 +98,14 @@ export function Footer() {
           </div>
         </div>
 
-        <p className="mt-14 text-center text-white/40 text-xs">
-          © {year} {site.name}. {siteContent.copyright}
-        </p>
+        <div className="mt-14 flex flex-col items-center gap-3 text-white/40 text-xs">
+          <LocalLink className="ez-link text-xs" href="/politica-de-privacidade">
+            Política de Privacidade
+          </LocalLink>
+          <p className="text-center">
+            © {year} {site.name}. {siteContent.copyright}
+          </p>
+        </div>
       </div>
     </footer>
   )

@@ -33,6 +33,10 @@ const landingSlugConfig = {
   immersion: {
     slugs: ['imersao', 'immersion'],
   },
+  privacy: {
+    slugs: ['politica-de-privacidade', 'privacy-policy', 'politica-de-privacidad'],
+    sitemap: ['politica-de-privacidade'],
+  },
 } as const satisfies Record<string, LandingSlugEntry>
 
 export type LandingSlugKey = keyof typeof landingSlugConfig
